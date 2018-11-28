@@ -1,0 +1,13 @@
+#image: python:alpine
+#
+#before_script:
+#  - pip3 install mkdocs
+#
+#build:
+#  script:
+#    - mkdocs build
+#    - cp -r ./public/* /home/devuser/echo_web/wiki/
+#  only:
+#    - master
+#  tags:
+#    - echo-linux

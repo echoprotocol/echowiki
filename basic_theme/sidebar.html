@@ -1,0 +1,47 @@
+{% if nav_item.children %}
+	<div  class="element">
+		<div class="title">
+			{{ nav_item.title }}
+		</div>
+		{% for nav_item in nav_item.children %}
+
+			{% if nav_item.children %}
+				<div class="item accordion">
+					<a href="" class="accordion-toggle">{{ nav_item.title }}</a>
+					<ul class="accordion-inner">
+						{% for nav_item in nav_item.children %}
+
+							{% if nav_item.children %}
+								<li class="sub-accordion">
+									<a href="" class="sub-accordion-toggle">{{ nav_item.title }}</a>
+									
+									<ul class="sub-accordion-inner">
+										{% for nav_item in nav_item.children %}
+											<li>
+												<a href="{{ nav_item.url|url }}" class="sub-accordion-item {% if nav_item.active %} active {% endif %}">
+													{{ nav_item.title }}
+												</a>
+											</li>
+										{% endfor %}
+
+									</ul>
+								</li>
+							{% else %}
+								<li>
+									<a href="{{ nav_item.url|url }}" class="accordion-item {% if nav_item.active %} active {% endif %}">
+									 {{ nav_item.title }}
+									</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+
+			{% else %}
+				<a href="{{ nav_item.url|url }}" class="item {% if nav_item.active %} active {% endif %}">
+					{{ nav_item.title }}
+				</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endif %}

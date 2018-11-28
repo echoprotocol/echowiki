@@ -1,0 +1,72 @@
+site_name: ECHO Blockchain Wiki
+site_url: https://wiki.myecho.app/
+site_dir: public
+theme:
+    name: basictheme
+    highlightjs: true
+    hljs_languages:
+      - javascript
+
+markdown_extensions:
+  - codehilite
+  - pymdownx.tasklist:
+  
+pages:
+  - Introduction:
+    - What is Echo?: Introduction/What is Echo.md
+    - How does Echo work?: Introduction/How does Echo work.md
+    - Whitepapers: Introduction/Whitepapers.md
+  - Get started:
+    - Individuals: Get started/Individuals.md
+    - Businisses:
+      - Shops: Get started/Businisses/Shops.md
+      - Exchange Platforms: Get started/Businisses/Exchange Platforms.md
+      - Investors: Get started/Businisses/Investors.md
+    - Installation:
+      - Linux:  Get started/Installation/Linux.md
+      - MacOS:  Get started/Installation/MacOS.md
+    - Running:
+      - Node:  Get started/Running/Node.md
+      - Wallet:  Get started/Running/Wallet.md
+  - How To:
+    - Use Echo: How To/Use Echo.md
+    - Accept Echo: How To/Accept Echo.md
+    - Issue Assets: How To/Issue Assets.md
+    - Use Smart Contracts: How To/Use Smart Contracts.md
+    - Issue Blocks/Get Rewarded: How To/Issue Blocks(Get Rewarded).md
+    - Activate APIs:
+      - RPC Call: How To/Activate APIs/RPC Call.md
+      - Websocket API and Subscriptions: How To/Activate APIs/Websocket API and Subscriptions.md
+    - Inspect Logs: How To/Inspect Logs.md
+    - Report Issues: How To/Report Issues.md
+  - Developers:
+    - Smart Contracts:
+      - Get Started: Developers/Smart Contracts/Get Started.md
+      - x86:
+        - Create x86 Smart Contract: Developers/Smart Contracts/x86/Create x86 Smart Contract.md
+        - Upload x86 Smart Contract: Developers/Smart Contracts/x86/Upload x86 Smart Contract.md
+        - Application Interface (API): Developers/Smart Contracts/x86/Application Interface (API).md
+        - Fees: Developers/Smart Contracts/x86/Fees.md
+      - Solidity:
+        - Create Solidity Smart Contract: Developers/Smart Contracts/Solidity/Create Solidity Smart Contract.md
+        - Upload Solidity Smart Contract: Developers/Smart Contracts/Solidity/Upload Solidity Smart Contract.md
+        - Application Interface (API): Developers/Smart Contracts/Solidity/Application Interface (API).md
+        - Fees: Developers/Smart Contracts/Solidity/Fees.md
+      - Use Smart Contracts: Developers/Smart Contracts/Use Smart Contracts.md
+      - Tips & Tricks: Developers/Smart Contracts/Tips & Tricks.md
+    - Command-Line Tools: Developers/Command-Line Tools.md
+    - Connect:
+      - WebSocket API: http://google.com
+      - Remote Procedure Call API: https://google.com
+      - Operations: http://google.com
+      - APIs: http://google.com
+    - Technologies:
+      - Echorand: Developers/Technologies/Echorand.md
+      - Sidechain: Developers/Technologies/Sidechain.md
+      - Oracles: Developers/Technologies/Oracles.md
+      - Contracts/VMs: Developers/Technologies/Contracts(VMs).md
+    - Source Code:
+      - Project structure: http://google.com
+      - Build instructions: http://google.com
+
+repo_url: https://github.com/d0ugal/mkdocs-basic-theme
