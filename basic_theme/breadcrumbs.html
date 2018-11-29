@@ -1,0 +1,11 @@
+<ul class="breadcrumbs" role="navigation" aria-label="breadcrumbs navigation">
+	
+	{% if page.ancestors|length > 0 %}
+		{% for doc in page.ancestors | reverse %}
+			<li>{{ doc.title }}</li>
+		{% endfor %}
+		<li>{{ page.title }}</li>
+	{% endif %}
+</ul>
+
+
