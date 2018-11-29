@@ -4,7 +4,7 @@ Update options common to all assets.
 
 There are a number of options which all assets in the network use. These options are enumerated in the asset_options struct. This operation is used to update these options for an existing asset.
 
-> Note: This operation cannot be used to update BitAsset-specific options. For these options, use @ref [asset_update_bitasset_operation](asset_update_bitasset_operation.md) instead.
+> Note: This operation cannot be used to update BitAsset-specific options. For these options, use @ref [asset_update_bitasset_operation](_asset_update_bitasset_operation.md) instead.
 
 - `fee` SHALL be nonnegative, and `issuer` MUST have a sufficient balance to pay it.
 - `issuer` SHALL be an existing account and MUST match asset_object::issuer on `asset_to_update`.

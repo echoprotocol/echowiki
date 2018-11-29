@@ -22,6 +22,8 @@
 
 ### Get properties from Smart Contract
 
+### Internal transactions
+
 ### Subscribe to Smart Contract Events
 
 ## Fees

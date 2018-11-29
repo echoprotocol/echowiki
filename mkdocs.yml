@@ -9,6 +9,8 @@ theme:
 
 markdown_extensions:
   - codehilite
+  - toc:
+      permalink: True
   - pymdownx.tasklist:
 
 pages:

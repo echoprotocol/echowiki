@@ -1,19 +1,26 @@
 Database API
 ============
 
-## get_objects(ids)
+### get_objects(array ids)
 
 Get the objects corresponding to the provided IDs.
 
 If any of the provided IDs does not map to an object, a null is returned in its position.
 
-### Parameters
+#### Parameters
+| Option | Description |
+|:-------|:-----------|
+| `ids`  | an array of object IDs, e.g. `["1.6.1", "1.6.2", ...]` |
 
-- *ids* an array of object IDs, e.g. `["1.6.1", "1.6.2", ...]`
-
-### Returns
+#### Returns
 
 The objects retrieved, in the order they are mentioned in ids.
+```json
+[{
+    "id": "1.6.1",
+    ...
+}]
+```
 
 ## set_subscribe_callback(callback, notify_remove_create)
 
