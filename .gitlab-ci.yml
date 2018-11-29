@@ -8,7 +8,7 @@ before_script:
 build:
   script:
     - mkdocs build
-#    - cp -r ./public/* /home/devuser/echo_web/wiki/
+    - cp -r ./public/* /home/devuser/echo_web/public_wiki/
   only:
     - master
   tags:
