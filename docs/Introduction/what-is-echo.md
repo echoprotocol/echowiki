@@ -89,10 +89,6 @@ Right aligned columns
 | engine | engine to be used for processing templates. Handlebars is the default. |
 | ext    | extension to be used for dest files. |
 
-ЙОУ  
-<br />
-ЙОУ
-
 ## Links
 
 [link text](http://dev.nodeca.com)
