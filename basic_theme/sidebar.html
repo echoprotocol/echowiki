@@ -17,7 +17,7 @@
 									
 									<ul class="sub-accordion-inner">
 										{% for nav_item in nav_item.children %}
-											<li>
+											<li id="bar{{nav_item.title|replace(" ", "")}}">
 												<a href="{{ nav_item.url|url }}" class="sub-accordion-item {% if nav_item.active %} active {% endif %}">
 													{{ nav_item.title }}
 												</a>
@@ -27,9 +27,9 @@
 									</ul>
 								</li>
 							{% else %}
-								<li>
+								<li id="bar-{{nav_item.title|replace(" ", "")}}">
 									<a href="{{ nav_item.url|url }}" class="accordion-item {% if nav_item.active %} active {% endif %}">
-									 {{ nav_item.title }}
+										{{ nav_item.title }}
 									</a>
 								</li>
 							{% endif %}
