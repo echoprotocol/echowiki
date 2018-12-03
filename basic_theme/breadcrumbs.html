@@ -5,6 +5,31 @@
 			<li>{{ doc.title }}</li>
 		{% endfor %}
 		<li>{{ page.title }}</li>
+		{% else %}
+			{% set items = page.url.split('/') %}
+			{% for item in items %}
+				{% if item|length > 0 %}
+					{% if loop.index == 3 %}
+						<li id="{{item|replace('_', '')}}">
+							<a href="{{ base_url }}/{% for link in items %}{% if loop.index < 4 %}{{ link|replace(' ', '') }}/{% endif %}{% endfor %} ">
+								{{ item|replace('_', ' ') }}
+							</a>
+						</li>
+					{% elif loop.index == 4 %}
+						<li id="{{item|replace('_', '')}}">
+							<a href="{{base_url}}/{%for link in items%}{%if loop.index < 4%}{%if loop.index != 1%}/{% endif %}{{link|replace(' ', '')}}{%endif%}{%if loop.index == 4%}#{{link|replace('_', '-')}}{% endif %}{% endfor %}" >
+								{{ item|replace('_', ' ') }}
+							</a>
+						</li>
+					{% else %}
+
+						<li>
+							{{ item|replace('_', ' ') }}
+						</li>
+					{% endif %}
+
+				{% endif %}
+			{% endfor %}
 	{% endif %}
 </ul>
 
