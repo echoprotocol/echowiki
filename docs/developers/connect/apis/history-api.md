@@ -54,7 +54,7 @@ Get operations relevant to the specificed account.
 
 ### Parameters
 
-- *account* The account whose history should be queried
+- *contract* The contract whose history should be queried
 - *stop* ID of the earliest operation to retrieve
 - *limit* Maximum number of operations to retrieve (must not exceed 100)
 - *start* ID of the most recent operation to retrieve
