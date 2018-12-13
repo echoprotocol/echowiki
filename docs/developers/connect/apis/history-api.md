@@ -40,9 +40,9 @@ Get only asked operations relevant to the specified account.
 ### Parameters
 - *account*	The account whose history should be queried
 - *operation_id* The ID of the operation we want to get operations in the account( 0 = transfer , 1 = limit order create, ...)
+- *start* ID of the most recent operation to retrieve
 - *stop* ID of the earliest operation to retrieve
 - *limit* Maximum number of operations to retrieve (must not exceed 100)
-- *start* ID of the most recent operation to retrieve
 
 ### Returns
 
