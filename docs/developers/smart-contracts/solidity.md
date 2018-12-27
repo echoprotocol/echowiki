@@ -128,6 +128,25 @@ call_contract nathan 1.16.0 "cfae3217" 0 1 2000000 true true
 
 ### Subscribe to Smart Contract Events
 
+Для подписи на события контрактов используется метод database_api  
+`subscribe_contract_logs(uint32_t id, contract_id_type contract_id, uint32_t from, uint32_t to)`.
+
+- `id` - произвольный идентификатор, который будет возвращен вместе с событием;
+- `contract_id` - идентификатор контракта, на события которого подписываются;
+- `from` и `to` - диапазон блоков, в котором прослушиваются события;
+
+При вызове этого метода, он вернет все уже имеющиеся события в указанном диапазоне, также как и метод `get_contract_logs`.
+
+Пример подписи на события используя wscat:
+```
+> {"id":1, "method":"subscribe_contract_logs", "params":[1337,"1.16.0",1,200]}
+< {"id":1,"jsonrpc":"2.0","result":[]}
+
+# call contract in echo_wallet
+
+< {"method":"notice","params":[1337,[[{"address":"0100000000000000000000000000000000000000","log":["a887d9f447f44f095186fc4a0bef9914881f330f24d2a2f63242c4c05eb26ee0"],"data":"000000000000000000000000000000000000000000000000000000000000001a"}]]]}
+```
+
 ## Fees
 // TODO
 
