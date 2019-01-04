@@ -60,10 +60,10 @@ pages:
       - Operations: developers/connect/operations.md
       - APIs: developers/connect/apis.md
     - Technologies:
-      - Echorand: developers/Technologies/Echorand.md
-      - Sidechain: developers/Technologies/Sidechain.md
-      - Oracles: developers/Technologies/Oracles.md
-      - Contracts/VMs: developers/Technologies/Contracts(VMs).md
+      - Echorand: developers/technologies/Echorand.md
+      - Sidechain: developers/technologies/sidechain.md
+      - Oracles: developers/technologies/Oracles.md
+      - Contracts/VMs: developers/technologies/Contracts(VMs).md
     - Libraries and Frameworks:
       - EchoJS: developers/libraries-n-frameworks/echojs.md
       - Android and iOS: developers/libraries-n-frameworks/android-n-ios.md
