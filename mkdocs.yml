@@ -14,7 +14,7 @@ markdown_extensions:
       baselevel: 1
   - pymdownx.tasklist:
 
-pages:
+nav:
   - Introduction:
     - What is Echo?: introduction/what-is-echo.md
     # - How does Echo work?: introduction/how-does-echo-work.md
@@ -55,8 +55,6 @@ pages:
 #      - Tips & Tricks: developers/smart-contracts/Tips & Tricks.md
     - Command-Line Tools: developers/command-line-tools.md
     - Connect:
-      - WebSocket API: developers/connect/websocket-api.md
-      - Remote Procedure Call API: developers/connect/remote-procedure-call-api.md
       - Operations: developers/connect/operations.md
       - APIs: developers/connect/apis.md
     - Technologies:
