@@ -13,49 +13,49 @@ for example:
 ```
 
 
-## login(string user, string password)
+### login(string user, string password)
 
 This must be called prior to requesting other APIs.
 Other APIs may not be accessible until the client has sucessfully authenticated.
 
-### Parameters
+#### Parameters
 - *user* Username to login with
 - *password* Password to login with
 
-### Returns
+#### Returns
 
 True if logged in successfully, false otherwise
 
 <!--
-### block()
+#### block()
 
 Retrieve the network block API indentifier.
 -->
 
-### network_broadcast()
+#### network_broadcast()
 
 Retrieve the network broadcast API identifier.
 
-### database()
+#### database()
 
 Retrieve the database API identifier.
 
-### history()
+#### history()
 
 Retrieve the history API identifier.
 
 <!--
-### network_node()
+#### network_node()
 
 Retrieve the network node API identifier.
 -->
 
-### crypto()
+#### crypto()
 
 Retrieve the cryptography API identifier.
 
 <!--
-### asset()
+#### asset()
 
 Retrieve the asset API identifier.
 -->
