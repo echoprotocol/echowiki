@@ -15,22 +15,22 @@ markdown_extensions:
 
 pages:
   - Introduction:
-    - What is Echo?: Introduction/what-is-echo.md
-    - How does Echo work?: Introduction/How does Echo work.md
-    - Whitepapers: Introduction/Whitepapers.md
+    - What is Echo?: introduction/what-is-echo.md
+    # - How does Echo work?: introduction/how-does-echo-work.md
+    - Whitepapers: introduction/whitepapers.md
   - Get started:
-    - Individuals: get-started/individuals.md
-    - Businisses:
-      - Shops: get-started/Businisses/Shops.md
-      - Exchange Platforms: get-started/Businisses/Exchange Platforms.md
-      - Investors: get-started/Businisses/Investors.md
     - Installation:
-      - Linux:  get-started/Installation/Linux.md
-      - MacOS:  get-started/Installation/MacOS.md
+      - Linux:  get-started/installation/linux.md
+      - MacOS:  get-started/installation/macos.md
     - Running:
       - Node:  get-started/running/node.md
       - Wallet:  get-started/running/wallet.md
       - Docker:  get-started/running/docker.md
+    # - Individuals: get-started/individuals.md
+    # - Businisses:
+    #   - Shops: get-started/Businisses/Shops.md
+    #   - Exchange Platforms: get-started/Businisses/Exchange Platforms.md
+    #   - Investors: get-started/Businisses/Investors.md
   - How To:
     - Use Echo: How To/Use Echo.md
     - Accept Echo: How To/Accept Echo.md
