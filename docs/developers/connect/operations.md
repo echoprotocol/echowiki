@@ -1,6 +1,6 @@
 # ECHO Operations
 
-### Account Management
+#### Account Management
 
 | Name                        | Description        |
 | --------------------------- | ------------------ |
@@ -10,14 +10,14 @@
 | [account_upgrade_operation](operations/account_management/_account_upgrade_operation.md)   | Manage an account's membership status |
 | [account_transfer_operation](operations/account_management/_account_transfer_operation.md)  | Transfers the account to another account while clearing the white list |
 
-### Assert Conditions
+#### Assert Conditions
 
 | Name             | Description                          |
 | ---------------- | ------------------------------------ |
 | [assert_operation](operations/assert_conditions/_assert_operation.md) | Assert that some conditions are true |
 
 
-### Asset management
+#### Asset management
 
 | Name | Description |
 | -------- | -------- |
@@ -34,21 +34,21 @@
 | [asset_reserve_operation](operations/asset_management/_asset_reserve_operation.md) | Used to take an asset out of circulation, returning to the issuer |
 | [asset_claim_fees_operation](operations/asset_management/_asset_claim_fees_operation.md) | Used to transfer accumulated fees back to the issuer's balance. |
 
-### Balance Object
+#### Balance Object
 
 | Name | Description |
 | -------- | -------- |
 | [balance_claim_operation](operations/balance_object/_balance_claim_operation.md) | Claim a balance in a `balance_object` |
 
-### Committee Members
+#### For Committee Members
 
 | Name | Description |
 | -------- | -------- |
-| [committee_member_create_operation](operations/committee_members/_committee_member_create_operation.md) | Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network |
-| [committee_member_update_operation](operations/committee_members/_committee_member_update_operation.md) | Update a `committee_member` object |
-| [committee_member_update_global_parameters_operation](operations/committee_members/_committee_member_update_global_parameters_operation.md) | Used by committee members to update the global parameters of the blockchain |
+| [committee_member_create_operation](operations/committee_member/_committee_member_create_operation.md) | Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network |
+| [committee_member_update_operation](operations/committee_member/_committee_member_update_operation.md) | Update a `committee_member` object |
+| committee_member_update_global_parameters_operation | Used by committee members to update the global parameters of the blockchain |
 
-### Stealth Transfer
+#### Stealth Transfer
 
 Operations related to stealth transfer of value
 
@@ -67,55 +67,55 @@ stealth balance to the temp account and then use the temp account to register a 
 account.  In this way users can use stealth funds to create anonymous accounts with which
 they can perform other actions that are not compatible with blinded balances (such as market orders)
 
-#### Referral Progam
+##### Referral Progam
 
 Stealth transfers that do not specify any account id cannot pay referral fees so 100% of the
 transaction fee is paid to the network.
 
-#### Fees
+##### Fees
 
 Stealth transfers can have an arbitrarylly large size and therefore the transaction fee for
 stealth transfers is based purley on the data size of the transaction.
 
-### Confidential Operations
+#### Confidential Operations
 
 | Name | Description |
 | -------- | -------- |
-| [transfer_to_blind_operation](operations/confidential_operations/_transfer_to_blind_operation.md) | Converts public account balance to a blinded or stealth balance |
-| [transfer_from_blind_operation](operations/confidential_operations/_transfer_from_blind_operation.md) | Converts blinded/stealth balance to a public account balance |
-| [blind_transfer_operation](operations/confidential_operations/_blind_transfer_operation.md) | Transfers from blind to blind |
+| [transfer_to_blind_operation](operations/stealth_transfer/_transfer_to_blind_operation.md) | Converts public account balance to a blinded or stealth balance |
+| [transfer_from_blind_operation](operations/stealth_transfer/_transfer_from_blind_operation.md) | Converts blinded/stealth balance to a public account balance |
+| [blind_transfer_operation](operations/stealth_transfer/_blind_transfer_operation.md) | Transfers from blind to blind |
 
-### Contract operations
-
-| Name | Description |
-| -------- | -------- |
-| [contract_operation](operations/contract_operations/_contract_operation.md) | Create new contract. |
-| [contract_transfer_operation](operations/contract_operations/_contract_transfer_operation.md) | Transfer assets to contract. |
-
-### Custom Extension
+#### Contract operations
 
 | Name | Description |
 | -------- | -------- |
-| [custom_operation](operations/custom_extension/_custom_operation.md) | Provides a generic way to add higher level protocols on top of witness consensus |
+| [contract_operation](operations/contracts/_contract_operation.md) | Create new contract. |
+| [contract_transfer_operation](operations/contracts/_contract_transfer_operation.md) | Transfer assets to contract. |
 
-### FBA
+#### Custom Extension
+
+| Name | Description |
+| -------- | -------- |
+| [custom_operation](operations/custom/_custom_operation.md) | Provides a generic way to add higher level protocols on top of witness consensus |
+
+#### FBA
 
 | Name | Description |
 | -------- | -------- |
 | [fba_distribute_operation](operations/fba/_fba_distribute_operation.md) *[VIRTUAL]* |  |
 
-### Assets Market
+#### Assets Market
 
 | Name | Description |
 | -------- | -------- |
-| [limit_order_create_operation](operations/assets_market/_limit_order_create_operation.md) | Instructs the blockchain to attempt to sell one asset for another |
-| [limit_order_cancel_operation](operations/assets_market/_limit_order_cancel_operation.md) | Used to cancel an existing limit order |
-| [call_order_update_operation](operations/assets_market/_call_order_update_operation.md) | This operation can be used to add collateral, cover, and adjust the margin call price for a particular user |
-| [fill_order_operation](operations/assets_market/_fill_order_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while matching orders and emitted for the purpose of accurately tracking account history, accelerating a reindex |
-| [bid_collateral_operation](operations/assets_market/_bid_collateral_operation.md) | This operation can be used after a black swan to bid collateral for taking over part of the debt and the settlement_fund (see BSIP-0018) |
-| [execute_bid_operation](operations/assets_market/_execute_bid_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while reviving a bitasset from collateral bids |
+| [limit_order_create_operation](operations/asset_market/_limit_order_create_operation.md) | Instructs the blockchain to attempt to sell one asset for another |
+| [limit_order_cancel_operation](operations/asset_market/_limit_order_cancel_operation.md) | Used to cancel an existing limit order |
+| [call_order_update_operation](operations/asset_market/_call_order_update_operation.md) | This operation can be used to add collateral, cover, and adjust the margin call price for a particular user |
+| [fill_order_operation](operations/asset_market/_fill_order_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while matching orders and emitted for the purpose of accurately tracking account history, accelerating a reindex |
+| [bid_collateral_operation](operations/asset_market/_bid_collateral_operation.md) | This operation can be used after a black swan to bid collateral for taking over part of the debt and the settlement_fund (see BSIP-0018) |
+| [execute_bid_operation](operations/asset_market/_execute_bid_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while reviving a bitasset from collateral bids |
 
-### Transaction Proposal Protocol
+#### Transaction Proposal Protocol
 
 Echo allows users to propose a transaction which requires approval of multiple accounts in order to execute.
 The user proposes a transaction using proposal_create_operation, then signatory accounts use
@@ -140,29 +140,29 @@ leverages on-chain notification of all relevant parties that their approval is r
 multi-signature approval requires some off-chain mechanism for acquiring several signatures on a single
 transaction. This off-chain synchronization can be avoided using proposals.
 
-#### Proposal operations
+##### Proposal operations
 
 | Name | Description |
 | -------- | -------- |
-| [proposal_create_operation](operations/transaction_proposal_protocol/_proposal_create_operation.md) | Creates a transaction proposal, for use in multi-sig scenarios |
-| [proposal_update_operation](operations/transaction_proposal_protocol/_proposal_update_operation.md) | Updates an existing transaction proposal |
-| [proposal_delete_operation](operations/transaction_proposal_protocol/_proposal_delete_operation.md) | Deletes an existing transaction proposal |
+| [proposal_create_operation](operations/proposals/_proposal_create_operation.md) | Creates a transaction proposal, for use in multi-sig scenarios |
+| [proposal_update_operation](operations/proposals/_proposal_update_operation.md) | Updates an existing transaction proposal |
+| [proposal_delete_operation](operations/proposals/_proposal_delete_operation.md) | Deletes an existing transaction proposal |
 
-### Asset Transfer
+#### Asset Transfer
 
 | Name | Description |
 | -------- | -------- |
 | [transfer_operation](operations/asset_transfer/_transfer_operation.md) | Transfers an amount of one asset from one account to another |
 | [override_transfer_operation](operations/asset_transfer/_override_transfer_operation.md) | Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority |
 
-### Vesting Balances
+#### Vesting Balances
 
 | Name | Description |
 | -------- | -------- |
 | [vesting_balance_create_operation](operations/vesting_balances/_vesting_balance_create_operation.md) | Create a vesting balance |
 | [vesting_balance_withdraw_operation](operations/vesting_balances/_vesting_balance_withdraw_operation.md) | Withdraw from a vesting balance |
-
-### Withdraw Permission
+ 
+#### Withdrawal Permissions
 
 | Name | Description |
 | -------- | -------- |
@@ -171,14 +171,14 @@ transaction. This off-chain synchronization can be avoided using proposals.
 | [withdraw_permission_claim_operation](operations/withdraw_permission/_withdraw_permission_claim_operation.md) | Withdraw from an account which has published a withdrawal permission |
 | [withdraw_permission_delete_operation](operations/withdraw_permission/_withdraw_permission_delete_operation.md) | Delete an existing withdrawal permission |
 
-### Witness Operations
+#### Witness Operations
 
 | Name | Description |
 | -------- | -------- |
-| [witness_create_operation](operations/witness_operations/_witness_create_operation.md) | Create a witness object, as a bid to hold a witness position on the network |
-| [witness_update_operation](operations/witness_operations/_witness_update_operation.md) | Update a witness object's URL and block signing key |
+| [witness_create_operation](operations/witnesses/_witness_create_operation.md) | Create a witness object, as a bid to hold a witness position on the network |
+| [witness_update_operation](operations/witnesses/_witness_update_operation.md) | Update a witness object's URL and block signing key |
 
-### The Blockchain Worker System
+#### The Blockchain Worker System
 
 Echo blockchains allow the creation of special "workers" which are elected positions paid by the blockchain
 for services they provide. There may be several types of workers, and the semantics of how and when they are paid
@@ -197,8 +197,8 @@ creation.
 
 Once created, a worker is immutable and will be kept by the blockchain forever.
 
-### Worker operations
+#### Worker operations
 
 | Name | Description |
 | -------- | -------- |
-| [worker_create_operation](operations/worker_operations/_worker_create_operation.md) | Create a new worker object |
+| [worker_create_operation](operations/workers/_worker_create_operation.md) | Create a new worker object |
