@@ -20,6 +20,8 @@ To start participating in consensus you should add option `--account-info=[accou
 ./bin/echo_node --echorand --rpc-endpoint="0.0.0.0:8090" --account-info=["1.6.2", "DET67rm27uYRVMQdN88EkpHE6LVVgivM8d8AmbkpauBFDuy"]
 ```
 
+See `-h` for more details
+
 ## Run and use Echo cli-wallet
 
 The Cli-Wallet is used to interact with the blockchain. Everything that adds new data to the blockchain requires a signature from a private key.

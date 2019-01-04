@@ -37,9 +37,10 @@ pages:
     - Use Smart Contracts: how-to/Use Smart Contracts.md
     - Issue Blocks/Get Rewarded: how-to/Issue Blocks(Get Rewarded).md
     - API:
-      - RPC Call: how-to/api/rpc-call.md
       - Websocket API and Subscriptions: how-to/api/websocket-api-and-subscriptions.md
+      - RPC Call: how-to/api/rpc-call.md
       - Cli-Wallet API: how-to/api/cli-wallet-api.md
+      - API Access Restrictions: how-to/api/access.md
     # - Inspect Logs: how-to/Inspect Logs.md
     # - Report Issues: how-to/Report Issues.md
   - Developers:
