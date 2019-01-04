@@ -11,13 +11,16 @@
 #### Installing dependencies on macOS
 
 To install dependencies for macOS follow this steps:
-1.  Install Homebrew by following the instructions here: http://brew.sh/
-2.  Initialize Homebrew:
+
+* Install Homebrew by following the instructions here: [http://brew.sh/](http://brew.sh/)
+* Initialize Homebrew:
+
 ```
 brew doctor
 brew update
 ```
-3.  Install necessary packages:
+* Install necessary packages:
+
 ```
 brew install cmake git autoconf automake leveldb libtool
 ```
