@@ -22,7 +22,7 @@ brew update
 * Install necessary packages:
 
 ```
-brew install cmake git autoconf automake leveldb libtool
+brew install cmake git autoconf automake leveldb libtool libelf
 ```
 
 #### Installing dependencies on Ubuntu 16.04 LTS (64-bit)

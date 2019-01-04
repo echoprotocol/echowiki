@@ -21,26 +21,27 @@ pages:
     - Whitepapers: introduction/whitepapers.md
   - Get started:
     - Installation: get-started/installation.md
-    - Running:
-      - Node:  get-started/running/node.md
-      - Wallet:  get-started/running/wallet.md
-      - Docker:  get-started/running/docker.md
+    - Running Node and Cli-wallet: get-started/running.md
+      # - Node:  get-started/running/node.md
+      # - Wallet:  get-started/running/wallet.md
+      # - Docker:  get-started/running/docker.md
     # - Individuals: get-started/individuals.md
     # - Businisses:
     #   - Shops: get-started/Businisses/Shops.md
     #   - Exchange Platforms: get-started/Businisses/Exchange Platforms.md
     #   - Investors: get-started/Businisses/Investors.md
   - How To:
-    - Use Echo: How To/Use Echo.md
-    - Accept Echo: How To/Accept Echo.md
-    - Issue Assets: How To/Issue Assets.md
-    - Use Smart Contracts: How To/Use Smart Contracts.md
-    - Issue Blocks/Get Rewarded: How To/Issue Blocks(Get Rewarded).md
-    - Activate APIs:
-      - RPC Call: How To/Activate APIs/RPC Call.md
-      - Websocket API and Subscriptions: How To/Activate APIs/Websocket API and Subscriptions.md
-    - Inspect Logs: How To/Inspect Logs.md
-    - Report Issues: How To/Report Issues.md
+    - Use Echo: how-to/Use Echo.md
+    - Accept Echo: how-to/Accept Echo.md
+    - Issue Assets: how-to/Issue Assets.md
+    - Use Smart Contracts: how-to/Use Smart Contracts.md
+    - Issue Blocks/Get Rewarded: how-to/Issue Blocks(Get Rewarded).md
+    - API:
+      - RPC Call: how-to/api/RPC Call.md
+      - Websocket API and Subscriptions: how-to/api/Websocket API and Subscriptions.md
+      - Cli-Wallet API: how-to/api/cli-wallet-api.md
+    # - Inspect Logs: how-to/Inspect Logs.md
+    # - Report Issues: how-to/Report Issues.md
   - Developers:
     - Smart Contracts:
       - Get Started: developers/smart-contracts/get-started.md
