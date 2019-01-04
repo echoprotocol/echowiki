@@ -1,4 +1,4 @@
-# ECHO Operations
+# Echo Operations
 
 #### Account Management
 

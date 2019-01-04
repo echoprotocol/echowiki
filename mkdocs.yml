@@ -36,7 +36,7 @@ nav:
     - Issue Assets: how-to/Issue Assets.md
     - Use Smart Contracts: how-to/Use Smart Contracts.md
     - Issue Blocks/Get Rewarded: how-to/Issue Blocks(Get Rewarded).md
-    - API:
+    - Connect to blockchain:
       - Websocket API and Subscriptions: how-to/api/websocket-api-and-subscriptions.md
       - RPC Call: how-to/api/rpc-call.md
       - Cli-Wallet API: how-to/api/cli-wallet-api.md
@@ -44,6 +44,7 @@ nav:
     # - Inspect Logs: how-to/Inspect Logs.md
     # - Report Issues: how-to/Report Issues.md
   - Developers:
+    - APIs: developers/apis.md
     - Smart Contracts:
       - Get Started: developers/smart-contracts/get-started.md
       - x86:
@@ -54,9 +55,7 @@ nav:
       - Solidity: developers/smart-contracts/solidity.md
 #      - Tips & Tricks: developers/smart-contracts/Tips & Tricks.md
     - Command-Line Tools: developers/command-line-tools.md
-    - Connect:
-      - Operations: developers/connect/operations.md
-      - APIs: developers/connect/apis.md
+    - Operations: developers/operations.md
     - Technologies:
       - Echorand: developers/technologies/Echorand.md
       - Sidechain: developers/technologies/sidechain.md
