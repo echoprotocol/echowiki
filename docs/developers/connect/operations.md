@@ -40,13 +40,13 @@
 | -------- | -------- |
 | [balance_claim_operation](operations/balance_object/_balance_claim_operation.md) | Claim a balance in a `balance_object` |
 
-### For Committee Members
+### Committee Members
 
 | Name | Description |
 | -------- | -------- |
-| [committee_member_create_operation](operations/committee_member/_committee_member_create_operation.md) | Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network |
-| [committee_member_update_operation](operations/committee_member/_committee_member_update_operation.md) | Update a `committee_member` object |
-| [committee_member_update_global_parameters_operation](operations/committee_member/_committee_member_update_global_parameters_operation.md) | Used by committee members to update the global parameters of the blockchain |
+| [committee_member_create_operation](operations/committee_members/_committee_member_create_operation.md) | Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network |
+| [committee_member_update_operation](operations/committee_members/_committee_member_update_operation.md) | Update a `committee_member` object |
+| [committee_member_update_global_parameters_operation](operations/committee_members/_committee_member_update_global_parameters_operation.md) | Used by committee members to update the global parameters of the blockchain |
 
 ### Stealth Transfer
 
@@ -81,22 +81,22 @@ stealth transfers is based purley on the data size of the transaction.
 
 | Name | Description |
 | -------- | -------- |
-| [transfer_to_blind_operation](operations/stealth_transfer/_transfer_to_blind_operation.md) | Converts public account balance to a blinded or stealth balance |
-| [transfer_from_blind_operation](operations/stealth_transfer/_transfer_from_blind_operation.md) | Converts blinded/stealth balance to a public account balance |
-| [blind_transfer_operation](operations/stealth_transfer/_blind_transfer_operation.md) | Transfers from blind to blind |
+| [transfer_to_blind_operation](operations/confidential_operations/_transfer_to_blind_operation.md) | Converts public account balance to a blinded or stealth balance |
+| [transfer_from_blind_operation](operations/confidential_operations/_transfer_from_blind_operation.md) | Converts blinded/stealth balance to a public account balance |
+| [blind_transfer_operation](operations/confidential_operations/_blind_transfer_operation.md) | Transfers from blind to blind |
 
 ### Contract operations
 
 | Name | Description |
 | -------- | -------- |
-| [contract_operation](operations/contracts/_contract_operation.md) | Create new contract. |
-| [contract_transfer_operation](operations/contracts/_contract_transfer_operation.md) | Transfer assets to contract. |
+| [contract_operation](operations/contract_operations/_contract_operation.md) | Create new contract. |
+| [contract_transfer_operation](operations/contract_operations/_contract_transfer_operation.md) | Transfer assets to contract. |
 
 ### Custom Extension
 
 | Name | Description |
 | -------- | -------- |
-| [custom_operation](operations/custom/_custom_operation.md) | Provides a generic way to add higher level protocols on top of witness consensus |
+| [custom_operation](operations/custom_extension/_custom_operation.md) | Provides a generic way to add higher level protocols on top of witness consensus |
 
 ### FBA
 
@@ -108,12 +108,12 @@ stealth transfers is based purley on the data size of the transaction.
 
 | Name | Description |
 | -------- | -------- |
-| [limit_order_create_operation](operations/asset_market/_limit_order_create_operation.md) | Instructs the blockchain to attempt to sell one asset for another |
-| [limit_order_cancel_operation](operations/asset_market/_limit_order_cancel_operation.md) | Used to cancel an existing limit order |
-| [call_order_update_operation](operations/asset_market/_call_order_update_operation.md) | This operation can be used to add collateral, cover, and adjust the margin call price for a particular user |
-| [fill_order_operation](operations/asset_market/_fill_order_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while matching orders and emitted for the purpose of accurately tracking account history, accelerating a reindex |
-| [bid_collateral_operation](operations/asset_market/_bid_collateral_operation.md) | This operation can be used after a black swan to bid collateral for taking over part of the debt and the settlement_fund (see BSIP-0018) |
-| [execute_bid_operation](operations/asset_market/_execute_bid_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while reviving a bitasset from collateral bids |
+| [limit_order_create_operation](operations/assets_market/_limit_order_create_operation.md) | Instructs the blockchain to attempt to sell one asset for another |
+| [limit_order_cancel_operation](operations/assets_market/_limit_order_cancel_operation.md) | Used to cancel an existing limit order |
+| [call_order_update_operation](operations/assets_market/_call_order_update_operation.md) | This operation can be used to add collateral, cover, and adjust the margin call price for a particular user |
+| [fill_order_operation](operations/assets_market/_fill_order_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while matching orders and emitted for the purpose of accurately tracking account history, accelerating a reindex |
+| [bid_collateral_operation](operations/assets_market/_bid_collateral_operation.md) | This operation can be used after a black swan to bid collateral for taking over part of the debt and the settlement_fund (see BSIP-0018) |
+| [execute_bid_operation](operations/assets_market/_execute_bid_operation.md) *[VIRTUAL]* | This is a virtual operation that is created while reviving a bitasset from collateral bids |
 
 ### Transaction Proposal Protocol
 
@@ -144,9 +144,9 @@ transaction. This off-chain synchronization can be avoided using proposals.
 
 | Name | Description |
 | -------- | -------- |
-| [proposal_create_operation](operations/proposals/_proposal_create_operation.md) | Creates a transaction proposal, for use in multi-sig scenarios |
-| [proposal_update_operation](operations/proposals/_proposal_update_operation.md) | Updates an existing transaction proposal |
-| [proposal_delete_operation](operations/proposals/_proposal_delete_operation.md) | Deletes an existing transaction proposal |
+| [proposal_create_operation](operations/transaction_proposal_protocol/_proposal_create_operation.md) | Creates a transaction proposal, for use in multi-sig scenarios |
+| [proposal_update_operation](operations/transaction_proposal_protocol/_proposal_update_operation.md) | Updates an existing transaction proposal |
+| [proposal_delete_operation](operations/transaction_proposal_protocol/_proposal_delete_operation.md) | Deletes an existing transaction proposal |
 
 ### Asset Transfer
 
@@ -162,7 +162,7 @@ transaction. This off-chain synchronization can be avoided using proposals.
 | [vesting_balance_create_operation](operations/vesting_balances/_vesting_balance_create_operation.md) | Create a vesting balance |
 | [vesting_balance_withdraw_operation](operations/vesting_balances/_vesting_balance_withdraw_operation.md) | Withdraw from a vesting balance |
 
-### Withdrawal Permissions
+### Withdraw Permission
 
 | Name | Description |
 | -------- | -------- |
@@ -175,8 +175,8 @@ transaction. This off-chain synchronization can be avoided using proposals.
 
 | Name | Description |
 | -------- | -------- |
-| [witness_create_operation](operations/witnesses/_witness_create_operation.md) | Create a witness object, as a bid to hold a witness position on the network |
-| [witness_update_operation](operations/witnesses/_witness_update_operation.md) | Update a witness object's URL and block signing key |
+| [witness_create_operation](operations/witness_operations/_witness_create_operation.md) | Create a witness object, as a bid to hold a witness position on the network |
+| [witness_update_operation](operations/witness_operations/_witness_update_operation.md) | Update a witness object's URL and block signing key |
 
 ### The Blockchain Worker System
 
@@ -201,4 +201,4 @@ Once created, a worker is immutable and will be kept by the blockchain forever.
 
 | Name | Description |
 | -------- | -------- |
-| [worker_create_operation](operations/workers/_worker_create_operation.md) | Create a new worker object |
+| [worker_create_operation](operations/worker_operations/_worker_create_operation.md) | Create a new worker object |

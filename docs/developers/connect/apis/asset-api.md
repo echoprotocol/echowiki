@@ -33,7 +33,7 @@ An array of all asset IDs with the number of holders.
 An array of the following structure:
 ```
 [{
-        asset_id: "1.6.<id-of-the-asset>",
+        asset_id: "1.3.<id-of-the-asset>",
         count: number-of-holders
 }, ...]
 ```
