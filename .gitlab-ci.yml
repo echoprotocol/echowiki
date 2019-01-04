@@ -1,6 +1,7 @@
 image: python:alpine
 
 before_script:
+  - git pull origin master
   - pip3 install mkdocs
   - pip3 install pymdown-extensions
   - pip3 install .

@@ -65,8 +65,8 @@ nav:
     - Libraries and Frameworks:
       - EchoJS: developers/libraries-n-frameworks/echojs.md
       - Android and iOS: developers/libraries-n-frameworks/android-n-ios.md
-    - Source Code:
-      - Project structure: http://google.com
-      - Build instructions: http://google.com
+    # - Source Code:
+      # - Project structure: http://google.com
+      # - Build instructions: http://google.com
 
 repo_url: https://github.com/d0ugal/mkdocs-basic-theme
