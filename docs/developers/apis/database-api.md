@@ -576,13 +576,33 @@ Get contract's logs.
 
 Subscribe to contract's logs.
 
+If you want to always receive alerts, then you can specify a very large number as the end of the range of the blocks you listen to, for example, `999999999`.
+
+When calling this method, it will return all already existing events in the specified range as well as the `get_contract_logs` method.
 
 ##### Parameters
+| Option         | Description                                         |
+|:---------------|:----------------------------------------------------|
+| `callback`     | a function of single argument to call as a callback |
+| `contract_id`  | ID of the contract                                  |
+| `from`         | log to start from                                   |
+| `to`           | log to end on                                       |
 
-- *callback* a function of single argument to call as a callback
-- *contract_id* ID of the contract
-- *from* log to start from
-- *to* log to end on
+##### Notice example
+
+```json
+{
+    "method":"notice",
+    "params":[ 1337,[
+        [{
+            "address":"0100000000000000000000000000000000000000",
+            "log": [
+                "a887d9f447f44f095186fc4a0bef9914881f330f24d2a2f63242c4c05eb26ee0"
+            ],"data": "000000000000000000000000000000000000000000000000000000000000001a"
+        }]
+    ]]
+}
+```
 
 #### get_contract_result(result_contract_id)
 
