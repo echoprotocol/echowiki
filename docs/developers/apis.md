@@ -1,4 +1,4 @@
-# ECHO Application Interfaces
+# Echo Application Interfaces
 
 - [login_api][] The login_api is the bottom layer of the RPC API. All other APIs must be requested from this API.
 - [asset_api][] Access to asset holders and asset balances.

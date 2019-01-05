@@ -44,7 +44,7 @@ nav:
     # - Inspect Logs: how-to/Inspect Logs.md
     # - Report Issues: how-to/Report Issues.md
   - Developers:
-    - APIs: developers/apis.md
+    - APIs list: developers/apis.md
     - Smart Contracts:
       - Get Started: developers/smart-contracts/get-started.md
       - x86:
@@ -56,16 +56,17 @@ nav:
 #      - Tips & Tricks: developers/smart-contracts/Tips & Tricks.md
     - Command-Line Tools: developers/command-line-tools.md
     - Operations: developers/operations.md
-    - Technologies:
-      - Echorand: developers/technologies/Echorand.md
-      - Sidechain: developers/technologies/sidechain.md
-      - Oracles: developers/technologies/Oracles.md
-      - Contracts/VMs: developers/technologies/Contracts(VMs).md
     - Libraries and Frameworks:
       - EchoJS: developers/libraries-n-frameworks/echojs.md
       - Android and iOS: developers/libraries-n-frameworks/android-n-ios.md
     # - Source Code:
       # - Project structure: http://google.com
       # - Build instructions: http://google.com
+  - Technologies:
+      - Echorand: developers/technologies/Echorand.md
+      - Sidechain: 
+        - General View: technologies/sidechain/general-view.md
+      - Oracles: developers/technologies/Oracles.md
+      - Contracts/VMs: developers/technologies/Contracts(VMs).md
 
 repo_url: https://github.com/d0ugal/mkdocs-basic-theme

@@ -1,12 +1,12 @@
 # Network broadcast API
 
-### broadcast_transaction(signed_transaction)
+#### broadcast_transaction(signed_transaction)
 
 Broadcast a transaction to the network.
 
 The transaction will be checked for validity in the local database prior to broadcasting. If it fails to apply locally, an error will be thrown and the transaction will not be broadcast.
 
-#### signed_transaction structure
+**signed_transaction** structure
 
 ```json
 {
@@ -24,11 +24,11 @@ The transaction will be checked for validity in the local database prior to broa
 }
 ```
 
-### broadcast_block(signed_block)
+#### broadcast_block(signed_block)
 
 Broadcast a block to the network.
 
-#### signed_block structure
+**signed_block** structure
 
 ```json
 {
@@ -48,11 +48,11 @@ Broadcast a block to the network.
 }
 ```
 
-### broadcast_transaction_with_callback(callback, trx )
+#### broadcast_transaction_with_callback(callback, trx )
 
 This version of broadcast transaction registers a callback method that will be called when the transaction is included into a block.
 The callback method includes the transaction id, block number, and transaction number in the block.
 
-### broadcast_transaction_synchronous (trx)
+#### broadcast_transaction_synchronous (trx)
 
 Synchronious version of `broadcast_transaction_with_callback`.

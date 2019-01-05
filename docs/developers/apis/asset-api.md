@@ -10,7 +10,7 @@ Retreive the information about the holders of the specified asset.
 - *start* The acount id to start retreiving from
 - *limit* Limit to that much accounts (max 100)
 
-#### Returns
+##### Returns
 An array of information about asset holders, that has the following structure:
 ```
 [{

@@ -252,13 +252,13 @@ Returns all unclaimed balance objects for a set of addresses.
 
 An array of assets vested.
 
-get_vesting_balances(account_id)
+#### get_vesting_balances(account_id)
 
-#### Parameters
+##### Parameters
 
 - *account_id* the id of account to use
 
-#### Returns
+##### Returns
 
 An array of vesting balances.
 
