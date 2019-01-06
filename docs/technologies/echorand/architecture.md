@@ -248,286 +248,286 @@ graph LR;
 ### echo::rand::options
 
 ```cpp
-    /// configuration options for echorand protocol
-    struct options
-    {
-        using network_sender_t = std::function<bool (const message&)>;
-        using block_producer_t = std::function<payset_t (const block_context_t&)>;
-        using block_handler_t = std::function<bool (const block_t&)>;
-        using verifiers_getter_t = std::function<verifiers_t (uint64_t, unsigned, unsigned)>;
+/// configuration options for echorand protocol
+struct options
+{
+    using network_sender_t = std::function<bool (const message&)>;
+    using block_producer_t = std::function<payset_t (const block_context_t&)>;
+    using block_handler_t = std::function<bool (const block_t&)>;
+    using verifiers_getter_t = std::function<verifiers_t (uint64_t, unsigned, unsigned)>;
 
-        unsigned            _time_net_1mb   = 0;    ///< timeout in mills for 1Mb message spreads over the network
-        unsigned            _time_net_256b  = 0;    ///< timeout in mills for 256b message spreads over the network
-        unsigned            _creator_count  = 0;    ///< number of max block creators for this node
-        unsigned            _verifier_count = 0;    ///< number of max block verifiers for this node
-        unsigned            _ok_threshold   = 0;    ///< threshold to made ok decision, recommended eq. 0.69 * _creator_count
-        unsigned            _max_bba_steps  = 0;    ///< max number of BBA steps
-        fc::sha256          _last_rand;             ///< Q(r-1) of last block
-        fc::sha256          _last_block_hash;       ///< hash of last block
-        uint64_t            _last_round     = 0;    ///< last number of round
-        bool                _bba_enabled    = true; ///< enables BBA part, otherwise runs onlyy GC part
-        block_handler_t     _save_block;            ///< saver for new blocks into chain db
-        network_sender_t    _send_message;          ///< sender for network messages
-        block_handler_t     _check_block;           ///< checker for received blocks
-        verifiers_getter_t  _get_verifiers;         ///< get info about all verifiers scheduled for given round/step
-        block_producer_t    _produce_block;         ///< producer of new block for echorand algorithm
-    };
+    unsigned            _time_net_1mb   = 0;    ///< timeout in mills for 1Mb message spreads over the network
+    unsigned            _time_net_256b  = 0;    ///< timeout in mills for 256b message spreads over the network
+    unsigned            _creator_count  = 0;    ///< number of max block creators for this node
+    unsigned            _verifier_count = 0;    ///< number of max block verifiers for this node
+    unsigned            _ok_threshold   = 0;    ///< threshold to made ok decision, recommended eq. 0.69 * _creator_count
+    unsigned            _max_bba_steps  = 0;    ///< max number of BBA steps
+    fc::sha256          _last_rand;             ///< Q(r-1) of last block
+    fc::sha256          _last_block_hash;       ///< hash of last block
+    uint64_t            _last_round     = 0;    ///< last number of round
+    bool                _bba_enabled    = true; ///< enables BBA part, otherwise runs onlyy GC part
+    block_handler_t     _save_block;            ///< saver for new blocks into chain db
+    network_sender_t    _send_message;          ///< sender for network messages
+    block_handler_t     _check_block;           ///< checker for received blocks
+    verifiers_getter_t  _get_verifiers;         ///< get info about all verifiers scheduled for given round/step
+    block_producer_t    _produce_block;         ///< producer of new block for echorand algorithm
+};
 ```
 
 ### echo::rand::agreement
 
 ```cpp
-    /// declaration of echorand agreement instance
-    class agreement : private options
-    {
-    public:
-        using rounds = std::map<uint64_t, std::shared_ptr<round>>;
+/// declaration of echorand agreement instance
+class agreement : private options
+{
+public:
+    using rounds = std::map<uint64_t, std::shared_ptr<round>>;
 
-        /// constructs echorand instance from options structure and
-        /// automatically starts new round
-        agreement(const options& arg);
+    /// constructs echorand instance from options structure and
+    /// automatically starts new round
+    agreement(const options& arg);
 
-        /// stops running rounds and stops echorand instance
-        ~agreement();
+    /// stops running rounds and stops echorand instance
+    ~agreement();
 
-        unsigned time_net_1mb() const noexcept;       ///< timeout in mills for 1Mb message spreads over the network
-        unsigned time_net_256b() const noexcept;      ///< timeout in mills for 256b message spreads over the network
-        unsigned creator_count() const noexcept;      ///< number of max block creators for this node
-        unsigned verifier_count() const noexcept;     ///< number of max block verifiers for this node
-        unsigned ok_threshold() const noexcept;       ///< threshold to make ok decision, recommended eq. 0.69 * _creator_count
-        unsigned max_bba_steps() const noexcept;      ///< max number of BBA steps
-        const fc::sha256& last_rand() const noexcept; ///< Q(r-1) of last block
-        const fc::sha256& last_block_hash() const noexcept;    ///< hash of last block
-        uint64_t last_round() const noexcept;         ///< last number of round
+    unsigned time_net_1mb() const noexcept;       ///< timeout in mills for 1Mb message spreads over the network
+    unsigned time_net_256b() const noexcept;      ///< timeout in mills for 256b message spreads over the network
+    unsigned creator_count() const noexcept;      ///< number of max block creators for this node
+    unsigned verifier_count() const noexcept;     ///< number of max block verifiers for this node
+    unsigned ok_threshold() const noexcept;       ///< threshold to make ok decision, recommended eq. 0.69 * _creator_count
+    unsigned max_bba_steps() const noexcept;      ///< max number of BBA steps
+    const fc::sha256& last_rand() const noexcept; ///< Q(r-1) of last block
+    const fc::sha256& last_block_hash() const noexcept;    ///< hash of last block
+    uint64_t last_round() const noexcept;         ///< last number of round
 
-        bool bba_enabled() const noexcept;            ///< enables BBA part, otherwise runs onlyy GC part
+    bool bba_enabled() const noexcept;            ///< enables BBA part, otherwise runs onlyy GC part
 
-        rounds::const_iterator begin() const noexcept;   ///< returns an iterator to the first round
-        rounds::const_iterator end() const noexcept;     ///< returns an iterator past the last round
+    rounds::const_iterator begin() const noexcept;   ///< returns an iterator to the first round
+    rounds::const_iterator end() const noexcept;     ///< returns an iterator past the last round
 
-        const round& get(uint64_t round_id) const;       ///< get round by its number/id,
-                                                         ///< @throws std::out_of_range if not found
+    const round& get(uint64_t round_id) const;       ///< get round by its number/id,
+                                                        ///< @throws std::out_of_range if not found
 
-        /// event handler for echorand messages from network,
-        /// make decision to forward message using send_message
-        /// as a result of internal call to round::handle_message
-        void dispatch_message(const message& msg);
+    /// event handler for echorand messages from network,
+    /// make decision to forward message using send_message
+    /// as a result of internal call to round::handle_message
+    void dispatch_message(const message& msg);
 
-        /// broadcast echorand message to network
-        void send_message(const message& msg) const;
+    /// broadcast echorand message to network
+    void send_message(const message& msg) const;
 
-        /// produce new block at local echo node
-        payset_t produce_block(const block_context_t& ctx) const;
+    /// produce new block at local echo node
+    payset_t produce_block(const block_context_t& ctx) const;
 
-        /// check given block
-        bool check_block(const block_t& block) const;
+    /// check given block
+    bool check_block(const block_t& block) const;
 
-        /// get info about all verifiers scheduled for given round/step
-        verifiers_t get_verifiers(uint64_t round_id, unsigned step_id) const;
+    /// get info about all verifiers scheduled for given round/step
+    verifiers_t get_verifiers(uint64_t round_id, unsigned step_id) const;
 
-        /// finishes round with certificate
-        void finish(uint64_t round_id, const certificate_t& cert);
+    /// finishes round with certificate
+    void finish(uint64_t round_id, const certificate_t& cert);
 
-        /// finishes round with block
-        void finish(uint64_t round_id, const block_t& block);
+    /// finishes round with block
+    void finish(uint64_t round_id, const block_t& block);
 
-    private:
-        rounds      _rounds;
+private:
+    rounds      _rounds;
 
-        round& start_next_round();
-    };
+    round& start_next_round();
+};
 ```
 
 ### echo::rand::round
 
 ```cpp
-    /// represents single round of echorand algorithm
-    class round : public std::enable_shared_from_this<round>
+/// represents single round of echorand algorithm
+class round : public std::enable_shared_from_this<round>
+{
+private:
+    /// starts first three steps of GC
+    round(uint64_t round_id, agreement& a);
+
+public:
+    using steps = std::unordered_map<unsigned,std::shared_ptr<step>>;
+
+    /// starts new round of echorand algorithm
+    static std::shared_ptr<round> start(uint64_t round_id, agreement& a);
+
+    /// finishes and destroys all steps (if any)
+    ~round();
+
+    agreement& parent() const;               ///< parent class
+    uint64_t id() const;                     ///< id of round
+    const fc::sha256& prev_rand() const;         ///< Q(r-1) of last block
+    const fc::sha256& prev_block_hash() const;   ///< hash of last block
+    steps::const_iterator begin() const;     ///< begin iterator to active steps
+    steps::const_iterator end() const;       ///< end iterator to active steps
+
+    const step& get(unsigned step_id) const; ///< get step by its number/id,
+                                                ///< @throws std::out_of_range if not found
+
+    /// get typed step by its number/id
+    ///< @throws std::out_of_range if not found
+    ///< @throws std::bad_cast on case of wrong type
+    template<typename _Step>
+    const _Step& get(unsigned step_id = 0) const
     {
-    private:
-        /// starts first three steps of GC
-        round(uint64_t round_id, agreement& a);
+        if(step_id == 0)
+            return dynamic_cast<const _Step&>(get(resolve_id_t<_Step>::id));
+        else
+            return dynamic_cast<const _Step&>(get(step_id));
+    }
 
-    public:
-        using steps = std::unordered_map<unsigned,std::shared_ptr<step>>;
+    /// broadcast echorand message to network and to related steps
+    template<typename _Msg>
+    void send_message(const _Msg& msg)
+    {
+        if(send_message_internal(msg))
+            return;
+        _messages.emplace_back(std::make_unique<_Msg>(msg));
+    }
 
-        /// starts new round of echorand algorithm
-        static std::shared_ptr<round> start(uint64_t round_id, agreement& a);
+    /// dispatch received echorand message to steps
+    result_t dispatch_message(const message& msg);
 
-        /// finishes and destroys all steps (if any)
-        ~round();
+    /// finish step, start next if required
+    void finish(unsigned step_id);
 
-        agreement& parent() const;               ///< parent class
-        uint64_t id() const;                     ///< id of round
-        const fc::sha256& prev_rand() const;         ///< Q(r-1) of last block
-        const fc::sha256& prev_block_hash() const;   ///< hash of last block
-        steps::const_iterator begin() const;     ///< begin iterator to active steps
-        steps::const_iterator end() const;       ///< end iterator to active steps
+    /// finish step with certificate
+    void finish(unsigned step_id, const certificate_t& cert);
 
-        const step& get(unsigned step_id) const; ///< get step by its number/id,
-                                                 ///< @throws std::out_of_range if not found
+    /// finish step with block
+    void finish(unsigned step_id, const block_t& b);
 
-        /// get typed step by its number/id
-        ///< @throws std::out_of_range if not found
-        ///< @throws std::bad_cast on case of wrong type
-        template<typename _Step>
-        const _Step& get(unsigned step_id = 0) const
-        {
-            if(step_id == 0)
-                return dynamic_cast<const _Step&>(get(resolve_id_t<_Step>::id));
-            else
-                return dynamic_cast<const _Step&>(get(step_id));
-        }
+    /// generated certificate
+    const certificate_t* certificate() const;
 
-        /// broadcast echorand message to network and to related steps
-        template<typename _Msg>
-        void send_message(const _Msg& msg)
-        {
-            if(send_message_internal(msg))
-                return;
-            _messages.emplace_back(std::make_unique<_Msg>(msg));
-        }
+    /// generated block
+    const block_t* const block() const;
 
-        /// dispatch received echorand message to steps
-        result_t dispatch_message(const message& msg);
+    /// empty block for this round
+    const block_t& empty_block() const;
 
-        /// finish step, start next if required
-        void finish(unsigned step_id);
+    /// empty block hash for this round
+    const fc::sha256& empty_block_hash() const;
 
-        /// finish step with certificate
-        void finish(unsigned step_id, const certificate_t& cert);
+private:
+    using certificate_ptr = std::unique_ptr<certificate_t>;
+    using block_ptr = std::unique_ptr<block_t>;
+    using block_hash_ptr = std::unique_ptr<fc::sha256>;
+    using messages = std::deque<std::unique_ptr<message>>;
 
-        /// finish step with block
-        void finish(unsigned step_id, const block_t& b);
+    const uint64_t      _id;          ///< id of round, initialized from a.last_round() + 1
+    const fc::sha256    _prev_rand;   ///< Q(r-1) of last block
+    const fc::sha256    _prev_block_hash;   ///< hash of last block
+    agreement&          _parent;      ///< parent class
+    steps               _steps;       ///< collection of active steps
+    certificate_ptr     _certificate; /// certificate for block, generated at this round
+    block_ptr           _block;       ///< block generated at this round
+    messages            _messages;    ///< message cache for dispatching to the next step at this node
 
-        /// generated certificate
-        const certificate_t* certificate() const;
+    mutable block_ptr      _empty_block;      ///< empty block for this round
+    mutable block_hash_ptr _empty_block_hash; ///< hash of empty block
 
-        /// generated block
-        const block_t* const block() const;
+    /// broadcast echorand message to network and to related steps
+    /// @returns true - if message was successfully dispatched to next local step
+    bool send_message_internal(const message& msg);
 
-        /// empty block for this round
-        const block_t& empty_block() const;
+    /// start step with specified id
+    void start(unsigned step_id);
 
-        /// empty block hash for this round
-        const fc::sha256& empty_block_hash() const;
-
-    private:
-        using certificate_ptr = std::unique_ptr<certificate_t>;
-        using block_ptr = std::unique_ptr<block_t>;
-        using block_hash_ptr = std::unique_ptr<fc::sha256>;
-        using messages = std::deque<std::unique_ptr<message>>;
-
-        const uint64_t      _id;          ///< id of round, initialized from a.last_round() + 1
-        const fc::sha256    _prev_rand;   ///< Q(r-1) of last block
-        const fc::sha256    _prev_block_hash;   ///< hash of last block
-        agreement&          _parent;      ///< parent class
-        steps               _steps;       ///< collection of active steps
-        certificate_ptr     _certificate; /// certificate for block, generated at this round
-        block_ptr           _block;       ///< block generated at this round
-        messages            _messages;    ///< message cache for dispatching to the next step at this node
-
-        mutable block_ptr      _empty_block;      ///< empty block for this round
-        mutable block_hash_ptr _empty_block_hash; ///< hash of empty block
-
-        /// broadcast echorand message to network and to related steps
-        /// @returns true - if message was successfully dispatched to next local step
-        bool send_message_internal(const message& msg);
-
-        /// start step with specified id
-        void start(unsigned step_id);
-
-        /// wait block, start finish step at the place of GC2 step
-        void wait_block();
-    };
+    /// wait block, start finish step at the place of GC2 step
+    void wait_block();
+};
 ```
 
 ### echo::rand::step
 
 ```cpp
-    /// base for all steps of echorand algorithm
-    class step : public std::enable_shared_from_this<step>
+/// base for all steps of echorand algorithm
+class step : public std::enable_shared_from_this<step>
+{
+protected:
+    /// initialize base instance
+    step(std::shared_ptr<round> r, unsigned step_id);
+
+public:
+    virtual ~step(); ///< destruct virtually, do nothing
+
+    std::shared_ptr<round> parent() const; ///< parent round
+    unsigned round_id() const;             ///< round id
+    unsigned id() const;                   ///< step id, fixed for gc and gc_bba, variable for bba steps
+    bool finished() const;                 ///< indicates this step is already finished
+
+    /// fired when echorand message received from network
+    virtual result_t handle_message(const message& msg);
+
+    /// finish this step by setting finished only
+    void set_finished();
+
+protected:
+    /// step initialization
+    virtual void init() {}
+
+    /// sets timer_expired event to fire in specified number of milliseconds
+    void set_timer(unsigned mills, const char* desc = nullptr);
+
+    /// timer event handler
+    virtual void timer_expired() {}
+
+    /// finish this step by setting finished and
+    /// try to signal parent round about this step is finished
+    void finish();
+
+    /// finish step with certificate
+    void finish(const certificate_t& cert);
+
+    /// finish step with block
+    void finish(const block_t& b);
+
+    /// @return verifiers for this step
+    verifiers_t verifiers(bool local = true) const;
+
+    /// setup common message header and sign message
+    void prepare_message(message& m, unsigned producer) const;
+
+private:
+    const unsigned                _round_id;            ///< round id
+    const unsigned                _id;                  ///< id of this step
+    const std::weak_ptr<round>    _parent;              ///< ptr to parent round
+    bool                          _finished = false;    ///< this step finished?
+    verifiers_t                   _step_verifiers;      ///< verifiers for this step
+    verifiers_t                   _msg_verifiers;       ///< verifiers for network messages (prev step)
+
+    void timer_handler();
+};
+
+/// factory class to start steps with automatic initialization
+template<typename _Step>
+class step_t final : public _Step
+{
+protected:
+    template<typename ..._Args>
+    step_t(_Args&&... args)
+    :   _Step(std::forward<_Args>(args)...)
+    {}
+
+public:
+    using type = step_t<_Step>;
+    using shared_ptr = std::shared_ptr<type>;
+
+    /// factory method to start steps
+    template<typename ..._Args>
+    static shared_ptr start(_Args&&... args)
     {
-    protected:
-        /// initialize base instance
-        step(std::shared_ptr<round> r, unsigned step_id);
-
-    public:
-        virtual ~step(); ///< destruct virtually, do nothing
-
-        std::shared_ptr<round> parent() const; ///< parent round
-        unsigned round_id() const;             ///< round id
-        unsigned id() const;                   ///< step id, fixed for gc and gc_bba, variable for bba steps
-        bool finished() const;                 ///< indicates this step is already finished
-
-        /// fired when echorand message received from network
-        virtual result_t handle_message(const message& msg);
-
-        /// finish this step by setting finished only
-        void set_finished();
-
-    protected:
-        /// step initialization
-        virtual void init() {}
-
-        /// sets timer_expired event to fire in specified number of milliseconds
-        void set_timer(unsigned mills, const char* desc = nullptr);
-
-        /// timer event handler
-        virtual void timer_expired() {}
-
-        /// finish this step by setting finished and
-        /// try to signal parent round about this step is finished
-        void finish();
-
-        /// finish step with certificate
-        void finish(const certificate_t& cert);
-
-        /// finish step with block
-        void finish(const block_t& b);
-
-        /// @return verifiers for this step
-        verifiers_t verifiers(bool local = true) const;
-
-        /// setup common message header and sign message
-        void prepare_message(message& m, unsigned producer) const;
-
-    private:
-        const unsigned                _round_id;            ///< round id
-        const unsigned                _id;                  ///< id of this step
-        const std::weak_ptr<round>    _parent;              ///< ptr to parent round
-        bool                          _finished = false;    ///< this step finished?
-        verifiers_t                   _step_verifiers;      ///< verifiers for this step
-        verifiers_t                   _msg_verifiers;       ///< verifiers for network messages (prev step)
-
-        void timer_handler();
-    };
-
-    /// factory class to start steps with automatic initialization
-    template<typename _Step>
-    class step_t final : public _Step
-    {
-    protected:
-        template<typename ..._Args>
-        step_t(_Args&&... args)
-        :   _Step(std::forward<_Args>(args)...)
-        {}
-
-    public:
-        using type = step_t<_Step>;
-        using shared_ptr = std::shared_ptr<type>;
-
-        /// factory method to start steps
-        template<typename ..._Args>
-        static shared_ptr start(_Args&&... args)
-        {
-            auto s = shared_ptr(new type(std::forward<_Args>(args)...));
-            s->init();
-            if(s->finished())
-                return {};
-            return s;
-        }
-    };
+        auto s = shared_ptr(new type(std::forward<_Args>(args)...));
+        s->init();
+        if(s->finished())
+            return {};
+        return s;
+    }
+};
 ```
 
 [blockchain]: https://ru.wikipedia.org/wiki/Блокчейн
