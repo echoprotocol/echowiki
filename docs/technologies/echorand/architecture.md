@@ -1,7 +1,5 @@
 # Архитектура EchoRand
 
-[[_TOC_]]
-
 В документе описано предложение по архитектуре для алгоритма echorand проекта **Echo**. Презентация проекта: ([ECHO: A Next Generation Blockhain Platform For Smart Economics][echo-wp]).
 
 ## Общее описание
