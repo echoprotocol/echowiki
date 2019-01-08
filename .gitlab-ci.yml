@@ -9,6 +9,7 @@ before_script:
 build:
   script:
     - mkdocs build
+    - rm -rf /home/devuser/echo_web/public_wiki/*
     - cp -r ./public/* /home/devuser/echo_web/public_wiki/
   only:
     - master
