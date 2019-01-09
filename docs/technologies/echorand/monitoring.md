@@ -12,8 +12,8 @@
 
 ```json
 {
-    "type": 1,
-    "round": current_round
+    "type": "round_started",
+    "round": 1337
 }
 ```
 
@@ -21,19 +21,37 @@
 
 ```json
 {
-    "type": 2,
-    "round": 0,
+    "type": "block_produced",
+    "round": 1337,
     "producer": 7, //int
-    "rand": "d5c8994382576e1f577eee5239dc3adc7ddddba4bc2405eda73bb3aa7faa76c7",
-    "block_hash": "000e8c18dd97194139e8b4d680c8c3636deb0016"
+    "rand": "06e67aa50b707d87da9150fa54d29aec1bed575866550e78301712826ca4c86a",
+    "block_hash": "0000035f1b3e741643485fbbad7bc0033c5d6d76"
 }
 ```
+
 
 `producer` - содержит instance(3 цифра триплета) аккаунта, выпустившего блок. 7 соответствует account_id_type "1.2.7"
 
 `rand` - содержит rand текущего блока. `sha256` хэш
 
 `block_hash` - содержит хэш текущего блока. `ripemd160` хэш
+
+* Нотификация о старте gc 
+
+```json
+{
+    "type": "gc_started",
+    "round": 1337
+}
+```
+* Нотификация о старте bba 
+
+```json
+{
+    "type": "bba_started",
+    "round": 1337
+}
+```
 
 ### Database API
 
