@@ -1,8 +1,8 @@
 # contract_transfer_operation
 
-Transfer assets to contract.
+Virtual operation that indicates internal transfers from contracts.
 
-### JSON Example
+## JSON Example
 
 ```json
 [

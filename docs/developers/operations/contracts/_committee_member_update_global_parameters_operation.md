@@ -6,7 +6,7 @@ This operation allows the committee_members to update the global parameters on t
 
 This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted.
 
-### JSON Example
+## JSON Example
 
 ```json
 [
