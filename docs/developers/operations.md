@@ -89,8 +89,8 @@ stealth transfers is based purley on the data size of the transaction.
 
 | Name | Description |
 | -------- | -------- |
-| [create_contract_operation](operations/contracts/_contract_operation.md) | Creates a contract. |
-| [call_contract_operation](operations/contracts/_contract_operation.md) | Calls a contract. |
+| [create_contract_operation](operations/contracts/_create_contract_operation.md) | Creates a contract. |
+| [call_contract_operation](operations/contracts/_call_contract_operation.md) | Calls a contract. |
 | [contract_transfer_operation](operations/contracts/_contract_transfer_operation.md) *[VIRTUAL]* | Indicates internal contract transfers |
 
 #### Custom Extension
