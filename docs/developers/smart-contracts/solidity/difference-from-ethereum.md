@@ -135,6 +135,18 @@ contract transfer {
 }
 ```
 
+#### `addr.isCommittee`
+Проверяет является ли адрес активным заверителем и возвращает соответствующее значение `bool`.
+
+Пример:
+```
+contract A {
+    function f(address addr) returns (bool) {
+        return addr.isCommittee;
+    }
+}
+```
+
 ### Способы использования
 
 #### Использовать Echo Solc
