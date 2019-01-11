@@ -46,7 +46,7 @@
 | -------- | -------- |
 | [committee_member_create_operation](operations/committee_member/_committee_member_create_operation.md) | Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network |
 | [committee_member_update_operation](operations/committee_member/_committee_member_update_operation.md) | Update a `committee_member` object |
-| committee_member_update_global_parameters_operation | Used by committee members to update the global parameters of the blockchain |
+| [committee_member_update_global_parameters_operation](operations/committee_member/_committee_member_update_global_parameters_operation.md) | Used by committee members to update the global parameters of the blockchain |
 
 #### Stealth Transfer
 
