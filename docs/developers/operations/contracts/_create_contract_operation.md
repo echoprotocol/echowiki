@@ -1,7 +1,7 @@
 # create_contract_operation
 
 Creates new contract.
-* `eth_accuracy` if set all balances passed with ethereum accuracy(18). More [here](https://wiki.echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)
+* `eth_accuracy` if true all balances passing to contract with ethereum accuracy(18). More [here](https://wiki.echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)
 * `supported_asset_id` is optional. Operation must be without this field if you dont want to link the contract with the specified asset.
 
 ## JSON Example
