@@ -23,8 +23,8 @@ Creates new contract.
     "gasPrice": 0,
     "gas": 0,
     "code": "",
-    "eth_accuracy": false,
-    "supported_asset_id": "1.3.0" // optional
+    "supported_asset_id": "1.3.0", // optional
+    "eth_accuracy": false
   }
 ]
 ```
