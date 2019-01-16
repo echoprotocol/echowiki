@@ -6,7 +6,7 @@ Virtual operation that indicates internal transfers from contracts.
 
 ```json
 [
-  48,{
+  49,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
