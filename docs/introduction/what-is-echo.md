@@ -1,4 +1,4 @@
-# Ehat is Echo
+# What is Echo
 
 Echo project is an initiative focused on research and development of a new advanced blockchain platform, which can be used as a conceptual foundation and environment for a wide range of smartcontract-based applications and services. Echo pursues a goal of becoming an advanced smart economy environment. Another major aim of Echo is to become a solid inter-blockchain platform, which would allow easy interactions with secondary and external blockchains. 
 
