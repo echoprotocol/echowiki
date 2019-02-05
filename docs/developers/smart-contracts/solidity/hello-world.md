@@ -60,7 +60,7 @@ But before, it's necessary to get the contract performance result. The result ID
 ```bash
 unlocked >>> get_account_history nathan 1
 get_account_history nathan 1
-2039-01-01T15:17:26 create_contract_operation nathan fee: 0.00013 ECHO   result: 1.17.0 
+2039-01-01T15:17:26 create_contract_operation nathan fee: 0.00013 ECHO   result: 1.17.0
 ```
 
 The result of creating a contract has the ID `1.17.0`, and now let's see how to get it using the `get_contract_result` method.

@@ -1,643 +1,621 @@
-# Алгоритм EchoRand
+<!-- markdownlint-disable md033 -->
 
-Техническое описание генерации блоков в распределенной [blockchain][] проекта **Echo** ([ECHO: A Next Generation Blockhain Platform For Smart Economics][echo-wp]).
+# EchoRand Algorithm
 
-За основу для алгоритма **EchoRand** взята теоретическая работа [Algorand v9][algorand-v9], которая описывает приход к консенсусу в децентрализованной сети на основе решения [задачи о византийских генералах][byzantine].
+Technical description of block generation in a distributed [blockchain][] of the **Echo** project ([ECHO: A Next Generation Blockchain Platform For Smart Economics][echo-wp]).
 
-В работе [Algorand v9][algorand-v9] излагается несколько возможных вариантов алгоритма. За основу для **EchoRand** взят вариант под названием **Algorand′2** с некоторыми изменениями.
+The theoretical solution [Algorand v9] [algorand-v9], which describes the achieving of a decentralized consensus based on solving the [Byzantine Generals' Problem] [byzantine], was used as the basis for the **EchoRand** algorithm.
 
-А именно:
+The theoretical solution [Algorand v9] [algorand-v9] presents several possible variants of the algorithm. **EchoRand** is based on the variant named **Algorand′2**, implemented with certain modifications.
 
-* Изменен способ определения участия конкретного исполнителя в конкретном шаге
-* Отказ от модели однократных, производных ключей для подписи сетевых сообщений
-* Изменен способ генерации разделяемого случайного состояния на третьем шаге алгоритма BBA
+Namely:
 
-Общая схема работы **EchoRand** описана в работе [ECHO: Model of Functioning of Distributed Ledger][echo-model].
+* The way to determine participation of a specific party in a particular step is changed
+* Denial of the one-time keys model and deriving keys model for signing network messages
+* The method of generating a random shared state in the third step of the BBA algorithm is changed
 
-## Общие требования к алгоритму и его реализации
+The general pattern of work of the **EchoRand** is described in [ECHO: Model of Functioning of Distributed Ledger][echo-model].
 
-Основные общие требования, вытекающие из [маркетингового описания][echo-wp] **Echo**:
+## General requirements for the algorithm and its implementation
 
-* Максимизация пропускной способности сети по количеству транзакций в секунду
-* Минимизация сетевых и вычислительных ресурсов для обеспечения работы сети
-* Децентрализация - все решения в сети принимаются консенсусом группы узлов
-* Высокая устойчивость к любым злонамеренным действиям в отношении самой сети и её пользователей
+Basic requirements deriving from the [marketing description][echo-wp] **Echo**:
 
-Практические требования, условия и цели:
+* Maximizing network bandwidth that specifies the number of transactions per second
+* Minimizing of network and computing resources for the optimization of network operations
+* Decentralization - all decisions within the network are made by a consensus of a node group
+* High resistance to any malicious actions in regard to the network itself and its users
 
-* Максимальная простота исходного кода
-* Изолированность исходного кода алгоритма от остального кода проекта **Echo**
-* Программное разделение этапов `gc` и `bba`. Это позволит, при необходимости, заменить алгоритм достижения византийского консенсуса.
+Practical requirements, conditions and goals:
 
-## Объекты алгоритма
+* Maximum simplicity source code
+* Isolation of the algorithm source code from the rest of the code of the project **Echo**
+* Programmed division of the `gc` и `bba` step. This will allow to replace the algorithm of reaching the Byzantine consensus, if necessary.
 
-* **Узел сети** - сервер, с работающим процессом `echo_node`, локальной конфигурацией и базой данных. Физическая единица сети, на которой запущен один экземпляр **EchoRand**
-* **Локальная конфигурация** - некоторый набор параметров, известный только текущему узлу сети.
-* **База (данных)** - [blockchain][] с некоторым набором блоков, возможно "отставший" от состояния в большинстве остальных узлов сети. Хранит актуальные публичные ключи ЭЦП всех участников работы алгоритма.
-* **Блок (данных)** - логическая единица базы для хранения набора транзакций и сопутствующих данных, которая может быть проверена на корректность внешними средствами
-* **Транзакция** - с точки зрения данного алгоритма, это определенный блок данных, который может быть проверен на корректность внешними средствами
-* **Исполнитель** - набор из приватного/публичного ключей [EdDSA][] и баланса в сети **Echo**. Фактически, это пользователь сети **Echo**,
-зарегистрированный на конкретном узле сети специальным образом. Один пользователь может быть
-зарегистрирован в качестве исполнителя только на одном узле сети в заданный момент времени. На одном узле сети возможна
-регистрация нескольких исполнителей.
+## Algorithm objects
 
-## Параметры алгоритма
+* **Network node** - a server, with running `echo_node` process, local configuration and database. A physical network unit with one running instance of **EchoRand**
+* **Local configuration** - a certain set of parameters accessible only to the running network node.
+* **Base (database)** - a [blockchain][] with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
+* **Block (block of data)** - logical database unit for storing a transaction set and the related data, that can be verified by external means
+* **Transaction** - in the context of this particular algorithm, it is a certain block of data that can be verified by external means
+* **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. On one network node permits registration of several participants.
 
-Следующие параметры алгоритма задаются константами, либо настраиваются из конфигурации при запуске **echo_node** и, возможно, корректируются в процессе работы алгоритма в некоторых пределах.
+## Algorithm parameters
 
-|Обозначение|Описание|
+The following algorithm parameters are set by constants, or configured at the **echo_node** startup and, possibly, adjusted within certain limits during the process of the algorithm operation.
+
+|Designation|Description|
 |:---:|---|
-| **Λ** | "большой" интервал, среднее время необходимое для распространения сообщения размером 1 мегабайт по сети **Echo** |
-| **λ** | "малый" интервал, среднее время необходимое для распространения сообщения размером 256 байт по сети **Echo** |
-| **$`N_{g}`$** | количество исполнителей-создателей блоков в раунде, используется в функции **VRF(r, 1)** |
-| **$`N_{c}`$** | количество исполнителей-контролёров блоков в раунде, используется в функции **VRF(r, s)**, $`s > 1`$ |
-| **$`t_{h}`$** | порог для принятия положительного решения при проверке, может быть выбрано как **$`0.69*N_{c}`$** |
-| **μ** | $`4 + 3*k, k > 0`$ - максимум шагов алгоритма, после выполнения которых создается пустой блок |
+| **Λ** | "large" interval, the average time required to distribute a 1MB message across the **Echo** network |
+| **λ** | "small" interval, the average time required to distribute a 256Bit message across the **Echo** network |
+| **$`N_{g}`$** | the number of block creators in a round, used in the **VRF(r, 1)** function |
+| **$`N_{c}`$** | the number of block controllers in a round, used in the **VRF(r, s)**, $`s > 1`$ function |
+| **$`t_{h}`$** | the threshold for making a positive decision when verifying, and can be selected by **$`0.69*N_{c}`$** |
+| **μ** | $`4 + 3*k, k > 0`$ - maximum number of algorithm steps after which an empty new block is created |
 
-## Выбор параметров
-
--
-
-### Выбор интервалов Λ и λ
+<!-- ## Parameter selection
 
 -
 
-### Выбор количества исполнителей $`N_{g}`$, $`N_{c}`$
+### Λ и λ interval selection
 
 -
 
-### Выбор μ - максимального количества шагов алгоритма
+### The number of participants $`N_{g}`$, $`N_{c}`$
 
 -
 
-## Криптографический аппарат
+### Selection of the maximum number of the algorithm steps (μ)
 
-### Алгоритмы
+- -->
 
-* [EdDSA][] - детерминированный алгоритм создания и проверки электронной цифровой подписи
-  *  публичный ключ: 32 байта (256 бит)
-  *  приватный ключ: 32 байта (256 бит)
-  *  подпись: 64 байта (512 бит)
-* [SHA-256][] - алгоритм криптографической хеш-функции
-  * хеш: 32 байта (256 бит)
-  * функция порядка на множестве хешей (`std::less<hash_t, hash_t>`)
-* [VRF][] - проверяемая случайная функция
+## Cryptographic device
 
-### Построение VRF
+### Algorithms
 
-#### Для определения активных исполнителей
+* [EdDSA][] - deterministic algorithm for creating and verifying electronic digital signature
+  * public key: 32 bytes (256 bits)
+  * private key: 32 bytes (256 bits)
+  * signature: 64 bytes (512 bits)
+* [SHA-256][] - cryptographic hash algorithm
+  * hash: 32 bytes (256 bits)
+  * sequence function on a hashset (`std::less<hash_t, hash_t>`)
+* [VRF][] - verifiable random function
 
-Проверяемая случайная функция на каждом раунде **r** и шаге **s** строится итеративно,
-следующим образом:
+### VRF building
+
+#### To identify active participants
+
+The verifiable random function at each **r** round and on each **s** step is built iteratively, in the following way:
+
 1. **VRF<sub>0</sub>(r, s) = [SHA-256][](Q<sub>r-1</sub>, r, s)**
 1. **VRF<sub>n</sub>(r, s) = [SHA-256][](VRF<sub>n-1</sub>(r, s))**
 
-Результатом работы данной функции является массив случайных значений размером **$`N_{g}`$**:
+The result of the function operation is an array of random values of size **$`N_{g}`$**:
 
 **VRF(r, s) = { VRF<sub>0</sub>(r, s), VRF<sub>1</sub>(r, s), ... }**
 
-Конкретный исполнитель вычисляется из хеша **VRF<sub>i</sub>(r, s)** таким образом, чтобы
-вероятность выбора исполнителя активным была пропорциональна его текущему балансу в системе.
+A specific participant is calculated from the **VRF<sub>i</sub>(r, s)** hash in a way as to make the probability of selecting a participant as active proportional to its current balance in the system.
 
-Набор **VRFN(r,s)** это массив индексов, различный для каждого узла сети и такой, что
-если **i ∈ VRFN(r,s)**, то из **VRF<sub>i</sub>(r, s)** вычисляется идентификатор пользователя
-являющийся исполнителем для данного раунда и шага на выбранном узле.
+**VRFN(r,s)** set is an array of indexes, different for each network node, and in case **i ∈ VRFN(r,s)**, we calculate the ID of the user who is the participant for the given round and step on a selected node out of the function **VRF<sub>i</sub>(r, s)**.
 
-Иными словами, **VRFN** является выборкой тех исполнителей из **VRF**, которые должны выполнятся
-на конкретном узле, раунде и шаге.
+In other words, **VRFN** is a selection of participants from **VRF** who act on a particular node, round and step.
 
-На разных узлах сети, на одном и том же раунде и шаге алгоритма, множества **VRFN** будут разные,
-а множество **VRF** будет одинаковым.
+At the same round and step  but on different network nodes of the algorithm, the **VRFN** selections will be different, while the **VRF** selection will be the same.
 
-#### Для генерации случайного значения раунда
+#### To generate a random round value
 
-Начальный вектор **Q(0)** выбирается случайным образом при инициализации [blockchain][] базы.
+The starting vector **Q(0)** is selected randomly at [blockchain][] database initialization.
 
-Далее, вектор **Q<sub>r</sub>** вычисляется следующим образом при создании нового блока:
-1. **Q<sub>r</sub>** = **H( signQ<sub>r-1</sub>, r )**, если блок **B(R)** не пуст.
-1. **Q<sub>r</sub>** = **H( Q<sub>r-1</sub>, r )**, если блок **B(R)** пуст.
+Then, at creation of a new block the **Q<sub>r</sub>** vector is calculated the following way:
 
-> Подпись в случае **1** использует приватный ключ исполнителя, который создает блок
+1. **Q<sub>r</sub>** = **H( signQ<sub>r-1</sub>, r )**, if the **B(R)** block is not empty.
+1. **Q<sub>r</sub>** = **H( Q<sub>r-1</sub>, r )**, if the **B(R)** block is empty.
 
-#### Для генерации случайного значения на r = 7,10,13,... шаге BBA
+> The signature in the case № **1** uses a private key of the participant who creates the block
+
+#### To generate a random value on r = 7,10,13,... BBA step
 
 **BBA_RAND(s) = lsb{ [SHA-256][] { Q<sub>r-1</sub>, r } }**
 
-## Условные обозначения
+## Notation keys
 
-|Обозначение|Описание|
+|Designation|Description|
 |:---:|---|
-| **N** | количество узлов сети |
-| **sign(x)** | подпись [EdDSA][] |
-| **H(x)** | хеш [SHA-256][] |
-| **r** >= 1 | текущий раунд алгоритма, фактически равно количеству блоков в базе плюс 1 |
-| **s** >= 1 | текущий номер шага алгоритма в раунде |
-| **B<sub>r</sub>** | блок, созданный на раунде **r**, равен { **r**, **producer-id**, **Q<sub>r</sub>**, **HB<sub>r</sub>**, **HB<sub>r-1</sub>**, **sigB**, **PAY<sub>r</sub>**, **CERT<sub>Br</sub>** } |
-| **HB<sub>r</sub>** | хеш блока **B<sub>r</sub>** |
-| **PAY<sup>r</sup>** | набор транзакций в блоке **B<sub>r</sub>**  |
-| **Q<sub>r</sub>** | разделяемый случайный вектор раунда **r** |
-| **signQ<sub>r</sub>** | подпись случайного вектора раунда **r** |
-| **signB<sub>r</sub>** | подпись блока раунда **r** |
-| **l(r)** | лидер раунда **r** - определяет **PAY<sup>r</sup>**, создает **B<sub>r</sub>** и определяет **Q<sub>r</sub>** |
-| **CERT<sub>r</sub>** | сертификат блока **B<sub>r</sub>**, формируется из набора сообщений **bba_signature** |
-| **VRF(r, s)** | упорядоченное множество исполнителей, которые участвуют в шаге **s** раунда **r** |
-| **VRFN(r, s)** | упорядоченное множество индексов исполнителей из **VRF(r, s)**, которые зарегистрированы на текущем узле и участвуют в шаге **s** раунда **r** |
+| **N** | number of nodes |
+| **sign(x)** | signature [EdDSA][] |
+| **H(x)** | hash [SHA-256][] |
+| **r** >= 1 | current round of the algorithm, which is virtually equal to the number of blocks in the database plus one |
+| **s** >= 1 | current step number of the algorithm in the round |
+| **B<sub>r</sub>** | block created in the **r** round, which equals to { **r**, **producer-id**, **Q<sub>r</sub>**, **HB<sub>r</sub>**, **HB<sub>r-1</sub>**, **sigB**, **PAY<sub>r</sub>**, **CERT<sub>Br</sub>** } |
+| **HB<sub>r</sub>** | **B<sub>r</sub>** block hash |
+| **PAY<sup>r</sup>** | set of transactions in the **B<sub>r</sub>** block  |
+| **Q<sub>r</sub>** | shared random vector of the **r** round |
+| **signQ<sub>r</sub>** | signature of a random vector of the **r** round |
+| **signB<sub>r</sub>** | signature of a block of the **r** round |
+| **l(r)** | round **r** leader - determines **PAY<sup>r</sup>**, creates **B<sub>r</sub>** and determines **Q<sub>r</sub>** |
+| **CERT<sub>r</sub>** | **B<sub>r</sub>** block certificate, formed out of a set of **bba_signature** messages |
+| **VRF(r, s)** | ordered set of participants who act in step **s** of  round **r** |
+| **VRFN(r, s)** | ordered set of indexes of **VRF(r, s)** participants who are registered on the current node and participate in step **s** of round **r** |
 
-Под экземпляром алгоритма **EchoRand** понимается реализация алгоритма, которая выполняется на некотором узле сети **Echo**.
+An instance of the **EchoRand** algorithm is understood as an implementation of the algorithm that is performed on a certain node of **Echo** network.
 
-## Функция **VRF(r, s)**
+## **VRF(r, s)** function
 
-Построение данной функции описано в документе [ECHO: Model of Functioning of Distributed Ledger][echo-model],
-в виде интервального дерева для всех известных исполнителей в системе.
+The function building is described in the document [ECHO: Model of Functioning of Distributed Ledger][echo-model], in the form of an interval tree for all the known participants in the system.
 
-Функция возвращает список исполнителей заданной длины для раунда **r** и шага **s**, одинаковый для всех узлов сети.
+The function returns a list of participants of a given length of round **r** and step **s**, which is the same for all the nodes in the network.
 
-Следует заметить, что функция использует некоторое фиксированое состояние [blockchain][] базы для вычисления
-балансов исполнителей. В общем случае эта функция может использовать состояние в раунде **max{0, r - k}**, где **k = 1,...**.
+It should be noted that the function uses a fixed state of [blockchain][] database to calculate the participants' balances. In the general case, this function can use a state of the round **max{0, r - k}**, где **k = 1,...**.
 
-Для вычисления функции требуется случайный вектор раунда **Q(r-k)**.
+To calculate the function, a random vector of the **Q(r-k)** round is required.
 
-## Описание алгоритма
+## Algorithm description
 
-Изложение работы алгоритма для раунда **r** и некоторого фиксированного исполнителя.
+The outline of the algorithm operation for round **r** and a fixed participant.
 
-Любое использование функции **sign(x)** предполагает использование приватного ключа этого фиксированного исполнителя, который доступен для экземпляра алгоритма **EchoRand**.
+Any use of the **sign(x)** function requires the use of a private key of this fixed participant, which is available for the instance of the **EchoRand** algorithm.
 
-Публичные ключи всех исполнителей сети **Echo** предполагаются доступными на каждом узле сети.
+Public keys of all the **Echo** network participants are supposed to be available on each node of the network.
 
-Изложение механизма регистрации исполнителей на узле, соответствия их учетным записям сети **Echo** и распространению их публичных ключей выходит за рамки данного документа.
+It is beyond the scope of this document to describe the mechanism of participants registration on a node, the compliance with their accounts within **Echo** network and the process of distributing their public keys.
 
-### Начало работы
+### Getting started
 
-#### 0. Подготовка
+#### 0. Preparation
 
-**Входные данные**:
-* **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>**
+**Input data**:
 
-Происходит создание раунда **R<sub>r</sub>**, который запускает шаги 1 и 2, описанные ниже. 
+* **Q<sub>r-1</sub>** from **CERT<sub>r-1</sub>**
 
-#### 1. Генерация блоков-кандидатов
+The round **R<sub>r</sub>**, which launches step 1 and step 2, described below, is created.
 
-**Входные данные**:
-* **HB<sub>r-1</sub>** из **CERT<sub>r-1</sub>**
-* **A<sub>1</sub>**, **N<sub>1</sub>** из контекста раунда
+#### 1. Candidate blocks generation
 
-1. **Старт**: сразу после определения **CERT<sub>r-1</sub>**
-1. **Проверка**:
-    1. если **N<sub>1</sub>=∅**, завершить шаг
-    1. выбрать индекс исполнителя с **n = N<sub>1</sub>[0]** в качестве создателя блока данного узла
-    1. получить реальный идентификатор исполнителя в [blockchain][]: **id<sub>1</sub> = A<sub>1</sub>[n]**
-    1. по **id<sub>1</sub>** исполнителя получить его приватные ключи
-1. **Сборка блока**:
-  1. если все предыдущие блоки **B(k), k=1..r-1** доступны, то построить **PAY<sup>r</sup>**
-  1. если хотя бы один из предыдущих блоков недоступен, то **PAY<sup>r</sup> = ∅**
-  1. если **PAY<sup>r</sup> != ∅**, создать новый блок **B<sub>r</sub> = { r, PAY<sup>r</sup>, Q<sub>r-1</sub>, signQ<sub>r-1</sub>, HB<sub>r-1</sub> }**
-1. **Коммуникация**: формирование, подпись и одновременная отсылка сообщений:
-  1. подписать ключом **id<sub>1</sub>** и отослать **gc_block** = **{ r, id<sub>1</sub>, B<sub>r</sub>, signB<sub>r</sub> }**
-  1. подписать ключом **id<sub>1</sub>** и отослать **gc_signature** = **{ r, id<sub>1</sub>, signQ<sub>r-1</sub>, HB<sub>r</sub> }**
+**Input data**:
 
-### Выработка оценочного соглашения (GC)
+* **HB<sub>r-1</sub>** from **CERT<sub>r-1</sub>**
+* **A<sub>1</sub>**, **N<sub>1</sub>** from the context of the round
 
-#### 2. Выбор лидера (голосование)
+1. **Start**: right after determining **CERT<sub>r-1</sub>**
+1. **Verification**:
+    1. If **N<sub>1</sub>=∅**, complete the step
+    1. select participant index with **n = N<sub>1</sub>[0]** as a creator of this block on the node
+    1. get actual ID of the the participant in the [blockchain][]: **id<sub>1</sub> = A<sub>1</sub>[n]**
+    1. through **id<sub>1</sub>** get all the private keys of a participant
+1. **Block assembly**:
+    1. if all the previous blocks **B(k), k=1..r-1** are available, build **PAY<sup>r</sup>**
+    1. if at least one of the previous blocks is unavailable, build **PAY<sup>r</sup> = ∅**
+    1. If **PAY<sup>r</sup> != ∅**, create a new block **B<sub>r</sub> = { r, PAY<sup>r</sup>, Q<sub>r-1</sub>, signQ<sub>r-1</sub>, HB<sub>r-1</sub> }**
+1. **Communication**: generation, signature and a simultaneous message sending:
+    1. sign with the key **id<sub>1</sub>** and send **gc_block** = **{ r, id<sub>1</sub>, B<sub>r</sub>, signB<sub>r</sub> }**
+    1. sign with the key **id<sub>1</sub>** and send **gc_signature** = **{ r, id<sub>1</sub>, signQ<sub>r-1</sub>, HB<sub>r</sub> }**
 
-**Входные данные**:
-* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>**
-* **A<sub>1</sub>**, **A<sub>2</sub>**, **N<sub>2</sub>** из контекста раунда
+### Developing an evaluation agreement (GC)
 
-**v** - некоторая локальная структура шага, которая хранит хеш блока и идентификатор лидера, создавшего блок.
+#### 2. Leader selection (voting)
 
-Символ пустого множества, присвоенный элементам **v** означает "пустой блок" и "неизвестный лидер".
-В приложении это может быть какая-то предпопределенная константа, либо отдельный флаг в структуре данных.
+**Input data**:
 
-1. **Старт**: сразу после определения **CERT<sub>r-1</sub>**
-1. **Таймер**: запланировать таймер через время **2 * λ**, по срабатыванию:
-    1. определить **l**, как **id** из полученных сообщений в **ctx[id]** с минимальным индексом в **A<sub>1</sub>**
-    1. если в локальном кеше для **l** есть блок **B<sub>r</sub>**
+* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** from **CERT<sub>r-1</sub>**
+* **A<sub>1</sub>**, **A<sub>2</sub>**, **N<sub>2</sub>** from the context of the round
+
+**v** - a local structure of a step that stores the hash of the block and the ID of the leader, who created the block.
+
+The empty set symbol assigned to the elements **v** means "empty block" and "unknown leader".
+In the application, it can be a predefined constant or a separate flag in the data structure.
+
+1. **Start**: right after defining **CERT<sub>r-1</sub>**
+1. **Timer**: schedule the timer after the time equal to **2 * λ**, by a trigger:
+    1. To define **l**, as **id** from the received messages in **ctx[id]** with a minimum index of **A<sub>1</sub>**
+    1. if the local cache for **l** has the block **B<sub>r</sub>**
         1. **v = { ctx[l].HB, l }**
-        1. перейти к **Коммуникации**
-1. **Таймер**: запланировать таймер через время **λ + Λ**, по срабатыванию:
+        1. go to **Communication**
+1. **Timer**: schedule the timer after the time equal to **λ + Λ**, by a trigger:
     1. **v = { ∅, ∅ }**
-    1. перейти к **Коммуникации**
-1. **Сеть**: подписаться на сообщения **gc_block**, **gc_signature** из сети при старте шага
-    1. при получении сообщения **gc_block** раунда **r**
-        1. проверить номер раунда в сообщении
-        1. проверить шаг сообщения равен **1**
-        1. проверить, что **msg.id ∈ A<sub>1</sub>** и получить публичный ключ пользователя
-        1. проверить подпись всего сообщения
-        1. проверить, что **msg.block** корректный
-            1. проверить раунд блока на равенство текущему
-            1. проверить **producer-id** ∈ A<sub>1</sub>**
-            1. проверить **Q<sub>r</sub>** из блока, если уже есть **gc_signature** для этого блока
-            1. проверить подпись блока используя **producer-id** блока
-            1. проверить **HB<sub>r-1</sub>** из блока на равенство локальному из **CERT<sub>r-1</sub>**
-            1. проверить корректность **PAY<sup>r</sup>** в блоке
-        1. если **ctx[msg.id]** уже создан
-            1. проверить **ctx[msg.id].HB == H(msg.block)**
-        1. если не создан, сохранить пару **msg.id, msg.block** в контекст раунда:
+    1. go to **Communication**
+1. **Network**: subscribe to network messages **gc_block**, **gc_signature** at the start of a step
+    1. after receiving a message **gc_block** of the round **r**
+        1. verify the round number in the message
+        1. verify the message step equals **1**
+        1. verify that **msg.id ∈ A<sub>1</sub>** and get the user's public key
+        1. verify the signature of the whole message
+        1. verify that **msg.block** is correct
+            1. verify the block's round for equality to the current
+            1. verify **producer-id** ∈ A<sub>1</sub>**
+            1. verify **Q<sub>r</sub>** from the block, if it already has the **gc_signature**
+            1. verify the block signature using **producer-id** of the block
+            1. verify **HB<sub>r-1</sub>** from the block for equality to the local one from **CERT<sub>r-1</sub>**
+            1. verify the correctness of **PAY<sup>r</sup>** in the block
+        1. If **ctx[msg.id]** already exists
+            1. verify **ctx[msg.id].HB == H(msg.block)**
+        1. If it does not exist, save **msg.id, msg.block** in the context of the round:
             1. **ctx[msg.id].B = msg.block**
             1. **ctx[msg.id].HB = H(msg.block)**
-        1. если установлено **l** и **l == id**:
+        1. if **l** and **l == id** are installed:
             1. **v = { ctx[l].HB, l }**
-            1. перейти к **Коммуникации**
-    1. при получении сообщения **gc_signature** раунда **r**
-        1. проверить номер раунда в сообщении
-        1. проверить, что **msg.id ∈ A<sub>1</sub>** и получить публичный ключ пользователя
-        1. проверить подпись всего сообщения
-        1. **msg.block_hash = ∅**: проверить **msg.rand** на равенство локальному из **CERT<sub>r-1</sub>**
-        1. **msg.block_hash != ∅**: проверить подпись **msg.rand** используя **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>**
-        1. сохранить **msg.id => ∅** в контекст раунда, если еще не сохранен:
+            1. go to **Communication**
+    1. after receiving a message **gc_signature** of the round **r**
+        1. verify the round number in the message
+        1. verify that **msg.id ∈ A<sub>1</sub>** and get the user's public key
+        1. verify the signature of the whole message
+        1. **msg.block_hash = ∅**: verify **msg.rand** for equality to the local one from **CERT<sub>r-1</sub>**
+        1. **msg.block_hash != ∅**: verify the signature **msg.rand** using **Q<sub>r-1</sub>** from **CERT<sub>r-1</sub>**
+        1. Save **msg.id => ∅** in the context of the round, if it’s not saved yet:
             1. **ctx[msg.id].B = ∅**
             1. **ctx[msg.id].HB = msg.block_hash**
             1. **ctx[msg.id].rand = msg.rand**
-1. **Коммуникация**: формирование, подпись и отсылка сообщений
-    1. остановить таймеры, **не** отписываться от событий сети
-    1. если **N<sub>2</sub> = ∅**, завершить шаг
+1. **Communication**: generating, signing and sending of messages
+    1. stop timers, **do not** unsubscribe from network messages
+    1. if **N<sub>2</sub> = ∅**, end the step
     1. **∀n<sub>2</sub> ∈ N<sub>2</sub>**:
-        1. получить реальный идентификатор исполнителя в [blockchain][]: **id<sub>2</sub> = A<sub>2</sub>[n<sub>2</sub>]**
-        1. подписать ключом **id<sub>2</sub>** и отослать
-            1. если **v != ∅**: **gc_proposal** = **{ r, 2, id<sub>2</sub>, v }**
-            1. если **v == ∅**: **gc_proposal** = **{ r, 2, id<sub>2</sub>, ∅ }**
+        1. get real user’s ID in the [blockchain][]: **id<sub>2</sub> = A<sub>2</sub>[n<sub>2</sub>]**
+        1. sign with the key **id<sub>2</sub>** and send
+            1. if **v != ∅**: **gc_proposal** = **{ r, 2, id<sub>2</sub>, v }**
+            1. if **v == ∅**: **gc_proposal** = **{ r, 2, id<sub>2</sub>, ∅ }**
 
-#### 3. Выбор лидера (подсчет голосов)
+#### 3. Choosing the leader (vote counting)
 
-**Входные данные**: **A<sub>2</sub>**, **A<sub>3</sub>**, **N<sub>3</sub>** из контекста раунда
+**Input data**: **A<sub>2</sub>**, **A<sub>3</sub>**, **N<sub>3</sub>** from the context of the round
 
-**Старт**: сразу после определения **CERT<sub>r-1</sub>**
+**Start**: right after defining **CERT<sub>r-1</sub>**
 
-**v** - некоторая локальная структура шага, которая хранит хеш блока и идентификатор лидера, создавшего блок.
+**v** - a local structure of a step that stores the hash of the block and the ID of the leader, who created the block.
 
-1. **Таймер**: запланировать таймер через время **3 * λ + Λ**, по срабатыванию:
+1. **Timer**: schedule the timer after the time equal to **3 * λ + Λ**, by a trigger:
     1. **v = { ∅, ∅ }**
-    1. перейти к **Коммуникации**
+    1. go to **Communication**
 
-1. **Сеть**: подписаться на сообщения **gc_proposal** из сети при старте шага, при получении
-    1. проверить номер раунда и шага в сообщении
-    1. проверить, что **msg.id ∈ A<sub>2</sub>** и получить публичный ключ пользователя
-    1. проверить подписи в сообщении
-    1. проверить, что **msg.v = { msg.block_hash, msg.leader }** содержится в контексте раунда.
-    Должно быть собрано в контекст на предыдущем шаге, как результат обработки сообщений **gc_block**, **gc_signature**.
-        1. **∃ ctx[msg.leader]** - запись для такого потенциального лидера существует в контексте
-        1. **ctx[msg.leader].HB == msg.block_hash** - хеш блока совпадает
-    1. **ctx[msg.leader].v3.push(msg.id)**, где **v3** это *unordered_set*
-    1. если счетчик больше порога **$`t_{h}`$**: **ctx[msg.leader].v3.size() > $`t_{h}`$**
+1. **Network**: subscribe to network messages **gc_proposal** at the start of a step, after receiving
+    1. verify the round number and the step number in the message
+    1. verify that **msg.id ∈ A<sub>2</sub>** and get the user's public key
+    1. verify the signature of the whole message
+    1. verify that **msg.v = { msg.block_hash, msg.leader }** is in the context of the round.
+    It should be collected in the context in the previous step, as a result of **gc_block** and **gc_signature** message processing.
+        1. **∃ ctx[msg.leader]** - a record for such a potential leader exists in the context
+        1. **ctx[msg.leader].HB == msg.block_hash** - the block hash coincides
+    1. **ctx[msg.leader].v3.push(msg.id)**, where **v3** is *unordered_set*
+    1. if the counter is more than the threshold **$`t_{h}`$**: **ctx[msg.leader].v3.size() > $`t_{h}`$**
         1. **v = { msg.block_hash, msg.leader }**
-        1. перейти к **Коммуникации**
+        1. go to **Communication**
 
-1. **Коммуникация**: формирование, подпись и отсылка сообщений
-    1. остановить таймеры, отписаться от событий сети
-    1. если **N<sub>3</sub> = ∅**, завершить шаг
+1. **Communication**: generating, signing and sending of messages
+    1. stop timers, unsubscribe from network messages
+    1. if **N<sub>3</sub> = ∅**, end the step
     1. **∀n<sub>3</sub> ∈ N<sub>3</sub>**:
-        1. получить реальный идентификатор исполнителя в [blockchain][]: **id<sub>3</sub> = A<sub>3</sub>[n<sub>3</sub>]**
-        1. подписать ключом пользователя **id<sub>3</sub>** и отослать **gc_proposal** = **{ r, 3, id<sub>3</sub>, v }**
+        1. get real user’s ID in the [blockchain][]: **id<sub>3</sub> = A<sub>3</sub>[n<sub>3</sub>]**
+        1. sign with the user’s key **id<sub>3</sub>** and send **gc_proposal** = **{ r, 3, id<sub>3</sub>, v }**
 
-#### 4. Первичная оценка подсчета голосов
+#### 4. Primary assessment of vote counting
 
-**Старт**: Сразу после окончания шага **3**
+**Start**: right after finishing the step **3**
 
-**Входные данные**: **A<sub>3</sub>**, **A<sub>4</sub>**, **N<sub>4</sub>** из контекста раунда
+**Input data**: **A<sub>3</sub>**, **A<sub>4</sub>**, **N<sub>4</sub>** from the context of the round
 
-1. **Таймер**: запланировать таймер через время **2 * λ**, по срабатыванию:
-    1. если **∃l | ctx[l].v4.size() > $`t_{h}/2`$**: **v = { ctx[l].HB, l }**
-        1. иначе: **v = { ∅, ∅ }**
+1. **Timer**: schedule the timer after the time equal to **2 * λ**, by a trigger:
+    1. if **∃l | ctx[l].v4.size() > $`t_{h}/2`$**: **v = { ctx[l].HB, l }**
+        1. otherwise: **v = { ∅, ∅ }**
     1. **b = 1**
-    1. перейти к **Коммуникации**
+    1. go to **Communication**
 
-1. **Сеть**: подписаться на сообщения **gc_proposal** из сети при старте шага, при получении
-    1. проверить номер раунда и шага в сообщении
-    1. проверить, что **id ∈ A<sub>3</sub>** и получить публичный ключ пользователя
-    1. проверить подписи в сообщении
+1. **Network**: subscribe to network messages **gc_proposal** at the start of a step, after receiving
+    1. verify the round number and the step number in the message
+    1. verify that **id ∈ A<sub>3</sub>** and get the user's public key
+    1. verify the signature of the whole message
     1. **msg.v = { msg.block_hash, msg.leader }**
-    1. **msg.v != { ∅, ∅ }**: проверить, что **msg.v** содержится в контексте раунда (должно быть собрано на шаге 2)
-        1. **∃ ctx[msg.leader]** - запись для такого потенциального лидера существует в контексте
-        1. **ctx[msg.leader].HB == msg.block_hash** - хеш блока совпадает
-        1. **ctx[msg.leader].v4.push(msg.id)**, **v4** это *unordered_set*
-        1. если **ctx[msg.leader].v4.size() > $`t_{h}`$**
+    1. **msg.v != { ∅, ∅ }**: verify that **msg.v** is in the context of the round (should be collected in step 2)
+        1. **∃ ctx[msg.leader]** - a record for such a potential leader exists in the context
+        1. **ctx[msg.leader].HB == msg.block_hash** - the block hash coincides
+        1. **ctx[msg.leader].v4.push(msg.id)**, **v4** is *unordered_set*
+        1. if **ctx[msg.leader].v4.size() > $`t_{h}`$**
             1. **v = { msg.block_hash, msg.leader }**, **b = 0**
-            1. перейти к **Коммуникации**
+            1. go to **Communication**
     1. **msg.v == { ∅, ∅ }**
-        1. **ctx.ve4.push(msg.id)**, **ve4** это *unordered_set* (**v**alue **e**mpty)
-        1. если **ctx.ve4.size() > $`t_{h}`$**
+        1. **ctx.ve4.push(msg.id)**, **ve4** is *unordered_set* (**v**alue **e**mpty)
+        1. if **ctx.ve4.size() > $`t_{h}`$**
             1. **v = { ∅, ∅ }**, **b = 1**
-            1. перейти к **Коммуникации**
+            1. go to **Communication**
 
-1. **Коммуникация**: формирование, подпись и отсылка сообщений
-    1. остановить таймеры, отписаться от событий сети
-    1. если **N<sub>4</sub> = ∅**, завершить шаг
+1. **Communication**: generating, signing and sending of messages
+    1. stop timers, unsubscribe from network messages
+    1. if **N<sub>4</sub> = ∅**, end the step
     1. **∀ n<sub>4</sub> ∈ N<sub>4</sub>**:
-        1. получить реальный идентификатор исполнителя в [blockchain][]: **id<sub>4</sub> = A<sub>4</sub>[n<sub>4</sub>]**
-        1. подписать ключом **id<sub>4</sub>** и отослать **bba_signature** = **{ r, 4, id<sub>4</sub>, b, v, sign(0, v) }**
+        1. get real user’s ID in the [blockchain][]: **id<sub>4</sub> = A<sub>4</sub>[n<sub>4</sub>]**
+        1. sign with the user’s key **id<sub>4</sub>** and send **bba_signature** = **{ r, 4, id<sub>4</sub>, b, v, sign(0, v) }**
 
-### Достижение византийского соглашения (BBA)
+### Reaching the Binary Byzantine Agreement (BBA)
 
-Существует несколько классов алгоритмов для достижения византийского соглашения. Алгоритм, который
-используется в **echorand** основан на использовании разделяемого случайного значения.
+There are several classes of algorithms for reaching the Byzantine Agreement. The one which is used in **echorand** is based on the use of a shared random value.
 
-Основная идея алгоритма состоит в следующем. На каждом шаге работы алгоритма,
-узлы в сети можно разбить на два множества:
+The central idea of the algorithm is the following. At each step of the algorithm, network nodes сan be divided into two sets:
 
-1. узлы, которые получили за предыдущие раунд(-ы) достаточное количество сообщений
-(с некоторым одинаковым значением), позволяющее им предложить это значение в качестве
-решения.
+1. nodes that received a sufficient number of messages during the previous round(s) (with a certain equal value), allowing them to offer this value as a solutions.
 
-1. узлы, которые получили два варианты решения в сообщениях и не могут отдать
-предпочтение какому-либо из них.
+1. nodes that received two solution variants and can not give preference to either of them.
 
-В последнем случае, неопределившиеся узлы используют [VRF][] для генерации разделяемого случайного числа
-из множества **{ 0, 1 }** для принятия и отсылки своего решения. В силу того, что случайное число будет
-одно и то же для всех "неуверенных" узлов, все такие узлы примут одинаковое решение.
+In the latter case, undecided nodes use [VRF][] to generate a shared random value from the **{0, 1}** set for making and sending their decisions. And since the random value will be the same for all the "uncertain" nodes, all such nodes will make just the same decision.
 
-Используемые обозначения для хранения данных:
-* **bba0** - сообщения с **непустым** блоком и голосом равным **1**
-* **bba1** - сообщения с **непустым** блоком и голосом равным **0**
-* **bbae0** - сообщения с **пустым** блоком и голосом равным **0**
-* **bbae1** - сообщения с **пустым** блоком и голосом равным **1**
+Designations used for data storage:
 
-#### 5. Первый шаг: монетка == 0
+* **bba0** - messages with a **non-empty** block and a vote equal to **1**
+* **bba1** - messages with a **non-empty** block and a vote equal to **0**
+* **bbae0** - messages with an **empty** block and a vote equal to **0**
+* **bbae1** - messages with an **empty** block and a vote equal to **1**
 
-**Шаг**: **$`5 \le s \le μ; \space s - 2 \equiv 0 \bmod 3 \space (s = 5,8,11,...)`$**
+#### 5. Step one: coin == 0
 
-**Старт**: Сразу после окончания шага **s ≡ 1 mod 3, s > 3**
+**Step**: **$`5 \le s \le μ; \space s - 2 \equiv 0 \bmod 3 \space (s = 5,8,11,...)`$**
 
-**Входные данные**:
-* **A<sub>s-1</sub>, N<sub>s-1</sub>, A<sub>s</sub>, N<sub>s</sub>** из контекста раунда
-* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>** - для формирования пустого блока
+**Start**: right after the step **s ≡ 1 mod 3, s > 3** ends
 
-**b** - локальный флаг шага, который отсылается в поле **value** сообщения **bba_signature**.
+**Input data**:
 
-1. **Таймер**: запланировать таймер через время **2 * λ**, по срабатыванию:
+* **A<sub>s-1</sub>, N<sub>s-1</sub>, A<sub>s</sub>, N<sub>s</sub>** from the context of the round
+* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>** - to generate an empty block
+
+**b** - local step flag that is sent in the **value** field of the **bba_signature** message.
+
+1. **Timer**: schedule the timer after the time equal to **2 * λ**, by a trigger:
     1. **b = 0**
-    1. перейти к **Коммуникации**
+    1. go to **Communication**
 
-1. **Сеть**: подписаться на сообщения **bba_signature** из сети при старте шага, при получении
-    1. проверить, что **msg.id ∈ A<sub>s-1</sub>** и получить публичный ключ пользователя
-    1. проверить подписи сообщения
+1. **Network**: subscribe to network messages **bba_signature** at the start of a step, after receiving
+    1. verify that **msg.id ∈ A<sub>s-1</sub>** and get the user's public key
+    1. verify the signatures of the whole message
     1. **msg.v = { msg.block_hash, msg.leader }**
     1. **msg.v != { ∅, ∅ }**:
-        1. **∃ ctx[msg.leader]** - запись для такого потенциального лидера существует в контексте
-        1. **ctx[msg.leader].HB == v.HB<sub>r</sub>** - хеш блока совпадает
-        1. **msg.value == 0**: **ctx[v.l].bba0[msg.s].push(msg.id, msg)**, где **bba0** массив *unordered_map*
-        1. **msg.value == 1**: **ctx[v.l].bba1[msg.s].push(msg.id, msg)**, где **bba1** массив *unordered_map*
+        1. **∃ ctx[msg.leader]** - a record for such a potential leader exists in the context
+        1. **ctx[msg.leader].HB == v.HB<sub>r</sub>** - the block hash coincides
+        1. **msg.value == 0**: **ctx[v.l].bba0[msg.s].push(msg.id, msg)**, where **bba0** array *unordered_map*
+        1. **msg.value == 1**: **ctx[v.l].bba1[msg.s].push(msg.id, msg)**, where **bba1** array *unordered_map*
     1. **msg.v == { ∅, ∅ }**:
-        1. **msg.value == 0**: **ctx.bbae0[msg.s].push(msg.id, msg)**, **bbae0** это массив *unordered_map*
-        1. **msg.value == 1**: **ctx.bbae1[msg.s].push(msg.id, msg)**, **bbae1** это массив *unordered_map*
-    1. если **∀ s >= 5 && s - 2 ≡ 0 mod 3** (**s == 5,8,11,...**) - **Ending Condition 0**
-        1. если **∃l | ctx[l].bba0[s-1].size() > $`t_{h}`$**:
+        1. **msg.value == 0**: **ctx.bbae0[msg.s].push(msg.id, msg)**, **bbae0** is an array *unordered_map*
+        1. **msg.value == 1**: **ctx.bbae1[msg.s].push(msg.id, msg)**, **bbae1** is an array *unordered_map*
+    1. if **∀ s >= 5 && s - 2 ≡ 0 mod 3** (**s == 5,8,11,...**) - **Ending Condition 0**
+        1. if **∃l | ctx[l].bba0[s-1].size() > $`t_{h}`$**:
             1. **B<sub>r</sub> = ctx[l].B**
-            1. **Q<sub>r</sub>** вычисляется из **ctx[l].signQ**, определенной на шаге 2
-            1. **CERT<sub>r</sub>** формируется из **ctx.bba1[s-1], ctx.bbae1[s-1], ctx.bba0[s-1], ctx.bbae0[s-1]**
+            1. **Q<sub>r</sub>** is calculated from **ctx[l].signQ**, specified in step 2
+            1. **CERT<sub>r</sub>** is generated from **ctx.bba1[s-1], ctx.bbae1[s-1], ctx.bba0[s-1], ctx.bbae0[s-1]**
             1. **b = 0<sup>*</sup>**
-            1. **КОНЕЦ РАУНДА!!!**
-    1. если **∀ s >= 6 && s - 2 ≡ 1 mod 3** (**s == 6,9,12,...**) - **Ending Condition 1**
-        1. если $`\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}`$:
+            1. **END OF THE ROUND!!!**
+    1. if **∀ s >= 6 && s - 2 ≡ 1 mod 3** (**s == 6,9,12,...**) - **Ending Condition 1**
+        1. if $`\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}`$:
             1. **B<sub>r</sub> = ∅**
-            1. **Q<sub>r</sub>** вычисляется из **Q<sub>r-1</sub>**
-            1. **CERT<sub>r</sub>** формируется из **ctx.bba1[s-1], ctx.bbae1[s-1], ctx.bba0[s-1], ctx.bbae0[s-1]**
+            1. **Q<sub>r</sub>* is calculated from **Q<sub>r-1</sub>**
+            1. **CERT<sub>r</sub>** is generated from **ctx.bba1[s-1], ctx.bbae1[s-1], ctx.bba0[s-1], ctx.bbae0[s-1]**
             1. **b = 1<sup>*</sup>**
-            1. **КОНЕЦ РАУНДА!!!**
-    1. если $`\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}`$: **b = 1** и к **Коммуникации**
-    1. если $`\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}`$: **b = 0** и к **Коммуникации**
+            1. **END OF THE ROUND!!!**
+    1. if $`\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}`$: **b = 1** и к **Communication**
+    1. if $`\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}`$: **b = 0** и к **Communication**
 
-1. **Коммуникация**: формирование, подпись и отсылка сообщений
-    1. остановить таймеры, **не** отписываться от событий сети
-    1. остановить проверку последних двух условий предыдущего пункта
-    1. если **N<sub>s</sub> = ∅**, завершить шаг
+1. **Communication**: generating, signing and sending of messages
+    1. stop timers, **do not** unsubscribe from network messages
+    1. stop verifying the last two conditions from the previous point
+    1. if **N<sub>s</sub> = ∅**, end the step
     1. **∀n<sub>s</sub> ∈ N<sub>s</sub>**:
-        1. получить реальный идентификатор исполнителя в [blockchain][]: **id<sub>s</sub> = A4[n<sub>s</sub>]**
-        1. подписать ключом **id<sub>s</sub>** и отослать **bba_signature** = **{ r, s, id<sub>s</sub>, b, v, sign(b, v) }**
-        1. где **v**, значение вычисленное на шаге 4
+        1. get real user’s ID in the blockchain: **id<sub>s</sub> = A4[n<sub>s</sub>]**
+        1. sign with the key **id<sub>s</sub>** and send **bba_signature** = **{ r, s, id<sub>s</sub>, b, v, sign(b, v) }**
+        1. where **v** is the value calculated in step 4
 
-#### 6. Второй шаг: монетка == 1
+#### 6. Step two: coin== 1
 
-**Шаг**: **$`6 \le s \le μ; \space s - 2 \equiv 1 \bmod 3 \space (s = 6,9,12,...)`$**
+**Step**: **$`6 \le s \le μ; \space s - 2 \equiv 1 \bmod 3 \space (s = 6,9,12,...)`$**
 
-**Старт**: Сразу после окончания шага **s ≡ 2 mod 3, s > 3**
+**Start**: right after the step **s ≡ 2 mod 3, s > 3** ends
 
-**Входные данные**:
-* **A<sub>s-1</sub>, N<sub>s-1</sub>, A<sub>s</sub>, N<sub>s</sub>** из контекста раунда
-* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>** - для формирования пустого блока
+**Input data**:
 
-**b** - локальный флаг шага, который отсылается в поле **value** сообщения **bba_signature**.
+* **A<sub>s-1</sub>, N<sub>s-1</sub>, A<sub>s</sub>, N<sub>s</sub>** from the context of the round
+* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>** - to generate an empty block
 
-1. **Таймер**: запланировать таймер через время **2 * λ**, по срабатыванию:
+**b** - local step flag that is sent in the **value** field of the **bba_signature** message.
+
+1. **Timer**: schedule the timer after the time equal to **2 * λ**, by a trigger:
     1. **b = 1**
-    1. перейти к **Коммуникации**
+    1. go to **Communication**
 
-1. **Сеть**: подписаться на сообщения **bba_signature** из сети при старте шага, при получении
-    1. проверить, что **msg.id ∈ A<sub>s-1</sub>** и получить публичный ключ пользователя
-    1. проверить подписи сообщения
+1. **Network**: subscribe to network messages **bba_signature** at the start of a step, after receiving
+    1. verify that **msg.id ∈ A<sub>s-1</sub>** and get the user's public key
+    1. verify the signatures of the whole message
     1. **msg.v = { msg.block_hash, msg.leader }**
-    1. **msg.v != { ∅, ∅ }**: как в шаге **5**
-    1. **msg.v == { ∅, ∅ }**: как в шаге **5**
-    1. если **∀ s >= 5 && s - 2 ≡ 0 mod 3** (**s == 5,8,11,...**): как в шаге **5** - **Ending Condition 0**
-    1. если **∀ s >= 6 && s - 2 ≡ 1 mod 3** (**s == 6,9,12,...**): как в шаге **5** - **Ending Condition 1**
-    1. если $`\sum_{n}ctx[n].bba0[s-1].size() > t_{h}`$: **b = 0** и к **Коммуникации**
+    1. **msg.v != { ∅, ∅ }**: like in step **5**
+    1. **msg.v == { ∅, ∅ }**: like in step **5**
+    1. if **∀ s >= 5 && s - 2 ≡ 0 mod 3** (**s == 5,8,11,...**): like in step **5** - **Ending Condition 0**
+    1. if **∀ s >= 6 && s - 2 ≡ 1 mod 3** (**s == 6,9,12,...**): like in step **5** - **Ending Condition 1**
+    1. if $`\sum_{n}ctx[n].bba0[s-1].size() > t_{h}`$: **b = 0** and go to **Communication**
 
-    > $`\sum_{n}ctx[n].bba1[s-1].size() > t_{h}`$ в этом шаге можно не проверять, как это делается в других
-    > шагах. В данном шаге это условие равно условию **Ending Condition 1**.
+    > $`\sum_{n}ctx[n].bba1[s-1].size() > t_{h}`$ in this step there's no need to verify how it's done in the other
+    > steps. In this particular step, the condition is equal to the condition of **Ending Condition 1**.
 
-1. **Коммуникация**: как в шаге **5**
+1. **Communication**: like in step **5**
 
-#### 7. Третий шаг: монетка = разделяемое случайное значение
+#### 7. Step three: coin = shared random value
 
-**Шаг**: **$`7 \le s \le μ; \space s - 2 \equiv 2 \bmod 3 \space (s = 7,10,13,...)`$**
+**Step**: **$`7 \le s \le μ; \space s - 2 \equiv 2 \bmod 3 \space (s = 7,10,13,...)`$**
 
-**Старт**: Сразу после окончания шага **s ≡ 0 mod 3, s > 3**
+**Start**: right after the step **s ≡ 0 mod 3, s > 3** ends
 
-**Входные данные**:
-* **A<sub>s-1</sub>, N<sub>s-1</sub>, A<sub>s</sub>, N<sub>s</sub>** из контекста раунда
-* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>** - для формирования пустого блока
+**Input data**:
 
-**b** - локальный флаг шага, который отсылается в поле **value** сообщения **bba_signature**.
+* **A<sub>s-1</sub>, N<sub>s-1</sub>, A<sub>s</sub>, N<sub>s</sub>** from the context of the round
+* **HB<sub>r-1</sub>**, **Q<sub>r-1</sub>** из **CERT<sub>r-1</sub>** - to generate an empty block
 
-1. **Таймер**: запланировать таймер через время **2 * λ**, по срабатыванию:
+**b** - local step flag that is sent in the **value** field of the **bba_signature** message.
+
+1. **Timer**: schedule the timer after the time equal to **2 * λ**, by a trigger:
     1. **b = BBA_RAND(r)**
-    1. перейти к **Коммуникации**
+    1. go to **Communication**
 
-1. **Сеть**: подписаться на сообщения **bba_signature** из сети при старте шага, при получении
-    1. проверить, что **msg.id ∈ A<sub>s-1</sub>** и получить публичный ключ пользователя
-    1. проверить подписи сообщения
+1. **Network**: subscribe to network messages **bba_signature** at the start of a step, after receiving
+    1. verify that **msg.id ∈ A<sub>s-1</sub>** and get the user's public key
+    1. verify the signatures of the whole message
     1. **msg.v = { msg.block_hash, msg.leader }**
-    1. **msg.v != { ∅, ∅ }**: как в шаге **5**
-    1. **msg.v == { ∅, ∅ }**: как в шаге **5**
-    1. если **∀ s >= 5 && s - 2 ≡ 0 mod 3** (**s == 5,8,11,...**): как в шаге **5** - **Ending Condition 0**
-    1. если **∀ s >= 6 && s - 2 ≡ 1 mod 3** (**s == 6,9,12,...**): как в шаге **5** - **Ending Condition 1**
-    1. если $`\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}`$: **b = 1** и к **Коммуникации**
-    1. если $`\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}`$: **b = 0** и к **Коммуникации**
+    1. **msg.v != { ∅, ∅ }**: like in step **5**
+    1. **msg.v == { ∅, ∅ }**: like in step **5**
+    1. if **∀ s >= 5 && s - 2 ≡ 0 mod 3** (**s == 5,8,11,...**): like in step **5** - **Ending Condition 0**
+    1. if **∀ s >= 6 && s - 2 ≡ 1 mod 3** (**s == 6,9,12,...**): like in step **5** - **Ending Condition 1**
+    1. if $`\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}`$: **b = 1** go to **Communication**
+    1. if $`\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}`$: **b = 0** go to **Communication**
 
-1. **Коммуникация**: как в шаге **5**
+1. **Communication**: like in step **5**
 
-#### Узлы, окончившие раунд
+#### Nodes that have completed the round
 
-Проблема:
-* узел уже окончил раунд
-* другие узлы еще исполняют последующие шаги
+Problem:
 
-Если узел, окончивший раунд, на последующих шагах должен отсылать **bba** сообщения с оценкой
-(то есть, для него **N<sub>s</sub>** непустое на каких-то последующих шагах), то выбор такого узла,
-закончившего раунд, должен каким-то образом попасть ко всем остальным узлам.
+* a node has already completed the round
+* the other nodes are still performing the subsequent steps
 
-Решение: эмуляция шага **bba**
+If the node, that has already completed the round, should send **bba** messages to the subsequent steps with evaluation
+(which means, that **N<sub>s</sub>** in it is non-empty at some subsequent steps), then the choice of such a node, that has completed the round, must somehow be among the other nodes.
 
-**Входные данные**:
-* последнее значение **b**
-* выбранный блок в виде **v = { block_hash, leader }**
+Solution: Step **bba** emulation
 
-1. если не было сообщений предыдущего шага от других узлов - завершить шаг и раунд
-1. иначе:
-    1. регистрировать наличие сообщений от других узлов для текущего раунда/шага
-    1. если **N<sub>s</sub> != ∅**, отослать сообщение **bba_signature** со своим выбором
+**Input data**:
 
-### Получение нового блока всеми участниками сети
+* last value **b**
+* selected block **v = { block_hash, leader }**
 
-Все узлы сети исполняют шаги раунда. Сообщения в сеть отсылают только те узлы, для которых выбраны
-исполнители на заданном шаге с помощью алгоритма **VRFN(r,s)**.
+1. if there are no messages from the previous step and the other nodes - complete the step and the round
+1. otherwise:
+    1. register the messages from the other nodes for the current round/step
+    1. if **N<sub>s</sub> != ∅**, send the **bba_signature** messages with their choice
 
-Таким образом все узлы сети достигают конца раунда на одном из этапов выполнения алгоритма **BBA**
-и получают сформированный **CERT<sub>r</sub>**.
+### Getting a new block by all the members of the network
 
-Если значение **ctx[l].B != ∅**, то блок получен.
+All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already their participants selected at a given step using the **VRFN(r,s)** algorithm.
 
-Если значение **ctx[l].B == ∅**, то:
+Thus, all the network nodes reach the end of the round at one of the stages of the **BBA** algorithm and get a formed **CERT<sub>r</sub>**.
 
-* **ctx[l].signQ == Q<sub>r-1</sub>** означает, что создан пустой блок.
-* **ctx[l].signQ != Q<sub>r-1</sub>** означает, что создан непустой блок и узел его не получил.
+If the value **ctx[l].B != ∅**, then the block is received.
+If the value **ctx[l].B == ∅**, then:
 
-## Сетевое взаимодействие
+* **ctx[l].signQ == Q<sub>r-1</sub>** means that an empty block has been created.
+* **ctx[l].signQ != Q<sub>r-1</sub>** means that a non-empty block has been created and the node has not received it.
 
-### Формат сообщений
+## Network interaction
 
-Каждое сообщение целиком подписывается [EdDSA][] ключом исполнителя, который создает сообщение. То есть,
-фактически, в сообщении всегда присутствует поле **message_signature**.
+### Message format
 
-Отдельные поля или группы полей подписываются тоже подписывается [EdDSA][] ключом исполнителя, который
-создает сообщение.
+Each message is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e, basically, there is always a **message_signature** field in a message.
 
-Такая "двойная" подпись необходима, так как подписи определенных групп полей в дальнейшем используются в
-[VRF][] для генерации случайного значения раунда и в наборе подписей **CERT<sub>r</sub>**.
+Separate fields or groups of fields are also signed with an [EdDSA][] key of the participant who creates the message.
 
-#### 1. gc_block (блок-кандидат)
+Such a "double" signature is essential, since the signatures of certain groups of fields are later used in [VRF][] to generate a random round value, and in the signature set **CERT<sub>r</sub>**.
 
-Данное сообщение отправляется на шаге **1**, в случае создания блока с непустым набором транзакций.
+#### 1. gc_block (candidate block)
 
-|Поле|Описание|
+This message is sent in step **1**, in the case of creating a block with a non-empty set of transactions.
+
+|Field|Description|
 |---|---|
-| **round** | текущий раунд |
-| **step** | текущий шаг |
-| **id** | идентификатор исполнителя, создавшего блок |
-| **signature** | подпись сообщения ключом исполнителя **id** |
-| **block** | блок, содержащий в себе: текущий раунд, идентификатор исполнителя, подпись блока и т.д. |
+| **round** | current round |
+| **step** | current step |
+| **id** | ID of the participant who created the block |
+| **signature** | signature of the message with the participant’s key **id** |
+| **block** | a block containing: the current round, the participant's ID, the block signature, etc. |
 
-#### 2. gc_signature (подпись случайной величины)
+#### 2. gc_signature (random value signature)
 
-Данное сообщение отправляется на шаге **1**, в случае наличия хотя бы одного исполнителя для узла на этот шаг.
+This message is sent during step **1**, if there is at least one participant for the node for this step.
 
-|Поле|Описание|
+|Field|Description|
 |---|---|
-| **round** | текущий раунд |
-| **step** | текущий шаг |
-| **id** | идентификатор исполнителя, создавшего блок |
-| **signature** | подпись сообщения ключом исполнителя **id** |
-| **rand** | **signQ<sub>r</sub>** - подпись случайного вектора предыдущего раунда ключом исполнителя **id** |
-| **block_hash** | хеш нового блока |
-| **prev_rand** | **signQ<sub>r</sub>** подпись случайного вектора раунда из предыдущего блока |
-| **prev_block_hash** | хеш предыдущего блока |
+| **round** | current round |
+| **step** | current step |
+| **id** | ID of the participant who created the block |
+| **signature** | signature of the message with the participant’s key **id** |
+| **rand** | **signQ<sub>r</sub>** - signature of a random previous round vector with the participant’s key **id** |
+| **block_hash** | new block hash |
+| **prev_rand** | **signQ<sub>r</sub>** signature of a random vector of the round from the previous block |
+| **prev_block_hash** | previous block hash |
 
-#### 3. gc_proposal (выбор лидера и блока)
+#### 3. gc_proposal (selection of a leader and a block)
 
-Данное сообщение отправляется на шагах **2** и **3**, в случае наличия хотя бы одного исполнителя для узла
-на этот шаг.
+This message is sent during step **2** and step **3**, if there is at least one participant for the node for this step.
 
-|Поле|Описание|
+|Field|Description|
 |---|---|
-| **round** | текущий раунд |
-| **step** | текущий шаг |
-| **id** | идентификатор исполнителя, создавшего данное сообщение |
-| **signature** | подпись сообщения ключом исполнителя **id** |
-| **block_hash** | хеш выбранного блока |
-| **leader** | идентификатор выбранного лидера, который создал блок |
+| **round** | current round |
+| **step** | current step |
+| **id** | ID of the participant who created the block |
+| **signature** | signature of the message with the participant’s key **id** |
+| **block_hash** | selected block hash |
+| **leader** | ID of a selected leader, who created the block |
 
-#### 4. bba_signature (результат работы шага BBA)
+#### 4. bba_signature (BBA step results)
 
-Данное сообщение отправляется на шаге **4** и всех последующих шагах алгоритма, в случае наличия хотя бы
-одного исполнителя для узла на этот шаг.
+This message is sent during step **4** and all the subsequent steps of the algorithm, if there is at least one participant for the node for this step.
 
-|Поле|Описание|
+|Field|Description|
 |---|---|
-| **round** | текущий раунд |
-| **step** | текущий шаг |
-| **id** | идентификатор исполнителя, создавшего данное сообщение |
-| **value** | оценка в рамках алгоритма **BBA**, 0 или 1 |
-| **block_hash** | хеш выбранного блока |
-| **leader** | идентификатор выбранного лидера, который создал блок |
-| **_bba_sign** | подпись полей **round**, **step**, **value**, **block_hash**, **leader** ключом исполнителя **id** |
-| **signature** | подпись полей **value**, **block_hash**, **leader** ключом исполнителя **id** |
+| **round** | current round |
+| **step** | current step |
+| **id** | ID of the participant who created the message |
+| **value** | evaluation within the **BBA** algorithm, 0 or 1 |
+| **block_hash** | selected block hash |
+| **leader** | ID of a selected leader, who created the block |
+| **_bba_sign** | signature for the fields **round**, **step**, **value**, **block_hash**, **leader** with the participant’s key **id** |
+| **signature** | signature for the fields **value**, **block_hash**, **leader** with the participant’s key **id** |
 
-### Обработка сообщений
+### Message processing
 
-Обработка сообщений сети запущенная на шаге **2** не останавливается при завершении шага, а продолжается
-до конца раунда.
+Network message processing launched in step**2** does not stop at the completion of the step, but continues till the end of the round.
 
-Обработка сообщений сети шагов **BBA** (**s = 5,...**) фактически одинаковая и не зависит от номера шага.
+Network message processing for steps **BBA** (**s = 5,...**) is practically the same and does not depend on the step number.
 
-Разница в сетевых обработчиках на этих шагах состоит в последующем анализе внутренних счетчиков контекста
-раунда. Следовательно сетевая обработка для этих шагов может быть эффективно реализована в базовом классе.
+On these steps the network handlers difference lies in a subsequent analysis of the internal counters of round context. Consequently, the network processing for these steps can be effectively implemented in the base class.
 
-### Распространение сообщений
+### Messages distribution
 
-Первое полученное сообщения **gc_block**, **gc_signature** узел пересылает всегда.
+The first received **gc_block** message, node **gc_signature** forwards always.
 
-Все последующие сообщения **gc_block**, **gc_signature**, которые узел получит, следует пересылать только
-в том случае, если **id** исполнителя в этом сообщении имеет наименьший индекс в массиве **A<sub>step</sub>**,
-среди всех полученных сообщений такого класса.
+All the subsequent **gc_block** messages, **gc_signature**, that the node receives, should only be forwarded if the **id** of the participant in this message has the smallest index in array **A<sub>step</sub>**, among all the received messages of this class.
 
-Все остальные сообщения раунда обрабатываются и пересылаются узлом только в случае:
+The rest of the round messages are processed and forwarded by the node only in case if:
 
-* узел впервые получил данное сообщение
-* сообщение проходит все проверки на корректность
+* the node has received this message for the first time
+* the message passes all the verification stages
 
-## Исключительные ситуации
+## Exceptional situations
 
-### Отсутствие сети
+### No network
 
-Шаги алгоритма не будут получать сообщения и все выходы из шагов будут происходить только по срабатыванию таймера.
+The steps of the algorithm will not receive messages, and an exit from a steps will only be possible when the timer triggers.
 
-Так как **конец раунда** на данный момент происходит только как реакция на приходящее сообщение, то шаги
-**BBA** будут выполнятся в цикле до достижения константы **μ**. В результате будет сгенерирован пустой блок.
+Since currently the **end of the round** occurs only as a reaction to the incoming message, the **BBA** steps will be implemented in a loop till reaching the **μ**constant. As a result, an empty block will be generated.
 
-### Восстановление сети
+### Network recovery
 
-Узлы, которые в результате восстановления сети войдут в раунд в середине, будут содержать неполные данные
-в своих контекстах раунда. В результате они будут генерировать либо *неверные* оценки, либо голосовать
-за пустой блок.
+The nodes that will enter the round in the middle, as a result of network recovery, will contain incomplete data in the context of the round. As a consequence, they will generate either *incorrect* evaluation, or vote for an empty block.
 
-В каждом из этих вариантов узлы будут себя вести как узел-злоумышленник. В результате информация с таких
-узлов будет отфильтрована алгоритмом **bba**.
+In each of these options the nodes will act as intruder nodes. As a result, the information coming from such nodes will be filtered by the **bba** algorithm.
 
-В силу неполных данных в локальных контекстах такие узлы завершат раунд:
-* с неверным блоком
-* с пустым блоком
+Due to incomplete data in the local contexts, such nodes will complete the round:
 
-Произойдет ветвление, которое будет автоматически разрешено, когда остальная сеть уйдет вперед в процессе генерации новых блоков.
+* with an invalid block
+* with an empty block
 
-### Неполная база [blockchain][] в узле
+There will be a ramification that will occur automatically, when the rest of the network goes forwards in the process of generating new blocks
 
-Случай, когда локальная база данных узла "догоняет" базу данных сети.
+### Incomplete blockchain base in a node
 
-При этом алгоритм не может работать в силу того, что отсутствуют значения:
+The case, when the local database of a node is "catching up" with the network database.
 
-* **HB<sub>r-1</sub>** - хеш последнего созданного блока
-* **Q<sub>r-1</sub>** - случайное значение последнего раунда работы алгоритма
+In doing so, the algorithm cannot work due to the fact that there are no values:
 
-Требуется определить момент, когда локальная база "догонит" базу данных сети и запустить раунд алгоритма.
+* **HB<sub>r-1</sub>** - hash of the last block created
+* **Q<sub>r-1</sub>** - random value of the last round of the algorithm
 
-### Отсутствие активных исполнителей на шаге
+It is required to determine the moment when the local database have “caught up” with the network database and have launched a round of the algorithm.
 
-Набор исполнителей вычисляет с помощью [VRF][] и не зависит реального наличия исполнителей в сети.
-Может возникнуть ситуация, когда для какого-то шага алгоритма нет активных исполнителей.
+### Absence of active participants in a step
 
-### Разрешение ветвлений
+A set of participants is calculated using [VRF][] and does not depend on actual presence of the participants in the network.There can be a situation when there are no active participants for an algorithm step.
 
-На основе [algorand-v9][] (9. Handling Forks, page 70)
+### Allowing for ramification
+
+Based on [algorand-v9][] (9. Handling Forks, page 70)
 
 [blockchain]: https://ru.wikipedia.org/wiki/Блокчейн
 [echo-wp]: https://drive.google.com/file/d/1JBCYt4QKBVK59MWstI0mIJkFUAc9Dy9O

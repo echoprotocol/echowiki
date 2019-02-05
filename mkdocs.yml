@@ -1,5 +1,5 @@
 site_name: ECHO Blockchain Wiki
-site_url: https://wiki.myecho.app/
+site_url: https://echo-dev.io
 site_dir: public
 theme:
     name: basictheme
@@ -8,11 +8,15 @@ theme:
       - javascript
 
 markdown_extensions:
+  - mdx_math: 
+      enable_dollar_delimiter: True #for use of inline $..$
   - codehilite
   - toc:
       permalink: True
       baselevel: 1
   - pymdownx.tasklist:
+
+extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']
 
 nav:
   - Introduction:
