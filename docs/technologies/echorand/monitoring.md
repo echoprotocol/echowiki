@@ -1,14 +1,14 @@
 # Echorand monitoring
 
-## Подписка на события
+## Newsletter subscription
 
 ### Network Node Api
 
 `void set_consensus_message_callback( std::function<void(const variant&)> )`
 
-Устанавливается callback, с помощью которого отправляются нотификации о старте раунда и получении блока от продьюсеров. Типы нотификаций:
+We need to install a callback, with the help of which the notifications about the start of the round and about the obtaining of the block from the producers are sent. Types of notifications:
 
-* Нотификация о старте раунда (round_started)
+* Notifications about the start of the round (round_started)
 
 ```json
 {
@@ -17,7 +17,7 @@
 }
 ```
 
-* Нотификация о пришедшем блоке от продьюсера
+* Notification about the arrived block from a producer
 
 ```json
 {
@@ -29,14 +29,13 @@
 }
 ```
 
+`producer` - contains an instance (3 is the triplet number) account, that issued a block. 7 corresponds to account_id_type "1.2.7"
 
-`producer` - содержит instance(3 цифра триплета) аккаунта, выпустившего блок. 7 соответствует account_id_type "1.2.7"
+`rand` - contains a rand of the current block. `sha256` hash
 
-`rand` - содержит rand текущего блока. `sha256` хэш
+`block_hash` - contains the hash of the current block. `ripemd160` hash
 
-`block_hash` - содержит хэш текущего блока. `ripemd160` хэш
-
-* Нотификация о старте gc 
+* Notifications about the start of gc
 
 ```json
 {
@@ -44,7 +43,8 @@
     "round": 1337
 }
 ```
-* Нотификация о старте bba 
+
+* Notifications about the start of bba
 
 ```json
 {
@@ -55,14 +55,14 @@
 
 ### Database API
 
-Так же для получения других данных необходимо использовать уже имеющийся в `database_api` функционал, а именно:
+Also, to receive other data, it is necessary to use the functionality already existing in `database_api`, namely:
 
 * `void set_block_applied_callback( std::function<void(const variant& block_id)> cb );`
 
-Используется для получения блоков, которые применяются в результате работы `echorand`
+Used to get blocks that are applied as a result of `echorand` operation
 
 * `set<account_id_type> get_current_verifiers(const uint32_t step_num)const;`
 
-`step_num` - номер шага, с которого необходимо получить верифаеров.
+`step_num` - step number, from which you need to get verifiers.
 
-Используется для получения идентификаторов верифаеров текущего раунда с шага(нумерация начинается с 1), переданного в параметры
+Used to get the ID of the verifiers of the current round, from the step (the numbering starts with 1) transferred to the parameters
