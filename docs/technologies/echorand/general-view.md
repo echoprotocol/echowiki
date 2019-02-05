@@ -48,10 +48,10 @@ The following algorithm parameters are set by constants, or configured at the **
 |:---:|---|
 | **Λ** | "large" interval, the average time required to distribute a 1MB message across the **Echo** network |
 | **λ** | "small" interval, the average time required to distribute a 256Bit message across the **Echo** network |
-| **$`N_{g}`$** | the number of block creators in a round, used in the **VRF(r, 1)** function |
-| **$`N_{c}`$** | the number of block controllers in a round, used in the **VRF(r, s)**, $`s > 1`$ function |
-| **$`t_{h}`$** | the threshold for making a positive decision when verifying, and can be selected by **$`0.69*N_{c}`$** |
-| **μ** | $`4 + 3*k, k > 0`$ - maximum number of algorithm steps after which an empty new block is created |
+| **N<sub>g</sub>** | the number of block creators in a round, used in the **VRF(r, 1)** function |
+| **N<sub>c</sub>** | the number of block controllers in a round, used in the **VRF(r, s)**, `s > 1` function |
+| **t<sub>h</sub>** | the threshold for making a positive decision when verifying, and can be selected by **0.69*N<sub>c</sub>** |
+| **μ** | `4 + 3*k, k > 0` - maximum number of algorithm steps after which an empty new block is created |
 
 <!-- ## Parameter selection
 
@@ -61,7 +61,7 @@ The following algorithm parameters are set by constants, or configured at the **
 
 -
 
-### The number of participants $`N_{g}`$, $`N_{c}`$
+### The number of participants N<sub>g</sub>, N<sub>c</sub>
 
 -
 
@@ -91,7 +91,7 @@ The verifiable random function at each **r** round and on each **s** step is bui
 1. **VRF<sub>0</sub>(r, s) = [SHA-256][](Q<sub>r-1</sub>, r, s)**
 1. **VRF<sub>n</sub>(r, s) = [SHA-256][](VRF<sub>n-1</sub>(r, s))**
 
-The result of the function operation is an array of random values of size **$`N_{g}`$**:
+The result of the function operation is an array of random values of size **N<sub>g</sub>**:
 
 **VRF(r, s) = { VRF<sub>0</sub>(r, s), VRF<sub>1</sub>(r, s), ... }**
 
