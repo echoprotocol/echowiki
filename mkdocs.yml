@@ -1,22 +1,24 @@
 site_name: ECHO Blockchain Wiki
-site_url: https://echo-dev.io
+site_url: https://echo-de
 site_dir: public
 theme:
     name: basictheme
     highlightjs: true
+    feature:
+        tabs: true
     hljs_languages:
       - javascript
 
 markdown_extensions:
-  - mdx_math: 
-      enable_dollar_delimiter: True #for use of inline $..$
   - codehilite
   - toc:
       permalink: True
       baselevel: 1
+  - mdx_math
   - pymdownx.tasklist:
 
-extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']
+extra_javascript: 
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 nav:
   - Introduction:
