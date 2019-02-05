@@ -1,46 +1,45 @@
+# Difference from Ethereum
 
-# Diffecence from Ethereum
+## Working with Gas in Echo
 
-## Работа с Gas в Echo
+A rather common problem when working with contracts on the Ethereum network is a transaction error due to the lack of Gas. The period between estimating the required Gas to perform a transaction and the actual performing of a  transaction on the blockchain may last long, while, in the meantime, the state of the contract may have changed, which in its turn may result in an increase in the quantity of the required Gas.
 
-Довольно частой проблемой при работе с контрактами в сети Ethereum является ошибка транзакции в связи с нехваткой Gas. Между оценкой необходимого Gas для выполнения транзакции и выполнения транзакции непосредственно на блокчейне может пройти время, за которое состояние контракта могло измениться, что в свою очередь может повлечь увеличение количества необходимого Gas.
+In order to minimize the risk, the mechanism of transaction fee payment for the Echo contract has been changed. The Gas cost estimation mechanism has also been changed - the parameter cannot be transferred by a user, it's a network configuration parameter that can be changed by the committee.
 
-Для того, чтобы минимизировать риск возникновения таких ситуаций, в Echo был изменен механизм оплаты комиссии за транзакции с контрактом. Также изменен механизм оценки стоимости Gas - параметр не может быть передан пользователем, является конфигурационным параметром сети и может быть изменен комитетом.
+### Transaction fee amount estimation
 
-### Оценка суммы комиссии за операцию
+For transaction fee amount estimation, Echo uses the following method [get_required_fees](https://wiki.echo-dev.io/developers/apis/database-api/#get_required_feesops-id). In responding to the request, when creating or executing a contract, Echo performs the following actions:
 
-Для оценки суммы комиссии в Echo используется метод [get_required_fees](https://wiki.echo-dev.io/developers/apis/database-api/#get_required_feesops-id). При выполнении данного запроса в случае операции создания или выполнения контракта, Echo выполняет следующие действия:
+- estimates the required amount of Gas to execute or create a contract;
+- transfers Gas to the amount in a specified asset, based on the exchange rate of the asset and the cost of a Gas unit;
+- adds an additional fee to the received amount for the creation of an operation and the size of an operation;
+- returns the resulting value in a form of query result.
 
-- оценивает необходимую сумму Gas для выполнения или создания контракта;
-- переводит Gas в сумму в указанном ассете, основываясь на курсе ассета, а также стоимости единицы Gas;
-- добавляет к полученной сумме дополнительную комиссию за создание операции и за размер операции;
-- возвращает полученное значение результатом запроса.
+The resulting value is indicated as `fee.amount` in the operation, just the same way as the other types of operations..
 
-Полученное значение указывается в операции как `fee.amount` как и операций других типов.
+### Performing an operation
 
-### Выполнение операции
+When performing an operation, the Gas amount is determined by the formula `Fee Amount / Gas Price`, where `Fee Amount` is the entire commission amount, including the commission for the creation and the size of an operation. This mechanism allows to block the fluctuations in the required Gas in case of a slight change in a state of the contract at the time between the commission estimation and the operation execution.
 
-При выполнении операции сумма Gas определяется по формуле `Fee Amount / Gas Price`. Причем `Fee Amount` - это вся сумма комиссии, не исключая комиссию за создание операции и ее размер. Этот механизм позволяет перекрыть колебания изменения необходимого Gas при незначительном измении состояния контракта в момент между оценкой комиссии и выполнении операции.
+## New features in solidity
 
-## Новые функции в solidity
+To support various types of assets in contracts, both the solidity compiler (solc) and the Ethereum Virtual Machine have been refined. As a result, to use the new functionality added to Echo smart contracts, it is required to compile using the modified solidity compiler.
 
-Для поддержки различных типов ассетов в контрактах были доработаны как компилятор solidity (solc), так и сама виртуальная машина Ethereum. В следствии чего для использования нового функционала, добавленного в Echo, смарт-контракты требуется компилировать именно с помощью модифицированного компилятора solidity.
-
-### Список функций
+### Functions
 
 #### `assetbalance`
 
-Через обращение к адресу, возвращает баланс в указанном ассете.
+By referring to the address, it returns the balance in the specified asset.
 
 ```cpp
 uint assetbalance(string assetId)
 ```
 
-- `assetId` - string, id ассета(в формате триплета, например "1.3.0").
+- `assetId` - string, id ассета(in a triplet format, for instance "1.3.0").
 
-Пример:
+Example:
 
-```solidity
+```cpp
 contract assetbalance {
     uint public balance;
     function saveBalance(address addr, string assetId) {
@@ -60,18 +59,18 @@ contract assetbalance2 {
 
 #### `transferasset`
 
-Через обращение к адресу, переводит на него определённую сумму в указанном ассете.
+By referring to the address, it transfers a certain amount in the specified asset.
 
 ```cpp
 void transferasset(uint value, uint assetId)
 ```
 
-- `value` - uint, сумма перевода.
-- `assetId` - uint, ID ассета перевода(в формате uint256).
+- `value` - uint, transfer amount.
+- `assetId` - uint, transfer asset ID (in a format of uint256).
 
-Пример:
+Example:
 
-```solidity
+```cpp
 contract transferasset {
     function transfer(address addr, uint value, uint assetId) {
         addr.transferasset(value, assetId);
@@ -88,17 +87,17 @@ contract transferasset2 {
 
 #### `db.property`
 
-Возвращает значение указанного поля указанного объекта в блокчейне.
+Returns the value of the field of a specified object in the blockchain.
 
 ```cpp
 bytes property(string idAndProperty)
 ```
 
-- `idAndProperty` - string, id объекта и запрашиваемое поле(например "1.2.5 lifetime_referrer_fee_percentage").
+- `idAndProperty` - string, object ID and the requested field(for instance "1.2.5 lifetime_referrer_fee_percentage").
 
-Пример:
+Example:
 
-```solidity
+```cpp
 contract property {
     bytes public data;
     function getProperty(string idAndProperty) {
@@ -116,7 +115,7 @@ contract property2 {
 
 #### `db.convert`
 
-Конвертирует объект не превышающий 32 байта в uint256.
+Converts an object, that should not exceed 32 bytes, into uint256.
 
 ```cpp
 uint convert(bytes data)
@@ -124,9 +123,9 @@ uint convert(bytes data)
 
 params:
 
-- `data` - bytes, конвертируемый объект.
+- `data` - bytes, convertible object.
 
-Пример:
+Example:
 
 ```cpp
 contract convert {
@@ -141,9 +140,9 @@ contract convert {
 
 #### `msg.idasset`
 
-Возвращает ID ассета с которым была вызвана транзакция создания или вызова контракта в формате uint.
+Returns the asset ID, with the help of which the transaction of creating or invoking a contract was created, in the uint format.
 
-Пример:
+Example:
 
 ```cpp
 contract transfer {
@@ -155,9 +154,9 @@ contract transfer {
 
 #### `addr.isCommittee`
 
-Проверяет является ли адрес активным заверителем и возвращает соответствующее значение `bool`.
+Verifies if the address is an active witness, and returns the corresponding `bool` value.
 
-Пример:
+Example:
 
 ```cpp
 contract A {
@@ -167,18 +166,18 @@ contract A {
 }
 ```
 
-### Способы использования
+### Ways to use
 
-#### Использовать Echo Solc
+#### Use Echo Solc
 
-Для компиляции контрактов с дополнительными методами вы можете использовать расширенный компилятор Solc - [https://github.com/echoprotocol/solc](https://github.com/echoprotocol/solc).
+To compile contracts with additional methods, an advanced Solc compiler can be used - [https://github.com/echoprotocol/solc](https://github.com/echoprotocol/solc).
 
-#### Использовать предустановленные контракты
+#### Use predefined contracts
 
-В сеть Echo при старте сети через genesis-блок устанавливаются предустановленные контракты, реализующие интерфейс для использования дополнительных методов. Вы можете использовать этот контракт и его интерфейс для вызова методов Echo.
+When starting the network via the Genesis-block, the Echo network uses predefined contracts that create an interface for using additional methods. This contract and its interface can be used to call the Echo methods.
 
-##### Адреса контрактов
+##### Contract addresses
 
-##### Интерфейсы контрактов
+##### Contract interfaces
 
-##### Пример использования
+##### Usage example
