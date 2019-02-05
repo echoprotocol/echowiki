@@ -9,7 +9,8 @@
 
 ### Оценка суммы комиссии за операцию
 
-Для оценки суммы комиссии в Echo используется метод [get_required_fees](https://wiki.echo-dev.io/developers/apis/database-api/#get_required_feesops-id). При выполнении данного запроса в случае операции создания или выполнения контракта, Echo выполняет следующие действия: 
+Для оценки суммы комиссии в Echo используется метод [get_required_fees](https://wiki.echo-dev.io/developers/apis/database-api/#get_required_feesops-id). При выполнении данного запроса в случае операции создания или выполнения контракта, Echo выполняет следующие действия:
+
 - оценивает необходимую сумму Gas для выполнения или создания контракта;
 - переводит Gas в сумму в указанном ассете, основываясь на курсе ассета, а также стоимости единицы Gas;
 - добавляет к полученной сумме дополнительную комиссию за создание операции и за размер операции;
@@ -25,16 +26,21 @@
 
 Для поддержки различных типов ассетов в контрактах были доработаны как компилятор solidity (solc), так и сама виртуальная машина Ethereum. В следствии чего для использования нового функционала, добавленного в Echo, смарт-контракты требуется компилировать именно с помощью модифицированного компилятора solidity.
 
+### Список функций
+
 #### `assetbalance`
+
 Через обращение к адресу, возвращает баланс в указанном ассете.
 
-```
+```cpp
 uint assetbalance(string assetId)
 ```
+
 - `assetId` - string, id ассета(в формате триплета, например "1.3.0").
 
 Пример:
-```
+
+```solidity
 contract assetbalance {
     uint public balance;
     function saveBalance(address addr, string assetId) {
@@ -53,16 +59,19 @@ contract assetbalance2 {
 ```
 
 #### `transferasset`
+
 Через обращение к адресу, переводит на него определённую сумму в указанном ассете.
 
-```
+```cpp
 void transferasset(uint value, uint assetId)
 ```
+
 - `value` - uint, сумма перевода.
 - `assetId` - uint, ID ассета перевода(в формате uint256).
 
 Пример:
-```
+
+```solidity
 contract transferasset {
     function transfer(address addr, uint value, uint assetId) {
         addr.transferasset(value, assetId);
@@ -78,15 +87,18 @@ contract transferasset2 {
 ```
 
 #### `db.property`
+
 Возвращает значение указанного поля указанного объекта в блокчейне.
 
-```
+```cpp
 bytes property(string idAndProperty)
 ```
+
 - `idAndProperty` - string, id объекта и запрашиваемое поле(например "1.2.5 lifetime_referrer_fee_percentage").
 
 Пример:
-```
+
+```solidity
 contract property {
     bytes public data;
     function getProperty(string idAndProperty) {
@@ -103,16 +115,20 @@ contract property2 {
 ```
 
 #### `db.convert`
+
 Конвертирует объект не превышающий 32 байта в uint256.
 
-```
+```cpp
 uint convert(bytes data)
 ```
+
 params:
+
 - `data` - bytes, конвертируемый объект.
 
 Пример:
-```
+
+```cpp
 contract convert {
     bytes public data;
     uint public value;
@@ -124,10 +140,12 @@ contract convert {
 ```
 
 #### `msg.idasset`
+
 Возвращает ID ассета с которым была вызвана транзакция создания или вызова контракта в формате uint.
 
 Пример:
-```
+
+```cpp
 contract transfer {
     function transfer(address addr, uint value) {
         addr.transferasset(value, msg.idasset);  
@@ -136,10 +154,12 @@ contract transfer {
 ```
 
 #### `addr.isCommittee`
+
 Проверяет является ли адрес активным заверителем и возвращает соответствующее значение `bool`.
 
 Пример:
-```
+
+```cpp
 contract A {
     function f(address addr) returns (bool) {
         return addr.isCommittee;
