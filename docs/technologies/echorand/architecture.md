@@ -1,108 +1,110 @@
-# Архитектура EchoRand
+# EchoRand Architecture
 
-В документе описано предложение по архитектуре для алгоритма echorand проекта **Echo**. Презентация проекта: ([ECHO: A Next Generation Blockhain Platform For Smart Economics][echo-wp]).
+The document contains the description of an architecture proposal for the echorand algorithm of the project **Echo**. Project presentation: ([ECHO: A Next Generation Blockсhain Platform For Smart Economics][echo-wp]).
 
-## Общее описание
+## General description
 
-|Класс|Роль|
+|Class|Role|
 |---|---|
-|Шаг (step)|реализация шага алгоритма|
-|Раунд (round)|менеджер шагов в пределах раунда алгоритма|
-|Алгоритм (agreement)|менеджер раундов и внешний интерфейс алгоритма|
-|Параметры алгоритма (options)|начальные параметры алгоритма|
-|Классы сетевых сообщений|передача сообщений между узлами сети|
+|Step|algorithm implementation step|
+|Round|step manager within the algorithm round|
+|Agreement|round manager and the front-end of the algorithm|
+|Options|initial parameters of the algorithm|
+|Network message classes|communication links between network nodes|
 
-### Алгоритм
+### Algorithm
 
-Класс `agreement` представляет собой основной класс реализации алгоритма - интерфейс для использования извне.
+`agreement` class is the main algorithm implementation class - an interface for external use.
 
-Класс реализует следующую функциональность:
-* хранение параметров конфигурации, таких как:
-  * параметры для работы алгоритма (максимальное количество шагов, таймауты и так далее);
-  * стартовое значение **Q(r-1)** (случайная величина из последнего блока);
-  * стартовое значение **HB(r-1)** ([SHA-256][] хеш последнего блока);
-  * интерфейс доступа к публичным ключам исполнителей для проверки подписи;
-  * интерфейс проверки блока на корректность;
-  * приватные ключи исполнителей на данном узле.
-* изменения параметров конфигурации;
-* запуск остановка работы алгоритма вцелом.
+The class implements the following functionality:
 
-В рамках работы алгоритма:
-* запуск раундов;
-* хранение ссылок на раунды;
-* остановка раунда и внесение нового блока в базу данных [blockchain][];
-* первичный прием сообщений из сети и их передача в соответствующие раунды;
-* предоставление раундам ссылок на конкретные интерфейсы, через реализацию адаптера.
+* storage of configuration parameters, such as:
+  * parameters for the algorithm operation (maximum number of steps, timeouts, etc.);
+  * **$Q (r-1)$** initial value (random variable from the previous block);
+  * **$HB (r-1)$** initial value ([SHA-256] [] hash address of the previous block);
+  * access interface to public keys of the relevant parties for verifying the signature;
+  * block validation interface;
+  * each party's private keys on the node.
+* configuration settings;
+* start-up and shutdown of the algorithm operation as a whole.
 
-### Раунд
+As part of the algorithm operation:
 
-Все шаги алгоритма выполняются в контексте определенного раунда.
+* start of rounds;
+* storing links to the rounds;
+* suspension of a round to add a new block to the database [blockchain][];
+* initial reception of network messages and their transfer to the corresponding rounds;
+* providing the rounds with links to specific interfaces, through the adapter implementation.
 
-Каждый раунд имеет свой номер.
+### Round
 
-Функциональность:
-* владеет всеми своими шагами и разделяемыми данными. Шаги алгоритма генерируют разделяемые данные,
-сохраняют и обмениваются ими при необходимости через раунд;
-* получает сетевые сообщения от `agreement` и передает их в соответствующий шаг алгоритма;
-* пересылает сетевые сообщения другим узлам сети в соответствии с алгоритмом, описанным в
-[техническом описании](echorand/tech);
-* запускает шаги алгоритма;
-* ждет уведомления об остановке шага и принимает решение о запуске следуюшего шага или о конце раунда;
-* уведомляет `agreement` о своей остановке.
+All steps of the algorithm are implemented within the context of a particular round.
 
-Раунд можно завершить только из шагов `bba`.
+Each round has its own number.
 
-Результатом завершенного раунда является подпись нового блока и, опционально, сам блок.
+Functionality:
 
-Если раунд завершен без блока, то начинается новый раунд, а текущий раунд ожидает прихода
-блока запуская специальный шаг `step_finish`. Решение об этом принимает `agreement`, анализируя
-результаты работы раунда, который послал уведомление об остановке.
+* owns all its steps and shared data. Algorithm steps generate the shared data, save and exchange them, where necessary, through the round;
+* receives network messages from `agreement` and transfers them to the corresponding step of the algorithm;
+* forwards network messages to the other nodes in accordance with the algorithm described in the [technical description](echorand / tech);
+* runs the steps of the algorithm;
+* waits for the notification of a step suspension and decides on the start of the next step or the end of the round;
+* notifies `agreement` about its suspension.
 
-Следует отметить, что теоретически может случиться ситуация, когда в `step_finish` находятся несколько
-раундов и, соответственно, несколько блоков. И по сети может поступить блок **n**, когда блок **n-1**
-еще находится в `step_finish` - фрагментация хвоста [blockchain][]. Такую ситуацию следует предусмотреть
-в классе `agreement`. К примеру, ввести переменную состояния раунда, которая принимает следующие значения:
-* выполняется;
-* ожидает блок;
-* ожидает внесение в [blockchain][].
+The round can be ended only from the `bba` steps.
 
-### Шаги
+The result of the ended round is the new block's signature and, optionally, the new block itself.
 
-Каждый шаг алгоритма должен выполняться асинхронно, реагируя одновременно и на события таймера
-и на события от сети, такие как приход сетевых сообщений.
+If the round is ended without a block, a new round starts, while the ongoing round is waiting for a new block to arrive
+launching a specific  `step_finish` step. The decision is made by `agreement`,
+analyzing the operation results of the round that sent the notification of suspension.
 
-Каждый шаг алгоритма имеет свой номер.
+It should be noted that theoretically there might be a situation where there are several
+rounds in `step_finish`, and thus several blocks. Via the network there can arrive the block **n**, while the block **n-1**
+is still in `step_finish` - tail fragmentation [blockchain][]. Such a situation should be foreseen
+in the `agreement` class. For example, by entering a variable of the state of the round, which takes the following values:
 
-Все шаги алгоритма подразделяются на группы `gc`, `gc-bba` и `bba`, каждая из которых имеет
-принципиально разное поведение.
+* gets implemented;
+* waits for a block;
+* waits to be added to [blockchain][].
 
-Шаги группы `gc` стартуют все вместе при старте раунда и работают одновременно.
+### Steps
 
-Единственный шаг группы `gc-bba` стартует после окончания последнего шага группы `gc`.
+Each step of the algorithm must be implemented asynchronously, responding simultaneously to the timer events
+and events of the network, such as network messages arrival.
 
->Тут имеется в виду последний шаг по номеру, а не последний закончившийся шаг.
+Each step of the algorithm has its own number.
+
+All steps of the algorithm are divided into groups: `gc`, `gc-bba` and `bba`, each of which shows
+significantly different behavior.
+
+The steps of the `gc` group start all together with the start of the round and work simultaneously.
+
+The only `gc-bba` group step starts after the end of the last step of the `gc` group.
+
+>This refers to the last step by number, not the last step that was ended.
 >
->Однако, таймауты на работу шагов выбираются таким образом, чтобы последний закончившийся шаг группы
-`gc` и был последним шагом по номеру.
+>However, the timeouts for the steps are chosen in such a way that the last step by number
+actually becomes the last ended step of the group `gc`.
 
-Шаги группы `bba` стартуют сразу после завершения шага `gc-bba` и работают последовательно, один за другим
-до окончания раунда, либо до достижения некоторого предела шагов. Предел шагов для группы `bba`
-задается из-вне реализации алгоритма, как параметр конфигурации.
+The steps of the `bba` group start immediately after the end of the `gc-bba` step and work sequentially, one after the other
+till the end of the round, or till reaching a certain step limit. The step limit for the group `bba`
+is set from the outside of the algorithm implementation, as a configuration parameter.
 
-### Вспомогательная функциональность
+### Auxiliary functionality
 
-#### Параметры алгоритма
+#### Algorithm parameters
 
-Структура, которая используется при инициализации класса `agreement` и последующего
-хранения параметров внутри этого класса. В целом, никто не мешает унаследовать `agreement`
-от этой структуры приватно.
+The structure used during the initialization of the `agreement` class and for the subsequent
+storing of parameters inside the class. In general, it's always possible to get the `agreement`
+from the structure privately.
 
-#### Интерфейс рассылки сообщений
+#### Messaging Interface
 
-Можно реализовать отдельным интерфейсом.
+It can be implemented as a separate interface.
 
-Также, при наличии базового класса для всех сетевых сообщений, можно реализовать и
-через простую передачу функтора в класс `agreement`. Где-то так:
+Also, if you have a base class for all network messages, it can be also implemented
+through a simple transfer of a functor to the `agreement` class. Pretty much like this:
 
 ```cpp
 using network_sender_t = std::function<bool (const graphene::net::echorand_message&)>;
@@ -110,48 +112,48 @@ network_sender_t _send_message;
 bool send_message(graphene::net::echorand_message& msg) { _send_message(msg); }
 ```
 
-#### Интерфейс создания нового блока
+#### Interface for creating a new block
 
-В конце раунда класс `agreement` должен добавить новый блок в локальную базу данных.
+At the end of the round `agreement` class should add a new block to the local database.
 
-Для взаимодействия с `Graphene API` можно предусмотреть такой же механизм, как и с
-интерфейсом рассылки сообщений.
+For interacting with the `Graphene API`, the same mechanism
+as with the messaging interface can be envisaged.
 
 ```cpp
 using block_handler_t = std::function<bool (const graphene::chain::signed_block&)>;
 void send_message(const graphene::net::echorand_message& msg) const noexcept;
 ```
 
-#### Интерфейс проверки блока на корректность
+#### Interface for the block validation check
 
-В процессе работы алгоритма, требуется проверить пришедший блок на корректность. Фактически проверить
-его транзакции средствами `Graphene API`.
+During the operation of the algorithm, it's necessary to check the validation of the arrived block. Basically it means
+to check its transactions using the `Graphene API`.
 
-Такой интерфейс тоже может быть реализован подобно интерфейсу создания нового блока из предыдущего пункта.
+Such an interface can also be implemented like the interface for creating a new block described in the previous point.
 
 ```cpp
 using block_handler_t = std::function<bool (const graphene::chain::signed_block&)>;
 void check_block(const graphene::chain::signed_block& block) const noexcept;
 ```
 
-#### Интерфейс получения информации об исполнителях
+#### Interface for getting information about the involved parties
 
-На старте раунда, и в процессе старта последующих серий шагов этапа `bba` потребуется получать
-список текущих исполнителей с их ключами. Для локальных исполнителей на сетевом узле требуется
-пара ключей - приватный и публичный, для удаленных требуется только публичный.
+At the start of the round, and at the start of the following series of the `bba` steps, you will need to receive
+a list of the involved parties with their keys. Local parties on the network node need
+a pair of keys - a private and a public one, for remoted parties only a public key is required.
 
-Такой интерфейс тоже может быть реализован, как в предыдущем пункте.
+Such an interface can also be implemented like the one described in the previous point.
 
 ```cpp
 using witness_getter_t = std::function<witnesses_t (unsigned, unsigned)>;
 witnesses_t get_witnesses(unsigned round_id, unsigned step_id) const noexcept;
 ```
 
-#### Классы сетевых сообщений
+#### Network message classes
 
-Реализуются отдельно в рамках соответствующих модулей `Graphene API`.
+Get implemented separately within the corresponding `Graphene API` modules.
 
-Если позволит `Graphene API`, классы сообщений желательно реализовать в виде иерархии:
+If `Graphene API` allows, it's better to implement the message classes as a hierarchy:
 
 ```mermaid
 graph TD;
@@ -160,56 +162,53 @@ graph TD;
   echorand_message-->echorand_bba_signature;
 ```
 
-### Инициализация
+### Initialization
 
-С помощью структуры `echo::randopt` в конструкторе класса `graphene::app::application` создается объект `agreement`.
+The object `agreement` is created in the `graphene::app::application` class constructor using the `echo::randopt` structure.
 
-Класс `graphene::app::application` управляет включением/выключением раундов алгоритма `agreement` в зависимости
-от активности процесса синхронизации блоков. При необходимости, меняет **Q(r-1)** и **HB(r-1)** в параметрах
-класса `agreement` перед запуском алгоритма после синхронизации.
+The `graphene::app::application` class controls the switching on and off function of the `agreement` algorithm rounds depending on
+the block synchronization process activity. If necessary, it changes **Q(r-1)** и **HB(r-1)** in the parameters of `agreement`
+after synchronization before running the algorithm.
 
-Класс `graphene::app::application` передает все приходящие по сети `echorand_message` в класс `agreement`.
+`graphene::app::application` class transfers all the messages coming through the `echorand_message` network to the `agreement` class.
 
-Требуется также предусмотреть изменение приватных ключей исполнителей на данном узле в параметрах класса `agreement`.
+It's also required to consider modifications of the private keys of the involved parties on the node in the `agreement` class parameters.
 
-В силу использования интерфейса `fc::schedule` все раунды и шаги должны создаваться, как `std::shared_ptr`, наследоваться
-от `std::enable_shared_from_this<...>` и при планировании события от таймера использовать схему:
+Since the `fc::schedule` interface is used, all the rounds and steps should be created like the `std::shared_ptr`, must be inherited
+from `std::enable_shared_from_this<...>` and, when scheduling an event from the timer, must use the following scheme:
 
 ```cpp
 auto pThis = shared_from_this();
 fs::schedule( [pThis, this](){ onTimer(); }, timeout );
 ```
 
-что и будет сделано в базовом классе шага, для реализации функциональности таймера.
+which will be done in the base class of the step, for the timer functionality implementation.
 
-### Функционирование
+### Functioning
 
-После старта, класс `agreement` создает раунд. Раунд создает в конструкторе три шага: `step_gc1`, `step_gc2`, `step_gc3`.
+After the start, the `agreement` class creates a round. In the constructor the round creates three steps: `step_gc1`, `step_gc2`, `step_gc3`.
 
-Шаги запускаются автоматически, раундом. В своих конструкторах, если это необходимо, они производят необходимые
-предварительные расчеты и планируются на таймеры.
+The steps are run automatically, by a round. In their corresponding constructors, if necessary, they produce the necessary
+preliminary calculations and become scheduled for the timers.
 
-Алгоритм получает от приложения сетевые сообщения и передает их в соответствующий раунд, по номеру. Раунд передает
-их в заданный шаг, в соответствии с номером шага в сообщении.
+The algorithm receives network messages from the application and sends them to the corresponding round with their relevant number. The round sends
+them to the specified step, in accordance with the step number in the message.
 
-Как только в результате сообщения от сети или срабатывания таймера какой-то шаг решает завершится,
-он сохраняет результаты своей работы в раунд. После этого шаг помечает внутри себя, что он закончился
-и сообщает об этом раунду. Раунд удаляет этот шаг из своей коллекции.
+As soon as a result of a network message or when the timer goes off a step decides to end,
+it saves the results of its work in a round. After this, the step marks the fact that it's over inside itself
+and reports this to the round. Then, the round removes this step from its collection.
 
-Наиболее вероятно, что окончание шага произойдет по событию от сети. В этом случае, событие на таймере
-будет все еще зарегистрировано и, следовательно, будет держать этот шаг в памяти. К сожалению,
-в `Graphene API` функторы по таймеру нельзя отменить и они срабатывают всегда. После срабатывания таймера,
-в этом случае, событие обработки увидит, что шаг помечен как оконченный и просто выйдет. В результате шаг
-будет удален из памяти.
+Most likely, the end of the step will be a result of a network message. In this case,
+the event will still be recorded on the timer and, therefore, will keep the step in memory. Unfortunately,
+in the `Graphene API` the timer functors cannot be canceled and they always work. In this case,
+after the timer goes off, the processing event will see that the step is marked as completed
+and will simply exit. As a result, the step will be removed from memory.
 
-Еще один из вариантов это остановка алгоритма. В этом случае, библиотека приложений `Graphene App` вызывает
-метод остановки алгоритма. Этот метод удалит все раунды. Раунды удалят все шаги, помечая их как оконченные.
-Если какие-то шаги остались зарегистрироваными на таймерах, то через некоторое время они будут удалены
-из памяти, как было описано выше.
+Another option is to stop the algorithm. In this case, the `Graphene App` application library calls a method of ending the algorithm. This method will remove all the rounds. The rounds will remove all the steps, marking them as completed. In case some steps remain registered on the timers, after a while they will be removed from memory, as it is described above.
 
-## Схемы
+## Schemes
 
-### Схема наследования
+### Inheritance schemes
 
 ```mermaid
 graph TD;
@@ -228,7 +227,7 @@ graph TD;
   step_bba-->step_bba3;
 ```
 
-### Схема владения
+### Ownership scheme
 
 ```mermaid
 graph LR;
@@ -239,13 +238,11 @@ graph LR;
   fc::schedule==shared==>step
 ```
 
-## Описание классов
+## Class descriptions
 
-Все классы объявлены в пространстве имен `echo::rand`.
+All classes are mentioned in the `echo::rand` namespace.
 
-Показаны только базовые классы архитектуры.
-
-### echo::rand::options
+Only basic architecture classes are demonstrated.
 
 ```cpp
 /// configuration options for echorand protocol

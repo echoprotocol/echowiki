@@ -116,7 +116,7 @@ Then, at creation of a new block the **$Q_{r}$** vector is calculated the follow
 
 #### To generate a random value on r = 7,10,13,... BBA step
 
-**$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$**
+$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$
 
 ## Notation keys
 
