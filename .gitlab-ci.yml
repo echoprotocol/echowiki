@@ -2,6 +2,7 @@ image: python:alpine
 
 before_script:
   - pip3 install mkdocs
+  - pip3 install python-markdown-math
   - pip3 install pymdown-extensions
   - pip3 install Pygments
   - pip3 install .
