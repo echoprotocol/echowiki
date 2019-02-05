@@ -1,4 +1,10 @@
-See wiki here - [https://wiki.myecho.app/](https://wiki.myecho.app/)
+# Echo blockchain Wiki
 
-- pip install . --user
-- mkdocs serve
+See wiki here - [https://echo-dev.io/](https://echo-dev.io/)
+
+Build HTML version:
+
+```bash
+pip install . --user
+mkdocs serve
+```
