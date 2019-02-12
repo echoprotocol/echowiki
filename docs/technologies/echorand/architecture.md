@@ -32,7 +32,7 @@ As part of the algorithm operation:
 
 * start of rounds;
 * storing links to the rounds;
-* suspension of a round to add a new block to the database [blockchain][];
+* suspension of a round to add a new block to the database blockchain;
 * initial reception of network messages and their transfer to the corresponding rounds;
 * providing the rounds with links to specific interfaces, through the adapter implementation.
 
@@ -61,12 +61,12 @@ analyzing the operation results of the round that sent the notification of suspe
 
 It should be noted that theoretically there might be a situation where there are several
 rounds in `step_finish`, and thus several blocks. Via the network there can arrive the block **n**, while the block **n-1**
-is still in `step_finish` - tail fragmentation [blockchain][]. Such a situation should be foreseen
+is still in `step_finish` - tail fragmentation blockchain. Such a situation should be foreseen
 in the `agreement` class. For example, by entering a variable of the state of the round, which takes the following values:
 
 * gets implemented;
 * waits for a block;
-* waits to be added to [blockchain][].
+* waits to be added to blockchain.
 
 ### Steps
 
@@ -527,7 +527,6 @@ public:
 };
 ```
 
-[blockchain]: https://ru.wikipedia.org/wiki/Блокчейн
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
 [echo-wp]: https://drive.google.com/file/d/1JBCYt4QKBVK59MWstI0mIJkFUAc9Dy9O
 [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
