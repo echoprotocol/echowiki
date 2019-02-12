@@ -15,99 +15,99 @@ for example:
 {"id": 1, "method":"call", "params":[1,"login",["", ""]]}
 ```
 
-#### login(string user, string password)
+### login(string user, string password)
 
 This must be called prior to requesting other APIs.
 Other APIs may not be accessible until the client has sucessfully authenticated.
 
-##### Parameters
+#### Parameters
 
 | Option | Description |
 |:-------|:-----------|
 | `user`  | Username to login with |
 | `password`  | Password to login with |
 
-##### Returns
+#### Returns
 
 `true` if logged in successfully, `false` otherwise
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"login",["", ""]]}
 < {"id":1,"jsonrpc":"2.0","result":true}
 ```
 
-#### block()
+### block()
 
 Retrieve the network block API indentifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the block API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"block",[]]}
 < {"id":1,"jsonrpc":"2.0","result":2}
 ```
 
-#### network_broadcast()
+### network_broadcast()
 
 Retrieve the network broadcast API identifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the network_broadcast API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"network_broadcast",[]]}
 < {"id":1,"jsonrpc":"2.0","result":3}
 ```
 
-#### database()
+### database()
 
 Retrieve the database API identifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the database API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"database",[]]}
 < {"id":1,"jsonrpc":"2.0","result":4}
 ```
 
-#### history()
+### history()
 
 Retrieve the history API identifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the history API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"history",[]]}
@@ -115,19 +115,19 @@ Identification of API connection which you should use on next requests to the hi
 
 ```
 
-#### network_node()
+### network_node()
 
 Retrieve the network node API identifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the network_node API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"network_node",[]]}
@@ -135,19 +135,19 @@ Identification of API connection which you should use on next requests to the ne
 
 ```
 
-#### crypto()
+### crypto()
 
 Retrieve the cryptography API identifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the crypto API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"crypto",[]]}
@@ -155,19 +155,19 @@ Identification of API connection which you should use on next requests to the cr
 
 ```
 
-#### asset()
+### asset()
 
 Retrieve the asset API identifier.
 
-##### Parameters
+#### Parameters
 
 Without parameters
 
-##### Returns
+#### Returns
 
 Identification of API connection which you should use on next requests to the asset API.
 
-##### Example
+#### Example
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"asset",[]]}
