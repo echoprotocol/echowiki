@@ -2,11 +2,11 @@
 
 # EchoRand Algorithm
 
-Technical description of block generation in a distributed [blockchain][] of the **Echo** project ([ECHO: A Next Generation Blockchain Platform For Smart Economics][echo-wp]).
+Technical description of block generation in a distributed blockchain of the **Echo** project ([ECHO: A Next Generation Blockchain Platform For Smart Economics][echo-wp]).
 
-The theoretical solution [Algorand v9] [algorand-v9], which describes the achieving of a decentralized consensus based on solving the [Byzantine Generals' Problem] [byzantine], was used as the basis for the **EchoRand** algorithm.
+The theoretical solution [Algorand v9] [algorand-v9], which describes the achieving of a decentralized consensus based on solving the Byzantine Generals' Problem, was used as the basis for the **EchoRand** algorithm.
 
-The theoretical solution [Algorand v9] [algorand-v9] presents several possible variants of the algorithm. **EchoRand** is based on the variant named **Algorand′2**, implemented with certain modifications.
+The theoretical solution [Algorand v9][algorand-v9] presents several possible variants of the algorithm. **EchoRand** is based on the variant named **Algorand′2**, implemented with certain modifications.
 
 Namely:
 
@@ -14,7 +14,7 @@ Namely:
 * Denial of the one-time keys model and deriving keys model for signing network messages
 * The method of generating a random shared state in the third step of the BBA algorithm is changed
 
-The general pattern of work of the **EchoRand** is described in [ECHO: Model of Functioning of Distributed Ledger][echo-model].
+<!-- The general pattern of work of the **EchoRand** is described in [ECHO: Model of Functioning of Distributed Ledger][echo-model]. -->
 
 ## General requirements for the algorithm and its implementation
 
@@ -35,7 +35,7 @@ Practical requirements, conditions and goals:
 
 * **Network node** - a server, with running `echo_node` process, local configuration and database. A physical network unit with one running instance of **EchoRand**
 * **Local configuration** - a certain set of parameters accessible only to the running network node.
-* **Base (database)** - a [blockchain][] with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
+* **Base (database)** - a blockchain with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
 * **Block (block of data)** - logical database unit for storing a transaction set and the related data, that can be verified by external means
 * **Transaction** - in the context of this particular algorithm, it is a certain block of data that can be verified by external means
 * **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. On one network node permits registration of several participants.
@@ -105,7 +105,7 @@ At the same round and step  but on different network nodes of the algorithm, the
 
 #### To generate a random round value
 
-The starting vector **$Q(0)$** is selected randomly at [blockchain][] database initialization.
+The starting vector **$Q(0)$** is selected randomly at blockchain database initialization.
 
 Then, at creation of a new block the **$Q_{r}$** vector is calculated the following way:
 
@@ -127,26 +127,26 @@ $BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$
 | **$H(x)$** | hash [SHA-256][] |
 | **$r$** >= 1 | current round of the algorithm, which is virtually equal to the number of blocks in the database plus one |
 | **$s$** >= 1 | current step number of the algorithm in the round |
-| **$B_{r}$** | block created in the **r** round, which equals to { **r**, **producer-id**, **Q_{r}**, **HB_{r}**, **HB_{r-1}**, **sigB**, **PAY_{r}**, **CERT_{Br}** } |
-| **$HB_{r}$** | **B_{\r}** block hash |
-| **PAY<sup>r</sup>** | set of transactions in the **B_{r}** block  |
-| **$Q_{r}$** | shared random vector of the **r** round |
-| **$signQ_{r}$** | signature of a random vector of the **r** round |
-| **$signB_{r}$** | signature of a block of the **r** round |
-| **$l(r)$** | round **r** leader - determines **PAY<sup>r</sup>**, creates **B_{r}** and determines **Q_{r}** |
-| **$CERT_{r}$** | **B_{r}** block certificate, formed out of a set of **bba_signature** messages |
-| **$VRF(r, s)$** | ordered set of participants who act in step **s** of  round **r** |
-| **$VRFN(r, s)$** | ordered set of indexes of **VRF(r, s)** participants who are registered on the current node and participate in step **s** of round **r** |
+| **$B_{r}$** | block created in the **r** round, which equals to { **$r$**, **$producer-id$**, **$Q_{r}$**, **$HB_{r}$**, **$HB_{r-1}$**, **$sigB$**, **$PAY_{r}$**, **$CERT_{Br}$** } |
+| **$HB_{r}$** | **$B_{r}$** block hash |
+| **PAY<sup>r</sup>** | set of transactions in the **$B_{r}$** block  |
+| **$Q_{r}$** | shared random vector of the **$r$** round |
+| **$signQ_{r}$** | signature of a random vector of the **$r$** round |
+| **$signB_{r}$** | signature of a block of the **$r$** round |
+| **$l(r)$** | round **$r$** leader - determines **$PAY_{r}$**, creates **$B_{r}$** and determines **$Q_{r}$** |
+| **$CERT_{r}$** | **$B_{r}$** block certificate, formed out of a set of **$bba_signature$** messages |
+| **$VRF(r, s)$** | ordered set of participants who act in step **$s$** of  round **$r$** |
+| **$VRFN(r, s)$** | ordered set of indexes of **$VRF(r, s)$** participants who are registered on the current node and participate in step **$s$** of round **$r$** |
 
 An instance of the **EchoRand** algorithm is understood as an implementation of the algorithm that is performed on a certain node of **Echo** network.
 
-## **VRF(r, s)** function
+## $VRF(r, s)$ function
 
-The function building is described in the document [ECHO: Model of Functioning of Distributed Ledger][echo-model], in the form of an interval tree for all the known participants in the system.
+<!-- The function building is described in the document [ECHO: Model of Functioning of Distributed Ledger][echo-model], in the form of an interval tree for all the known participants in the system. -->
 
 The function returns a list of participants of a given length of round **r** and step **s**, which is the same for all the nodes in the network.
 
-It should be noted that the function uses a fixed state of [blockchain][] database to calculate the participants' balances. In the general case, this function can use a state of the round **max{0, r - k}**, где **k = 1,...**.
+It should be noted that the function uses a fixed state of blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round **max{0, r - k}**, где **k = 1,...**.
 
 To calculate the function, a random vector of the **Q(r-k)** round is required.
 
@@ -181,7 +181,7 @@ The round **R_{r}**, which launches step 1 and step 2, described below, is creat
 1. **Verification**:
     1. If **N_{1}=∅**, complete the step
     1. select participant index with **n = N_{1}[0]** as a creator of this block on the node
-    1. get actual ID of the the participant in the [blockchain][]: **id_{1} = A_{1}[n]**
+    1. get actual ID of the the participant in the blockchain: **id_{1} = A_{1}[n]**
     1. through **id_{1}** get all the private keys of a participant
 1. **Block assembly**:
     1. if all the previous blocks **B(k), k=1..r-1** are available, build **PAY<sup>r</sup>**
@@ -249,7 +249,7 @@ In the application, it can be a predefined constant or a separate flag in the da
     1. stop timers, **do not** unsubscribe from network messages
     1. if **N_{2} = ∅**, end the step
     1. **∀n_{2} ∈ N_{2}**:
-        1. get real user’s ID in the [blockchain][]: **id_{2} = A_{2}[n_{2}]**
+        1. get real user’s ID in the blockchain: **id_{2} = A_{2}[n_{2}]**
         1. sign with the key **id_{2}** and send
             1. if **v != ∅**: **gc_proposal** = **{ r, 2, id_{2}, v }**
             1. if **v == ∅**: **gc_proposal** = **{ r, 2, id_{2}, ∅ }**
@@ -283,7 +283,7 @@ In the application, it can be a predefined constant or a separate flag in the da
     1. stop timers, unsubscribe from network messages
     1. if **N_{3} = ∅**, end the step
     1. **∀n_{3} ∈ N_{3}**:
-        1. get real user’s ID in the [blockchain][]: **id_{3} = A_{3}[n_{3}]**
+        1. get real user’s ID in the blockchain: **id_{3} = A_{3}[n_{3}]**
         1. sign with the user’s key **id_{3}** and send **gc_proposal** = **{ r, 3, id_{3}, v }**
 
 #### 4. Primary assessment of vote counting
@@ -320,7 +320,7 @@ In the application, it can be a predefined constant or a separate flag in the da
     1. stop timers, unsubscribe from network messages
     1. if **N_{4} = ∅**, end the step
     1. **∀ n_{4} ∈ N_{4}**:
-        1. get real user’s ID in the [blockchain][]: **id_{4} = A_{4}[n_{4}]**
+        1. get real user’s ID in the blockchain: **id_{4} = A_{4}[n_{4}]**
         1. sign with the user’s key **id_{4}** and send **bba_signature** = **{ r, 4, id_{4}, b, v, sign(0, v) }**
 
 ### Reaching the Binary Byzantine Agreement (BBA)
@@ -617,11 +617,8 @@ A set of participants is calculated using [VRF][] and does not depend on actual 
 
 Based on [algorand-v9][] (9. Handling Forks, page 70)
 
-[blockchain]: https://ru.wikipedia.org/wiki/Блокчейн
 [echo-wp]: https://drive.google.com/file/d/1JBCYt4QKBVK59MWstI0mIJkFUAc9Dy9O
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
-[echo-model]: https://drive.google.com/file/d/1-yLdXbp16jeZJM2JNTbxFPDGU_BaFpOu
 [EdDSA]: https://en.wikipedia.org/wiki/EdDSA
 [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
-[byzantine]: https://ru.wikipedia.org/wiki/Задача_византийских_генералов
 [VRF]: https://en.wikipedia.org/wiki/Verifiable_random_function
