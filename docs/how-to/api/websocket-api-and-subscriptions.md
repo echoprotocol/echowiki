@@ -18,7 +18,7 @@ In Echo, Websocket calls are stateful and accessible via regular JSON formated w
 
 The parameters `params` have the following structure:
 
-```
+```bash
 [API-identifier, Method-to-Call, Call-Parameters]
 ```
 
@@ -87,7 +87,7 @@ Find below a list of available APIs:
 
 #### 1. Login
 
-The first thing we need to do is to *login*::
+The first thing we need to do is to *login*
 
 ```bash
 > {"id":2,"method":"call","params":[1,"login",["",""]]}
@@ -101,7 +101,7 @@ should verify, that the ``result`` give positive confirmation about your login.
 #### 2. Requesting Access to an API
 
 Most data can be queried from the :doc:`database`-API to which we *register*
-with the following call:::
+with the following call:
 
 ```bash
 > {"id":2,"method":"call","params":[1,"database",[]]}
@@ -110,7 +110,7 @@ with the following call:::
 #### 3. Obtain the API identifier
 
 After requesting access, the full node will either deny access or return an
-identifier to be used in future calls::
+identifier to be used in future calls
 
 ```bash
 < {"id":2,"result":2}
@@ -120,7 +120,7 @@ The ``result`` will be our identifier for the database API, in the following cal
 
 #### 4. Call methods of a specific API by providing the identifier
 
-Now we can call any methods available to the ``database`` API via:::
+Now we can call any methods available to the ``database`` API via:
 
 ```bash
 > {"id":1, "method":"call", "params":[DATABASE_API_ID,"get_accounts",[["1.2.0"]]]}
@@ -133,20 +133,20 @@ in the database change or a particular event (such as filled orders) occur.
 
 We have the following subscriptions available:
 
-* ``set_subscribe_callback( int identifier, bool clear_filter )``:
+- ``set_subscribe_callback( int identifier, bool clear_filter )``:
      To simplify development a global subscription callback can be registered.
      Every notification initiated by the full node will carry a particular
      ``id`` as defined by the user with the ``identifier`` parameter.
 
-* ``set_pending_transaction_callback(int identifier)``:
+- ``set_pending_transaction_callback(int identifier)``:
      Notifications for incoming *unconfirmed* transactions.
-* ``set_block_applied_callback(blockid)``:
+- ``set_block_applied_callback(blockid)``:
      Gives a notification whenever the block ``blockid`` is applied to the
      blockchain.
-* ``subscribe_to_market(int identifier, asset_id a, asset_id b))``:
+- ``subscribe_to_market(int identifier, asset_id a, asset_id b))``:
     Subscribes to market changes in market ``a:b`` and sends notifications with
     id ``identifier``.
-* ``get_full_accounts(array account_ids, bool subscribe)``:
+- ``get_full_accounts(array account_ids, bool subscribe)``:
     Returns the full account object for the accounts in array ``account_ids``
     and subscribes to changed to that account if ``subscribe`` is set to
     ``True``.
@@ -185,7 +185,7 @@ every time the object changes:
 
 Here is an example of a full session:
 
-```
+```shell
   > {"method": "call", "params": [1, "login", ["", ""]], "id": 2}
   < {"id":2,"result":true}
   > {"method": "call", "params": [1, "database", []], "id": 3}
