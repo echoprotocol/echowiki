@@ -140,7 +140,7 @@ $BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$
 
 An instance of the **EchoRand** algorithm is understood as an implementation of the algorithm that is performed on a certain node of **Echo** network.
 
-## $VRF(r, s)$ function
+## VRF(r, s) function
 
 <!-- The function building is described in the document [ECHO: Model of Functioning of Distributed Ledger][echo-model], in the form of an interval tree for all the known participants in the system. -->
 
