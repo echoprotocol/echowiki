@@ -7,6 +7,7 @@ Get the objects corresponding to the provided IDs.
 If any of the provided IDs does not map to an object, a null is returned in its position.
 
 ##### Parameters
+
 | Option | Description |
 |:-------|:-----------|
 | `ids`  | an array of object IDs, e.g. `["1.6.1", "1.6.2", ...]` |
@@ -14,6 +15,7 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 ##### Returns
 
 The objects retrieved, in the order they are mentioned in ids.
+
 ```json
 [{
     "id": "1.6.1",
