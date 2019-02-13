@@ -617,7 +617,7 @@ A set of participants is calculated using [VRF][] and does not depend on actual 
 
 Based on [algorand-v9][] (9. Handling Forks, page 70)
 
-[echo-wp]: https://drive.google.com/file/d/1JBCYt4QKBVK59MWstI0mIJkFUAc9Dy9O
+[echo-wp]: https://drive.google.com/file/d/1y1VCfvM8czq-BaTgEl0AuctAbGzV_S93/view
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
 [EdDSA]: https://en.wikipedia.org/wiki/EdDSA
 [SHA-256]: https://en.wikipedia.org/wiki/SHA-2
