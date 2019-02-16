@@ -87,7 +87,7 @@ The following algorithm parameters are set by constants, or configured at the **
 The verifiable random function at each **r** round and on each **s** step is built iteratively, in the following way:
 
 $$1. VRF_{0}(r, s) = SHA256(Q_{r-1}, r, s)$$
-$$1. VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$$
+$$2. VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$$
 
 The result of the function operation is an array of random values of size **$N_{g}$**:
 
