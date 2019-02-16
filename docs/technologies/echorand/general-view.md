@@ -2,9 +2,9 @@
 
 # EchoRand Algorithm
 
-Technical description of block generation in a distributed blockchain of the **Echo** project ([ECHO: A Next Generation Blockchain Platform For Smart Economics][echo-wp]).
+Technical description of block generation in a distributed blockchain of the **Echo** project.
 
-The theoretical solution [Algorand v9] [algorand-v9], which describes the achieving of a decentralized consensus based on solving the Byzantine Generals' Problem, was used as the basis for the **EchoRand** algorithm.
+The theoretical solution [Algorand v9][algorand-v9], which describes the achieving of a decentralized consensus based on solving the Byzantine Generals' Problem, was used as the basis for the **EchoRand** algorithm.
 
 The theoretical solution [Algorand v9][algorand-v9] presents several possible variants of the algorithm. **EchoRand** is based on the variant named **Algorand′2**, implemented with certain modifications.
 
@@ -13,8 +13,6 @@ Namely:
 * The way to determine participation of a specific party in a particular step is changed
 * Denial of the one-time keys model and deriving keys model for signing network messages
 * The method of generating a random shared state in the third step of the BBA algorithm is changed
-
-<!-- The general pattern of work of the **EchoRand** is described in [ECHO: Model of Functioning of Distributed Ledger][echo-model]. -->
 
 ## General requirements for the algorithm and its implementation
 
@@ -48,9 +46,9 @@ The following algorithm parameters are set by constants, or configured at the **
 |:---:|---|
 | $Λ$ | "large" interval, the average time required to distribute a 1MB message across the **Echo** network |
 | $λ$ | "small" interval, the average time required to distribute a 256Bit message across the **Echo** network |
-| $N_{g}$ | the number of block creators in a round, used in the function $VRF(r, 1)$ |
-| $N_{c}$ | the number of block controllers in a round, used in the function $VRF(r, s), s > 1$ |
-| $t_{h}$ | the threshold for making a positive decision when verifying, and can be selected by **$0.69*N_{c}$** |
+| $N_{g}$ | the number of block producers in a round, used in the function $VRF(r, 1)$ |
+| $N_{c}$ | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$ |
+| $t_{h}$ | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
 | $μ$ | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created |
 
 <!-- ## Parameter selection
@@ -74,12 +72,12 @@ The following algorithm parameters are set by constants, or configured at the **
 ### Algorithms
 
 * [EdDSA][] - deterministic algorithm for creating and verifying electronic digital signature
-  * public key: 32 bytes (256 bits)
-  * private key: 32 bytes (256 bits)
-  * signature: 64 bytes (512 bits)
+    * public key: 32 bytes (256 bits)
+    * private key: 32 bytes (256 bits)
+    * signature: 64 bytes (512 bits)
 * [SHA-256][] - cryptographic hash algorithm
-  * hash: 32 bytes (256 bits)
-  * sequence function on a hashset (`std::less<hash_t, hash_t>`)
+    * hash: 32 bytes (256 bits)
+    * sequence function on a hashset (`std::less<hash_t, hash_t>`)
 * [VRF][] - verifiable random function
 
 ### VRF building
@@ -88,8 +86,8 @@ The following algorithm parameters are set by constants, or configured at the **
 
 The verifiable random function at each **r** round and on each **s** step is built iteratively, in the following way:
 
-1. $VRF_{0}(r, s) = SHA256(Q_{r-1}, r, s)$
-1. $VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$
+1. $$VRF_{0}(r, s) = SHA256(Q_{r-1}, r, s)$$
+1. $$VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$$
 
 The result of the function operation is an array of random values of size **$N_{g}$**:
 
