@@ -91,7 +91,7 @@ $$2. VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$$
 
 The result of the function operation is an array of random values of size **$N_{g}$**:
 
-$VRF(r, s) = { VRF_{0}(r, s), VRF_{1}(r, s), ... }$
+$$VRF(r, s) = { VRF_{0}(r, s), VRF_{1}(r, s), ... }$$
 
 A specific participant is calculated from the **$VRF_{i}(r, s)$** hash in a way as to make the probability of selecting a participant as active proportional to its current balance in the system.
 
