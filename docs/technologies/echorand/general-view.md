@@ -127,14 +127,14 @@ $BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$
 | **$s$** >= 1 | current step number of the algorithm in the round |
 | **$B_{r}$** | block created in the **r** round, which equals to { **$r$**, **$producer-id$**, **$Q_{r}$**, **$HB_{r}$**, **$HB_{r-1}$**, **$sigB$**, **$PAY_{r}$**, **$CERT_{Br}$** } |
 | **$HB_{r}$** | **$B_{r}$** block hash |
-| **PAY<sup>r</sup>** | set of transactions in the **$B_{r}$** block  |
-| **$Q_{r}$** | shared random vector of the **$r$** round |
-| **$signQ_{r}$** | signature of a random vector of the **$r$** round |
-| **$signB_{r}$** | signature of a block of the **$r$** round |
-| **$l(r)$** | round **$r$** leader - determines **$PAY_{r}$**, creates **$B_{r}$** and determines **$Q_{r}$** |
+| **PAY_{r}** | set of transactions in the **$B_{r}$** block  |
+| **$Q_{r}$** | shared random vector of the **r** round |
+| **$signQ_{r}$** | signature of a random vector of the **r** round |
+| **$signB_{r}$** | signature of a block of the **r** round |
+| **$l(r)$** | round **r** leader - determines **$PAY_{r}$**, creates **$B_{r}$** and determines **$Q_{r}$** |
 | **$CERT_{r}$** | **$B_{r}$** block certificate, formed out of a set of **$bba_signature$** messages |
-| **$VRF(r, s)$** | ordered set of participants who act in step **$s$** of  round **$r$** |
-| **$VRFN(r, s)$** | ordered set of indexes of **$VRF(r, s)$** participants who are registered on the current node and participate in step **$s$** of round **$r$** |
+| **$VRF(r, s)$** | ordered set of participants who act in step **s** of  round **r** |
+| **$VRFN(r, s)$** | ordered set of indexes of **$VRF(r, s)$** participants who are registered on the current node and participate in step **s** of round **r** |
 
 An instance of the **EchoRand** algorithm is understood as an implementation of the algorithm that is performed on a certain node of **Echo** network.
 
@@ -164,30 +164,35 @@ It is beyond the scope of this document to describe the mechanism of participant
 
 **Input data**:
 
-* **Q_{r-1}** from **CERT_{r-1}**
+* **$Q_{r-1}$** from **$CERT_{r-1}$**
 
-The round **R_{r}**, which launches step 1 and step 2, described below, is created.
+The round **$R_{r}$**, which launches step 1 and step 2, described below, is created.
 
 #### 1. Candidate blocks generation
 
-**Input data**:
+**Input data:**
 
-* **HB_{r-1}** from **CERT_{r-1}**
-* **A_{1}**, **N_{1}** from the context of the round
+* **$HB_{r-1}$** from **$CERT_{r-1}$**
+* **$A_{1}$**, **$N_{1}$** from the context of the round
 
-1. **Start**: right after determining **CERT_{r-1}**
+**Start:**
+
+right after determining **$CERT_{r-1}$**
+
+**Steps:**
+
 1. **Verification**:
-    1. If **N_{1}=∅**, complete the step
-    1. select participant index with **n = N_{1}[0]** as a creator of this block on the node
-    1. get actual ID of the the participant in the blockchain: **id_{1} = A_{1}[n]**
-    1. through **id_{1}** get all the private keys of a participant
+    1. If **$N_{1}=∅$**, complete the step
+    1. select participant index with **$n = N_{1}[0]$** as a creator of this block on the node
+    1. get actual ID of the the participant in the blockchain: **$id_{1} = A_{1}[n]$**
+    1. through **$id_{1}$** get all the private keys of a participant
 1. **Block assembly**:
-    1. if all the previous blocks **B(k), k=1..r-1** are available, build **PAY<sup>r</sup>**
-    1. if at least one of the previous blocks is unavailable, build **PAY<sup>r</sup> = ∅**
-    1. If **PAY<sup>r</sup> != ∅**, create a new block **B_{r} = { r, PAY<sup>r</sup>, Q_{r-1}, signQ_{r-1}, HB_{r-1} }**
+    1. if all the previous blocks **$B(k), k=1..r-1$** are available, build **$PAY_{r}$**
+    1. if at least one of the previous blocks is unavailable, build **$PAY_{r} = ∅$**
+    1. If **$PAY_{r} != ∅$**, create a new block **$B_{r} = { r, PAY_{r}, Q_{r-1}, signQ_{r-1}, HB_{r-1} }$**
 1. **Communication**: generation, signature and a simultaneous message sending:
-    1. sign with the key **id_{1}** and send **gc_block** = **{ r, id_{1}, B_{r}, signB_{r} }**
-    1. sign with the key **id_{1}** and send **gc_signature** = **{ r, id_{1}, signQ_{r-1}, HB_{r} }**
+    1. sign with the key **$id_{1}$** and send **gc_block = ${ r, id_{1}, B_{r}, signB_{r} }$**
+    1. sign with the key **$id_{1}$** and send **gc_signature = ${ r, id_{1}, signQ_{r-1}, HB_{r} }$**
 
 ### Developing an evaluation agreement (GC)
 
@@ -195,62 +200,67 @@ The round **R_{r}**, which launches step 1 and step 2, described below, is creat
 
 **Input data**:
 
-* **HB_{r-1}**, **Q_{r-1}** from **CERT_{r-1}**
-* **A_{1}**, **A_{2}**, **N_{2}** from the context of the round
+* $HB_{r-1}$, $Q_{r-1}$ from $CERT_{r-1}$
+* $A_{1}$, $A_{2}$, $N_{2}$ from the context of the round
 
 **v** - a local structure of a step that stores the hash of the block and the ID of the leader, who created the block.
 
 The empty set symbol assigned to the elements **v** means "empty block" and "unknown leader".
 In the application, it can be a predefined constant or a separate flag in the data structure.
 
-1. **Start**: right after defining **CERT_{r-1}**
-1. **Timer**: schedule the timer after the time equal to **2 * λ**, by a trigger:
-    1. To define **l**, as **id** from the received messages in **ctx[id]** with a minimum index of **A_{1}**
+ **Start:**
+
+right after defining $CERT_{r-1}$
+
+ **Steps:**
+
+1. **Timer**: schedule the timer after the time equal to **$2 * λ$**, by a trigger:
+    1. To define **l**, as **id** from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
     1. if the local cache for **l** has the block **B_{r}**
-        1. **v = { ctx[l].HB, l }**
+        1. **$v = { ctx[l].HB, l }$**
         1. go to **Communication**
-1. **Timer**: schedule the timer after the time equal to **λ + Λ**, by a trigger:
-    1. **v = { ∅, ∅ }**
+1. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
+    1. **$v = { ∅, ∅ }$**
     1. go to **Communication**
 1. **Network**: subscribe to network messages **gc_block**, **gc_signature** at the start of a step
     1. after receiving a message **gc_block** of the round **r**
         1. verify the round number in the message
         1. verify the message step equals **1**
-        1. verify that **msg.id ∈ A_{1}** and get the user's public key
+        1. verify that **$msg.id ∈ A_{1}$** and get the user's public key
         1. verify the signature of the whole message
         1. verify that **msg.block** is correct
             1. verify the block's round for equality to the current
             1. verify **producer-id** ∈ A_{1}**
-            1. verify **Q_{r}** from the block, if it already has the **gc_signature**
+            1. verify **$Q_{r}$** from the block, if it already has the **gc_signature**
             1. verify the block signature using **producer-id** of the block
-            1. verify **HB_{r-1}** from the block for equality to the local one from **CERT_{r-1}**
-            1. verify the correctness of **PAY<sup>r</sup>** in the block
-        1. If **ctx[msg.id]** already exists
-            1. verify **ctx[msg.id].HB == H(msg.block)**
+            1. verify **$HB_{r-1}$** from the block for equality to the local one from **$CERT_{r-1}$**
+            1. verify the correctness of **$PAY_{r}$** in the block
+        1. If **$ctx[msg.id]$** already exists
+            1. verify **$ctx[msg.id].HB == H(msg.block)$**
         1. If it does not exist, save **msg.id, msg.block** in the context of the round:
-            1. **ctx[msg.id].B = msg.block**
-            1. **ctx[msg.id].HB = H(msg.block)**
+            1. **$ctx[msg.id].B = msg.block$**
+            1. **$ctx[msg.id].HB = H(msg.block)$**
         1. if **l** and **l == id** are installed:
-            1. **v = { ctx[l].HB, l }**
+            1. **$v = { ctx[l].HB, l }$**
             1. go to **Communication**
     1. after receiving a message **gc_signature** of the round **r**
         1. verify the round number in the message
-        1. verify that **msg.id ∈ A_{1}** and get the user's public key
+        1. verify that **$msg.id ∈ A_{1}$** and get the user's public key
         1. verify the signature of the whole message
-        1. **msg.block_hash = ∅**: verify **msg.rand** for equality to the local one from **CERT_{r-1}**
-        1. **msg.block_hash != ∅**: verify the signature **msg.rand** using **Q_{r-1}** from **CERT_{r-1}**
-        1. Save **msg.id => ∅** in the context of the round, if it’s not saved yet:
-            1. **ctx[msg.id].B = ∅**
-            1. **ctx[msg.id].HB = msg.block_hash**
-            1. **ctx[msg.id].rand = msg.rand**
+        1. **$msg.block_hash = ∅$**: verify **msg.rand** for equality to the local one from **$CERT_{r-1}$**
+        1. **$msg.block_hash != ∅$**: verify the signature **msg.rand** using **$Q_{r-1}$** from **$CERT_{r-1}$**
+        1. Save **$msg.id => ∅$** in the context of the round, if it’s not saved yet:
+            1. **$ctx[msg.id].B = ∅$**
+            1. **$ctx[msg.id].HB = msg.block_hash$**
+            1. **$ctx[msg.id].rand = msg.rand$**
 1. **Communication**: generating, signing and sending of messages
     1. stop timers, **do not** unsubscribe from network messages
-    1. if **N_{2} = ∅**, end the step
-    1. **∀n_{2} ∈ N_{2}**:
-        1. get real user’s ID in the blockchain: **id_{2} = A_{2}[n_{2}]**
-        1. sign with the key **id_{2}** and send
-            1. if **v != ∅**: **gc_proposal** = **{ r, 2, id_{2}, v }**
-            1. if **v == ∅**: **gc_proposal** = **{ r, 2, id_{2}, ∅ }**
+    1. if **$N_{2} = ∅$**, end the step
+    1. **$∀n_{2} ∈ N_{2}$**:
+        1. get real user’s ID in the blockchain: **$id_{2} = A_{2}[n_{2}]$**
+        1. sign with the key **$id_{2}$** and send
+            1. if **$v != ∅$**: **gc_proposal** = **${ r, 2, id_{2}, v }$**
+            1. if **$v == ∅$**: **gc_proposal** = **${ r, 2, id_{2}, ∅ }$**
 
 #### 3. Choosing the leader (vote counting)
 
