@@ -1,0 +1,63 @@
+.chapter {
+	display: flex;
+	max-width: 42rem;
+	width: 100%;
+
+	&-preview {
+		margin: 0 3.3rem 0 0;
+
+		img {
+			height: 4.2rem;
+			width: 4.2rem;
+		}
+	}
+
+	&-title {
+		align-items: center;
+		display: flex;
+		height: 4.2rem;
+
+		a {
+			color: #323ff5;
+
+			font-size: 2rem;
+
+			letter-spacing: 0.05rem;
+			position: relative;
+
+			@include inter-ui-bold();
+
+			&::before {
+				background-color: #323ff5;
+				bottom: 0;
+				content: "";
+				height: 0.2rem;
+				left: 0;
+				position: absolute;
+				right: 0;
+				transition: background-color $speed;
+			}
+
+			&:hover {
+				&::before {
+					background-color: transparent;
+				}
+			}
+		}
+	}
+
+	&-body {
+		p {
+			color: #070430;
+			letter-spacing: 0.038rem;
+			line-height: 1.6;
+			margin: 0.1rem 0 0 0;
+		}
+	}
+}
+
+@include screen-max(420) {
+	.chapter {
+		flex-direction: column;
+	}
+}

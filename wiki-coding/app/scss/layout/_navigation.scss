@@ -1,0 +1,74 @@
+.nav {
+	display: flex;
+
+	& > li {
+		margin-left: 24px;
+		padding: 5px;
+
+		&:nth-child(1) {
+			margin-left: 53px;
+		}
+
+		&:last-child {
+			padding: 5px 0 0 5px 5px;
+		}
+	}
+
+	a {
+		color: #fff;
+		font-size: 15px;
+		letter-spacing: 0.5px;
+		position: relative;
+		white-space: nowrap;
+
+		@include inter-ui-bold();
+
+		&:before {
+			background-color: rgba(#fff, 0.6);
+			bottom: -1px;
+			content: "";
+			height: 2px;
+			left: 0;
+			position: absolute;
+			right: 0;
+			transition: background-color $speed;
+			width: 100%;
+		}
+
+		&:hover {
+			&:before {
+				background-color: transparent;
+			}
+		}
+	}
+}
+
+@include screen-max-1280 {
+	.nav {
+		& > li {
+			margin-left: 22px;
+			padding: 5px 0;
+
+			&:nth-child(1) {
+				margin-left: auto;
+			}
+		}
+	}
+}
+@include screen-max(600) {
+	.nav {
+		flex-wrap: wrap;
+		max-width: 230px;
+
+		& > li {
+			padding: 10px 0;
+
+			&:nth-child(1),
+			&:nth-child(3),
+			&:nth-child(5) {
+				margin-left: 0;
+				padding-left: 0;
+			}
+		}
+	}
+}

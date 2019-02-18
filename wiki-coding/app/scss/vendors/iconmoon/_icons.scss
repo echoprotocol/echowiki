@@ -1,0 +1,98 @@
+.i-check {
+	&:before {
+		content: $i-check;
+	}
+}
+
+.i-close .path1 {
+	&:before {
+		color: rgb(255, 255, 255);
+		content: $i-close-path1;
+	}
+}
+
+.i-close .path2 {
+	&:before {
+		color: rgb(0, 0, 0);
+		content: $i-close-path2;
+		margin-left: -1em;
+	}
+}
+
+.i-github {
+	&:before {
+		color: #fff;
+		content: $i-github;
+	}
+}
+
+.i-link {
+	&:before {
+		content: $i-link;
+	}
+}
+
+.i-open_small .path1 {
+	&:before {
+		color: rgb(255, 255, 255);
+		content: $i-open_small-path1;
+	}
+}
+
+.i-open_small .path2 {
+	&:before {
+		color: rgb(0, 0, 0);
+		content: $i-open_small-path2;
+		margin-left: -1em;
+	}
+}
+
+.i-open .path1 {
+	&:before {
+		color: rgb(255, 255, 255);
+		content: $i-open-path1;
+	}
+}
+
+.i-open .path2 {
+	&:before {
+		color: rgb(0, 0, 0);
+		content: $i-open-path2;
+		margin-left: -1em;
+	}
+}
+
+.i-slack {
+	&:before {
+		color: #fff;
+		content: $i-slack;
+	}
+}
+
+.i-whitepaper {
+	&:before {
+		color: #0000fb;
+		content: $i-whitepaper;
+	}
+}
+
+.i-apple {
+	&:before {
+		color: #fff;
+		content: $i-apple;
+	}
+}
+
+.i-linux {
+	&:before {
+		color: #fff;
+		content: $i-linux;
+	}
+}
+
+.i-windows {
+	&:before {
+		color: #fff;
+		content: $i-windows;
+	}
+}

@@ -1,0 +1,48 @@
+.social {
+	align-items: center;
+
+	&-text {
+		color: #fff;
+		font-size: 1.5rem;
+		letter-spacing: 0.04rem;
+		margin-right: 2.8rem;
+	}
+
+	.i-github {
+		margin: 0 1.6rem 0 0;
+
+		&:before {
+			font-size: 2rem;
+		}
+	}
+
+	.i-slack {
+		&:before {
+			font-size: 1.9rem;
+		}
+	}
+}
+
+@include screen-max-1024 {
+	.social {
+		&.for-mobile {
+			display: flex;
+		}
+
+		&.for-desctop {
+			display: none;
+		}
+	}
+}
+
+@include screen-min-1024 {
+	.social {
+		&.for-mobile {
+			display: none;
+		}
+
+		&.for-desctop {
+			display: flex;
+		}
+	}
+}

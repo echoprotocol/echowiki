@@ -1,0 +1,73 @@
+.sub-accordion {
+	&-toggle {
+		border-bottom: 1px solid;
+		color: #051eeb;
+		cursor: pointer;
+		display: inline-flex;
+		position: relative;
+
+		&::before,
+		&::after {
+			background-color: #000033;
+			bottom: 0;
+			content: "";
+			height: 2px;
+			left: -24px;
+			margin: auto;
+			position: absolute;
+			top: 0;
+			width: 10px;
+		}
+
+		&::after {
+			transition: transform 0.2s;
+		}
+
+		&:not(.open) {
+			&::after {
+				transform: rotate(90deg);
+			}
+		}
+	}
+
+	&-inner {
+		display: none;
+		margin: 7px 0 20px 15px;
+
+		> li {
+			&:not(:last-child) {
+				margin-bottom: 7px;
+			}
+		}
+	}
+
+	&-item {
+		align-items: center;
+		border-bottom: 1px solid;
+		color: #051eeb;
+		display: inline-flex;
+		font-size: 12px;
+		letter-spacing: 0.025em;
+		padding: 0 1px;
+		position: relative;
+		white-space: nowrap;
+
+		&::before {
+			background-color: #000033;
+			border-radius: 50%;
+			bottom: 0;
+			content: "";
+			display: block;
+			height: 3px;
+			left: -10px;
+			margin: auto;
+			position: absolute;
+			top: 0;
+			width: 3px;
+		}
+
+		&.active {
+			color: #aa0d92;
+		}
+	}
+}

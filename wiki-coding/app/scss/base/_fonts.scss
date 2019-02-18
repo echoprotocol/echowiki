@@ -1,0 +1,125 @@
+@font-face {
+	font-family: "InterUI-Black";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../fonts/inter-ui/InterUI-Black.eot");
+	src: url("../fonts/inter-ui/InterUI-Black.woff2") format("woff2"),
+	url("../fonts/inter-ui/InterUI-Black.woff") format("woff"),
+	url("../fonts/inter-ui/InterUI-Black.otf") format("opentype"),
+	url("../fonts/inter-ui/Hack/InterUI-Black.ttf") format("truetype"),
+	url("../fonts/inter-ui/Font-Light.svg#InterUI-Black") format("svg");
+}
+
+@mixin inter-ui-black {
+	font: {
+		family: "InterUI-Black";
+		style: normal;
+		weight: 800;
+	}
+}
+
+@font-face {
+	font-family: "InterUI-Bold";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../fonts/inter-ui/InterUI-Bold.eot");
+	src: url("../fonts/inter-ui/InterUI-Bold.woff2") format("woff2"),
+	url("../fonts/inter-ui/InterUI-Bold.woff") format("woff"),
+	url("../fonts/inter-ui/InterUI-Bold.otf") format("opentype"),
+	url("../fonts/inter-ui/Hack/InterUI-Bold.ttf") format("truetype"),
+	url("../fonts/inter-ui/Font-Light.svg#InterUI-Bold") format("svg");
+}
+
+@mixin inter-ui-bold {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	font: {
+		family: "InterUI-Bold";
+		style: normal;
+		weight: 700;
+	}
+}
+
+@font-face {
+	font-family: "InterUI-Medium";
+	font-style: normal;
+	font-weight: 500;
+	src: url("../fonts/inter-ui/InterUI-Medium.eot");
+	src: url("../fonts/inter-ui/InterUI-Medium.woff2") format("woff2"),
+	url("../fonts/inter-ui/InterUI-Medium.woff") format("woff"),
+	url("../fonts/inter-ui/InterUI-Medium.otf") format("opentype"),
+	url("../fonts/inter-ui/Hack/InterUI-Medium.ttf") format("truetype"),
+	url("../fonts/inter-ui/Font-Light.svg#InterUI-Medium") format("svg");
+}
+
+@mixin inter-ui-medium {
+	font: {
+		family: "InterUI-Medium";
+		style: normal;
+		weight: 500;
+	}
+}
+
+@font-face {
+	font-family: "InterUI-Regular";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/inter-ui/InterUI-Regular.eot");
+	src: url("../fonts/inter-ui/InterUI-Regular.woff2") format("woff2"),
+	url("../fonts/inter-ui/InterUI-Regular.woff") format("woff"),
+	url("../fonts/inter-ui/InterUI-Regular.otf") format("opentype"),
+	url("../fonts/inter-ui/Hack/InterUI-Regular.ttf") format("truetype"),
+	url("../fonts/inter-ui/Font-Light.svg#InterUI-Regular") format("svg");
+}
+
+@mixin inter-ui-regular {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	font: {
+		family: "InterUI-Regular";
+		style: normal;
+		weight: 400;
+	}
+}
+
+@font-face {
+	font-family: "Hack-Bold";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/hack/Hack-Bold.eot");
+	src: url("../fonts/hack/Hack-Bold.woff2") format("woff2"),
+	url("../fonts/hack/Hack-Bold.woff") format("woff"),
+	url("../fonts/hack/Hack-Bold.otf") format("opentype"),
+	url("../fonts/hack/Hack/Hack-Bold.ttf") format("truetype"),
+	url("../fonts/hack/Font-Light.svg#Hack-Bold") format("svg");
+}
+
+@mixin hack-bold {
+	font: {
+		family: "Hack-Bold";
+		style: normal;
+		weight: 700;
+	}
+}
+
+@font-face {
+	font-family: "Hack-Regular";
+	font-style: normal;
+	font-weight: 400;
+	src: url("../fonts/hack/Hack-Regular.eot");
+	src: url("../fonts/hack/Hack-Regular.woff2") format("woff2"),
+	url("../fonts/hack/Hack-Regular.woff") format("woff"),
+	url("../fonts/hack/Hack-Regular.otf") format("opentype"),
+	url("../fonts/hack/Hack/Hack-Regular.ttf") format("truetype"),
+	url("../fonts/hack/Font-Light.svg#Hack-Regular") format("svg");
+}
+
+@mixin hack-regular {
+	font: {
+		family: "Hack-Regular";
+		style: normal;
+		weight: 400;
+	}
+}

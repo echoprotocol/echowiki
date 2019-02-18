@@ -1,0 +1,86 @@
+$_h1: rgba(0, 0, 0, 0.5);
+$_h2: rgba(0, 0, 0, 0.6);
+$_h3: rgba(0, 0, 0, 0.7);
+
+header {
+	height: 164px;
+	padding: 60px 0 0;
+	position: relative;
+
+	&::before {
+		background-color: $color-blue-bg;
+		@include absolute-stretch();
+	}
+
+	&:after {
+		@include absolute-stretch();
+		background: linear-gradient(to bottom, $_h1 0%, $_h2 50%, $_h3 100%);
+		opacity: 0.5;
+	}
+
+	.nav {
+		li {
+			padding: 15px 5px 0;
+
+			&:first-child {
+				margin-left: 0;
+				padding-left: 0;
+			}
+
+			&:last-child {
+				margin-right: 0;
+				padding: 15px 7px 0;
+			}
+		}
+	}
+}
+
+@include screen-max-1280 {
+	header {
+		padding: 60px 55px 0 76px;
+	}
+}
+
+@include screen-max-768 {
+	header {
+		padding: 30px;
+	}
+}
+
+@include screen-max(980) {
+	header {
+		height: auto;
+		padding: 30px 55px 30px 76px;
+
+		.grid-container {
+			flex-direction: column;
+			height: 100%;
+		}
+	}
+}
+
+@include screen-max-768 {
+	header {
+		padding: 30px 30px 20px 30px;
+	}
+}
+
+@include screen-max(730) {
+	header {
+		.nav {
+			flex-wrap: wrap;
+			max-width: 230px;
+
+			& > li {
+				padding: 10px 0;
+
+				&:nth-child(1),
+				&:nth-child(3),
+				&:nth-child(5) {
+					margin-left: 0;
+					padding-left: 0;
+				}
+			}
+		}
+	}
+}
