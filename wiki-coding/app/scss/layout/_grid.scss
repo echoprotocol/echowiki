@@ -1,0 +1,49 @@
+.grid-container {
+	display: flex;
+	margin: auto;
+	max-width: 1517px;
+	width: 100%;
+
+	&.column {
+		flex-direction: column;
+	}
+}
+
+.grid-left,
+.grid-right {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 100%;
+}
+
+.grid-left {
+	max-width: 606px;
+}
+
+.grid-right {
+	max-width: 909px;
+}
+
+@include screen-max-1600 {
+	.grid-container {
+		max-width: 1092px;
+	}
+
+	.grid-left {
+		max-width: 400px;
+	}
+}
+
+@include screen-max-1280 {
+	.grid-left {
+		max-width: 350px;
+	}
+}
+
+@include screen-max-1024 {
+	.grid-left {
+		max-width: 264px;
+	}
+}

@@ -1,0 +1,30 @@
+$i-ff: "icomoon" !default;
+$i-fp: "../fonts/iconmoon" !default;
+
+$i-check: "\e903";
+$i-close-path1: "\e904";
+$i-close-path2: "\e905";
+$i-github: "\e906";
+$i-link: "\e907";
+$i-open_small-path1: "\e908";
+$i-open_small-path2: "\e909";
+$i-open-path1: "\e90a";
+$i-open-path2: "\e90b";
+$i-slack: "\e90c";
+$i-whitepaper: "\e90d";
+$i-apple: "\e900";
+$i-linux: "\e901";
+$i-windows: "\e902";
+
+
+@mixin iconmoon-font {
+	font-family: "#{$i-ff}";
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: 1;
+	speak: none;
+	text-transform: none;
+}

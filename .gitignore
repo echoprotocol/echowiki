@@ -3,3 +3,6 @@ public
 dist/
 mkdocs_basic_theme.egg-info/
 site/
+wiki-coding/node_modules
+wiki-coding/dist
+wiki-coding/package-lock.json

@@ -1,0 +1,34 @@
+@mixin btn {
+	align-items: center;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	padding: 0 15px;
+	text-transform: uppercase;
+}
+
+.blue-btn {
+	background-color: #0b1bee;
+	border: 1px solid transparent;
+	color: #fff;
+	letter-spacing: 0.17rem;
+	transition: background-color $speed;
+
+	@include btn();
+
+	&:hover {
+		background-color: #323ff5;
+	}
+
+	&:focus {
+		background-color: #323ff5;
+		outline: 0;
+	}
+
+	&.big {
+		height: 5.4rem;
+		letter-spacing: 0.17rem;
+		min-width: 20rem;
+		@include inter-ui-bold();
+	}
+}

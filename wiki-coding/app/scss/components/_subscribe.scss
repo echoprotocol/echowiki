@@ -1,0 +1,51 @@
+.subscribe {
+	align-items: center;
+	background-color: #f3f3fe;
+	display: flex;
+	flex-direction: column;
+	height: 35rem;
+	padding: 6rem 0 0;
+
+	&-title {
+		align-items: center;
+		color: #000;
+		display: inline-block;
+		font-size: 4.4rem;
+		letter-spacing: 0.1rem;
+		line-height: 1;
+		margin: 0.8rem 0 1.8rem;
+		position: relative;
+
+		@include inter-ui-bold();
+	}
+
+	&-info {
+		font-size: 2rem;
+		letter-spacing: 0.04rem;
+		margin: 0 0 4.3rem;
+		@include hack-regular();
+	}
+}
+@include screen-max(768) {
+	.subscribe {
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.subscribe-title {
+		margin: 0 0 3rem;
+		padding: 0 3rem;
+		text-align: center;
+	}
+
+	.subscribe-info {
+		display: none;
+	}
+}
+
+@include screen-max(600) {
+	.subscribe-title {
+		font-size: 2.6rem;
+	}
+}

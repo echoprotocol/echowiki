@@ -1,0 +1,85 @@
+$_f1: rgba(0, 0, 0, 0.6);
+$_f2: rgba(0, 0, 0, 0.5);
+$_f3: rgba(0, 0, 0, 0.4);
+
+footer {
+	background-image: url(../img/bg_header.svg);
+	background-position: bottom -850px left -100px;
+	background-repeat: no-repeat;
+	background-size: 2500px;
+	height: 35rem;
+	margin: auto 0 0 0;
+	padding: 5.7rem 0 0;
+	position: relative;
+
+	&::before {
+		background-color: $color-blue-bg;
+
+		@include absolute-stretch();
+	}
+
+	&:after {
+		@include absolute-stretch();
+		background: linear-gradient(to bottom, $_f1 0%, $_f2 50%, $_f3 100%);
+		opacity: 0.5;
+	}
+
+	.social {
+		margin-left: auto;
+	}
+}
+
+@include screen-max-2000 {
+	footer {
+		.nav {
+			margin: 0 0 0 auto;
+		}
+	}
+}
+
+@include screen-max-1280 {
+	footer {
+		padding: 5.7rem 8.2rem 0;
+	}
+}
+
+@include screen-max-1024 {
+	footer {
+		.grid-left {
+			flex-direction: column;
+		}
+
+		.doc {
+			margin: 0 0 auto auto;
+		}
+
+		.social {
+			margin: 3rem 0 0 0;
+		}
+	}
+}
+
+@include screen-max-768 {
+	footer {
+		padding: 3rem;
+	}
+}
+
+@include screen-max(680) {
+	footer {
+		height: 20rem;
+
+		.grid-container {
+			flex-direction: column;
+			height: 100%;
+		}
+
+		.grid-right {
+			height: 100%;
+		}
+
+		.doc {
+			margin: auto 0 0 0;
+		}
+	}
+}

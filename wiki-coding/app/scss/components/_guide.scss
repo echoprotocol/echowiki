@@ -1,0 +1,52 @@
+.guide {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 11.2rem auto 0;
+	max-width: 102.7rem;
+	text-align: left;
+	width: 100%;
+
+	& > li {
+		margin-bottom: 7rem;
+		width: 50%;
+	}
+
+	> li:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@include screen-max-1600 {
+	.guide {
+		max-width: 109.2rem;
+		padding: 0 3.3rem;
+	}
+}
+
+@include screen-max-1280 {
+	.guide {
+		padding: 0 3.3rem 0 7.5rem;
+	}
+}
+@include screen-max-1024 {
+	.guide {
+		flex-direction: column;
+
+		li {
+			max-width: 100%;
+			width: 100%;
+		}
+	}
+}
+
+@include screen-max(768) {
+	.guide {
+		padding: 0 3rem;
+	}
+}
+@include screen-max(600) {
+	.guide {
+		margin: 5.5rem 0 0;
+	}
+}

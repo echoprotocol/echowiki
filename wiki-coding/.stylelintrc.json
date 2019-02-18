@@ -1,0 +1,69 @@
+{
+    "ignoreFiles": "../assets/scss/vendors/**",
+    "plugins": [
+		"stylelint-scss",
+        "stylelint-order"
+    ],
+    "rules": {
+        "block-no-empty": true,
+        "color-no-invalid-hex": true,
+        "comment-empty-line-before": [
+            "always",
+            {
+                "ignore": [
+                    "after-comment",
+                    "stylelint-commands"
+                ]
+            }
+        ],
+        "declaration-block-no-duplicate-properties": true,
+        "declaration-block-no-shorthand-property-overrides": true,
+        "declaration-colon-space-after": "always",
+        "declaration-colon-space-before": "never",
+        "declaration-property-value-blacklist": {
+            "/^border-bottom/": [
+                "none"
+            ],
+            "/^border-left/": [
+                "none"
+            ],
+            "/^border-right/": [
+                "none"
+            ],
+            "/^border-top/": [
+                "none"
+            ],
+            "/^border/": [
+                "none"
+            ]
+        },
+        "function-comma-space-after": "always",
+        "indentation": [
+            "tab",
+            {
+                "except": [
+                    "value"
+                ]
+            }
+        ],
+        "max-empty-lines": 2,
+        "media-feature-colon-space-after": "always",
+        "media-feature-colon-space-before": "never",
+        "media-feature-name-no-vendor-prefix": true,
+        "order/order": [
+            "declarations"
+        ],
+        "order/properties-alphabetical-order": true,
+        "rule-empty-line-before": [
+            "always",
+            {
+                "except": [
+                    "first-nested"
+                ],
+                "ignore": [
+                    "after-comment"
+                ]
+            }
+        ]
+    }
+}
