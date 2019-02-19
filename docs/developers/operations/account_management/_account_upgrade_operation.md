@@ -6,9 +6,28 @@ This operation is used to upgrade an account to a member, or renew its subscript
 
 Any account may use this operation to become a lifetime member by setting upgrade_to_lifetime_member to true. Once an account has become a lifetime member, it may not use this operation anymore.
 
+```cpp
+struct account_upgrade_operation : public base_operation
+{
+  struct fee_parameters_type { 
+      uint64_t membership_annual_fee   =  2000 * ECHO_BLOCKCHAIN_PRECISION;
+      uint64_t membership_lifetime_fee = 10000 * ECHO_BLOCKCHAIN_PRECISION; ///< the cost to upgrade to a lifetime member
+  };
+
+  asset             fee;
+  /// The account to upgrade; must not already be a lifetime member
+  account_id_type   account_to_upgrade;
+  /// If true, the account will be upgraded to a lifetime member; otherwise, it will add a year to the subscription
+  bool              upgrade_to_lifetime_member = false;
+  extensions_type   extensions;
+};
+```
+
+[asset](../types/common.md#asset)
+
 ### JSON Example 
 
-```json
+```javascript
 [
   8,{
     "fee": {

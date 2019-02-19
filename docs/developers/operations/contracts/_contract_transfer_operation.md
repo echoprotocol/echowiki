@@ -4,7 +4,7 @@ Virtual operation that indicates internal transfers from contracts.
 
 ## JSON Example
 
-```json
+```javascript
 [
   49,{
     "fee": {

@@ -2,9 +2,52 @@
 
 This operation is used to update an existing account. It can be used to update the authorities, or adjust the options on the account. See account_object::options_type for the options which may be updated.
 
+```cpp
+struct account_update_operation : public base_operation
+{
+  struct ext
+  {
+      optional< void_t >            null_ext;
+      optional< special_authority > owner_special_authority;
+      optional< special_authority > active_special_authority;
+  };
+
+  struct fee_parameters_type
+  {
+      share_type fee             = 20 * ECHO_BLOCKCHAIN_PRECISION;
+      uint32_t   price_per_kbyte = ECHO_BLOCKCHAIN_PRECISION;
+  };
+
+  asset fee;
+  /// The account to update
+  account_id_type account;
+
+  /// New owner authority. If set, this operation requires owner authority to execute.
+  optional<authority> owner;
+  /// New active authority. This can be updated by the current active authority.
+  optional<authority> active;
+  // New ED25519 public key
+  optional<eddsa::public_key_t> ed_key;
+
+  /// New account options
+  optional<account_options> new_options;
+  extension< ext > extensions;
+};
+```
+
+[authority](../types/common.md#authority)
+
+[special_authority](../types/common.md#special_authority)
+
+[asset](../types/common.md#asset)
+
+[buyback_account_options](../types/common.md#buyback_account_options)
+
+[account_options](../types/common.md#account_options)
+
 ### JSON Example
 
-```json
+```javascript
 [
   6,{
     "fee": {
