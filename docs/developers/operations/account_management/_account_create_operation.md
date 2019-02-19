@@ -2,9 +2,59 @@
 
 This operation is used to create an account
 
+```cpp
+struct account_create_operation
+{
+  struct ext
+  {
+      optional< void_t >            null_ext;
+      optional< special_authority > owner_special_authority;
+      optional< special_authority > active_special_authority;
+      optional< buyback_account_options > buyback_options;
+  };
+
+  struct fee_parameters_type
+  {
+      uint64_t basic_fee      = 5*ECHO_BLOCKCHAIN_PRECISION; ///< the cost to register the cheapest non-free account
+      uint64_t premium_fee    = 2000*ECHO_BLOCKCHAIN_PRECISION; ///< the cost to register the cheapest non-free account
+      uint32_t price_per_kbyte = ECHO_BLOCKCHAIN_PRECISION;
+  };
+
+  asset           fee;
+  /// This account pays the fee. Must be a lifetime member.
+  account_id_type registrar;
+
+  /// This account receives a portion of the fee split between registrar and referrer. Must be a member.
+  account_id_type referrer;
+  /// Of the fee split between registrar and referrer, this percentage goes to the referrer. The rest goes to the
+  /// registrar.
+  uint16_t        referrer_percent = 0;
+
+  string          name;
+  
+  authority       owner;
+  authority       active;
+  eddsa::public_key_t ed_key;
+
+  account_options options;
+  extension< ext > extensions;
+};
+```
+
+[authority](../types/common.md#authority)
+
+[special_authority](../types/common.md#special_authority)
+
+[asset](../types/common.md#asset)
+
+[buyback_account_options](../types/common.md#buyback_account_options)
+
+[account_options](../types/common.md#account_options)
+
+
 ### JSON Example 
 
-```json
+```javascript
 [
   5,{
     "fee": { // will be set automaticly

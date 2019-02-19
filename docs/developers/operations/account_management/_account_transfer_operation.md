@@ -8,11 +8,25 @@ The account_id's owner/active/voting/memo authority should be set to new_owner
 
 This operation will clear the account's whitelist statuses, but not the blacklist statuses.
 
+```cpp
+struct account_transfer_operation
+{
+    struct fee_parameters_type { uint64_t fee = 500 * ECHO_BLOCKCHAIN_PRECISION; };
+    
+    asset           fee;
+    account_id_type account_id;
+    account_id_type new_owner;
+    extensions_type extensions;
+};
+```
+
+[asset](../types/common.md#asset)
+
 ### JSON Example
 
-```json
+```javascript
 [
-  9,{
+  9,{    
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
