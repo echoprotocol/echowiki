@@ -38,139 +38,25 @@ Other APIs may not be accessible until the client has sucessfully authenticated.
 < {"id":1,"jsonrpc":"2.0","result":true}
 ```
 
-### block()
+### API Methods
 
-Retrieve the network block API indentifier.
+Enable and retrieve enabled API indentifier
 
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the block API.
-
-#### Example
-
-```bash
-> {"id": 1, "method":"call", "params":[1,"block",[]]}
-< {"id":1,"jsonrpc":"2.0","result":2}
-```
-
-### network_broadcast()
-
-Retrieve the network broadcast API identifier.
-
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the network_broadcast API.
+| API | Description |
+|:-------|:-----------|
+| `database` | `database_api` implements the API for the chain database |
+| `block` | `block_api` has only a get_blocks method for getting multiple blocks |
+| `network_broadcast` | `network_broadcast_api` allows broadcasting of transactions and blocks |
+| `network_node` | `network_node_api` allows maintenance of p2p connections including consensus monitoring |
+| `crypto` | `crypto_api` implemets crypto helper functions |
+| `history` | `history_api` implements the RPC API for accounts, contracts, orders and markets history |
+| `asset` | `asset_api` access to asset holders and asset balances |
 
 #### Example
 
-```bash
-> {"id": 1, "method":"call", "params":[1,"network_broadcast",[]]}
-< {"id":1,"jsonrpc":"2.0","result":3}
-```
-
-### database()
-
-Retrieve the database API identifier.
-
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the database API.
-
-#### Example
+Working exactly the same for all API's. Example for `database_api`:
 
 ```bash
 > {"id": 1, "method":"call", "params":[1,"database",[]]}
-< {"id":1,"jsonrpc":"2.0","result":4}
-```
-
-### history()
-
-Retrieve the history API identifier.
-
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the history API.
-
-#### Example
-
-```bash
-> {"id": 1, "method":"call", "params":[1,"history",[]]}
-< {"id":1,"jsonrpc":"2.0","result":5}
-
-```
-
-### network_node()
-
-Retrieve the network node API identifier.
-
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the network_node API.
-
-#### Example
-
-```bash
-> {"id": 1, "method":"call", "params":[1,"network_node",[]]}
-< {"id":1,"jsonrpc":"2.0","result":6}
-
-```
-
-### crypto()
-
-Retrieve the cryptography API identifier.
-
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the crypto API.
-
-#### Example
-
-```bash
-> {"id": 1, "method":"call", "params":[1,"crypto",[]]}
-< {"id":1,"jsonrpc":"2.0","result":7}
-
-```
-
-### asset()
-
-Retrieve the asset API identifier.
-
-#### Parameters
-
-Without parameters
-
-#### Returns
-
-Identification of API connection which you should use on next requests to the asset API.
-
-#### Example
-
-```bash
-> {"id": 1, "method":"call", "params":[1,"asset",[]]}
-< {"id":1,"jsonrpc":"2.0","result":7}
-
+< {"id":1,"jsonrpc":"2.0","result":2}
 ```
