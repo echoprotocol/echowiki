@@ -74,7 +74,8 @@ nav:
       # - Project structure: http://google.com
       # - Build instructions: http://google.com
   - Technologies:
-      - Echorand: 
+      - Echorand:
+        - In a nutshell: technologies/echorand/in-a-nutshell.md
         - General View: technologies/echorand/general-view.md
         - Architecture: technologies/echorand/architecture.md
         - Monitoring with ws: technologies/echorand/monitoring.md
