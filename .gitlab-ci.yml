@@ -16,3 +16,5 @@ build:
     - master
   tags:
     - echo-linux
+
+# generate pdf - pandoc metadata.yaml -s filename.md --pdf-engine=xelatex -V geometry:margin=1in -t latex -o filename.pdf
