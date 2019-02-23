@@ -4,7 +4,7 @@
 
 - **Producers** - a list of accounts delegated to offer the next block of the network. Different for each block
 - **Verifiers** - a list of accounts delegated to verifie and choose the next block of the network. Different for each consensus step
-- **Verifiable random function (BRF)** - pseudo-random function that provides publicly verifiable proofs of its outputs' correctness
+- **Verifiable random function (VRF)** - pseudo-random function that provides publicly verifiable proofs of its outputs' correctness
 - **Graded consensus** - the stage of consensus at which each of the verifier must declare their preliminary decision
 - **Byzantine agreement problem** - is a condition of a computer system, particularly distributed computing systems, where components may fail and there is imperfect information on whether a component has failed. The term takes its name from an allegory, the "Byzantine Generals' Problem", developed to describe this condition, where actors must agree on a concerted strategy to avoid catastrophic system failure, but some of the actors are unreliable.
 - **Binary Byzantine Agreement (BBA)** - solution of the problem of the Byzantine agreement which is based on the transfer of binary data between the participants
