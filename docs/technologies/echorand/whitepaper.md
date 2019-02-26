@@ -2,8 +2,7 @@
 
 The following document describes the basic working mechanism of **EchoRand** consensus algorithm which underlies the Echo blockchain network.
 
-The basis for the **EchoRand** algorithm is the [Algorand v9] [algorand-v9] theoretical work, which describes reaching a consensus in a decentralized network based on the solution of the Byzantine generals problem.
-In [Algorand v9] [algorand-v9] work, several possible solutions of the algorithm are presented. A solution called **Algorand’2** is taken as the **EchoRand** basis.
+The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, which describes reaching a consensus in a decentralized network based on the solution of the Byzantine generals problem. In [Algorand v9][algorand-v9] work, several possible solutions of the algorithm are presented. A solution called **Algorand’2** is taken as the **EchoRand** basis.
 
 Namely:
 
@@ -18,11 +17,11 @@ The following components underlie EchoRand:
 - **executor** -  the network account selected in the step of the round for performing a specific consensus action
 - **set of producers** - an identified by the protocol for the current block list of participants, that are given the opportunity to propose a block option for the current round
 - **set of verifiers** - an identified by the protocol for a specific step list of participants, that are trusted to perform the verification actions which are defined by the step, in which they were chosen.
-- **verified random function(VRF)** -  a pseudo-random function, which provides publicly verifiable evidence of its conclusion.
+- **verified random function (VRF)** -  a pseudo-random function, which provides publicly verifiable evidence of its conclusion.
 - **round seed** - a pseudo-random value changed on each block. It serves as the basis for generating the verifiers set and block producers.
-- **Graded consensus** - one of the consensus stages, at which
+- **Graded Consensus** - one of the consensus stages, at which
 each verifier must announce their preliminary block determination regarding the current block
-- **Binary Byzantine Agreement(BBA)** - a solution of the Byzantine Agreement problem, which has transfer of binary data between participants and reconciliation of results with the overall picture in its basis.
+- **Binary Byzantine Agreement (BBA)** - a solution of the Byzantine Agreement problem, which has transfer of binary data between participants and reconciliation of results with the overall picture in its basis.
 - **a network node** - a running echo application instance, located in the network of other nodes, having the last actual state (synchronization to the last block)
 
 ### Legend
