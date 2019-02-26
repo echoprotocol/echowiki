@@ -1,199 +1,200 @@
 # EchoRand
 
-Данный документ описывает основной механизм работы алгоритма консенсуса **EchoRand**, лежащий в основе блокчейн-сети Echo.
+The following document describes the basic working mechanism of **EchoRand** consensus algorithm which underlies the Echo blockchain network.
 
-За основу для алгоритма **EchoRand** взята теоретическая работа [Algorand v9][algorand-v9], которая описывает приход к консенсусу в децентрализованной сети на основе решения задачи о византийских генералах.
-В работе [Algorand v9][algorand-v9] излагается несколько возможных вариантов алгоритма. За основу для **EchoRand** взят вариант под названием **Algorand′2** с некоторыми изменениями.
+The basis for the **EchoRand** algorithm is the [Algorand v9] [algorand-v9] theoretical work, which describes reaching a consensus in a decentralized network based on the solution of the Byzantine generals problem.
+In [Algorand v9] [algorand-v9] work, several possible solutions of the algorithm are presented. A solution called **Algorand’2** is taken as the **EchoRand** basis.
 
-А именно:
+Namely:
 
-- Изменен способ определения участия конкретного исполнителя в конкретном шаге
-- Отказ от модели однократных, производных ключей для подписи сетевых сообщений
-- Изменен способ генерации разделяемого случайного состояния на третьем шаге алгоритма BBA
+- The way to determine participation of a specific party in each particular step is changed
+- Disposable, derived keys for network messages signing are renounced.
+- The way of generating a shared random state in the third step of the BBA algorithm is changed.
 
-## Основные компоненты
+## Basic components
 
-Основой EchoRand являются следующие компоненты:
+The following components underlie EchoRand:
 
-- **испольлнитель** - аккаунт сети, выбранный на шаге раунда для выполнения определенного действия, связанного с консенсусом
-- **набор создателей блока** - список исполнителей, определенных прооколом для текущего блока, которые получают возможность предложить вариант блока на текущем раунде
-- **набор верификаторов** - список исполнителей, определенных протоколом для конкретного шага, которым доверяется выполнить действия верификации, определенные шагом, на котором они были выбраны
-- **проверяемая случайная функция (VRF)** - псевдослучайная функция, которая предоставляет публично проверяемые доказательства правильности своих выводов
-- **сид раунда** - псевдослучайное значение, изменяемое на каждом блоке. Служит основой для генерации набора верификаторов и создателей блоков
-- **Graded concencus** - один из этапов консенсуса, на котором каждый из верификаторов должен объявить свое предварительное решение относительно текущего блока
-- **Бинарное Византийское Соглашение (BBA)** - решение проблемы византийского соглашения, в основе которого лежит передача двоичных данных между участниками и сверка результатов с общей картиной
-- **узел сети** - запущенный экземляр приложения echo, находящийся в сети остальных узлов, имеющий последнее актуальное состояние (синхронизация до последнего блока)
+-**executor** -  the network account selected in the step of the round for performing a specific consensus action
+-**set of producers** - an identified by the protocol for the current block list of participants, that are given the opportunity to propose a block option for the current round
+-**set of verifiers** - an identified by the protocol for a specific step list of participants, that are trusted to perform the verification actions which are defined by the step, in which they were chosen.
+-**verified random function(VRF)** -  a pseudo-random function, which provides publicly verifiable evidence of its conclusion.
+-**round seed** - a pseudo-random value changed on each block. It serves as the basis for generating the verifiers set and block producers.
+-**Graded consensus** - one of the consensus stages, at which
+each verifier must announce their preliminary block determination regarding the current block
+**Binary Byzantine Agreement(BBA)** - a solution of the Byzantine Agreement problem, which has transfer of binary data between participants and reconciliation of results with the overall picture in its basis.
+-**a network node** - a running echo application instance, located in the network of other nodes, having the last actual state (synchronization to the last block)
 
-### Условные обозначения
+### Legend
 
-|Обозначение             |Описание   |
-|:---:|-----------|
-| $r$ >= 1               | текущий раунд алгоритма, фактически равно количеству блоков в базе плюс 1 |
-| $s$ >= 1               | текущий номер шага алгоритма в раунде |
-| $Q_r$                  | сид раунда **r** |
-| $VRF(r, s)$            | упорядоченное множество исполнителей, которые участвуют в шаге **s** раунда **r** |
-| $VRFN(r, s)$           | упорядоченное множество индексов исполнителей из $VRF(r, s)$, которые зарегистрированы на текущем узле и участвуют в шаге **s** раунда **r** |
+|Designation          |Description  |
+|:----:|-----------|
+| $r$ >= 1               | the current round of the algorithm, it is actually equal to the number of blocks in the base plus 1 |
+| $s$ >= 1               | the current number of the algorithm step in the round|
+| $Q_r$                  | **r** round seed |
+| $VRF(r, s)$            | an ordered plurality of executors who participate in **s** step of **r** round |
+| $VRFN(r, s)$           | an ordered indexes plurality of executors indexes from $VRF(r, s)$, who are registered at the current node and participate in **s** step of the **r** round|
 
 ### VRF
 
-Понятие проверяемой случайной функции (VRF) было введено Микали, Рабином и Вадханом. Это псевдослучайная функция, которая предоставляет публично проверяемые доказательства правильности своих выводов. При заданном входном значении `x` владелец секретного ключа `SK` может вычислить значение функции $y = F_{SK}(x)$ и доказательство $P_{SK}(x)$. Используя доказательство и открытый ключ $PK = g^{SK}$, каждый может проверить, что значение $y = F_{SK}(x)$ действительно вычислено правильно, но эту информацию нельзя использовать для поиска секретного ключа.
+The concept of verifiable random function (VRF) was introduced by Mikali, Rabin and Wadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value `x`, the owner of the secret key`SK` can calculate the value of the function $y = F_{SK}(x)$ and the proof $P_{SK}(x)$. Using the proof and public key $PK = g^{SK}$, everyone can verify that the value of $y = F_{SK}(x)$ is indeed calculated correctly, but this information cannot be used to search for the secret key.
 
-Применение VRF в EchoRand заключается в следующем - имея псевдорандомное значение для каждого раунда $Q_r$ и функцию VRF каждый из улов сети может определить список исполнителей $VRF(r, s)$ в шаге **s** раунда **r** и на основании его совершить необходимые действия, если авторизованный аккаунт на узле является частью $VRF(r, s)$, а также верифицировать действия других участников на наличие у них права дейсвия на этом шаге.
+The use of VRF in EchoRand is as follows - having a pseudo-random value for each $Q_r$ round and the VRF function, each of the network nodes can determine the list of $VRF(r, s)$ executors in **s** step of **r** round, and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, s)$, and as well verify whether the participants have the right to act at this step.
 
-#### Определения активных исполнителей
+#### Definitions of Active Performers
 
-Проверяемая случайная функция на каждом раунде **r** и шаге **s** строится итеративно, следующим образом:
+The checked random function at each **r** round and **s** step is built iteratively, as follows:
 
 $$1. VRF_{0}(r, s) = SHA256(Q_{r-1}, r, s)$$
 $$2. VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$$
 
-Результатом работы данной функции является массив случайных значений:
+The result of this function is an array of random values:
 
 $$VRF(r, s) = { VRF_{0}(r, s), VRF_{1}(r, s), ... }$$
 
-Конкретный исполнитель вычисляется из хеша $VRF_i(r, s)$ таким образом, чтобы вероятность выбора исполнителя активным была пропорциональна его балансу в системе на момент блока `r - 2`.
+A specific executor is calculated from the $VRF_i(r, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the `r - 2` block.
 
-Набор $VRFN(r,s)$ это массив индексов, различный для каждого узла сети и такой, что если $i ∈ VRFN(r,s)$, то из $VRF_i(r, s)$ вычисляется идентификатор пользователя являющийся исполнителем для данного раунда и шага на выбранном узле.
+$VRFN (r,s)$ set is an array of indexes that is different for each node of the network, and if $i ∈ VRFN (r,s)$, then the user ID is calculated from $VRF_i (r,s)$ that is the executor for the given round and step at the selected node.
 
-Иными словами, $VRFN$ является выборкой тех исполнителей из $VRF$, которые авторизованы на текущем узле и должны выполнятся на конкретном раунде и шаге.
+In other words, $VRFN$ is a selection of those executors from $VRF$, who are authorized at the current node and must be executed on a specific round and step.
 
-На разных узлах сети, на одном и том же раунде и шаге алгоритма, множества $VRFN$ будут разные, а множество $VRF$ будет одинаковым.
+At different network nodes, at the same round and step of the algorithm, the $VRFN$ pluralities will be different, and the $VRF$ plurality will be the same.
 
-#### Ненерации случайного значения раунда - сида раунда
+#### Round Random Value - Round Seed - Generation
 
-Начальный вектор $Q(0)$ выбирается случайным образом при инициализации базы.
+The $Q(0)$ initial vector is randomly selected while the database is initialized.
 
-Далее, вектор $Q_{r}$ вычисляется следующим образом при создании нового блока:
+Further, the $Q_ {r}$ vector is calculated as follows while creating a new block:
 
-Для непустого блока $B(R)$:
+For a non-empty block $B(R)$:
 
 $$Q_{r} = H( signQ_{r-1}, r )$$
 
-В этом случае для подписи используется приватный ключ исполнителя, который создает блок.
+In this case, the signature uses the private key of the participant that creates the block.
 
-В случае, если $B(R)$ блок пуст:
+In case $B(R)$ block is empty:
 $$Q_{r} = H( Q_{r-1}, r )$$
 
-#### Генерации случайного значения на s = 7,10,13,... шаге BBA
+#### Generating a random value at s = 7,10,13, ... BBA step
 
 $$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$$
 
-### Раунды консенсуса
+### Consensus rounds
 
-![EchoRand steps](./echorand-steps.png)
+![echorand-steps.png](./echorand-steps.png)
 
-Основные этапы консенсуса:
+The main stages of consensus:
 
-- Генерация блока исполнителями, выбранными на роль создателя блока
-- Голосование за лучший блок
-- Достижение соглашения между узналами о лучшем блоке
+- Block generation by performers selected to be the creators of the block
+- Voting for the best block
+- Reaching an agreement between nodes about the best unit
 
-#### Генерация блока
+### Block generation
 
-Определенное количество исполнителей (набор создателей блока) генерируют блок.
+A certain number of accounts (a block creators set) generates a block.
 
-Набор создателей блока определяется каждый блок с помощью проверяемой рандомной функции (VRF). В результате каждый узел сети получает набор $VRF(r, s)$ и подмножество $VRFN(r, s)$ - список аккаунтов, авторизованных на данном узле. Если $VRFN(r, s)$ не пустой, узел выпускает предложение блока на основании транзакций, находящихся в мемпуле узла.
+The block creators set is determined by each block with the help of verifiable random function (VRF). As a result, each network node receives a $VRF(r, s)$ set and a $VRFN(r, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
-#### Голосование за лучший блок (Graded concencus)
+### Voting for the best block (Graded consensus)
 
-Состоит из 3-х шагов. На данном этапе цель верификаторов - проголосовать и заявить сети, кого из продюссеров они считают лучшим кандидатом для текущего блока.
+It consists of 3 steps. At this stage, the goal of the verifiers is to vote and announce to the network, which of the producers they consider to be the best candidate for the current block.
 
-#### Шаг 1 - голосование
+#### Step 1 - the voting
 
-Каждый из выбранных верификаторов говорит сети, какой из блоков он считает предпочтительным для секущего раунда.
+Each of the selected verifiers tells the network which of the blocks they consider preferable for the current round.
 
-#### Шаг 2 - подсчет голосов
+#### Step 2 - vote count
 
-Сообщения предыдущего шага получают все активные узлы сети. Выбранные верификаторы на шаге 2 подсчитывают, какой из предложенных блоков набрал больше голосов и объявляют об этом сети.
+Based on the messages received from step 1, to determine which of the producers got more votes and to announce it to the network. (it is done by each of the verifiers).
 
-#### Шаг 3 - первичная оценка подсчета голосов
+#### Step 3 - primary evaluation of the vote count
 
-Имея результаты голосования на предыдущих шагах, узлы имеют представление о том, смогла ли сеть договориться о выборе продюссера для текущего раунда. Результат (договорились или нет) и о чем именно договорились каждый верификатор формирует в сообщение и отправляет в сеть.
+Having the voting results of the previous steps, the nodes know, whether the network was able to agree on the choice of the producer for the current round. Each verifier forms a message including information on the result(agreed or not) and what exactly they have agreed on, and sends the message to the network.
 
-После данного шага все узлы в сети знают результат голосования. В честной сети этого было бы достаточно для завершения раунда. Но так как мы допускаем возможность недобросовестных участников, сети необходимо сверить данные. Это задача следующего этапа.
+After this step, all nodes in the network have a preliminary idea of whether the producer of the unit has been determined or not. In an honest network, this would be enough to complete the round. But since we allow the possibility of unscrupulous participants, the network needs to verify the data. This is the objective of the next stage.
 
-#### Достижение Binary Byzantine Agreement (BBA)
+### Reaching Binary Byzantine agreement (BBA)
 
-На каждом шаге работы алгоритма, узлы в сети можно разбить на два множества:
+At each step of the algorithm work, the nodes in the network can be divided into two pluralities:
 
-- узлы, которые получили за предыдущие раунд(-ы) достаточное количество сообщений (с некоторым одинаковым значением), позволяющее им предложить это значение в качестве решения.
-- узлы, которые получили два варианта решения в сообщениях и не могут отдать предпочтение какому-либо из них.
+- nodes that have received a sufficient number of messages in the previous round(s) (with some identical value), allowing them to offer this value as a solution.
+- nodes that have received two solutions in messages and can’t give preference to any of them.
 
-В последнем случае, неопределившихся узлы используют VRF для генерации разделяемого случайного числа из множества { 0, 1 } для принятия и отсылки своего решения. В силу того, что случайное число будет одно и то же для всех "неуверенных" узлов, все такие узлы примут одинаковое решение.
+In the latter case, undecided nodes use VRF to generate a shared random number from the plurality {0, 1} to make a decision and to send it. Since the random number will be the same for all "unsure" nodes, all such nodes will take identical decision.
 
-Этап состоит из циклов, в которые входит 3 шага. На каждом из шагов новый сет верификаторов отправляет свое видение результата голосования в бинарном виде. Если в результате цикла (3-шагов) `2/3 + 1` верифаеров сходятся во мнении, блок применяется. Если же нет - цикл запускается снова.
+The stage consists of cycles, which include 3 steps each. At each step, a new set of verifiers sends their vision of the vote result vote in binary form. If as a result of the cycle (3 steps) 2/3 + 1 verifiers agree, the block is applied. If not, the cycle starts again.
 
-В случае, если за 4 цикла (в них участвует 12 разных сетов верификаторов) сеть не смогла прийти к единому мнению, в сети применяется пустой блок и начинается следующий раунд с самого первого шага - генерации блока.
+If in 4 cycles (12 different sets of verifiers participate in them) the network didn’t manage to come to a common opinion, an empty block is used in the network and the next round starts from the very first step - block generation.
 
-#### Применение блока всеми участниками сети
+## Block application by the network participants
 
-Все узлы сети получают все сообщения, отправленные исполнителями на всех этапах консенсуса. Соответственно, каждый из узлов на момент окончания консенсуса сам для себя определяет его окончание и понимает, какой именно блок необходимо применить и добавить в цепочку. Т.е. итоговое сообщение с результатирующей информацией никем не отправляется, так как в этом нет необходимости.
+All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. Accordingly, each of their nodes at the time of the consensus ending determines its end for itself, and understands which block to apply and add to the chain. It means, the final message with the resulting information isn’t sent by anyone, as it’s not necessary.
 
-## Разрешение ветвлений
+## Branching permission
 
-Количество шагов алгоритма и зависимость от всех базы аккаунтов делает возможность ветвлений маловероятной.
-Однако EchoRand все равно имеет механизм разрешения ветвлений.
-Разрешение ветвления происходит по одному из следующий сценариев:
+The number of steps of the algorithm and dependence on the whole accounts database makes the possibility of branching unlikely.
+However, EchoRand still has a branch permission mechanism.
+The branching permission takes place according to one of the following scenarios:
 
-- Переключиться на самую длинную цепочку при наличии нескольких цепочкек.
-- Если имеется более одной длинной цепочки, следовать за той, у которой последний блок не пустой. Если
-у всех из них в конце пустые блоки, проверять вторые и последующие блоки с конца до первого непустого блока.
-- Если имеется более одной длинной цепочки с непустыми блоками в конце, скажем, цепочки
-длины r, следовать той, чей блок r имеет наименьшее значение хеша.
+To switch to the longest chain in the presence of several chains.
 
-## Оптимизация сетевого протокола
+- If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
+- If there is more than one long chain with non-empty blocks in the end of a R-length chain, to follow the one in which the r block has the smallest hash value.
 
-Для уменьшения количество сообщений с информацией о предложении блока, в протоколе имплементированы следующие оптимизации:
+## Network protocol optimization
 
-- в случае, если узел сети получает предложение блока, которое уже не первое для раунда и не является лучше предыдущего, узел не отправляет сообщение о нем остальным узлам.
-- в случае, если на узле авторизовано несколько исполнителей для раунда генерации блока, узел сам определяет, какой из блоков лучший кандидат и отправляет в сеть только одно предложение блока.
+To reduce the number of messages with information about the block proposal, the following optimizations are implemented in the protocol:
 
-## Исключительные ситуации
+- if the network node receives a block proposal that is not the first for the round and is not better than the previous one, the node does not send a message about it to the other nodes.
+- If several participants are authorized on the node for the block generation round, the node itself determines which of the blocks is the best candidate and sends a network proposal only to one block.
 
-### Отсутствие сети
+## Exceptional situations
 
-Шаги алгоритма не будут получать сообщения и все выходы из шагов будут происходить только по срабатыванию таймера.
-Так как конец раунда на данный момент происходит только как реакция на приходящее сообщение, то шаги
-BBA будут выполнятся в цикле до достижения константы μ. В результате будет сгенерирован пустой блок.
+### No network
 
-### Восстановление сети
+Steps of the algorithm will not receive messages and all exits from the steps will occur only when the timer is triggered.
 
-Узлы, которые в результате восстановления сети войдут в раунд в середине, будут содержать неполные данные
-в своих контекстах раунда. В результате они будут генерировать либо неверные оценки, либо голосовать
-за пустой блок.
-В каждом из этих вариантов узлы будут себя вести как узел-злоумышленник. В результате информация с таких
-узлов будет отфильтрована алгоритмом bba.
-В силу неполных данных в локальных контекстах такие узлы завершат раунд:
+Since the end of the round at the moment occurs only as a reaction to an incoming message, the BBA steps
+will be executed in a loop until reaching the μ constant. As a result, an empty block will be generated.
 
-- с неверным блоком
-- с пустым блоком
+### Network Restoring
 
-Произойдет ветвление, которое будет автоматически разрешено, когда остальная сеть уйдет вперед в процессе генерации новых блоков.
+Nodes that as a result of network recovery will enter the round in the middle, will contain incomplete data
+in their round contexts. As a result, they will either generate incorrect estimates or vote for an empty block.
 
-### Неполная база blockchain в узле
+In each of these options, the nodes will behave as node-intruder. As a result, information from such
+nodes will be filtered by the BBA algorithm.
+Due to incomplete data in local contexts, such nodes will complete the round:
 
-Случай, когда локальная база данных узла "догоняет" базу данных сети.
-При этом алгоритм не может работать в силу того, что отсутствуют значения:
+- with a wrong block
+- with an empty block
 
-- $HB_{r-1}$ - хеш последнего созданного блока
-- $Q_{r-1}$ - случайное значение последнего раунда работы алгоритма
+A branching, which will be automatically resolved when the rest of the network goes ahead in the process of generating new blocks, will occur.
 
-Требуется определить момент, когда локальная база "догонит" базу данных сети и запустить раунд алгоритма.
+### An incomplete blockchain base in node
 
-### Отсутствие активных исполнителей на шаге
+It’s the case in which the local database of the node is catching up with the network database.
+In this case, the algorithm cannot work due to the fact that there are no values:
 
-Набор исполнителей вычисляет с помощью VRF и не зависит реального наличия исполнителей в сети.
-Может возникнуть ситуация, когда для какого-то шага алгоритма нет активных исполнителей.
-В этом случае активные участники сети по истечению таймаута просто переходят на следующий шаг или применяют пустой блок, в случае, если это был последний шаг.
+- $HB_{r-1}$ - is hash of the last created block
+- $Q_{r-1}$ - is a random value of the last round of the algorithm
 
-## Делегация участия в консенсусе
+It is required to determine the moment when the local database will “catch up” with the network database and launch a round of the algorithm.
 
-Исполнителями на раундах являются аккаунты, но для участия в консенсусе необходим активный узел, так как только имея актуальное состояние сети и наличие свободных транзакций в мемпуле позволяют определять сеты исполнителей, собирать и проверять сообщения.
+### Lack of active performers in the step
 
-Учитывая, что большинство аккаунтов не имеют возможность поддерживать активный узел в сети, но могут быть выбраны для участия в раунде, в протоколе реализован механизм делегации участия в консенсусе другим аккаунтам. Это означает, что аккаунт `A` может установить для себя доверенный аккаунт `B` с заведомо запущенным узлом в сети и тем самым предоставить аккаунту `B` возможность выполускать сообщения консенсуса в тот момент, когда исполнителем был выбран аккаунт `A`.
+A participants set makes calculations using VRF and does not depend on the actual presence of participants in the network.
+There may be a situation when for some step of the algorithm there are no active performers.
+In this case, the active members of the network at the expiration of the timeout simply go to the next step or use an empty block, in case it was the last step.
 
-По умолчанию доверенным аккаунтом `B` для аккаунта `A` становится тот аккаунт, который зарегистировал аккаунт `B` в сети.
+## Delegation of participation in consensus
 
-> Создание аккаунта в сети Echo требует создания соответствующей транзакции, добавляенной в блок
+The participants on the rounds are the accounts, but to participate in the consensus, the active node is needed, since only having the current network status and the availability of free transactions in the mempool allows one to determine the sets of the performers, to collect and check messages.
+
+Given that most accounts do not have the ability to maintain an active node in the network, but can be selected to participate in the round, the protocol implements the mechanism for delegating participation in consensus to other accounts. This means that an `A` account can set for itself a trusted `B`  account with a knowingly running node in the network and thereby give the `B` account an opportunity to issue consensus messages at the moment when the `A` account was selected by the participant.
+
+By default, the `B` trusted account for the `A` account becomes the account that registered the `B` account in the network.
+
+> Creating an account in the Echo network requires creating a corresponding transaction added to the block
 
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
