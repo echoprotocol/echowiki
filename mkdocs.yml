@@ -17,7 +17,7 @@ markdown_extensions:
   - mdx_math
   - pymdownx.tasklist:
 
-extra_javascript: 
+extra_javascript:
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 nav:
@@ -40,6 +40,7 @@ nav:
   - How To:
     - Use Echo: how-to/Use Echo.md
     - Accept Echo: how-to/Accept Echo.md
+    - Create account: how-to/create-account.md
     - Issue Assets: how-to/Issue Assets.md
     - Use Smart Contracts: how-to/Use Smart Contracts.md
     - Issue Blocks/Get Rewarded: how-to/Issue Blocks(Get Rewarded).md
@@ -54,7 +55,7 @@ nav:
     - APIs list: developers/apis.md
     - Smart Contracts:
       - Get Started: developers/smart-contracts/get-started.md
-      - Solidity: 
+      - Solidity:
         - Introduction: developers/smart-contracts/solidity/introduction.md
         - Hello World!: developers/smart-contracts/solidity/hello-world.md
         - Difference from ethereum: developers/smart-contracts/solidity/difference-from-ethereum.md
@@ -79,7 +80,7 @@ nav:
         - General View: technologies/echorand/general-view.md
         - Architecture: technologies/echorand/architecture.md
         - Monitoring with ws: technologies/echorand/monitoring.md
-      - Sidechain: 
+      - Sidechain:
         - General View: technologies/sidechain/general-view.md
       - Oracles: developers/technologies/Oracles.md
       - Contracts/VMs: developers/technologies/Contracts(VMs).md
