@@ -84,9 +84,9 @@ Once each node computes it's role at the beginning of a round, the set of produc
 
 The set of verifiers begin listening for proposed next blocks and begin the process of voting for the best block using a 2 stage Byzantine fault tolerant (BFT) consensus process. At the first stage, **Graded Consensus (GC)**, each verifier announces their preliminary determination regarding the best block to append to the distributed ledger in a three-step process. The second stage, **Binary Byzantine Agreement (BBA)**, Byzantine consensus is reached through the transfer of binary data between the verifiers and a reconciliation of the overall state of the network. After BBA is complete, verifiers sign the best block and propogate it to the Echo network, where acceptors verify the signatures by verifiers and append the block to their own local instance of the distributed ledger.
 
-![echorand-steps.png](./echorand-steps.png)
-
 ## The EchoRand Mechanism
+
+![echorand-steps.png](./echorand-steps.png)
 
 ### Other Terms
 
@@ -97,30 +97,39 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ### Legend
 
-| Designation  | Description                                                                                                                                                 |
-| :----------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   $r$ >= 1   | the current round of the algorithm, it is actually equal to the number of blocks in the base plus 1                                                         |
-|   $s$ >= 1   | the current number of the algorithm step in the round                                                                                                       |
-|    $Q_r$     | **r** round seed                                                                                                                                            |
-| $VRF(r, s)$  | an ordered plurality of executors who participate in **s** step of **r** round                                                                              |
-| $VRFN(r, s)$ | an ordered indexes plurality of executors indexes from $VRF(r, s)$, who are registered at the current node and participate in **s** step of the **r** round |
+|   Designation    | Description                                                                                                                                                               |
+| :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   **$sig(x)$**   | [EdDSA][] signature of $x$                                                                                                                                                |
+|    **$H(x)$**    | [SHA-256][] hash of $x$                                                                                                                                                   |
+|     **$r$**      | current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $r >= 1$                                                            |
+|     **$s$**      | current step number of the algorithm in the round. $s >= 1$                                                                                                               |
+|   **$B_{r}$**    | block created in round $r$, which equals to { **$r$**, **$ID_{producer}$**, **$Q_{r}$**, **$H(B_{r})$**, **$H(B_{r-1})$**, **$sig(B)$**, **$PAY_{r}$**, **$CERT_{Br}$** } |
+|  **$H(B_{r})$**  | hash of **$B_{r}$**                                                                                                                                                       |
+|  **$PAY_{r}$**   | set of transactions contained in block **$B_{r}$**                                                                                                                        |
+|   **$Q_{r}$**    | shared randomness seed of round **$r$**                                                                                                                                   |
+| **$sig(Q_{r})$** | signature of a random vector of the **$r$** round                                                                                                                         |
+| **$sig(B_{r})$** | signature of a block of the **$r$** round                                                                                                                                 |
+|    **$l(r)$**    | round **$r$** leader - determines **$PAY_{r}$**, creates **$B_{r}$** and determines **$Q_{r}$**                                                                           |
+|  **$CERT_{r}$**  | **$B_{r}$** block certificate, formed out of a set of **$bba_signature$** messages                                                                                        |
+| **$VRF(r, s)$**  | ordered set of participants who act in step **$s$** of round **$r$**                                                                                                      |
+| **$VRFN(r, s)$** | ordered set of indexes of **$VRF(r, s)$** participants who are registered on the current node and participate in step **$s$** of round **$r$**                            |
 
-## Algorithm parameters
+### Parameters
 
 The following algorithm parameters are set by constants, or configured at the **echo_node** startup and can potentially be adjusted within certain limits during the process of the algorithm operation.
 
-| Designation | Description                                                                                            |
-| :---------: | ------------------------------------------------------------------------------------------------------ |
-|     $Λ$     | "large" interval, the average time required to distribute a 1MB message across the **Echo** network    |
-|     $λ$     | "small" interval, the average time required to distribute a 256Bit message across the **Echo** network |
-|   $N_{g}$   | the number of block producers in a round, used in the function $VRF(r, 1)$                             |
-|   $N_{c}$   | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                      |
-|   $t_{h}$   | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$       |
-|     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created         |
+| Designation | Description                                                                                             |
+| :---------: | ------------------------------------------------------------------------------------------------------- |
+|     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across the **Echo** network    |
+|     $λ$     | "small" interval, the average time required to distribute a 256 bit message across the **Echo** network |
+|   $N_{g}$   | the number of block producers in a round, used in the function $VRF(r, 1)$                              |
+|   $N_{c}$   | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                       |
+|   $t_{h}$   | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$        |
+|     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created          |
 
-## Cryptographic device
+### Cryptographic Primatives
 
-### Algorithms
+<!-- Need to add more here, describing EdDSA and SHA-256 -->
 
 - [EdDSA][] - deterministic algorithm for creating and verifying electronic digital signature
   - public key: 32 bytes (256 bits)
@@ -133,48 +142,51 @@ The following algorithm parameters are set by constants, or configured at the **
 
 ### VRF
 
-The concept of verifiable random function (VRF) was introduced by Mikali, Rabin and Wadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value `x`, the owner of the secret key`SK` can calculate the value of the function $y = F_{SK}(x)$ and the proof $P_{SK}(x)$. Using the proof and public key $PK = g^{SK}$, everyone can verify that the value of $y = F_{SK}(x)$ is indeed calculated correctly, but this information cannot be used to search for the secret key.
+The concept of verifiable random function (VRF) was introduced by Mikali, Rabin and Wadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value $x$, the owner of the secret key $SK$ can calculate the value of the function $y = F_{SK}(x)$ and the proof $P_{SK}(x)$. Using the proof and public key $PK = g^{SK}$, everyone can verify that the value of $y = F_{SK}(x)$ is indeed calculated correctly, but this information cannot be used to discover the secret key.
 
-The use of VRF in EchoRand is as follows - having a pseudo-random value for each $Q_r$ round and the VRF function, each of the network nodes can determine the list of $VRF(r, s)$ executors in **s** step of **r** round, and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, s)$, and as well verify whether the participants have the right to act at this step.
+The use of VRF in EchoRand is as follows: having a pseudo-random value $Q_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF(r, s)$ executors in $s$ step of $r$ round, and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, s)$, and additionally verify whether the participants have the right to act at this step.
 
-#### Definitions of Active Performers
+#### Identification of Active Roles
 
 The checked random function at each **r** round and **s** step is built iteratively, as follows:
 
-$$1. VRF_{0}(r, s) = SHA256(Q_{r-1}, r, s)$$
-$$2. VRF_{n}(r, s) = SHA256(VRF_{n-1}(r, s))$$
+$$ VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$
+$$ VRF_{1}(r, s) = H(VRF_{0}(r, s))$$
+$$ VRF_{2}(r, s) = H(VRF_{1}(r, s))$$
+$$...$$
+$$ VRF_{n}(r, s) = H(VRF_{n-1}(r, s))$$
 
 The result of this function is an array of random values:
 
-$$VRF(r, s) = { VRF_{0}(r, s), VRF_{1}(r, s), ... }$$
+$$VRF(r, s) = {[ VRF_{0}(r, s), VRF_{1}(r, s), ...  ]}$$
 
-A specific executor is calculated from the $VRF_i(r, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the `r - 2` block.
+A specific executor is calculated from the $VRF_i(r, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - 2$ block.
 
-$VRFN (r,s)$ set is an array of indexes that is different for each node of the network, and if $i ∈ VRFN (r,s)$, then the user ID is calculated from $VRF_i (r,s)$ that is the executor for the given round and step at the selected node.
+The set $VRFN (r,s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN (r,s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,s)$.
 
-In other words, $VRFN$ is a selection of those executors from $VRF$, who are authorized at the current node and must be executed on a specific round and step.
+In other words, **$VRFN$** is a selection of participants from **$VRF$** who act on a particular node, round and step.
 
-At different network nodes, at the same round and step of the algorithm, the $VRFN$ pluralities will be different, and the $VRF$ plurality will be the same.
+At the same round and step but on different network nodes of the algorithm, the **$VRFN$** selections will be different, while the **$VRF$** selection will be the same.
 
-#### Round Random Value - Round Seed - Generation
+#### Generation of Randomness Seed
 
-The $Q(0)$ initial vector is randomly selected while the database is initialized.
+The starting seed **$Q_{0}$** is selected randomly at blockchain database initialization.
 
-Further, the $Q_ {r}$ vector is calculated as follows while creating a new block:
+Then, at creation of a new block in round **$r$** the **$Q_{r}$** vector is calculated. For a non-empty block **$B_{r}$**:
 
-For a non-empty block $B(R)$:
+$$Q_{r} = H( sig(Q_{r-1}), r )$$
 
-$$Q_{r} = H( signQ_{r-1}, r )$$
-
-In this case, the signature uses the private key of the participant that creates the block.
-
-In case $B(R)$ block is empty:
+In this case, the signature is generated using the EdDSA private key of the producer that created the block. In case **$B_{r}$** block is empty:
 
 $$Q_{r} = H( Q_{r-1}, r )$$
+
+<!-- This doesn't make any sense to me. Need to define some more terms? -->
 
 #### Generating a random value at s = 7,10,13, ... BBA step
 
 $$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$$
+
+## Consensus Rounds
 
 ## Cryptographic Sortition
 
