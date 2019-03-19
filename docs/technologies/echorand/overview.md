@@ -16,11 +16,13 @@ The ability to reach network-wide agreement about the next suitable set of trans
 
 ## Design Goals
 
-In designing any distributed consensus system, one of the biggest challenges is balancing transaction throughput with centralization. On one end of the spectrum, Bitcoin is limtied to ~7 transactions per second in order to minimize the resource requirements necessary to run a full validating node. On the other end, EOS requires 21 elected block producers to maintain extremely sophisticated hardware setups, getting high transaction throughput at the cost of increased centralization.
+In designing any distributed consensus system, one of the biggest challenges is balancing transaction throughput with centralization. On one end of the spectrum, Bitcoin is limited to ~7 transactions per second in order to minimize the resource requirements necessary to run a full validating node. On the other end, EOS requires 21 elected block producers to maintain extremely sophisticated hardware setups, getting high transaction throughput at the cost of increased centralization.
 
 However, this tradeoff between centralization and throughput in not fundamental. Blockchains rely on the assumption that a majority of the network is always honest. If that is the case, it follows that a random sample of the network should also consist mostly of honest nodes (provided, of course, that the sample is large enough). That is the principle that Echo relies on.
 
 Rather than forcing every node to verify every transaction, Echo selects a random set of validators for every block. As long as enough imoqie validators attest that the block is valid, every other node on the network can accept it without needing to conduct their own verification. This allows Echo to achieve high throughput without requiring each individual node to verify every transaction like Bitcoin or compute every virtual machine state change like Ethereum.
+
+Echo operates with a different trust model than Delegated Proof of Stake systems, where only a limited set of selected actors can advance the network, thus bringing an undesired element of centralization and trust into the network. Instead, EchoRand allows for a greater degree of decentralization through involvement of all users in the consesnsus process, produces trust through verifiable randomness and delivers performance by limiting the proportion of users required for consensus in each round.
 
 The major goal for creating the EchoRand consensus mechanism is to reduce of amount of explicit synchronization needed for reaching consensus in a distributed ledger. Other design goals include:
 
@@ -48,9 +50,17 @@ There are three distinct roles in EchoRand consensus:
 - **Producers** are a set of nodes responsible for the construction of a new block from unconfirmed transactions. Producers propose the next block to be added to the distributed ledger.
 - **Verifiers** are a set of nodes responible for validating a block proposed by the producers and reaching Byzantine agreement among the set of verifiers about which proposed block to add to the distributed ledger.
   delegated to verifie and choose the next block of the network. Different for each consensus step
-- **Acceptors** are all other network nodes. They play a passive role, simply accepting an approved block signed by validators and appending the block to their own local instance of distributed ledger.
+- **Acceptors** are all other network nodes. They play a passive role, simply accepting an approved block signed by verifiers and appending the block to their own local instance of the distributed ledger.
 
-EchoRand consensus is performed in rounds, with either a new block of transactions or an empty block being appended to the distributed ledger after each round. At each round, a new set of producers and verifiers is selected from all nodes in the network in such a way that:
+EchoRand consensus is performed in **rounds**, with either a new block of transactions or an empty block being appended to the distributed ledger after each round. Each EchoRand round consists of three main steps:
+
+1. Cryptographic Sortition
+2. Block Generation
+3. Best Block Voting and Application
+
+### Cryptographic Sortition
+
+At each round, a new set of producers and verifiers is selected from all nodes in the network in such a way that:
 
 - The distribution of roles for the round is not known to any node in the network before the round begins.
 - The assignement of roles for the round can be computed independently by every network node, without the need for any explicit communication or network-wide coordination to occur.
@@ -60,43 +70,29 @@ To accomplish this deterministic yet random assignment of roles, EchoRand uses a
 
 The size of sets of producers and verifiers is globally-known and configurable. It can be dynamically adjusted to accomplish the best trade off between security and performance. As a safeguard against Sybil attacks, each node's probability of becoming a verifier or a producer for the round is directly proportional to that node's account balance.
 
-In contrast to Delegated Proof-of-Stake, where only a limited set of selected users makes decisions on the network progress, thus, bringing centralization and undesired trust into the network, EchoRand brings complete decentralization through involvement of all users, produces trust through verifiable randomness and
-delivers performance by limiting the number of users required for decision making to a reasonable number.
+Each EchoRand block contains a set of proposed transactions and a **randomness seed**, which is a pseudo-random value that changes for each block and round. This seed serves as the basis for generating the sets of block producers and verifiers using the VRF. Every node in the network can verify that seed was generated by a block producer in accordance with network rules and thus it was not manipulated by the producer. However, there is no way to predict what seed should be generated by each producer in advance of receiving that seed from the producer.
 
-Each EchoRand block contains a list of proposed transactions and randomness seed. That seed is generated and
+A new EchoRand consensus round begins after a node receives the latest signed block and its randomness seed from its peers. That seed is then used to generate secondary random numbers. Using the same publicly known deterministic algorithm on every node of the network and the same seed as an input for that algorithm, the same set of secondary random numbers is independently generated for each round by each node in the network without any explicit communication between nodes. Each node in the EchoRand network maintains special uniformly organized ordered map of accounts and their balances. Using secondary random numbers and publicly known algorithm, each node in the network can independently identify the set of producers and verifiers for the round.
 
-- Every user in the system can verify that seed was generated by producer in accordance with network rules and thus was not manipulated by the producer.
-- There is no way to predict what seed should be generated by each producer before its reception from producer.
+### Block Generation
 
-A round in EchoRand starts with receipt of the latest approved block and its randomness seed. That seed is then used to generate secondary random numbers. Using the same publicly known deterministic algorithm on every node of the network and the same seed as an input for that algorithm, the same set of secondary random numbers is independently generated for each round on each node of the network without any explicit communication between nodes. Each node in EchoRand network maintains special uniformly organized ordered map of accounts and their balances. Using secondary random numbers and publicly known algorithm, each node in the network can independently identify the set of producers and verifiers for the round.
+The distribution of roles for the round is performed before the set transactions received with the last signed block are applied to the ledger of account balances. Therefore, the block producer, who generates both the seed and the set of transactions, is unable to manipulate transactions in the proposed set to affect the distribution of roles for the next round. Similarly, the producer is unable to manipulate the randomness seed for the next round, because its generation is verifiable be every node.
 
-Distribution of roles for the round is performed before application of transactions received with the last approved block. Therefore, the producer, who generates both the seed and the set of transactions, is unable to manipulate transactions in the proposed set to affect distribution of roles for the next round. At the same time, producer is unable to manipulate seed for the next round, because its generation is verifiable.
+Once each node computes it's role at the beginning of a round, the set of producers compile a set of unconfirmed transactions into a new proposed block and broadcast it to their peers on the network, along with a new randomness seed.
 
-Once roles are assigned, producers propose blocks, verifiers reach consensus using one of BFT variants on one of the proposed blocks, and approve it by signing. The signed block is broadcasted to the network and accepted by other users (acceptors).
+### Best Block Voting and Application
 
-## Other Terms
+The set of verifiers begin listening for proposed next blocks and begin the process of voting for the best block using a 2 stage Byzantine fault tolerant (BFT) consensus process. At the first stage, **Graded Consensus (GC)**, each verifier announces their preliminary determination regarding the best block to append to the distributed ledger in a three-step process. The second stage, **Binary Byzantine Agreement (BBA)**, Byzantine consensus is reached through the transfer of binary data between the verifiers and a reconciliation of the overall state of the network. After BBA is complete, verifiers sign the best block and propogate it to the Echo network, where acceptors verify the signatures by verifiers and append the block to their own local instance of the distributed ledger.
 
-The following components underlie EchoRand:
+![echorand-steps.png](./echorand-steps.png)
 
-### whitepaper.md
+## The EchoRand Mechanism
 
-- **executor** - the network account selected in the step of the round for performing a specific consensus action
-- **round seed** - a pseudo-random value changed on each block. It serves as the basis for generating the verifiers set and block producers.
-- **Graded Consensus** - one of the consensus stages, at which
-  each verifier must announce their preliminary block determination regarding the current block
-- **Binary Byzantine Agreement (BBA)** - a solution of the Byzantine Agreement problem, which has transfer of binary data between participants and reconciliation of results with the overall picture in its basis.
+### Other Terms
 
-### In-a-nutshell.md
-
-- **Graded consensus** - the stage of consensus at which each of the verifier must declare their preliminary decision
-- **Byzantine agreement problem** - is a condition of a computer system, particularly distributed computing systems, where components may fail and there is imperfect information on whether a component has failed. The term takes its name from an allegory, the "Byzantine Generals' Problem", developed to describe this condition, where actors must agree on a concerted strategy to avoid catastrophic system failure, but some of the actors are unreliable.
-- **Binary Byzantine Agreement (BBA)** - solution of the problem of the Byzantine agreement which is based on the transfer of binary data between the participants
-
-### general-view.md
-
+- **Executor** - the network account selected in the step of the round for performing a specific consensus action
 - **Local configuration** - a certain set of parameters accessible only to the running network node.
 - **Base (database)** - a blockchain with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
-- **Transaction** - in the context of this particular algorithm, it is a certain block of data that can be verified by external means
 - **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. On one network node permits registration of several participants.
 
 ### Legend
@@ -179,18 +175,6 @@ $$Q_{r} = H( Q_{r-1}, r )$$
 #### Generating a random value at s = 7,10,13, ... BBA step
 
 $$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$$
-
-## The EchoRand Mechanism
-
-![echorand-steps.png](./echorand-steps.png)
-
-### Tyler Blog
-
-EchoRand consists of three main steps:
-
-1. Cryptographic Sortition
-2. Block Generation
-3. Best Block Voting and Application
 
 ## Cryptographic Sortition
 
