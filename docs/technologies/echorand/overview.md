@@ -391,18 +391,15 @@ If the value **$ctx[l].B == ∅$**, then:
 - **$ctx[l].signQ == Q_{r-1}$** means that an empty block has been created.
 - **$ctx[l].signQ != Q_{r-1}$** means that a non-empty block has been created and the node has not received it.
 
-### Branching permission
+### Fork Prioritization
 
-The number of steps of the algorithm and dependence on the whole accounts database makes the possibility of branching unlikely.
-However, EchoRand still has a branch permission mechanism.
-The branching permission takes place according to one of the following scenarios:
+The number of steps of the algorithm and dependence on the state of the whole account database makes the possibility of forks unlikely. However, EchoRand still has a mechanism for choosing between diverging chains. The fork selection takes place according to one of the following scenarios:
 
-To switch to the longest chain in the presence of several chains.
+1. To switch to the longest chain (with the highest number of completed rounds) in the presence of several chains.
+1. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
+1. If there is more than one long chain with non-empty blocks in the end of a $r$-length chain, to follow the one in which the $r$ block has the smallest hash value.
 
-- If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
-- If there is more than one long chain with non-empty blocks in the end of a R-length chain, to follow the one in which the r block has the smallest hash value.
-
-## Network interaction
+## Network Interaction
 
 ### Network protocol optimization
 
