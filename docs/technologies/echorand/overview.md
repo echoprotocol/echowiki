@@ -185,11 +185,11 @@ $$Q_{r} = H( Q_{r-1}, r )$$
 
 <!-- This doesn't make any sense to me. Need to define some more terms? -->
 
-##### Generating a random value at s = 7,10,13, ... BBA step
+##### Generating a Random Vvalue at s = 7,10,13, ... BBA Step
 
 $$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$$
 
-### Block generation
+### Block Generation
 
 For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, s)$ as described above. As a result, each network node receives a $VRF(r, s)$ set and a $VRFN(r, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
@@ -390,14 +390,6 @@ If the value **$ctx[l].B == ∅$**, then:
 - **$ctx[l].signQ == Q_{r-1}$** means that an empty block has been created.
 - **$ctx[l].signQ != Q_{r-1}$** means that a non-empty block has been created and the node has not received it.
 
-### Fork Prioritization
-
-The number of steps of the algorithm and dependence on the state of the whole account database makes the possibility of forks unlikely. However, EchoRand still has a mechanism for choosing between diverging chains. The fork selection takes place according to one of the following scenarios:
-
-1. To switch to the longest chain (with the highest number of completed rounds) in the presence of several chains.
-1. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
-1. If there is more than one long chain with non-empty blocks in the end of a $r$-length chain, to follow the one in which the $r$ block has the smallest hash value.
-
 ## Network Communication
 
 ### Message Format
@@ -493,91 +485,83 @@ To reduce the number of messages with information about the proposed block, the 
 - If the network node receives a block proposal that is not the first for the round and is not better than the previous one, the node does not pass this message and block proposal to its peers.
 - If several participants are authorized on the node for the block generation round, the node itself determines which of the blocks is the best candidate and sends a block proposal only for the best block.
 
-## Exceptional situations
+### Exceptional Situations
 
-### No network
+#### Fork Prioritization
 
-Steps of the algorithm will not receive messages and all exits from the steps will occur only when the timer is triggered.
+The number of steps of the algorithm and dependence on the state of the whole account database makes the possibility of forks unlikely. However, EchoRand still has a mechanism for choosing between diverging chains. The fork selection takes place according to one of the following scenarios:
 
-Since the end of the round at the moment occurs only as a reaction to an incoming message, the BBA steps
-will be executed in a loop until reaching the **μ** constant. As a result, an empty block will be generated.
+1. To switch to the longest chain (with the highest number of completed rounds) in the presence of several chains.
+1. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
+1. If there is more than one long chain with non-empty blocks in the end of a $r$-length chain, to follow the one in which the $r$ block has the smallest hash value.
 
-### Network Restoring
+This process is based on [algorand-v9][] (9. Handling Forks, page 70).
 
-Nodes that as a result of network recovery will enter the round in the middle, will contain incomplete data
-in their round contexts. As a result, they will either generate incorrect estimates or vote for an empty block.
+#### Network Unreachable
 
-In each of these options, the nodes will behave as node-intruder. As a result, information from such
-nodes will be filtered by the BBA algorithm.
-Due to incomplete data in local contexts, such nodes will complete the round:
+In the case a node is not able to communicate with peers or stops receiving message broadcast, the node's internal state of the current round and step will only advance when the timer is triggered.
 
-- with a wrong block
-- with an empty block
+Since the conclusion of the current round at the moment occurs only upon receiving a successful BBA message from peers, the node will continue executing the BBA steps in a loop until reaching the **μ** constant. As a result, an empty block will be generated.
 
-A branching, which will be automatically resolved when the rest of the network goes ahead in the process of generating new blocks, will occur.
+#### Network Restored
 
-### Network recovery
+Nodes that receive messages only from the middle of a consensus round, as a result of an interupted network connection, will possess incomplete data about the context and progress of the round. As a consequence, they will reach either an _incorrect_ evaluation for the best block or vote for an _empty block_.
 
-The nodes that will enter the round in the middle, as a result of network recovery, will contain incomplete data in the context of the round. As a consequence, they will generate either _incorrect_ evaluation, or vote for an empty block.
+In either case, the node will act as if it was a malicious node, passing incorrect information to the network. Consequently, the information coming from such nodes will be filtered by the **BBA** algorithm. Once the node realizes that it's view of the ledger is inconsistent with the rest of network, a reconciliation will occur automatically, when the rest of the network goes forwards in the process of generating new blocks.
 
-In each of these options the nodes will act as intruder nodes. As a result, the information coming from such nodes will be filtered by the **bba** algorithm.
+<!-- probably need to expand the above section some and link to the fork reconciliation rules to show how that happens -->
 
-Due to incomplete data in the local contexts, such nodes will complete the round:
+#### Incomplete Local Block Database
 
-- with an invalid block
-- with an empty block
+The scenario occurs when the local database of the node is syncing or reconciling with the global distributed ledger. During this sync process, the node cannot pariticpate in the consensus algorithm due to the fact that it lacks knowledge of the values:
 
-There will be a ramification that will occur automatically, when the rest of the network goes forwards in the process of generating new blocks
+- $H(B_{r-1})$, the hash of the last created block
+- $Q_{r-1}$, the randomness seed of the last round of the algorithm
 
-### An incomplete blockchain base in node
+The syncing node must determine the moment when its local database will be in sync with the rest of the network and begin the steps of the consensus algorithm at that time.
 
-It’s the case in which the local database of the node is catching up with the network database.
-In this case, the algorithm cannot work due to the fact that there are no values:
+#### Insufficient Node Participation
 
-- $HB_{r-1}$ - is hash of the last created block
-- $Q_{r-1}$ - is a random value of the last round of the algorithm
+Given that each network node must independently use the VRF to determine their role in each consensus round, the distribution of roles does not depend on the availability or actual participation of each node. The VRF distributes roles based on the entire set of network nodes and registered accounts, not merely the active ones. Because of this, there exists the possibility that for some step of the consensus algorithm, none of the nodes selected for that role are online or available.
 
-It is required to determine the moment when the local database will “catch up” with the network database and launch a round of the algorithm.
+In this case, the timeout threashold will be reached for that step of the round, and the active nodes will simply proceed to the next step or append an empty block to the ledger (in case this occurs at the final step), triggering the distribution of a new set of roles.
 
-### Lack of active performers in the step
+Network simulations suggest that:
 
-A participants set makes calculations using VRF and does not depend on the actual presence of participants in the network.
-There may be a situation when for some step of the algorithm there are no active performers.
-In this case, the active members of the network at the expiration of the timeout simply go to the next step or use an empty block, in case it was the last step.
+- When **70%** of accounts are active, the network generates 4% empty blocks and a 5.5s efficient block generation time
+- When **65%** of accounts are active, the network generates 16% empty blocks and a 14s efficient block generation time
+- When **60%** of accounts are active, the network generates 30% empty blocks and a 32s efficient block generation time
+- When **50%** of accounts are active, the network generates 70%+ empty blocks and a 120s+ efficient block generation time
 
-### Allowing for ramification
+#### Delegating Consensus Participation
 
-Based on [algorand-v9][] (9. Handling Forks, page 70)
-
-## Delegation of participation in consensus
-
-The participants on the rounds are the accounts, but to participate in the consensus, the active node is needed, since only having the current network status and the availability of free transactions in the mempool allows one to determine the sets of the performers, to collect and check messages.
-
-Given that most accounts do not have the ability to maintain an active node in the network, but can be selected to participate in the round, the protocol implements the mechanism for delegating participation in consensus to other accounts. This means that an `A` account can set for itself a trusted `B` account with a knowingly running node in the network and thereby give the `B` account an opportunity to issue consensus messages at the moment when the `A` account was selected by the participant.
-
-By default, the `B` trusted account for the `A` account becomes the account that registered the `B` account in the network.
-
-### Tyler Blog
-
-All users are eligible to participate in every lottery to determine if they have a "winning ticket" to serve as a block producer or verifier for each block. The only requirement is that after every block is finalized, each user must independently run the VRF computation to generate a "lottery ticket" for the next block. This requires that the user have an online node that's connected to the rest of the network and the ability to sign new blocks with their private key. Although EchoRand is designed to be minimally resource intensive for node operators, the protocol recognizes that every user may not be able to run their own node, and provides a way to "delegate" the block production role to another node by providing a type of secret key called a delegation key, which allows another user to participate in consensus on their behalf but not spend funds from their account. Because of these feature, every user should be able to participate in the consensus mechanism either by operating their own node or by delegating that right.
+Given that a high consensus participation rate is needed by acccounts in order to maintain full network throughput and avoid the generation of empty blocks, the protocol provides a method for delegating this participation to an active node using a delegation key. This key allows another node to participate in signing consensus messages on their behalf but not create other transaction. This means that account `A` can designate another trusted account `B` with an active node in the network and thereby give account `B` the ability to generate and sign consensus messages at the moment when the `A` account was selected by the participant.
 
 ## Security and Performance
 
-Because the selection of block producers and verifiers is weighted by the users balance of tokens, EchoRand transforms the typical byzantine fault tolerance requirement of 2/3rd of honest nodes to a more sybil-resistant requirement that **2/3rds of tokens** are held by honest nodes. This assumption is also improved because the nodes with the highest token balances have the most "skin in the game", and thus the most economic value to lose of the network is attacked. As long as 2/3rds of tokens are held by honest nodes participating in consensus, the network will run at maximum performance, with no loss of capacity.
+Because the selection of block producers and verifiers is weighted by the accounts balance, EchoRand transforms the typical byzantine fault tolerance requirement of 2/3rd of honest nodes to a more sybil-resistant requirement that **2/3rds of balances** are held by honest nodes. This assumption is also improved because the nodes with the highest balances have the most "skin in the game", and thus the most economic value to lose of the network is attacked. As long as 2/3rds of balances are held by honest nodes participating in consensus, the network will run at maximum performance, with no loss of capacity.
 
-In the case that **less than 2/3rds of tokens are held by honest users** participating in consensus, the network will begin to suffer from degraded performance in the form of empty blocks being added to the ledger. As this honest participation rate declines from 67% to 33%, the statistical probability of empty blocks being added to the ledger increases linearly from 0 to 100%.
+In the case that **less than 2/3rds of balances are held by honest users** participating in consensus, the network will begin to suffer from degraded performance in the form of empty blocks being added to the ledger. As this honest participation rate declines from 67% to 33%, the statistical probability of empty blocks being added to the ledger increases linearly from 0 to 100%.
 
 With more than 67% of tokens held by an attacker, the attacker could continually disrupt the consensus mechanism and prevent new blocks from being added to the ledger or censor transactions, just as an attacking miner with 51% of hash rate in a proof of work-based currency.
 
 ## Incentives
 
-Unlike Algorand, EchoRand introduced a formal incentive scheme to reward users for participating in the consensus process either by running a full node or delegating to another node. This incentive scheme is designed to balance the optimal security and performance of EchoRand network by incentivizing more nodes to participate in consensus whenever performance drops below optimal levels, while maintaining adequate security and decentralization.
+EchoRand introduced a formal incentive scheme to reward accounts for participating in the consensus process either by running an active node or delegating to another active node. This incentive scheme is designed to balance the optimal security and performance of EchoRand network by incentivizing more accounts to participate in consensus whenever performance drops below optimal levels, while maintaining adequate security and decentralization.
 
-Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly created tokens, similarly to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller amount of newly created tokens. In the case that an empty block is added to the network, no nodes receive a block reward.
+Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly generated balance, similarly to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller balance. In the case that an empty block is added to the network, no nodes receive a block reward.
 
-When the network begins to generate empty blocks due to failure of consensus (whether because of an attacker or through low participation in consensus by honest users), the protocol increases the block reward (which inflates the entire token supply) in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate.
+When the network begins to generate empty blocks due to failure of consensus (whether because of an attacker or through low participation in consensus by honest users), the protocol increases the block reward through inflation in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate.
 
-> Creating an account in the Echo network requires creating a corresponding transaction added to the block
+<!-- Need to explain and model (or show formulas) for the inflation increase and decrease -->
+
+## Conclusion
+
+EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus. In EchoRand consensus, every account is automatically able to participate in the block production and validation process, either by running a node or delegating to an existing node. Each new block of transactions is generated by a committee randomly chosen from the set of all network accounts. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. However, the task of securely choosing this committee out of the pool of all users would typically require a large coordination, communication, or computation overhead for the network. In addition, when this committee of block producers is announced by the network, the chosen actors could be come the subject of bribe or DDoS attacks.
+
+By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
+
+<!-- Creating an account in the Echo network requires creating a corresponding transaction added to the block -->
 
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
 [echo-wp]: https://drive.google.com/file/d/1y1VCfvM8czq-BaTgEl0AuctAbGzV_S93/view
