@@ -4,8 +4,7 @@
 
 EchoRand is the consensus mechanism used by the Echo protocol to provide very fast and final consensus. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
 
-The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9
-describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
 
 ## Background
 
@@ -217,8 +216,8 @@ Each network node generates a list of producers for the current block and if the
    1. If at least one of the previous blocks is unavailable, build **$PAY_{r} = ∅$**
    1. If **$PAY_{r} != ∅$**, create a new block **$B_{r}$** = { $r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})$ }
 1. **Communication, generation, signature and a simultaneous broadcast:**
-   1. Sign with the key **$id_{1}$** and send message **gc_block** = { $r, id_{1}, B_{r}, sig(B_{r})$ }
-   1. Sign with the key **$id_{1}$** and send **gc_signature** = { $r, id_{1}, sig(Q_{r-1}), H(B_{r})$ }
+   1. Sign with the key **$id_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig(B_{r})$ }
+   1. Sign with the key **$id_{1}$** and send `gc_signature` = { $r, id_{1}, sig(Q_{r-1}), H(B_{r})$ }
 
 ### Graded Consensus (GC)
 
@@ -245,8 +244,8 @@ Each of the selected verifiers tells the network which of the blocks they consid
 1. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
    1. **$v$** == { $∅, ∅$ }
    1. go to **Communication**
-1. **Network**: subscribe to network messages **gc_block**, **gc_signature** at the start of a step
-   1. After receiving a message **gc_block** of the round **$r$**
+1. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
+   1. After receiving a message `gc_block` of the round **$r$**
       1. Verify the round number in the message
       1. Verify the message step equals **1**
       1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
@@ -254,7 +253,7 @@ Each of the selected verifiers tells the network which of the blocks they consid
       1. Verify that **msg.block** is correct
          1. Verify the block's round for equality to the current
          1. Verify **$ID_{producer}$** ∈ A\_{1}\*\*
-         1. Verify **$Q_{r}$** from the block, if it already has the **gc_signature**
+         1. Verify **$Q_{r}$** from the block, if it already has the `gc_signature`
          1. Verify the block signature using **producer-id** of the block
          1. Verify **$H(B_{r-1})$** from the block for equality to the local one from **$CERT_{r-1}$**
          1. Verify the correctness of **$PAY_{r}$** in the block
@@ -266,7 +265,7 @@ Each of the selected verifiers tells the network which of the blocks they consid
       1. Vf **l** and **l == id** are installed:
          1. **$v = { ctx[l].HB, l }$**
          1. Go to **Communication**
-   1. After receiving a message **gc_signature** of the round **$r$**
+   1. After receiving a message `gc_signature` of the round **$r$**
       1. Verify the round number in the message
       1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
       1. Verify the signature of the whole message
@@ -282,8 +281,8 @@ Each of the selected verifiers tells the network which of the blocks they consid
    1. **$∀n_{2} ∈ N_{2}$**:
       1. Get real user’s ID in the blockchain: **$id_{2} = A_{2}[n_{2}]$**
       1. Sign with the key **$id_{2}$** and send
-         1. if **$v != ∅$**: **gc_proposal** = **${ r, 2, id_{2}, v }$**
-         1. if **$v == ∅$**: **gc_proposal** = **${ r, 2, id_{2}, ∅ }$**
+         1. if **$v != ∅$**: `gc_proposal` = **${ r, 2, id_{2}, v }$**
+         1. if **$v == ∅$**: `gc_proposal` = **${ r, 2, id_{2}, ∅ }$**
 
 #### Step 2 - Vote Counting
 
@@ -300,13 +299,13 @@ Based on the messages received from other verifiers in step 1, each verifier tal
    1. **$v$** == { $∅, ∅$ }
    1. Go to **Communication**
 
-1. **Network**: subscribe to network messages **gc_proposal** at the start of a step, after receiving
+1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
 
    1. Verify the round number and the step number in the message
    1. Verify that **$msg.id ∈ A_{2}$** and get the user's public key
    1. Verify the signature of the whole message
    1. Verify that **$msg.v = { msg.block\_hash, msg.leader }$** is in the context of the round.
-      It should be collected in the context in the previous step, as a result of **gc_block** and **gc_signature** message processing. 1. **$∃ ctx[msg.leader]$** - a record for such a potential leader exists in the context 1. **$ctx[msg.leader].HB == msg.block_hash$** - the block hash coincides
+      It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing. 1. **$∃ ctx[msg.leader]$** - a record for such a potential leader exists in the context 1. **$ctx[msg.leader].HB == msg.block_hash$** - the block hash coincides
    1. **$ctx[msg.leader].v3.push(msg.id)$**, where **$v3$** is an _unordered_set_
    1. If the counter is more than the threshold **$`t_{h}`$**: **$ctx[msg.leader].v3.size() > `t_{h}`$**
       1. **$v$** = { $msg.block\_hash, msg.leader$ }
@@ -317,7 +316,7 @@ Based on the messages received from other verifiers in step 1, each verifier tal
    1. If **$N\{3\} = ∅$**, end the step
    1. **$∀n\{3\} ∈ N\{3\}$**:
       1. Get real user’s ID in the blockchain: **$id_{3} = A_{3}[n_{3}]$**
-      1. Sign with the user’s key **$id_{3}$** and send **gc_proposal** = { $r, 3, id_{3}, v$ }
+      1. Sign with the user’s key **$id_{3}$** and send `gc_proposal` = { $r, 3, id_{3}, v$ }
 
 #### Step 3 - Primary evaluation of the vote count
 
@@ -338,7 +337,7 @@ After this step, all nodes in the network have a preliminary idea of whether the
    1. **$b = 1$**
    1. Go to **Communication**
 
-1. **Network**: subscribe to network messages **gc_proposal** at the start of a step, after receiving
+1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
 
    1. Verify the round number and the step number in the message
    1. Verify that **$id ∈ A\{3\}$** and get the user's public key
@@ -363,7 +362,7 @@ After this step, all nodes in the network have a preliminary idea of whether the
    1. If **$N\{4\} = ∅$**, end the step
    1. **$∀ n\{4\} ∈ N\{4\}$**:
       1. Get real user’s ID in the blockchain: $id_{4} = A_{4}[n_{4}]$
-      1. Sign with the user’s key **id\_{4}** and send **bba_signature** = { $r, 4, id\_{4}, b, v, sig(0, v)$ }
+      1. Sign with the user’s key **id\_{4}** and send `bba_signature` = { $r, 4, id\_{4}, b, v, sig(0, v)$ }
 
 ### Binary Byzantine Agreement (BBA)
 
@@ -399,51 +398,50 @@ The number of steps of the algorithm and dependence on the state of the whole ac
 1. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
 1. If there is more than one long chain with non-empty blocks in the end of a $r$-length chain, to follow the one in which the $r$ block has the smallest hash value.
 
-## Network Interaction
+## Network Communication
 
-### Network protocol optimization
+### Message Format
 
-To reduce the number of messages with information about the block proposal, the following optimizations are implemented in the protocol:
-
-- if the network node receives a block proposal that is not the first for the round and is not better than the previous one, the node does not send a message about it to the other nodes.
-- If several participants are authorized on the node for the block generation round, the node itself determines which of the blocks is the best candidate and sends a network proposal only to one block.
-
-### Message format
-
-Each message is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e, basically, there is always a **message_signature** field in a message.
+Each message broadcast by nodes is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e there is always a **message_signature** field inlcuded with a broadcast message.
 
 Separate fields or groups of fields are also signed with an [EdDSA][] key of the participant who creates the message.
 
-Such a "double" signature is essential, since the signatures of certain groups of fields are later used in [VRF][] to generate a random round value, and in the signature set **CERT\_{r}**.
+Such a "double" signature is essential, since the signatures of certain groups of fields are later used in [VRF][] to generate a random round value, and in the signature set **$CERT_{r}$**.
 
-#### 1. gc_block (candidate block)
+#### 1. Candidate Block: `gc_block`
 
-This message is sent in step **1**, in the case of creating a block with a non-empty set of transactions.
+This message is sent in step **1** by producers to propose a newly created block with a non-empty set of transactions for addition to the distributed ledger.
 
-| Field         | Description                                                                            |
-| ------------- | -------------------------------------------------------------------------------------- |
-| **round**     | current round                                                                          |
-| **step**      | current step                                                                           |
-| **id**        | ID of the participant who created the block                                            |
-| **signature** | signature of the message with the participant’s key **id**                             |
-| **block**     | a block containing: the current round, the participant's ID, the block signature, etc. |
+| Field         | Description                                                                                  |
+| ------------- | -------------------------------------------------------------------------------------------- |
+| **round**     | current round                                                                                |
+| **step**      | current step                                                                                 |
+| **id**        | ID of the participant who created the block                                                  |
+| **signature** | signature of the message with the participant’s key corresponding to the **id**              |
+| **block**     | a valid block containing: the current round, the participant's ID, the block signature, etc. |
 
-#### 2. gc_signature (random value signature)
+<!-- Possible to include more detail here about the block format/data structure? -->
+
+#### 2. Random Value Signature: `gc_signature`
+
+<!-- Can we explaing the purpose of this message more? Also, what does it mean "if there is at least one participant for the node for this step"? Plz clarify -->
 
 This message is sent during step **1**, if there is at least one participant for the node for this step.
 
-| Field               | Description                                                                                    |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| **round**           | current round                                                                                  |
-| **step**            | current step                                                                                   |
-| **id**              | ID of the participant who created the block                                                    |
-| **signature**       | signature of the message with the participant’s key **id**                                     |
-| **rand**            | **signQ\_{r}** - signature of a random previous round vector with the participant’s key **id** |
-| **block_hash**      | new block hash                                                                                 |
-| **prev_rand**       | **signQ\_{r}** signature of a random vector of the round from the previous block               |
-| **prev_block_hash** | previous block hash                                                                            |
+| Field               | Description                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------- |
+| **round**           | current round                                                                                   |
+| **step**            | current step                                                                                    |
+| **id**              | ID of the participant who created the block                                                     |
+| **signature**       | signature of the message with the participant’s key **id**                                      |
+| **rand**            | **$sig(Q_{r})$**, the signature of a previous randomness seed with the participant’s key **id** |
+| **block_hash**      | new block hash                                                                                  |
+| **prev_rand**       | **$sig(Q_{r})$** the signature of the randomness seed from the previous block                   |
+| **prev_block_hash** | previous block hash                                                                             |
 
-#### 3. gc_proposal (selection of a leader and a block)
+#### 3. Selection of a Leader and a Block: `gc_proposal`
+
+<!-- Can we explaing the purpose of this message more? Also, what does it mean "if there is at least one participant for the node for this step"? Plz clarify -->
 
 This message is sent during step **2** and step **3**, if there is at least one participant for the node for this step.
 
@@ -454,9 +452,9 @@ This message is sent during step **2** and step **3**, if there is at least one 
 | **id**         | ID of the participant who created the block                |
 | **signature**  | signature of the message with the participant’s key **id** |
 | **block_hash** | selected block hash                                        |
-| **leader**     | ID of a selected leader, who created the block             |
+| **leader**     | ID of a selected leader who created the block              |
 
-#### 4. bba_signature (BBA step results)
+#### 4. BBA Consensus Result: `bba_signature`
 
 This message is sent during step **4** and all the subsequent steps of the algorithm, if there is at least one participant for the node for this step.
 
@@ -465,30 +463,35 @@ This message is sent during step **4** and all the subsequent steps of the algor
 | **round**      | current round                                                                                                         |
 | **step**       | current step                                                                                                          |
 | **id**         | ID of the participant who created the message                                                                         |
-| **value**      | evaluation within the **BBA** algorithm, 0 or 1                                                                       |
+| **value**      | evaluation within the **BBA** algorithm, either 0 or 1                                                                |
 | **block_hash** | selected block hash                                                                                                   |
 | **leader**     | ID of a selected leader, who created the block                                                                        |
 | **\_bba_sign** | signature for the fields **round**, **step**, **value**, **block_hash**, **leader** with the participant’s key **id** |
 | **signature**  | signature for the fields **value**, **block_hash**, **leader** with the participant’s key **id**                      |
 
-### Message processing
+### Message Processing
 
-Network message processing launched in step **2** does not stop at the completion of the step, but continues till the end of the round.
+Network message processing begun in step **2** does not stop at the completion of the step, but continues until the completion of the round.
 
-Network message processing for steps **BBA** (**s = 5,...**) is practically the same and does not depend on the step number.
+Network message processing for steps **BBA** (**s = 5, ...**) is practically the same and does not depend on the step number. For these steps the messaging process differs based on a subsequent analysis of the internal counters of the round. Consequently, the network processing for these steps can be effectively implemented in the base class.
 
-On these steps the network handlers difference lies in a subsequent analysis of the internal counters of round context. Consequently, the network processing for these steps can be effectively implemented in the base class.
+### Messages Distribution via Gossip
 
-### Messages distribution
+Each node always forwards the first `gc_block` message received to its peers, followed by a `gc_signature` by that node.
 
-The first received **gc_block** message, node **gc_signature** forwards always.
+For each subsequent `gc_block` messages received (along with a `gc_signature`), the node checks the participant **id** included. This message is only forwarded by the if the **id** of the participant in this message has the smallest index in array **$A_{step}$**, among all the `gc_block` messages already received by the node. In this way, a candidate is chosen among many blocks proposed by producers.
 
-All the subsequent **gc_block** messages, **gc_signature**, that the node receives, should only be forwarded if the **id** of the participant in this message has the smallest index in array **A\_{step}**, among all the received messages of this class.
+The rest of the round messages are processed and forwarded to peers by a node only in the case that:
 
-The rest of the round messages are processed and forwarded by the node only in case if:
+- The node is receiving the message for the first time
+- The message passes all the verification steps
 
-- the node has received this message for the first time
-- the message passes all the verification stages
+### Network Protocol Optimization
+
+To reduce the number of messages with information about the proposed block, the following optimizations are implemented in the protocol:
+
+- If the network node receives a block proposal that is not the first for the round and is not better than the previous one, the node does not pass this message and block proposal to its peers.
+- If several participants are authorized on the node for the block generation round, the node itself determines which of the blocks is the best candidate and sends a block proposal only for the best block.
 
 ## Exceptional situations
 
