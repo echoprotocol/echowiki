@@ -89,7 +89,7 @@ PixelPlex has implemented appropriate technical and organizational measures to p
 
 ## 7. Changes to this Privacy Policy
 
-PixelPlex may periodically, for various reasons, make changes to this Policy, for example to reflect changes in legislation and regulations, industry and technical developments, to protect of our users. 
+PixelPlex may periodically, for various reasons, make changes to this Policy, for example to reflect changes in legislation and regulations, industry and technical developments, to protect of our users.
 
 ## 8. Contact us
 
