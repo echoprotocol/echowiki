@@ -2,6 +2,9 @@
 
 # EchoRand
 
+$$Alex\ Dulub,\ Tyler\ Evans,\ Pixelplex\ Et\ Al.$$
+
+**ABSTRACT**
 EchoRand is the consensus mechanism used by the Echo protocol to provide very fast and final consensus. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
 
 The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
@@ -10,7 +13,7 @@ The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theor
 
 The ability to reach network-wide agreement about the next suitable set of transactions and adding them to the ledger (e.g. the blockchain) is a critical property of any distributed ledger. This property has important implications for the censorship-resistance and resiliency of the network, as an adversary who disrupts this consensus process can prevent any new economic activity from happening on the protocol. The task of determining which actor (or committee of actors) in a decentralized network have the right to propose new blocks for addition to the ledger has been addressed by different protocols:
 
-- **Proof of Work (PoW)**: The actors with the highest computational power compete for the ability to add blocks, massive real world hardware and electricity cost to participate in block generation ("mining"). Anyone can permissionlessly join or leave this competition by adding their computing power to the network. The network functions properly as long as 51% of computing power ("hash rate") is held by honest actors.
+- **Proof of Work (PoW)**: The actors with the highest computational power compete for the ability to add blocks, resulting in massive real world hardware and electricity requirements to participate in block generation ("mining"). Anyone can permissionlessly join or leave this competition by adding their computing power to the network. The network functions properly as long as 51% of computing power ("hash rate") is held by honest actors.
 - **Proof of Stake (PoS)**: Network actors can lock ("stake") some or all of their token balance as a security deposit in order to earn the right to participate in block production. Their participation is proportional to the amount of tokens staked, and this token deposit can be destroyed ("slashed") if they are proven to harm the network. The network is secure as long as 51% of the locked currency is staked by honest actors.
 - **Delegated Proof of Stake (dPoS)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by vote of the entire network and votes are weighted by the amount of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 - **Proof of Weighted Randomness (PoWR)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
@@ -21,9 +24,9 @@ In designing any distributed consensus system, one of the biggest challenges is 
 
 However, this tradeoff between centralization and throughput in not fundamental. Blockchains rely on the assumption that a majority of the network is always honest. If that is the case, it follows that a random sample of the network should also consist mostly of honest nodes (provided, of course, that the sample is large enough). That is the principle that Echo relies on.
 
-Rather than forcing every node to verify every transaction, Echo selects a random set of validators for every block. As long as enough imoqie validators attest that the block is valid, every other node on the network can accept it without needing to conduct their own verification. This allows Echo to achieve high throughput without requiring each individual node to verify every transaction like Bitcoin or compute every virtual machine state change like Ethereum.
+Rather than forcing every node to verify every transaction, Echo selects a random set of validators for every block. As long as enough of the validators attest that the block is valid, every other node on the network can accept it without needing to conduct their own verification. This allows Echo to achieve high throughput without requiring each individual node to verify every transaction like Bitcoin or compute every virtual machine state change like Ethereum.
 
-Echo operates with a different trust model than Delegated Proof of Stake systems, where only a limited set of selected actors can advance the network, thus bringing an undesired element of centralization and trust into the network. Instead, EchoRand allows for a greater degree of decentralization through involvement of all users in the consesnsus process, produces trust through verifiable randomness and delivers performance by limiting the proportion of users required for consensus in each round.
+Echo operates with a different trust model than Delegated Proof of Stake systems, where only a limited set of selected actors can advance the network, thus bringing an undesired element of centralization and trust into the network. Instead, EchoRand allows for a greater degree of decentralization through involvement of all users in the consensus process, produces trust through verifiable randomness and delivers performance by limiting the proportion of users required for consensus in each round.
 
 The major goal for creating the EchoRand consensus mechanism is to reduce of amount of explicit synchronization needed for reaching consensus in a distributed ledger. Other design goals include:
 
@@ -65,7 +68,7 @@ At each round, a new set of producers and verifiers is selected from all nodes i
 
 - The distribution of roles for the round is not known to any node in the network before the round begins.
 - The assignement of roles for the round can be computed independently by every network node, without the need for any explicit communication or network-wide coordination to occur.
-- The distribution of roles for any future round can not be predicted in advance by any of network node.
+- The distribution of roles for any future round can not be predicted in advance by any network node.
 
 To accomplish this deterministic yet random assignment of roles, EchoRand uses a **verifiable random function (VRF)**, which is pseudo-random function that provides publicly verifiable proofs of its outputs' correctness, originally introduced by Mikali, Rabin and Wadhan. Using a VRF, each network node can independenly check if it is assigned the role of a producer or verifier for a given round and send cryptographically proof of that assignment to other network nodes along with the proposed next block (for producers) or signed next block (for verifiers).
 
@@ -94,7 +97,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 - **Executor** - the network account selected in the step of the round for performing a specific consensus action
 - **Local configuration** - a certain set of parameters accessible only to the running network node.
 - **Base (database)** - a blockchain with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
-- **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. On one network node permits registration of several participants.
+- **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. One network node permits registration of several participants.
 
 ### Legend
 
@@ -111,7 +114,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 | **$sig(Q_{r})$** | signature of a random vector of the **$r$** round                                                                                                                         |
 | **$sig(B_{r})$** | signature of a block of the **$r$** round                                                                                                                                 |
 |    **$l(r)$**    | round **$r$** leader - determines **$PAY_{r}$**, creates **$B_{r}$** and determines **$Q_{r}$**                                                                           |
-|  **$CERT_{r}$**  | **$B_{r}$** block certificate, formed out of a set of **$bba_signature$** messages                                                                                        |
+|  **$CERT_{r}$**  | **$B_{r}$** block certificate, formed out of a set of `bba_signature` messages                                                                                            |
 | **$VRF(r, s)$**  | ordered set of participants who act in step **$s$** of round **$r$**                                                                                                      |
 | **$VRFN(r, s)$** | ordered set of indexes of **$VRF(r, s)$** participants who are registered on the current node and participate in step **$s$** of round **$r$**                            |
 
@@ -119,14 +122,14 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 The following algorithm parameters are set by constants, or configured at the **echo_node** startup and can potentially be adjusted within certain limits during the process of the algorithm operation.
 
-| Designation | Description                                                                                             |
-| :---------: | ------------------------------------------------------------------------------------------------------- |
-|     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across the **Echo** network    |
-|     $λ$     | "small" interval, the average time required to distribute a 256 bit message across the **Echo** network |
-|   $N_{g}$   | the number of block producers in a round, used in the function $VRF(r, 1)$                              |
-|   $N_{c}$   | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                       |
-|   $t_{h}$   | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$        |
-|     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created          |
+| Designation | Description                                                                                      |
+| :---------: | ------------------------------------------------------------------------------------------------ |
+|     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across the network      |
+|     $λ$     | "small" interval, the average time required to distribute a 256 bit message across the network   |
+|   $N_{g}$   | the number of block producers in a round, used in the function $VRF(r, 1)$                       |
+|   $N_{c}$   | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                |
+|   $t_{h}$   | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
+|     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created   |
 
 ### Cryptographic Primatives
 
@@ -185,7 +188,7 @@ $$Q_{r} = H( Q_{r-1}, r )$$
 
 <!-- This doesn't make any sense to me. Need to define some more terms? -->
 
-##### Generating a Random Vvalue at s = 7,10,13, ... BBA Step
+##### Generating a Random Value at s = 7,10,13, ... BBA Step
 
 $$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$$
 
@@ -195,7 +198,7 @@ For each block, a new list of possible **producers** is determined with the help
 
 Since all input data for the VRF is already included in the previous blocks, each node in the network determines the list of producers independently, and it is the same for everyone (deterministic).
 
-The mechanism is as follows: for block **$B$** from round **$r$**, we have a hash **$H(B_{r})$**, which is the result of the producer's signature $sig(H(B_{r-1}))$ of the previos block hash. Since the producer can’t mainipulate the result of the hash function (as the data that is hashed and the private key are strictly defined), and the hashing is checked using public key, we receive a new pseudo-random number in each block. This number (hash) from the block **$B_{r}$** is used as a random index to select the first producer on the list to generate a block. The index of this producer is used to get the next producer on the list, etc. until a complete list of those who will generate a block is created.
+The mechanism is as follows: for block **$B$** from round **$r$**, we have a hash **$H(B_{r})$**, which is the result of the producer's signature $sig(H(B_{r-1}))$ of the previous block hash. Since the producer can’t mainipulate the result of the hash function (as the data that is hashed and the private key are strictly defined), and the hashing is checked using the producer's public key, we receive a new pseudo-random number in each block. This number (hash) from the block **$B_{r}$** is used as a random index to select the first producer on the list to generate a block. The index of this producer is used to get the next producer on the list, etc. until a complete list of those who will generate a block is created.
 
 Each network node generates a list of producers for the current block and if the authorized account on the node is a member of the list, it generates and sends a block to the network using the following mechanism:
 
