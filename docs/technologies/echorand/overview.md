@@ -4,7 +4,7 @@
 
 $PixelPlex\ Et\ Al,\ Tyler\ Evans.$
 
-## ABSTRACT
+## Abstract
 
 EchoRand is the consensus mechanism used by the Echo protocol to provide very fast and final consensus. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
 
