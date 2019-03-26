@@ -2,7 +2,7 @@
 
 # EchoRand
 
-$$PixelPlex \ Et\ Al,\ Tyler\ Evans.$$
+$$PixelPlex\ Et\ Al,\ Tyler\ Evans.$$
 
 ## ABSTRACT
 
