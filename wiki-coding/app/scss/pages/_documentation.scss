@@ -349,3 +349,45 @@ h6 {
 		}
 	}
 }
+
+.source {
+	font-family: "Source Sans Pro", sans-serif;
+
+	li {
+		font-size: 17px !important;
+		line-height: 24px !important;
+	}
+
+	b {
+		font-weight: 600;
+	}
+}
+
+.git {
+	li {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji" !important;
+		font-size: 16px !important;
+		font-weight: 400 !important;
+		line-height: 1.5 !important;
+	}
+}
+
+.pt {
+	font-family: "PT Sans", sans-serif;
+
+	li {
+		font-size: 17px !important;
+		line-height: 24px !important;
+	}
+}
+
+.lato {
+	font-family: "Lato", sans-serif;
+}
+
+.helvetica {
+	font-family: "Helvetica", sans-serif;
+}

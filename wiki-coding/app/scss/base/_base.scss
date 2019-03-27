@@ -5,9 +5,10 @@ html {
 body {
 	display: flex;
 	flex-direction: column;
+	@include inter-ui-regular();
+
 	font-size: 1.4rem;
 	min-height: 100vh;
-	@include inter-ui-regular();
 }
 
 * {
