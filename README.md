@@ -2,7 +2,7 @@
 
 See wiki here - [https://echo-dev.io/](https://echo-dev.io/)
 
-Install dependences: 
+Install dependences:
 
 ```bash
 pip3 install mkdocs
