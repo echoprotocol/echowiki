@@ -17,11 +17,10 @@
 	a {
 		color: #fff;
 		font-size: 15px;
+		font-weight: 700;
 		letter-spacing: 0.5px;
 		position: relative;
 		white-space: nowrap;
-
-		@include inter-ui-bold();
 
 		&:before {
 			background-color: rgba(#fff, 0.6);

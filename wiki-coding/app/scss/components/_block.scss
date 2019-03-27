@@ -7,11 +7,10 @@
 	color: #000;
 	display: inline-block;
 	font-size: 4.4rem;
+	font-weight: 700;
 	line-height: 1;
 	margin: 10rem 0 0 0;
 	position: relative;
-
-	@include inter-ui-bold();
 
 	&:before {
 		background-color: #0b1bee;

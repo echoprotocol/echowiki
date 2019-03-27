@@ -26,9 +26,9 @@
 	}
 
 	&.big {
+		font-weight: 700;
 		height: 5.4rem;
 		letter-spacing: 0.17rem;
 		min-width: 20rem;
-		@include inter-ui-bold();
 	}
 }

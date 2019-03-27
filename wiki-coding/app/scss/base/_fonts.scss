@@ -1,86 +1,40 @@
 @font-face {
-	font-family: "InterUI-Black";
-	font-style: normal;
-	font-weight: 700;
-	src: url("../fonts/inter-ui/InterUI-Black.eot");
-	src: url("../fonts/inter-ui/InterUI-Black.woff2") format("woff2"),
-	url("../fonts/inter-ui/InterUI-Black.woff") format("woff"),
-	url("../fonts/inter-ui/InterUI-Black.otf") format("opentype"),
-	url("../fonts/inter-ui/Hack/InterUI-Black.ttf") format("truetype"),
-	url("../fonts/inter-ui/Font-Light.svg#InterUI-Black") format("svg");
-}
-
-@mixin inter-ui-black {
-	font: {
-		family: "InterUI-Black";
-		style: normal;
-		weight: 800;
-	}
-}
-
-@font-face {
-	font-family: "InterUI-Bold";
-	font-style: normal;
-	font-weight: 700;
-	src: url("../fonts/inter-ui/InterUI-Bold.eot");
-	src: url("../fonts/inter-ui/InterUI-Bold.woff2") format("woff2"),
-	url("../fonts/inter-ui/InterUI-Bold.woff") format("woff"),
-	url("../fonts/inter-ui/InterUI-Bold.otf") format("opentype"),
-	url("../fonts/inter-ui/Hack/InterUI-Bold.ttf") format("truetype"),
-	url("../fonts/inter-ui/Font-Light.svg#InterUI-Bold") format("svg");
-}
-
-@mixin inter-ui-bold {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-
-	font: {
-		family: "InterUI-Bold";
-		style: normal;
-		weight: 700;
-	}
-}
-
-@font-face {
-	font-family: "InterUI-Medium";
-	font-style: normal;
-	font-weight: 500;
-	src: url("../fonts/inter-ui/InterUI-Medium.eot");
-	src: url("../fonts/inter-ui/InterUI-Medium.woff2") format("woff2"),
-	url("../fonts/inter-ui/InterUI-Medium.woff") format("woff"),
-	url("../fonts/inter-ui/InterUI-Medium.otf") format("opentype"),
-	url("../fonts/inter-ui/Hack/InterUI-Medium.ttf") format("truetype"),
-	url("../fonts/inter-ui/Font-Light.svg#InterUI-Medium") format("svg");
-}
-
-@mixin inter-ui-medium {
-	font: {
-		family: "InterUI-Medium";
-		style: normal;
-		weight: 500;
-	}
-}
-
-@font-face {
-	font-family: "InterUI-Regular";
+	font-family: "Lato";
 	font-style: normal;
 	font-weight: 400;
-	src: url("../fonts/inter-ui/InterUI-Regular.eot");
-	src: url("../fonts/inter-ui/InterUI-Regular.woff2") format("woff2"),
-	url("../fonts/inter-ui/InterUI-Regular.woff") format("woff"),
-	url("../fonts/inter-ui/InterUI-Regular.otf") format("opentype"),
-	url("../fonts/inter-ui/Hack/InterUI-Regular.ttf") format("truetype"),
-	url("../fonts/inter-ui/Font-Light.svg#InterUI-Regular") format("svg");
+	src: url("../fonts/lato/regular/Lato.eot");
+	src: url("../fonts/lato/regular/Lato.eot?#iefix") format("embedded-opentype"),
+	url("../fonts/lato/regular/Lato.svg#Lato") format("svg"),
+	url("../fonts/lato/regular/Lato.ttf") format("truetype"),
+	url("../fonts/lato/regular/Lato.woff") format("woff"),
+	url("../fonts/lato/regular/Lato.woff2") format("woff2");
 }
 
-@mixin inter-ui-regular {
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-
+@mixin lato-regular {
 	font: {
-		family: "InterUI-Regular";
+		family: "Lato";
 		style: normal;
 		weight: 400;
+	}
+}
+
+@font-face {
+	font-family: "Lato";
+	font-style: normal;
+	font-weight: 700;
+	src: url("../fonts/lato/bold/Lato.eot");
+	src: url("../fonts/lato/bold/Lato.eot?#iefix") format("embedded-opentype"),
+	url("../fonts/lato/bold/Lato.svg#Lato") format("svg"),
+	url("../fonts/lato/bold/Lato.ttf") format("truetype"),
+	url("../fonts/lato/bold/Lato.woff") format("woff"),
+	url("../fonts/lato/bold/Lato.woff2") format("woff2");
+}
+
+@mixin lato-bold {
+	font: {
+		family: "Lato";
+		style: normal;
+		weight: 700;
 	}
 }
 
@@ -93,7 +47,7 @@
 	url("../fonts/hack/Hack-Bold.woff") format("woff"),
 	url("../fonts/hack/Hack-Bold.otf") format("opentype"),
 	url("../fonts/hack/Hack/Hack-Bold.ttf") format("truetype"),
-	url("../fonts/hack/Font-Light.svg#Hack-Bold") format("svg");
+	url("../fonts/hack/Hack-Bold.svg#Hack-Bold") format("svg");
 }
 
 @mixin hack-bold {
@@ -113,7 +67,7 @@
 	url("../fonts/hack/Hack-Regular.woff") format("woff"),
 	url("../fonts/hack/Hack-Regular.otf") format("opentype"),
 	url("../fonts/hack/Hack/Hack-Regular.ttf") format("truetype"),
-	url("../fonts/hack/Font-Light.svg#Hack-Regular") format("svg");
+	url("../fonts/hack/Hack-Bold.svg#Hack-Regular") format("svg");
 }
 
 @mixin hack-regular {
@@ -123,5 +77,3 @@
 		weight: 400;
 	}
 }
-
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700|PT+Sans:400,700|Roboto:400,700|Source+Sans+Pro:400,600,700");
