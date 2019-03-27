@@ -227,6 +227,8 @@ Each network node generates a list of producers for the current block and if the
 
 This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
 
+![gc-steps.png](./gc-steps.png)
+
 #### Step 1 - Voting
 
 Each of the selected verifiers tells the network which of the blocks they consider preferable for the current round.
