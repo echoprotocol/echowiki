@@ -1,16 +1,34 @@
 <!-- markdownlint-disable md024 -->
+<!-- markdownlint-disable md033 -->
 
-# EchoRand
+# EchoRand: Fast and Final Consensus Based on Proof of Weighted Randomness {.title }
 
-$PixelPlex\ Et\ Al,\ Tyler\ Evans.$
+<!-- Can we add some more names here? Besides just Pixelplex -->
+<span class="intro">
 
-## Abstract
+Alex Dulub, Tyler Evans, Pixelplex, Et al.
 
-EchoRand is the consensus mechanism used by the Echo protocol to provide very fast and final consensus. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
+`team@echo.org`
 
-The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+March 2019
+WORKING DRAFT
 
-## Background
+</span>
+
+## Abstract {.abstract .counter-skip}
+
+<span class="abstract">
+
+EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus on which set of transaction to append to a distributed ledger. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
+
+</span>
+
+[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+[^2]: Lorem ipsum dolor sit amet, consectetur adipiscing eli2t.
+
+## Introduction
+
+### Prior Work
 
 The ability to reach network-wide agreement about the next suitable set of transactions and adding them to the ledger (e.g. the blockchain) is a critical property of any distributed ledger. This property has important implications for the censorship-resistance and resiliency of the network, as an adversary who disrupts this consensus process can prevent any new economic activity from happening on the protocol. The task of determining which actor (or committee of actors) in a decentralized network have the right to propose new blocks for addition to the ledger has been addressed by different protocols:
 
@@ -19,7 +37,9 @@ The ability to reach network-wide agreement about the next suitable set of trans
 - **Delegated Proof of Stake (dPoS)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by vote of the entire network and votes are weighted by the amount of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 - **Proof of Weighted Randomness (PoWR)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
 
-## Design Goals
+The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos [^1]. Algorand v9[^2] describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+
+### Design Goals
 
 In designing any distributed consensus system, one of the biggest challenges is balancing transaction throughput with centralization. On one end of the spectrum, Bitcoin is limited to ~7 transactions per second in order to minimize the resource requirements necessary to run a full validating node. On the other end, EOS requires 21 elected block producers to maintain extremely sophisticated hardware setups, getting high transaction throughput at the cost of increased centralization.
 
@@ -63,7 +83,7 @@ EchoRand consensus is performed in **rounds**, with either a new block of transa
 1. Block Generation
 1. Best Block Voting and Application
 
-### Cryptographic Sortition
+### Cryptographic Sortition {.counter-reset}
 
 At each round, a new set of producers and verifiers is selected from all nodes in the network in such a way that:
 
@@ -93,7 +113,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ![echorand-steps.png](./echorand-steps.png)
 
-### Other Terms
+### Other Terms {.counter-reset}
 
 - **Executor** - the network account selected in the step of the round for performing a specific consensus action
 - **Local configuration** - a certain set of parameters accessible only to the running network node.
@@ -101,6 +121,8 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 - **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. One network node permits registration of several participants.
 
 ### Legend
+
+<!-- Let's add definitions for msg, ctx, N, A, id -->
 
 |   Designation    | Description                                                                                                                                                               |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -396,7 +418,7 @@ If the value **$ctx[l].B == ∅$**, then:
 
 ## Network Communication
 
-### Message Format
+### Message Format {.counter-reset}
 
 Each message broadcast by nodes is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e there is always a **message_signature** field inlcuded with a broadcast message.
 
