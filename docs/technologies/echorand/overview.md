@@ -1,7 +1,7 @@
 <!-- markdownlint-disable md024 -->
 <!-- markdownlint-disable md033 -->
 
-# EchoRand: Fast and Final Consensus Based on Proof of Weighted Randomness {.title }
+# Echo PoWR: Fast and Final Consensus Based on Proof of Weighted Randomness {.title }
 
 <!-- Can we add some more names here? Besides just Pixelplex -->
 <span class="intro">
@@ -23,9 +23,6 @@ EchoRand is the consensus mechanism used by the Echo protocol to provide fast an
 
 </span>
 
-[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-[^2]: Lorem ipsum dolor sit amet, consectetur adipiscing eli2t.
-
 ## Introduction
 
 ### Prior Work
@@ -37,7 +34,16 @@ The ability to reach network-wide agreement about the next suitable set of trans
 - **Delegated Proof of Stake (dPoS)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by vote of the entire network and votes are weighted by the amount of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 - **Proof of Weighted Randomness (PoWR)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
 
-The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos [^1]. Algorand v9[^2] describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] [^1] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos . Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares [^2] as well as delegated proof of stake blockchains like EOS [^3] with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+
+[^1]: Silvio Micali and Jing Chen. _Algorand_. Jul. 2016. URL: [https://arxiv.org/abs/1607.01341v9][algorand-v9].
+[^2]: Daniel Larimer and Fabian Schuh. _Bitshares 2.0: Financial Smart Contract Platform_. URL: [https://whitepaperdatabase.com/bitshares-bts-whitepaper/][bitshares].
+
+[bitshares]: https://whitepaperdatabase.com/bitshares-bts-whitepaper/
+
+[^3]: Block.One. _EOS.IO Technical White Paper v2_. URL: [https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md][eos].
+
+[eos]: https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md
 
 ### Design Goals
 
@@ -91,7 +97,9 @@ At each round, a new set of producers and verifiers is selected from all nodes i
 - The assignement of roles for the round can be computed independently by every network node, without the need for any explicit communication or network-wide coordination to occur.
 - The distribution of roles for any future round can not be predicted in advance by any network node.
 
-To accomplish this deterministic yet random assignment of roles, EchoRand uses a **verifiable random function (VRF)**, which is pseudo-random function that provides publicly verifiable proofs of its outputs' correctness, originally introduced by Mikali, Rabin and Wadhan. Using a VRF, each network node can independenly check if it is assigned the role of a producer or verifier for a given round and send cryptographically proof of that assignment to other network nodes along with the proposed next block (for producers) or signed next block (for verifiers).
+To accomplish this deterministic yet random assignment of roles, EchoRand uses a **verifiable random function (VRF)** [^4], which is pseudo-random function that provides publicly verifiable proofs of its outputs' correctness, originally introduced by Mikali, Rabin and Wadhan. Using a VRF, each network node can independenly check if it is assigned the role of a producer or verifier for a given round and send cryptographically proof of that assignment to other network nodes along with the proposed next block (for producers) or signed next block (for verifiers).
+
+[^4]: Silvio Micali, Michael O. Rabin, and Salil P. Vadhan. _Verifiable random functions_. 1999. Proceedings of the 40th IEEE Symposium on Foundations of Computer Science.
 
 The size of sets of producers and verifiers is globally-known and configurable. It can be dynamically adjusted to accomplish the best trade off between security and performance. As a safeguard against Sybil attacks, each node's probability of becoming a verifier or a producer for the round is directly proportional to that node's account balance.
 
@@ -162,10 +170,12 @@ The following algorithm parameters are set by constants, or configured at the **
   - public key: 32 bytes (256 bits)
   - private key: 32 bytes (256 bits)
   - signature: 64 bytes (512 bits)
-- [SHA-256][] - cryptographic hash algorithm
+- SHA-256[^5] - cryptographic hash algorithm
   - hash: 32 bytes (256 bits)
   - sequence function on a hashset (`std::less<hash_t, hash_t>`)
 - [VRF][] - verifiable random function
+
+[^5]:
 
 #### VRF
 
@@ -589,7 +599,7 @@ By randomly selecting validators for each block rather than forcing every node t
 
 <!-- Creating an account in the Echo network requires creating a corresponding transaction added to the block -->
 
-[algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
+[algorand-v9]: https://arxiv.org/abs/1607.01341v9
 [echo-wp]: https://drive.google.com/file/d/1y1VCfvM8czq-BaTgEl0AuctAbGzV_S93/view
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
 [eddsa]: https://en.wikipedia.org/wiki/EdDSA
