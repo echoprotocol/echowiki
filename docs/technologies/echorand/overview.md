@@ -3,6 +3,19 @@
 
 # Echo PoWR: Fast and Final Consensus Based on Proof of Weighted Randomness {.title }
 
+<!-- MORE QUESTIONS -->
+<!-- The requirement ‘One user can be registered as a participant only on a single network node at a given time.’ seems unenforceable. Is it really correct? -->
+
+<!-- In Input Data: ‘𝐴1 , 𝑁1 from the context of the round’ A1 hasn’t been defined and N1 is ambiguous (Nc, Ng, or something undefined) -->
+
+<!-- Would also help to specify what **l vs *l vs l* vs l** denotes. I’m unclear on the distinction, if any. Also ctx is undefined. -->
+
+<!-- Haha a minor translation issue, but the phrase ‘schedule the timer after the time equal to…’ appears several times -->
+
+<!-- The security section looks really good! Maybe a quick note that a 67% attacker can double spend as well as censor tho?  -->
+
+<!-- Need to add a section, maybe under "exceptional situations" where we discuss the ability for a block producer to manipulate the account balances to make himself more likely to be chosen as block producer again. How is this attack vector mitigated? -->
+
 <!-- Can we add some more names here? Besides just Pixelplex -->
 <span class="intro">
 
@@ -453,7 +466,7 @@ If the value **$ctx[l].B == ∅$**, then:
 
 ### Message Format {.counter-reset}
 
-Each message broadcast by nodes is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e there is always a **message_signature** field inlcuded with a broadcast message.
+Each message broadcast by nodes is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e there is always a `message_signature` field included with a broadcast message.
 
 Separate fields or groups of fields are also signed with an [EdDSA][] key of the participant who creates the message.
 
