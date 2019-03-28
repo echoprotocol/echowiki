@@ -170,9 +170,9 @@ The following algorithm parameters are set by constants, or configured at the **
 | :---------: | ------------------------------------------------------------------------------------------------ |
 |     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across the network      |
 |     $λ$     | "small" interval, the average time required to distribute a 256 bit message across the network   |
-|   $N_{g}$   | the number of block producers in a round, used in the function $VRF(r, 1)$                       |
-|   $N_{c}$   | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                |
-|   $t_{h}$   | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
+|    $N_g$    | the number of block producers in a round, used in the function $VRF(r, 1)$                       |
+|    $N_c$    | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                |
+|    $t_h$    | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
 |     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created   |
 
 ### Cryptographic Primatives
@@ -180,15 +180,15 @@ The following algorithm parameters are set by constants, or configured at the **
 <!-- Need to add more here, describing EdDSA and SHA-256 -->
 
 - [EdDSA][] - deterministic algorithm for creating and verifying electronic digital signature
-  - public key: 32 bytes (256 bits)
-  - private key: 32 bytes (256 bits)
-  - signature: 64 bytes (512 bits)
+    - public key: 32 bytes (256 bits)
+    - private key: 32 bytes (256 bits)
+    - signature: 64 bytes (512 bits)
 - SHA-256[^5] - cryptographic hash algorithm
-  - hash: 32 bytes (256 bits)
-  - sequence function on a hashset (`std::less<hash_t, hash_t>`)
+    - hash: 32 bytes (256 bits)
+    - sequence function on a hashset (`std::less<hash_t, hash_t>`)
 - [VRF][] - verifiable random function
 
-[^5]:
+[^5]: Descriptions of SHA-256, SHA-384, and SHA-512 from NIST. URL: [https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf][SHA-256]
 
 #### VRF
 
@@ -269,17 +269,17 @@ Right after determining $CERT_{r-1}$
 #### Steps
 
 1. **Verification**:
-   1. If **$N_{1}=∅$**, complete the step
-   1. Select participant index with **$n = N_{1}[0]$** as a creator of this block on the node
-   1. Get actual ID of the the participant in the blockchain: **$id_{1} = A_{1}[n]$**
-   1. Through **$id_{1}$** get all the private keys of a participant
+	1. If **$N_{1}=∅$**, complete the step
+    1. Select participant index with **$n = N_{1}[0]$** as a creator of this block on the node
+    1. Get actual ID of the the participant in the blockchain: **$id_{1} = A_{1}[n]$**
+    1. Through **$id_{1}$** get all the private keys of a participant
 1. **Block assembly**:
-   1. If all the previous blocks **$B_{k}$** where $k=1, 2, 3, ..., r-1$ are available, build **$PAY_{r}$**
-   1. If at least one of the previous blocks is unavailable, build **$PAY_{r} = ∅$**
-   1. If **$PAY_{r}\ != ∅$**, create a new block **$B_{r}\ =\ \\{\ r,\ PAY_{r},\ Q_{r-1},\ sig(Q_{r-1}),\ H(B_{r-1})\ \\}$**
+    1. If all the previous blocks **$B_{k}$** where $k=1, 2, 3, ..., r-1$ are available, build **$PAY_{r}$**
+    1. If at least one of the previous blocks is unavailable, build **$PAY_{r} = ∅$**
+    1. If **$PAY_{r}\ != ∅$**, create a new block **$B_{r}\ =\ \\{\ r,\ PAY_{r},\ Q_{r-1},\ sig(Q_{r-1}),\ H(B_{r-1})\ \\}$**
 1. **Communication, generation, signature and a simultaneous broadcast:**
-   1. Sign with the key **$id_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig(B_{r})$ }
-   1. Sign with the key **$id_{1}$** and send `gc_signature` = { $r, id_{1}, sig(Q_{r-1}), H(B_{r})$ }
+    1. Sign with the key **$id_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig(B_{r})$ }
+    1. Sign with the key **$id_{1}$** and send `gc_signature` = { $r, id_{1}, sig(Q_{r-1}), H(B_{r})$ }
 
 ### Graded Consensus (GC)
 
@@ -306,52 +306,52 @@ Right after determining $CERT_{r-1}$
 ##### Steps
 
 1. **Timer**: schedule the timer after the time equal to **$2 * λ$**, by a trigger:
-   1. To define **l**, as **id** from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
-   1. If the local cache for **l** has the block **$B_{r}$**
-      1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
-      1. Go to **Communication**
+    1. To define **l**, as **id** from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
+    1. If the local cache for **l** has the block **$B_{r}$**
+        1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
+        1. Go to **Communication**
 1. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
-   1. **$v\ ==\ \\{\ ∅,\ ∅\ \\}$**
-   1. go to **Communication**
+    1. **$v\ ==\ \\{\ ∅,\ ∅\ \\}$**
+    1. go to **Communication**
 1. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
-   1. After receiving a message `gc_block` of the round **$r$**
-      1. Verify the round number in the message
-      1. Verify the message step equals **1**
-      1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
-      1. Verify the signature of the whole message
-      1. Verify that **msg.block** is correct
-         1. Verify the block's round for equality to the current
-         1. Verify **$ID_{producer} ∈ A_{1}$**
-         1. Verify **$Q_{r}$** from the block, if it already has the `gc_signature`
-         1. Verify the block signature using **producer-id** of the block
-         1. Verify **$H(B_{r-1})$** from the block for equality to the local one from **$CERT_{r-1}$**
-         1. Verify the correctness of **$PAY_{r}$** in the block
-      1. If **$ctx[msg.id]$** already exists
-         1. Verify **$ctx[msg.id].HB == H(msg.block)$**
-      1. If it does not exist, save **msg.id, msg.block** in the context of the round:
-         1. **$ctx[msg.id].B = msg.block$**
-         1. **$ctx[msg.id].HB = H(msg.block)$**
-      1. Vf **l** and **l == id** are installed:
-         1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
-         1. Go to **Communication**
-   1. After receiving a message `gc_signature` of the round **$r$**
-      1. Verify the round number in the message
-      1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
-      1. Verify the signature of the whole message
-      1. **$msg.block\\_hash = ∅$**: verify **msg.rand** for equality to the local one from **$CERT_{r-1}$**
-      1. **$msg.block\\_hash\ != ∅$**: verify the signature **msg.rand** using **$Q_{r-1}$** from **$CERT_{r-1}$**
-      1. Save **$msg.id => ∅$** in the context of the round if it’s not saved yet:
-         1. **$ctx[msg.id].B = ∅$**
-         1. **$ctx[msg.id].HB = msg.block\\_hash$**
-         1. **$ctx[msg.id].rand = msg.rand$**
+    1. After receiving a message `gc_block` of the round **$r$**
+        1. Verify the round number in the message
+        1. Verify the message step equals **1**
+        1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
+        1. Verify the signature of the whole message
+        1. Verify that **msg.block** is correct
+            1. Verify the block's round for equality to the current
+            1. Verify **$ID_{producer} ∈ A_{1}$**
+            1. Verify **$Q_{r}$** from the block, if it already has the `gc_signature`
+            1. Verify the block signature using **producer-id** of the block
+            1. Verify **$H(B_{r-1})$** from the block for equality to the local one from **$CERT_{r-1}$**
+            1. Verify the correctness of **$PAY_{r}$** in the block
+        1. If **$ctx[msg.id]$** already exists
+            1. Verify **$ctx[msg.id].HB == H(msg.block)$**
+        1. If it does not exist, save **msg.id, msg.block** in the context of the round:
+            1. **$ctx[msg.id].B = msg.block$**
+            1. **$ctx[msg.id].HB = H(msg.block)$**
+        1. Vf **l** and **l == id** are installed:
+            1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
+            1. Go to **Communication**
+    1. After receiving a message `gc_signature` of the round **$r$**
+        1. Verify the round number in the message
+        1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
+        1. Verify the signature of the whole message
+        1. **$msg.block\\_hash = ∅$**: verify **msg.rand** for equality to the local one from **$CERT_{r-1}$**
+        1. **$msg.block\\_hash\ != ∅$**: verify the signature **msg.rand** using **$Q_{r-1}$** from **$CERT_{r-1}$**
+        1. Save **$msg.id => ∅$** in the context of the round if it’s not saved yet:
+            1. **$ctx[msg.id].B = ∅$**
+            1. **$ctx[msg.id].HB = msg.block\\_hash$**
+            1. **$ctx[msg.id].rand = msg.rand$**
 1. **Communication**: generating, signing and sending of messages
-   1. Stop timers, **do not** unsubscribe from network messages
-   1. If **$N_{2} = ∅$**, end the step
-   1. **$∀n_{2} ∈ N_{2}$**:
-      1. Get real user’s ID in the blockchain: **$id_{2} = A_{2}[n_{2}]$**
-      1. Sign with the key **$id_{2}$** and send
-         1. if **$v\ != ∅$**: `gc_proposal` = **$\\{\ r, 2, id_{2}, v\ \\}$**
-         1. if **$v == ∅$**: `gc_proposal` = **$\\{\ r, 2, id_{2}, ∅\ \\}$**
+    1. Stop timers, **do not** unsubscribe from network messages
+    1. If **$N_{2} = ∅$**, end the step
+    1. **$∀n_{2} ∈ N_{2}$**:
+        1. Get real user’s ID in the blockchain: **$id_{2} = A_{2}[n_{2}]$**
+        1. Sign with the key **$id_{2}$** and send
+            1. if **$v\ != ∅$**: `gc_proposal` = **$\\{\ r, 2, id_{2}, v\ \\}$**
+            1. if **$v == ∅$**: `gc_proposal` = **$\\{\ r, 2, id_{2}, ∅\ \\}$**
 
 #### Step 3 - Vote Counting
 
@@ -368,26 +368,26 @@ Right after determining $CERT_{r-1}$
 ##### Steps
 
 1. **Timer**: schedule the timer after the time equal to $3 * λ + Λ$, by a trigger:
-   1. **$v == \\{\ ∅, ∅\ \\}$**
-   1. Go to **Communication**
+    1. **$v == \\{\ ∅, ∅\ \\}$**
+    1. Go to **Communication**
 1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
-   1. Verify the round number and the step number in the message
-   1. Verify that **$msg.id ∈ A_{2}$** and get the user's public key
-   1. Verify the signature of the whole message
-   1. Verify that **$msg.v = \\{\ msg.block\\_hash, msg.leader\ \\}$** is in the context of the round.
+    1. Verify the round number and the step number in the message
+    1. Verify that **$msg.id ∈ A_{2}$** and get the user's public key
+    1. Verify the signature of the whole message
+    1. Verify that **$msg.v = \\{\ msg.block\\_hash, msg.leader\ \\}$** is in the context of the round.
       It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
-      1. **$∃\ ctx[msg.leader]$** - a record for such a potential leader exists in the context
-      1. **$ctx[msg.leader].HB == msg.block\\_hash$** - the block hash coincides
-   1. **$ctx[msg.leader].v3.push(msg.id)$**, where **$v3$** is an _unordered_set_
-   1. If the counter is more than the threshold **$t_{h}$**: **$ctx[msg.leader].v3.size() > t_{h}$**
-      1. **$v = \\{\ msg.block\\_hash, msg.leader\ \\}$**
-      1. Go to **Communication**
+        1. **$∃\ ctx[msg.leader]$** - a record for such a potential leader exists in the context
+        1. **$ctx[msg.leader].HB == msg.block\\_hash$** - the block hash coincides
+    1. **$ctx[msg.leader].v3.push(msg.id)$**, where **$v3$** is an _unordered_set_
+    1. If the counter is more than the threshold **$t_{h}$**: **$ctx[msg.leader].v3.size() > t_{h}$**
+        1. **$v = \\{\ msg.block\\_hash, msg.leader\ \\}$**
+        1. Go to **Communication**
 1. **Communication**: generating, signing and sending of messages
-   1. Stop timers, unsubscribe from network messages
-   1. If **$N_3 = ∅$**, end the step
-   1. **$∀n_3 ∈ N_3$**:
-      1. Get real user’s ID in the blockchain: **$id_{3} = A_{3}[n_{3}]$**
-      1. Sign with the user’s key **$id_{3}$** and send `gc_proposal` = { $r, 3, id_{3}, v$ }
+    1. Stop timers, unsubscribe from network messages
+    1. If **$N_3 = ∅$**, end the step
+    1. **$∀n_3 ∈ N_3$**:
+        1. Get real user’s ID in the blockchain: **$id_{3} = A_{3}[n_{3}]$**
+        1. Sign with the user’s key **$id_{3}$** and send `gc_proposal` = { $r, 3, id_{3}, v$ }
 
 #### Step 4 - Primary evaluation of the vote count
 
@@ -406,35 +406,33 @@ Right after finishing the step 3.
 ##### Steps
 
 1. **Timer**: schedule the timer after the time equal to **2 \* λ**, by a trigger:
-   1. if $∃l\ |\ ctx[l].v4.size()\ >\ t_{h}/2:\ v\ =\ \\{\ ctx[l].HB,\ l\ \\}$
-      1. otherwise: $v\ =\ \\{\ ∅,\ ∅\ \\}$
-   1. **$b = 1$**
-   1. Go to **Communication**
+    1. if $∃l\ |\ ctx[l].v4.size()\ >\ t_{h}/2:\ v\ =\ \\{\ ctx[l].HB,\ l\ \\}$
+        1. otherwise: $v\ =\ \\{\ ∅,\ ∅\ \\}$
+    1. **$b = 1$**
+    1. Go to **Communication**
 1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
-
-   1. Verify the round number and the step number in the message
-   1. Verify that **$id\ ∈\ A\{3\}$** and get the user's public key
-   1. Verify the signature of the whole message
-   1. **$msg.v$** = { $msg.block\\_hash, msg.leader$ }
-   1. **$msg.v\ !=\ \\{\ ∅,\ ∅\ \\}$**: verify that **$msg.v$** is in the context of the round (should be collected in step 2)
-      1. **$∃\ ctx[msg.leader]$** - a record for such a potential leader exists in the context
-      1. **$ctx[msg.leader].HB == msg.block\\_hash$** - the block hash coincides
-      1. **$ctx[msg.leader].v4.push(msg.id)$**, **$v4$** is an _unordered_set_
-      1. if **$ctx[msg.leader].v4.size()\ >\ t_{h}$**
-         1. **$v\ =\ \\{\ msg.block\\_hash,\ msg.leader\ \\}$** , **$b\ =\ 0$**
-         1. Go to **Communication**
-   1. **$msg.v\ ==\ \\{\ ∅,\ ∅\ \\}$**
-      1. **$ctx.ve4.push(msg.id)$**, **$ve4$** is an _unordered_set_ (**v**alue **e**mpty)
-      1. if **$ctx.ve4.size()\ >\ t_{h}$**
-         1. **$v\ =\ \\{\ ∅,\ ∅\ \\}$**, **$b = 1$**
-         1. Go to **Communication**
-
+    1. Verify the round number and the step number in the message
+    1. Verify that **$id\ ∈\ A\{3\}$** and get the user's public key
+    1. Verify the signature of the whole message
+    1. **$msg.v$** = { $msg.block\\_hash, msg.leader$ }
+    1. **$msg.v\ !=\ \\{\ ∅,\ ∅\ \\}$**: verify that **$msg.v$** is in the context of the round (should be collected in step 2)
+        1. **$∃\ ctx[msg.leader]$** - a record for such a potential leader exists in the context
+        1. **$ctx[msg.leader].HB == msg.block\\_hash$** - the block hash coincides
+        1. **$ctx[msg.leader].v4.push(msg.id)$**, **$v4$** is an _unordered_set_
+        1. if **$ctx[msg.leader].v4.size()\ >\ t_{h}$**
+            1. **$v\ =\ \\{\ msg.block\\_hash,\ msg.leader\ \\}$** , **$b\ =\ 0$**
+            1. Go to **Communication**
+    1. **$msg.v\ ==\ \\{\ ∅,\ ∅\ \\}$**
+        1. **$ctx.ve4.push(msg.id)$**, **$ve4$** is an _unordered_set_ (**v**alue **e**mpty)
+        1. if **$ctx.ve4.size()\ >\ t_{h}$**
+            1. **$v\ =\ \\{\ ∅,\ ∅\ \\}$**, **$b = 1$**
+            1. Go to **Communication**
 1. **Communication**: generating, signing and sending of messages
-   1. Stop timers, unsubscribe from network messages
-   1. If **$N_4\ =\ ∅$**, end the step
-   1. **$∀\ n_4\ ∈\ N_4$**:
-      1. Get real user’s ID in the blockchain: $id_{4}\ =\ A_{4}[n_{4}]$
-      1. Sign with the user’s key **$id_{4}$** and send `bba_signature` = { $r, 4, id\_{4}, b, v, sig(0, v)$ }
+    1. Stop timers, unsubscribe from network messages
+    1. If **$N_4\ =\ ∅$**, end the step
+    1. **$∀\ n_4\ ∈\ N_4$**:
+        1. Get real user’s ID in the blockchain: $id_{4}\ =\ A_{4}[n_{4}]$
+        1. Sign with the user’s key **$id_{4}$** and send `bba_signature` = { $r, 4, id\_{4}, b, v, sig(0, v)$ }
 
 ### Binary Byzantine Agreement (BBA)
 
@@ -639,5 +637,5 @@ By randomly selecting validators for each block rather than forcing every node t
 [echo-wp]: https://drive.google.com/file/d/1y1VCfvM8czq-BaTgEl0AuctAbGzV_S93/view
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
 [eddsa]: https://tools.ietf.org/html/rfc8032
-[sha-256]: https://en.wikipedia.org/wiki/SHA-2
+[sha-256]: https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf
 [vrf]: https://en.wikipedia.org/wiki/Verifiable_random_function

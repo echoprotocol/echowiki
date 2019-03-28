@@ -44,7 +44,7 @@ gulp.task('run',
     'html',
     'fonts-dist',
 	'img-min',
-	'watch'	
+	'watch'
   ], function() {
   browserSync.init({
     server: "./dist"
@@ -93,7 +93,7 @@ gulp.task("scss-lint", function() {
 		throwError: true
 	  })
 	];
-  
+
 	return gulp.src(
 		[
 			'./app/scss/**/*.scss',
@@ -135,7 +135,7 @@ gulp.task('minify-css', function(){
   return gulp.src(dist.css + '**/*.css')
     .pipe(cssmin())
     .pipe(gulp.dest(dist.css))
-    .pipe(reload({stream: true }));    
+    .pipe(reload({stream: true }));
 });
 
 
