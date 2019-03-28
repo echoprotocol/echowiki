@@ -6,13 +6,11 @@
 <!-- MORE QUESTIONS -->
 <!-- The requirement ‘One user can be registered as a participant only on a single network node at a given time.’ seems unenforceable. Is it really correct? -->
 
-<!-- Would also help to specify what **l vs *l vs l* vs l** denotes. I’m unclear on the distinction, if any. Also ctx is undefined. -->
-
 <!-- Haha a minor translation issue, but the phrase ‘schedule the timer after the time equal to…’ appears several times -->
 
 <!-- The security section looks really good! Maybe a quick note that a 67% attacker can double spend as well as censor tho?  -->
 
-<!-- Need to add a section, maybe under "exceptional situations" where we discuss the ability for a block producer to manipulate the account balances to make himself more likely to be chosen as block producer again. How is this attack vector mitigated? -->
+<!-- Need to add more here describing EdDSA and SHA-256, as well as citations for both -->
 
 <!-- Can we add some more names here? Besides just Pixelplex -->
 <span class="intro">
@@ -165,8 +163,8 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 |     **$id$**     | account identifier in the blockchain                                                                                                                                      |
 |    **$A_s$**     | array of account identifiers selected as participants in the step **$s$**                                                                                                 |
 |    **$N_s$**     | array of $A_s$ indexes which correspond to the identifiers of users authorized on the current node in the step **$s$**                                                    |
-|     **$l$**      | identifier of the producer who is the leader in this round                                                                                                                |
-|    **$ctx$**     | context of current round. An object which contains all received messages for the round                                                                                    |
+|     **$l$**      | the id of the producer who is the leader in this round                                                                                                                    |
+|    **$ctx$**     | the context of current round as an object which contains all received messages for the round                                                                              |
 
 ### Parameters
 
@@ -238,20 +236,20 @@ In this case, the signature is generated using the EdDSA private key of the prod
 
 $$Q_{r} = H( Q_{r-1}, r )$$
 
-##### Generating a Random Value at s = 7,10,13, ... BBA Step
+##### Generating a Random Value Dururing BBA Steps
 
-At each step of the BBA algorithm, network nodes сan be divided into two sets:
+At each step of the BBA algorithm, all network nodes сan be divided into two sets:
 
-- nodes that received a sufficient number of messages during the previous round(s) (with a certain equal value), allowing them to offer this value as a solution.
-- nodes that received two solution variants and cannot give preference to either of them.
+- nodes that have received a sufficient number of messages during the previous round(s) from their peers (with a certain equal value), allowing them to be certain about the value that will be chosen by the network
+- nodes that have received a significant number of messages with two solution variants, meaning the nodes are uncertain about the value that will be chosen by the network
 
-In the latter case, undecided nodes use **$VRF$** to generate a shared random value from the `{0, 1}` set for making and sending their decisions. And since the random value will be the same for all the "uncertain" nodes, all such nodes will make just the same decision.
+In the latter case, all uncertain nodes use a **$VRF$** to generate a shared random value from the set `{0, 1}` for deciding between the two valid alternatives and relay their decision to the rest of the network. Since the random value will be the same for all uncertain nodes, each will arrive at the same decision.
 
-A Random Value for "uncertain" nodes will be generating with this formula:
+A random value for uncertain nodes is generated according to the formula:
 
 $$BBA\_RAND(s) = lsb\ \{ SHA256( Q_{r-1}, r ) \}$$
 
-Where $lsb$ - least significant bit.
+Where $lsb$ is the least significant bit.
 
 ### Step 1 - Block Generation
 
@@ -596,7 +594,7 @@ The scenario occurs when the local database of the node is syncing or reconcilin
 
 The syncing node must determine the moment when its local database will be in sync with the rest of the network and begin the steps of the consensus algorithm at that time.
 
-#### Block producer influence on the VRF outcome
+#### Block Producer Influence on VRF
 
 Account balances formed as a result of the $r$ round will be used in the VRF only when assigning a set of producers and verifiers for the round $r + 2$. However, the randomness seed for the round $r + 2$ will be affected by the outcome of the round $r + 1$.
 
