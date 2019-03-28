@@ -78,7 +78,8 @@
 
 	p,
 	li {
-		code {
+		code,
+		.mjx-math {
 			background-color: rgba(27, 31, 35, 0.05);
 			border: 1px solid rgba(#051eeb, 0.1);
 			border-radius: 3px;
@@ -87,6 +88,14 @@
 
 			&:hover {
 				color: #070430;
+			}
+		}
+
+		.MJXc-display {
+			.mjx-math {
+				background-color: transparent;
+				border: 0;
+				padding: 0;
 			}
 		}
 	}
