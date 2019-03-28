@@ -79,10 +79,11 @@
 	p,
 	li {
 		code {
-			background-color: rgba(#051eeb, 0.1);
+			background-color: rgba(27, 31, 35, 0.05);
 			border: 1px solid rgba(#051eeb, 0.1);
+			border-radius: 3px;
 			color: #070430;
-			padding: 0 3px;
+			padding: 0px 3px 2px 3px;
 
 			&:hover {
 				color: #070430;
@@ -126,9 +127,9 @@
 	ul li,
 	ol li,
 	a {
-		font-size: 17px;
+		font-size: 16px;
 		letter-spacing: 0.025px;
-		line-height: 25px;
+		line-height: 27px;
 	}
 
 	ol {
@@ -333,19 +334,6 @@ h6 {
 
 		.grid-container {
 			flex-direction: column;
-		}
-	}
-}
-@include screen-min(900) {
-	.documentation-page {
-		table {
-			tr {
-				td {
-					&:nth-child(1) {
-						width: 300px;
-					}
-				}
-			}
 		}
 	}
 }
