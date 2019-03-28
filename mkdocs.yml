@@ -2,15 +2,17 @@ site_name: ECHO Blockchain Wiki
 site_url: https://echo-de
 site_dir: public
 theme:
-    name: basictheme
-    highlightjs: true
-    feature:
-        tabs: true
-    hljs_languages:
-      - javascript
+  name: basictheme
+  highlightjs: true
+  feature:
+    tabs: true
+  hljs_languages:
+    - javascript
 
 markdown_extensions:
   - codehilite
+  - footnotes
+  - attr_list
   - toc:
       permalink: True
       baselevel: 1
@@ -18,70 +20,70 @@ markdown_extensions:
   - pymdownx.tasklist:
 
 extra_javascript:
-    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 nav:
   - Introduction:
-    - What is Echo?: introduction/what-is-echo.md
-    # - How does Echo work?: introduction/how-does-echo-work.md
-    - Whitepapers: introduction/whitepapers.md
+      - What is Echo?: introduction/what-is-echo.md
+      # - How does Echo work?: introduction/how-does-echo-work.md
+      - Whitepapers: introduction/whitepapers.md
   - Get started:
-    - Installation: get-started/installation.md
-    - Running Node and Cli-wallet: get-started/running.md
-    - Quickstart Docker: get-started/docker.md
-      # - Node:  get-started/running/node.md
-      # - Wallet:  get-started/running/wallet.md
-      # - Docker:  get-started/running/docker.md
+      - Installation: get-started/installation.md
+      - Running Node and Cli-wallet: get-started/running.md
+      - Quickstart Docker: get-started/docker.md
+        # - Node:  get-started/running/node.md
+        # - Wallet:  get-started/running/wallet.md
+        # - Docker:  get-started/running/docker.md
     # - Individuals: get-started/individuals.md
     # - Businisses:
     #   - Shops: get-started/Businisses/Shops.md
     #   - Exchange Platforms: get-started/Businisses/Exchange Platforms.md
     #   - Investors: get-started/Businisses/Investors.md
   - How To:
-    - Use Echo: how-to/Use Echo.md
-    - Accept Echo: how-to/Accept Echo.md
-    - Create account: how-to/create-account.md
-    - Issue Assets: how-to/Issue Assets.md
-    - Use Smart Contracts: how-to/Use Smart Contracts.md
-    - Issue Blocks/Get Rewarded: how-to/Issue Blocks(Get Rewarded).md
-    - Connect to blockchain:
-      - Websocket API and Subscriptions: how-to/api/websocket-api-and-subscriptions.md
-      - RPC Call: how-to/api/rpc-call.md
-      - Cli-Wallet API: how-to/api/cli-wallet-api.md
-      - API Access Restrictions: how-to/api/access.md
+      - Use Echo: how-to/Use Echo.md
+      - Accept Echo: how-to/Accept Echo.md
+      - Create account: how-to/create-account.md
+      - Issue Assets: how-to/Issue Assets.md
+      - Use Smart Contracts: how-to/Use Smart Contracts.md
+      - Issue Blocks/Get Rewarded: how-to/Issue Blocks(Get Rewarded).md
+      - Connect to blockchain:
+          - Websocket API and Subscriptions: how-to/api/websocket-api-and-subscriptions.md
+          - RPC Call: how-to/api/rpc-call.md
+          - Cli-Wallet API: how-to/api/cli-wallet-api.md
+          - API Access Restrictions: how-to/api/access.md
     # - Inspect Logs: how-to/Inspect Logs.md
     # - Report Issues: how-to/Report Issues.md
   - Developers:
-    - APIs list: developers/apis.md
-    - Smart Contracts:
-      - Get Started: developers/smart-contracts/get-started.md
-      - Solidity:
-        - Introduction: developers/smart-contracts/solidity/introduction.md
-        - Hello World!: developers/smart-contracts/solidity/hello-world.md
-        - Difference from ethereum: developers/smart-contracts/solidity/difference-from-ethereum.md
-      - x86-64:
-        - Introduction: developers/smart-contracts/x86-64/introduction.md
-        # - Create x86 Smart Contract: developers/smart-contracts/x86-64/Create x86 Smart Contract.md
-        # - Upload x86 Smart Contract: developers/smart-contracts/x86-64/Upload x86 Smart Contract.md
-        # - Application Interface (API): developers/smart-contracts/x86-64/Application Interface (API).md
-        # - Fees: developers/smart-contracts/x86-64/Fees.md
-#      - Tips & Tricks: developers/smart-contracts/Tips & Tricks.md
-    - Command-Line Tools: developers/command-line-tools.md
-    - Operations: developers/operations.md
-    - Libraries and Frameworks:
-      - EchoJS: developers/libraries-n-frameworks/echojs.md
-      - Android and iOS: developers/libraries-n-frameworks/android-n-ios.md
+      - APIs list: developers/apis.md
+      - Smart Contracts:
+          - Get Started: developers/smart-contracts/get-started.md
+          - Solidity:
+              - Introduction: developers/smart-contracts/solidity/introduction.md
+              - Hello World!: developers/smart-contracts/solidity/hello-world.md
+              - Difference from ethereum: developers/smart-contracts/solidity/difference-from-ethereum.md
+          - x86-64:
+              - Introduction: developers/smart-contracts/x86-64/introduction.md
+            # - Create x86 Smart Contract: developers/smart-contracts/x86-64/Create x86 Smart Contract.md
+            # - Upload x86 Smart Contract: developers/smart-contracts/x86-64/Upload x86 Smart Contract.md
+            # - Application Interface (API): developers/smart-contracts/x86-64/Application Interface (API).md
+            # - Fees: developers/smart-contracts/x86-64/Fees.md
+      #      - Tips & Tricks: developers/smart-contracts/Tips & Tricks.md
+      - Command-Line Tools: developers/command-line-tools.md
+      - Operations: developers/operations.md
+      - Libraries and Frameworks:
+          - EchoJS: developers/libraries-n-frameworks/echojs.md
+          - Android and iOS: developers/libraries-n-frameworks/android-n-ios.md
     # - Source Code:
-      # - Project structure: http://google.com
-      # - Build instructions: http://google.com
+    # - Project structure: http://google.com
+    # - Build instructions: http://google.com
   - Technologies:
       - Echorand:
-        - In a nutshell: technologies/echorand/in-a-nutshell.md
-        - General View: technologies/echorand/general-view.md
-        - Architecture: technologies/echorand/architecture.md
-        - Monitoring with ws: technologies/echorand/monitoring.md
+          - In a nutshell: technologies/echorand/in-a-nutshell.md
+          - General View: technologies/echorand/general-view.md
+          - Architecture: technologies/echorand/architecture.md
+          - Monitoring with ws: technologies/echorand/monitoring.md
       - Sidechain:
-        - General View: technologies/sidechain/general-view.md
+          - General View: technologies/sidechain/general-view.md
       - Oracles: developers/technologies/Oracles.md
       - Contracts/VMs: developers/technologies/Contracts(VMs).md
 

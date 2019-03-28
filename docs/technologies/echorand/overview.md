@@ -1,16 +1,44 @@
 <!-- markdownlint-disable md024 -->
+<!-- markdownlint-disable md033 -->
 
-# EchoRand
+# Echo PoWR: Fast and Final Consensus Based on Proof of Weighted Randomness {.title }
 
-$PixelPlex\ Et\ Al,\ Tyler\ Evans.$
+<!-- MORE QUESTIONS -->
+<!-- The requirement ‘One user can be registered as a participant only on a single network node at a given time.’ seems unenforceable. Is it really correct? -->
 
-## Abstract
+<!-- In Input Data: ‘𝐴1 , 𝑁1 from the context of the round’ A1 hasn’t been defined and N1 is ambiguous (Nc, Ng, or something undefined) -->
 
-EchoRand is the consensus mechanism used by the Echo protocol to provide very fast and final consensus. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
+<!-- Would also help to specify what **l vs *l vs l* vs l** denotes. I’m unclear on the distinction, if any. Also ctx is undefined. -->
 
-The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+<!-- Haha a minor translation issue, but the phrase ‘schedule the timer after the time equal to…’ appears several times -->
 
-## Background
+<!-- The security section looks really good! Maybe a quick note that a 67% attacker can double spend as well as censor tho?  -->
+
+<!-- Need to add a section, maybe under "exceptional situations" where we discuss the ability for a block producer to manipulate the account balances to make himself more likely to be chosen as block producer again. How is this attack vector mitigated? -->
+
+<!-- Can we add some more names here? Besides just Pixelplex -->
+<span class="intro">
+
+Alex Dulub, Tyler Evans, Pixelplex, Et al.
+
+`team@echo.org`
+
+March 2019
+WORKING DRAFT
+
+</span>
+
+## Abstract {.abstract .counter-skip}
+
+<span class="abstract">
+
+EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus on which set of transaction to append to a distributed ledger. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
+
+</span>
+
+## Introduction
+
+### Prior Work
 
 The ability to reach network-wide agreement about the next suitable set of transactions and adding them to the ledger (e.g. the blockchain) is a critical property of any distributed ledger. This property has important implications for the censorship-resistance and resiliency of the network, as an adversary who disrupts this consensus process can prevent any new economic activity from happening on the protocol. The task of determining which actor (or committee of actors) in a decentralized network have the right to propose new blocks for addition to the ledger has been addressed by different protocols:
 
@@ -19,7 +47,18 @@ The ability to reach network-wide agreement about the next suitable set of trans
 - **Delegated Proof of Stake (dPoS)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by vote of the entire network and votes are weighted by the amount of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 - **Proof of Weighted Randomness (PoWR)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
 
-## Design Goals
+The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] [^1] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos . Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares [^2] as well as delegated proof of stake blockchains like EOS [^3] with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+
+[^1]: Silvio Micali and Jing Chen. _Algorand_. Jul. 2016. URL: [https://arxiv.org/abs/1607.01341v9][algorand-v9].
+[^2]: Daniel Larimer and Fabian Schuh. _Bitshares 2.0: Financial Smart Contract Platform_. URL: [https://whitepaperdatabase.com/bitshares-bts-whitepaper/][bitshares].
+
+[bitshares]: https://whitepaperdatabase.com/bitshares-bts-whitepaper/
+
+[^3]: Block.One. _EOS.IO Technical White Paper v2_. URL: [https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md][eos].
+
+[eos]: https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md
+
+### Design Goals
 
 In designing any distributed consensus system, one of the biggest challenges is balancing transaction throughput with centralization. On one end of the spectrum, Bitcoin is limited to ~7 transactions per second in order to minimize the resource requirements necessary to run a full validating node. On the other end, EOS requires 21 elected block producers to maintain extremely sophisticated hardware setups, getting high transaction throughput at the cost of increased centralization.
 
@@ -63,7 +102,7 @@ EchoRand consensus is performed in **rounds**, with either a new block of transa
 1. Block Generation
 1. Best Block Voting and Application
 
-### Cryptographic Sortition
+### Cryptographic Sortition {.counter-reset}
 
 At each round, a new set of producers and verifiers is selected from all nodes in the network in such a way that:
 
@@ -71,7 +110,9 @@ At each round, a new set of producers and verifiers is selected from all nodes i
 - The assignement of roles for the round can be computed independently by every network node, without the need for any explicit communication or network-wide coordination to occur.
 - The distribution of roles for any future round can not be predicted in advance by any network node.
 
-To accomplish this deterministic yet random assignment of roles, EchoRand uses a **verifiable random function (VRF)**, which is pseudo-random function that provides publicly verifiable proofs of its outputs' correctness, originally introduced by Mikali, Rabin and Wadhan. Using a VRF, each network node can independenly check if it is assigned the role of a producer or verifier for a given round and send cryptographically proof of that assignment to other network nodes along with the proposed next block (for producers) or signed next block (for verifiers).
+To accomplish this deterministic yet random assignment of roles, EchoRand uses a **verifiable random function (VRF)** [^4], which is pseudo-random function that provides publicly verifiable proofs of its outputs' correctness, originally introduced by Mikali, Rabin and Wadhan. Using a VRF, each network node can independenly check if it is assigned the role of a producer or verifier for a given round and send cryptographically proof of that assignment to other network nodes along with the proposed next block (for producers) or signed next block (for verifiers).
+
+[^4]: Silvio Micali, Michael O. Rabin, and Salil P. Vadhan. _Verifiable random functions_. 1999. Proceedings of the 40th IEEE Symposium on Foundations of Computer Science.
 
 The size of sets of producers and verifiers is globally-known and configurable. It can be dynamically adjusted to accomplish the best trade off between security and performance. As a safeguard against Sybil attacks, each node's probability of becoming a verifier or a producer for the round is directly proportional to that node's account balance.
 
@@ -93,7 +134,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ![echorand-steps.png](./echorand-steps.png)
 
-### Other Terms
+### Other Terms {.counter-reset}
 
 - **Executor** - the network account selected in the step of the round for performing a specific consensus action
 - **Local configuration** - a certain set of parameters accessible only to the running network node.
@@ -101,6 +142,8 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 - **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. One network node permits registration of several participants.
 
 ### Legend
+
+<!-- Let's add definitions for msg, ctx, N, A, id -->
 
 |   Designation    | Description                                                                                                                                                               |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -127,9 +170,9 @@ The following algorithm parameters are set by constants, or configured at the **
 | :---------: | ------------------------------------------------------------------------------------------------ |
 |     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across the network      |
 |     $λ$     | "small" interval, the average time required to distribute a 256 bit message across the network   |
-|   $N_{g}$   | the number of block producers in a round, used in the function $VRF(r, 1)$                       |
-|   $N_{c}$   | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                |
-|   $t_{h}$   | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
+|    $N_g$    | the number of block producers in a round, used in the function $VRF(r, 1)$                       |
+|    $N_c$    | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                |
+|    $t_h$    | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
 |     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created   |
 
 ### Cryptographic Primatives
@@ -137,13 +180,15 @@ The following algorithm parameters are set by constants, or configured at the **
 <!-- Need to add more here, describing EdDSA and SHA-256 -->
 
 - [EdDSA][] - deterministic algorithm for creating and verifying electronic digital signature
-  - public key: 32 bytes (256 bits)
-  - private key: 32 bytes (256 bits)
-  - signature: 64 bytes (512 bits)
-- [SHA-256][] - cryptographic hash algorithm
-  - hash: 32 bytes (256 bits)
-  - sequence function on a hashset (`std::less<hash_t, hash_t>`)
+    - public key: 32 bytes (256 bits)
+    - private key: 32 bytes (256 bits)
+    - signature: 64 bytes (512 bits)
+- SHA-256[^5] - cryptographic hash algorithm
+    - hash: 32 bytes (256 bits)
+    - sequence function on a hashset (`std::less<hash_t, hash_t>`)
 - [VRF][] - verifiable random function
+
+[^5]: Descriptions of SHA-256, SHA-384, and SHA-512 from NIST. URL: [https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf][SHA-256]
 
 #### VRF
 
@@ -187,13 +232,22 @@ In this case, the signature is generated using the EdDSA private key of the prod
 
 $$Q_{r} = H( Q_{r-1}, r )$$
 
-<!-- This doesn't make any sense to me. Need to define some more terms? -->
-
 ##### Generating a Random Value at s = 7,10,13, ... BBA Step
 
-$$BBARAND(s) = lsb( SHA256( Q_{r-1}, r ) )$$
+At each step of the BBA algorithm, network nodes сan be divided into two sets:
 
-### Block Generation
+- nodes that received a sufficient number of messages during the previous round(s) (with a certain equal value), allowing them to offer this value as a solution.
+- nodes that received two solution variants and cannot give preference to either of them.
+
+In the latter case, undecided nodes use **$VRF$** to generate a shared random value from the `{0, 1}` set for making and sending their decisions. And since the random value will be the same for all the "uncertain" nodes, all such nodes will make just the same decision.
+
+A Random Value for "uncertain" nodes will be generating with this formula:
+
+$$BBA\_RAND(s) = lsb\ \{ SHA256( Q_{r-1}, r ) \}$$
+
+Where $lsb$ - least significant bit.
+
+### Step 1 - Block Generation
 
 For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, s)$ as described above. As a result, each network node receives a $VRF(r, s)$ set and a $VRFN(r, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
@@ -208,26 +262,33 @@ Each network node generates a list of producers for the current block and if the
 - **$H(B_{r-1})$** from **$CERT_{r-1}$**
 - **$A_{1}$**, **$N_{1}$** from the context of the round
 
+##### Start
+
+Right after determining $CERT_{r-1}$
+
 #### Steps
 
 1. **Verification**:
-   1. If **$N_{1}=∅$**, complete the step
-   1. Select participant index with **$n = N_{1}[0]$** as a creator of this block on the node
-   1. Get actual ID of the the participant in the blockchain: **$id_{1} = A_{1}[n]$**
-   1. Through **$id_{1}$** get all the private keys of a participant
+	1. If **$N_{1}=∅$**, complete the step
+    1. Select participant index with **$n = N_{1}[0]$** as a creator of this block on the node
+    1. Get actual ID of the the participant in the blockchain: **$id_{1} = A_{1}[n]$**
+    1. Through **$id_{1}$** get all the private keys of a participant
 1. **Block assembly**:
-   1. If all the previous blocks **$B_{k}$** where $k=1, 2, 3, ..., r-1$ are available, build **$PAY_{r}$**
-   1. If at least one of the previous blocks is unavailable, build **$PAY_{r} = ∅$**
-   1. If **$PAY_{r} != ∅$**, create a new block **$B_{r}$** = { $r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})$ }
+    1. If all the previous blocks **$B_{k}$** where $k=1, 2, 3, ..., r-1$ are available, build **$PAY_{r}$**
+    1. If at least one of the previous blocks is unavailable, build **$PAY_{r} = ∅$**
+    1. If **$PAY_{r}\ != ∅$**, create a new block **$B_{r}\ =\ \\{\ r,\ PAY_{r},\ Q_{r-1},\ sig(Q_{r-1}),\ H(B_{r-1})\ \\}$**
 1. **Communication, generation, signature and a simultaneous broadcast:**
-   1. Sign with the key **$id_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig(B_{r})$ }
-   1. Sign with the key **$id_{1}$** and send `gc_signature` = { $r, id_{1}, sig(Q_{r-1}), H(B_{r})$ }
+    1. Sign with the key **$id_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig(B_{r})$ }
+    1. Sign with the key **$id_{1}$** and send `gc_signature` = { $r, id_{1}, sig(Q_{r-1}), H(B_{r})$ }
 
 ### Graded Consensus (GC)
 
 This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
+<br/>
+<br/>
+![gc-steps.png](./gc-steps.png)
 
-#### Step 1 - Voting
+#### Step 2 - Voting
 
 Each of the selected verifiers tells the network which of the blocks they consider preferable for the current round.
 
@@ -238,57 +299,61 @@ Each of the selected verifiers tells the network which of the blocks they consid
 
 **$v$** is a local structure of a step that stores the hash of the block and the ID of the producer which created the block. The empty set symbol assigned to the elements **$v$** means "empty block" and "unknown leader". In the application, it can be a predefined constant or a separate flag in the data structure.
 
+##### Start
+
+Right after determining $CERT_{r-1}$
+
 ##### Steps
 
 1. **Timer**: schedule the timer after the time equal to **$2 * λ$**, by a trigger:
-   1. To define **l**, as **id** from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
-   1. If the local cache for **l** has the block **$B_{r}$**
-      1. **$v = { ctx[l].HB, l }$**
-      1. Go to **Communication**
+    1. To define **l**, as **id** from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
+    1. If the local cache for **l** has the block **$B_{r}$**
+        1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
+        1. Go to **Communication**
 1. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
-   1. **$v$** == { $∅, ∅$ }
-   1. go to **Communication**
+    1. **$v\ ==\ \\{\ ∅,\ ∅\ \\}$**
+    1. go to **Communication**
 1. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
-   1. After receiving a message `gc_block` of the round **$r$**
-      1. Verify the round number in the message
-      1. Verify the message step equals **1**
-      1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
-      1. Verify the signature of the whole message
-      1. Verify that **msg.block** is correct
-         1. Verify the block's round for equality to the current
-         1. Verify **$ID_{producer}$** ∈ A\_{1}\*\*
-         1. Verify **$Q_{r}$** from the block, if it already has the `gc_signature`
-         1. Verify the block signature using **producer-id** of the block
-         1. Verify **$H(B_{r-1})$** from the block for equality to the local one from **$CERT_{r-1}$**
-         1. Verify the correctness of **$PAY_{r}$** in the block
-      1. If **$ctx[msg.id]$** already exists
-         1. Verify **$ctx[msg.id].HB == H(msg.block)$**
-      1. If it does not exist, save **msg.id, msg.block** in the context of the round:
-         1. **$ctx[msg.id].B = msg.block$**
-         1. **$ctx[msg.id].HB = H(msg.block)$**
-      1. Vf **l** and **l == id** are installed:
-         1. **$v = { ctx[l].HB, l }$**
-         1. Go to **Communication**
-   1. After receiving a message `gc_signature` of the round **$r$**
-      1. Verify the round number in the message
-      1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
-      1. Verify the signature of the whole message
-      1. **$msg.block\_hash = ∅$**: verify **msg.rand** for equality to the local one from **$CERT_{r-1}$**
-      1. **$msg.block\_hash != ∅$**: verify the signature **msg.rand** using **$Q_{r-1}$** from **$CERT_{r-1}$**
-      1. Save **$msg.id => ∅$** in the context of the round if it’s not saved yet:
-         1. **$ctx[msg.id].B = ∅$**
-         1. **$ctx[msg.id].HB = msg.block\_hash$**
-         1. **$ctx[msg.id].rand = msg.rand$**
+    1. After receiving a message `gc_block` of the round **$r$**
+        1. Verify the round number in the message
+        1. Verify the message step equals **1**
+        1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
+        1. Verify the signature of the whole message
+        1. Verify that **msg.block** is correct
+            1. Verify the block's round for equality to the current
+            1. Verify **$ID_{producer} ∈ A_{1}$**
+            1. Verify **$Q_{r}$** from the block, if it already has the `gc_signature`
+            1. Verify the block signature using **producer-id** of the block
+            1. Verify **$H(B_{r-1})$** from the block for equality to the local one from **$CERT_{r-1}$**
+            1. Verify the correctness of **$PAY_{r}$** in the block
+        1. If **$ctx[msg.id]$** already exists
+            1. Verify **$ctx[msg.id].HB == H(msg.block)$**
+        1. If it does not exist, save **msg.id, msg.block** in the context of the round:
+            1. **$ctx[msg.id].B = msg.block$**
+            1. **$ctx[msg.id].HB = H(msg.block)$**
+        1. Vf **l** and **l == id** are installed:
+            1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
+            1. Go to **Communication**
+    1. After receiving a message `gc_signature` of the round **$r$**
+        1. Verify the round number in the message
+        1. Verify that **$msg.id ∈ A_{1}$** and get the user's public key
+        1. Verify the signature of the whole message
+        1. **$msg.block\\_hash = ∅$**: verify **msg.rand** for equality to the local one from **$CERT_{r-1}$**
+        1. **$msg.block\\_hash\ != ∅$**: verify the signature **msg.rand** using **$Q_{r-1}$** from **$CERT_{r-1}$**
+        1. Save **$msg.id => ∅$** in the context of the round if it’s not saved yet:
+            1. **$ctx[msg.id].B = ∅$**
+            1. **$ctx[msg.id].HB = msg.block\\_hash$**
+            1. **$ctx[msg.id].rand = msg.rand$**
 1. **Communication**: generating, signing and sending of messages
-   1. Stop timers, **do not** unsubscribe from network messages
-   1. If **$N_{2} = ∅$**, end the step
-   1. **$∀n_{2} ∈ N_{2}$**:
-      1. Get real user’s ID in the blockchain: **$id_{2} = A_{2}[n_{2}]$**
-      1. Sign with the key **$id_{2}$** and send
-         1. if **$v != ∅$**: `gc_proposal` = **${ r, 2, id_{2}, v }$**
-         1. if **$v == ∅$**: `gc_proposal` = **${ r, 2, id_{2}, ∅ }$**
+    1. Stop timers, **do not** unsubscribe from network messages
+    1. If **$N_{2} = ∅$**, end the step
+    1. **$∀n_{2} ∈ N_{2}$**:
+        1. Get real user’s ID in the blockchain: **$id_{2} = A_{2}[n_{2}]$**
+        1. Sign with the key **$id_{2}$** and send
+            1. if **$v\ != ∅$**: `gc_proposal` = **$\\{\ r, 2, id_{2}, v\ \\}$**
+            1. if **$v == ∅$**: `gc_proposal` = **$\\{\ r, 2, id_{2}, ∅\ \\}$**
 
-#### Step 2 - Vote Counting
+#### Step 3 - Vote Counting
 
 Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes and announces the results of their count to the entire network.
 
@@ -296,33 +361,35 @@ Based on the messages received from other verifiers in step 1, each verifier tal
 
 - $A_{2}$, $A_{3}$, $N_{3}$ from the context of the round
 
+##### Start
+
+Right after determining $CERT_{r-1}$
+
 ##### Steps
 
-1. **Timer**: schedule the timer after the time equal to **3 \* λ + Λ**, by a trigger:
-
-   1. **$v$** == { $∅, ∅$ }
-   1. Go to **Communication**
-
+1. **Timer**: schedule the timer after the time equal to $3 * λ + Λ$, by a trigger:
+    1. **$v == \\{\ ∅, ∅\ \\}$**
+    1. Go to **Communication**
 1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
-
-   1. Verify the round number and the step number in the message
-   1. Verify that **$msg.id ∈ A_{2}$** and get the user's public key
-   1. Verify the signature of the whole message
-   1. Verify that **$msg.v = { msg.block\_hash, msg.leader }$** is in the context of the round.
-      It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing. 1. **$∃ ctx[msg.leader]$** - a record for such a potential leader exists in the context 1. **$ctx[msg.leader].HB == msg.block_hash$** - the block hash coincides
-   1. **$ctx[msg.leader].v3.push(msg.id)$**, where **$v3$** is an _unordered_set_
-   1. If the counter is more than the threshold **$`t_{h}`$**: **$ctx[msg.leader].v3.size() > `t_{h}`$**
-      1. **$v$** = { $msg.block\_hash, msg.leader$ }
-      1. Go to **Communication**
-
+    1. Verify the round number and the step number in the message
+    1. Verify that **$msg.id ∈ A_{2}$** and get the user's public key
+    1. Verify the signature of the whole message
+    1. Verify that **$msg.v = \\{\ msg.block\\_hash, msg.leader\ \\}$** is in the context of the round.
+      It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
+        1. **$∃\ ctx[msg.leader]$** - a record for such a potential leader exists in the context
+        1. **$ctx[msg.leader].HB == msg.block\\_hash$** - the block hash coincides
+    1. **$ctx[msg.leader].v3.push(msg.id)$**, where **$v3$** is an _unordered_set_
+    1. If the counter is more than the threshold **$t_{h}$**: **$ctx[msg.leader].v3.size() > t_{h}$**
+        1. **$v = \\{\ msg.block\\_hash, msg.leader\ \\}$**
+        1. Go to **Communication**
 1. **Communication**: generating, signing and sending of messages
-   1. Stop timers, unsubscribe from network messages
-   1. If **$N\{3\} = ∅$**, end the step
-   1. **$∀n\{3\} ∈ N\{3\}$**:
-      1. Get real user’s ID in the blockchain: **$id_{3} = A_{3}[n_{3}]$**
-      1. Sign with the user’s key **$id_{3}$** and send `gc_proposal` = { $r, 3, id_{3}, v$ }
+    1. Stop timers, unsubscribe from network messages
+    1. If **$N_3 = ∅$**, end the step
+    1. **$∀n_3 ∈ N_3$**:
+        1. Get real user’s ID in the blockchain: **$id_{3} = A_{3}[n_{3}]$**
+        1. Sign with the user’s key **$id_{3}$** and send `gc_proposal` = { $r, 3, id_{3}, v$ }
 
-#### Step 3 - Primary evaluation of the vote count
+#### Step 4 - Primary evaluation of the vote count
 
 After receiving the voting results of the previous steps, all nodes know whether the verifiers were able to agree on the choice of the best block for the current round. Each verifier creates a message including information on the outcome (whether an agreement was reached or not) and the details of the block agreement and broadcasts this message to the network.
 
@@ -332,41 +399,40 @@ After this step, all nodes in the network have a preliminary idea of whether the
 
 - $A_{3}$, $A_{4}$, $N_{4}$ from the context of the round
 
+##### Start
+
+Right after finishing the step 3.
+
 ##### Steps
 
 1. **Timer**: schedule the timer after the time equal to **2 \* λ**, by a trigger:
-
-   1. if **$∃l | ctx[l].v4.size() > `t_{h}/2`: v = { ctx[l].HB, l }$**
-      1. otherwise: **$v = { ∅, ∅ }$**
-   1. **$b = 1$**
-   1. Go to **Communication**
-
+    1. if $∃l\ |\ ctx[l].v4.size()\ >\ t_{h}/2:\ v\ =\ \\{\ ctx[l].HB,\ l\ \\}$
+        1. otherwise: $v\ =\ \\{\ ∅,\ ∅\ \\}$
+    1. **$b = 1$**
+    1. Go to **Communication**
 1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
-
-   1. Verify the round number and the step number in the message
-   1. Verify that **$id ∈ A\{3\}$** and get the user's public key
-   1. Verify the signature of the whole message
-   1. **$msg.v$** = { $msg.block\_hash, msg.leader$ }
-   1. **$msg.v != { ∅, ∅ }$**: verify that **$msg.v$** is in the context of the round (should be collected in step 2)
-      1. **$∃ ctx[msg.leader]$** - a record for such a potential leader exists in the context
-      1. **$ctx[msg.leader].HB == msg.block\_hash$** - the block hash coincides
-      1. **$ctx[msg.leader].v4.push(msg.id)$**, **$v4$** is an _unordered_set_
-      1. if **$ctx[msg.leader].v4.size() > `t_{h}`$**
-         1. **$v$** = { $msg.block\_hash, msg.leader$, **$b = 0$**
-         1. Go to **Communication**
-   1. **$msg.v$** == { $∅, ∅$ }
-      1. **$ctx.ve4.push(msg.id$)**, **$ve4$** is an _unordered_set_ (**v**alue **e**mpty)
-      1. if **$ctx.ve4.size() > `t_{h}`$**
-         1. **$v$** = { $∅, ∅$ }, **$b = 1$**
-         1. Go to **Communication**
-
+    1. Verify the round number and the step number in the message
+    1. Verify that **$id\ ∈\ A\{3\}$** and get the user's public key
+    1. Verify the signature of the whole message
+    1. **$msg.v$** = { $msg.block\\_hash, msg.leader$ }
+    1. **$msg.v\ !=\ \\{\ ∅,\ ∅\ \\}$**: verify that **$msg.v$** is in the context of the round (should be collected in step 2)
+        1. **$∃\ ctx[msg.leader]$** - a record for such a potential leader exists in the context
+        1. **$ctx[msg.leader].HB == msg.block\\_hash$** - the block hash coincides
+        1. **$ctx[msg.leader].v4.push(msg.id)$**, **$v4$** is an _unordered_set_
+        1. if **$ctx[msg.leader].v4.size()\ >\ t_{h}$**
+            1. **$v\ =\ \\{\ msg.block\\_hash,\ msg.leader\ \\}$** , **$b\ =\ 0$**
+            1. Go to **Communication**
+    1. **$msg.v\ ==\ \\{\ ∅,\ ∅\ \\}$**
+        1. **$ctx.ve4.push(msg.id)$**, **$ve4$** is an _unordered_set_ (**v**alue **e**mpty)
+        1. if **$ctx.ve4.size()\ >\ t_{h}$**
+            1. **$v\ =\ \\{\ ∅,\ ∅\ \\}$**, **$b = 1$**
+            1. Go to **Communication**
 1. **Communication**: generating, signing and sending of messages
-
-   1. Stop timers, unsubscribe from network messages
-   1. If **$N\{4\} = ∅$**, end the step
-   1. **$∀ n\{4\} ∈ N\{4\}$**:
-      1. Get real user’s ID in the blockchain: $id_{4} = A_{4}[n_{4}]$
-      1. Sign with the user’s key **id\_{4}** and send `bba_signature` = { $r, 4, id\_{4}, b, v, sig(0, v)$ }
+    1. Stop timers, unsubscribe from network messages
+    1. If **$N_4\ =\ ∅$**, end the step
+    1. **$∀\ n_4\ ∈\ N_4$**:
+        1. Get real user’s ID in the blockchain: $id_{4}\ =\ A_{4}[n_{4}]$
+        1. Sign with the user’s key **$id_{4}$** and send `bba_signature` = { $r, 4, id\_{4}, b, v, sig(0, v)$ }
 
 ### Binary Byzantine Agreement (BBA)
 
@@ -396,9 +462,9 @@ If the value **$ctx[l].B == ∅$**, then:
 
 ## Network Communication
 
-### Message Format
+### Message Format {.counter-reset}
 
-Each message broadcast by nodes is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e there is always a **message_signature** field inlcuded with a broadcast message.
+Each message broadcast by nodes is entirely signed with the [EdDSA][] key of the participant who creates the message, i.e there is always a `message_signature` field included with a broadcast message.
 
 Separate fields or groups of fields are also signed with an [EdDSA][] key of the participant who creates the message.
 
@@ -567,9 +633,9 @@ By randomly selecting validators for each block rather than forcing every node t
 
 <!-- Creating an account in the Echo network requires creating a corresponding transaction added to the block -->
 
-[algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
+[algorand-v9]: https://arxiv.org/abs/1607.01341v9
 [echo-wp]: https://drive.google.com/file/d/1y1VCfvM8czq-BaTgEl0AuctAbGzV_S93/view
 [algorand-v9]: https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2
-[eddsa]: https://en.wikipedia.org/wiki/EdDSA
-[sha-256]: https://en.wikipedia.org/wiki/SHA-2
+[eddsa]: https://tools.ietf.org/html/rfc8032
+[sha-256]: https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf
 [vrf]: https://en.wikipedia.org/wiki/Verifiable_random_function
