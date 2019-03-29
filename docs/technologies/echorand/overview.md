@@ -21,8 +21,6 @@ WORKING DRAFT
 EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus on which set of transaction to append to a distributed ledger. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
 
 </span>
-<span class="main">
-
 ## Introduction
 
 ### Prior Work
@@ -647,5 +645,3 @@ By randomly selecting validators for each block rather than forcing every node t
 [eddsa]: https://tools.ietf.org/html/rfc8032
 [sha-256]: https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf
 [vrf]: https://en.wikipedia.org/wiki/Verifiable_random_function
-
-</span>
