@@ -32,7 +32,7 @@ The ability to reach network-wide agreement about the next suitable set of trans
 - **Delegated Proof of Stake (dPoS)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by vote of the entire network and votes are weighted by the amount of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 - **Proof of Weighted Randomness (PoWR)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
 
-The basis for the **Echo PoWR** algorithm is the [Algorand v9][algorand-v9] [^1] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos . Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares [^2] as well as delegated proof of stake blockchains like EOS [^3] with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+The concept for the **Echo PoWR** algorithm is the [Algorand v9][algorand-v9] [^1] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos . Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. EchoRand combines techniques from early proof of stake blockchains like Bitshares [^2] as well as delegated proof of stake blockchains like EOS [^3] with the cryptographic sortition of projects like DFINITY [^7] and Algorand. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
 
 [^1]: Silvio Micali and Jing Chen. _Algorand_. Jul. 2016. URL: [https://arxiv.org/abs/1607.01341v9][algorand-v9].
 [^2]: Daniel Larimer and Fabian Schuh. _Bitshares 2.0: Financial Smart Contract Platform_. URL: [https://whitepaperdatabase.com/bitshares-bts-whitepaper/][bitshares].
@@ -42,6 +42,10 @@ The basis for the **Echo PoWR** algorithm is the [Algorand v9][algorand-v9] [^1]
 [^3]: Block.One. _EOS.IO Technical White Paper v2_. URL: [https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md][eos].
 
 [eos]: https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md
+
+[^7]: Timo Hanke, Mahnush Movahedi and Dominic Williams. _DFINITY Technology Overview Series Consensus System_. URL: [https://dfinity.org/pdf-viewer/pdfs/viewer?file=../library/dfinity-consensus.pdf][dfinity].
+
+[dfinity]: https://dfinity.org/pdf-viewer/pdfs/viewer?file=../library/dfinity-consensus.pdf
 
 ### Design Goals
 
