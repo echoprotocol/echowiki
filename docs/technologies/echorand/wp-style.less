@@ -86,13 +86,14 @@ a[href^="#"].table::after {
 }
 
 body {
+  font-family: "Times New Roman", Times, serif !important;
+  hyphens: inherit;
+  text-align: justify;
   // column-count: 2;
   // column-gap: balance;
   // column-gap: 0.33in;
-  font-family: "Times New Roman", Times, serif !important;
-  hyphens: auto;
-  text-align: justify;
 }
+
 body > :first-child {
   counter-reset: page 1;
 }
@@ -262,7 +263,7 @@ td {
 .footnote:footnote-marker {
   content: counter(footnote);
   font-size: 66%;
-  footnote-style-position: inside;
+  // footnote-style-position: inside;
 }
 
 @page {
@@ -456,7 +457,7 @@ header h2 {
 }
 
 h1.title {
-  // column-span: all;
+  column-span: all;
   // font-family: Helvetica, sans-serif;
   font-size: 18pt;
   font-weight: normal !important;
@@ -473,12 +474,14 @@ h1.title {
 }
 
 h2.abstract {
+  column-span: all;
   font-size: 0.9em !important;
   margin-top: 40px;
   text-align: center;
 }
 
 span.abstract {
+  column-span: all;
   p {
     font-size: 0.9em;
     margin-left: 50px;
@@ -488,10 +491,12 @@ span.abstract {
 
 span.intro {
   text-align: center;
+  column-span: all;
 }
 
 .authors {
   column-gap: 0;
+  column-span: all;
 }
 .authors + .authors {
   margin-top: 6pt;
