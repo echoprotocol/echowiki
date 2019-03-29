@@ -643,7 +643,7 @@ where $K$ is the number of active committee members.
 ### Producer influence on the participants selection
 
 Account balances formed as a result of the $r$ round will be used only when forming a set of performers for the round $r + 2$.
-But, the seed for the round $r + 2$ will take as a result of the round $r + 1$.
+But, the seed from the round $r + 1$ will take for the round $r + 2$.
 So since the producer cannot predict the seed that will be received as a result of the round $r + 1$, he cannot predict how
 the choice of performers will change as a result of manipulating account balances on the $r$ round.
 
