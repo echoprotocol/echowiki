@@ -48,17 +48,17 @@ Get only asked operations relevant to the specified account.
 
 A list of operations performed by account, ordered from most recent to oldest.
 
-#### get_contract_history (account, stop, limit, start)
+#### get_contract_history (contract, stop, limit, start)
 
-Get operations relevant to the specificed account.
+Get operations relevant to the specificed contract.
 
 ##### Parameters
 
-- *account* The account whose history should be queried
+- *account* The contract whose history should be queried
 - *stop* ID of the earliest operation to retrieve
 - *limit* Maximum number of operations to retrieve (must not exceed 100)
 - *start* ID of the most recent operation to retrieve
 
 ##### Returns
 
-A list of operations performed by account, ordered from most recent to oldest.
+A list of operations performed by contract, ordered from most recent to oldest.
