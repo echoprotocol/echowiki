@@ -3,19 +3,9 @@
 
 # Echo PoWR: Fast and Final Consensus Based on Proof of Weighted Randomness {.title }
 
-<!-- MORE QUESTIONS -->
-<!-- The requirement ‘One user can be registered as a participant only on a single network node at a given time.’ seems unenforceable. Is it really correct? -->
-
-<!-- Haha a minor translation issue, but the phrase ‘schedule the timer after the time equal to…’ appears several times -->
-
-<!-- The security section looks really good! Maybe a quick note that a 67% attacker can double spend as well as censor tho?  -->
-
-<!-- Need to add more here describing EdDSA and SHA-256, as well as citations for both -->
-
-<!-- Can we add some more names here? Besides just Pixelplex -->
 <span class="intro">
 
-Tyler Evans, Pixelplex, Et al.
+<!-- Tyler Evans, Pixelplex, Et al. -->
 
 `team@echo.org`
 
@@ -43,7 +33,7 @@ The ability to reach network-wide agreement about the next suitable set of trans
 - **Delegated Proof of Stake (dPoS)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by vote of the entire network and votes are weighted by the amount of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 - **Proof of Weighted Randomness (PoWR)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
 
-The basis for the **EchoRand** algorithm is the [Algorand v9][algorand-v9] [^1] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos . Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares [^2] as well as delegated proof of stake blockchains like EOS [^3] with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+The basis for the **Echo PoWR** algorithm is the [Algorand v9][algorand-v9] [^1] theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos . Algorand v9 describes a algorthim for reaching consensus in a decentralized network by with Byzantine fault tolerance. In the [Algorand v9][algorand-v9] paper, several possible varations of the algorithm are presented. **Algorand’2** is chosen as the basis for **EchoRand**. EchoRand combines techniques from early proof of stake blockchains like Bitshares [^2] as well as delegated proof of stake blockchains like EOS [^3] with the cryptographic sortition of Algorand v9. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
 
 [^1]: Silvio Micali and Jing Chen. _Algorand_. Jul. 2016. URL: [https://arxiv.org/abs/1607.01341v9][algorand-v9].
 [^2]: Daniel Larimer and Fabian Schuh. _Bitshares 2.0: Financial Smart Contract Platform_. URL: [https://whitepaperdatabase.com/bitshares-bts-whitepaper/][bitshares].
@@ -141,8 +131,6 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ### Legend
 
-<!-- Let's add definitions for msg, ctx, N, A, id -->
-
 |   Designation    | Description                                                                                                                                                               |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |    **$msg$**     | message of the participant of a step transmitted between nodes                                                                                                            |
@@ -181,18 +169,17 @@ The following algorithm parameters are set by constants, or configured at the **
 
 ### Cryptographic Primatives
 
-<!-- Need to add more here, describing EdDSA and SHA-256 -->
-
-- [EdDSA][] - deterministic algorithm for creating and verifying electronic digital signature
+- [EdDSA][^6] - a digital signature scheme using a variant of Schnorr signatures as a deterministic algorithm for creating and verifying electronic digital signatures
   - public key: 32 bytes (256 bits)
   - private key: 32 bytes (256 bits)
   - signature: 64 bytes (512 bits)
-- SHA-256[^5] - cryptographic hash algorithm
+- SHA-256[^5] - a well known secure cryptographic hash algorithm
   - hash: 32 bytes (256 bits)
   - sequence function on a hashset (`std::less<hash_t, hash_t>`)
 - [VRF][] - verifiable random function
 
 [^5]: Descriptions of SHA-256, SHA-384, and SHA-512 from NIST. URL: [https://web.archive.org/web/20130526224224/http://csrc.nist.gov/groups/STM/cavp/documents/shs/sha256-384-512.pdf][sha-256]
+[^6]: Daniel Bernstein, Niels Duif, Tanja Lange, Peter Schwabe, and Bo-Yin Yang. _High-speed high-security signatures"_. 2012. _Journal of Cryptographic Engineering_.
 
 #### VRF
 
@@ -486,13 +473,9 @@ This message is sent in step **1** by producers to propose a newly created block
 | **signature** | signature of the message with the participant’s key corresponding to the **id**              |
 | **block**     | a valid block containing: the current round, the participant's ID, the block signature, etc. |
 
-<!-- Possible to include more detail here about the block format/data structure? -->
-
 #### 2. Random Value Signature: `gc_signature`
 
-<!-- Can we explaing the purpose of this message more? Also, what does it mean "if there is at least one participant for the node for this step"? Plz clarify -->
-
-This message is sent during step **1**, if there is at least one participant for the node for this step.
+This message is sent during step **1** if there is at least one participant for the node for this step.
 
 | Field               | Description                                                                                     |
 | ------------------- | ----------------------------------------------------------------------------------------------- |
@@ -507,9 +490,7 @@ This message is sent during step **1**, if there is at least one participant for
 
 #### 3. Selection of a Leader and a Block: `gc_proposal`
 
-<!-- Can we explaing the purpose of this message more? Also, what does it mean "if there is at least one participant for the node for this step"? Plz clarify -->
-
-This message is sent during step **2** and step **3**, if there is at least one participant for the node for this step.
+This message is sent during step **2** and step **3** if there is at least one participant for the node for this step.
 
 | Field          | Description                                                |
 | -------------- | ---------------------------------------------------------- |
@@ -583,8 +564,6 @@ Nodes that receive messages only from the middle of a consensus round, as a resu
 
 In either case, the node will act as if it was a malicious node, passing incorrect information to the network. Consequently, the information coming from such nodes will be filtered by the **BBA** algorithm. Once the node realizes that it's view of the ledger is inconsistent with the rest of network, a reconciliation will occur automatically, when the rest of the network goes forwards in the process of generating new blocks.
 
-<!-- probably need to expand the above section some and link to the fork reconciliation rules to show how that happens -->
-
 #### Incomplete Local Block Database
 
 The scenario occurs when the local database of the node is syncing or reconciling with the global distributed ledger. During this sync process, the node cannot pariticpate in the consensus algorithm due to the fact that it lacks knowledge of the values:
@@ -651,9 +630,7 @@ EchoRand introduced a formal incentive scheme to reward accounts for participati
 
 Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly generated balance, similarly to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller balance. In the case that an empty block is added to the network, no nodes receive a block reward.
 
-When the network begins to generate empty blocks due to failure of consensus (whether because of an attacker or through low participation in consensus by honest users), the protocol increases the block reward through inflation in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate.
-
-<!-- Need to explain and model (or show formulas) for the inflation increase and decrease -->
+When the network begins to generate empty blocks due to failure of consensus (whether because of an attacker or through low participation in consensus by honest users), the protocol increases the block reward through inflation in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate. Research is ongoing into the idea rate of change and limits for the inflation rate.
 
 ## Conclusion
 
