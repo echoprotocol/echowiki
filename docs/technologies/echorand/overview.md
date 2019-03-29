@@ -19,7 +19,7 @@
 <!-- Can we add some more names here? Besides just Pixelplex -->
 <span class="intro">
 
-Alex Dulub, Tyler Evans, Pixelplex, Et al.
+Tyler Evans, Pixelplex, Et al.
 
 `team@echo.org`
 
@@ -139,7 +139,9 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 - **Executor** - the network account selected in the step of the round for performing a specific consensus action
 - **Local configuration** - a certain set of parameters accessible only to the running network node.
 - **Base (database)** - a blockchain with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
-- **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant only on a single network node at a given time. One network node permits registration of several participants.
+- **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically
+it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant
+only on a single network node at a given time. One network node permits registration of several participants.
 
 ### Legend
 
@@ -147,6 +149,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 |   Designation    | Description                                                                                                                                                               |
 | :--------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     **$msg$**    | message of the participant of a step transmitted between nodes                                                                                                            |
 |   **$sig(x)$**   | [EdDSA][] signature of $x$                                                                                                                                                |
 |    **$H(x)$**    | [SHA-256][] hash of $x$                                                                                                                                                   |
 |     **$r$**      | current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $r >= 1$                                                            |
@@ -161,6 +164,11 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 |  **$CERT_{r}$**  | **$B_{r}$** block certificate, formed out of a set of `bba_signature` messages                                                                                            |
 | **$VRF(r, s)$**  | ordered set of participants who act in step **$s$** of round **$r$**                                                                                                      |
 | **$VRFN(r, s)$** | ordered set of indexes of **$VRF(r, s)$** participants who are registered on the current node and participate in step **$s$** of round **$r$**                            |
+|     **$id$**     | account identifier in the blockchain                                                                                                                                      |
+|    **$A_s$**     | array of account identifiers selected as participants in the step **$s$**                                                                                                 |
+|    **$N_s$**     | array of $A_s$ indexes which correspond to the identifiers of users authorized on the current node in the step **$s$**                                                    |
+|     **$l$**      | identifier of the producer who is the leader in this round                                                                                                                |
+|    **$ctx$**     | context of current round. An object which contains all received messages for the round                                                                                    |
 
 ### Parameters
 
@@ -306,8 +314,8 @@ Right after determining $CERT_{r-1}$
 ##### Steps
 
 1. **Timer**: schedule the timer after the time equal to **$2 * λ$**, by a trigger:
-    1. To define **l**, as **id** from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
-    1. If the local cache for **l** has the block **$B_{r}$**
+    1. To define $l$, as $id$ from the received messages in **$ctx[id]$** with a minimum index of **$A_{1}$**
+    1. If the local cache for $l$ has the block **$B_{r}$**
         1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
         1. Go to **Communication**
 1. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
@@ -331,7 +339,7 @@ Right after determining $CERT_{r-1}$
         1. If it does not exist, save **msg.id, msg.block** in the context of the round:
             1. **$ctx[msg.id].B = msg.block$**
             1. **$ctx[msg.id].HB = H(msg.block)$**
-        1. Vf **l** and **l == id** are installed:
+        1. If $l$ and $l == id$ are installed:
             1. **$v\ =\ \\{\ ctx[l].HB,\ l\ \\}$**
             1. Go to **Communication**
     1. After receiving a message `gc_signature` of the round **$r$**
@@ -605,7 +613,39 @@ Network simulations suggest that:
 
 #### Delegating Consensus Participation
 
-Given that a high consensus participation rate is needed by acccounts in order to maintain full network throughput and avoid the generation of empty blocks, the protocol provides a method for delegating this participation to an active node using a delegation key. This key allows another node to participate in signing consensus messages on their behalf but not create other transaction. This means that account `A` can designate another trusted account `B` with an active node in the network and thereby give account `B` the ability to generate and sign consensus messages at the moment when the `A` account was selected by the participant.
+Given that a high consensus participation rate is needed by accounts in order to maintain full network throughput and
+avoid the generation of empty blocks, the protocol provides two levels of delegating this participation.
+
+##### Level One - Explicit Delegation
+
+Account `A` can set up for itself a trusted account `B` with a running node on the network and thus provide account `B`
+with the opportunity to issue messages of consensus at the moment when account `A` was selected by the verifier.
+In this case, the message from account `B` will be considered only if the node did not receive the message from the
+original verifier, i.e. from account `A`.
+
+By default, the trusted account `B` for the account `A` becomes the account that registered the account `B`.
+
+##### Second Level - Delegation To The Committee
+
+At each step of the consensus for each verifier, his personal guardian is determined from the list of active committee members.
+As a result, each of the active members of the committee receives its set of accounts delegated to him at this particular step of consensus.
+For each of the accounts delegated to it, the node on which the committee account is authorized issues message of consensus.
+The important point is that the message from the committee member is considered when counting votes only if during the full
+time interval allocated for the current step, the node has not received any messages from the verifier selected for the round or
+from his delegate.
+
+The committee member corresponding to the $VRF_{n}(r, s)$ account at step $s$ round $r$ is determined by the following formula:
+
+$$ C_{n} = ceil\{\ n * K / N_{c}\ \} $$
+
+where $K$ is the number of active committee members.
+
+### Producer influence on the participants selection
+
+Account balances formed as a result of the $r$ round will be used only when forming a set of performers for the round $r + 2$.
+But, the seed from the round $r + 1$ will take for the round $r + 2$.
+So since the producer cannot predict the seed that will be received as a result of the round $r + 1$, he cannot predict how
+the choice of performers will change as a result of manipulating account balances on the $r$ round.
 
 ## Security and Performance
 
