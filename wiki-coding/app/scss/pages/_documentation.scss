@@ -87,7 +87,8 @@
 			border: 1px solid rgba(#051eeb, 0.1);
 			border-radius: 3px;
 			color: #070430;
-			padding: 0px 3px 2px 3px;
+			padding: 0px 4px 2px;
+			white-space: nowrap;
 
 			&:hover {
 				color: #070430;
@@ -134,6 +135,7 @@
 			border: 1px solid rgba(#cccff9, 1);
 			color: #051eeb;
 			padding: 0 3px;
+			white-space: nowrap;
 
 			&::after {
 				background-color: rgba(#cccff9, 1);
@@ -310,6 +312,8 @@ h3 {
 		color: #070430;
 		font-size: 22px;
 		letter-spacing: 0.5px;
+		margin: 0 6px;
+		white-space: nowrap;
 		@include hack-bold;
 	}
 
