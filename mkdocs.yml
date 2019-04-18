@@ -84,7 +84,6 @@ nav:
           - Monitoring with ws: technologies/echorand/monitoring.md
       - Sidechain:
           - General View: technologies/sidechain/general-view.md
-      - Oracles: developers/technologies/Oracles.md
       - Contracts/VMs: developers/technologies/Contracts(VMs).md
 
 repo_url: https://github.com/d0ugal/mkdocs-basic-theme
