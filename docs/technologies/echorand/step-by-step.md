@@ -13,7 +13,7 @@
 |    $H(x)$    | SHA-256 hash of $x$                                                                                                                       |
 |     $r$      | current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $r >= 1$                            |
 |     $s$      | current step number of the algorithm in the round. $s >= 1$                                                                               |
-|   $B_r$      | block created in round $r$, which equals to { $r$, $ID_{producer}$, $Q_r$, $H(B_r)$, $H(B_{r-1})$, $sig(B)$, $PAY_r$, $CERT_{Br}$ }       |
+|   $B_r$      | block created in round $r$, which equals to \{ $r$, $ID_\{producer\}$, $Q_r$, $H(B_r)$, $H(B_\{r-1\})$, $sig(B_r)$, $PAY_r$, $CERT_r$ \}  |
 |  $H(B_r)$    | hash of $B_r$                                                                                                                             |
 |  $PAY_r$     | set of transactions contained in block $B_r$                                                                                              |
 |   $Q_r$      | shared randomness seed of round $r$                                                                                                       |
@@ -21,13 +21,12 @@
 | $sig(B_r)$   | signature of a block of the $r$ round                                                                                                     |
 |    $l(r)$    | round $r$ leader - determines $PAY_r$, creates $B_r$ and determines $Q_r$                                                                 |
 |  $CERT_r$    | $B_r$ block certificate, formed out of a set of `bba_signature` messages                                                                  |
-| $VRF(r, s)$  | ordered set of participants who act in step $s$ of round $r$                                                                              |
-| $VRFN(r, s)$ | ordered set of indexes of $VRF(r, s)$ participants who are registered on the current node and participate in step $s$ of round $r$        |
+| $VRF(r, s)$  | set of participants who act in step $s$ of round $r$                                                                                      |
 |     $id$     | account identifier in the blockchain                                                                                                      |
-|    $A_s$     | array of account identifiers selected as participants in the step $s$                                                                     |
+|    $A_s$     | array of account identifiers selected as participants at the step $s$                                                                     |
 |    $N_s$     | array of $A_s$ indexes which correspond to the identifiers of users authorized on the current node in the step $s$                        |
 |     $l$      | identifier of the producer who is the leader in this round                                                                                |
-|    $ctx$     | context of current round. An object which contains all received messages for the round                                                    |
+|    $ctx$     | context of current round, an object which contains all received messages for the round                                                    |
 
 ### Parameters
 
@@ -35,21 +34,21 @@ The following algorithm parameters are set by constants, or configured at the **
 
 | Designation | Description                                                                                      |
 | :---------: | ------------------------------------------------------------------------------------------------ |
-|     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across the network      |
-|     $λ$     | "small" interval, the average time required to distribute a 256 bit message across the network   |
+|     $Λ$     | "large" interval, the average time required to distribute a 1 MB message across Echo network     |
+|     $λ$     | "small" interval, the average time required to distribute a 256 bit message across Echo network  |
 |    $N_g$    | the number of block producers in a round, used in the function $VRF(r, 1)$                       |
 |    $N_c$    | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$                |
-|    $t_h$    | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_c$   |
-|     $μ$     | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created   |
+|    $t_h$    | threshold for making positive decision during verifying, set by default to $0.69*N_c$            |
+|     $μ$     | $4 + 3*k, k > 0$ - maximum number for algorithm steps, upon reached new empty block is created   |
 
 ### Other Terms
 
 - **Executor** - the network account selected in the step of the round for performing a specific consensus action
 - **Local configuration** - a certain set of parameters accessible only to the running network node.
 - **Base (database)** - a blockchain with a certain set of blocks, possibly "lagging behind" the state of most other network nodes. It stores public EDS keys of all the participants of the algorithm operation.
-- **Participant** - a set of [EdDSA][] private/public keys and an account balance within the **Echo** network. Basically
-it's an **Echo** network user, specially registered on a specific network node. One user can be registered as a participant
-only on a single network node at a given time. One network node permits registration of several participants.
+- **Participant** - a set of EdDSA private/public keys and an account balance within the **Echo** network. Basically
+it's an **Echo** network user, specially registered on a specific network node. A user can be registered as a participant
+only on a single network node at a given time. A network node permits registration of several participants.
 
 ### Getting started
 
@@ -65,26 +64,27 @@ The round $R_r$, which launches step 1 and step 2, described below, is created.
 
 **Input data:**
 
-* $HB_{r-1}$ from $CERT_{r-1}$
+* $H(B_{r-1})$ from $CERT_{r-1}$
 * $A_1$, $N_1$ from the context of the round
 
 **Start:**
 
-right after determining $CERT_{r-1}$
+Right after determining $CERT_{r-1}$
 
 **Steps:**
 
 1. **Verification**:
     1. If $N_{1} = ∅$, complete the step
-    1. select participant index with $n = N_{1}[0]$ as a creator of this block on the node
-    1. get actual ID of the the participant in the blockchain: $id_{1} = A_{1}[n]$
-    1. through $id_{1}$ get all the private keys of a participant
+    1. Select participant index $n ∈ N_{1}$, which generates the smallest $Q_r = sig(Q_{r-1}, r)$, as a creator of new block on the node
+    1. Get actual ID of the participant in the blockchain: $id_{1} = A_{1}[n]$
+    1. Through $id_{1}$ get all the private keys of a participant
 1. **Block assembly**:
-    1. if all the previous blocks $B(k), k=1..r-1$ are available, build $PAY_{r}$
-    1. if at least one of the previous blocks is unavailable, build $PAY_{r} = ∅$
-    1. If $PAY_{r}\ != ∅$, create a new block $B_{r} = { r, PAY_{r}, Q_{r-1}, signQ_{r-1}, HB_{r-1} }$
-1. **Communication**: generation, signature and a simultaneous message sending:
-    1. sign with the key $id_1$ and send $gc\\_signature = \\{\ r, id_1, signQ\_{r-1}, HB_r\ \\}$
+    1. If all the previous blocks $B(k), k=1..r-1$ are available, build $PAY_r$
+    1. If at least one of the previous blocks is unavailable, build $PAY_r = ∅$
+    1. If $PAY_r != ∅$, create a new block $B_r = { r, PAY_r, Q_r, H(B_{r-1}) }$
+1. **Communication**:
+    1. Sign with the key $id_1$ and send `gc_signature` = { $r$, $id_1$, $Q_r$, $H(B_{r})$ }
+    1. Sign with the key $id_1$ and send `gc_block` = { $r$, $id_1$, $B_r$ }
 
 ### Developing an evaluation agreement (GC)
 
@@ -92,10 +92,10 @@ right after determining $CERT_{r-1}$
 
 **Input data**:
 
-* $HB_{r-1}$, $Q_{r-1}$ from $CERT_{r-1}$
+* $H(B_{r-1})$, $Q_{r-1}$ from $CERT_{r-1}$
 * $A_{1}$, $A_{2}$, $N_{2}$ from the context of the round
 
-**v** - a local structure of a step that stores the hash of the block and the ID of the leader, who created the block.
+**v** - local structure to store information about leader candidate: producer ID and corresponding block hash.
 
 The empty set symbol assigned to the elements **v** means "empty block" and "unknown leader".
 In the application, it can be a predefined constant or a separate flag in the data structure.
@@ -107,9 +107,9 @@ right after defining $CERT_{r-1}$
 **Steps:**
 
 1. **Timer**: schedule the timer after the time equal to $2 * λ$, by a trigger:
-    1. To define $l$, as $id$ from the received messages in $ctx[id]$ with a minimum index of $A_{1}$
+    1. Define $l$ as $id$ existent in $ctx[id]$ with a minimum $Q_{r}$
     1. if the local cache for $l$ has the block $B_{r}$
-        1. $v = \\{\ ctx[l].HB,\ l\ \\}$
+        1. $v = \\{\ ctx[l].H(B_{r}),\ l\ \\}$
         1. go to **Communication**
 1. **Timer**: schedule the timer after the time equal to $λ + Λ$, by a trigger:
     1. $v = \\{\ ∅, ∅\ \\}$
@@ -117,23 +117,23 @@ right after defining $CERT_{r-1}$
 1. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
     1. after receiving a message `gc_block` of the round $r$
         1. verify the round number in the message
-        1. verify the message step equals `1`
+        1. verify the message step, must be equal to `1`
         1. verify that $msg.id ∈ A_{1}$ and get the user's public key
         1. verify the signature of the whole message
         1. verify that $msg.block$ is correct
             1. verify the block's round for equality to the current
-            1. verify $producer-id ∈ A_{1}$
-            1. verify $Q_{r}$ from the block, if it already has the `gc_signature`
+            1. verify `producer-id` is from $A_{1}$
+            1. verify $Q_{r}$, if it already has the `gc_signature`
             1. verify the block signature using `producer-id` of the block
             1. verify $HB_{r-1}$ from the block for equality to the local one from $CERT_{r-1}$
             1. verify the correctness of $PAY_{r}$ in the block
         1. If $ctx[msg.id]$ already exists
-            1. verify $ctx[msg.id].HB == H(msg.block)$
-        1. If it does not exist, save `msg.id, msg.block` in the context of the round:
+            1. verify $ctx[msg.id].H(B_{r}) == H(msg.block)$
+        1. If it does not exist, save `msg.id, msg.block` to the context of the round:
             1. $ctx[msg.id].B = msg.block$
-            1. $ctx[msg.id].HB = H(msg.block)$
-        1. if $l$ and $l == id$ are installed:
-            1. $v = \\{\ ctx[l].HB,\ l\ \\}$
+            1. $ctx[msg.id].H(B_{r}) = H(msg.block)$
+        1. if $l$ defined and $l == id$:
+            1. $v = \\{\ ctx[l].H(B_{r}),\ l\ \\}$
             1. go to **Communication**
     1. after receiving a message `gc_signature` of the round **r**
         1. verify the round number in the message
@@ -149,21 +149,25 @@ right after defining $CERT_{r-1}$
     1. stop timers, **do not** unsubscribe from network messages
     1. if $N_{2} = ∅$, end the step
     1. $∀n_{2} ∈ N_{2}$:
-        1. get real user’s ID in the blockchain: $id_{2} = A_{2}[n_{2}]$
-        1. sign with the key $id_{2}$ and send
-            1. if $v\ != ∅$: $gc\\_proposal = \\{\ r, 2, id\_{2}, v\ \\}$
-            1. if $v == ∅$: $gc\\_proposal = \\{\ r, 2, id\_{2}, ∅\ \\}$
+        1. get real user’s ID in the blockchain: $id_2 = A_{2}[n_{2}]$
+        1. sign with the key of $id_{2}$ and send
+            1. if $v\ != ∅$: `gc_proposal` = { r, 2, $id_2$, v }
+            1. if $v == ∅$: `gc_proposal` = { r, 2, $id_2$, ∅ }
 
 #### 3. Choosing the leader (vote counting)
 
-**Input data**: $A_{2}$, $A_{3}$, $N_{3}$ from the context of the round
+**Input data**:
 
-**Start**: right after defining $CERT_{r-1}$
+* $A_{2}$, $A_{3}$, $N_{3}$ from the context of the round
+
+**Start**:
+
+right after defining $CERT_{r-1}$
 
 **v** - a local structure of a step that stores the hash of the block and the ID of the leader, who created the block.
 
 1. **Timer**: schedule the timer after the time equal to $3 * λ + Λ$, by a trigger:
-    1. $v = \\{\ ∅, ∅\ \\}$
+    1. `v` = { ∅, ∅ }
     1. go to **Communication**
 
 1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
@@ -173,18 +177,18 @@ right after defining $CERT_{r-1}$
     1. verify that $msg.v = \\{\ msg.block\\_hash, msg.leader\ \\}$ is in the context of the round.
     It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
         1. $∃ ctx[msg.leader]$ - a record for such a potential leader exists in the context
-        1. $ctx[msg.leader].HB == msg.block\\_hash$ - the block hash coincides
+        1. $ctx[msg.leader].H(B) == msg.block\\_hash$ - the block hash coincides
     1. $ctx[msg.leader].v3.push(msg.id)$, where $v3$ is *unordered_set*
     1. if the counter is more than the threshold $t_{h}$: $ctx[msg.leader].v3.size() > t_{h}$
-        1. $v = \\{\ msg.block_hash, msg.leader\ \\}$
+        1. `v = { msg.block_hash, msg.leader }`
         1. go to **Communication**
 
 1. **Communication**: generating, signing and sending of messages
     1. stop timers, unsubscribe from network messages
     1. if $N_{3} = ∅$, end the step
     1. $∀n_{3} ∈ N_{3}$:
-        1. get real user’s ID in the blockchain: $id_{3} = A_{3}[n_{3}]$
-        1. sign with the user’s key $id_{3}$ and send $gc\\_proposal = \\{\ r, 3, id\_{3}, v\ \\}$
+        1. get real user’s ID in the blockchain: $id_3 = A_3[n_3]$
+        1. sign with the user’s key $id_3$ and send `gc_proposal` = { r, 3, $id_3$, v }
 
 #### 4. Primary assessment of vote counting
 
@@ -198,30 +202,30 @@ right after defining $CERT_{r-1}$
     1. $b = 1$
     1. go to **Communication**
 
-1. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
+1. **Network**: subscribe to network messages `gc_proposal` at the start of a step and on receiving
     1. verify the round number and the step number in the message
     1. verify that $id ∈ A_{3}$ and get the user's public key
     1. verify the signature of the whole message
-    1. $msg.v = \\{\ msg.block_hash, msg.leader\ \\}$
-    1. $msg.v\ != \\{\ ∅, ∅\ \\}$: verify that $msg.v$ is in the context of the round (should be collected in step 2)
-        1. $∃\ ctx[msg.leader]$ - a record for such a potential leader exists in the context
-        1. $ctx[msg.leader].HB == msg.block\\_hash$ - the block hash coincides
-        1. $ctx[msg.leader].v4.push(msg.id)$, $v4$ is *unordered_set*
+    1. `msg.v = { msg.block_hash, msg.leader }`
+    1. `msg.v != { ∅, ∅ }`: verify that `msg.v` is in the context of the round (should be collected in step 2)
+        1. `∃ ctx[msg.leader]` - a record for such a potential leader exists in the context
+        1. `ctx[msg.leader].H(B) == msg.block_hash` - the block hash coincides
+        1. `ctx[msg.leader].v4.push(msg.id)`, `v4` is *unordered_set*
         1. if $ctx[msg.leader].v4.size() > t_{h}$
-            1. $v = \\{\ msg.block\\_hash, msg.leader\ \\}$, $b = 0$
+            1. `v = { msg.block_hash, msg.leader }`, `b = 0`
             1. go to **Communication**
-    1. $msg.v == \\{\ ∅, ∅\ \\}$
-        1. $ctx.ve4.push(msg.id)$, $ve4$ is *unordered_set* (**v**alue **e**mpty)
+    1. `msg.v == { ∅, ∅ }`
+        1. `ctx.ve4.push(msg.id)`, `ve4` is *unordered_set* (**v**alue **e**mpty)
         1. if $ctx.ve4.size() > t_{h}$
-            1. $v = \\{\ ∅, ∅\ \\}$, $b = 1$
+            1. `v = { ∅, ∅ }`, `b = 1`
             1. go to **Communication**
 
 1. **Communication**: generating, signing and sending of messages
     1. stop timers, unsubscribe from network messages
     1. if $N_{4} = ∅$, end the step
     1. $∀\ n_{4} ∈ N_{4}$:
-        1. get real user’s ID in the blockchain: $id_{4} = A_{4}[n_{4}]$
-        1. sign with the user’s key $id_{4}$ and send $bba_signature = \\{\ r, 4, id_{4}, b, v, sign(0, v)\ \\}$
+        1. get real user’s ID in the blockchain: $id_4 = A_4[n_{4}]$
+        1. sign with the user’s key $id_4$ and send `bba_signature` = { r, 4, $id_4$, b, v, sign(v) }
 
 ### Reaching the Binary Byzantine Agreement (BBA)
 
@@ -236,8 +240,8 @@ In the latter case, undecided nodes use VRF to generate a shared random value fr
 
 Designations used for data storage:
 
-* `bba0` - messages with a `non-empty` block and a vote equal to `1`
-* `bba1` - messages with a `non-empty` block and a vote equal to `0`
+* `bba0` - messages with a `non-empty` block and a vote equal to `0`
+* `bba1` - messages with a `non-empty` block and a vote equal to `1`
 * `bbae0` - messages with an `empty` block and a vote equal to `0`
 * `bbae1` - messages with an `empty` block and a vote equal to `1`
 
@@ -284,8 +288,8 @@ $b$ - local step flag that is sent in the `value` field of the `bba_signature` m
             1. $CERT_{r}$ is generated from $ctx.bba1[s-1]$, $ctx.bbae1[s-1]$, $ctx.bba0[s-1]$, $ctx.bbae0[s-1]$
             1. $b = 1^*$
             1. **END OF THE ROUND!!!**
-    1. if $\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}$: $b = 1$ и к **Communication**
-    1. if $\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}$: $b = 0$ и к **Communication**
+    1. if $\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}$: $b = 1$, go to **Communication**
+    1. if $\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}$: $b = 0$, go to **Communication**
 
 1. **Communication**: generating, signing and sending of messages
     1. stop timers, **do not** unsubscribe from network messages
@@ -352,8 +356,8 @@ $b$ - local step flag that is sent in the `value` field of the `bba_signature` m
     1. $msg.v == \\{\ ∅, ∅\ \\}$: like in step $5$
     1. if $∀\ s >= 5\ \\&\\&\ s - 2 ≡ 0\ mod\ 3$ $(s == 5,8,11,...)$: like in step $5$ - **Ending Condition 0**
     1. if $∀\ s >= 6\ \\&\\&\ s - 2 ≡ 1\ mod\ 3$ $(s == 6,9,12,...)$: like in step $5$ - **Ending Condition 1**
-    1. if $\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}$: $b = 1$ go to **Communication**
-    1. if $\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}$: $b = 0$ go to **Communication**
+    1. if $\sum_{n}ctx[n].bba1[s-1].size() + ctx.bbae1[s-1].size() > t_{h}$: $b = 1$, go to **Communication**
+    1. if $\sum_{n}ctx[n].bba0[s-1].size() + ctx.bbae0[s-1].size() > t_{h}$: $b = 0$, go to **Communication**
 
 1. **Communication**: like in step $5$
 
@@ -391,6 +395,21 @@ If the value $ctx[l].B == ∅$, then:
 * $ctx[l].signQ == Q_{r-1}$ means that an empty block has been created.
 * $ctx[l].signQ != Q_{r-1}$ means that a non-empty block has been created and the node has not received it.
 
+### Fallback service
+
+In rare cases, a number of active network nodes may be below $t_h$. In such a case ECHO network will always generate empty block. To prevent this behavior, root
+committee is introduced. If network node, participating in round steps, is inactive - selected committee member will generate appropriate step
+message on behalf of this member.
+
+In such a case message will have non-empty **fallback** field and message itself will be signed by the key of committee member.
+
+Handling of such messages will be done at appropriate steps with prioritizing of originally generated messages.
+
+Prioritizing can be done in both ways:
+
+* **GC related steps** - wait original messages and collect fallback ones too. After some timeout fallback messages will be taken into account.
+* **BBA steps** - fallback messages collected and counted as original ones. Original messages override fallback ones if any.
+
 ## Network interaction
 
 ### Message format
@@ -401,28 +420,32 @@ Separate fields or groups of fields are also signed with an EdDSA key of the par
 
 Such a "double" signature is essential, since the signatures of certain groups of fields are later used in VRF to generate a random round value, and in the signature set $CERT_{r}$.
 
+#### 0. Common message header
+
+Following fields are included in any message, if not specially mentioned.
+
+| Field                | Description                                                                                               |
+|----------------------|-----------------------------------------------------------------------------------------------------------|
+| **round**            | current round                                                                                             |
+| **step**             | current step                                                                                              |
+| **id**               | ID of the participant who created the block                                                               |
+| **fallback**         | fallback ID of the participant who created the block on behalf of ID                                      |
+| **signature**        | signature of the message with the participant’s key $id$                                                  |
+
 #### 1. gc_block (candidate block)
 
 This message is sent in step `1`, in the case of creating a block with a non-empty set of transactions.
 
 | Field                | Description                                                                                               |
 |----------------------|-----------------------------------------------------------------------------------------------------------|
-| **round**            | current round                                                                                             |
-| **step**             | current step                                                                                              |
-| **id**               | ID of the participant who created the block                                                               |
-| **signature**        | signature of the message with the participant’s key $id$                                                  |
 | **block**            | a block containing: the current round, the participant's ID, the block signature, etc.                    |
- 
+
 #### 2. gc_signature (random value signature)
 
 This message is sent during step `1`, if there is at least one participant for the node for this step.
 
 | Field                | Description                                                                                               |
 |----------------------|-----------------------------------------------------------------------------------------------------------|
-| **round**            | current round                                                                                             |
-| **step**             | current step                                                                                              |
-| **id**               | ID of the participant who created the block                                                               |
-| **signature**        | signature of the message with the participant’s key $id$                                                  |
 | **rand**             | $signQ_r$ - signature of a random previous round vector with the participant’s key $id$                   |
 | **block_hash**       | new block hash                                                                                            |
 | **prev_rand**        | $signQ_r$ signature of a random vector of the round from the previous block                               |
@@ -434,10 +457,6 @@ This message is sent during step `2` and step `3`, if there is at least one part
 
 | Field                | Description                                                                                               |
 |----------------------|-----------------------------------------------------------------------------------------------------------|
-| **round**            | current round                                                                                             |
-| **step**             | current step                                                                                              |
-| **id**               | ID of the participant who created the block                                                               |
-| **signature**        | signature of the message with the participant’s key $id$                                                  |
 | **block_hash**       | selected block hash                                                                                       |
 | **leader**           | ID of a selected leader, who created the block                                                            |
 
@@ -447,11 +466,20 @@ This message is sent during step `4` and all the subsequent steps of the algorit
 
 | Field                | Description                                                                                               |
 |----------------------|-----------------------------------------------------------------------------------------------------------|
-| **round**            | current round                                                                                             |
-| **step**             | current step                                                                                              |
-| **id**               | ID of the participant who created the message                                                             |
 | **value**            | evaluation within the `BBA` algorithm, 0 or 1                                                             |
 | **block_hash**       | selected block hash                                                                                       |
 | **leader**           | ID of a selected leader, who created the block                                                            |
-| **_bba_sign**        | signature for the fields `round`, `step`, `value`, `block_hash`, `leader` with the participant’s key $id$ |
-| **signature**        | signature for the fields `value`, `block_hash`, `leader` with the participant’s key $id$                  |
+| **bba_sign**         | signature for the fields `round`, `step`, `value`, `block_hash`, `leader` with the participant’s key $id$ |
+
+#### 5. round_info (round start synchronization)
+
+This message is sent to synchronize start of new round over the ECHO network. It does not contain common message header.
+
+| Field                | Description                                                                                               |
+|----------------------|-----------------------------------------------------------------------------------------------------------|
+| **round**            | just finished round                                                                                       |
+| **rand**             | $signQ_r$ signature generated at finished round                                                           |
+
+
+
+
