@@ -546,7 +546,7 @@ To reduce the number of messages with information about the proposed block, the 
 
 The number of steps of the algorithm and dependence on the state of the whole account database makes the possibility of forks unlikely. However, EchoRand still has a mechanism for choosing between diverging chains. The fork selection takes place according to one of the following scenarios:
 
-1. To switch to the longest chain (with the highest number of completed rounds) in the presence of several chains.
+1. To switch to the longest chain (with the highest number of completed non zero rounds) in the presence of several chains.
 1. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
 1. If there is more than one long chain with non-empty blocks at the end of a $r$-length chain, to follow the one in which the $r$ block has the smallest hash value.
 
