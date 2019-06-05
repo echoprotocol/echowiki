@@ -79,7 +79,7 @@ nav:
   - Technologies:
       - Echorand:
           - In a nutshell: technologies/echorand/in-a-nutshell.md
-          - General View: technologies/echorand/general-view.md
+          - General View: technologies/echorand/overview.md
           - Architecture: technologies/echorand/architecture.md
           - Monitoring with ws: technologies/echorand/monitoring.md
       - Sidechain:
