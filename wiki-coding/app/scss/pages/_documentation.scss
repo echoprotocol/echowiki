@@ -38,9 +38,16 @@
 	}
 
 	h1 {
+		@include screen-max(1050) {
+			font-size: 30px;
+		}
 		color: #051eeb;
 		font-size: 32px;
 		margin: 40px 0 20px;
+
+		&.title {
+			word-break: break-word;
+		}
 	}
 
 	h2 {
@@ -362,6 +369,15 @@ h6 {
 
 		.grid-container {
 			flex-direction: column;
+		}
+	}
+}
+@include screen-max(1150) {
+	.footnote {
+		ol {
+			li a {
+				word-break: break-all;
+			}
 		}
 	}
 }
