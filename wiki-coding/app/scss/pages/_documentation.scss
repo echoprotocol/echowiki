@@ -8,21 +8,11 @@
 
 	width: 100%;
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	h1 {
 		align-items: center;
 		display: flex;
 		outline: none;
 		word-break: break-all;
-
-		.headerlink {
-			font-size: 0;
-			margin-left: 15px;
-		}
 	}
 
 	h1,
@@ -35,6 +25,11 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		letter-spacing: 0.0025em;
+
+		.headerlink {
+			font-size: 0;
+			margin-left: 15px;
+		}
 	}
 
 	h1 {
@@ -319,7 +314,6 @@ h3 {
 		color: #070430;
 		font-size: 22px;
 		letter-spacing: 0.5px;
-		margin: 0 6px;
 		white-space: nowrap;
 		@include hack-bold;
 	}
