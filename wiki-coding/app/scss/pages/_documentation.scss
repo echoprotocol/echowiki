@@ -311,11 +311,9 @@ h3 {
 	}
 
 	code {
-		color: #070430;
-		font-size: 22px;
-		letter-spacing: 0.5px;
+		font-family: "Lato", sans-serif;
+		-webkit-font-smoothing: auto;
 		white-space: nowrap;
-		@include hack-bold;
 	}
 
 	code + .headerlink {
