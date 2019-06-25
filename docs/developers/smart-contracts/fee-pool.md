@@ -1,53 +1,68 @@
 # Smart Contract Fee Pool
 
-## Общее описание
+## General Description
 
-**Smart Contract Fee Pool** - механизм, позволяющий пользователям приложения, основанного на контракте,
-использовать вызовы контракта за счет баланса пулла, пополняемого кем-то другим. В частности - владельцем
-контракта и приложения. Данный механизм позволяет минимизировать порог входа пользователей в приложение,
-позволяя исключить этап, на котором для использования контракта пользователю необходимо предварительно
-позаботиться о наличии ненулевого баланса в каком-либо ассете, в котором можно оплачивать комиссию.
+**Smart Contract Fee Pool** is a mechanism that allows users of a
+contract-based app to use contract calls at the expense of the pool
+balance that is replenished by someone else. In one case, it could be
+the owner of the contract and the app itself. This mechanism enables to
+minimize the threshold for new users running the app, allowing to
+eliminate the stage when in order to use the contract, the user must
+first make sure of a non-zero balance on one of the assets by which the
+commission fee can be paid. In particular, this problem stands out the
+most when using ERC20 tokens. In this case in order to transfer a token,
+the user needs to have an additional balance. 
 
-В частности данная проблема остро проявляется при использовании *ERC20* токенов, где для перевода токена,
-пользователю необходимо владеть дополнительным балансом.
+## Operations Description
 
-## Используемые операции
+### Balance replenishment - `contract_fund_fee_pool_operation`
 
-### Пополнение баланса - `contract_fund_fee_pool_operation`
+By using this operation, any network user has the ability to replenish
+the contract balance pool. This operation is irreversible - the balance
+transferred to this contract pool can be spent only when calling the
+contract. It is impossible to recover (withdraw) the balance from the
+pool. 
 
-Используя операцию `contract_fund_fee_pool_operation` любой пользователь
-сети имеет возможность пополнить пул баланса контракта. Данная операция
-является необратимой - переведенный на пул контракта баланс может быть
-израсходован только при вызовах данного контракта, восстановить
-(отозвать) баланс с пула невозможно.
+A contract pool can only be replenished in Echo.
 
-Пулл контракта может быть пополнен только в Echo.
+If there is a non-zero balance on the pool, the `get_required_fees` 
+request will return an object having the fee and user fee.
 
-При наличии ненулевого балана на пуле, запрос [get_required_fees](https://echo-dev.io/developers/apis/database-api/#get_required_feesops-id)
-будет возвращать объект, содержащий в себе одним из полей - комисси. Вторым - сумма комиссии, которую необходимо заплатить пользователю. 
-В случае доступности пула пользователю - комиссия для оплаты пользователем будет либо равна нулю (в случае наличия полной суммы комиссии), 
-либо являться разницей полной комисси за выполнение и достуных средств на пуле.
+```
+Example1: 
+If the commission fee is 0.1 echo and the pool holds 0.1 echo
+Object1: fee = 0.1 echo, user fee = 0 echo.
 
-### Whitelisting и Blacklisting - `contract_whitelist_operation`
+Example2:
+If the commission fee is 1 echo and the pool holds 0.98 echo
+Object2: fee = 1 echo, user fee = 0.02 echo.
+```
 
-Контракт имеет `whitelist` и `blacklist` - списки аккаунтов, редактируемые владельцем контракта. В случае, если
-хотя бы один аккаунт добавлен в `whitelist`, отправка транзакций за счет `fee pool` будет доступна только тем
-аккаунтам, которые были добавлены в `whitelist`. Если `whitelist` пуст, любой аккаунт сети может воспользоваться
-`fee pool` контракта.
+### Whitelisting and Blacklisting: `contract_whitelist_operation`
 
-Аккаунты, добавленные в `blacklist` не могут бесплатно использовать данный контракт, даже если баланс `fee pool`
-больше нуля.
+The contract has a whitelist and a blacklist. These are lists of
+accounts edited by the owner of the contract. In the case when at least
+one account has been added to the whitelist, sending transactions
+through the fee pool will be available only to the accounts added to the
+whitelist. If the whitelist is empty, any network account can use the
+contract's fee pool.
 
-Используя операцию `contract_whitelist_operation` можно добавить аккаунт в один из списков, либо исключить из
-обоих. Вызов операции `contract_whitelist_operation` доступ только для владельца контракта - аккаунта,
-создавшего данный контракт.
+Accounts added to the blacklist cannot use this contract for free, even
+if there is a non-zero balance on the fee pool. 
 
-## Используемые методы API
+The contract_whitelist_operation allows to add an account to one of
+these lists, or exclude it from both of them. Only the owner of the
+contract (the account that created it) has access to the
+contract_whitelist_operation.
 
-### Получение списков `whitelist` и `blacklist` - `get_contract_whitelist`
+## API Methods Description
 
-Метод `get_contract_whitelist` возвращает как `whitelist`, так и `blacklist` для указанного контракта.
+### Returning the Whitelist and Blacklist: `get_contract_whitelist`
 
-### Получение контракта - `get_contract_fee_pool_balances`
+The get_contract_whitelist method returns both the whitelist and
+blacklist for the specified contract. 
 
-Метод `get_contract_fee_pool_balances` возвращает текущие балансы `fee pool` для указанного контракта.
+### Returning the Fee Pool Balance: `get_contract_fee_pool_balances`
+
+The `get_contract_fee_pool_balances` method returns the current fee pool
+balance for the specified contract.

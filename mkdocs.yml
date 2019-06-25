@@ -45,6 +45,7 @@ nav:
           - x86-64:
               - Introduction: developers/smart-contracts/x86-64/introduction.md
               - C++ Token contract: developers/smart-contracts/x86-64/cpp-contract.md
+          - Smart Contract Fee Pool: developers/smart-contracts/fee-pool.md
       - Command-Line Tools: developers/command-line-tools.md
       - Operations: developers/operations.md
       - Libraries and Frameworks:
