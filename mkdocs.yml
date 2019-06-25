@@ -29,7 +29,7 @@ nav:
       - Quickstart Docker: get-started/docker.md
   - How To:
       - Create account: how-to/create-account.md
-      - Generage address: how-to/generate-address.md
+#      - Generage address: how-to/generate-address.md
       - Connect to blockchain:
           - Websocket API and Subscriptions: how-to/api/websocket-api-and-subscriptions.md
           - RPC Call: how-to/api/rpc-call.md

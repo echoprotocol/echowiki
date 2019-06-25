@@ -1,166 +1,180 @@
 # Bitcoin Sidechain (Echo)
 
-## Общее описание
+## General Overview
 
-Bitcoin Sidechain (BS) - расширение Echo, реализующее шлюз между 
-блокчейнами Echo и Bitcoin, позволяет использовать валюту Bitcoin в 
-рамках блокчейна Echo и выводить ее из сети Echo обратно в сеть Bitcoin.
+Bitcoin Sidechain (BS) is an Echo extension functioning as a gateway
+between Echo blockchains and Bitcoin blockchains, which allows to use
+Bitcoin within the Echo blockchain and withdraw it out of the Echo
+network back into the Bitcoin network. 
 
-Функционал реализуется путем заморозки активов на стороне Bitcoin на 
-соответствующем адресе, активацией соответствующего объема средств на 
-стороне Echo (для ввода активов в Echo) и обратного процесса для вывода 
-средств обратно в Bitcoin-сеть.
+The functionality is implemented by freezing the assets on the
+corresponding address of the Bitcoin side and activating the
+corresponding amount of funds on the Echo side (to deposit assets in
+Echo). The reverse process can be carried out for withdrawing funds back
+to the Bitcoin network. 
 
-Участники комитета сети Echo являются посредниками, реализующими связь 
-двух блокчейнов.
+The participants of the Echo network serve as intermediaries that
+implement the connection between the two blockchains. 
 
-## Шаги пользователя
+## User Steps
 
-Для любого действия с вводом или выводом средств, предварительно 
-пользователь должен создать аккаунт и запросить адрес пополнения:
+For any action on deposit or withdrawal of funds, the user must create
+an account first and request a Deposit Address: 
 
-1.	зарегистрировать новый аккаунт в любом кошельке Echo;
-2.	отправить в сеть операцию - запрос создания нового адреса пополнения.
+1. register a new account in an Echo wallet;
+1. set an operation: a request to create a new Deposit Address.
 
-### Ввод Bitcoin
 
-1.	в сети 	Bitcoin должен перевести BTC на сгенерированный выше адрес;
-2.	дождаться подтверждения перевода в сети Echo и получить возможность 
-использовать соответствующий баланс в eBTC в сети Echo.
+### Bitcoin Deposit
 
-### Вывод Bitcoin
+1. transfer the BTC in the Bitcoin network to the previously generated
+   Deposit Address;
+2. wait for the confirmation of the transfer to the Echo network to be
+   able afterwards to use the corresponding balance in eBTC in the Echo
+   network.
 
-1.	отправить eBTC на Bitcoin адрес в сети Echo;
-2.	дождаться подтверждения перевода и получить возможность использовать 
-соответствующий баланс на указанном выше адресе в сети Bitcoin. 
+### Bitcoin Withdrawal
 
-## Протокол работы Sidechain
+1. send eBTC in the Echo network to the Bitcoin address;
+2. wait for confirmation of the transfer to be able to use the
+   corresponding balance at the specified above address in the Bitcoin
+   network. 
 
-### Основные разделы протокола
 
-1.	Создание Bitcoin адреса пополнения.  	
-2.	Обработка ввода Bitcoin.  	
-3.	Обработка вывода Bitcoin. 
+## Sidechain Operation Protocol
 
-### Создание Bitcoin-адреса
+### Main Sections of the Protocol
 
-1.	Отправка операции на создание адреса.  	
-2.	Генерация адреса. 
+1. Creation of a Bitcoin Deposit Address.
+1. Processing of the deposit in Bitcoin.
+1. Processing of the withdrawal in Bitcoin.
 
-Адрес представляет из себя segwit multisig (кастомный скрипт). Скрипт 
-данного адреса позволяет вернуть средства отправителю в случае неполадок 
-шлюза.
+### Creation of a Bitcoin Deposit Address
 
-Пользователь генерирует транзакцию содержащую операцию create bitcoin 
-address и отправляет эту транзакцию в сеть echo. При обработке данной 
-транзакции будет создан bitcoin address, привязанный к учетной записи 
-пользователя.
+1. Request of an operation to create an address.
+1. Address generation
 
-### Обработка ввода Bitcoin
+The address represents a segwit multisig (a custom script). The script
+of the given address allows to return the funds to the sender in case of
+gateway malfunction. 
 
-**1\. мониторинг транзакций на адреса пополнения**
+The user generates a transaction containing the operation 'Create
+Bitcoin Address' and sends the transaction to the Echo network. During
+the transaction processing the user gets a new bitcoin address linked to
+the user account. 
 
-Все члены комитета слушают блокчейн bitcoin. Каждый из участников 
-комитета проверяет каждый блок на наличие транзакций на адреса
-пополнения 
 
-**2\. Информирование сети о транзакции**
+### Processing of the deposit in Bitcoin
 
-После получения блока bitcoin, в котором находится транзакция, 
-содержащая адрес, созданный в echo, члены комитета отправляют операцию 
-с информацией о данном вводе BTC в блокчейн echo. Отправленная операция 
-создает новый объект, хранящий информацию о вводе BTC, если такового 
-объекта еще нет. Или наращивает счётчик, если такой объект уже 
-существует. После того, как счётчик объекта больше двух третей от 
-количества активных членов комитета, мы можем его рассматривать как 
-действительный. При обработке блока echo протокол, при наличии 
-действительных вводов/выводов, создает объект, хранящий 
-биткоин-транзакцию для перевода BTC с адреса, созданного для 
-пользователя на адрес хранилища средств. 
+1. monitoring of transactions to the Deposit Addresses
 
-**3\. Перевод средств на адрес хранилища**
+All the participants listen to the Bitcoin blockchain. Each of them
+checks each block to find possible transactions to Deposit Addresses. 
 
-После того, как транзакция будет сформирована, членам комитета 
-необходимо подписать своими приватными ключами 
-bitcoin-транзакцию, находящуюся в объекте. Как только транзакция 
-будет подписана 2/3 + 1 активных членов комитета, она будет 
-отправлена в сеть bitcoin (всеми членами комитета). 
+2. Informing the network about the transaction
 
-**4\. Зачисление средств на аккаунт**
+On receiving a Bitcoin block containing a transaction with an address
+generated in Echo, the participants set an operation with the
+information about the given BTC deposit to the Echo blockchain. The
+operation creates a new object which stores the information about the
+BTC deposit. A new object is created in case there is no such object
+yet. If such an object already exists the operation calls an increase in
+the value of the counter. When the object's counter has a value that
+exceeds the two-thirds of the number of active participants, it can be
+considered valid. When processing an Echo block, the protocol creates an
+object that stores the Bitcoin transaction for transferring BTC from the
+Deposit Address created by the user to the address of the funds
+repository. The action is possible if the protocol contains
+deposits/withdrawals which are valid. 
 
-После подтверждения отправленной транзакции на стороне bitcoin, 
-пользователю Echo перечисляется eBTC.
+3. Transferring of funds to the Repository Address 
 
-### Обработка вывода Bitcoin
+When the transaction is formed, the participants are requested to sign
+the transaction, which is located in the object, with their own private
+keys. As soon as the transaction is signed by 2/3 + 1 active
+participants, it will be sent to the Bitcoin network (by all the
+participants). 
 
-Пользователь создаёт транзакцию, содержащую операцию вывода BTC, и 
-отправляет её в сеть echo. При обработке транзакции создается объект, 
-содержащий информацию о выводе. При обработке блока echo протокол, при 
-наличии действительных вводов/выводов, создает объект хранящий 
-биткоин-транзакцию. После этого, членам комитета необходимо подписать 
-своими приватными ключами bitcoin-транзакцию, находящуюся в объекте. 
-Как только транзакция будет подписана больше, чем 2/3 активных членов 
-комитета, она будет отправлена в сеть bitcoin (всеми членами комитета). 
-После подтверждения отправленной транзакции на стороне bitcoin, 
-пользователь может воспользоваться BTC на стороне bitcoin.
+4. Transferring of funds to the user account
 
-## Смена хранилища средств
+When the transaction sent on the Bitcoin side is confirmed, the user in
+the Echo network gets the eBTC. 
 
-### Описание проблем
+### Processing of the withdrawal in Bitcoin
 
-По той причине, что все BTC, введенные в echo, хранятся на одном vout 
-хранилища средств, и ключи всех активных членов комитета есть в скрипте 
-адреса хранилища средств, необходимо при смене активных членов комитета, 
-заменить ключи из sidechain управляющего аккаунта и создавать новый 
-адрес для хранилища средств, основанный на ключах новых активных членов 
-комитета.
+The user creates a transaction containing a BTC deposit operation and
+sends it to the Echo network. On the processing of this transaction, The
+Echo protocol generates an object containing the information about the
+deposit. When processing an Echo block, the protocol creates an object
+that stores the Bitcoin transaction. Afterwards, the participants are
+requested to sign the Bitcoin transaction, which is located in the
+object, with their own private keys. As soon as the transaction is
+signed by more than 2/3 of the active participants, it will be sent to
+the Bitcoin network (by all the participants). When the transaction sent
+on the Bitcoin side is confirmed, the user on the Bitcoin side can use
+the received BTC. 
 
-Так же необходимо совершить перевод с одного адреса хранилища средств на 
-новый, но для этого нужно ограничить количество сменяемых активных членов 
-комитета за один maintenance. Это сделано для того, чтобы оставалось 
-определенное количество  активных членов комитета, способных подписать 
-vin для перевода на новый адрес хранилища средств.
+## Change of Funds Repository
 
-Так же возникает проблема, что BTC не могут быть переведены с одного 
-адреса на другой просто так, так как непонятно, кто будет оплачивать 
-комиссию за транзакцию в сети Bitcoin.
+### Problem Description
 
-Следующая смена хранилища средств не может быть произведена, пока не 
-подтверждается транзакция с предыдущей сменой.
+When changing the active participants, the keys from the Sidechain of
+managing account should be replaced and a new address for the storage of
+funds, based on the keys of the new active participants should be
+created. It is necessary due to the fact that all the BTC deposited into
+Echo are stored in one vout of the Funds Repository and the keys of all
+the active participants are located in the script of the Funds
+Repository. 
 
-Это сделано по следующим причинам:
+It is also necessary to make a transfer from one Funds Repository
+Address to the new one. For doing this, the number of changeable active
+participants for one maintenance must be limited. This was done with the
+purpose to always preserve a certain number of active participants who
+could sign a vin for the transfer to the new Funds Repository Address. 
 
-Предположим, что следующая смена хранилища средств прошла, не дождавшись 
-подтверждения предыдущей транзакции на смену хранилища средств. Обе 
-транзакции попали в чейн Bitcoin. Произошёл форк сети Bitcoin и 
-транзакции попали в ветку, которая впоследствии будет удалена. 
-Изначальных активных членов комитета, которые были до обеих смен 
-хранилища средств, осталось меньше чем необходимое количество, чтобы 
-подписать новый перевод на хранилища средств 2. Именно поэтому 
-необходимо блокировать смену активных членов комитета (хранилища средств), 
-пока не подтвердится предыдущая транзакция на смену.
+One more problem is that transferring BTC from one address to another is
+not that simple for the fact that it's not really clear who is to pay
+the fee for the transaction in the Bitcoin network. 
 
-По нашему сценарию смена адреса хранилиза будет происходить следующим 
-образом:
+The current change of funds' repository cannot be made until the
+transaction on the previous change is confirmed. 
 
-* Определяется список новых активных членов комитета. На момент 
-maintenance будет сменено определённое количество активных членов 
-комитета. Оставшееся количество должно быть таким, чтобы оно могло 
-подписать транзакцию на смену хранилища средств. Если же на момент 
-maintenance, при подсчете голосов сложилась ситуация, при которой 
-старых активных членов комитета остаётся меньше, чем должно быть для 
-возможности подписать перевод, то остаётся столько активных членов 
-комитета сколько нужно для подписи, остальные меняются на новые. 
-Оставшиеся же активных членов комитета, которые должны были стать 
-новыми, но не стали, поменяются на следующем maintenance, после того как 
-подтвердится перевод на новый адрес хранилища средств.
-* Ключи активных членов комитета, которые были удалены из списка 
-активных на этом maintenance удаляются из sidechain управляющего аккаунта.
-* Создаётся новый адрес хранилища средств, основанный на ключах новых 
-активных членов комитета.
-* Далее ожидается ввод или вывод BTC.
-* Как только появляется новый ввод или вывод, активные члены комитета, 
-ключи которых есть в старом адресе хранилища средств, подписывают 
-транзакцию.
-* В транзакцию кладётся vout уже на новый адрес хранилища средств.
-* Транзакция отправляется в сеть.
+This is done for the following reasons:
+
+Suppose the current change of funds' repository is confirmed without
+waiting for the transaction on the previous change to be confirmed. When
+both transactions get into the Bitcoin chain, the Bitcoin network
+becomes forked and the transactions appear on one of the branches which
+will subsequently be removed. The original number of the active
+participants operating before the shifts remained less than it is
+required to sign a new transfer to the repositories. 2. That is why it's
+necessary to block the change of active participants (or funds
+repository) until the transaction on the previous one is confirmed. 
+
+According to our scenario, the change of repository address will be
+performed in the following way: 
+
+A list of new active participants is determined. At the time of
+maintenance, a certain number of active participants will be changed.
+The remaining number should remain sufficient for signing a transaction
+to change the repository of funds. If at the time of maintenance, during
+the vote counting, there is a situation in which the number of old
+active participants is fewer than it is required to sign the
+transaction, then there remain as many active participants as necessary
+for signing. All the rest change for new ones. The remaining
+participants who were supposed to be changed but did not do it, change
+at the next maintenance, after the transfer to the new Funds Repository
+Address is confirmed. 
+
+- Keys of the active participants that have been removed from the list
+  of active participants at the maintenance are consequently removed
+  from the Sidechain of the managing account. 
+- Based on the keys of the new active participants, a new Funds
+  Repository Address is created. 
+- Next, the network expects a BTC deposit/withdrawal. 
+- As soon as a new deposit or withdrawal is made, the active
+  participants whose keys are stored in the old Funds Repository Address
+  sign the transaction. 
+- The transaction gets the vout to the already new Funds Repository
+  Address. 
+- The transaction is sent to the network.
