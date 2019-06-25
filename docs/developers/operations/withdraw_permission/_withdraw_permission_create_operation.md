@@ -14,7 +14,7 @@ The fee for this operation is paid by withdraw_from_account, and this account is
 
 ```json
 [
-  25,{
+  23,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -27,7 +27,8 @@ The fee for this operation is paid by withdraw_from_account, and this account is
     },
     "withdrawal_period_sec": 0,
     "periods_until_expiration": 0,
-    "period_start_time": "1970-01-01T00:00:00"
+    "period_start_time": "1970-01-01T00:00:00",
+    "extensions": []
   }
 ]
 ```

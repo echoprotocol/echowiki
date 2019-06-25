@@ -60,14 +60,14 @@ But before, it's necessary to get the contract performance result. The result ID
 ```bash
 unlocked >>> get_account_history nathan 1
 get_account_history nathan 1
-2039-01-01T15:17:26 create_contract_operation nathan fee: 0.00013 ECHO   result: 1.17.0
+2039-01-01T15:17:26 create_contract_operation nathan fee: 0.00013 ECHO   result: 1.15.0
 ```
 
-The result of creating a contract has the ID `1.17.0`, and now let's see how to get it using the `get_contract_result` method.
+The result of creating a contract has the ID `1.15.0`, and now let's see how to get it using the `get_contract_result` method.
 
 ```bash
-unlocked >>> get_contract_result 1.17.0
-get_contract_result 1.17.0
+unlocked >>> get_contract_result 1.15.0
+get_contract_result 1.15.0
 [
   0,{
     "exec_res": {
@@ -89,15 +89,15 @@ get_contract_result 1.17.0
 ]
 ```
 
-The address of the new contract is in the `exec_res.new_address` field. It is written in an Ethereum address format, that equals `0100000000000000000000000000000000000000` in our case, which is converted into Echo ID as `1.16.0`.
+The address of the new contract is in the `exec_res.new_address` field. It is written in an Ethereum address format, that equals `0100000000000000000000000000000000000000` in our case, which is converted into Echo ID as `1.14.0`.
 
 Now, we can find out the current contract balance, as well as call its methods.
 
 Finding out the balance using the `list_id_balances` method:
 
 ```bash
-unlocked >>> list_id_balances 1.16.0
-list_id_balances 1.16.0
+unlocked >>> list_id_balances 1.14.0
+list_id_balances 1.14.0
 [{
     "amount": 10000,
     "asset_id": "1.3.0"
@@ -108,14 +108,14 @@ list_id_balances 1.16.0
 Calling the `greet` method that returns the constant string.
 
 ```sh
-call_contract nathan 1.16.0 "cfae3217" 0 ECHO 1 2000000 true true
+call_contract nathan 1.14.0 "cfae3217" 0 ECHO 1 2000000 true true
 ```
 
 The line that the contract returns is in the contract result field `exec_res.output` in a hex-form.
 
 ```sh
-unlocked >>> get_contract_result 1.17.1
-get_contract_result 1.17.1
+unlocked >>> get_contract_result 1.15.1
+get_contract_result 1.15.1
 [
   0,{
     "exec_res": {
@@ -140,14 +140,14 @@ get_contract_result 1.17.1
 Calling the `getPennie` method, that performs transfer to the account and creates an event.
 
 ```sh
-call_contract nathan 1.16.0 "9e19b52d" 0 ECHO 1 2000000 true true
+call_contract nathan 1.14.0 "9e19b52d" 0 ECHO 1 2000000 true true
 ```
 
 As a result of this method implementation, the contract balance should have decreased by 1, which we can see when viewing its balance sheet.
 
 ```sh
-unlocked >>> list_id_balances 1.16.0
-list_id_balances 1.16.0
+unlocked >>> list_id_balances 1.14.0
+list_id_balances 1.14.0
 [{
     "amount": 9999,
     "asset_id": "1.3.0"
@@ -171,24 +171,24 @@ Also there are event records in the result logs..
 Calling the `breakPiggy` method, that returns all the contract money back and destroying the contract itself.
 
 ```sh
-call_contract nathan 1.16.0 "0314c1bf" 0 ECHO 1 2000000 true true
+call_contract nathan 1.14.0 "0314c1bf" 0 ECHO 1 2000000 true true
 ```
 
 As a result, we can see that the contract balance has decreased to zero and that it has `suicided`, so now it's impossible to call its methods any more.
 
 ```sh
-unlocked >>> list_id_balances 1.16.0
-list_id_balances 1.16.0
+unlocked >>> list_id_balances 1.14.0
+list_id_balances 1.14.0
 [{
     "amount": 0,
     "asset_id": "1.3.0"
   }
 ]
 
-unlocked >>> get_object 1.16.0
-get_object 1.16.0
+unlocked >>> get_object 1.14.0
+get_object 1.14.0
 [{
-    "id": "1.16.0",
+    "id": "1.14.0",
     "statistics": "2.20.0",
     "suicided": true,
     "type": "evm"

@@ -60,11 +60,24 @@ Stop receiving any notifications. Unsubscribes from all subscribed objects.
 Retrieve a block header.
 
 ##### Parameters
+
 - *block_num* height of the block whose header should be returned
 
 ##### Returns
 
 Header of the referenced block, or null if no matching block was found.
+
+#### get_block_header_batch(array block_nums)
+
+Retrieve multiple block header by block numbers
+
+##### Parameters
+
+- *block_num* vector containing heights of the block whose header should be returned
+
+##### Returns
+
+Array of headers of the referenced blocks, or null if no matching block was found
 
 #### get_block(block_num)
 
@@ -77,6 +90,18 @@ Retrieve a full, signed block.
 ##### Returns
 
 The referenced block, or null if no matching block was found.
+
+#### get_block_virtual_ops(block_num)
+
+Get virtual ops from the block
+
+##### Parameters
+
+- *block_num* Height of the block to be returned
+
+##### Returns
+
+Array of operation history objects, or null if no matching operation was found
 
 #### get_transaction(block_num, trx_in_block)
 
@@ -139,6 +164,19 @@ Retreive an array of account IDs associated with the given keys.
 
 An array of arrays of account IDs for every public key provided.
 
+#### is_public_key_registered(public_key)
+
+Determine whether a textual representation of a public key
+(in Base-58 format) is *currently* linked
+to any *registered* (i.e. non-stealth) account on the blockchain
+
+##### Parameters
+
+- *public_key* Public key
+
+##### Returns
+
+Whether a public key is known
 
 #### get_accounts(account_ids)
 
@@ -217,10 +255,35 @@ Get names and IDs for registered accounts.
 
 Map of account names to corresponding IDs.
 
+#### get_account_addresses(account_id, from, limit)
+
+Get addresses of specified account
+
+##### Parameters
+
+- *account_id* ID of the account
+- *from* Number of block to start retrieve from
+- *limit* Maximum number of addresses to return
+
+##### Returns
+
+Addresses owned by account in specified ids interval
+
+#### get_account_by_address(address)
+
+Get owner of specified address
+
+##### Parameters
+
+- *address* address in form of ripemd160 hash
+
+##### Returns
+
+Account id of owner
+
 #### get_account_count()
 
 Get the total number of accounts registered with the blockchain.
-
 
 #### get_account_balances(id, assets)
 
@@ -344,18 +407,32 @@ Get call orders in a given asset.
 
 The call orders to be called, ordered from earliest to latest.
 
-#### get_settle_orders(a, limit)
+#### get_settle_orders(asset, limit)
 
 Get forced settlement orders in a given asset.
 
 ##### Parameters
 
-- *a* ID of asset being settled
+- *asset* ID of asset being settled
 - *limit* maximum number of orders to retrieve
 
 ##### Returns
 
 The settle orders, ordered from earliest settlement date to latest.
+
+#### get_collateral_bids(asset, limit, start)
+
+Get collateral_bid_objects for a given asset
+
+##### Parameters
+
+- *asset* ID of asset
+- *limit* Maximum number of objects to retrieve
+- *start* skip that many results
+
+##### Returns
+
+The settle orders, ordered from earliest settlement date to latest
 
 #### get_margin_positions(id)
 
@@ -426,6 +503,17 @@ Returns recent trades for the market assetA:assetB. The time must be UTC.
 
 Recent transactions in the market
 
+#### get_current_verifiers(stage_num)
+
+Get a list of accounts selected to be verifiers on current round on stage provided
+
+##### Parameters
+
+- *stage_num* Stage number
+
+##### Returns
+
+List of accounts selected to be verifiers on given stage
 
 #### get_witnesses(witness_ids)
 
@@ -506,6 +594,10 @@ Get names and IDs for registered committee_members.
 
 Map of committee_member names to corresponding IDs
 
+#### get_committee_count()
+
+Get the total number of committee registered with the blockchain
+
 #### get_workers_by_account(account_id)
 
 Returns the worker objects associated with this account.
@@ -559,6 +651,66 @@ If the asset type does not have a valid core_exchange_rate
 #### get_proposed_transactions(id)
 
 Returns the set of proposed transactions relevant to the specified account id.
+
+#### get_eth_address(account)
+
+Returns information about generated ethereum address, if then exist and approved, for the given account id.
+
+##### Parameters
+
+- *account* the id of the account to provide information about
+
+##### Returns
+
+The public ethereum address data stored in the blockchain
+
+#### get_account_deposits(account)
+
+Returns all approved deposits, for the given account id.
+
+##### Parameters
+
+- *account* the id of the account to provide information about
+
+##### Returns
+
+The all public deposits data stored in the blockchain
+
+#### get_account_withdrawals(account)
+
+Returns all approved withdrawals, for the given account id.
+
+##### Parameters
+
+- *account* the id of the account to provide information about
+
+##### Returns
+
+The all public withdrawals data stored in the blockchain
+
+#### get_contract_pool_balance(id)
+
+Get an contract's pool balance in default asset
+
+##### Parameters
+
+- *id* ID of the contract to get balances for
+
+##### Returns
+
+Balances of the contract
+
+#### get_contract_pool_whitelist(id)
+
+Get an contract's whitelist and blacklist
+
+##### Parameters
+
+- *id* ID of the contract to get balances for
+
+##### Returns
+
+Struct contract_pool_whitelist which consist of whitelist blacklist
 
 #### get_all_contracts()
 

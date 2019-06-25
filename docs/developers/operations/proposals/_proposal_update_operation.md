@@ -14,7 +14,7 @@ If an account's owner and active authority are both required, only the owner aut
 
 ```json
 [
-  23,{
+  21,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

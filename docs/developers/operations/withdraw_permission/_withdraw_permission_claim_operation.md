@@ -12,7 +12,7 @@ Fee is paid by withdraw_to_account, which is required to authorize this operatio
 
 ```json
 [
-  27,{
+  25,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -24,12 +24,7 @@ Fee is paid by withdraw_to_account, which is required to authorize this operatio
       "amount": 0,
       "asset_id": "1.3.0"
     },
-    "memo": {
-        "from": "ECHO6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
-        "to": "ECHO6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
-        "nonce": "16430576185191232340",
-        "message": "74d0e455e2e5587b7dc85380102c3291"
-    },
+    "extensions": []
   }
 ]
 ```

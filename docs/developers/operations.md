@@ -48,43 +48,6 @@
 | [committee_member_update_operation](operations/committee_member/_committee_member_update_operation.md) | Update a `committee_member` object |
 | [committee_member_update_global_parameters_operation](operations/committee_member/_committee_member_update_global_parameters_operation.md) | Used by committee members to update the global parameters of the blockchain |
 
-#### Stealth Transfer
-
-Operations related to stealth transfer of value
-
-Stealth Transfers enable users to maintain their finanical privacy against even
-though all transactions are public.  Every account has three balances:
-
-1. Public Balance - everyone can see the balance changes and the parties involved
-2. Blinded Balance - everyone can see who is transacting but not the amounts involved
-3. Stealth Balance - both the amounts and parties involved are obscured
-
-Account owners may set a flag that allows their account to receive(or not) transfers of these kinds
-Asset issuers can enable or disable the use of each of these types of accounts.
-
-Using the "temp account" which has no permissions required, users can transfer a
-stealth balance to the temp account and then use the temp account to register a new
-account.  In this way users can use stealth funds to create anonymous accounts with which
-they can perform other actions that are not compatible with blinded balances (such as market orders)
-
-##### Referral Progam
-
-Stealth transfers that do not specify any account id cannot pay referral fees so 100% of the
-transaction fee is paid to the network.
-
-##### Fees
-
-Stealth transfers can have an arbitrarylly large size and therefore the transaction fee for
-stealth transfers is based purley on the data size of the transaction.
-
-#### Confidential Operations
-
-| Name | Description |
-| -------- | -------- |
-| [transfer_to_blind_operation](operations/stealth_transfer/_transfer_to_blind_operation.md) | Converts public account balance to a blinded or stealth balance |
-| [transfer_from_blind_operation](operations/stealth_transfer/_transfer_from_blind_operation.md) | Converts blinded/stealth balance to a public account balance |
-| [blind_transfer_operation](operations/stealth_transfer/_blind_transfer_operation.md) | Transfers from blind to blind |
-
 #### Contract operations
 
 | Name | Description |
@@ -92,18 +55,30 @@ stealth transfers is based purley on the data size of the transaction.
 | [create_contract_operation](operations/contracts/_create_contract_operation.md) | Creates a contract. |
 | [call_contract_operation](operations/contracts/_call_contract_operation.md) | Calls a contract. |
 | [contract_transfer_operation](operations/contracts/_contract_transfer_operation.md) *[VIRTUAL]* | Indicates internal contract transfers |
+| [contract_update_operation](operations/contracts/_contract_update_operation.md) | Update contract data |
+
+#### Sidechain operations
+
+| Name | Description |
+| -------- | -------- |
+| [generate_eth_address_operation](operations/contracts/_generate_eth_address_operation.md) | |
+| [create_eth_address_operation](operations/contracts/_create_eth_address_operation.md) | |
+| [deposit_eth_operation](operations/contracts/_deposit_eth_operation.md) | |
+| [withdraw_eth_operation](operations/contracts/_withdraw_eth_operation.md) | |
+| [approve_withdraw_eth_operation](operations/contracts/_approve_withdraw_eth_operation.md) | |
+| [change_sidechain_config_operation](operations/contracts/_change_sidechain_config_operation.md) | |
+| [sidechain_issue_operation](operations/contracts/_sidechain_issue_operation.md) | |
+| [sidechain_burn_operation](operations/contracts/_sidechain_burn_operation.md) | |
+| [register_erc20_token_operation](operations/contracts/_register_erc20_token_operation.md) | |
+| [deposit_erc20_token_operation](operations/contracts/_deposit_erc20_token_operation.md) | |
+| [withdraw_erc20_token_operation](operations/contracts/_withdraw_erc20_token_operation.md) | |
+| [approve_erc20_token_withdraw_operation](operations/contracts/_approve_erc20_token_withdraw_operation.md) | |
 
 #### Custom Extension
 
 | Name | Description |
 | -------- | -------- |
 | [custom_operation](operations/custom/_custom_operation.md) | Provides a generic way to add higher level protocols on top of witness consensus |
-
-#### FBA
-
-| Name | Description |
-| -------- | -------- |
-| [fba_distribute_operation](operations/fba/_fba_distribute_operation.md) *[VIRTUAL]* |  |
 
 #### Assets Market
 
@@ -171,35 +146,3 @@ transaction. This off-chain synchronization can be avoided using proposals.
 | [withdraw_permission_update_operation](operations/withdraw_permission/_withdraw_permission_update_operation.md) | Update an existing withdraw permission |
 | [withdraw_permission_claim_operation](operations/withdraw_permission/_withdraw_permission_claim_operation.md) | Withdraw from an account which has published a withdrawal permission |
 | [withdraw_permission_delete_operation](operations/withdraw_permission/_withdraw_permission_delete_operation.md) | Delete an existing withdrawal permission |
-
-#### Witness Operations
-
-| Name | Description |
-| -------- | -------- |
-| [witness_create_operation](operations/witnesses/_witness_create_operation.md) | Create a witness object, as a bid to hold a witness position on the network |
-| [witness_update_operation](operations/witnesses/_witness_update_operation.md) | Update a witness object's URL and block signing key |
-
-#### The Blockchain Worker System
-
-Echo blockchains allow the creation of special "workers" which are elected positions paid by the blockchain
-for services they provide. There may be several types of workers, and the semantics of how and when they are paid
-are defined by the @ref worker_type_enum enumeration. All workers are elected by core stakeholder approval, by
-voting for or against them.
-
-Workers are paid from the blockchain's daily budget if their total approval (votes for - votes against) is
-positive, ordered from most positive approval to least, until the budget is exhausted. Payments are processed at
-the blockchain maintenance interval. If a worker does not have positive approval during payment processing, or if
-the chain's budget is exhausted before the worker is paid, that worker is simply not paid at that interval.
-Payment is not prorated based on percentage of the interval the worker was approved. If the chain attempts to pay
-a worker, but the budget is insufficient to cover its entire pay, the worker is paid the remaining budget funds,
-even though this does not fulfill his total pay. The worker will not receive extra pay to make up the difference
-later. Worker pay is placed in a vesting balance and vests over the number of days specified at the worker's
-creation.
-
-Once created, a worker is immutable and will be kept by the blockchain forever.
-
-#### Worker operations
-
-| Name | Description |
-| -------- | -------- |
-| [worker_create_operation](operations/workers/_worker_create_operation.md) | Create a new worker object |

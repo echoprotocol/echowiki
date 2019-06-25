@@ -24,7 +24,7 @@ It's inherited from [base_contract_operation](../types/common.md#base_contract_o
 
 ```javascript
 [
-  47,{
+  40,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -36,7 +36,8 @@ It's inherited from [base_contract_operation](../types/common.md#base_contract_o
     },
     "code": "",
     "supported_asset_id": "1.3.0", // optional
-    "eth_accuracy": false
+    "eth_accuracy": false,
+    "extensions": []
   }
 ]
 ```

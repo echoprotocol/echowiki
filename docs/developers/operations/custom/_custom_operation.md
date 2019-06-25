@@ -8,7 +8,7 @@ There is no validation for this operation other than that required auths are val
 
 ```json
 [
-  35,{
+  32,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -16,7 +16,8 @@ There is no validation for this operation other than that required auths are val
     "payer": "1.2.0",
     "required_auths": ["1.2.0"],
     "id": 0,
-    "data": ""
+    "data": "",
+    "extensions": []
   }
 ]
 ```

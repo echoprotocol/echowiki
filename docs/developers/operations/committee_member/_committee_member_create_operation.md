@@ -8,13 +8,15 @@ Accounts which wish to become committee_members may use this operation to create
 
 ```json
 [
-  29,{
+  27,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
     },
     "committee_member_account": "1.2.0",
-    "url": ""
+    "url": "",
+    "eth_address": "0000000000000000000000000000000000000000",
+    "extensions": []
   }
 ]
 ```

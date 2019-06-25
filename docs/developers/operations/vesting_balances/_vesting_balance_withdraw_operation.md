@@ -10,7 +10,7 @@ Withdrawal from a not-completely-mature vesting balance will result in paying fe
 
 ```json
 [
-  33,{
+  31,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -20,7 +20,8 @@ Withdrawal from a not-completely-mature vesting balance will result in paying fe
     "amount": {
       "amount": 0,
       "asset_id": "1.3.0"
-    }
+    },
+    "extensions": []
   }
 ]
 ```

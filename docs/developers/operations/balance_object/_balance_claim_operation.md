@@ -8,7 +8,7 @@ This operation is used to claim the balance in a given @ref balance_object. If t
 
 ```json
 [
-  37,{
+  34,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -19,7 +19,8 @@ This operation is used to claim the balance in a given @ref balance_object. If t
     "total_claimed": {
       "amount": 0,
       "asset_id": "1.3.0"
-    }
+    },
+    "extensions": []
   }
 ]
 ```

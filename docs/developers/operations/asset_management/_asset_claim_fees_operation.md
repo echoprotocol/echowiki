@@ -6,7 +6,7 @@ Used to transfer accumulated fees back to the issuer's balance.
 
 ```json
 [
-  43,{
+  37,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

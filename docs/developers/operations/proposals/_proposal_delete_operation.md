@@ -8,7 +8,7 @@ This operation allows the early veto of a proposed transaction. It may be used b
 
 ```json
 [
-  24,{
+  22,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
