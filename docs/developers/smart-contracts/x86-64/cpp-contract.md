@@ -16,7 +16,7 @@ to get small and portable bytecode
   not supported
 - RTTI
     - exceptions
-  -   constructors of global variables are not called on the program
+    - constructors of global variables are not called on the program
       startup 
 
 Contract parameters can be retrieved by get_parameters variadic
