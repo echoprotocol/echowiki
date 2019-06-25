@@ -25,8 +25,6 @@ extra_javascript:
 nav:
   - Introduction:
       - What is Echo?: introduction/what-is-echo.md
-      # - How does Echo work?: introduction/how-does-echo-work.md
-      - Whitepapers: introduction/whitepapers.md
   - Get started:
       - Installation: get-started/installation.md
       - Running Node and Cli-wallet: get-started/running.md

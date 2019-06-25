@@ -1,9 +1,5 @@
 # Installing Echo
 
-### Install on macOS via Homebrew
-
-### Install on Ubuntu via PPAs
-
 ## Build it from source code
 
 ### Installing dependencies
