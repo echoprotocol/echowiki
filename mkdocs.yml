@@ -65,6 +65,6 @@ nav:
           - Monitoring with ws: technologies/echorand/monitoring.md
       - Sidechain:
           - General View: technologies/sidechain/general-view.md
-      - Echo x86-64 VM: developers/technologies/echo-x86-64-vm.md
+      - Echo x86-64 VM: technologies/echo-x86-64-vm.md
 
 repo_url: https://github.com/d0ugal/mkdocs-basic-theme
