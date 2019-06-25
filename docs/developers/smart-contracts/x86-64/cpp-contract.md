@@ -39,96 +39,98 @@ custom token.
 #include "parameters.hpp"
 #include "return_value.hpp"
 #include "contract_base.hpp"
+#include "db_types.hpp"
+#include "db_hashmap.hpp"
 
 namespace x86_64_contract
 {
-    
-    class contract : public contract_base
-    {
-    private:
-        string _name{"Contract"};
-        
-        DB_STRING(_owner);
-        DB_UINT64(_total_supply);
-        DB_UINT64(_max_supply);
-        DB_HASHMAP(db_string, db_uint64, _balances);
-    
-    public:
-        void constructor() override
-        {
-            _owner = get_origin_sender();
-            _total_supply = 0;
-            _max_supply = 1'000'000'000;
-        }
-        
-        std::uint64_t total_supply() const
-        {
-            return _total_supply;
-        }
-        
-        std::uint64_t balance_of(const string& account)
-        {
-            if(db_hashmap<db_string, db_string>::npos != _map.find(account))
-            {
-                retrun _map[account];
-            }
-            return 0;
-        }
-        
-        bool mint(std::uint64_t amount)
-        {
-            if(get_origin_sender() == _owner && _total_supply + amount <= _max_supply)
-            {
-                _total_supply += amount;
-                _balances[_owner] += amount;
-                return true;
-            }
-            return false;
-        }
-        
-        bool transfer(const string& from, const string& to, std::uint64_t amount)
-        {
-            if(get_origin_sender() == from && _balances[from] >= amount)
-            {
-                _balances[from] -= amount;
-                _balances[to] += amount;
-                return true;
-            }
-            return false;
-        }
-    };
-    
-    extern "C" void __apply()
-    {
-        CONTRACT(c);
-        string function;
-        
-        get_function_name(function);
-    
-        if (function == "total_supply")
-        {
-            set_return_values(c.total_supply());
-        }
-        else if (function == "balance_of")
-        {
-            string account;
-            if(get_parameters(account))
-                set_return_values(c.balance_of(account));
-        }
-        else if (function == "mint")
-        {
-            std::uint64_t amount = 0;
-            if(get_parameters(amount))
-                set_return_values(c.mint(amount));
-        }
-        else if (function == "transfer")
-        {
-            string from, to;
-            std::uint64_t amount = 0;
-            if(get_parameters(from, to, amount))
-                set_return_values(c.transfer(from, to, amount));
-        }
-    }
+
+class contract : public contract_base
+{
+private:
+   string _name{"Contract"};
+
+   DB_STRING(_owner);
+   DB_UINT64(_total_supply);
+   DB_UINT64(_max_supply);
+   DB_HASHMAP(db_string, db_uint64, _balances);
+
+public:
+   void constructor() override
+   {
+       _owner = get_origin_sender();
+       _total_supply = 0;
+       _max_supply = 1'000'000'000;
+   }
+
+   std::uint64_t total_supply() const
+   {
+       return _total_supply;
+   }
+
+   std::uint64_t balance_of(const string& account)
+   {
+       if(db_hashmap<db_string, db_string>::npos != _balances.find(account))
+       {
+           return _balances[account];
+       }
+       return 0;
+   }
+
+   bool mint(std::uint64_t amount)
+   {
+       if(get_origin_sender() == _owner && _total_supply + amount <= _max_supply)
+       {
+           _total_supply += amount;
+           _balances[_owner] += amount;
+           return true;
+       }
+       return false;
+   }
+
+   bool transfer(const string& from, const string& to, std::uint64_t amount)
+   {
+       if(get_origin_sender() == from && _balances[from] >= amount)
+       {
+           _balances[from] -= amount;
+           _balances[to] += amount;
+           return true;
+       }
+       return false;
+   }
+};
+
+extern "C" void __apply()
+{
+   CONTRACT(c);
+   string function;
+
+   parameters::get_function_name(function);
+
+   if (function == "total_supply")
+   {
+       set_return_values(c.total_supply());
+   }
+   else if (function == "balance_of")
+   {
+       string account;
+       if(get_parameters(account))
+           set_return_values(c.balance_of(account));
+   }
+   else if (function == "mint")
+   {
+       std::uint64_t amount = 0;
+       if(get_parameters(amount))
+           set_return_values(c.mint(amount));
+   }
+   else if (function == "transfer")
+   {
+       string from, to;
+       std::uint64_t amount = 0;
+       if(get_parameters(from, to, amount))
+           set_return_values(c.transfer(from, to, amount));
+   }
+}
 }
 ```
 
