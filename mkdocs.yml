@@ -63,8 +63,9 @@ nav:
           - General View: technologies/echorand/overview.md
           - Architecture: technologies/echorand/architecture.md
           - Monitoring with ws: technologies/echorand/monitoring.md
-      - Sidechain:
-          - General View: technologies/sidechain/general-view.md
+      - Sidechains:
+          - Bitcoin Sidechain: technologies/sidechain/bitcoin-sidechain-overview.md
+          - Ethereum Sidechain: technologies/sidechain/ethereum-sidechain-overview.md
       - Echo x86-64 VM: technologies/echo-x86-64-vm.md
 
 repo_url: https://github.com/d0ugal/mkdocs-basic-theme
