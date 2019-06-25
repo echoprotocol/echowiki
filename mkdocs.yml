@@ -57,9 +57,6 @@ nav:
       - Libraries and Frameworks:
           - EchoJS: developers/libraries-n-frameworks/echojs.md
           - Android and iOS: developers/libraries-n-frameworks/android-n-ios.md
-    # - Source Code:
-    # - Project structure: http://google.com
-    # - Build instructions: http://google.com
   - Technologies:
       - Echorand:
           - In a nutshell: technologies/echorand/in-a-nutshell.md
@@ -68,6 +65,6 @@ nav:
           - Monitoring with ws: technologies/echorand/monitoring.md
       - Sidechain:
           - General View: technologies/sidechain/general-view.md
-      - Contracts/VMs: developers/technologies/Contracts(VMs).md
+      - Echo x86-64 VM: developers/technologies/echo-x86-64-vm.md
 
 repo_url: https://github.com/d0ugal/mkdocs-basic-theme
