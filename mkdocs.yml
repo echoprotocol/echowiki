@@ -23,8 +23,6 @@ extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 nav:
-  - Introduction:
-      - What is Echo?: introduction/what-is-echo.md
   - Get started:
       - Installation: get-started/installation.md
       - Running Node and Cli-wallet: get-started/running.md
