@@ -35,42 +35,43 @@ The flow of the VM executing the smart contract is as follows:
 - Loading the bytecode into memory. Set up stack and heap in the memory.
 - Starting emulation from the start address
 - For every instruction VM does the following 
-  - Decoding of the instruction 
-    - Prefixes are decoded by main decoder (unused prefixes, REX prefix,
-      operand size prefix)
-    - Instruction opcode is decoded by main decoder 
-    - Appropriate instruction decoder is called which reads the rest of
-      the instruction (MODRM and SIB bytes, immediate values) and
-      creates operands 
-      - Instructions are divided into groups based on the instruction
-        operation codes (one byte, two bytes, one byte with additional 3
-        bits in MODRM, three bytes), hash maps are created for each
-        group and instruction decoders are stored there for fast access
-      - Operands are created based on values of the MODRM and SIB byte
-        and instruction code itself, please see
-        [https://wiki.osdev.org/X86-64_Instruction_Encoding](https://wiki.osdev.org/X86-64_Instruction_Encoding)
-        for a brief description or
-        [https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf](https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf)
-        for the detailed Intel x86-64 instructions set specification.
-  - Executing decoded instruction 
-    - Operands read from memory/CPU registers or immediate values
-      encoded in the instruction, taking into account the size of
-      operands specified by prefixes or instruction itself.
-    - Instruction does appropriate calculations 
-    - Operands write back the result(s) to memory and/or CPU registers
-      including the flag register for some of the instructions.
-  - Interrupt instruction is used to communicate with the VM from
+    - Decoding of the instruction 
+        - Prefixes are decoded by main decoder (unused prefixes, REX prefix,
+          operand size prefix)
+        - Instruction opcode is decoded by main decoder 
+        - Appropriate instruction decoder is called which reads the rest of
+          the instruction (MODRM and SIB bytes, immediate values) and
+          creates operands 
+            - Instructions are divided into groups based on the instruction
+            operation codes (one byte, two bytes, one byte with additional 3
+            bits in MODRM, three bytes), hash maps are created for each
+            group and instruction decoders are stored there for fast access
+            - Operands are created based on values of the MODRM and SIB byte
+            and instruction code itself, please see
+            [https://wiki.osdev.org/X86-64_Instruction_Encoding](https://wiki.osdev.org/X86-64_Instruction_Encoding)
+            for a brief description or
+            [https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf](https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf)
+            for the detailed Intel x86-64 instructions set specification.
+    - Executing decoded instruction 
+        - Operands read from memory/CPU registers or immediate values
+          encoded in the instruction, taking into account the size of
+          operands specified by prefixes or instruction itself.
+        - Instruction does appropriate calculations 
+        - Operands write back the result(s) to memory and/or CPU
+          registers including the flag register for some of the
+          instructions.
+    - Interrupt instruction is used to communicate with the VM from
     running script. Based on the value provided with the interrupt
     instruction the following is performed: 
-    - access to parameters and returning result of the smart
-      contract 
-    - interaction with the ECHO blockchain 
-    - heap memory allocation. This is required as the script is
-      running in a isolated environment without access to system
-      memory 
-    - debug output 
-    - set of different functions used by contract developer
-      (cryptography functions, math functions, etc)
+        - access to parameters and returning result of the smart
+          contract 
+        - interaction with the ECHO blockchain 
+        - heap memory allocation. This is required as the script is
+          running in a isolated environment without access to system
+          memory 
+        - debug output 
+        - set of different functions used by contract developer
+          (cryptography functions, math functions, etc)
 - Finish the execution after the ret instruction push the null value
   into the RIP register 
 - Return value can be retrieved from the VM as a byte array
