@@ -1,6 +1,8 @@
-# Database API
+# APIs
 
-#### get_objects(array ids)
+## Database API
+
+### get_objects(array ids)
 
 Get the objects corresponding to the provided IDs.
 
