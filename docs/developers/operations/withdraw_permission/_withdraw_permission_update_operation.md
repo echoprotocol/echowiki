@@ -10,7 +10,7 @@ Fee is paid by withdraw_from_account, which is required to authorize this operat
 
 ```json
 [
-  26,{
+  24,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -24,7 +24,8 @@ Fee is paid by withdraw_from_account, which is required to authorize this operat
     },
     "withdrawal_period_sec": 0,
     "period_start_time": "1970-01-01T00:00:00",
-    "periods_until_expiration": 0
+    "periods_until_expiration": 0,
+    "extensions": []
   }
 ]
 ```

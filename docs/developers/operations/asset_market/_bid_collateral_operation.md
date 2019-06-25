@@ -6,7 +6,7 @@ This operation can be used after a black swan to bid collateral for taking over 
 
 ```json
 [
-  45,{
+  38,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

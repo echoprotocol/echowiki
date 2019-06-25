@@ -64,17 +64,17 @@ create_contract(
 Пример вызова созданного ранее контракта:
 
 ```
-call_contract nathan 1.16.0 "c2985578" 0 ECHO 1 2000000 true true
+call_contract nathan 1.14.0 "c2985578" 0 ECHO 1 2000000 true true
 ```
 
 ### Get result of deployment or call
 
-Для получения результатов выполнения контрактов используется функция `get_contract_result(contract_result_id id)`, принимающая id результатов контрактов, например `1.17.2`.
+Для получения результатов выполнения контрактов используется функция `get_contract_result(contract_result_id id)`, принимающая id результатов контрактов, например `1.15.2`.
 
 ### Call smart contracts field
 Чтобы узнать значение публичного поля контракта, без создания транзакции, достаточно вызвать метод `call_contract_no_changing_state`.
 
-Например `call_contract_no_changing_state 1.16.4 nathan ECHO "73d4a13a"`, где `"73d4a13a"` является хешем имени поля.
+Например `call_contract_no_changing_state 1.14.4 nathan ECHO "73d4a13a"`, где `"73d4a13a"` является хешем имени поля.
 
 ### Internal transactions
 При трансфере через контракт, значения трансфера записываются в историю переводов, которая хранится на чейне Echo.

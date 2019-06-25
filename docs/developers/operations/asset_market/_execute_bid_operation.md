@@ -6,7 +6,7 @@ This is a virtual operation that is created while reviving a bitasset from colla
 
 ```json
 [
-  46,{
+  39,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -19,7 +19,8 @@ This is a virtual operation that is created while reviving a bitasset from colla
     "collateral": {
       "amount": 0,
       "asset_id": "1.3.0"
-    }
+    },
+    "extensions": []
   }
 ]
 ```

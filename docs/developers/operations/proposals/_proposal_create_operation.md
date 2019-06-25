@@ -10,7 +10,7 @@ Creates a transaction proposal. The operations which compose the transaction are
 
 ```json
 [
-  22,{
+  20,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -18,7 +18,7 @@ Creates a transaction proposal. The operations which compose the transaction are
     "fee_paying_account": "1.2.0",
     "expiration_time": "1970-01-01T00:00:00",
     "proposed_ops": [],
-    "review_period_seconds": 100500,
+    "review_period_seconds": 100500, // optional
     "extensions": []
   }
 ]

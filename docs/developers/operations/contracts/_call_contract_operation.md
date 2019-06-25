@@ -19,7 +19,7 @@ Inherited from [base_contract_operation](../types/contract.md#base_contract_oper
 
 ```javascript
 [
-  48,{
+  41,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -30,7 +30,8 @@ Inherited from [base_contract_operation](../types/contract.md#base_contract_oper
       "asset_id": "1.3.0"
     },
     "code": "",
-    "callee": "1.16.0"
+    "callee": "1.14.0",
+    "extensions": []
   }
 ]
 ```

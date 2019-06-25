@@ -9,7 +9,7 @@ Virtual op generated when force settlement is cancelled.
 
 ```json
 [
-  42,{
+  36,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

@@ -15,7 +15,7 @@ Returns ID of newly created vesting_balance_object.
 
 ```json
 [
-  32,{
+  30,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -32,7 +32,8 @@ Returns ID of newly created vesting_balance_object.
         "vesting_cliff_seconds": 0,
         "vesting_duration_seconds": 0
       }
-    ]
+    ],
+    "extensions": []
   }
 ]
 ```
