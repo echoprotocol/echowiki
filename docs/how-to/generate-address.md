@@ -1,30 +1,37 @@
-# Генерация адресов аккаунта
+# Account Address Generation
 
-## Общее описание
+## General Description
 
-Механизм идентификации платежа в Echo реализуется путем создания уникальных адресов для одного аккаунта. Это
-позволяет получать платежи на один аккаунт, предоставляя пользователям разные адреса для их идентификации или
-идентификации товара, объекта, к которому относится платеж.
+The payment identification mechanism in Echo is implemented by creating
+unique addresses for a single account. This enables receiving payments
+to a single account, providing users with different addresses to
+identify them or identify the product/object this payment is related to. 
 
-Сгенерированные адреса являются алиасом для аккаунта и расцениваются сетью как перевод между отправителем и
-аккаунтом получателем, к которому относится данный адрес. Адреса могут использоваться только для получения
-платежей и не могут использоваться для отправки платежей с них.
+The generated addresses are an alias for the account and are regarded by
+the network as transfers between the sender and the recipient’s account
+who owns this address. Addresses can only be used to receive payments
+and cannot be used to send outgoing payments. 
 
-## Методы API и операции
+## API Methods and Operations
 
-### Генерация адреса
+### Address Generation
 
-Для генерации адреса необходимо отправить операцию `account_address_create_operation` от аккаунта, для которого
-нужно создать новый адрес. При генерации можно указать `label` - строковое значение, которое будет привязано к
-сгенерированному адресу. Будьте внимательны, `label`, привязанный к адресу, будет доступен для просмотра всем
-участникам сети и не является приватной информацией.
+In order to generate an address, the `account_address_create_operation`
+must be sent from the account you want to create a new address for.
+Using this operation you can specify a `label` - a string value that
+will be bound to the generated address.
 
-### Получение всех адресов
+IMPORTANT: the `label` associated with the address will be seen by all
+members of the network and is not private information.
 
-Для получения списка адресов аккаунта необходимо воспользоваться методом API
-`get_account_addresses(account_id,stop=0,limit=100,start=0)`. Метод вернет все адреса, привязанные к аккаунту,
-и их лейблы, если они были указаны.
+### To Return All Addresses
 
-### Получение аккаунта по адресу
+In order to get the list of addresses for the account, use the API
+method `get_account_addresses(account_id,from,limit)`. The method will
+return all the addresses associated with the account, and their labels,
+if they were specified.
 
-Испольщуя метод API `get_account_by_address(address)` можно получить аккаунт, к которому привязан данный адрес.
+### To Return the Account by Its Address
+
+Use the API method `get_account_by_address(address)` to return the
+account tied to the specified address. 
