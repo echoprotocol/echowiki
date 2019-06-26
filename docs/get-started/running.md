@@ -6,7 +6,7 @@ In order to run a full node that we can connect to, we need to open the
 RPC interface, this can be done by:
 
 ```
-./bin/echo_node --echorand --rpc-endpoint="0.0.0.0:8090"
+./bin/echo_node --rpc-endpoint="0.0.0.0:8090"
 ```
 
 This will open port `8090` and make it available over the internet (unless you run behind a router/firewall).
@@ -17,7 +17,7 @@ Note, that the full node needs to synchronize the blockchain with the network fi
 To start participating in consensus you should add option `--account-info=[account_id, EDDSA_private_key]`. Where `account_id` is ID of your account and `EDDSA_private_key` is ed215519 key that you registered with.
 
 ```
-./bin/echo_node --echorand --rpc-endpoint="0.0.0.0:8090" --account-info=["1.6.2", "DET67rm27uYRVMQdN88EkpHE6LVVgivM8d8AmbkpauBFDuy"]
+./bin/echo_node --rpc-endpoint="0.0.0.0:8090" --account-info=["1.6.2", "DET67rm27uYRVMQdN88EkpHE6LVVgivM8d8AmbkpauBFDuy"]
 ```
 
 See `-h` for more details
@@ -37,43 +37,51 @@ Url which we will use in example:
 wss://echo-dev.io/ws
 ```
 
-```bash
+```text
 ./bin/echo_wallet -s wss://echo-dev.io/ws
 ```
 
 This will open the cli-wallet and unless you already have a local
 wallet, will ask you to provide a passphrase for your local wallet.
-Once a wallet has been created (default wallet file is ``wallet.json``),
+
+Once a new wallet has been created (default wallet file is ``wallet.json``),
 it will prompt with
 
-```
-locked >>> 
+```text
+Please use the set_password method to initialize a new wallet before continuing
+new >>> 
 ```
 
-The wallet can be unlocked by providing the passphrase:
+As said, a new wallet needs to be initialized before use. Password is set with `set_password` command:
 
-> The passphrase is given in clear text and is echoed by the wallet!
+> Private data, such as passphrase or private key, is not echoed by the wallet
 
+```text
+new >>> set_password 
+Input private data:
+supersecretpassphrase
+locked >>>
 ```
-locked >>> unlock "supersecretpassphrase"
-null
+
+Now the wallet can be `unlock`ed by providing the passphrase:
+
+```text
+locked >>> unlock 
+Input private data:
+supersecretpassphrase
 unlocked >>> 
 ```
 
-After this point, you can issue [any command available to the
+<!-- After this point, you can issue [any command available to the
 cli-wallet](/how-to/api/cli-wallet-api/) or construct your own
-transaction manually.
+transaction manually. -->
 
-You can get more detailed information either by pressing `Tab`, twice,
-or by issuing ``help``.
-Detailed explanations for most calls are available via
+You can get a detailed list of all commands by calling `help` command.
 
-```
-unlocked >> gethelp <command>
-```
+By pressing `TAB` you can get a list of autocomplete commands or complete current if there is no alternatives.
 
 > Many calls have a obligatory ``broadcast``-flag as last
-          argument. If this flag is ``False``, the wallet will construct
+          argument. If this flag is ``false``, the wallet will construct
           and sign, but **not** broadcast the transaction. This can be
           very useful for a cold storage setup or to verify
           transactions.
@@ -86,6 +94,6 @@ application with it. You have the choices of
 * websocket RPC via the ``-r`` parameter, and
 * HTTP RPC via the ``-H`` parameter:
 
-```bash
+```text
 ./bin/echo_wallet -s wss://echo-dev.io/ws -H 127.0.0.1:8092 -r 127.0.0.1:8093
 ```
