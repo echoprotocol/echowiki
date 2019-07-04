@@ -9,6 +9,7 @@
 | [account_whitelist_operation](operations/account_management/_account_whitelist_operation.md) | This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets |
 | [account_upgrade_operation](operations/account_management/_account_upgrade_operation.md)   | Manage an account's membership status |
 | [account_transfer_operation](operations/account_management/_account_transfer_operation.md)  | Transfers the account to another account while clearing the white list |
+| [account_address_create_operation](operations/account_management/_account_address_create_operation.md) | |
 
 #### Assert Conditions
 
@@ -56,6 +57,8 @@
 | [call_contract_operation](operations/contracts/_call_contract_operation.md) | Calls a contract. |
 | [contract_transfer_operation](operations/contracts/_contract_transfer_operation.md) *[VIRTUAL]* | Indicates internal contract transfers |
 | [contract_update_operation](operations/contracts/_contract_update_operation.md) | Update contract data |
+| [contract_fund_pool_operation](operations/contracts/_contract_fund_pool_operation.md) | Transfer asset to fee pool. |
+| [contract_whitelist_operation](operations/contracts/_contract_whitelist_operation.md) | |
 
 #### Sidechain operations
 
@@ -130,6 +133,7 @@ transaction. This off-chain synchronization can be avoided using proposals.
 | -------- | -------- |
 | [transfer_operation](operations/asset_transfer/_transfer_operation.md) | Transfers an amount of one asset from one account to another |
 | [override_transfer_operation](operations/asset_transfer/_override_transfer_operation.md) | Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority |
+| [transfer_to_address_operation](operations/asset_transfer/_transfer_to_address_operation.md) | |
 
 #### Vesting Balances
 
