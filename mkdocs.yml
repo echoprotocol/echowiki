@@ -26,6 +26,7 @@ nav:
   - Get started:
       - Installation: get-started/installation.md
       - Running Node and Cli-wallet: get-started/running.md
+      - Running Committee Node: get-started/running-committee.md
       - Quickstart Docker: get-started/docker.md
   - How To:
       - Create account: how-to/create-account.md
