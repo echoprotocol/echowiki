@@ -1,6 +1,6 @@
 # Registration API
 
-#### register_account(name, owner_key, active_key, memo_key, echorand_key)
+#### register_account(name, active_key, echorand_key)
 
 ##### Parameters
 | Option | Description |
@@ -9,7 +9,7 @@
 | `public_key_t active` | active ed25519 key |
 | `public_key_t echorand_key` | ed25519 key for echorand |
 
-##### Returns
+##### Example
 
 The objects retrieved, in the order they are mentioned in ids.
 ```json
