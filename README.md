@@ -64,13 +64,9 @@ You can read more about how the Echo works and how it works from the
 inside. You can follow the links below:
 
 - PoWR EchoRand
-  - [In a nutshell](technologies/echorand/in-a-nutshell) - a brief
-    description of the principles of consensus
-  - [Overview](technologies/echorand/overview) - detailed description of
-    the mechanism with all the subtleties and nuances
-  - [Architecture](technologies/echorand/architecture) - low-level
-    detailed description of exactly how the idea was implemented in the
-    code
+  - [In a nutshell](technologies/echorand/in-a-nutshell) - a brief description of the principles of consensus
+  - [Overview](technologies/echorand/overview) - detailed description of the mechanism with all the subtleties and nuances
+  - [Architecture](technologies/echorand/architecture) - low-level detailed description of exactly how the idea was implemented in the code
     
 ## How to use?
 
@@ -89,13 +85,8 @@ Keep track of the blocks and transactions you can on the block explorer:
 To interact with the blockchain at the code level, you have the
 following libraries and SDKs at your disposal: 
 
-- [echojs-lib](https://github.com/echoprotocol/echojs-lib) - A
-  javascript Echo library for node.js and browsers 
-- [echopy-lib](https://github.com/echoprotocol/echopy-lib) - Python
-  Library for Echo Blockchain 
-- [echo-unity-lib](https://github.com/echoprotocol/echo-unity-lib) -
-  Unity library for Echo 
-- [echo-ios-framework](https://github.com/echoprotocol/echo-ios-framework)
-  \- Pure Swift Echo framework for iOS
-- [echo-android-framework](https://github.com/echoprotocol/echo-android-framework)
-  \- Pure Kotlin Echo framework for Android
+- [echojs-lib](https://github.com/echoprotocol/echojs-lib) - A javascript Echo library for node.js and browsers
+- [echopy-lib](https://github.com/echoprotocol/echopy-lib) - Python Library for Echo Blockchain 
+- [echo-unity-lib](https://github.com/echoprotocol/echo-unity-lib) - Unity library for Echo 
+- [echo-ios-framework](https://github.com/echoprotocol/echo-ios-framework) - Pure Swift Echo framework for iOS
+- [echo-android-framework](https://github.com/echoprotocol/echo-android-framework) - Pure Kotlin Echo framework for Android
