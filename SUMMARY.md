@@ -4,6 +4,7 @@
 
 ## How To
 
+* [Install Full Node](how-to/install-full-node.md)
 * [Create Account](how-to/create-account.md)
 * [Generate Address](how-to/generate-address.md)
 
