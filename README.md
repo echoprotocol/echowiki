@@ -1,20 +1,13 @@
-# Echo blockchain Wiki
+# Echo Docs
 
-See wiki here - [https://echo-dev.io/](https://echo-dev.io/)
+Welcome to the Echo Docs!
 
-Install dependences:
+Please note that the current version of the documentation is not final
+and will change soon.
 
-```bash
-pip3 install mkdocs
-pip3 install python-markdown-math
-pip3 install pymdown-extensions
-pip3 install Pygments
-pip3 install .
-```
+## What is Echo?
 
-Build HTML version:
-
-```bash
-pip3 install .
-mkdocs serve
-```
+Echo is a generalized smart contract protocol that enables efficient
+decentralized computing. It provides the infrastructure and developer
+tooling necessary to build and deploy scalable, high-performing
+decentralized applications.
