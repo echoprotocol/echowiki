@@ -10,7 +10,7 @@ The easiest of them is to simply download the pre-installed binary files from th
 
 - [echo-linux.v0.8.0rc2.tar](https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar)
 
-```bash
+```shell
 wget https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar
 tar -xvf echo-linux.v0.8.0rc2.tar
 ./echo_node \
@@ -36,7 +36,7 @@ After starting, the blockchain should start synchronizing with the main network.
 The Echo node is also available as a docker container. 
 
 Detailed information on how to run the Echo container can be found by 
-clicking on this link - [echoprotocol/echo][https://hub.docker.com/r/echoprotocol/echo]
+clicking on this link - [echoprotocol/echo](https://hub.docker.com/r/echoprotocol/echo)
 
 ## Build from sources
 
@@ -54,13 +54,13 @@ To install dependencies for macOS follow this steps:
 * Install Homebrew by following the instructions here: [http://brew.sh/](http://brew.sh/)
 * Initialize Homebrew:
 
-```bash
+```shell
 brew doctor
 brew update
 ```
 * Install necessary packages:
 
-```bash
+```shell
 brew install cmake git autoconf automake leveldb libtool libelf doxygen
 ```
 
@@ -68,7 +68,7 @@ brew install cmake git autoconf automake leveldb libtool libelf doxygen
 
 Ubuntu 16.04 LTS have no required cmake and gcc-7 in default repositories. They can be installed though Pip and third-party PPA repository.
 
-```bash
+```shell
 sudo add-apt-repository ppa:jonathonf/gcc-7.3
 sudo apt update
 
@@ -80,13 +80,13 @@ sudo apt install make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl 
 
 #### Installing dependencies on Ubuntu 18.04 LTS and later
 
-```bash
+```shell
 sudo apt update
 sudo apt install cmake make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl libreadline-dev autoconf libtool git ntp libcurl4-openssl-dev  libcurl4-openssl-dev libleveldb-dev libelf-dev
 ```
 
 ### Build instructions
-```bash
+```shell
 git clone https://github.com/echoprotocol/echo.git
 cd echo
 git submodule update --init --recursive
