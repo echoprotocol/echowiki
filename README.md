@@ -64,9 +64,9 @@ You can read more about how the Echo works and how it works from the
 inside. You can follow the links below:
 
 - PoWR EchoRand
-  - [In a nutshell](technologies/echorand/in-a-nutshell.md) - a brief description of the principles of consensus
-  - [Overview](technologies/echorand/overview.md) - detailed description of the mechanism with all the subtleties and nuances
-  - [Architecture](technologies/echorand/architecture.md) - low-level detailed description of exactly how the idea was implemented in the code
+  - [In a nutshell](../technologies/echorand/in-a-nutshell.md) - a brief description of the principles of consensus
+  - [Overview](../technologies/echorand/overview.md) - detailed description of the mechanism with all the subtleties and nuances
+  - [Architecture](../technologies/echorand/architecture.md) - low-level detailed description of exactly how the idea was implemented in the code
     
 ## How to use?
 
