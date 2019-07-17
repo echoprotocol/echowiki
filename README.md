@@ -1,11 +1,10 @@
-# Echo Docs
+# Introduction
 
 ![echo-logo.svg](echo-logo.svg)
 
 Welcome to the Echo Docs!
 
-Please note that the current version of the documentation is not final
-and will change soon.
+Please note that the current version of the documentation is not final and will change soon.
 
 ## What is Echo?
 
