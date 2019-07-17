@@ -11,6 +11,6 @@
 ## Technologies
 
 * PoWR EchoRand
-  * [In a nutshell](technologies/echorand/in-a-nutshell.md)
-  * [Overview](technologies/echorand/overview.md)
-  * [Architecture](technologies/echorand/architecture.md)
+  * [In a nutshell](technologies/powr-echorand/in-a-nutshell.md)
+  * [Overview](technologies/powr-echorand/overview.md)
+  * [Architecture](technologies/powr-echorand/architecture.md)
