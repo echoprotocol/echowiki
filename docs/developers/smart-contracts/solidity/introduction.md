@@ -32,7 +32,7 @@ Short Memo:
 ff0000000000000000000000ffffffffffffffff  | Conversion of decimal Echo type
 [][ 11 bytes of zeros  ][   8 bytes    ]  |       to hex short type:
 ^ 1 byte id short type    id instance     |   2 -> 00 - account
-                                          |  16 -> 01 - contract
+                                          |  14 -> 01 - contract
 1.2.26 = account 26 (0x1a) =              |  dd -> xx - everything else
 000000000000000000000000000000000000001a  |
                                           |
