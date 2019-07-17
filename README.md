@@ -1,6 +1,6 @@
 # Introduction
 
-![echo-logo.svg](echo-logo.svg)
+![](echo-logo.svg)
 
 Welcome to the Echo Docs!
 
