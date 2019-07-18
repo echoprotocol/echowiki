@@ -5,8 +5,8 @@
 In order to run a full node that we can connect to, we need to open the
 RPC interface, this can be done by:
 
-```bash
-./echo_node --rpc-endpoint="0.0.0.0:8090"
+```
+./bin/echo_node --rpc-endpoint="0.0.0.0:8090"
 ```
 
 This will open port `8090` and make it available over the internet (unless you run behind a router/firewall).
@@ -14,15 +14,13 @@ If you want it to be open for your machine only, replace `0.0.0.0` by `localhost
 
 Note, that the full node needs to synchronize the blockchain with the network first, which may take a few minutes.
 
-To start participating in consensus you should add option `--account-info=[account_id, echorand_private_key]`. Where `account_id` is ID of your account and `echorand_private_key` is ed215519 key that you registered with.
+To start participating in consensus you should add option `--account-info=[account_id, EDDSA_private_key]`. Where `account_id` is ID of your account and `EDDSA_private_key` is ed215519 key that you registered with.
 
-```bash
-./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info=["1.6.2", "EatcCyGVZbJnXFpytaCBoWwcnGJGsPDCzxnZS5P4Tnjr"]
+```
+./bin/echo_node --rpc-endpoint="0.0.0.0:8090" --account-info=["1.6.2", "DET67rm27uYRVMQdN88EkpHE6LVVgivM8d8AmbkpauBFDuy"]
 ```
 
-The `--account-info` argument can be repeated several times.
-
-You can also specify a private key(s) in the configuration file.
+See `-h` for more details
 
 ## Run and use Echo cli-wallet
 
