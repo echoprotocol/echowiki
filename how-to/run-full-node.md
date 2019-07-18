@@ -51,7 +51,7 @@ wss://testnet.echo-dev.io/ws
 ```
 
 {% hint style="warning" %}
-If you get an error {"remote_chain_id":"$$REMOTE_CHAIN_ID$$","chain_id":"$$CHAIN_ID$$"} 
+If you get an error `{"remote_chain_id":"$$REMOTE_CHAIN_ID$$","chain_id":"$$CHAIN_ID$$"}` 
 at the time of the wallet start it means that genesis.json was changed. It it can happen
 on testnet or devnet. You can fix it add an argument `--chain-id=$$REMOTE_CHAIN_ID$$`,
 where `$$REMOTE_CHAIN_ID$$` is chain id that wallet shows as `remote_chain_id` on the message.
@@ -96,7 +96,7 @@ You can get a detailed list of all commands by calling `help` command.
 By pressing `TAB` you can get a list of autocomplete commands or complete current if there is no alternatives.
 
 {% hint style="info" %}
-Many calls have a obligatory `broadcast`-flag as last argument. If this flag is `false`, 
+Many calls have an obligatory `broadcast`-flag as last argument. If this flag is `false`, 
 the wallet will construct and sign, but **not** broadcast the transaction. This can be
 very useful for a cold storage setup or to verify transactions.
 {% endhint %}
