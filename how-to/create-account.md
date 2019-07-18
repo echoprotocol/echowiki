@@ -25,7 +25,5 @@ A valid name consists of a dot-separated sequence of one or more labels consisti
 In addition, we require the following:
 
 * All letters are lowercase
-* Length is between \(inclusive\) `ECHO_MIN_ACCOUNT_NAME_LENGTH` \(now = 1\)
-
-  and `ECHO_MAX_ACCOUNT_NAME_LENGTH` \(now = 63\)
+* Length is between \(inclusive\) `ECHO_MIN_ACCOUNT_NAME_LENGTH` \(now = 1\) and `ECHO_MAX_ACCOUNT_NAME_LENGTH` \(now = 63\)
 
