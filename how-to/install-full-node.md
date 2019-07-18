@@ -8,9 +8,9 @@ The easiest of them is to simply download the pre-installed binary files from th
 
 ### Linux
 
-- [echo-linux.v0.8.0rc2.tar](https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar)
+* [echo-linux.v0.8.0rc2.tar](https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar)
 
-```shell
+```text
 wget https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar
 tar -xvf echo-linux.v0.8.0rc2.tar
 ./echo_node \
@@ -19,24 +19,21 @@ tar -xvf echo-linux.v0.8.0rc2.tar
     --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
-Having executed these commands, you download the archive, unzip it and 
-launch the blockchain node with the activated RPC interface on port 6312. 
-After starting, the blockchain should start synchronizing with the main network.
+Having executed these commands, you download the archive, unzip it and launch the blockchain node with the activated RPC interface on port 6312. After starting, the blockchain should start synchronizing with the main network.
 
 ### MacOS
 
-- Build from sources only
+* Build from sources only
 
 ### Windows
 
-- Not supported yet
+* Not supported yet
 
 ## Run as Docker
 
-The Echo node is also available as a docker container. 
+The Echo node is also available as a docker container.
 
-Detailed information on how to run the Echo container can be found by 
-clicking on this link - [echoprotocol/echo](https://hub.docker.com/r/echoprotocol/echo)
+Detailed information on how to run the Echo container can be found by clicking on this link - [echoprotocol/echo](https://hub.docker.com/r/echoprotocol/echo)
 
 ## Build from sources
 
@@ -44,8 +41,8 @@ clicking on this link - [echoprotocol/echo](https://hub.docker.com/r/echoprotoco
 
 Main system dependencies:
 
-- **CMake 3.8.0** and later
-- **GCC 7** and later or **Clang 5** and later
+* **CMake 3.8.0** and later
+* **GCC 7** and later or **Clang 5** and later
 
 #### Installing dependencies on macOS
 
@@ -54,13 +51,14 @@ To install dependencies for macOS follow this steps:
 * Install Homebrew by following the instructions here: [http://brew.sh/](http://brew.sh/)
 * Initialize Homebrew:
 
-```shell
+```text
 brew doctor
 brew update
 ```
+
 * Install necessary packages:
 
-```shell
+```text
 brew install cmake git autoconf automake leveldb libtool libelf doxygen
 ```
 
@@ -68,7 +66,7 @@ brew install cmake git autoconf automake leveldb libtool libelf doxygen
 
 Ubuntu 16.04 LTS have no required cmake and gcc-7 in default repositories. They can be installed though Pip and third-party PPA repository.
 
-```shell
+```text
 sudo add-apt-repository ppa:jonathonf/gcc-7.3
 sudo apt update
 
@@ -80,13 +78,14 @@ sudo apt install make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl 
 
 #### Installing dependencies on Ubuntu 18.04 LTS and later
 
-```shell
+```text
 sudo apt update
 sudo apt install cmake make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl libreadline-dev autoconf libtool git ntp libcurl4-openssl-dev  libcurl4-openssl-dev libleveldb-dev libelf-dev
 ```
 
 ### Build instructions
-```shell
+
+```text
 git clone https://github.com/echoprotocol/echo.git
 cd echo
 git submodule update --init --recursive
@@ -95,3 +94,4 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
+

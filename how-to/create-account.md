@@ -27,5 +27,5 @@ In addition, we require the following:
 * All letters are lowercase
 * Length is between \(inclusive\) `ECHO_MIN_ACCOUNT_NAME_LENGTH` \(now = 1\)
 
-  and `ECHO_MAX_ACCOUNT_NAME_LENGTH` \(now = 63\) 
+  and `ECHO_MAX_ACCOUNT_NAME_LENGTH` \(now = 63\)
 

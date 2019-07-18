@@ -10,7 +10,8 @@
 
 ## Technologies
 
-* PoWR EchoRand
+* [PoWR EchoRand](technologies/powr-echorand/README.md)
   * [In a nutshell](technologies/powr-echorand/in-a-nutshell.md)
   * [Overview](technologies/powr-echorand/overview.md)
   * [Architecture](technologies/powr-echorand/architecture.md)
+
