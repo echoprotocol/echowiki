@@ -47,8 +47,8 @@ You can read more about how the Echo works and how it works from the inside. You
 
 * PoWR EchoRand
   * [In a nutshell](technologies/powr-echorand/in-a-nutshell.md) - a brief description of the principles of consensus
-  * [Overview](https://github.com/echoprotocol/echowiki/tree/7e7b42766726e2150633d834f12c21d7f3d3ed60/technologies/powr-echorand/overview/README.md) - detailed description of the mechanism with all the subtleties and nuances
-  * [Architecture](https://github.com/echoprotocol/echowiki/tree/7e7b42766726e2150633d834f12c21d7f3d3ed60/technologies/powr-echorand/architecture/README.md) - low-level detailed description of exactly how the idea was implemented in the code
+  * [Overview](technologies/powr-echorand/overview.md) - detailed description of the mechanism with all the subtleties and nuances
+  * [Architecture](technologies/powr-echorand/architecture.md) - low-level detailed description of exactly how the idea was implemented in the code
 
 ## How to use?
 
