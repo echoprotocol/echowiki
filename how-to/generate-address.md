@@ -1,4 +1,4 @@
-# Address Generation
+# Generating an Address
 
 ## General Description
 

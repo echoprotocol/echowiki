@@ -1,4 +1,4 @@
-# Account Creation
+# Creating an Account
 
 There are two options to create an Echo account:
 
