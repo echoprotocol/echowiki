@@ -14,10 +14,10 @@ If you want it to be open for your machine only, replace `0.0.0.0` by `localhost
 
 Note, that the full node needs to synchronize the blockchain with the network first, which may take a few minutes.
 
-To start participating in consensus you should add option `--account-info=[account_id, echorand_private_key]`. Where `account_id` is ID of your account and `echorand_private_key` is ed215519 key that you registered with.
+To start participating in consensus you should add option `--account-info="[\"account_id\", \"echorand_private_key\"]"`. Where `account_id` is ID of your account and `echorand_private_key` is ed215519 key that you registered with.
 
 ```bash
-./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info=["1.6.2", "EatcCyGVZbJnXFpytaCBoWwcnGJGsPDCzxnZS5P4Tnjr"]
+./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info="[\"1.2.423\", \"BST6vLKcm6pWq2m2iHRMXu88JkbUgQ7sNcDncYCrwKf7\"]"
 ```
 
 The `--account-info` argument can be repeated several times.
