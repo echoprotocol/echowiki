@@ -6,22 +6,22 @@
 
 Main system dependencies:
 
-- **CMake 3.8.0** and later.
-- **GCC 7** and later or **Clang 5** and later.
+* **CMake 3.8.0** and later.
+* **GCC 7** and later or **Clang 5** and later.
 
 #### Installing Dependencies on Mac OS
 
 To install dependencies for Mac OS, follow these steps:
 
-- Install `Homebrew` by following the instructions here: [http://brew.sh/](http://brew.sh/)
-- Update `Homebrew`:
+* Install `Homebrew` by following the instructions here: [http://brew.sh/](http://brew.sh/)
+* Update `Homebrew`:
 
 ```bash
 brew doctor
 brew update
 ```
 
-- Install the necessary packages:
+* Install the necessary packages:
 
 ```bash
 brew install cmake git autoconf automake leveldb libtool libelf doxygen
