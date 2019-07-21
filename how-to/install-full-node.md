@@ -1,10 +1,10 @@
-# Install Full Node
+# Installing a Full Node
 
 There are several ways to install and run a full Echo node on your machine.
 
-## Download files
+## Downloading Files
 
-The easiest of them is to simply download the pre-installed binary files from the link below and run the node with the pre-installed configurations
+The quickest way is to simply download the binary files from the link below and run the node with the default configuration:
 
 ### Linux
 
@@ -19,52 +19,58 @@ tar -xvf echo-linux.v0.8.0rc2.tar
     --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
-Having executed these commands, you download the archive, unzip it and launch the blockchain node with the activated RPC interface on port 6312. After starting, the blockchain should start synchronizing with the main network.
+By executing these commands, you have:
 
-### MacOS
+1. Downloaded the archive.
+2. Unzipped it.
+3. Launched the Echo node with an activated RPC interface on port 6312
 
-* Build from sources only
+### Mac OS
+
+* Build from sources only.
 
 ### Windows
 
-* Not supported yet
+* Not supported yet.
 
-## Run as Docker
+## Running as a Docker Image
 
-The Echo node is also available as a docker container.
+The Echo node is also available as a docker image.
 
-Detailed information on how to run the Echo container can be found by clicking on this link - [echoprotocol/echo](https://hub.docker.com/r/echoprotocol/echo)
+Detailed information on how to run the Echo container can be found here: [echoprotocol/echo](https://hub.docker.com/r/echoprotocol/echo)
 
-## Build from sources
+## Building from the Source Code
 
-### Installing dependencies
+### Installing Dependencies
 
 Main system dependencies:
 
-* **CMake 3.8.0** and later
-* **GCC 7** and later or **Clang 5** and later
+* **CMake 3.8.0** and later.
+* **GCC 7** and later or **Clang 5** and later.
 
-#### Installing dependencies on macOS
+#### Installing Dependencies on Mac OS
 
-To install dependencies for macOS follow this steps:
+To install dependencies for Mac OS, follow these steps:
 
-* Install Homebrew by following the instructions here: [http://brew.sh/](http://brew.sh/)
-* Initialize Homebrew:
+* Install `Homebrew` by following the instructions here: [http://brew.sh/](http://brew.sh/)
+* Update `Homebrew`:
 
 ```bash
 brew doctor
 brew update
 ```
 
-* Install necessary packages:
+* Install the necessary packages:
 
 ```bash
 brew install cmake git autoconf automake leveldb libtool libelf doxygen
 ```
 
-#### Installing dependencies on Ubuntu 16.04 LTS
+#### Installing Dependencies on Ubuntu 16.04 LTS
 
-Ubuntu 16.04 LTS have no required cmake and gcc-7 in default repositories. They can be installed though Pip and third-party PPA repository.
+##### Ubuntu 16.04 LTS
+
+Ubuntu 16.04 LTS has no required `cmake` and `gcc-7` in its default repositories. They can be installed through Pip and third-party PPA repository.
 
 ```bash
 sudo add-apt-repository ppa:jonathonf/gcc-7.3
@@ -76,14 +82,14 @@ sudo pip3 install cmake
 sudo apt install make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl libreadline-dev autoconf libtool git ntp libcurl4-openssl-dev  libcurl4-openssl-dev libleveldb-dev libelf-dev
 ```
 
-#### Installing dependencies on Ubuntu 18.04 LTS and later
+#### Installing Dependencies on Ubuntu 18.04 LTS and Later
 
 ```bash
 sudo apt update
 sudo apt install cmake make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl libreadline-dev autoconf libtool git ntp libcurl4-openssl-dev  libcurl4-openssl-dev libleveldb-dev libelf-dev
 ```
 
-### Build instructions
+### Build Instructions
 
 ```bash
 git clone https://github.com/echoprotocol/echo.git
@@ -94,4 +100,3 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
-
