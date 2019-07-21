@@ -15,12 +15,12 @@ You can also use the Echo desktop wallet. For example, Echo Blip Wallet provides
 
 ## Account Name Requirements
 
-A valid account name consists of a dot-separated sequence of one or more parts, according to the following rules:
+A valid account name consists of a dot-separated sequence of one or more labels, according to the following rules:
 
-- Each part is three characters or more.
-- Each part begins with a letter.
-- Each part ends with a letter, or digit.
-- Each part contains only letters, digits, or hyphens.
+- Each label is three characters or more.
+- Each label begins with a letter.
+- Each label ends with a letter, or digit.
+- Each label contains only letters, digits, or hyphens.
 
 We also require the following:
 
