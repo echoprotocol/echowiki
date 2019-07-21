@@ -11,7 +11,7 @@ Main system dependencies:
 
 #### Installing Dependencies on Mac OS
 
-To install dependencies for Mac OS follow these steps:
+To install dependencies for Mac OS, follow these steps:
 
 - Install `Homebrew` by following the instructions here: [http://brew.sh/](http://brew.sh/)
 - Update `Homebrew`:
@@ -31,7 +31,7 @@ brew install cmake git autoconf automake leveldb libtool libelf doxygen
 
 ##### Ubuntu 16.04 LTS
 
-Ubuntu 16.04 LTS have no required `cmake` and `gcc-7` in its default repositories. They can be installed though Pip and third-party PPA repository.
+Ubuntu 16.04 LTS has no required `cmake` and `gcc-7` in its default repositories. They can be installed through Pip and third-party PPA repository.
 
 ```bash
 sudo add-apt-repository ppa:jonathonf/gcc-7.3
