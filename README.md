@@ -46,9 +46,9 @@ To get acquainted with how to start using Echo, you can visit the [How To](https
 You can read more about how the Echo works and how it works from the inside. You can follow the links below:
 
 * PoWR EchoRand
-  * [In a nutshell](technologies-1/powr-echorand/in-a-nutshell.md) - a brief description of the principles of consensus
-  * [Overview](technologies-1/powr-echorand/overview.md) - detailed description of the mechanism with all the subtleties and nuances
-  * [Architecture](technologies-1/powr-echorand/architecture.md) - low-level detailed description of exactly how the idea was implemented in the code
+  * [In a nutshell](technologies/powr-echorand/in-a-nutshell.md) - a brief description of the principles of consensus
+  * [Overview](technologies/powr-echorand/overview.md) - detailed description of the mechanism with all the subtleties and nuances
+  * [Architecture](technologies/powr-echorand/architecture.md) - low-level detailed description of exactly how the idea was implemented in the code
 
 ## Using Echo
 
