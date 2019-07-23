@@ -8,11 +8,12 @@ The quickest way is to simply download the binary files from the link below and 
 
 ### Linux
 
-* [echo-linux.v0.8.0rc2.tar](https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar)
+* [echo-linux.v0.8.2.tar](https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.2.tar)
 
 ```bash
-wget https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.0rc2.tar
-tar -xvf echo-linux.v0.8.0rc2.tar
+wget https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.2.tar
+tar -xvf echo-linux.v0.8.2.tar
+cd echo-linux.v0.8.2.tar
 ./echo_node \
     --seed-node=echo-testnet-us-1.echo-dev.io:6310  \
     --seed-node=echo-testnet-eu-1.echo-dev.io:6310 \
