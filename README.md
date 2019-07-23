@@ -12,7 +12,7 @@ Echo includes several main modules:
 
 ### PoWR Consensus
 
-Fast, final and scalable BFT consensus using Proof of Weighted Randomness (PoWR) also known as EchoRand. EchoRand uses a Verifiable Random Function (VRF) to randomly select a pool of block producers and block verifiers proportionally to their stake to validate each new set of transactions.
+Fast, final and scalable BFT consensus using Proof of Weighted Randomness \(PoWR\) also known as EchoRand. EchoRand uses a Verifiable Random Function \(VRF\) to randomly select a pool of block producers and block verifiers proportionally to their stake to validate each new set of transactions.
 
 ### x64 Virtual Machine & EVM
 
@@ -39,7 +39,7 @@ Therefore, some of the functionality isn't available on the testnet, yet. At the
 
 ## Getting Started
 
-To get acquainted with how to start using Echo, you can visit the [How To](how-to/) section.
+To get acquainted with how to start using Echo, you can visit the [How To](https://github.com/echoprotocol/echowiki/tree/baca73a3ccc555edddbb68c221cbf5d08bbde51a/how-to/README.md) section.
 
 ## Technology Details
 
@@ -60,7 +60,7 @@ You can start using Echo right now. For starters, you can use wallets to create 
 
 Use the Echo block explorer to keep track of the blocks and transactions:
 
-* Echo Explorer (testnet) - [https://explorer.echo.org](https://explorer.echo.org)
+* Echo Explorer \(testnet\) - [https://explorer.echo.org](https://explorer.echo.org)
 
 To interact with the blockchain at the code level, you have the following libraries and SDKs at your disposal:
 
@@ -69,3 +69,4 @@ To interact with the blockchain at the code level, you have the following librar
 * [echo-unity-lib](https://github.com/echoprotocol/echo-unity-lib) - Unity library for Echo
 * [echo-ios-framework](https://github.com/echoprotocol/echo-ios-framework) - Pure Swift Echo framework for iOS
 * [echo-android-framework](https://github.com/echoprotocol/echo-android-framework) - Pure Kotlin Echo framework for Android
+

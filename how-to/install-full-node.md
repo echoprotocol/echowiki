@@ -1,4 +1,4 @@
-# Installing a Full Node
+# Install Full Node
 
 There are several ways to install and run a full Echo node on your machine.
 
@@ -68,7 +68,7 @@ brew install cmake git autoconf automake leveldb libtool libelf doxygen
 
 #### Installing Dependencies on Ubuntu 16.04 LTS
 
-##### Ubuntu 16.04 LTS
+**Ubuntu 16.04 LTS**
 
 Ubuntu 16.04 LTS has no required `cmake` and `gcc-7` in its default repositories. They can be installed through Pip and third-party PPA repository.
 
@@ -100,3 +100,4 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
+

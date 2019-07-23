@@ -1,4 +1,4 @@
-# Generating an Address
+# Generate Address
 
 ## General Description
 
@@ -21,3 +21,4 @@ In order to get the list of addresses for the account, use the API method `get_a
 ### Find an Account by Its Address
 
 Use the API method `get_account_by_address(address)` to find an account by its address.
+

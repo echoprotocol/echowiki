@@ -1,3 +1,4 @@
-# Config
+# Config.ini file
 
 // will be described
+
