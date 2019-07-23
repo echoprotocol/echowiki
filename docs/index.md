@@ -1,1 +1,1 @@
-# ECHO Blockchain Wiki
+# Echo Blockchain Wiki
