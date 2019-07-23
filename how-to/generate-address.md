@@ -12,7 +12,9 @@ Generated addresses are an alias for an account and are regarded by the network 
 
 To generate an address, the `account_address_create_operation` must be sent from the account you want to create a new address for. Using this operation, you can specify a `label` - a string value that will be bound to the generated address.
 
-IMPORTANT: the `label` associated with the address will be seen by all members of the network and is not a private information.
+{% hint style="warning" %}
+the `label` associated with the address will be seen by all members of the network and is not a private information.
+{% endhint %}
 
 ### List All Addresses
 
