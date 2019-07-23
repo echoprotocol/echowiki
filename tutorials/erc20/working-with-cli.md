@@ -202,4 +202,4 @@ unlocked >>> call_contract_no_changing_state 1.14.349 myacc ECHO 70a082310000000
 unlocked >>>
 ```
 
-Баланс адреса стал меньше на 10 единиц.
+Баланс адреса стал меньше на `0x10` единиц.
