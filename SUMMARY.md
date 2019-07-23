@@ -1,10 +1,11 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [How to](how-to-1/README.md)
+  * [Install Full Node](how-to-1/install-full-node.md)
 
 ## How To
 
-* [Install Full Node](how-to/install-full-node.md)
 * [Run Full Node](how-to/run-full-node.md)
 * [Create Account](how-to/create-account.md)
 * [Generate Address](how-to/generate-address.md)
