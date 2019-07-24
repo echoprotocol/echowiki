@@ -1,10 +1,8 @@
 # Delegation of participation
 
-Аккаунт может делигировать отправку сообщений от своего имени другому аккаунту. 
-Это означает, что вторым вариантом участия в консненсусе является делегация - делегировав право выпуска сообщений аккаунту, который авторизован на узле, вы сможете получать часть награды за сообщение, которое было выпущено от имени вашего аккаунта.
+An account can delegate sending messages on its behalf to another account. This means that the second option to participate in the consensus is delegation - by delegating the right to issue messages to an account that is authorized on the node, you can receive a part of the reward for the message that was issued on behalf of your account.
 
-Узнать идентификатор аккаунта, кому делегирован выпуск, можно получив объект аккаунта. 
-Идентификатор будет находится по пути `options.delegating_account`.
+Delegate ID can be found in `account` object. The ID will be located at `options.delegating_account`.
 
 {% tabs %}
 {% tab title="CLI Wallet" %}
@@ -114,9 +112,9 @@ connect().then(async () => {
 
 {% endtabs %}
 
-Из информации, полученной выше, следует, что аккаунт `1.2.8` может выпускать сообщения от имени аккаунта `1.2.503`.
+Based on the information above, we conclude that account 1.2.8 may issue messages on behalf of account 1.2.503.
 
-Идентификатор делегата может быть изменен:
+Delegate ID can be changed:
 
 ```javascript
 const privateKey = PrivateKey.fromWif(YOUR_WIF);
@@ -138,4 +136,4 @@ echo.createTransaction()
     .broadcast();
 ```
 
-В результате аккаунт, которому будет делигировано выпускать сообщения - аккаунт с ID `1.2.500`.
+As a result, the account to which it will be delegated to issue messages is account 1.2.500.
