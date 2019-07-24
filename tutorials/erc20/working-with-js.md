@@ -21,8 +21,7 @@ npm i echojs-lib
 ```javascript
 const { default: echo, PrivateKey, constants } = require('echojs-lib');
 
-const privateKey = echo.PrivateKey
-	.fromWif(YOUR_PRIVATE_KEY_WIF);
+const privateKey = PrivateKey.fromWif(YOUR_PRIVATE_KEY_WIF);
 
 const connect = async () => {
 	await echo.connect('ws://127.0.0.1:9000');
