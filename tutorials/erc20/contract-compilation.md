@@ -2,7 +2,7 @@
 
 ## ERC20 Contract
 
-Классический ERC20 контракт сооветствует следующему интерфейсу:
+The classic ERC20 contract supports the following interface:
 
 ```solidity
 function totalSupply() external view returns (uint256);
@@ -15,10 +15,11 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 event Approval(address indexed owner, address indexed spender, uint256 value);
 ```
 
-В данном руководстве будет использован контракт, основанный на имплементации OpenZeppelin, с добавлением функционала начисления токенов аккаунту создателю в момент создания контракта.
-Оригинал контракта вы сможете найти по следующей ссылке - [ERC20.sol](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v2.3.0/contracts/token/ERC20/ERC20.sol)
+In this tutorial, a contract based on the implementation of OpenZeppelin will be used, with the addition of the token transfer functionality to the creator account at the time the contract is created.
+The original contract can be found at the following link - [ERC20.sol](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v2.3.0/contracts/token/ERC20/ERC20.sol)
 
-Для удобства использования зависимости контракта собраны в один файл. В результате контракт имеет следующий вид:
+For ease of use, contract dependencies are collected in one file.
+As a result, the contract is as follows:
 
 ```solidity
 pragma solidity 0.4.23;
@@ -352,17 +353,16 @@ contract ERC20 is IERC20 {
 
 ## Contract Compilation
 
-Для работы с контрактом в рамках Echo также как и в Ethereum необходимы следующие артефакты:
+As with Ethereum, the following artifacts are required to work with a contract within Echo:
 
-1. contract bitecode
-2. functions hashes
+1. contract ByteCode
+2. function hashes
 3. ABI (for using by libraries or wallets)
 
-Одним из способов получить данные артефакты является использование [https://remix.ethereum.org/](https://remix.ethereum.org/).
+One way to get these artifacts is to use [https://remix.ethereum.org/](https://remix.ethereum.org/).
 
-Обратите внимание, что на данный момент Echo поддерживает версию Solidity не выше `0.4.23`, поэтому при компиляции контракта должна быть выбрана версия не выше этой.
-
-Результатом компиляции является следующий результат:
+Please note that at the moment Echo supports the Solidity version not higher than `0.4.23`, therefore, when compiling a contract, a version not higher than this should be chosen.
+The result of the compilation is as follows:
 
 {% tabs %}
 {% tab title="ByteCode" %}
@@ -618,8 +618,8 @@ contract ERC20 is IERC20 {
 {% endtab %}
 {% endtabs %}
 
-Также для компиляции может быть использован `solc`. 
-Предварительно сохранив контракт в файл `erc20.sol` вы можете использовать следующую строку для достижения аналогичного результата:
+Also `solc` can be used for compilation. 
+At first, you should save the contract to the file `erc20.sol` and then you can use the following line to achieve a similar result:
 
 ```bash
 $ ./solc --bin --hashes erc20.sol
@@ -638,13 +638,13 @@ Function signatures:
 "23b872dd": "transferFrom(address,address,uint256)"
 ```
 
-Данный подход будет полезен в случае, когда вам необходимо скомпилировать контракт, который использует расширенный функционал Echo Solidity.
-Подробнее об этом вы сможете прочитать в соответствующем разделе.
+This approach will be useful when you need to compile a contract that uses the advanced Echo Solidity functionality.
+You can read more about this in the corresponding section.
 
 ## Working With Contract
 
-Ниже приведены несколько подходов работы с контрактом:
+Below are several approaches to working with a contract:
 
-* Using CLI Wallet
-* Using Desktop Wallet
-* Using JavaScript Library Wallet
+* [Using CLI Wallet](working-with-cli.md)
+* [Using Desktop Wallet](working-with-desktop.md)
+* [Using JavaScript Library Wallet](working-with-js.md)
