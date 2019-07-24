@@ -8,7 +8,7 @@
   * [Generate Address](how-to/generate-address.md)
 * [Tutorials](tutorials/README.md)
   * [Work With ERC20](tutorials/erc20/README.md)
-    * [Contract Compilation](tutorials/erc20/README.md)
+    * [Contract Compilation](tutorials/erc20/contract-compilation.md)
     * [Using CLI Wallet](tutorials/erc20/working-with-cli.md)
     * [Using JavaScript Library](tutorials/erc20/working-with-js.md)
     * [Using Desktop Wallet](tutorials/erc20/working-with-desktop.md)
