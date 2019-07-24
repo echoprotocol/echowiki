@@ -1,24 +1,22 @@
 # Aggregation of participants
 
-Имея несколько аккаунтов зачастую является неудобным активировать их ключи в узле, так как это влечет добавление новых ключей в конфигурацию узла, а также его перезапуск.
+If you have several accounts it is often inconvenient to activate their keys in the node, since this causes adding new keys to the node configuration, as well as restarting the node.
 
-Механизм делигирования, описанный выше, также может быть использован для решения данной проблемы.
-Для этого достаточно авторизовать на узле один аккаунт и остальным аккаунтам делигировать выпуск сообщений на него.
+The delegation mechanism described above can also be used to solve this problem. It is sufficient to authorize one account on the node and set it as delegate for other accounts
 
-Шаги реализации такого подхода будут следующие:
+The steps to implement are as follows:
 
-Предположим, мы имеем аккаунт `1.2.514` и приватный ключ от него - `5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA`.
+Suppose we have an account 1.2.514 and its private key - `5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA`.
 
-Используя параметр `--account-info` авторизуем данный аккаунт на узле:
+Using `--account-info` parameter, we authorize this account on the node:
 
 ```bash
 ./echo_node --account-info="[\"1.2.514\", \"5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA\"]"
 ```
 
-Мы можем зарегистрировать несколько аккаунтов.
-Есть несколько способов зарегистрировать аккаунт. В примере ниже мы будем использовать registration API, предоставленное другим узлом.
+We can register multiple accounts. There are several ways to register an account. In the example below we will use the registration API provided by a different node.
 
-В первую очередь поднадобится приватный и публичный ключ, которые могут быть сгенерированы следующим способом:
+First off,private and public keys will be required (keys can be generated in the following way):
 
 ```javascript
 const {PrivateKey, ED25519} = require('echojs-lib');
@@ -29,14 +27,14 @@ console.log('Private key:', PrivateKey.fromBuffer(privateKey).toWif());
 console.log('Public key:', PrivateKey.fromBuffer(privateKey).toPublicKey().toPublicKeyString());
 ```
 
-Пример вывода:
+Example of output:
 
 ```
 Private key: 5KMr5oyskAyn549FiCiXUekkNvWKxUzN7FxYCapP335V8ybU47y
 Public key: ECHOAcdxnWHXa1XhGqqrJLXEBLDstVEaeGoBuTKq2u9Niyvp
 ```
 
-Использя полученные выше ключи можем создать аккаунт
+We can create a new account using generated keys
 
 ```javascript
 const {default: echo, constants} = require('echojs-lib');
@@ -78,10 +76,9 @@ connect().then(async () => {
 });
 ```
 
-В рузультате будет зарегистрирован новый аккаунт. Получив объект аккаунта можно убедиться, что у него не пустое свойство `options.delegating_account`. 
-По умолчанию значением делегата является идентификатор аккаунта, который его зарегистрировал.
+As a result, a new account will be registered. After receiving the account object, you can make sure that its `options.delegating_account` property is not empty. By default, the delegate is the account that registered it.
 
-Используя `ACCOUNT_UPDATE` мы можем обновить это значение на `1.2.514` - ID аккаунта, авторизованного на узле.
+Using `ACCOUNT_UPDATE`, we can update this parameter to 1.2.514 - the account ID authorized on the node.
 
 ```javascript
 const privateKey = PrivateKey.fromWif('5KMr5oyskAyn549FiCiXUekkNvWKxUzN7FxYCapP335V8ybU47y');
@@ -104,7 +101,4 @@ echo.createTransaction()
     .then((result) => console.log(result))
     .catch(e => console.log(e));
 ```
-
-После чего при наличии значительной суммы на аккаунте `testaccount` можно убедиться, что аккаунт участвует в консенсусе. 
-К примеру - аккаунт периодически выбирается в роли продюсера блока.
-Остановив узел с авторизованным родителем можно убедиться в том, что без запущенного узла родителя аккаунт не будет являться участником консенсуса.
+After that, if there is a significant amount of Echo on `testaccount`’s balance, you can make sure that the account participates in consensus. For example, the account is selected as a block producer on a periodic basis. By stopping a node with an authorized parent account, you can make sure that the account does not participate in consensus.
