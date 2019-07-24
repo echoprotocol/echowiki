@@ -10,20 +10,6 @@ This will open port `8090` and make it publicly available over the internet \(un
 
 Note, that at the first run, the node will need to synchronize the blockchain with the network first, which may take a few minutes.
 
-To start participating in the EchoRand consensus, you should add the option `--account-info="[\"account_id\", \"echorand_private_key\"]"`. Where `account_id` is ID of your account and `echorand_private_key` is the ED215519 key that you have registered with.
-
-```bash
-./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info="[\"1.2.423\", \"BST6vLKcm6pWq2m2iHRMXu88JkbUgQ7sNcDncYCrwKf7\"]"
-```
-
-The `--account-info` argument can be used multiple times to give the node access to numerous accounts.
-
-{% hint style="info" %}
-You can also specify a private key\(s\) in the [configuration file](https://github.com/echoprotocol/echowiki/tree/baca73a3ccc555edddbb68c221cbf5d08bbde51a/how-to/advanced/config.md).
-{% endhint %}
-
-Starting from version `0.9.0`, private keys can be specified through the Echo console. This allows you to use private keys in a more secure manner since the keys are saved to a file in an encrypted format and a password must be specified to decrypt and use them.
-
 ## CLI Wallet
 
 The CLI wallet is used to interact with the Echo blockchain and use to generate signatures.
