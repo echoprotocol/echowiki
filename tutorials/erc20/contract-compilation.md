@@ -2,7 +2,7 @@
 
 ## ERC20 Contract
 
-The classic ERC20 contract supports the following interface:
+A standard ERC20 contract supports the following interface:
 
 ```solidity
 function totalSupply() external view returns (uint256);
@@ -15,8 +15,8 @@ event Transfer(address indexed from, address indexed to, uint256 value);
 event Approval(address indexed owner, address indexed spender, uint256 value);
 ```
 
-In this tutorial, a contract based on the implementation of OpenZeppelin will be used, with the addition of the token transfer functionality to the creator account at the time the contract is created.
-The original contract can be found at the following link - [ERC20.sol](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v2.3.0/contracts/token/ERC20/ERC20.sol)
+In this tutorial, a contract based on the implementation of OpenZeppelin will be used, with the addition of token transfer functionality to the creator account at the time the contract is created.
+The original contract can be found here - [ERC20.sol](https://github.com/OpenZeppelin/openzeppelin-solidity/blob/v2.3.0/contracts/token/ERC20/ERC20.sol)
 
 For ease of use, contract dependencies are collected in one file.
 As a result, the contract is as follows:
@@ -361,7 +361,7 @@ As with Ethereum, the following artifacts are required to work with a contract w
 
 One way to get these artifacts is to use [https://remix.ethereum.org/](https://remix.ethereum.org/).
 
-Please note that at the moment Echo supports the Solidity version not higher than `0.4.23`, therefore, when compiling a contract, a version not higher than this should be chosen.
+Please note that at the moment Echo supports the Solidity version `<= 0.4.23`, therefore, when compiling a contract, solc version `<= 0.4.23` should be chosen.
 The result of the compilation is as follows:
 
 {% tabs %}
@@ -638,10 +638,10 @@ Function signatures:
 "23b872dd": "transferFrom(address,address,uint256)"
 ```
 
-This approach will be useful when you need to compile a contract that uses the advanced Echo Solidity functionality.
+This approach will be useful when you need to compile a contract that uses advanced Echo Solidity functionality.
 You can read more about this in the corresponding section.
 
-## Working With Contract
+## Working With Contracts
 
 Below are several approaches to working with a contract:
 
