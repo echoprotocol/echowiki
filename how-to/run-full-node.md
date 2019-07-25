@@ -3,10 +3,13 @@
 To to run a full node that we can connect to, we need to open the RPC interface, this can be done by:
 
 ```bash
-./echo_node --rpc-endpoint="0.0.0.0:8090"
+./echo_node \
+    --seed-node=echo-testnet-us-1.echo-dev.io:6310  \
+    --seed-node=echo-testnet-eu-1.echo-dev.io:6310 \
+    --rpc-endpoint=127.0.0.1:6311 --testnet
 ```
 
-This will open port `8090` and make it publicly available over the internet \(unless you're running behind a router/firewall\). If you only need to access the RPC locally, replace `0.0.0.0` by `localhost`.
+This will open port `6312`.
 
 Note, that at the first run, the node will need to synchronize the blockchain with the network first, which may take a few minutes.
 
@@ -18,10 +21,8 @@ The CLI wallet is used to interact with the Echo blockchain and use to generate 
 
 All it takes for the CLI wallet to run is a trusted API server to connect to the blockchain. Businesses and individuals run these public API servers. In this example, we use the public Echo node API and connect via a secured websocket connection:
 
-For example, using the `wss://testnet.echo-dev.io/ws` Echo node websocket interface URL:
-
 ```bash
-./echo_wallet -s wss://testnet.echo-dev.io/ws
+./echo_wallet -s ws://127.0.0.1:6311/ws
 ```
 
 {% hint style="warning" %}
@@ -75,6 +76,6 @@ The CLI wallet can open an RPC port, so that in be accessed by applications or s
 * HTTP RPC via the `-H` parameter.
 
 ```bash
-./echo_wallet -s wss://testnet.echo-dev.io/ws -H 127.0.0.1:8092 -r 127.0.0.1:8093
+./echo_wallet -s ws://127.0.0.1:6311/ws -H 127.0.0.1:8092 -r 127.0.0.1:8093
 ```
 
