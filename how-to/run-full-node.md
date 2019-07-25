@@ -19,7 +19,13 @@ The CLI wallet is used to interact with the Echo blockchain and use to generate 
 
 ### Running the CLI Wallet
 
-All it takes for the CLI wallet to run is a trusted API server to connect to the blockchain. Businesses and individuals run these public API servers. In this example, we use the public Echo node API and connect via a secured websocket connection:
+All it takes for the CLI wallet to run is a trusted API server to connect to the blockchain. Businesses and individuals run these public API servers.
+
+```bash
+./echo_wallet -s wss://testnet.echo-dev.io/ws
+```
+
+In this example, we use the public Echo node API and connect via a secured websocket connection. But you can yse your local node IP and PORT like this:
 
 ```bash
 ./echo_wallet -s ws://127.0.0.1:6311/ws
