@@ -1,4 +1,4 @@
-# Install Full Node
+# Install an Echo Full Node
 
 There are several ways to install and run a full Echo node on your machine.
 
@@ -13,22 +13,18 @@ The quickest way is to simply download the binary files from the link below and 
 ```bash
 wget https://echo-bin.s3.eu-central-1.amazonaws.com/echo-linux.v0.8.2.tar
 tar -xvf echo-linux.v0.8.2.tar
-cd echo-linux.v0.8.2.tar
-./echo_node \
-    --seed-node=echo-testnet-us-1.echo-dev.io:6310  \
-    --seed-node=echo-testnet-eu-1.echo-dev.io:6310 \
-    --rpc-endpoint=127.0.0.1:6312 --testnet
+cd echo-linux.v0.8.2
 ```
 
 By executing these commands, you have:
 
-1. Downloaded the archive.
-2. Unzipped it.
-3. Launched the Echo node with an activated RPC interface on port 6312
+1. Downloaded the zipped node binary
+2. Unzipped the binary
+3. Entered the directory with the `echo_node` and `echo_wallet` executables
 
 ### Mac OS
 
-* Build from sources only.
+* Build from source only, per instructions below.
 
 ### Windows
 
