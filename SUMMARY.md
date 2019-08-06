@@ -18,6 +18,7 @@
     * [Aggregation of participants](tutorials/participation/agregation-participants.md)
 * [API Reference](api-reference/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
+    * [Login API](api-reference/echo-node-api/login-api.md)
 * [Technologies](technologies/README.md)
   * [PoWR EchoRand](technologies/powr-echorand/README.md)
     * [In a nutshell](technologies/powr-echorand/in-a-nutshell.md)
