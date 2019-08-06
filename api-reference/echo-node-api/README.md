@@ -2,21 +2,17 @@
 
 ## Login API
 
-The login_api is the bottom layer of the RPC API. All other APIs must be
-requested from this API.
+The login\_api is the bottom layer of the RPC API. All other APIs must be requested from this API.
 
-* [login(string user, string password)](/api-reference/echo-node-api/login-api#login-string-user-string-password)
+* [login\(string user, string password\)](login-api.md)
 
-## Asset API 
+## Asset API
 
 Access to asset holders and asset balances.
 
 ## Database API
 
-Exposes accessors on the database which query state tracked by a
-blockchain validating node. Read-only, all modifications to the database
-must be performed via transactions. Transactions can be broadcasted via
-the [Network Broadcast API](network-broadcast-api.md).
+Exposes accessors on the database which query state tracked by a blockchain validating node. Read-only, all modifications to the database must be performed via transactions. Transactions can be broadcasted via the [Network Broadcast API](https://github.com/echoprotocol/echowiki/tree/a51e885cd5991f21faeb47fe2b5ec57e52b12b99/api-reference/echo-node-api/network-broadcast-api.md).
 
 ## History API
 
@@ -29,3 +25,4 @@ Allows broadcasting of transactions.
 ## Registration API
 
 API that provides method for account registration
+

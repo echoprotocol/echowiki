@@ -1,1 +1,2 @@
-# Participation in EchoRand
+# Participate In Consensus
+

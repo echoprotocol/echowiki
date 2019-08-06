@@ -1,14 +1,14 @@
-# Working With Contract With CLI Wallet
+# Using CLI Wallet
 
-Information on installing and setting up CLI Wallet can be found in the corresponding section.
-Pre-requisites:
-- a wallet connected to a running Echo node
-- an account authenticated into the wallet
+Information on installing and setting up CLI Wallet can be found in the corresponding section. Pre-requisites:
+
+* a wallet connected to a running Echo node
+* an account authenticated into the wallet
 
 ## Contract Deployment
 
 `create_contract` method is used for contract creation/deployment:
- 
+
 ```bash
 create_contract <registrar_account> <bytecode> <send_amount> <send_asset_name> <supported_asset_id> <eth_accuracy> <save_wallet>
 ```
@@ -55,8 +55,7 @@ unlocked >>> create_contract myacc 60806040523<...>97293b4050029 0 ECHO "" false
 }
 ```
 
-`1.15.721` ID in `operation_results` array determines the operation execution result ID. An object with said ID stores the information about the deployed contract.
-`get_object` method can be used to get said object.
+`1.15.721` ID in `operation_results` array determines the operation execution result ID. An object with said ID stores the information about the deployed contract. `get_object` method can be used to get said object.
 
 ```bash
 get_object 1.15.722
@@ -79,7 +78,7 @@ The first element of the `contracts_id` array is the contract ID. Contract ID is
 
 ## Call contract
 
-There are two types of contract calls - a call without changing the contract's state (to receive values of variables and methods) and a call that would change the contract's state (sending a transaction).
+There are two types of contract calls - a call without changing the contract's state \(to receive values of variables and methods\) and a call that would change the contract's state \(sending a transaction\).
 
 ## Get ERC20 Token Balance
 
@@ -89,10 +88,7 @@ Fetching an account's balance in token doesn't require a transaction, hence the 
 call_contract_no_changing_state 1.14.349 myacc ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
 ```
 
-The last argument in the method is the hash of the contract's called method and the argument joined with the arguments that were passed along with the call.
-In this case `70a08231` is the hash of `balanceOf(address)` method, and `0000000000000000000000000000000000000000000000000000000000000536` is the "address" (derived from account ID), the balance of which we need are trying to get (zeroes are added to increase the size of the address to 32 bytes). 
-This address belongs to Echo account `1.2.1334`. More information on converting the IDs to address formats can be found in [EVM. Introduction](developers/evm/introduction.md) .
-
+The last argument in the method is the hash of the contract's called method and the argument joined with the arguments that were passed along with the call. In this case `70a08231` is the hash of `balanceOf(address)` method, and `0000000000000000000000000000000000000000000000000000000000000536` is the "address" \(derived from account ID\), the balance of which we need are trying to get \(zeroes are added to increase the size of the address to 32 bytes\). This address belongs to Echo account `1.2.1334`. More information on converting the IDs to address formats can be found in [EVM. Introduction](https://github.com/echoprotocol/echowiki/tree/f71e492770fc748547dd36ac897a747ea2257dc6/tutorials/erc20/developers/evm/introduction.md) .
 
 ```bash
 unlocked >>> call_contract_no_changing_state 1.14.349 myacc ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
@@ -195,3 +191,4 @@ unlocked >>>
 ```
 
 Address's balance has been reduced by `0x10`.
+

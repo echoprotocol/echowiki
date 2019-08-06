@@ -607,10 +607,10 @@ right after defining $CERT\_{r-1}$
 1. **Timer**: schedule the timer after the time equal to $2 \* λ$, by a trigger:
    1. Define $l$ as $id$ existent in $ctx\[id\]$ with a minimum $Q\_{r}$
    2. if the local cache for $l$ has the block $B\_{r}$
-      1. $v = \{ ctx\[l\].H\(B\_{r}\), l \}$
+      1. $v = { ctx\[l\].H\(B\_{r}\), l }$
       2. go to **Communication**
 2. **Timer**: schedule the timer after the time equal to $λ + Λ$, by a trigger:
-   1. $v = \{ ∅, ∅ \}$
+   1. $v = { ∅, ∅ }$
    2. go to **Communication**
 3. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
    1. after receiving a message `gc_block` of the round $r$
@@ -631,7 +631,7 @@ right after defining $CERT\_{r-1}$
          1. $ctx\[msg.id\].B = msg.block$
          2. $ctx\[msg.id\].H\(B\_{r}\) = H\(msg.block\)$
       8. if $l$ defined and $l == id$:
-         1. $v = \{ ctx\[l\].H\(B\_{r}\), l \}$
+         1. $v = { ctx\[l\].H\(B\_{r}\), l }$
          2. go to **Communication**
    2. after receiving a message `gc_signature` of the round **r**
       1. verify the round number in the message
@@ -665,7 +665,7 @@ right after defining $CERT\_{r-1}$
 **v** - a local structure of a step that stores the hash of the block and the ID of the leader, who created the block.
 
 1. **Timer**: schedule the timer after the time equal to $3  _λ + Λ$, by a trigger: 1. `v` = { ∅, ∅ } 1. go to \*Communication_
-2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving 1. verify the round number and the step number in the message 1. verify that $msg.id ∈ A_{2}$ and get the user's public key 1. verify the signature of the whole message 1. verify that $msg.v = \{ msg.block\\_hash, msg.leader \}$ is in the context of the round. It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing. 1. $∃ ctx\[msg.leader\]$ - a record for such a potential leader exists in the context 1. $ctx\[msg.leader\].H\(B\) == msg.block\\_hash$ - the block hash coincides 1. $ctx\[msg.leader\].v3.push\(msg.id\)$, where $v3$ is unordered\_set 1. if the counter is more than the threshold $t_{h}$: $ctx\[msg.leader\].v3.size\(\) &gt; t\_{h}$ 1. `v = { msg.block_hash, msg.leader }` 1. go to **Communication**
+2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving 1. verify the round number and the step number in the message 1. verify that $msg.id ∈ A_{2}$ and get the user's public key 1. verify the signature of the whole message 1. verify that $msg.v = { msg.block\\_hash, msg.leader }$ is in the context of the round. It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing. 1. $∃ ctx\[msg.leader\]$ - a record for such a potential leader exists in the context 1. $ctx\[msg.leader\].H\(B\) == msg.block\\_hash$ - the block hash coincides 1. $ctx\[msg.leader\].v3.push\(msg.id\)$, where $v3$ is unordered\_set 1. if the counter is more than the threshold $t_{h}$: $ctx\[msg.leader\].v3.size\(\) &gt; t\_{h}$ 1. `v = { msg.block_hash, msg.leader }` 1. go to **Communication**
 3. **Communication**: generating, signing and sending of messages 1. stop timers, unsubscribe from network messages 1. if $N_{3} = ∅$, end the step 1. $∀n_{3} ∈ N\_{3}$: 1. get real user’s ID in the blockchain: $id\_3 = A\_3\[n\_3\]$ 1. sign with the user’s key $id\_3$ and send `gc_proposal` = { r, 3, $id\_3$, v }
 
 #### 4. Primary assessment of vote counting
@@ -674,7 +674,7 @@ right after defining $CERT\_{r-1}$
 
 **Input data**: $A_{3}$, $A_{4}$, $N\_{4}$ from the context of the round
 
-1. **Timer**: schedule the timer after the time equal to $2  _λ$, by a trigger: 1. if $∃l \| ctx\[l\].v4.size\(\) &gt; t\_{h}/2$: $v = \{ ctx\[l\].HB, l \}$ 1. otherwise: $v = \{ ∅, ∅ \}$ 1. $b = 1$ 1. go to \*Communication_
+1. **Timer**: schedule the timer after the time equal to $2  _λ$, by a trigger: 1. if $∃l \| ctx\[l\].v4.size\(\) &gt; t\_{h}/2$: $v = { ctx\[l\].HB, l }$ 1. otherwise: $v = { ∅, ∅ }$ 1. $b = 1$ 1. go to \*Communication\_
 2. **Network**: subscribe to network messages `gc_proposal` at the start of a step and on receiving 1. verify the round number and the step number in the message 1. verify that $id ∈ A_{3}$ and get the user's public key 1. verify the signature of the whole message 1. `msg.v = { msg.block_hash, msg.leader }` 1. `msg.v != { ∅, ∅ }`: verify that `msg.v` is in the context of the round \(should be collected in step 2\) 1. `∃ ctx[msg.leader]` - a record for such a potential leader exists in the context 1. `ctx[msg.leader].H(B) == msg.block_hash` - the block hash coincides 1. `ctx[msg.leader].v4.push(msg.id)`, `v4` is unordered\_set 1. if $ctx\[msg.leader\].v4.size\(\) &gt; t_{h}$ 1. `v = { msg.block_hash, msg.leader }`, `b = 0` 1. go to **Communication** 1. `msg.v == { ∅, ∅ }` 1. `ctx.ve4.push(msg.id)`, `ve4` is _unordered\_set_ \(**v**alue **e**mpty\) 1. if $ctx.ve4.size\(\) &gt; t\_{h}$ 1. `v = { ∅, ∅ }`, `b = 1` 1. go to **Communication**
 3. **Communication**: generating, signing and sending of messages 1. stop timers, unsubscribe from network messages 1. if $N_{4} = ∅$, end the step 1. $∀ n_{4} ∈ N_{4}$: 1. get real user’s ID in the blockchain: $id\_4 = A\_4\[n_{4}\]$ 1. sign with the user’s key $id\_4$ and send `bba_signature` = { r, 4, $id\_4$, b, v, sign\(v\) }
 
@@ -710,8 +710,8 @@ Designations used for data storage:
 $b$ - local step flag that is sent in the `value` field of the `bba_signature` message.
 
 1. **Timer**: schedule the timer after the time equal to $2  _λ$, by a trigger: 1. $b = 0$ 1. go to \*Communication_
-2. **Network**: subscribe to network messages `bba_signature` at the start of a step, after receiving 1. verify that $msg.id ∈ A_{s-1}$ and get the user's public key 1. verify the signatures of the whole message 1. $msg.v = \{ msg.block\_hash, msg.leader \}$ 1. $msg.v != \{ ∅, ∅ \}$: 1. $∃ ctx\[msg.leader\]$ - a record for such a potential leader exists in the context 1. $ctx\[msg.leader\].HB == v.HB_{r}$ - the block hash coincides 1. $msg.value == 0$: $ctx\[v.l\].bba0\[msg.s\].push\(msg.id, msg\)$, where $bba0$ array _unordered\_map_ 1. $msg.value == 1$: $ctx\[v.l\].bba1\[msg.s\].push\(msg.id, msg\)$, where $bba1$ array _unordered\_map_ 1. $msg.v == \{ ∅, ∅ \}$: 1. $msg.value == 0$: $ctx.bbae0\[msg.s\].push\(msg.id, msg\)$, $bbae0$ is an array _unordered\_map_ 1. $msg.value == 1$: $ctx.bbae1\[msg.s\].push\(msg.id, msg\)$, $bbae1$ is an array _unordered\_map_ 1. if $∀ s &gt;= 5 \&\& s - 2 ≡ 0 mod 3$ $\(s == 5,8,11,...\)$ - **Ending Condition 0** 1. if $∃l \| ctx\[l\].bba0\[s-1\].size\(\) &gt; t_{h}$: 1. $B_{r} = ctx\[l\].B$ 1. $Q_{r}$ is calculated from $ctx\[l\].signQ$, specified in step 2 1. $CERT_{r}$ is generated from $ctx.bba1\[s-1\]$, $ctx.bbae1\[s-1\]$, $ctx.bba0\[s-1\]$, $ctx.bbae0\[s-1\]$ 1. $b = 0^_$ 1. **END OF THE ROUND!!!** 1. if $∀ s &gt;= 6 \&\& s - 2 ≡ 1 mod 3$ $\(s == 6,9,12,...\)$ - **Ending Condition 1** 1. if $\sum{n}ctx\[n\].bba1\[s-1\].size\(\) + ctx.bbae1\[s-1\].size\(\) &gt; t{h}$: 1. $B{r} = ∅$ 1. $Q{r}$ is calculated from $Q{r-1}$ 1. $CERT{r}$ is generated from $ctx.bba1\[s-1\]$, $ctx.bbae1\[s-1\]$, $ctx.bba0\[s-1\]$, $ctx.bbae0\[s-1\]$ 1. $b = 1^_$ 1. **END OF THE ROUND!!!** 1. if $\sum_{n}ctx\[n\].bba1\[s-1\].size\(\) + ctx.bbae1\[s-1\].size\(\) &gt; t_{h}$: $b = 1$, go to **Communication** 1. if $\sum_{n}ctx\[n\].bba0\[s-1\].size\(\) + ctx.bbae0\[s-1\].size\(\) &gt; t_{h}$: $b = 0$, go to **Communication**
-3. **Communication**: generating, signing and sending of messages 1. stop timers, **do not** unsubscribe from network messages 1. stop verifying the last two conditions from the previous point 1. if $N_{s} = ∅$, end the step 1. $∀n_{s} ∈ N_{s}$: 1. get real user’s ID in the blockchain: $id_{s} = A4\[n_{s}\]$ 1. sign with the key $id_{s}$ and send $bba\_signature = \{ r, s, id\_{s}, b, v, sign\(b, v\) \}$ 1. where $v$ is the value calculated in step 4
+2. **Network**: subscribe to network messages `bba_signature` at the start of a step, after receiving 1. verify that $msg.id ∈ A_{s-1}$ and get the user's public key 1. verify the signatures of the whole message 1. $msg.v = { msg.block\_hash, msg.leader }$ 1. $msg.v != { ∅, ∅ }$: 1. $∃ ctx\[msg.leader\]$ - a record for such a potential leader exists in the context 1. $ctx\[msg.leader\].HB == v.HB_{r}$ - the block hash coincides 1. $msg.value == 0$: $ctx\[v.l\].bba0\[msg.s\].push\(msg.id, msg\)$, where $bba0$ array _unordered\_map_ 1. $msg.value == 1$: $ctx\[v.l\].bba1\[msg.s\].push\(msg.id, msg\)$, where $bba1$ array _unordered\_map_ 1. $msg.v == { ∅, ∅ }$: 1. $msg.value == 0$: $ctx.bbae0\[msg.s\].push\(msg.id, msg\)$, $bbae0$ is an array _unordered\_map_ 1. $msg.value == 1$: $ctx.bbae1\[msg.s\].push\(msg.id, msg\)$, $bbae1$ is an array _unordered\_map_ 1. if $∀ s &gt;= 5 \&\& s - 2 ≡ 0 mod 3$ $\(s == 5,8,11,...\)$ - **Ending Condition 0** 1. if $∃l \| ctx\[l\].bba0\[s-1\].size\(\) &gt; t_{h}$: 1. $B_{r} = ctx\[l\].B$ 1. $Q_{r}$ is calculated from $ctx\[l\].signQ$, specified in step 2 1. $CERT_{r}$ is generated from $ctx.bba1\[s-1\]$, $ctx.bbae1\[s-1\]$, $ctx.bba0\[s-1\]$, $ctx.bbae0\[s-1\]$ 1. $b = 0^_$ 1. **END OF THE ROUND!!!** 1. if $∀ s &gt;= 6 \&\& s - 2 ≡ 1 mod 3$ $\(s == 6,9,12,...\)$ - **Ending Condition 1** 1. if $\sum{n}ctx\[n\].bba1\[s-1\].size\(\) + ctx.bbae1\[s-1\].size\(\) &gt; t{h}$: 1. $B{r} = ∅$ 1. $Q{r}$ is calculated from $Q{r-1}$ 1. $CERT{r}$ is generated from $ctx.bba1\[s-1\]$, $ctx.bbae1\[s-1\]$, $ctx.bba0\[s-1\]$, $ctx.bbae0\[s-1\]$ 1. $b = 1^_$ 1. **END OF THE ROUND!!!** 1. if $\sum_{n}ctx\[n\].bba1\[s-1\].size\(\) + ctx.bbae1\[s-1\].size\(\) &gt; t_{h}$: $b = 1$, go to **Communication** 1. if $\sum_{n}ctx\[n\].bba0\[s-1\].size\(\) + ctx.bbae0\[s-1\].size\(\) &gt; t_{h}$: $b = 0$, go to **Communication**
+3. **Communication**: generating, signing and sending of messages 1. stop timers, **do not** unsubscribe from network messages 1. stop verifying the last two conditions from the previous point 1. if $N_{s} = ∅$, end the step 1. $∀n_{s} ∈ N_{s}$: 1. get real user’s ID in the blockchain: $id_{s} = A4\[n_{s}\]$ 1. sign with the key $id_{s}$ and send $bba\_signature = { r, s, id\_{s}, b, v, sign\(b, v\) }$ 1. where $v$ is the value calculated in step 4
 
 #### 6. Step two: coin == 1
 
@@ -727,7 +727,7 @@ $b$ - local step flag that is sent in the `value` field of the `bba_signature` m
 $b$ - local step flag that is sent in the $value$ field of the `bba_signature` message.
 
 1. **Timer**: schedule the timer after the time equal to $2  _λ$, by a trigger: 1. $b = 1$ 1. go to \*Communication_
-2. **Network**: subscribe to network messages `bba_signature` at the start of a step, after receiving 1. verify that $msg.id ∈ A_{s-1}$ and get the user's public key 1. verify the signatures of the whole message 1. $msg.v = \{ msg.block\_hash, msg.leader \}$ 1. $msg.v != \{ ∅, ∅ \}$: like in step $5$ 1. $msg.v == \{ ∅, ∅ \}$: like in step $5$ 1. if $∀ s &gt;= 5 \&\& s - 2 ≡ 0 mod 3$ $\(s == 5,8,11,...\)$: like in step $5$ - **Ending Condition 0** 1. if $∀ s &gt;= 6 \&\& s - 2 ≡ 1 mod 3$ $\(s == 6,9,12,...\)$: like in step $5$ - **Ending Condition 1** 1. if $\sum_{n}ctx\[n\].bba0\[s-1\].size\(\) &gt; t\_{h}$: $b = 0$ and go to **Communication**
+2. **Network**: subscribe to network messages `bba_signature` at the start of a step, after receiving 1. verify that $msg.id ∈ A_{s-1}$ and get the user's public key 1. verify the signatures of the whole message 1. $msg.v = { msg.block\_hash, msg.leader }$ 1. $msg.v != { ∅, ∅ }$: like in step $5$ 1. $msg.v == { ∅, ∅ }$: like in step $5$ 1. if $∀ s &gt;= 5 \&\& s - 2 ≡ 0 mod 3$ $\(s == 5,8,11,...\)$: like in step $5$ - **Ending Condition 0** 1. if $∀ s &gt;= 6 \&\& s - 2 ≡ 1 mod 3$ $\(s == 6,9,12,...\)$: like in step $5$ - **Ending Condition 1** 1. if $\sum_{n}ctx\[n\].bba0\[s-1\].size\(\) &gt; t\_{h}$: $b = 0$ and go to **Communication**
 3. **Communication**: like in step **5**
 
 > $\sum_{n}ctx\[n\].bba1\[s-1\].size\(\) &gt; t_{h}$ in this step there's no need to verify how it's done in the other steps. In this particular step, the condition is equal to the condition of **Ending Condition 1**.
@@ -746,7 +746,7 @@ $b$ - local step flag that is sent in the $value$ field of the `bba_signature` m
 $b$ - local step flag that is sent in the `value` field of the `bba_signature` message.
 
 1. **Timer**: schedule the timer after the time equal to $2  _λ$, by a trigger: 1. $b = BBA\\_RAND\(r\)$ 1. go to \*Communication_
-2. **Network**: subscribe to network messages `bba_signature` at the start of a step, after receiving 1. verify that $msg.id ∈ A_{s-1}$ and get the user's public key 1. verify the signatures of the whole message 1. $msg.v = \{ msg.block\_hash, msg.leader \}$ 1. $msg.v != \{ ∅, ∅ \}$: like in step $5$ 1. $msg.v == \{ ∅, ∅ \}$: like in step $5$ 1. if $∀ s &gt;= 5 \&\& s - 2 ≡ 0 mod 3$ $\(s == 5,8,11,...\)$: like in step $5$ - **Ending Condition 0** 1. if $∀ s &gt;= 6 \&\& s - 2 ≡ 1 mod 3$ $\(s == 6,9,12,...\)$: like in step $5$ - **Ending Condition 1** 1. if $\sum_{n}ctx\[n\].bba1\[s-1\].size\(\) + ctx.bbae1\[s-1\].size\(\) &gt; t_{h}$: $b = 1$, go to **Communication** 1. if $\sum_{n}ctx\[n\].bba0\[s-1\].size\(\) + ctx.bbae0\[s-1\].size\(\) &gt; t\_{h}$: $b = 0$, go to **Communication**
+2. **Network**: subscribe to network messages `bba_signature` at the start of a step, after receiving 1. verify that $msg.id ∈ A_{s-1}$ and get the user's public key 1. verify the signatures of the whole message 1. $msg.v = { msg.block\_hash, msg.leader }$ 1. $msg.v != { ∅, ∅ }$: like in step $5$ 1. $msg.v == { ∅, ∅ }$: like in step $5$ 1. if $∀ s &gt;= 5 \&\& s - 2 ≡ 0 mod 3$ $\(s == 5,8,11,...\)$: like in step $5$ - **Ending Condition 0** 1. if $∀ s &gt;= 6 \&\& s - 2 ≡ 1 mod 3$ $\(s == 6,9,12,...\)$: like in step $5$ - **Ending Condition 1** 1. if $\sum_{n}ctx\[n\].bba1\[s-1\].size\(\) + ctx.bbae1\[s-1\].size\(\) &gt; t_{h}$: $b = 1$, go to **Communication** 1. if $\sum_{n}ctx\[n\].bba0\[s-1\].size\(\) + ctx.bbae0\[s-1\].size\(\) &gt; t\_{h}$: $b = 0$, go to **Communication**
 3. **Communication**: like in step $5$
 
 #### Nodes that have completed the round
@@ -763,7 +763,7 @@ Solution: Step $bba$ emulation
 **Input data**:
 
 * last value $b$
-* selected block $v = \{ block\\_hash, leader \}$
+* selected block $v = { block\\_hash, leader }$
 * if there are no messages from the previous step and the other nodes - complete the step and the round
 * otherwise:
   1. register the messages from the other nodes for the current round/step

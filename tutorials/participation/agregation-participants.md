@@ -16,7 +16,7 @@ Using `--account-info` parameter, we authorize this account on the node:
 
 We can register multiple accounts. There are several ways to register an account. In the example below we will use the registration API provided by a different node.
 
-First off,private and public keys will be required (keys can be generated in the following way):
+First off,private and public keys will be required \(keys can be generated in the following way\):
 
 ```javascript
 const {PrivateKey, ED25519} = require('echojs-lib');
@@ -29,7 +29,7 @@ console.log('Public key:', PrivateKey.fromBuffer(privateKey).toPublicKey().toPub
 
 Example of output:
 
-```
+```text
 Private key: 5KMr5oyskAyn549FiCiXUekkNvWKxUzN7FxYCapP335V8ybU47y
 Public key: ECHOAcdxnWHXa1XhGqqrJLXEBLDstVEaeGoBuTKq2u9Niyvp
 ```
@@ -40,39 +40,39 @@ We can create a new account using generated keys
 const {default: echo, constants} = require('echojs-lib');
 
 const {
-	WS_CONSTANTS: {
-		DATABASE_API,
-		NETWORK_BROADCAST_API,
-		HISTORY_API,
-		REGISTRATION_API,
-		ASSET_API,
-		LOGIN_API,
-		NETWORK_NODE_API,
-	}
+    WS_CONSTANTS: {
+        DATABASE_API,
+        NETWORK_BROADCAST_API,
+        HISTORY_API,
+        REGISTRATION_API,
+        ASSET_API,
+        LOGIN_API,
+        NETWORK_NODE_API,
+    }
 } = constants;
 
 const connect = async () => {
-	await echo.connect('ws://echo-testnet-eu-1.echo-dev.io:6311', {
-		apis: [
-			DATABASE_API,
-			NETWORK_BROADCAST_API,
-			HISTORY_API,
-			REGISTRATION_API,
-			ASSET_API,
-			LOGIN_API,
-			NETWORK_NODE_API,
-		]
-	});
+    await echo.connect('ws://echo-testnet-eu-1.echo-dev.io:6311', {
+        apis: [
+            DATABASE_API,
+            NETWORK_BROADCAST_API,
+            HISTORY_API,
+            REGISTRATION_API,
+            ASSET_API,
+            LOGIN_API,
+            NETWORK_NODE_API,
+        ]
+    });
 };
 
 connect().then(async () => {
-	const result = await echo.api.registerAccount(
-		'testaccount',
-		'ECHOAcdxnWHXa1XhGqqrJLXEBLDstVEaeGoBuTKq2u9Niyvp',
-		'ECHOAcdxnWHXa1XhGqqrJLXEBLDstVEaeGoBuTKq2u9Niyvp',
-		() => {}
-	);
-	console.log(result);
+    const result = await echo.api.registerAccount(
+        'testaccount',
+        'ECHOAcdxnWHXa1XhGqqrJLXEBLDstVEaeGoBuTKq2u9Niyvp',
+        'ECHOAcdxnWHXa1XhGqqrJLXEBLDstVEaeGoBuTKq2u9Niyvp',
+        () => {}
+    );
+    console.log(result);
 });
 ```
 
@@ -101,4 +101,6 @@ echo.createTransaction()
     .then((result) => console.log(result))
     .catch(e => console.log(e));
 ```
+
 After that, if there is a significant amount of Echo on `testaccount`’s balance, you can make sure that the account participates in consensus. For example, the account is selected as a block producer on a periodic basis. By stopping a node with an authorized parent account, you can make sure that the account does not participate in consensus.
+

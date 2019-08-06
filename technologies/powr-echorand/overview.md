@@ -23,7 +23,7 @@ The ability to reach network-wide agreement about the next suitable set of trans
 * **Delegated Proof of Stake \(dPoS\)**: A fixed-size committee of actors has the ability to generate and verify blocks. Actors can only join this committee by a vote of the entire network and votes are weighted by the number of tokens that each network actor holds. This model most clearly parallels a representative democracy, where elected leaders are known publicly and are competing to offer the best service to the network so they will continue to be elected. The security assumption is that at least 51% of the committee members elected by the network votes are honest actors.
 * **Proof of Weighted Randomness \(PoWR\)**: A small committee of block producers or block validators are chosen randomly from the entire set of network actors. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. The likelihood of being randomly selected for the committee is proportional to a user's balance of tokens. This committee exists only for a single block, and a new committee is randomly chosen for each new block of transactions. The network remains secure as long as at least 33% of tokens are held by honest actors.
 
-The concept for the **Echo PoWR** algorithm is the [Algorand v9](https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2)  theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9 describes an algorithm for reaching consensus in a decentralized network by with Byzantine fault tolerance. EchoRand combines techniques from early proof of stake blockchains like Bitshares  as well as delegated proof of stake blockchains like EOS  with the cryptographic sortition of projects like DFINITY  and Algorand. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
+The concept for the **Echo PoWR** algorithm is the [Algorand v9](https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2) theoretical work, a Byzantine agreement protocol proposed by Jing Chen, Sergey Gorbunov, Silvio Micali, and Georgios Vlachos. Algorand v9 describes an algorithm for reaching consensus in a decentralized network by with Byzantine fault tolerance. EchoRand combines techniques from early proof of stake blockchains like Bitshares as well as delegated proof of stake blockchains like EOS with the cryptographic sortition of projects like DFINITY and Algorand. EchoRand also introduces a novel incentive and delegation scheme to increase network security.
 
 ### Design Goals
 
@@ -236,16 +236,16 @@ Right after determining $CERT\_{r-1}$
 2. **Block assembly**:
    1. If all the previous blocks **$B\_{k}$** where $k=1, 2, 3, ..., r-1$ are available, build **$PAY\_{r}$**
    2. If at least one of the previous blocks is unavailable, build **$PAY\_{r} = ∅$**
-   3. If **$PAY\_{r} != ∅$**, create a new block **$B**_**{r} = \{ r, PAY**_**{r}, Q**_**{r-1}, sig\(Q**_**{r-1}\), H\(B\_{r-1}\) \}$**
+   3. If **$PAY\_{r} != ∅$**, create a new block **$B**_**{r} = { r, PAY**_**{r}, Q**_**{r-1}, sig\(Q**_**{r-1}\), H\(B\_{r-1}\) }$**
 3. **Communication, generation, signature and a simultaneous broadcast:**
    1. Sign with the key **$id\_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig\(B\_{r}\)$ }
    2. Sign with the key **$id\_{1}$** and send `gc_signature` = { $r, id_{1}, sig\(Q_{r-1}\), H\(B\_{r}\)$ }
 
 ### Graded Consensus \(GC\)
 
-This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.   
-   
- ![gc-steps.png](../../.gitbook/assets/gc-steps.png)
+This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
+
+![gc-steps.png](../../.gitbook/assets/gc-steps.png)
 
 #### Step 2 - Voting
 
@@ -267,10 +267,10 @@ Right after determining $CERT\_{r-1}$
 1. **Timer**: schedule the timer after the time equal to **$2 \* λ$**, by a trigger:
    1. To define $l$, as $id$ from the received messages in **$ctx\[id\]$** with a minimum index of **$A\_{1}$**
    2. If the local cache for $l$ has the block **$B\_{r}$**
-      1. **$v = \{ ctx\[l\].HB, l \}$**
+      1. **$v = { ctx\[l\].HB, l }$**
       2. Go to **Communication**
 2. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
-   1. **$v == \{ ∅, ∅ \}$**
+   1. **$v == { ∅, ∅ }$**
    2. go to **Communication**
 3. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
    1. After receiving a message `gc_block` of the round **$r$**
@@ -291,7 +291,7 @@ Right after determining $CERT\_{r-1}$
          1. **$ctx\[msg.id\].B = msg.block$**
          2. **$ctx\[msg.id\].HB = H\(msg.block\)$**
       8. If $l$ and $l == id$ are installed:
-         1. **$v = \{ ctx\[l\].HB, l \}$**
+         1. **$v = { ctx\[l\].HB, l }$**
          2. Go to **Communication**
    2. After receiving a message `gc_signature` of the round **$r$**
       1. Verify the round number in the message
@@ -309,8 +309,8 @@ Right after determining $CERT\_{r-1}$
    3. **$∀n**_**{2} ∈ N**_**{2}$**:
       1. Get real user’s ID in the blockchain: **$id**_**{2} = A**_**{2}\[n\_{2}\]$**
       2. Sign with the key **$id\_{2}$** and send
-         1. if **$v != ∅$**: `gc_proposal` = **$\{ r, 2, id\_{2}, v \}$**
-         2. if **$v == ∅$**: `gc_proposal` = **$\{ r, 2, id\_{2}, ∅ \}$**
+         1. if **$v != ∅$**: `gc_proposal` = **${ r, 2, id\_{2}, v }$**
+         2. if **$v == ∅$**: `gc_proposal` = **${ r, 2, id\_{2}, ∅ }$**
 
 #### Step 3 - Vote Counting
 
@@ -327,23 +327,19 @@ Right after determining $CERT\_{r-1}$
 **Steps**
 
 1. **Timer**: schedule the timer after the time equal to $3 \* λ + Λ$, by a trigger:
-   1. **$v == \{ ∅, ∅ \}$**
+   1. **$v == { ∅, ∅ }$**
    2. Go to **Communication**
-2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
-   1. Verify the round number and the step number in the message
-   2. Verify that **$msg.id ∈ A\_{2}$** and get the user's public key
-   3. Verify the signature of the whole message
-   4. Verify that **$msg.v = \{ msg.block\\_hash, msg.leader \}$** is in the context of the round.
+2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving 1. Verify the round number and the step number in the message 2. Verify that **$msg.id ∈ A\_{2}$** and get the user's public key 3. Verify the signature of the whole message 4. Verify that **$msg.v = { msg.block\\_hash, msg.leader }$** is in the context of the round.
 
-      It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
+   It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
 
-      1. **$∃ ctx\[msg.leader\]$** - a record for such a potential leader exists in the context
-      2. **$ctx\[msg.leader\].HB == msg.block\\_hash$** - the block hash coincides
-
-   5. **$ctx\[msg.leader\].v3.push\(msg.id\)$**, where **$v3$** is an _unordered\_set_
-   6. If the counter is more than the threshold **$t\_{h}$**: **$ctx\[msg.leader\].v3.size\(\) &gt; t\_{h}$**
-      1. **$v = \{ msg.block\\_hash, msg.leader \}$**
+   1. **$∃ ctx\[msg.leader\]$** - a record for such a potential leader exists in the context
+   2. **$ctx\[msg.leader\].HB == msg.block\\_hash$** - the block hash coincides
+   3. **$ctx\[msg.leader\].v3.push\(msg.id\)$**, where **$v3$** is an _unordered\_set_
+   4. If the counter is more than the threshold **$t\_{h}$**: **$ctx\[msg.leader\].v3.size\(\) &gt; t\_{h}$**
+      1. **$v = { msg.block\\_hash, msg.leader }$**
       2. Go to **Communication**
+
 3. **Communication**: generating, signing and sending of messages
    1. Stop timers, unsubscribe from network messages
    2. If **$N\_3 = ∅$**, end the step
@@ -368,8 +364,8 @@ Immediately after completing step 3.
 **Steps**
 
 1. **Timer**: schedule the timer after the time equal to **2 \* λ**, by a trigger:
-   1. if $∃l \| ctx\[l\].v4.size\(\) &gt; t\_{h}/2: v = \{ ctx\[l\].HB, l \}$
-      1. otherwise: $v = \{ ∅, ∅ \}$
+   1. if $∃l \| ctx\[l\].v4.size\(\) &gt; t\_{h}/2: v = { ctx\[l\].HB, l }$
+      1. otherwise: $v = { ∅, ∅ }$
    2. **$b = 1$**
    3. Go to **Communication**
 2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
@@ -377,17 +373,17 @@ Immediately after completing step 3.
    2. Verify that **$id ∈ A{3}$** and get the user's public key
    3. Verify the signature of the whole message
    4. **$msg.v$** = { $msg.block\\_hash, msg.leader$ }
-   5. **$msg.v != \{ ∅, ∅ \}$**: verify that **$msg.v$** is in the context of the round \(should be collected in step 2\)
+   5. **$msg.v != { ∅, ∅ }$**: verify that **$msg.v$** is in the context of the round \(should be collected in step 2\)
       1. **$∃ ctx\[msg.leader\]$** - a record for such a potential leader exists in the context
       2. **$ctx\[msg.leader\].HB == msg.block\\_hash$** - the block hash coincides
       3. **$ctx\[msg.leader\].v4.push\(msg.id\)$**, **$v4$** is an _unordered\_set_
       4. if **$ctx\[msg.leader\].v4.size\(\) &gt; t\_{h}$**
-         1. **$v = \{ msg.block\\_hash, msg.leader \}$** , **$b = 0$**
+         1. **$v = { msg.block\\_hash, msg.leader }$** , **$b = 0$**
          2. Go to **Communication**
-   6. **$msg.v == \{ ∅, ∅ \}$**
+   6. **$msg.v == { ∅, ∅ }$**
       1. **$ctx.ve4.push\(msg.id\)$**, **$ve4$** is an _unordered\_set_ \(**v**alue **e**mpty\)
       2. if **$ctx.ve4.size\(\) &gt; t\_{h}$**
-         1. **$v = \{ ∅, ∅ \}$**, **$b = 1$**
+         1. **$v = { ∅, ∅ }$**, **$b = 1$**
          2. Go to **Communication**
 3. **Communication**: generating, signing and sending of messages
    1. Stop timers, unsubscribe from network messages
