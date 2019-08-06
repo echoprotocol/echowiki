@@ -4,7 +4,7 @@
 
 The login\_api is the bottom layer of the RPC API. All other APIs must be requested from this API.
 
-* [login\(string user, string password\)](login-api.md)
+* [login\(string user, string password\)](login-api.md#login-string-user-string-password)
 
 ## Asset API
 
