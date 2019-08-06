@@ -1,19 +1,4 @@
-<!-- markdownlint-disable md001 -->
-<!-- markdownlint-disable md024 -->
-
 # Login API
-
-The functions here should be called as follows:
-
-```json
-{"id": your-id, "method":"call", "params":[1,"function-name",[params...]]}
-```
-
-for example:
-
-```json
-{"id": 1, "method":"call", "params":[1,"login",["", ""]]}
-```
 
 ### login(string user, string password)
 
