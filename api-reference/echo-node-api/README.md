@@ -5,7 +5,7 @@
 The login_api is the bottom layer of the RPC API. All other APIs must be
 requested from this API.
 
-* login(string user, string password)
+* [login(string user, string password)](/api-reference/echo-node-api/login-api#login-string-user-string-password)
 
 ## Asset API 
 
