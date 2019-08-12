@@ -6,6 +6,7 @@
   * [Run Full Node](how-to/run-full-node.md)
   * [Create Account](how-to/create-account.md)
   * [Generate Address](how-to/generate-address.md)
+  * [Running Committee Node](how-to/running-committee.md)
 * [Tutorials](tutorials/README.md)
   * [Work With ERC20](tutorials/erc20/README.md)
     * [Contract Compilation](tutorials/erc20/contract-compilation.md)
