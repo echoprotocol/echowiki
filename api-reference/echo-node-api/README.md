@@ -16,7 +16,7 @@ Access to asset holders and asset balances.
 
 ## Database API
 
-Exposes accessors on the database which query state tracked by a blockchain validating node. Read-only, all modifications to the database must be performed via transactions. Transactions can be broadcasted via the [Network Broadcast API](https://github.com/echoprotocol/echowiki/tree/a51e885cd5991f21faeb47fe2b5ec57e52b12b99/api-reference/echo-node-api/network-broadcast-api.md).
+Exposes accessors on the database which query state tracked by a blockchain validating node. Read-only, all modifications to the database must be performed via transactions. Transactions can be broadcasted via the [Network Broadcast API](network-broadcast-api.md).
 
 * [Objects](database-api.md#objects)
   * [get_objects(ids)](database-api.md)
