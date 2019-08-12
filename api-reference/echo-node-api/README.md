@@ -107,22 +107,22 @@ Exposes accessors on the database which query state tracked by a blockchain vali
 
 Contains methods to access account histories.
 
-* [get_account_history(account, stop, limit = 100, start)](history-api.md)
-* [get_relative_account_history(account, stop, limit, start)](history-api.md)
-* [get_account_history_operations(account, operation_id, start, stop, limit)](history-api.md)
-* [get_contract_history(contract, stop, limit, start)](history-api.md)
+* [get_account_history](history-api.md)
+* [get_relative_account_history](history-api.md)
+* [get_account_history_operations](history-api.md)
+* [get_contract_history](history-api.md)
 
 ## Network Broadcast API
 
 Allows broadcasting of transactions.
 
-* [broadcast_transaction(signed_transaction)](network-broadcast-api.md)
-* [broadcast_block(signed_block)](network-broadcast-api.md)
-* [broadcast_transaction_with_callback(callback, trx)](network-broadcast-api.md)
-* [broadcast_transaction_synchronous(trx)](network-broadcast-api.md)
+* [broadcast_transaction](network-broadcast-api.md)
+* [broadcast_block](network-broadcast-api.md)
+* [broadcast_transaction_with_callback](network-broadcast-api.md)
+* [broadcast_transaction_synchronous](network-broadcast-api.md)
 
 ## Registration API
 
 API that provides method for account registration
 
-* [register_account(name, active_key, echorand_key)](registration-api.md)
+* [register_account](registration-api.md)
