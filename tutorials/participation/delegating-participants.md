@@ -6,8 +6,7 @@ Delegate ID can be found in `account` object. The ID will be located at `options
 
 {% tabs %}
 {% tab title="CLI Wallet" %}
-
-```
+```text
 unlocked >>> get_account myacc
 {
   "id": "1.2.503",
@@ -56,7 +55,7 @@ unlocked >>>
 const { default: echo } = require('echojs-lib');
 
 const connect = async () => {
-	await echo.connect('ws://127.0.0.1:6311');
+    await echo.connect('ws://127.0.0.1:6311');
 };
 
 connect().then(async () => {
@@ -65,7 +64,7 @@ connect().then(async () => {
 });
 ```
 
-```json
+```javascript
 {
   "id": "1.2.503",
   "membership_expiration_date": "1970-01-01T00:00:00",
@@ -107,9 +106,7 @@ connect().then(async () => {
   "extensions": []
 }
 ```
-
 {% endtab %}
-
 {% endtabs %}
 
 Based on the information above, we conclude that account 1.2.8 may issue messages on behalf of account 1.2.503.
@@ -137,3 +134,4 @@ echo.createTransaction()
 ```
 
 As a result, the account to which it will be delegated to issue messages is account 1.2.500.
+

@@ -33,7 +33,7 @@ The current number of operations for the account can be found in the account sta
 
 A list of operations performed by account, ordered from most recent to oldest.
 
-#### get_account_history_operations (account, operation_id, start, stop, limit = 100)
+#### get_account_history_operations(account, operation_id, start, stop, limit = 100)
 
 Get only asked operations relevant to the specified account.
 
@@ -48,7 +48,7 @@ Get only asked operations relevant to the specified account.
 
 A list of operations performed by account, ordered from most recent to oldest.
 
-#### get_contract_history (contract, stop, limit, start)
+#### get_contract_history(contract, stop, limit, start)
 
 Get operations relevant to the specificed contract.
 
