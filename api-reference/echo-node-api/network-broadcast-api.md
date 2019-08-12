@@ -48,11 +48,11 @@ Broadcast a block to the network.
 }
 ```
 
-#### broadcast_transaction_with_callback(callback, trx )
+#### broadcast_transaction_with_callback(callback, trx)
 
 This version of broadcast transaction registers a callback method that will be called when the transaction is included into a block.
 The callback method includes the transaction id, block number, and transaction number in the block.
 
-#### broadcast_transaction_synchronous (trx)
+#### broadcast_transaction_synchronous(trx)
 
 Synchronious version of `broadcast_transaction_with_callback`.

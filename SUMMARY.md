@@ -20,6 +20,7 @@
   * [Echo Node API](api-reference/echo-node-api/README.md)
     * [Login API](api-reference/echo-node-api/login-api.md)
     * [Asset API](api-reference/echo-node-api/asset-api.md)
+    * [DataBase API](api-reference/echo-node-api/database-api.md)
 * [Technologies](technologies/README.md)
   * [PoWR EchoRand](technologies/powr-echorand/README.md)
     * [In a nutshell](technologies/powr-echorand/in-a-nutshell.md)
@@ -27,4 +28,3 @@
     * [Architecture](technologies/powr-echorand/architecture.md)
 * [Advanced](advanced/README.md)
   * [Config.ini file](advanced/config.md)
-

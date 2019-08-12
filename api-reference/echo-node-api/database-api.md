@@ -2182,7 +2182,7 @@ An array of balances of the account.
 }
 ```
 
-#### get_contract_balances (contract_id)
+#### get_contract_balances(contract_id)
 
 Get an contract's balances in various assets.
 
