@@ -44,4 +44,3 @@ Working exactly the same for all API's. Example for `database_api`:
 > {"id": 1, "method":"call", "params":[1,"database",[]]}
 < {"id":1,"jsonrpc":"2.0","result":2}
 ```
-
