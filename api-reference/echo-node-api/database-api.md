@@ -682,7 +682,48 @@ Fetch an individual transaction.
 
 A processed transaction object.
 
-### get_recent_transaction_by_id(id)
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": {
+        "ref_block_num": 221,
+        "ref_block_prefix": 4141892275,
+        "expiration": "2019-08-14T14:05:52",
+        "operations": [
+            [
+                0,
+                {
+                    "fee": {
+                        "amount": 20,
+                        "asset_id": "1.3.0"
+                    },
+                    "from": "1.2.26",
+                    "to": "1.2.10",
+                    "amount": {
+                        "amount": 1000000000,
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+            ]
+        ],
+        "extensions": [],
+        "signatures": [
+            "5c95aedb574a86252749031f4d5cbb790037604b8c2e01e6e6eae071cb231459a4902e2932383b14e0d61d49812a73992766c958c823cd2691c5d4d4fe803b07"
+        ],
+        "signed_with_echorand_key": false,
+        "operation_results": [
+            [
+                0,
+                {}
+            ]
+        ]
+    }
+}
+```
+
+#### get_recent_transaction_by_id(id)
 
 If the transaction has not expired, this method will return the
 transaction for the given ID or it will return null if it is not known.
@@ -704,7 +745,7 @@ Just because it is not known does not mean it wasn’t included in the blockchai
         DATABASE_API_ID,
         "get_recent_transaction_by_id",
         [
-            "a4002bfb11e667ed67ea40c20774b99a705f58c3"
+            "15ec7bf0b50732b49f8228e07d24365338f9e3ab"
         ]
     ]
 }
@@ -713,6 +754,50 @@ Just because it is not known does not mean it wasn’t included in the blockchai
 #### Returns
 
 A signed transaction object.
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": {
+        "ref_block_num": 27,
+        "ref_block_prefix": 109608699,
+        "expiration": "2019-08-14T14:22:17",
+        "operations": [
+            [
+                21,
+                {
+                    "fee": {
+                        "amount": 0,
+                        "asset_id": "1.3.0"
+                    },
+                    "deposit_to_account": "1.2.26",
+                    "balance_to_claim": "1.8.0",
+                    "balance_owner_key": "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
+                    "total_claimed": {
+                        "amount": "1000000000000000",
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+            ]
+        ],
+        "extensions": [],
+        "signatures": [
+            "c621da6b014a5cf6d4533ea747f0d77908663e6b4daaa3f5041f6d176f26a947847889c467d82506da9c00316e073c2435f21a6bb6e2788996c8c0b94e93bd01"
+        ],
+        "signed_with_echorand_key": false,
+        "operation_results": [
+            [
+                0,
+                {}
+            ]
+        ]
+    }
+}
+```
+
+---
 
 ## Globals
 
@@ -738,15 +823,13 @@ Retrieve the chain property object associated with the chain.
 
 ```json
 {
-    "id": 4,
+    "id": 3,
     "jsonrpc": "2.0",
     "result": {
-        "id": "2.10.0",
-        "chain_id": "31cde47f6b94908c2b2ed67c3365c7f58bb744dac145ecf6dc0941e1167c34ab",
+        "id": "2.9.0",
+        "chain_id": "ee3aa7f1a6cc08a2759c2c9844a0dd475d5e9ee5a4a032f74c6d9fa1c0b9c89e",
         "immutable_parameters": {
-            "min_committee_member_count": 9,
-            "num_special_accounts": 0,
-            "num_special_assets": 0
+            "min_committee_member_count": 11
         },
         "extensions": []
     }
