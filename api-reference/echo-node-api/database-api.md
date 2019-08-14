@@ -6,7 +6,7 @@
 
 ## Objects
 
-### get_objects(ids)
+#### get_objects(ids)
 
 Get the objects corresponding to the provided IDs.
 
@@ -1895,7 +1895,7 @@ The contracts data from VM corresponding to the provided ID.
 
  Get a list of contracts by ID.
 
- ##### Parameters
+##### Parameters
 
 | Option                                         | Description                      |
 |------------------------------------------------|:---------------------------------|
