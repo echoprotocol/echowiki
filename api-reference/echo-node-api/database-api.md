@@ -445,6 +445,14 @@ Get the total number of transactions in block.
 
 If block was found total number of transaction in block, or null if no matching block was found.
 
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": 1
+}
+```
+
 #### get_block_virtual_ops(block_num)
 
 Get virtual ops from the block.
