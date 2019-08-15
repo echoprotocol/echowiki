@@ -187,6 +187,74 @@ Subscribe to pending transactions.
 |--------------------------------------------|:----------------------------------------------------|
 | `function<void(const variant&)> callback`  | notifications for incoming unconfirmed transactions |
 
+#### Example
+
+```json
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "set_pending_transaction_callback",
+        [
+            "CALLBACK_ID"
+        ]
+    ]
+}
+```
+
+#### Notice example
+
+```json
+{
+    "method": "notice",
+    "params": [
+        CALLBACK_ID,
+        [
+            {
+                "ref_block_num": 46,
+                "ref_block_prefix": 620557504,
+                "expiration": "2019-08-14T12:35:31",
+                "operations": [
+                    [
+                        21,
+                        {
+                            "fee": {
+                                "amount": 0,
+                                "asset_id": "1.3.0"
+                            },
+                            "deposit_to_account": "1.2.26",
+                            "balance_to_claim": "1.8.0",
+                            "balance_owner_key": "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
+                            "total_claimed": {
+                                "amount": "1000000000000000",
+                                "asset_id": "1.3.0"
+                            },
+                            "extensions": []
+                        }
+                    ]
+                ],
+                "extensions": [],
+                "signatures": [
+                    "1c8747b07f8131b4caaa52932c14a2472b52fdff339456ceb52befe5f2f14142e0020a4ba02258a68c43668bd36fc4c56ba19234a9a525e9c493fbc251103e0a"
+                ],
+                "signed_with_echorand_key": false
+            }
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
+
 #### set_block_applied_callback(callback)
 
 Subscribe to block applications.
