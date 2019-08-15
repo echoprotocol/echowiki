@@ -4,13 +4,9 @@
 
 March 2019 WORKING DRAFT
 
-&lt;/span&gt;
-
-## Abstract {.abstract .counter-skip}
+## Abstract
 
 EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus on which set of transactions to append to a distributed ledger. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
-
-&lt;/span&gt;
 
 ## Introduction
 
@@ -109,8 +105,8 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 | Symbol | Description |
 | :---: | :--- |
-| **$msg$** | a message transmitted by a participating node to its peers during a specific step |
-| **$sig\(x\)$** | the EdDSA signature of $x$ |
+| **$$msg$$** | a message transmitted by a participating node to its peers during a specific step |
+| **$$sig(x)$$** | the EdDSA signature of $x$ |
 | **$H\(x\)$** | the SHA-256 hash of $x$ |
 | **$r$** | the current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $r &gt;= 1$ |
 | **$s$** | the current step number of the algorithm in the round. $s &gt;= 1$ |
