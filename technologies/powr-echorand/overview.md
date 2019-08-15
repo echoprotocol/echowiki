@@ -110,7 +110,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 | **$$H(x)$$** | the SHA-256 hash of $$x$$ |
 | **$$r$$** | the current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $$r >= 1$$ |
 | **$$s$$** | the current step number of the algorithm in the round. $$s >= 1$$ |
-| **$$B_{r}$$** | a block created in round $$r$$, which equals to { **$r$**, **$ID\_{producer}$**, **$Q\_{r}$**, **$H\(B\_{r}\)$**, **$H\(B\_{r-1}\)$**, **$sig\(B\)$**, **$PAY\_{r}$**, **$CERT\_{Br}$** } |
+| **$$B_{r}$$** | a block created in round $$r$$, which equals to { **$$r$$**, **$$ID_{producer}$$**, **$$Q_{r}$$**, **$$H(B_{r})$$**, **$$H(B_{r-1})$$**, **$$sig(B)$$**, **$$PAY_{r}$$**, **$$CERT_{Br}$$** } |
 | **$$H(B_{r})$$** | the SHA-256 hash of **$$B_{r}$$** |
 | **$$PAY_{r}$$** | the set of transactions contained in block **$$B_{r}$$** |
 | **$$Q_{r}$$** | the shared randomness seed of round **$$r$$** |
