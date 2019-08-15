@@ -259,9 +259,75 @@ Subscribe to block applications.
 |-----------------------------------------------------|:-----------------------------------------------------------------------------|
 | `function<void(const variant& block_id)> callback`  | gives a notification whenever the block block_id is applied to the blockchain |
 
-### cancel_all_subscriptions()
+#### Example
 
-Stop receiving any notifications. Unsubscribes from all subscribed objects.
+```json
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "set_block_applied_callback",
+        [
+            CALLBACK_ID
+        ]
+    ]
+}
+```
+
+#### Notice example
+
+```json
+{
+    "method": "notice",
+    "params": [
+        CALLBACK_ID,
+        [
+            "0013191865d4306288d52d2f648476508a159a0d"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
+
+#### cancel_all_subscriptions()
+
+Stop receiving any notifications. Unsubscribe from all subscribed objects.
+
+#### Example
+
+```json
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "cancel_all_subscriptions",
+        [
+            CALLBACK_ID
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
 
 ## Blocks and transactions
 
