@@ -80,7 +80,7 @@ Exposes accessors on the database which query state tracked by a blockchain vali
   * [get_committee_count](database-api.md#get_committee_count)
 * [Votes](database-api.md#votes)
   * [lookup_vote_ids](database-api.md#lookup_vote_ids-votes)
-* Authority / validation
+* [Authority / validation](database-api.md#authority-validation)
   * [get_transaction_hex](database-api.md#get_transaction_hex-trx)
   * [get_required_signatures](database-api.md#get_required_signatures-ctrx-available_keys)
   * [get_potential_signatures](database-api.md#get_potential_signatures-ctrx)
@@ -94,11 +94,11 @@ Exposes accessors on the database which query state tracked by a blockchain vali
   * [get_eth_address](database-api.md#get_eth_address-account)
   * [get_account_deposits](database-api.md#get_account_deposits-account)
   * [get_account_withdrawals](database-api.md#get_account_withdrawals-account)
-* Sidechain ERC20
+* [Sidechain ERC20](database-api.md#sidechain-erc20)
   * [get_erc20_token](database-api.md#get_erc20_token-eth_addr)
   * [get_erc20_account_deposits](database-api.md#get_erc20_account_deposits-account)
   * [get_erc20_account_withdrawals](database-api.md#get_erc20_account_withdrawals-account)
-* Contract Feepool
+* [Contract Feepool](database-api.md#contract-feepool)
   * [get_contract_pool_balance](database-api.md#get_contract_pool_balance-id)
   * [get_contract_pool_whitelist](database-api.md#get_contract_pool_whitelist-id)
 
