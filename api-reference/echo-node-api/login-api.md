@@ -1,21 +1,17 @@
-# APIs
+# Login API
 
-## Login API
-
----
-
-#### login(user, password)
+### login(user, password)
 
 This must be called prior to requesting other APIs. Other APIs may not be accessible until the client has sucessfully authenticated.
 
-##### Parameters
+#### Parameters
 
 | Option                   | Description            |
 |--------------------------|:-----------------------|
 | `const string& user`     | Username to login with |
 | `const string& password` | Password to login with |
 
-##### Example
+#### Example
 
 ```json
 {
@@ -32,7 +28,7 @@ This must be called prior to requesting other APIs. Other APIs may not be access
 }
 ```
 
-##### Returns
+#### Returns
 
 `True` if logged in successfully; `false` otherwise
 
@@ -44,7 +40,7 @@ This must be called prior to requesting other APIs. Other APIs may not be access
 }
 ```
 
-#### API Methods
+## API Methods
 
 Enable and retrieve enabled API indentifier
 
@@ -58,7 +54,7 @@ Enable and retrieve enabled API indentifier
 | `asset`             | `asset_api` access to asset holders and asset balances                                  |
 | `registration`      | `registration_api` implements the API for register_account                              | 
 
-##### Example
+#### Example
 
 Working exactly the same for all API's. Example for `database_api`:
 
@@ -74,7 +70,7 @@ Working exactly the same for all API's. Example for `database_api`:
 }
 ```
 
-##### Returns
+#### Returns
 
 ```json
 {
