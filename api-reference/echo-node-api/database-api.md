@@ -2363,6 +2363,30 @@ An array of vesting balances.
 
 Get the total number of accounts registered with the blockchain.
 
+#### Example
+
+```json
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_account_count",
+        []
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": 27
+}
+```
+
 ---
 
 ## Assets
