@@ -2215,6 +2215,47 @@ An array of balances of the contract.
 
 Semantically equivalent to *get_account_balances*, but takes a name instead of an ID.
 
+#### Parameters
+
+| Option                                  | Description                                                                                         |
+|:----------------------------------------|:----------------------------------------------------------------------------------------------------|
+| `const std::string& name`               | name of the account to get balances for                                                             |
+| `const flat_set<asset_id_type>& assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_named_account_balances",
+        [
+            "nathan",
+            [
+                "1.3.0"
+            ]
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "amount": "991999999999840",
+            "asset_id": "1.3.0"
+        }
+    ]
+}
+```
+
 #### get_balance_objects(keys)
 
 Returns all unclaimed balance objects for a set of addresses.
