@@ -357,44 +357,44 @@ After receiving the voting results of the previous steps, all nodes know whether
 
 After this step, all nodes in the network have a preliminary idea of whether the best block has been determined or not. In an honest network, this would be enough to complete the round and append the block to the existing ledger. But since we allow the possibility of unscrupulous participants, the network needs an additional step to verify the data. This is the objective of the next stage.
 
-**Input Data**
+##### Input Data
 
-* $A_{3}$, $A_{4}$, $N\_{4}$ from the context of the round
+* $$A_{3}$$, $$A_{4}$$, $$N_{4}$$ from the context of the round
 
-**Start**
+##### Start
 
 Immediately after completing step 3.
 
-**Steps**
+##### Steps
 
-1. **Timer**: schedule the timer after the time equal to **2 \* λ**, by a trigger:
-   1. if $∃l \| ctx\[l\].v4.size\(\) &gt; t\_{h}/2: v = { ctx\[l\].HB, l }$
-      1. otherwise: $v = { ∅, ∅ }$
-   2. **$b = 1$**
+1. **Timer**: schedule the timer after the time equal to $$2 * λ$$, by a trigger:
+   1. if $$∃l | ctx[l].v4.size() > t_{h}/2: v = \{ ctx[l].HB, l \}$$
+      1. otherwise: $$v = \{ ∅, ∅ \}$$
+   2. $$b = 1$$
    3. Go to **Communication**
 2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
    1. Verify the round number and the step number in the message
-   2. Verify that **$id ∈ A{3}$** and get the user's public key
+   2. Verify that $$id ∈ A\{3\}$$ and get the user's public key
    3. Verify the signature of the whole message
-   4. **$msg.v$** = { $msg.block\\_hash, msg.leader$ }
-   5. **$msg.v != { ∅, ∅ }$**: verify that **$msg.v$** is in the context of the round \(should be collected in step 2\)
-      1. **$∃ ctx\[msg.leader\]$** - a record for such a potential leader exists in the context
-      2. **$ctx\[msg.leader\].HB == msg.block\\_hash$** - the block hash coincides
-      3. **$ctx\[msg.leader\].v4.push\(msg.id\)$**, **$v4$** is an _unordered\_set_
-      4. if **$ctx\[msg.leader\].v4.size\(\) &gt; t\_{h}$**
-         1. **$v = { msg.block\\_hash, msg.leader }$** , **$b = 0$**
+   4. $$msg.v = \{ msg.block\_hash, msg.leader \}$$
+   5. $$msg.v != \{ ∅, ∅ \}$$: verify that $$msg.v$$ is in the context of the round \(should be collected in step 2\)
+      1. $$∃ ctx[msg.leader]$$ - a record for such a potential leader exists in the context
+      2. $$ctx[msg.leader].HB == msg.block\_hash$$ - the block hash coincides
+      3. $$ctx[msg.leader].v4.push(msg.id)$$, $$v4$$ is an _unordered\_set_
+      4. if $$ctx[msg.leader].v4.size() > t_{h}$$
+         1. $$v = \{ msg.block\_hash, msg.leader \}$$ , $$b = 0$$
          2. Go to **Communication**
-   6. **$msg.v == { ∅, ∅ }$**
-      1. **$ctx.ve4.push\(msg.id\)$**, **$ve4$** is an _unordered\_set_ \(**v**alue **e**mpty\)
-      2. if **$ctx.ve4.size\(\) &gt; t\_{h}$**
-         1. **$v = { ∅, ∅ }$**, **$b = 1$**
+   6. $$msg.v == \{ ∅, ∅ \}$$
+      1. $$ctx.ve4.push(msg.id)$$, $$ve4$$ is an _unordered\_set_ \(**v**alue **e**mpty\)
+      2. if $$ctx.ve4.size() > t_{h}$$
+         1. $$v = \{ ∅, ∅ \}$$, $$b = 1$$
          2. Go to **Communication**
 3. **Communication**: generating, signing and sending of messages
    1. Stop timers, unsubscribe from network messages
-   2. If **$N\_4 = ∅$**, end the step
-   3. **$∀ n\_4 ∈ N\_4$**:
-      1. Get real user’s ID in the blockchain: $id_{4} = A_{4}\[n\_{4}\]$
-      2. Sign with the user’s key **$id\_{4}$** and send `bba_signature` = { $r, 4, id\_{4}, b, v, sig\(0, v\)$ }
+   2. If $$N_4 = ∅$$, end the step
+   3. $$∀ n_4 ∈ N_4$$:
+      1. Get real user’s ID in the blockchain: $$id_{4} = A_{4}[n_{4}]$$
+      2. Sign with the user’s key $$id_{4}$$ and send `bba_signature` = $$\{ r, 4, id_{4}, b, v, sig(0, v) \}$$
 
 ### Binary Byzantine Agreement \(BBA\)
 
