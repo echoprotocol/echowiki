@@ -249,7 +249,7 @@ Right after determining $$CERT_{r-1}$$
 
 This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
 
-![GC Steps(../../.gitbook/assets/gc-steps.png)
+![GC Steps](../../.gitbook/assets/gc-steps.png)
 
 #### Step 2 - Voting
 
@@ -271,7 +271,7 @@ Right after determining $$CERT_{r-1}$$
 1. **Timer**: schedule the timer after the time equal to $$2 * λ$$, by a trigger:
    1. To define $$l$$, as $$id$$ from the received messages in $$ctx[id]$$ with a minimum index of $$A_{1}$$
    2. If the local cache for $$l$$ has the block $$B_{r}$$
-      1. $$v = \{ctx[l].HB, l}$$
+      1. $$v = \{ctx[l].HB, l\}$$
       2. Go to **Communication**
 2. **Timer**: schedule the timer after the time equal to $$λ + Λ$$, by a trigger:
    1. $$v == \{∅, ∅\}$$
