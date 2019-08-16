@@ -92,9 +92,9 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ## The EchoRand Mechanism
 
-![echorand-steps.png](../../.gitbook/assets/echorand-steps%20%281%29.png)
+![EchoRand Steps](../../.gitbook/assets/echorand-steps%20%281%29.png)
 
-### Other Terms {.counter-reset}
+### Other Terms
 
 * **Executor** - the network account selected in the step of the round for performing a specific consensus action
 * **Local configuration** - a certain set of parameters accessible only to the running network node.
@@ -132,16 +132,16 @@ The following algorithm parameters are set by constants, or configured at the **
 
 | Designation | Description |
 | :---: | :--- |
-| $Λ$ | "large" interval, the average time required to distribute a 1 MB message across the network |
-| $λ$ | "small" interval, the average time required to distribute a 256-bit message across the network |
-| $N\_g$ | the number of block producers in a round, used in the function $VRF\(r, 1\)$ |
-| $N\_c$ | the number of block verifiers in a round, used in the function $VRF\(r, s\), s &gt; 1$ |
-| $t\_h$ | the threshold for making a positive decision when verifying, and can be selected by $0.69\*N\_{c}$ |
-| $μ$ | $4 + 3\*k, k &gt; 0$ - maximum number of algorithm steps after which an empty new block is created |
+| $$Λ$$ | "large" interval, the average time required to distribute a 1 MB message across the network |
+| $$λ$$ | "small" interval, the average time required to distribute a 256-bit message across the network |
+| $$N_g$$ | the number of block producers in a round, used in the function $$VRF(r, 1)$$ |
+| $$N_c$$ | the number of block verifiers in a round, used in the function $$VRF(r, s), s > 1$$ |
+| $$t_h$$ | the threshold for making a positive decision when verifying, and can be selected by $$0.69*N_{c}$$ |
+| $$μ$$ | $$4 + 3*k, k > 0$$ - maximum number of algorithm steps after which an empty new block is created |
 
 ### Cryptographic Primitives
 
-* \[EdDSA\] - a digital signature scheme using a variant of Schnorr signatures as a deterministic algorithm for creating and verifying electronic digital signatures
+* EdDSA - a digital signature scheme using a variant of Schnorr signatures as a deterministic algorithm for creating and verifying electronic digital signatures
   * public key: 32 bytes \(256 bits\)
   * private key: 32 bytes \(256 bits\)
   * signature: 64 bytes \(512 bits\)
