@@ -411,28 +411,28 @@ If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random set
 
 ### Block application by the network participants
 
-All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the **$VRFN\(r,s\)$** algorithm.
+All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the $$VRFN(r,s)$$ algorithm.
 
-Accordingly, each node individually determines when consensus has been reached on the next block and understands which block to apply and add to its own local copy of the distributed ledger. Thus, all the network nodes reach the end of the round at one of the stages of the **BBA** algorithm and get a formed **$CERT\_{r}$**. Therefore, a final message with the resulting information isn’t broadcast by any node, as each node has already determined this information independently.
+Accordingly, each node individually determines when consensus has been reached on the next block and understands which block to apply and add to its own local copy of the distributed ledger. Thus, all the network nodes reach the end of the round at one of the stages of the `BBA` algorithm and get a formed $$CERT_{r}$$. Therefore, a final message with the resulting information isn’t broadcast by any node, as each node has already determined this information independently.
 
-If the value **$ctx\[l\].B != ∅$**, then the block is received. If the value **$ctx\[l\].B == ∅$**, then:
+If the value $$ctx[l].B != ∅$$, then the block is received. If the value $$ctx[l].B == ∅$$, then:
 
-* **$ctx\[l\].signQ == Q\_{r-1}$** means that an empty block has been created.
-* **$ctx\[l\].signQ != Q\_{r-1}$** means that a non-empty block has been created and the node has not received it.
+* $$ctx[l].signQ == Q_{r-1}$$ means that an empty block has been created.
+* $$ctx[l].signQ != Q_{r-1}$$ means that a non-empty block has been created and the node has not received it.
 
 ## Network Communication
 
-### Message Format {.counter-reset}
+### Message Format
 
 Each message broadcast by nodes is entirely signed with the [EdDSA](https://tools.ietf.org/html/rfc8032) key of the participant who creates the message, i.e there is always a `message_signature` field included with a broadcast message.
 
 Separate fields or groups of fields are also signed with an [EdDSA](https://tools.ietf.org/html/rfc8032) key of the participant who creates the message.
 
-Such a "double" signature is essential, since the signatures of certain groups of fields are later used in [VRF](https://en.wikipedia.org/wiki/Verifiable_random_function) to generate a random round value, and in the signature set **$CERT\_{r}$**.
+Such a "double" signature is essential, since the signatures of certain groups of fields are later used in [VRF](https://en.wikipedia.org/wiki/Verifiable_random_function) to generate a random round value, and in the signature set $$CERT_{r}$$.
 
 #### 1. Candidate Block: `gc_block`
 
-This message is sent in step **1** by producers to propose a newly created block with a non-empty set of transactions for addition to the distributed ledger.
+This message is sent in step `1` by producers to propose a newly created block with a non-empty set of transactions for addition to the distributed ledger.
 
 | Field | Description |
 | :--- | :--- |
@@ -452,9 +452,9 @@ This message is sent during step **1** if there is at least one participant for 
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key **id** |
-| **rand** | **$sig\(Q\_{r}\)$**, the signature of a previous randomness seed with the participant’s key **id** |
+| **rand** | $$sig(Q_{r})$$, the signature of a previous randomness seed with the participant’s key **id** |
 | **block\_hash** | the new block hash |
-| **prev\_rand** | **$sig\(Q\_{r}\)$**, the signature of the randomness seed from the previous block |
+| **prev\_rand** | $$sig(Q_{r})$$, the signature of the randomness seed from the previous block |
 | **prev\_block\_hash** | the previous block hash |
 
 #### 3. Selection of a Leader and a Block: `gc_proposal`
@@ -517,7 +517,7 @@ The number of steps of the algorithm and dependence on the state of the whole ac
 
 1. To switch to the longest chain \(with the highest number of completed non zero rounds\) in the presence of several chains.
 2. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
-3. If there is more than one long chain with non-empty blocks at the end of a $r$-length chain, to follow the one in which the $r$ block has the smallest hash value.
+3. If there is more than one long chain with non-empty blocks at the end of a `r`-length chain, to follow the one in which the `r` block has the smallest hash value.
 
 This process is based on [algorand-v9](https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2) \(9. Handling Forks, page 70\).
 
@@ -525,28 +525,28 @@ This process is based on [algorand-v9](https://drive.google.com/file/d/1dohyg2LM
 
 In the case a node is not able to communicate with peers or stops receiving message broadcast, the node's internal state of the current round and step will only advance when the timer is triggered.
 
-Since the conclusion of the current round at the moment occurs only upon receiving a successful BBA message from peers, the node will continue executing the BBA steps in a loop until reaching the **μ** constant. As a result, an empty block will be generated.
+Since the conclusion of the current round at the moment occurs only upon receiving a successful BBA message from peers, the node will continue executing the BBA steps in a loop until reaching the `μ` constant. As a result, an empty block will be generated.
 
 #### Network Restored
 
 Nodes that receive messages only from the middle of a consensus round, as a result of an interrupted network connection, will possess incomplete data about the context and progress of the round. As a consequence, they will reach either an _incorrect_ evaluation for the best block or vote for an _empty block_.
 
-In either case, the node will act as if it was a malicious node, passing incorrect information to the network. Consequently, the information coming from such nodes will be filtered by the **BBA** algorithm. Once the node realizes that its view of the ledger is inconsistent with the rest of network, a reconciliation will occur automatically, when the rest of the network goes forwards in the process of generating new blocks.
+In either case, the node will act as if it was a malicious node, passing incorrect information to the network. Consequently, the information coming from such nodes will be filtered by the `BBA` algorithm. Once the node realizes that its view of the ledger is inconsistent with the rest of network, a reconciliation will occur automatically, when the rest of the network goes forwards in the process of generating new blocks.
 
 #### Incomplete Local Block Database
 
 The scenario occurs when the local database of the node is syncing or reconciling with the global distributed ledger. During this sync process, the node cannot participate in the consensus algorithm due to the fact that it lacks knowledge of the values:
 
-* $H\(B\_{r-1}\)$, the hash of the last created block
-* $Q\_{r-1}$, the randomness seed of the last round of the algorithm
+* $$H(B_{r-1})$$, the hash of the last created block
+* $$Q_{r-1}$$, the randomness seed of the last round of the algorithm
 
 The syncing node must determine the moment when its local database will be in sync with the rest of the network and begin the steps of the consensus algorithm at that time.
 
 #### Block Producer Influence on VRF
 
-Account balances formed as a result of the $r$ round will be used in the VRF only when assigning a set of producers and verifiers for the round $r + 2$. However, the randomness seed for the round $r + 2$ will be affected by the outcome of the round $r + 1$.
+Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + 2`. However, the randomness seed for the round `r + 2` will be affected by the outcome of the round `r + 1`.
 
-So since the producer cannot predict the seed that will be received as a result of the round $r + 1$, he cannot predict how the choice of performers will be affected by manipulating account balances on the $r$ round.
+So since the producer cannot predict the seed that will be received as a result of the round `r + 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round.
 
 #### Insufficient Node Participation
 
@@ -577,9 +577,9 @@ The protocol provides a second, fallback level of delegators who are authorized 
 
 Through this mechanism, at each step of the consensus for each verifier \(but not block producers\), a fallback delegate is determined from the list of active committee members. As a result, each of the active members of the committee receives its set of accounts delegated to him at a particular step of consensus. The important criteria for these delegates is that the messages from the committee member \(on behalf of account `A`\) is considered when counting votes only if during the full time interval allocated for the current step, the node has not received any messages from the verifier selected for the round `A` or from his explicit delegate `B`.
 
-The committee member corresponding to the $VRF\_{n}\(r, s\)$ account at step $s$ round $r$ is determined by the following formula:
+The committee member corresponding to the $$VRF_{n}(r, s)$$ account at step `s` round `r` is determined by the following formula:
 
-$$C_{n} = ceil\{\ n * K / N_{c}\ \}$$
+$$C_{n} = ceil\{n * K / N_{c}\}$$
 
 where $K$ is the number of active committee members.
 
