@@ -158,7 +158,7 @@ The use of VRF in EchoRand is as follows: having a pseudo-random value $$Q_r$$ f
 
 The function $$VRF_{n}(r, s)$$ returns a list of participants of a given length of round **$$r$$** and step **$$s$$**, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round **$$max({0, r - k})$$**, where **$$k = 1$$**. To calculate the function, a random vector $$Q_{r-k}$$ from round $$r-k$$ is required.
 
-**Identification of Active Roles**
+##### Identification of Active Roles
 
 The checked random function at each **r** round and **s** step is built iteratively, as follows:
 
@@ -184,7 +184,7 @@ In other words, $$VRFN$$ is a selection of participants from $$VRF$$ who act on 
 
 At the same round and step but on different network nodes of the algorithm, the $$VRFN$$ selections will be different, while the $$VRF$$ selection will be the same.
 
-**Generation of Randomness Seed**
+##### Generation of Randomness Seed
 
 The starting seed $$Q_{0}$$ is selected randomly at blockchain database initialization.
 
@@ -196,7 +196,7 @@ In this case, the signature is generated using the EdDSA private key of the prod
 
 $$Q_{r} = H(Q_{r-1}, r)$$
 
-**Generating a Random Value During BBA Steps**
+##### Generating a Random Value During BBA Steps
 
 At each step of the BBA algorithm, all network nodes сan be divided into two sets:
 
@@ -226,11 +226,11 @@ Each network node generates a list of producers for the current block and if the
 * $$H(B_{r-1})$$ from $$CERT_{r-1}$$
 * $$A_{1}$$, $$N_{1}$$ from the context of the round
 
-**Start**
+##### Start
 
 Right after determining $$CERT_{r-1}$$
 
-#### Steps
+##### Steps
 
 1. **Verification**:
    1. If $$N_{1} = ∅$$, complete the step
@@ -255,18 +255,18 @@ This stage consists of three steps. At this stage, the goal of the verifiers is 
 
 Each of the selected verifiers tells the network which of the blocks they consider preferable for the current round.
 
-**Input Data**
+##### Input Data
 
 * $$H(B_{r-1})$$, $$Q_{r-1}$$ from $$CERT_{r-1}$$
 * $$A_{1}$$, $$A_{2}$$, $$N_{2}$$ from the context of the round
 
 $$v$$ is a local structure of a step that stores the hash of the block and the ID of the producer which created the block. The empty set symbol assigned to the elements $$v$$ means "empty block" and "unknown leader". In the application, it can be a predefined constant or a separate flag in the data structure.
 
-**Start**
+##### Start
 
 Right after determining $$CERT_{r-1}$$
 
-**Steps**
+##### Steps
 
 1. **Timer**: schedule the timer after the time equal to $$2 * λ$$, by a trigger:
    1. To define $$l$$, as $$id$$ from the received messages in $$ctx[id]$$ with a minimum index of $$A_{1}$$
@@ -279,14 +279,14 @@ Right after determining $$CERT_{r-1}$$
 3. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
    1. After receiving a message `gc_block` of the round $$r$$
       1. Verify the round number in the message
-      2. Verify the message step equals **1**
+      2. Verify the message step equals `1`
       3. Verify that $$msg.id ∈ A_{1}$$ and get the user's public key
       4. Verify the signature of the whole message
-      5. Verify that **msg.block** is correct
+      5. Verify that $$msg.block$$ is correct
          1. Verify the block's round for equality to the current
          2. Verify $$ID_{producer} ∈ A_{1}$$
-         3. Verify $Q_{r}$ from the block, if it already has the `gc_signature`
-         4. Verify the block signature using **producer-id** of the block
+         3. Verify $$Q_{r}$$ from the block, if it already has the `gc_signature`
+         4. Verify the block signature using `producer-id` of the block
          5. Verify $$H(B_{r-1})$$ from the block for equality to the local one from $$CERT_{r-1}$$
          6. Verify the correctness of $$PAY_{r}$$ in the block
       6. If $$ctx[msg.id]$$ already exists
