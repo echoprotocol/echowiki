@@ -64,7 +64,7 @@ EchoRand consensus is performed in **rounds**, with either a new block of transa
 2. Block Generation
 3. Best Block Voting and Application
 
-### Cryptographic Sortition {.counter-reset}
+### Cryptographic Sortition
 
 At each round, a new set of producers and verifiers is selected from all nodes in the network in such a way that:
 
@@ -203,28 +203,28 @@ At each step of the BBA algorithm, all network nodes сan be divided into two se
 * nodes that have received a sufficient number of messages during the previous round\(s\) from their peers \(with a certain equal value\), allowing them to be certain about the value that will be chosen by the network
 * nodes that have received a significant number of messages with two solution variants, meaning the nodes are uncertain about the value that will be chosen by the network
 
-In the latter case, all uncertain nodes use a **$VRF$** to generate a shared random value from the set `{0, 1}` for deciding between the two valid alternatives and relay their decision to the rest of the network. Since the random value will be the same for all uncertain nodes, each will arrive at the same decision.
+In the latter case, all uncertain nodes use a $$VRF$$ to generate a shared random value from the set `{0, 1}` for deciding between the two valid alternatives and relay their decision to the rest of the network. Since the random value will be the same for all uncertain nodes, each will arrive at the same decision.
 
 A random value for uncertain nodes is generated according to the formula:
 
-$$BBA\_RAND(s) = lsb\ \{ SHA256( Q_{r-1}, r ) \}$$
+$$BBA\_RAND(s) = lsb\{SHA256(Q_{r-1}, r)\}$$
 
-Where $lsb$ is the least significant bit.
+Where $$lsb$$ is the least significant bit.
 
 ### Step 1 - Block Generation
 
-For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF\(r, s\)$ as described above. As a result, each network node receives a $VRF\(r, s\)$ set and a $VRFN\(r, s\)$ subset - a list of accounts authorized at this node. If $VRFN\(r, s\)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
+For each block, a new list of possible **producers** is determined with the help of a verifiable random function $$VRF(r, s)$$ as described above. As a result, each network node receives a $$VRF(r, s)$$ set and a $$VRFN(r, s)$$ subset - a list of accounts authorized at this node. If $$VRFN(r, s)$$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
 Since all input data for the VRF is already included in the previous blocks, each node in the network determines the list of producers independently, and it is the same for everyone \(deterministic\).
 
-The mechanism is as follows: for block **$B$** from round **$r$**, we have a hash **$H\(B\_{r}\)$**, which is the result of the producer's signature $sig\(H\(B_{r-1}\)\)$ of the previous block hash. Since the producer can’t manipulate the result of the hash function \(as the data that is hashed and the private key are strictly defined\), and the hashing is checked using the producer's public key, we receive a new pseudo-random number in each block. This number \(hash\) from the block \*\*$B_{r}$\*\* is used as a random index to select the first producer on the list to generate a block. The index of this producer is used to get the next producer on the list, etc. until a complete list of those who will generate a block is created.
+The mechanism is as follows: for block $$B$$ from round $$r$$, we have a hash $$H(B_{r})$$, which is the result of the producer's signature $$sig(H(B_{r-1}))$$ of the previous block hash. Since the producer can’t manipulate the result of the hash function \(as the data that is hashed and the private key are strictly defined\), and the hashing is checked using the producer's public key, we receive a new pseudo-random number in each block. This number \(hash\) from the block $$B_{r}$$ is used as a random index to select the first producer on the list to generate a block. The index of this producer is used to get the next producer on the list, etc. until a complete list of those who will generate a block is created.
 
 Each network node generates a list of producers for the current block and if the authorized account on the node is a member of the list, it generates and sends a block to the network using the following mechanism:
 
 #### Input Data
 
-* **$H\(B\_{r-1}\)$** from **$CERT\_{r-1}$**
-* **$A\_{1}$**, **$N\_{1}$** from the context of the round
+* $$H(B_{r-1})$$ from $$CERT_{r-1}$$
+* $$A_{1}$$, $$N_{1}$$ from the context of the round
 
 **Start**
 
