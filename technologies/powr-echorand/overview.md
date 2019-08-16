@@ -228,22 +228,22 @@ Each network node generates a list of producers for the current block and if the
 
 **Start**
 
-Right after determining $CERT\_{r-1}$
+Right after determining $$CERT_{r-1}$
 
 #### Steps
 
 1. **Verification**:
-   1. If **$N\_{1}=∅$**, complete the step
-   2. Select participant index with **$n = N\_{1}\[0\]$** as a creator of this block on the node
-   3. Get actual ID of the the participant in the blockchain: **$id**_**{1} = A**_**{1}\[n\]$**
-   4. Through **$id\_{1}$** get all the private keys of a participant
+   1. If $$N_{1} = ∅$$, complete the step
+   2. Select participant index with $$n = N_{1}[0]$$ as a creator of this block on the node
+   3. Get actual ID of the the participant in the blockchain: $$id_{1} = A_{1}[n]$$
+   4. Through $$id_{1}$$ get all the private keys of a participant
 2. **Block assembly**:
-   1. If all the previous blocks **$B\_{k}$** where $k=1, 2, 3, ..., r-1$ are available, build **$PAY\_{r}$**
-   2. If at least one of the previous blocks is unavailable, build **$PAY\_{r} = ∅$**
-   3. If **$PAY\_{r} != ∅$**, create a new block **$B**_**{r} = { r, PAY**_**{r}, Q**_**{r-1}, sig\(Q**_**{r-1}\), H\(B\_{r-1}\) }$**
+   1. If all the previous blocks $$B_{k}$$ where $$k=1, 2, 3, ..., r-1$$ are available, build $$PAY_{r}$$
+   2. If at least one of the previous blocks is unavailable, build $$PAY_{r} = ∅$$
+   3. If $$PAY_{r} != ∅$$, create a new block $$B_{r} = {r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})}$$
 3. **Communication, generation, signature and a simultaneous broadcast:**
-   1. Sign with the key **$id\_{1}$** and send message `gc_block` = { $r, id_{1}, B_{r}, sig\(B\_{r}\)$ }
-   2. Sign with the key **$id\_{1}$** and send `gc_signature` = { $r, id_{1}, sig\(Q_{r-1}\), H\(B\_{r}\)$ }
+   1. Sign with the key $$id_{1}$$** and send message `gc_block` = $${r, id_{1}, B_{r}, sig(B_{r})}$$
+   2. Sign with the key $$id_{1}$$** and send `gc_signature` = $${r, id_{1}, sig(Q_{r-1}), H(B_{r})}$$
 
 ### Graded Consensus \(GC\)
 
