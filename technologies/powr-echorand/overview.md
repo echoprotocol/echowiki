@@ -320,36 +320,36 @@ Right after determining $$CERT_{r-1}$$
 
 Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes and announces the results of their count to the entire network.
 
-**Input Data**
+##### Input Data
 
-* $A_{2}$, $A_{3}$, $N\_{3}$ from the context of the round
+* $$A_{2}$$, $$A_{3}$$, $$N_{3}$$ from the context of the round
 
-**Start**
+##### Start
 
-Right after determining $CERT\_{r-1}$
+Right after determining $$CERT_{r-1}$$
 
-**Steps**
+##### Steps
 
-1. **Timer**: schedule the timer after the time equal to $3 \* λ + Λ$, by a trigger:
-   1. **$v == { ∅, ∅ }$**
+1. **Timer**: schedule the timer after the time equal to $$3 * λ + Λ$$, by a trigger:
+   1. $$v == \{ ∅, ∅ \}$$
    2. Go to **Communication**
-2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving 1. Verify the round number and the step number in the message 2. Verify that **$msg.id ∈ A\_{2}$** and get the user's public key 3. Verify the signature of the whole message 4. Verify that **$msg.v = { msg.block\\_hash, msg.leader }$** is in the context of the round.
+2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving 1. Verify the round number and the step number in the message 2. Verify that $$msg.id ∈ A_{2}$$ and get the user's public key 3. Verify the signature of the whole message 4. Verify that $$msg.v = \{ msg.block\_hash, msg.leader \}$$ is in the context of the round.
 
    It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
 
-   1. **$∃ ctx\[msg.leader\]$** - a record for such a potential leader exists in the context
-   2. **$ctx\[msg.leader\].HB == msg.block\\_hash$** - the block hash coincides
-   3. **$ctx\[msg.leader\].v3.push\(msg.id\)$**, where **$v3$** is an _unordered\_set_
-   4. If the counter is more than the threshold **$t\_{h}$**: **$ctx\[msg.leader\].v3.size\(\) &gt; t\_{h}$**
-      1. **$v = { msg.block\\_hash, msg.leader }$**
+   1. $$∃ ctx[msg.leader]$$ - a record for such a potential leader exists in the context
+   2. $$ctx[msg.leader].HB == msg.block\_hash$$ - the block hash coincides
+   3. $$ctx[msg.leader].v3.push(msg.id)$$, where $$v3$$ is an _unordered\_set_
+   4. If the counter is more than the threshold $$t_{h}$$: $$ctx[msg.leader].v3.size() > t_{h}$$
+      1. $$v = \{ msg.block\_hash, msg.leader \}$$
       2. Go to **Communication**
 
 3. **Communication**: generating, signing and sending of messages
    1. Stop timers, unsubscribe from network messages
-   2. If **$N\_3 = ∅$**, end the step
-   3. **$∀n\_3 ∈ N\_3$**:
-      1. Get real user’s ID in the blockchain: **$id**_**{3} = A**_**{3}\[n\_{3}\]$**
-      2. Sign with the user’s key **$id\_{3}$** and send `gc_proposal` = { $r, 3, id\_{3}, v$ }
+   2. If $$N_3 = ∅$$, end the step
+   3. $$∀n_3 ∈ N_3$$:
+      1. Get real user’s ID in the blockchain: $$id_{3} = A_{3}[n_{3}]$$
+      2. Sign with the user’s key $$id_{3}$$ and send `gc_proposal` = $$\{ r, 3, id_{3}, v \}$$
 
 #### Step 4 - Primary evaluation of the vote count
 
