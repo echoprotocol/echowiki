@@ -228,7 +228,7 @@ Each network node generates a list of producers for the current block and if the
 
 **Start**
 
-Right after determining $$CERT_{r-1}$
+Right after determining $$CERT_{r-1}$$
 
 #### Steps
 
@@ -240,10 +240,10 @@ Right after determining $$CERT_{r-1}$
 2. **Block assembly**:
    1. If all the previous blocks $$B_{k}$$ where $$k=1, 2, 3, ..., r-1$$ are available, build $$PAY_{r}$$
    2. If at least one of the previous blocks is unavailable, build $$PAY_{r} = ∅$$
-   3. If $$PAY_{r} != ∅$$, create a new block $$B_{r} = {r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})}$$
+   3. If $$PAY_{r} != ∅$$, create a new block $$B_{r} = \{r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})\}$$
 3. **Communication, generation, signature and a simultaneous broadcast:**
-   1. Sign with the key $$id_{1}$$** and send message `gc_block` = $${r, id_{1}, B_{r}, sig(B_{r})}$$
-   2. Sign with the key $$id_{1}$$** and send `gc_signature` = $${r, id_{1}, sig(Q_{r-1}), H(B_{r})}$$
+   1. Sign with the key $$id_{1}$$** and send message `gc_block` = $$\{r, id_{1}, B_{r}, sig(B_{r})\}$$
+   2. Sign with the key $$id_{1}$$** and send `gc_signature` = $$\{r, id_{1}, sig(Q_{r-1}), H(B_{r})\}$$
 
 ### Graded Consensus \(GC\)
 
