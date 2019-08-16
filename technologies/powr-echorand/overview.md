@@ -152,29 +152,37 @@ The following algorithm parameters are set by constants, or configured at the **
 
 #### VRF
 
-The concept of a verifiable random function \(VRF\) was introduced by Micali, Rabin, and Vadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value $x$, the owner of the secret key $SK$ can calculate the value of the function $y = F_{SK}\(x\)$ and the proof $P_{SK}\(x\)$. Using the proof and public key $PK = g^{SK}$, everyone can verify that the value of $y = F\_{SK}\(x\)$ is indeed calculated correctly, but this information cannot be used to discover the secret key.
+The concept of a verifiable random function \(VRF\) was introduced by Micali, Rabin, and Vadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value $x$, the owner of the secret key $SK$ can calculate the value of the function $$y = F_{SK}(x)$$ and the proof $$P_{SK}(x)$$. Using the proof and public key $$PK = g^{SK}$$, everyone can verify that the value of $$y = F_{SK}(x)$$ is indeed calculated correctly, but this information cannot be used to discover the secret key.
 
-The use of VRF in EchoRand is as follows: having a pseudo-random value $Q\_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF\(r, s\)$ executors in $s$ step of $r$ round,and based on it, perform the necessary actions if the authorized account on the node is part of $VRF\(r, s\)$, and additionally verify whether the participants have the right to act at this step.
+The use of VRF in EchoRand is as follows: having a pseudo-random value $$Q_r$$ for each round and the VRF function, each of the network nodes can determine the list of $$VRF(r, s)$$ executors in $$s$$ step of $$r$$ round,and based on it, perform the necessary actions if the authorized account on the node is part of $$VRF(r, s)$$, and additionally verify whether the participants have the right to act at this step.
 
-The function $VRF_{n}\(r, s\)$ returns a list of participants of a given length of round **$r$** and step **$s$**, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round **$max\({0, r - k}\)$**, where **$k = 1$**. To calculate the function, a random vector \*\*$Q_{r-k}$\*\* from round $r-k$ is required.
+The function $$VRF_{n}(r, s)$$ returns a list of participants of a given length of round **$$r$$** and step **$$s$$**, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round **$$max({0, r - k})$$**, where **$$k = 1$$**. To calculate the function, a random vector $$Q_{r-k}$$ from round $$r-k$$ is required.
 
 **Identification of Active Roles**
 
 The checked random function at each **r** round and **s** step is built iteratively, as follows:
 
-$$VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$ $$VRF_{1}(r, s) = H(VRF_{0}(r, s))$$ $$VRF_{2}(r, s) = H(VRF_{1}(r, s))$$ $$...$$ $$VRF_{n}(r, s) = H(VRF_{n-1}(r, s))$$
+$$VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$ 
+
+$$VRF_{1}(r, s) = H(VRF_{0}(r, s))$$ 
+
+$$VRF_{2}(r, s) = H(VRF_{1}(r, s))$$ 
+
+$$...$$ 
+
+$$VRF_{n}(r, s) = H(VRF_{n-1}(r, s))$$
 
 The result of this function is an array of random values:
 
 $$VRF(r, s) = {[ VRF_{0}(r, s), VRF_{1}(r, s), ... ]}$$
 
-A specific executor is calculated from the $VRF\_i\(r, s\)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - 2$ block.
+A specific executor is calculated from the $$VRF_i(r, s)$$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $$r - 2$$ block.
 
-The set $VRFN \(r,s\)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN \(r,s\)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF\_i \(r,s\)$.
+The set $$VRFN (r,s)$$ is an array of indexes that is different for each node of the network, and if $$i ∈ VRFN (r,s)$$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $$VRF_i (r,s)$$.
 
-In other words, **$VRFN$** is a selection of participants from **$VRF$** who act on a particular node, round, and step.
+In other words, $$VRFN$$ is a selection of participants from $$VRF$$ who act on a particular node, round, and step.
 
-At the same round and step but on different network nodes of the algorithm, the **$VRFN$** selections will be different, while the **$VRF$** selection will be the same.
+At the same round and step but on different network nodes of the algorithm, the $$VRFN$$ selections will be different, while the $$VRF$$ selection will be the same.
 
 **Generation of Randomness Seed**
 
