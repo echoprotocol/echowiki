@@ -186,15 +186,15 @@ At the same round and step but on different network nodes of the algorithm, the 
 
 **Generation of Randomness Seed**
 
-The starting seed **$Q\_{0}$** is selected randomly at blockchain database initialization.
+The starting seed $$Q_{0}$$ is selected randomly at blockchain database initialization.
 
-Then, at the creation of a new block in round **$r$** the **$Q\_{r}$** vector is calculated. For a non-empty block **$B\_{r}$**:
+Then, at the creation of a new block in round $$r$$ the $$Q_{r}$$ vector is calculated. For a non-empty block $$B_{r}$$:
 
-$$Q_{r} = H( sig(Q_{r-1}), r )$$
+$$Q_{r} = H(sig(Q_{r-1}), r)$$
 
-In this case, the signature is generated using the EdDSA private key of the producer that created the block. In case **$B\_{r}$** block is empty:
+In this case, the signature is generated using the EdDSA private key of the producer that created the block. In case $$B_{r}$$ block is empty:
 
-$$Q_{r} = H( Q_{r-1}, r )$$
+$$Q_{r} = H(Q_{r-1}, r)$$
 
 **Generating a Random Value During BBA Steps**
 
