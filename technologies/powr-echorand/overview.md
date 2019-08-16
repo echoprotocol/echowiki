@@ -242,14 +242,14 @@ Right after determining $$CERT_{r-1}$$
    2. If at least one of the previous blocks is unavailable, build $$PAY_{r} = ∅$$
    3. If $$PAY_{r} != ∅$$, create a new block $$B_{r} = \{r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})\}$$
 3. **Communication, generation, signature and a simultaneous broadcast:**
-   1. Sign with the key $$id_{1}$$** and send message `gc_block` = $$\{r, id_{1}, B_{r}, sig(B_{r})\}$$
-   2. Sign with the key $$id_{1}$$** and send `gc_signature` = $$\{r, id_{1}, sig(Q_{r-1}), H(B_{r})\}$$
+   1. Sign with the key $$id_{1}$$ and send message `gc_block` = $$\{r, id_{1}, B_{r}, sig(B_{r})\}$$
+   2. Sign with the key $$id_{1}$$ and send `gc_signature` = $$\{r, id_{1}, sig(Q_{r-1}), H(B_{r})\}$$
 
 ### Graded Consensus \(GC\)
 
 This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
 
-![gc-steps.png](../../.gitbook/assets/gc-steps.png)
+![GC Steps(../../.gitbook/assets/gc-steps.png)
 
 #### Step 2 - Voting
 
@@ -257,64 +257,64 @@ Each of the selected verifiers tells the network which of the blocks they consid
 
 **Input Data**
 
-* $H\(B_{r-1}\)$, $Q_{r-1}$ from $CERT\_{r-1}$
-* $A_{1}$, $A_{2}$, $N\_{2}$ from the context of the round
+* $$H(B_{r-1})$$, $$Q_{r-1}$$ from $$CERT_{r-1}$$
+* $$A_{1}$$, $$A_{2}$$, $$N_{2}$$ from the context of the round
 
-**$v$** is a local structure of a step that stores the hash of the block and the ID of the producer which created the block. The empty set symbol assigned to the elements **$v$** means "empty block" and "unknown leader". In the application, it can be a predefined constant or a separate flag in the data structure.
+$$v$$ is a local structure of a step that stores the hash of the block and the ID of the producer which created the block. The empty set symbol assigned to the elements $$v$$ means "empty block" and "unknown leader". In the application, it can be a predefined constant or a separate flag in the data structure.
 
 **Start**
 
-Right after determining $CERT\_{r-1}$
+Right after determining $$CERT_{r-1}$$
 
 **Steps**
 
-1. **Timer**: schedule the timer after the time equal to **$2 \* λ$**, by a trigger:
-   1. To define $l$, as $id$ from the received messages in **$ctx\[id\]$** with a minimum index of **$A\_{1}$**
-   2. If the local cache for $l$ has the block **$B\_{r}$**
-      1. **$v = { ctx\[l\].HB, l }$**
+1. **Timer**: schedule the timer after the time equal to $$2 * λ$$, by a trigger:
+   1. To define $$l$$, as $$id$$ from the received messages in $$ctx[id]$$ with a minimum index of $$A_{1}$$
+   2. If the local cache for $$l$$ has the block $$B_{r}$$
+      1. $$v = \{ctx[l].HB, l}$$
       2. Go to **Communication**
-2. **Timer**: schedule the timer after the time equal to **$λ + Λ$**, by a trigger:
-   1. **$v == { ∅, ∅ }$**
+2. **Timer**: schedule the timer after the time equal to $$λ + Λ$$, by a trigger:
+   1. $$v == \{∅, ∅\}$$
    2. go to **Communication**
 3. **Network**: subscribe to network messages `gc_block`, `gc_signature` at the start of a step
-   1. After receiving a message `gc_block` of the round **$r$**
+   1. After receiving a message `gc_block` of the round $$r$$
       1. Verify the round number in the message
       2. Verify the message step equals **1**
-      3. Verify that **$msg.id ∈ A\_{1}$** and get the user's public key
+      3. Verify that $$msg.id ∈ A_{1}$$ and get the user's public key
       4. Verify the signature of the whole message
       5. Verify that **msg.block** is correct
          1. Verify the block's round for equality to the current
-         2. Verify **$ID**_**{producer} ∈ A**_**{1}$**
-         3. Verify **$Q\_{r}$** from the block, if it already has the `gc_signature`
+         2. Verify $$ID_{producer} ∈ A_{1}$$
+         3. Verify $Q_{r}$ from the block, if it already has the `gc_signature`
          4. Verify the block signature using **producer-id** of the block
-         5. Verify **$H\(B\_{r-1}\)$** from the block for equality to the local one from **$CERT\_{r-1}$**
-         6. Verify the correctness of **$PAY\_{r}$** in the block
-      6. If **$ctx\[msg.id\]$** already exists
-         1. Verify **$ctx\[msg.id\].HB == H\(msg.block\)$**
-      7. If it does not exist, save **msg.id, msg.block** in the context of the round:
-         1. **$ctx\[msg.id\].B = msg.block$**
-         2. **$ctx\[msg.id\].HB = H\(msg.block\)$**
-      8. If $l$ and $l == id$ are installed:
-         1. **$v = { ctx\[l\].HB, l }$**
+         5. Verify $$H(B_{r-1})$$ from the block for equality to the local one from $$CERT_{r-1}$$
+         6. Verify the correctness of $$PAY_{r}$$ in the block
+      6. If $$ctx[msg.id]$$ already exists
+         1. Verify $$ctx[msg.id].HB == H(msg.block)$$
+      7. If it does not exist, save $$msg.id, msg.block$$ in the context of the round:
+         1. $$ctx[msg.id].B = msg.block$$
+         2. $$ctx[msg.id].HB = H(msg.block)$$
+      8. If $$l$$ and $$l == id$$ are installed:
+         1. $$v = \{ctx[l].HB, l\}$$
          2. Go to **Communication**
-   2. After receiving a message `gc_signature` of the round **$r$**
+   2. After receiving a message `gc_signature` of the round $$r$$
       1. Verify the round number in the message
-      2. Verify that **$msg.id ∈ A\_{1}$** and get the user's public key
+      2. Verify that $$msg.id ∈ A_{1}$$ and get the user's public key
       3. Verify the signature of the whole message
-      4. **$msg.block\\_hash = ∅$**: verify **msg.rand** for equality to the local one from **$CERT\_{r-1}$**
-      5. **$msg.block\\_hash != ∅$**: verify the signature **msg.rand** using **$Q\_{r-1}$** from **$CERT\_{r-1}$**
-      6. Save **$msg.id =&gt; ∅$** in the context of the round if it’s not saved yet:
-         1. **$ctx\[msg.id\].B = ∅$**
-         2. **$ctx\[msg.id\].HB = msg.block\\_hash$**
-         3. **$ctx\[msg.id\].rand = msg.rand$**
+      4. $$msg.block\_hash = ∅$$: verify $$msg.rand$$ for equality to the local one from $$CERT_{r-1}$$
+      5. $$msg.block\_hash != ∅$$: verify the signature $$msg.rand$$ using $$Q_{r-1}$$ from $$CERT_{r-1}$$
+      6. Save $$$msg.id => ∅$$ in the context of the round if it’s not saved yet:
+         1. $$ctx[msg.id].B = ∅$$
+         2. $$ctx[msg.id].HB = msg.block\_hash$$
+         3. $$ctx[msg.id].rand = msg.rand$$
 4. **Communication**: generating, signing and sending of messages
    1. Stop timers, **do not** unsubscribe from network messages
-   2. If **$N\_{2} = ∅$**, end the step
-   3. **$∀n**_**{2} ∈ N**_**{2}$**:
-      1. Get real user’s ID in the blockchain: **$id**_**{2} = A**_**{2}\[n\_{2}\]$**
-      2. Sign with the key **$id\_{2}$** and send
-         1. if **$v != ∅$**: `gc_proposal` = **${ r, 2, id\_{2}, v }$**
-         2. if **$v == ∅$**: `gc_proposal` = **${ r, 2, id\_{2}, ∅ }$**
+   2. If $$N_{2} = ∅$$, end the step
+   3. $$∀n_{2} ∈ N_{2}$$:
+      1. Get real user’s ID in the blockchain: $$id_{2} = A_{2}[n_{2}]$$
+      2. Sign with the key $$id_{2}$$ and send
+         1. if $$v != ∅$$: `gc_proposal` = $$\{ r, 2, id_{2}, v \}$$
+         2. if $$v == ∅$$: `gc_proposal` = $$\{ r, 2, id_{2}, ∅ \}$$
 
 #### Step 3 - Vote Counting
 
