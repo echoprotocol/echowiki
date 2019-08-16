@@ -495,7 +495,7 @@ Network message processing for steps **BBA** \(**s = 5, ...**\) is practically t
 
 Each node always forwards the first `gc_block` message received to its peers, followed by a `gc_signature` by that node.
 
-For each subsequent `gc_block` messages received \(along with a `gc_signature`\), the node checks the participant **id** included. This message is only forwarded by the if the **id** of the participant in this message has the smallest index in array **$A\_{step}$**, among all the `gc_block` messages already received by the node. In this way, a candidate is chosen among many blocks proposed by producers.
+For each subsequent `gc_block` messages received \(along with a `gc_signature`\), the node checks the participant **id** included. This message is only forwarded by the if the **id** of the participant in this message has the smallest index in array $$A_{step}$$, among all the `gc_block` messages already received by the node. In this way, a candidate is chosen among many blocks proposed by producers.
 
 The rest of the round messages are processed and forwarded to peers by a node only in the case that:
 
