@@ -185,7 +185,7 @@ Subscribe to pending transactions.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "method": "call",
     "params": [
         DATABASE_API_ID,
@@ -243,7 +243,7 @@ Subscribe to pending transactions.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "jsonrpc": "2.0",
     "result": null
 }
@@ -263,7 +263,7 @@ Subscribe to block applications.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "method": "call",
     "params": [
         DATABASE_API_ID,
@@ -293,7 +293,7 @@ Subscribe to block applications.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "jsonrpc": "2.0",
     "result": null
 }
@@ -307,7 +307,7 @@ Stop receiving any notifications. Unsubscribe from all subscribed objects.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "method": "call",
     "params": [
         DATABASE_API_ID,
@@ -323,7 +323,7 @@ Stop receiving any notifications. Unsubscribe from all subscribed objects.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "jsonrpc": "2.0",
     "result": null
 }
@@ -684,7 +684,7 @@ A processed transaction object.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "jsonrpc": "2.0",
     "result": {
         "ref_block_num": 221,
@@ -757,7 +757,7 @@ A signed transaction object.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "jsonrpc": "2.0",
     "result": {
         "ref_block_num": 27,
@@ -823,7 +823,7 @@ Retrieve the chain property object associated with the chain.
 
 ```json
 {
-    "id": 3,
+    "id": 4,
     "jsonrpc": "2.0",
     "result": {
         "id": "2.9.0",
@@ -2501,9 +2501,50 @@ An array of assets vested.
 |:------------------------------|:-------------------------|
 | `account_id_type account_ids` | the id of account to use |
 
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        2,
+        "get_vesting_balances",
+        [
+            "1.2.26"
+        ]
+    ]
+}
+```
+
 #### Returns
 
 An array of vesting balances.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "id": "1.7.0",
+        "owner": "1.2.26",
+        "balance": {
+            "amount": 100,
+            "asset_id": "1.3.0"
+        },
+        "policy": [
+            0,
+            {
+                "begin_timestamp": "1970-01-01T00:00:00",
+                "vesting_cliff_seconds": 0,
+                "vesting_duration_seconds": 0,
+                "begin_balance": 0
+            }
+        ],
+        "extensions": []
+    }
+}
+```
 
 ### get_account_count()
 
