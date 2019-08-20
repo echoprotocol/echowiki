@@ -1,24 +1,20 @@
-# APIs
-
-## Database API
-
----
+# Database API
 
 ## Objects
 
-#### get_objects(ids)
+### get_objects(ids)
 
 Get the objects corresponding to the provided IDs.
 
 If any of the provided IDs does not map to an object, a null is returned in its position.
 
-##### Parameters
+#### Parameters
 
 | Option                               | Description                                            |
 |--------------------------------------|:-------------------------------------------------------|
 | `const vector<object_id_type>& ids`  | an array of object IDs, e.g. `["1.2.1", "1.2.2", ...]` |
 
-##### Example
+#### Example
 
 ```json
 {
@@ -37,7 +33,7 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 }
 ```
 
-##### Returns
+#### Returns
 
 The objects retrieved, in the order they are mentioned in ids.
 
@@ -133,15 +129,13 @@ The objects retrieved, in the order they are mentioned in ids.
 }
 ```
 
----
-
 ## Subscriptions
 
-#### set_subscribe_callback(callback, clear_filter)
+### set_subscribe_callback(callback, clear_filter)
 
 Subscribe to updates.
 
-##### Parameters
+#### Parameters
 
 | Option                                     | Description                                                       |
 |--------------------------------------------|:------------------------------------------------------------------|
@@ -150,7 +144,7 @@ Subscribe to updates.
 
 If *clear_filter* is set to true, the API server will notify all newly created objects and ID of all newly removed objects to the client, no matter whether client subscribed to the objects
 
-##### Notice example
+#### Notice example
 
 ```json
 {
@@ -177,51 +171,50 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 }
 ```
 
-#### set_pending_transaction_callback(callback)
+### set_pending_transaction_callback(callback)
 
 Subscribe to pending transactions.
 
-##### Parameters
+#### Parameters
 
 | Option                                     | Description                                         |
 |--------------------------------------------|:----------------------------------------------------|
 | `function<void(const variant&)> callback`  | notifications for incoming unconfirmed transactions |
 
-#### set_block_applied_callback(callback)
+### set_block_applied_callback(callback)
 
 Subscribe to block applications.
 
-##### Parameters
+#### Parameters
 
 | Option                                              | Description                                                                  |
 |-----------------------------------------------------|:-----------------------------------------------------------------------------|
 | `function<void(const variant& block_id)> callback`  | gives a notification whenever the block block_id is applied to the blockchain |
 
-#### cancel_all_subscriptions()
+### cancel_all_subscriptions()
 
 Stop receiving any notifications. Unsubscribes from all subscribed objects.
 
----
-
 ## Blocks and transactions
 
-#### get_block_header(block_num)
+### get_block_header(block_num)
 
 Retrieve a block header.
 
-##### Parameters
+#### Parameters
 
 | Option               | Description                                         |
 |----------------------|:----------------------------------------------------|
 | `uint32_t block_num` | height of the block whose header should be returned |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_block_header",
         [
             "1000"
@@ -230,7 +223,7 @@ Retrieve a block header.
 }
 ```
 
-##### Returns
+#### Returns
 
 Header of the referenced block, or null if no matching block was found.
 
@@ -250,23 +243,24 @@ Header of the referenced block, or null if no matching block was found.
 }
 ```
 
-#### get_block_header_batch(block_nums)
+### get_block_header_batch(block_nums)
 
 Retrieve multiple block header by block numbers.
 
-##### Parameters
+#### Parameters
 
 | Option                              | Description                                                            |
 |-------------------------------------|:-----------------------------------------------------------------------|
 | `const vector<uint32_t> block_nums` | vector containing heights of the block whose header should be returned |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_block_header_batch",
         [
             "10",
@@ -277,7 +271,7 @@ Retrieve multiple block header by block numbers.
 }
 ```
 
-##### Returns
+#### Returns
 
 Array of headers of the referenced blocks, or null if no matching block was found.
 
@@ -326,23 +320,24 @@ Array of headers of the referenced blocks, or null if no matching block was foun
 }
 ```
 
-#### get_block(block_num)
+### get_block(block_num)
 
 Retrieve a full, signed block.
 
-##### Parameters
+#### Parameters
 
 | Option               | Description                        |
 |----------------------|:-----------------------------------|
 | `uint32_t block_num` | height of the block to be returned |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_block",
         [
             "1000"
@@ -351,7 +346,7 @@ Retrieve a full, signed block.
 }
 ```
 
-##### Returns
+#### Returns
 
 The referenced block, or null if no matching block was found.
 
@@ -416,23 +411,24 @@ The referenced block, or null if no matching block was found.
 }
 ```
 
-#### get_block_tx_number(id)
+### get_block_tx_number(id)
 
 Get the total number of transactions in block.
 
-##### Parameters
+#### Parameters
 
 | Option                                  | Description                 |
 |-----------------------------------------|:----------------------------|
 | `const block_id_type(fc::ripemd160) id` | ID of the block to retrieve |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_block_tx_number",
         [
             "000003e835f96c81ce14fea203ad5658f8b2f5b1"
@@ -441,27 +437,28 @@ Get the total number of transactions in block.
 }
 ```
 
-##### Returns
+#### Returns
 
 If block was found total number of transaction in block, or null if no matching block was found.
 
-#### get_block_virtual_ops(block_num)
+### get_block_virtual_ops(block_num)
 
 Get virtual ops from the block.
 
-##### Parameters
+#### Parameters
 
 | Option               | Description                        |
 |----------------------|:-----------------------------------|
 | `uint32_t block_num` | height of the block to be returned |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_block_virtual_ops",
         [
             "7429"
@@ -470,7 +467,7 @@ Get virtual ops from the block.
 }
 ```
 
-##### Returns
+#### Returns
 
 Array of operation history objects, or null if no matching operation was found.
 
@@ -511,24 +508,25 @@ Array of operation history objects, or null if no matching operation was found.
 }
 ```
 
-#### get_transaction(block_num, trx_in_block)
+### get_transaction(block_num, trx_in_block)
 
 Fetch an individual transaction.
 
-##### Parameters
+#### Parameters
 
 | Option                  | Description                                          |
 |-------------------------|:-----------------------------------------------------|
 | `uint32_t block_num`    | height of the block in which the transaction resides |
 | `uint32_t trx_in_block` | index of the transaction in the block                |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_transaction",
         [
             "1000",
@@ -538,29 +536,30 @@ Fetch an individual transaction.
 }
 ```
 
-##### Returns
+#### Returns
 
 A processed transaction object.
 
-#### get_recent_transaction_by_id(id)
+### get_recent_transaction_by_id(id)
 
 If the transaction has not expired, this method will return the
 transaction for the given ID or it will return null if it is not known.
 Just because it is not known does not mean it wasn’t included in the blockchain.
 
-##### Parameters
+#### Parameters
 
 | Option                                        | Description           |
 |-----------------------------------------------|:----------------------|
 | `const transaction_id_type(fc::ripemd160) id` | ID of the transaction |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_recent_transaction_by_id",
         [
             "a4002bfb11e667ed67ea40c20774b99a705f58c3"
@@ -569,32 +568,31 @@ Just because it is not known does not mean it wasn’t included in the blockchai
 }
 ```
 
-##### Returns
+#### Returns
 
 A signed transaction object.
 
----
-
 ## Globals
 
-#### get_chain_properties()
+### get_chain_properties()
 
 Retrieve the chain property object associated with the chain.
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_chain_properties",
         []
     ]
 }
 ```
 
-##### Returns
+#### Returns
 
 ```json
 {
@@ -613,24 +611,25 @@ Retrieve the chain property object associated with the chain.
 }
 ```
 
-#### get_global_properties()
+### get_global_properties()
 
 Retrieve the current global property object.
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_global_properties",
         []
     ]
 }
 ```
 
-##### Returns
+#### Returns
 
 ```json
 {
@@ -804,24 +803,25 @@ Retrieve the current global property object.
 }
 ```
 
-#### get_config()
+### get_config()
 
 Retrieve compile-time constants.
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_config",
         []
     ]
 }
 ```
 
-##### Returns
+#### Returns
 
 ```json
 {
@@ -902,24 +902,25 @@ Retrieve compile-time constants.
 }
 ```
 
-#### get_chain_id()
+### get_chain_id()
 
 Get the chain ID.
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_chain_id",
         []
     ]
 }
 ```
 
-##### Returns
+#### Returns
 
 ```json
 {
@@ -929,24 +930,25 @@ Get the chain ID.
 }
 ```
 
-#### get_dynamic_global_properties()
+### get_dynamic_global_properties()
 
 Retrieve the current dynamic global property object.
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_dynamic_global_properties",
         []
     ]
 }
 ```
 
-##### Returns
+#### Returns
 
 ```json
 {
@@ -971,27 +973,26 @@ Retrieve the current dynamic global property object.
 }
 ```
 
----
-
 ## Keys
 
-#### get_key_references(keys)
+### get_key_references(keys)
 
 Retreive an array of account IDs associated with the given keys.
 
-##### Parameters
+#### Parameters
 
 | Option                             | Description             |
 |------------------------------------|:------------------------|
 | `vector<eddsa::public_key_t> keys` | an array of public keys |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_key_references",
         [
             "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
@@ -1001,7 +1002,7 @@ Retreive an array of account IDs associated with the given keys.
 }
 ```
 
-##### Returns
+#### Returns
 
 An array of arrays of account IDs for every public key provided.
 
@@ -1016,24 +1017,25 @@ An array of arrays of account IDs for every public key provided.
 }
 ```
 
-#### is_public_key_registered(public_key)
+### is_public_key_registered(public_key)
 
 Determine whether of a public key is *currently* linked
 to any *registered* (i.e. non-stealth) account on the blockchain.
 
-##### Parameters
+#### Parameters
 
 | Option                    | Description |
 |---------------------------|:------------|
 | `eddsa::public_key_t key` | public key  |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "is_public_key_registered",
         [
             "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB"
@@ -1043,7 +1045,7 @@ to any *registered* (i.e. non-stealth) account on the blockchain.
 
 ```
 
-##### Returns
+#### Returns
 
 Whether a public key is known.
 
@@ -1055,27 +1057,26 @@ Whether a public key is known.
 }
 ```
 
----
-
 ## Accounts
 
-#### get_accounts(account_ids)
+### get_accounts(account_ids)
 
 Get a list of accounts by ID. This function has semantics identical to get_objects.
 
-##### Parameters
+#### Parameters
 
 | Option                                        | Description                     |
 |-----------------------------------------------|:--------------------------------|
 | `const vector<account_id_type>& accounts_ids` | IDs of the accounts to retrieve |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_accounts",
         [
             "1.2.10",
@@ -1085,7 +1086,7 @@ Get a list of accounts by ID. This function has semantics identical to get_objec
 }
 ```
 
-##### Returns
+#### Returns
 
 The accounts corresponding to the provided IDs.
 
@@ -1179,7 +1180,7 @@ The accounts corresponding to the provided IDs.
 }
 ```
 
-#### get_full_accounts(names_or_ids, subscribe)
+### get_full_accounts(names_or_ids, subscribe)
 
 Fetch all objects relevant to the specified accounts and subscribe to updates.
 
@@ -1188,14 +1189,14 @@ and subscribes to updates to the given accounts. If any of the strings in names_
 cannot be tied to an account, that input will be ignored.
 All other accounts will be retrieved and subscribed.
 
-##### Parameters
+#### Parameters
 
 | Option                               | Description                                                                |
 |--------------------------------------|:---------------------------------------------------------------------------|
 | `const vector<string>& names_or_ids` | an array of either the names or IDs of accounts to retrieve (can be mixed) |
 | `bool subscribe`                     | Whethere to subscribe to updates                                           |
 
-##### Example
+#### Example
 
 ```json
 {
@@ -1215,7 +1216,7 @@ All other accounts will be retrieved and subscribed.
 }
 ```
 
-##### Returns
+#### Returns
 
 A map of strings from names_or_ids to the corresponding accounts.
 
@@ -1463,23 +1464,24 @@ A map of strings from names_or_ids to the corresponding accounts.
 }
 ```
 
-#### get_account_by_name(name)
+### get_account_by_name(name)
 
 Get the account object by it's name.
 
-##### Parameters
+#### Parameters
 
 | Option        | Description  |
 |---------------|:-------------|
 | `string name` | account name |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_by_name",
         [
             "nathan"
@@ -1488,7 +1490,7 @@ Get the account object by it's name.
 }
 ```
 
-##### Returns
+#### Returns
 
 Account object it the account exists, null otherwise.
 
@@ -1540,21 +1542,22 @@ Account object it the account exists, null otherwise.
 }
 ```
 
-#### get_account_references(account_id)
+### get_account_references(account_id)
 
-##### Parameters
+#### Parameters
 
 | Option                       | Description       |
 |------------------------------|:------------------|
 | `account_id_type account_id` | id of the account |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_references",
         [
             "1.2.10"
@@ -1563,7 +1566,7 @@ Account object it the account exists, null otherwise.
 }
 ```
 
-##### Returns
+#### Returns
 
 All accounts that refer to the key or account id in their active authorities.
 
@@ -1578,23 +1581,24 @@ All accounts that refer to the key or account id in their active authorities.
 }
 ```
 
-#### lookup_account_names(account_names)
+### lookup_account_names(account_names)
 
 Get a list of accounts by name. This function has semantics identical to get_objects.
 
-##### Parameters
+#### Parameters
 
 | Option                                | Description                       |
 |---------------------------------------|:----------------------------------|
 | `const vector<string>& account_names` | names of the accounts to retrieve |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "lookup_account_names",
         [
             "init1",
@@ -1604,7 +1608,7 @@ Get a list of accounts by name. This function has semantics identical to get_obj
 }
 ```
 
-##### Returns
+#### Returns
 
 The accounts holding the provided names.
 
@@ -1698,24 +1702,25 @@ The accounts holding the provided names.
 }
 ```
 
-#### lookup_accounts(lower_bound_name, limit)
+### lookup_accounts(lower_bound_name, limit)
 
 Get names and IDs for registered accounts.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                              |
 |----------------------------------|:---------------------------------------------------------|
 | `const string& lower_bound_name` | lower bound of the first name to return                  |
 | `uint32_t limit`                 | maximum number of results to return must not exceed 1000 |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "lookup_accounts",
         [
             "init1",
@@ -1725,7 +1730,7 @@ Get names and IDs for registered accounts.
 }
 ```
 
-##### Returns
+#### Returns
 
 Map of account names to corresponding IDs.
 
@@ -1750,11 +1755,11 @@ Map of account names to corresponding IDs.
 }
 ```
 
-#### get_account_addresses(account_id, from, limit)
+### get_account_addresses(account_id, from, limit)
 
 Get addresses of specified account.
 
-##### Parameters
+#### Parameters
 
 | Option                             | Description                            |
 |------------------------------------|:---------------------------------------|
@@ -1762,13 +1767,14 @@ Get addresses of specified account.
 | `const uint64_t from`              | number of block to start retrieve from |
 | `const unsigned limit`             | maximum number of addresses to return  |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_addresses",
         [
             "1.2.10",
@@ -1779,7 +1785,7 @@ Get addresses of specified account.
 }
 ```
 
-##### Returns
+#### Returns
 
 Addresses owned by account in specified ids interval.
 
@@ -1799,23 +1805,24 @@ Addresses owned by account in specified ids interval.
 }
 ```
 
-#### get_account_by_address(address)
+### get_account_by_address(address)
 
 Get owner of specified address.
 
-##### Parameters
+#### Parameters
 
 | Option                        | Description                       |
 |-------------------------------|:----------------------------------|
 | `const fc::ripemd160 address` | address in form of ripemd160 hash | 
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_by_address",
         [
             "8815c69de5d32d3061e52ca9386446332225b43d"
@@ -1824,7 +1831,7 @@ Get owner of specified address.
 }
 ```
 
-##### Returns
+#### Returns
 
 Account id of owner.
 
@@ -1836,31 +1843,26 @@ Account id of owner.
 }
 ```
 
-#### get_account_count()
-
-Get the total number of accounts registered with the blockchain.
-
----
-
 ## Contracts
 
-#### get_contract(contract_id)
+### get_contract(contract_id)
 
 Get a contract info from VM by ID.
 
-##### Parameters
+#### Parameters
 
 | Option                         | Description                    |
 |--------------------------------|:-------------------------------|
 | `contract_id_type contract_id` | ID of the contract to retrieve | 
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contract",
         [
             "1.14.0"
@@ -1869,7 +1871,7 @@ Get a contract info from VM by ID.
 }
 ```
 
-##### Returns
+#### Returns
 
 The contracts data from VM corresponding to the provided ID.
 
@@ -1895,23 +1897,24 @@ The contracts data from VM corresponding to the provided ID.
 }
 ```
 
-#### get_contracts(contract_ids)
+### get_contracts(contract_ids)
 
  Get a list of contracts by ID.
 
-##### Parameters
+ ##### Parameters
 
 | Option                                         | Description                      |
 |------------------------------------------------|:---------------------------------|
 | `const vector<contract_id_type>& contract_ids` | IDs of the contracts to retrieve | 
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contracts",
         [
             "1.14.0",
@@ -1921,7 +1924,7 @@ The contracts data from VM corresponding to the provided ID.
 }
 ```
 
-##### Returns
+#### Returns
 
 The contracts corresponding to the provided IDs.
 
@@ -1951,11 +1954,11 @@ The contracts corresponding to the provided IDs.
 }
 ```
 
-#### get_contract_logs(contract_id, from, to)
+### get_contract_logs(contract_id, from, to)
 
 Get logs of specified contract.
 
-##### Parameters
+#### Parameters
 
 | Option                               | Description                            |
 |--------------------------------------|:---------------------------------------|
@@ -1963,13 +1966,14 @@ Get logs of specified contract.
 | `const uint32_t from`                | number of block to start retrieve from |
 | `const uint32_t to`                  | number of block to end to retrieve     |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contract_logs",
         [
             "1.14.0",
@@ -1980,21 +1984,21 @@ Get logs of specified contract.
 }
 ```
 
-##### Returns
+#### Returns
 
 The contracts logs from specified blocks interval.
 
-#### subscribe_contracts(contracts_ids)
+### subscribe_contracts(contracts_ids)
 
 Request notification about contracts.
 
-##### Parameters 
+#### Parameters 
 
 | Option                                          | Description                       |
 |-------------------------------------------------|:----------------------------------|
 | `const vector<contract_id_type>& contracts_ids` | IDs of the contracts to subscribe |
 
-#### subscribe_contract_logs(callback, contract_id, from, to)
+### subscribe_contract_logs(callback, contract_id, from, to)
 
 Subscribe to contract's logs.
 
@@ -2002,7 +2006,7 @@ If you want to always receive alerts, then you can specify a very large number a
 
 When calling this method, it will return all already existing events in the specified range as well as the `get_contract_logs` method.
 
-##### Parameters
+#### Parameters
 
 | Option                               | Description                                                 |
 |:-------------------------------------|:------------------------------------------------------------|
@@ -2011,11 +2015,11 @@ When calling this method, it will return all already existing events in the spec
 | `const uint32_t from`                | number of block to start retrieve from                      |
 | `const uint32_t to`                  | number of block to end to retrieve                          |
 
-##### Returns
+#### Returns
 
 The contracts logs from specified blocks interval.
 
-##### Notice example
+#### Notice example
 
 ```json
 {
@@ -2037,23 +2041,24 @@ The contracts logs from specified blocks interval.
 }
 ```
 
-#### get_contract_result(id)
+### get_contract_result(id)
 
 Get contract result from VM for specified result_id
 
-##### Parameters
+#### Parameters
 
 | Option                              | Description              |
 |-------------------------------------|:-------------------------|
 | `const contract_result_id_type& id` | ID of result to retrieve |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contract_result",
         [
             "1.15.0"
@@ -2062,7 +2067,7 @@ Get contract result from VM for specified result_id
 }
 ```
 
-##### Returns
+#### Returns
 
 Result of execution.
 
@@ -2103,11 +2108,11 @@ Result of execution.
 }
 ```
 
-#### call_contract_no_changing_state(contract_id, registrar_account, asset_type, code)
+### call_contract_no_changing_state(contract_id, registrar_account, asset_type, code)
 
 Call the provided contract, but don't change the state.
 
-##### Parameters
+#### Parameters
 
 | Option                              | Description                                                   |
 |:------------------------------------|:--------------------------------------------------------------|
@@ -2116,13 +2121,14 @@ Call the provided contract, but don't change the state.
 | `asset_id_type asset_type`          | the type of the asset transfered to the contract              |
 | `string code`                       | the hash of the method to call(or name for x86-x64 contracts) |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "call_contract_no_changing_state",
         [
             "1.14.0",
@@ -2134,32 +2140,31 @@ Call the provided contract, but don't change the state.
 }
 ```
 
-##### Returns
+#### Returns
 
 Result of execution.
 
----
-
 ## Balances
 
-#### get_account_balances(id, assets)
+### get_account_balances(id, assets)
 
 Get an account’s balances in various assets.
 
-##### Parameters
+#### Parameters
 
 | Option                                  | Description                                                                                         |
 |:----------------------------------------|:----------------------------------------------------------------------------------------------------|
 | `account_id_type id`                    | ID of the account to get balances for                                                               |
 | `const flat_set<asset_id_type>& assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_balances",
         [
             "1.2.15",
@@ -2169,7 +2174,7 @@ Get an account’s balances in various assets.
 }
 ```
 
-##### Returns
+#### Returns
 
 An array of balances of the account.
 
@@ -2186,23 +2191,24 @@ An array of balances of the account.
 }
 ```
 
-#### get_contract_balances(contract_id)
+### get_contract_balances(contract_id)
 
 Get an contract's balances in various assets.
 
-##### Parameters
+#### Parameters
 
 | Option                         | Description                            |
 |:-------------------------------|:---------------------------------------|
 | `contract_id_type contract_id` | ID of the contract to get balances for |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contract_balances",
         [
             "1.14.0"
@@ -2211,31 +2217,32 @@ Get an contract's balances in various assets.
 }
 ```
 
-##### Returns
+#### Returns
 
 An array of balances of the contract.
 
-#### get_named_account_balances(name, assets)
+### get_named_account_balances(name, assets)
 
 Semantically equivalent to *get_account_balances*, but takes a name instead of an ID.
 
-#### get_balance_objects(keys)
+### get_balance_objects(keys)
 
 Returns all unclaimed balance objects for a set of addresses.
 
-##### Parameters
+#### Parameters
 
 | Option                                    | Description             |
 |:------------------------------------------|:------------------------|
 | `const vector<eddsa::public_key_t>& keys` | an array of public keys |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_balance_objects",
         [
             "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
@@ -2245,102 +2252,103 @@ Returns all unclaimed balance objects for a set of addresses.
 }
 ```
 
-##### Returns
+#### Returns
 
 An array of balances objects.
 
-#### get_vested_balances(objs)
+### get_vested_balances(objs)
 
-##### Parameters
+#### Parameters
 
 | Option                                | Description             |
 |:--------------------------------------|:------------------------|
 | `const vector<balance_id_type>& objs` | an array of public keys |
 
-##### Returns
+#### Returns
 
 An array of assets vested.
 
-#### get_vesting_balances(account_id)
+### get_vesting_balances(account_id)
 
-##### Parameters
+#### Parameters
 
 | Option                        | Description              |
 |:------------------------------|:-------------------------|
 | `account_id_type account_ids` | the id of account to use |
 
-##### Returns
+#### Returns
 
 An array of vesting balances.
 
----
+### get_account_count()
+
+Get the total number of accounts registered with the blockchain.
 
 ## Assets
 
-#### get_assets(asset_ids)
+### get_assets(asset_ids)
 
 Get a list of assets by ID. This function has semantics identical to get_objects.
 
-##### Parameters
+#### Parameters
 
 | Option                                   | Description                   |
 |:-----------------------------------------|:------------------------------|
 | `const vector<asset_id_type>& asset_ids` | IDs of the assets to retrieve |
 
-##### Returns
+#### Returns
 
 The assets corresponding to the provided IDs.
 
-#### list_assets(lower_bound_symbol, limit)
+### list_assets(lower_bound_symbol, limit)
 
 Get assets alphabetically by symbol name.
 
-##### Parameters
+#### Parameters
 
 | Option                             | Description                                             |
 |:-----------------------------------|:--------------------------------------------------------|
 | `const string& lower_bound_symbol` | lower bound of symbol names to retrieve                 |
 | `uint32_t limit`                   | maximum number of assets to fetch (must not exceed 100) |
 
-##### Returns
+#### Returns
 
 The assets found.
 
-#### lookup_asset_symbols(symbols_or_ids)
+### lookup_asset_symbols(symbols_or_ids)
 
 Get a list of assets by symbol. This function has semantics identical to get_objects.
 
-##### Parameters
+#### Parameters
 
 | Option                                 | Description                                          |
 |:---------------------------------------|:-----------------------------------------------------|
 | `const vector<string>& symbols_or_ids` | symbols or stringified IDs of the assets to retrieve |
 
-##### Return
+#### Returns
 
 The assets corresponding to the provided symbols or IDs.
 
----
-
 ## Verifiers
 
-#### get_current_verifiers(stage_num)
+### get_current_verifiers(stage_num)
 
 Get a list of accounts selected to be verifiers on current round on stage provided.
 
-##### Parameters
+#### Parameters
 
 | Option                          | Description  |
 |:--------------------------------|:-------------|
 | `const uint32_t stage_num`      | stage number |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_current_verifiers",
         [
             "5"
@@ -2349,7 +2357,7 @@ Get a list of accounts selected to be verifiers on current round on stage provid
 }
 ```
 
-##### Returns
+#### Returns
 
 List of accounts selected to be verifiers on given stage.
 
@@ -2369,27 +2377,26 @@ List of accounts selected to be verifiers on given stage.
 }
 ```
 
----
-
 ## Committee members
 
-#### get_committee_members(committee_member_ids)
+### get_committee_members(committee_member_ids)
 
 Get a list of committee_members by ID. This function has semantics identical to get_objects.
 
-##### Parameters
+#### Parameters
 
 | Option                                                         | Description                              |
 |:---------------------------------------------------------------|:-----------------------------------------|
 | `const vector<committee_member_id_type>& committee_member_ids` | IDs of the committee_members to retrieve |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_committee_members",
         [
             "1.5.0",
@@ -2399,7 +2406,7 @@ Get a list of committee_members by ID. This function has semantics identical to 
 }
 ```
 
-##### Returns
+#### Returns
 
 The committee_members corresponding to the provided IDs.
 
@@ -2432,23 +2439,24 @@ The committee_members corresponding to the provided IDs.
 }
 ```
 
-#### get_committee_member_by_account(account)
+### get_committee_member_by_account(account)
 
 Get the committee_member owned by a given account.
 
-##### Parameters
+#### Parameters
 
 | Option                    | Description                                                      |
 |:--------------------------|:-----------------------------------------------------------------|
 | `account_id_type account` | the ID of the account whose committee_member should be retrieved |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_committee_member_by_account",
         [
             "1.2.26"
@@ -2457,34 +2465,32 @@ Get the committee_member owned by a given account.
 }
 ```
 
-##### Returns
+#### Returns
 
 The committee_member object, or null if the account does not have a committee_member.
 
-#### lookup_committee_member_accounts(lower_bound_name, limit)
+### lookup_committee_member_accounts(lower_bound_name, limit)
 
 Get names and IDs for registered committee_members.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                                 |
 |:---------------------------------|:------------------------------------------------------------|
 | `const string& lower_bound_name` | lower bound of the first name to return                     |
 | `uint32_t limit`                 | maximum number of results to return -- must not exceed 1000 |
 
-##### Returns
+#### Returns
 
 Map of committee_member names to corresponding IDs.
 
-#### get_committee_count()
+### get_committee_count()
 
 Get the total number of committee registered with the blockchain
 
----
-
 ## Votes
 
-#### lookup_vote_ids(votes)
+### lookup_vote_ids(votes)
 
 Given a set of votes, return the objects they are voting for.
 
@@ -2493,70 +2499,67 @@ This will be a mixture of committee_member_object.
 The results will be in the same order as the votes.
 null will be returned for any vote ids that are not found.
 
-##### Parameters
+#### Parameters
 
 | Option                              | Description    |
 |:------------------------------------|:---------------|
 | `const vector<vote_id_type>& votes` | an array votes |
 
----
-
 ## Authority / validation
 
-#### get_transaction_hex(trx)
+### get_transaction_hex(trx)
 
 Get a hexdump of the serialized binary form of a signed transaction.
 
-#### get_required_signatures(ctrx, available_keys)
+### get_required_signatures(ctrx, available_keys)
 
 Takes a partially signed transaction and a set of public keys that the owner has the ability
 to sign for and return the minimal subset of public keys that should add
 signatures to the transaction.
 
-#### get_potential_signatures(ctrx)
+### get_potential_signatures(ctrx)
 
 This method will return the set of all public keys that could possibly sign for a given transaction.
 This call can be used by wallets to filter their set of public keys to just
 the relevant subset prior to calling get_required_signatures to get the minimum subset.
 
-#### verify_authority(trx)
+### verify_authority(trx)
 
 Returns true of the trx has all of the required signatures, otherwise throws an exception.
 
-#### verify_account_authority(name_or_id, signers)
+### verify_account_authority(name_or_id, signers)
 
 Returns true if the signers have enough authority to authorize an account.
 
-#### validate_transaction(trx)
+### validate_transaction(trx)
 
 Validates a transaction against the current state without broadcasting it on the network.
 
-#### get_required_fees(ops, id)
+### get_required_fees(ops, id)
 
 For each operation calculate the required fee in the specified asset type.
 If the asset type does not have a valid core_exchange_rate.
 
----
-
 ## Proposed transactions
 
-#### get_proposed_transactions(id)
+### get_proposed_transactions(id)
 
 Returns the set of proposed transactions relevant to the specified account id.
 
-##### Parameters
+#### Parameters
 
 | Option               | Description           |
 |:---------------------|:----------------------|
 | `account_id_type id` | the ID of the account |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_proposed_transactions",
         [
             "1.2.26"
@@ -2565,27 +2568,26 @@ Returns the set of proposed transactions relevant to the specified account id.
 }
 ```
 
----
-
 ## Sidechain
 
-#### get_eth_address(account)
+### get_eth_address(account)
 
 Returns information about generated ethereum address, if then exist and approved, for the given account id.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                        |
 |:---------------------------------|:---------------------------------------------------|
 | `const account_id_type& account` | the id of the account to provide information about |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_eth_address",
         [
             "1.2.21"
@@ -2594,7 +2596,7 @@ Returns information about generated ethereum address, if then exist and approved
 }
 ```
 
-##### Returns
+#### Returns
 
 The public ethereum address data stored in the blockchain
 
@@ -2613,23 +2615,24 @@ The public ethereum address data stored in the blockchain
 }
 ```
 
-#### get_account_deposits(account)
+### get_account_deposits(account)
 
 Returns all approved deposits, for the given account id.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                        |
 |:---------------------------------|:---------------------------------------------------|
 | `const account_id_type& account` | the id of the account to provide information about |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_deposits",
         [
             "1.2.21"
@@ -2638,7 +2641,7 @@ Returns all approved deposits, for the given account id.
 }
 ```
 
-##### Returns
+#### Returns
 
 The all public deposits data stored in the blockchain.
 
@@ -2660,23 +2663,24 @@ The all public deposits data stored in the blockchain.
 }
 ```
 
-#### get_account_withdrawals(account)
+### get_account_withdrawals(account)
 
 Returns all approved withdrawals, for the given account id.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                        |
 |:---------------------------------|:---------------------------------------------------|
 | `const account_id_type& account` | the id of the account to provide information about |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_account_withdrawals",
         [
             "1.2.21"
@@ -2685,7 +2689,7 @@ Returns all approved withdrawals, for the given account id.
 }
 ```
 
-##### Returns
+#### Returns
 
 The all public withdrawals data stored in the blockchain.
 
@@ -2708,27 +2712,26 @@ The all public withdrawals data stored in the blockchain.
 }
 ```
 
----
-
 ## Sidechain ERC20
 
-#### get_erc20_token(eth_addr)
+### get_erc20_token(eth_addr)
 
 Returns information about erc20 token, if then exist.
 
-##### Parameters
+#### Parameters
 
 | Option                             | Description                                       |
 |:-----------------------------------|:--------------------------------------------------|
 | `const eth_address_type& eth_addr` | the ethereum address of token in Ethereum network |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_erc20_token",
         [
             "0102fe7702b96808f7bbc0d4a888ed1468216cfd"
@@ -2737,27 +2740,28 @@ Returns information about erc20 token, if then exist.
 }
 ```
 
-##### Returns
+#### Returns
 
 The public erc20 token data stored in the blockchain.
 
-#### get_erc20_account_deposits(account)
+### get_erc20_account_deposits(account)
 
 Returns all approved deposits, for the given account id.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                        |
 |:---------------------------------|:---------------------------------------------------|
 | `const account_id_type& account` | the id of the account to provide information about |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_erc20_account_deposits",
         [
             "1.2.26"
@@ -2766,27 +2770,28 @@ Returns all approved deposits, for the given account id.
 }
 ```
 
-##### Returns
+#### Returns
 
 The all public erc20 deposits data stored in the blockchain.
 
-#### get_erc20_account_withdrawals(account)
+### get_erc20_account_withdrawals(account)
 
 Returns all approved withdrawals, for the given account id.
 
-##### Parameters
+#### Parameters
 
 | Option                           | Description                                        |
 |:---------------------------------|:---------------------------------------------------|
 | `const account_id_type& account` | the id of the account to provide information about |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_erc20_account_withdrawals",
         [
             "1.2.26"
@@ -2795,31 +2800,30 @@ Returns all approved withdrawals, for the given account id.
 }
 ```
 
-##### Returns
+#### Returns
 
 The all public erc20 withdrawals data stored in the blockchain.
 
----
-
 ## Contract Feepool
 
-#### get_contract_pool_balance(id)
+### get_contract_pool_balance(id)
 
 Get an contract's pool balance in default asset.
 
-##### Parameters
+#### Parameters
 
 | Option                | Description                            |
 |:----------------------|:---------------------------------------|
 | `contract_id_type id` | ID of the contract to get balances for |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contract_pool_balance",
         [
             "1.14.0"
@@ -2828,27 +2832,28 @@ Get an contract's pool balance in default asset.
 }
 ```
 
-##### Returns
+#### Returns
 
 Balances of the contract.
 
-#### get_contract_pool_whitelist(id)
+### get_contract_pool_whitelist(id)
 
 Get an contract's whitelist and blacklist.
 
-##### Parameters
+#### Parameters
 
 | Option                | Description                            |
 |:----------------------|:---------------------------------------|
 | `contract_id_type id` | ID of the contract to get balances for |
 
-##### Example
+#### Example
 
 ```json
 {
     "id": 4,
     "method": "call",
-    "params": [DATABASE_API_ID,
+    "params": [
+        DATABASE_API_ID,
         "get_contract_pool_whitelist",
         [
             "1.14.0"
@@ -2857,6 +2862,6 @@ Get an contract's whitelist and blacklist.
 }
 ```
 
-##### Returns
+#### Returns
 
 Struct contract_pool_whitelist which consist of whitelist blacklist.
