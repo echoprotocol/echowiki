@@ -2860,9 +2860,71 @@ Get names and IDs for registered committee_members.
 | `const string& lower_bound_name` | lower bound of the first name to return                     |
 | `uint32_t limit`                 | maximum number of results to return -- must not exceed 1000 |
 
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        2,
+        "lookup_committee_member_accounts",
+        [
+            "a",
+            "1000"
+        ]
+    ]
+}
+```
+
 #### Returns
 
 Map of committee_member names to corresponding IDs.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        [
+            "init0",
+            "1.5.0"
+        ],
+        [
+            "init1",
+            "1.5.1"
+        ],
+        [
+            "init2",
+            "1.5.2"
+        ],
+        [
+            "init3",
+            "1.5.3"
+        ],
+        [
+            "init4",
+            "1.5.4"
+        ],
+        [
+            "init5",
+            "1.5.5"
+        ],
+        [
+            "init6",
+            "1.5.6"
+        ],
+        [
+            "init7",
+            "1.5.7"
+        ],
+        [
+            "init8",
+            "1.5.8"
+        ]
+    ]
+}
+```
 
 ### get_committee_count()
 
