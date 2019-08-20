@@ -2485,13 +2485,44 @@ An array of balances objects.
 
 #### Parameters
 
-| Option                                | Description             |
-|:--------------------------------------|:------------------------|
-| `const vector<balance_id_type>& objs` | an array of public keys |
+| Option                                | Description            |
+|:--------------------------------------|:-----------------------|
+| `const vector<balance_id_type>& objs` | an array of balance ID |
+
+#### Example
+
+```json
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_vested_balances",
+        [
+            [
+                "1.8.0"
+            ]
+        ]
+    ]
+}
+```
 
 #### Returns
 
 An array of assets vested.
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "amount": "1000000000000000",
+            "asset_id": "1.3.0"
+        }
+    ]
+}
+```
 
 ### get_vesting_balances(account_id)
 
