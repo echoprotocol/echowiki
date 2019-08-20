@@ -17,7 +17,6 @@ You can also use the Echo desktop wallet. For example, Echo Blip Wallet provides
 
 A valid account name consists of a dot-separated sequence of one or more labels, according to the following rules:
 
-* Each label is three characters or more.
 * Each label begins with a letter.
 * Each label ends with a letter, or digit.
 * Each label contains only letters, digits, or hyphens.

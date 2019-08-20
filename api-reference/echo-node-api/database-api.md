@@ -195,7 +195,7 @@ Subscribe to block applications.
 
 | Option                                              | Description                                                                  |
 |-----------------------------------------------------|:-----------------------------------------------------------------------------|
-| `function<void(const variant& block_id)> callback`  | gives a notification whenever the block blockid is applied to the blockchain |
+| `function<void(const variant& block_id)> callback`  | gives a notification whenever the block block_id is applied to the blockchain |
 
 #### cancel_all_subscriptions()
 
@@ -1836,6 +1836,10 @@ Account id of owner.
 }
 ```
 
+#### get_account_count()
+
+Get the total number of accounts registered with the blockchain.
+
 ---
 
 ## Contracts
@@ -2159,7 +2163,7 @@ Get an account’s balances in various assets.
         "get_account_balances",
         [
             "1.2.15",
-            "1.3.0", ...
+            ["1.3.0", ...]
         ]
     ]
 }
@@ -2268,10 +2272,6 @@ An array of assets vested.
 ##### Returns
 
 An array of vesting balances.
-
-#### get_account_count()
-
-Get the total number of accounts registered with the blockchain.
 
 ---
 
@@ -2488,7 +2488,7 @@ Get the total number of committee registered with the blockchain
 
 Given a set of votes, return the objects they are voting for.
 
-This will be a mixture of committee_member_object, witness_objects, and worker_objects
+This will be a mixture of committee_member_object.
 
 The results will be in the same order as the votes.
 null will be returned for any vote ids that are not found.
