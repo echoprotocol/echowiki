@@ -2470,8 +2470,7 @@ Returns all unclaimed balance objects for a set of addresses.
         DATABASE_API_ID,
         "get_balance_objects",
         [
-            "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
-            "ECHOB7X3uEz2mJXTBbbBzUw8f8neV3RFEje8o1isr3cuqF7Y", ...
+            "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu", ...
         ]
     ]
 }
@@ -2480,6 +2479,25 @@ Returns all unclaimed balance objects for a set of addresses.
 #### Returns
 
 An array of balances objects.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.8.0",
+            "owner": "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
+            "balance": {
+                "amount": "1000000000000000",
+                "asset_id": "1.3.0"
+            },
+            "last_claim_date": "1970-01-01T00:00:00",
+            "extensions": []
+        }
+    ]
+}
+```
 
 ### get_vested_balances(objs)
 
