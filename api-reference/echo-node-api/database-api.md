@@ -2776,11 +2776,13 @@ Get a list of committee_members by ID. This function has semantics identical to 
     "id": 4,
     "method": "call",
     "params": [
-        DATABASE_API_ID,
+        2,
         "get_committee_members",
         [
-            "1.5.0",
-            "1.5.1", ...
+            [
+                "1.4.0",
+                "1.4.1"
+            ]
         ]
     ]
 }
@@ -2796,23 +2798,23 @@ The committee_members corresponding to the provided IDs.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.5.0",
+            "id": "1.4.0",
             "committee_member_account": "1.2.6",
-            "pay_vb": "1.12.5",
+            "pay_vb": "1.7.0",
             "vote_id": "0:0",
-            "total_votes": "4897997616",
+            "total_votes": 0,
             "url": "",
-            "eth_address": "9BDC67627acA07aD0DAB8C6678765862b7d5F5C0",
+            "eth_address": "f372c3b578534Ac5C1Cf0Cca7049A279d1ca3e79",
             "extensions": []
         },
         {
-            "id": "1.5.1",
+            "id": "1.4.1",
             "committee_member_account": "1.2.7",
-            "pay_vb": "1.12.6",
+            "pay_vb": "1.7.1",
             "vote_id": "0:1",
             "total_votes": 0,
             "url": "",
-            "eth_address": "2B1f2bDdEf68914106F72e7Ee9A43D95F180A397",
+            "eth_address": "Fba802D86f8d9b080eD247e712751DDBF86086A9",
             "extensions": []
         }
     ]
@@ -2839,7 +2841,7 @@ Get the committee_member owned by a given account.
         DATABASE_API_ID,
         "get_committee_member_by_account",
         [
-            "1.2.26"
+            "1.2.6"
         ]
     ]
 }
@@ -2848,6 +2850,23 @@ Get the committee_member owned by a given account.
 #### Returns
 
 The committee_member object, or null if the account does not have a committee_member.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "id": "1.4.0",
+        "committee_member_account": "1.2.6",
+        "pay_vb": "1.7.0",
+        "vote_id": "0:0",
+        "total_votes": 0,
+        "url": "",
+        "eth_address": "f372c3b578534Ac5C1Cf0Cca7049A279d1ca3e79",
+        "extensions": []
+    }
+}
+```
 
 ### lookup_committee_member_accounts(lower_bound_name, limit)
 
@@ -2867,10 +2886,10 @@ Get names and IDs for registered committee_members.
     "id": 4,
     "method": "call",
     "params": [
-        DATABASE_API_ID,
+        2,
         "lookup_committee_member_accounts",
         [
-            "a",
+            "",
             "1000"
         ]
     ]
@@ -2888,39 +2907,27 @@ Map of committee_member names to corresponding IDs.
     "result": [
         [
             "init0",
-            "1.5.0"
+            "1.4.0"
         ],
         [
             "init1",
-            "1.5.1"
+            "1.4.1"
         ],
         [
             "init2",
-            "1.5.2"
+            "1.4.2"
         ],
         [
             "init3",
-            "1.5.3"
+            "1.4.3"
         ],
         [
             "init4",
-            "1.5.4"
+            "1.4.4"
         ],
         [
             "init5",
-            "1.5.5"
-        ],
-        [
-            "init6",
-            "1.5.6"
-        ],
-        [
-            "init7",
-            "1.5.7"
-        ],
-        [
-            "init8",
-            "1.5.8"
+            "1.4.5"
         ]
     ]
 }
