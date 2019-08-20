@@ -2867,7 +2867,7 @@ Get names and IDs for registered committee_members.
     "id": 4,
     "method": "call",
     "params": [
-        2,
+        DATABASE_API_ID,
         "lookup_committee_member_accounts",
         [
             "a",
@@ -2929,6 +2929,30 @@ Map of committee_member names to corresponding IDs.
 ### get_committee_count()
 
 Get the total number of committee registered with the blockchain
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_committee_count",
+        []
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": 9
+}
+```
 
 ## Votes
 
