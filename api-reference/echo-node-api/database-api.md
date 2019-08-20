@@ -489,57 +489,113 @@ The referenced block, or null if no matching block was found.
     "id": 4,
     "jsonrpc": "2.0",
     "result": {
-        "previous": "000003e7db7017a9a894ab68b0bd6e29a3a8ae03",
-        "timestamp": "2019-06-25T07:13:12",
-        "account": "1.2.8",
-        "transaction_merkle_root": "0000000000000000000000000000000000000000",
-        "vm_root": "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421.56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421 0.9a71ff66a2f503e4e96c4e9a2521d6a710f2d373b422332029da170d78fa1a68",
+        "previous": "000003e792f925703c5e033e0b0d0419d955cd38",
         "round": 1000,
+        "timestamp": "2019-08-15T15:50:15",
+        "account": "1.2.12",
+        "delegate": "1.2.0",
+        "transaction_merkle_root": "0000000000000000000000000000000000000000",
+        "vm_root": [
+            "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b42156e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "0.9a71ff66a2f503e4e96c4e9a2521d6a710f2d373b422332029da170d78fa1a68"
+        ],
+        "prev_signatures": [
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 6,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "4bd5fefe4735219d3154bd773a909aca5233c0c4d881afd93a74f60a894403b501f955e49c4c058d0cab9933a463c19ddc01d093e8c76a339bbff7b5a1875d05"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 9,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "8063dc28f2d5c58119282b474e4a8aae89abbeef3b6cfc2db26e8cf929b22c3c52c01c7983df3a968286a6d48f86804d5ef283aedd433ac1f1407e5e6777f701"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 10,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "dcf2b9b38e02cdc9af772c716d2668f945e2effa3752a23dde5b3a64b27738e51eaf1847ebe2aa41d4056215db8ecc8b61504e28cb3ffa14f9675de5fc2d1b06"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 12,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "b33102eed7bafcbeffc2f10b1bfe622e888fcaaffb3a3415de35fbd8577bb7d88c2c26eea3738eee90d448116f465eb9f512fab6982adb058c0136dfad3bdf07"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 11,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "9d0505e795c4beaea4c5121be821f5b7d037142e99bc91877fad3fc2d1b635a752a5cdde2141270fbd199dee11c2ae1b35398dc31ea4cc6425defddec549220e"
+            }
+        ],
         "extensions": [],
-        "ed_signature": "e96ab7d670280cfde4a9255a5abe0161f946f5be5427a33778064e705f85aea82f453b01988b64d941e13abc0de5f9c5596d6838a946e06a783e758a8195a801",
-        "rand": "6b0fa959096a569810a9647034c7cdb4cd0ac30ccddcd5884ed24eb17bf68b6b",
-        "cert": {
-            "_rand": "6b0fa959096a569810a9647034c7cdb4cd0ac30ccddcd5884ed24eb17bf68b6b",
-            "_block_hash": "000003e8c6a3b58cd0f3ccbec0af5fde717077da",
-            "_producer": 8,
-            "_signatures": [
-                {
-                    "_step": 4,
-                    "_value": 0,
-                    "_signer": 10,
-                    "_fallback": 0,
-                    "_bba_sign": "a40faf83ad8b89bd0be170638931ef9ef2c898c3d8bffbb3bf33e25139b67df7c8e106659489aa56d04518e2eca184512e743b6489b6773993dcbc529741a006"
-                },
-                {
-                    "_step": 4,
-                    "_value": 0,
-                    "_signer": 9,
-                    "_fallback": 0,
-                    "_bba_sign": "b7ed84d12d81fb830dc54f99a50cd15781ab65634dbd2747176c16996f135d70f5aa69e0769d97e7cff1fe75296f5ad0f411f6dbe209d669e4957b55d99b750f"
-                },
-                {
-                    "_step": 4,
-                    "_value": 0,
-                    "_signer": 13,
-                    "_fallback": 0,
-                    "_bba_sign": "defb6d7f4223b3a019dcd14a243b8bbaedc9e3c76fa1f945d8fa5b98b4416f3f007dd17966810509dc0c9e5ba598fe944b6edb6a6f11e2a8df210bec8ee0820d"
-                },
-                {
-                    "_step": 4,
-                    "_value": 0,
-                    "_signer": 14,
-                    "_fallback": 0,
-                    "_bba_sign": "93c4d2a3f44257287f897c5be940d09fe91a04fb28943c29e7ea7acf0a073e3c99882baaae57f369f0f2027b789a627d36302f303c1d681d22a62d5e09f7eb06"
-                },
-                {
-                    "_step": 4,
-                    "_value": 0,
-                    "_signer": 12,
-                    "_fallback": 0,
-                    "_bba_sign": "05157cc34d128cd206ad7dfdb1cd9592f79ebcb58da5b6a82256fcb88b71610a1ef2df0261bb34aed814169c6141317facb1629c12e1671d05e61a1b4e517c07"
-                }
-            ]
-        },
+        "ed_signature": "6e1ba3b86e0dffab6a06abe3fa7725fc7bf8737773cc105957a0c671252a5c4f52e134cb65f3f81c8ba90dea3b7b5200432f755e98d8008fb0344f2da1baf90f",
+        "rand": "008d90988856b11453a1727a2475f3e7ece17ca5a18dd07605200f6a56cdb18d",
+        "cert": [
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 10,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "267b545c018b555a1bbf901f34ee8ded8173af60fb9e23cd6c3b152e75147327ff43b408d6574627575f29a0a6ff921812cb5008f359e888bd9d573501f4a801"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 9,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "c19e034e79c056e35b813078598cdb976e83ef0e0b957875d8d25ef6b34c28f724d7e5dd1426498a14de466f674e522ac320fbad41bb32412a5c8eb50fd72808"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 6,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "0ea7dd8a26e95ccf1b3ad24aafda694f032eacecb25f81d06fb283c60357f305d5a6ce62fa0793303b1d093c76277939aa09a1e4ae5aaeed7c19b98a87891d0c"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 8,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "34b1d6b8afaff8693117c17600686b1d759923ead90d9bdbf26eed5e02bf1caae0a095026c83245a78e4c3e0fa965e2845a6c28038af422631361e82e8e74209"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 7,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "44f9ab6a4729eadeb95041b57c04fff62097815779f008ca96c67f6d8756a99bad2f0e138332e0d9172cd6a7103060e95259c0e5e3a746632894f13c2f351804"
+            }
+        ],
         "transactions": []
     }
 }
