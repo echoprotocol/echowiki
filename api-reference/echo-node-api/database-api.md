@@ -3202,6 +3202,32 @@ Returns the set of proposed transactions relevant to the specified account id.
 }
 ```
 
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.5.0",
+            "expiration_time": "1970-01-01T00:00:00",
+            "proposed_transaction": {
+                "ref_block_num": 221,
+                "ref_block_prefix": 4141892275,
+                "expiration": "1970-01-01T00:00:00",
+                "operations": [],
+                "extensions": []
+            },
+            "required_active_approvals": [],
+            "available_active_approvals": [],
+            "available_key_approvals": [],
+            "extensions": []
+        }
+    ]
+}
+```
+
 ## Sidechain
 
 ### get_eth_address(account)
