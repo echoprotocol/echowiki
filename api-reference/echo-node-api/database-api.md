@@ -10,9 +10,9 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 
 #### Parameters
 
-| Option                               | Description                                            |
-|--------------------------------------|:-------------------------------------------------------|
-| `const vector<object_id_type>& ids`  | an array of object IDs, e.g. `["1.2.1", "1.2.2", ...]` |
+| Option                       | Description                                            |
+|------------------------------|:-------------------------------------------------------|
+| `vector<object_id_type> ids` | an array of object IDs, e.g. `["1.2.1", "1.2.2", ...]` |
 
 #### Example
 
@@ -137,10 +137,10 @@ Subscribe to updates.
 
 #### Parameters
 
-| Option                                     | Description                                                       |
-|--------------------------------------------|:------------------------------------------------------------------|
-| `function<void(const variant&)> callback`  | global subscription callback can be registered                    |
-| `clear_filter`                             | whether subscribe to universal object creation and removal events |
+| Option                             | Description                                                       |
+|------------------------------------|:------------------------------------------------------------------|
+| `function<void(variant)> callback` | global subscription callback can be registered                    |
+| `clear_filter`                     | whether subscribe to universal object creation and removal events |
 
 If *clear_filter* is set to true, the API server will notify all newly created objects and ID of all newly removed objects to the client, no matter whether client subscribed to the objects
 
@@ -177,9 +177,9 @@ Subscribe to pending transactions.
 
 #### Parameters
 
-| Option                                     | Description                                         |
-|--------------------------------------------|:----------------------------------------------------|
-| `function<void(const variant&)> callback`  | notifications for incoming unconfirmed transactions |
+| Option                             | Description                                         |
+|------------------------------------|:----------------------------------------------------|
+| `function<void(variant)> callback` | notifications for incoming unconfirmed transactions |
 
 #### Example
 
@@ -255,9 +255,9 @@ Subscribe to block applications.
 
 #### Parameters
 
-| Option                                              | Description                                                                  |
-|-----------------------------------------------------|:-----------------------------------------------------------------------------|
-| `function<void(const variant& block_id)> callback`  | gives a notification whenever the block block_id is applied to the blockchain |
+| Option                                      | Description                                                                  |
+|---------------------------------------------|:-----------------------------------------------------------------------------|
+| `function<void(variant block_id)> callback` | gives a notification whenever the block blockid is applied to the blockchain |
 
 #### Example
 
@@ -434,9 +434,9 @@ Retrieve multiple block header by block numbers.
 
 #### Parameters
 
-| Option                              | Description                                                            |
-|-------------------------------------|:-----------------------------------------------------------------------|
-| `const vector<uint32_t> block_nums` | vector containing heights of the block whose header should be returned |
+| Option                        | Description                                                            |
+|-------------------------------|:-----------------------------------------------------------------------|
+| `vector<uint32_t> block_nums` | vector containing heights of the block whose header should be returned |
 
 #### Example
 
@@ -658,9 +658,9 @@ Get the total number of transactions in block.
 
 #### Parameters
 
-| Option                                  | Description                 |
-|-----------------------------------------|:----------------------------|
-| `const block_id_type(fc::ripemd160) id` | ID of the block to retrieve |
+| Option                            | Description                 |
+|-----------------------------------|:----------------------------|
+| `block_id_type(fc::ripemd160) id` | ID of the block to retrieve |
 
 #### Example
 
@@ -838,9 +838,9 @@ Just because it is not known does not mean it wasn’t included in the blockchai
 
 #### Parameters
 
-| Option                                        | Description           |
-|-----------------------------------------------|:----------------------|
-| `const transaction_id_type(fc::ripemd160) id` | ID of the transaction |
+| Option                                  | Description           |
+|-----------------------------------------|:----------------------|
+| `transaction_id_type(fc::ripemd160) id` | ID of the transaction |
 
 #### Example
 
@@ -1591,9 +1591,9 @@ Get a list of accounts by ID. This function has semantics identical to get_objec
 
 #### Parameters
 
-| Option                                        | Description                     |
-|-----------------------------------------------|:--------------------------------|
-| `const vector<account_id_type>& accounts_ids` | IDs of the accounts to retrieve |
+| Option                                 | Description                     |
+|----------------------------------------|:--------------------------------|
+| `vector<account_id_type> accounts_ids` | IDs of the accounts to retrieve |
 
 #### Example
 
@@ -1717,10 +1717,10 @@ All other accounts will be retrieved and subscribed.
 
 #### Parameters
 
-| Option                               | Description                                                                |
-|--------------------------------------|:---------------------------------------------------------------------------|
-| `const vector<string>& names_or_ids` | an array of either the names or IDs of accounts to retrieve (can be mixed) |
-| `bool subscribe`                     | Whethere to subscribe to updates                                           |
+| Option                        | Description                                                                |
+|-------------------------------|:---------------------------------------------------------------------------|
+| `vector<string> names_or_ids` | an array of either the names or IDs of accounts to retrieve (can be mixed) |
+| `bool subscribe`              | Whethere to subscribe to updates                                           |
 
 #### Example
 
@@ -2113,9 +2113,9 @@ Get a list of accounts by name. This function has semantics identical to get_obj
 
 #### Parameters
 
-| Option                                | Description                       |
-|---------------------------------------|:----------------------------------|
-| `const vector<string>& account_names` | names of the accounts to retrieve |
+| Option                         | Description                       |
+|--------------------------------|:----------------------------------|
+| `vector<string> account_names` | names of the accounts to retrieve |
 
 #### Example
 
@@ -2234,10 +2234,10 @@ Get names and IDs for registered accounts.
 
 #### Parameters
 
-| Option                           | Description                                              |
-|----------------------------------|:---------------------------------------------------------|
-| `const string& lower_bound_name` | lower bound of the first name to return                  |
-| `uint32_t limit`                 | maximum number of results to return must not exceed 1000 |
+| Option                    | Description                                              |
+|---------------------------|:---------------------------------------------------------|
+| `string lower_bound_name` | lower bound of the first name to return                  |
+| `uint32_t limit`          | maximum number of results to return must not exceed 1000 |
 
 #### Example
 
@@ -2287,11 +2287,11 @@ Get addresses of specified account.
 
 #### Parameters
 
-| Option                             | Description                            |
-|------------------------------------|:---------------------------------------|
-| `const account_id_type account_id` | ID of the account                      |
-| `const uint64_t from`              | number of block to start retrieve from |
-| `const unsigned limit`             | maximum number of addresses to return  |
+| Option                       | Description                            |
+|------------------------------|:---------------------------------------|
+| `account_id_type account_id` | ID of the account                      |
+| `uint64_t from`              | number of block to start retrieve from |
+| `unsigned limit`             | maximum number of addresses to return  |
 
 #### Example
 
@@ -2337,9 +2337,9 @@ Get owner of specified address.
 
 #### Parameters
 
-| Option                        | Description                       |
-|-------------------------------|:----------------------------------|
-| `const fc::ripemd160 address` | address in form of ripemd160 hash | 
+| Option                  | Description                       |
+|-------------------------|:----------------------------------|
+| `fc::ripemd160 address` | address in form of ripemd160 hash | 
 
 #### Example
 
@@ -2429,9 +2429,9 @@ The contracts data from VM corresponding to the provided ID.
 
  ##### Parameters
 
-| Option                                         | Description                      |
-|------------------------------------------------|:---------------------------------|
-| `const vector<contract_id_type>& contract_ids` | IDs of the contracts to retrieve | 
+| Option                                  | Description                      |
+|-----------------------------------------|:---------------------------------|
+| `vector<contract_id_type> contract_ids` | IDs of the contracts to retrieve | 
 
 #### Example
 
@@ -2486,11 +2486,11 @@ Get logs of specified contract.
 
 #### Parameters
 
-| Option                               | Description                            |
-|--------------------------------------|:---------------------------------------|
-| `const contract_id_type contract_id` | ID of the contract                     |
-| `const uint32_t from`                | number of block to start retrieve from |
-| `const uint32_t to`                  | number of block to end to retrieve     |
+| Option                         | Description                            |
+|--------------------------------|:---------------------------------------|
+| `contract_id_type contract_id` | ID of the contract                     |
+| `uint32_t from`                | number of block to start retrieve from |
+| `uint32_t to`                  | number of block to end to retrieve     |
 
 #### Example
 
@@ -2536,9 +2536,9 @@ Request notification about contracts.
 
 #### Parameters 
 
-| Option                                          | Description                       |
-|-------------------------------------------------|:----------------------------------|
-| `const vector<contract_id_type>& contracts_ids` | IDs of the contracts to subscribe |
+| Option                                   | Description                       |
+|------------------------------------------|:----------------------------------|
+| `vector<contract_id_type> contracts_ids` | IDs of the contracts to subscribe |
 
 #### Example
 
@@ -2590,12 +2590,12 @@ When calling this method, it will return all already existing events in the spec
 
 #### Parameters
 
-| Option                               | Description                                                 |
-|:-------------------------------------|:------------------------------------------------------------|
-| `function<void(const variant&)> cb`  | callback method which is called when contracts has new logs |
-| `const contract_id_type contract_id` | ID of the contract                                          |
-| `const uint32_t from`                | number of block to start retrieve from                      |
-| `const uint32_t to`                  | number of block to end to retrieve                          |
+| Option                         | Description                                                 |
+|:-------------------------------|:------------------------------------------------------------|
+| `function<void(variant)> cb`   | callback method which is called when contracts has new logs |
+| `contract_id_type contract_id` | ID of the contract                                          |
+| `uint32_t from`                | number of block to start retrieve from                      |
+| `uint32_t to`                  | number of block to end to retrieve                          |
 
 #### Example
 
@@ -2656,9 +2656,9 @@ Get contract result from VM for specified result_id
 
 #### Parameters
 
-| Option                              | Description              |
-|-------------------------------------|:-------------------------|
-| `const contract_result_id_type& id` | ID of result to retrieve |
+| Option                       | Description              |
+|------------------------------|:-------------------------|
+| `contract_result_id_type id` | ID of result to retrieve |
 
 #### Example
 
@@ -2769,10 +2769,10 @@ Get an account’s balances in various assets.
 
 #### Parameters
 
-| Option                                  | Description                                                                                         |
-|:----------------------------------------|:----------------------------------------------------------------------------------------------------|
-| `account_id_type id`                    | ID of the account to get balances for                                                               |
-| `const flat_set<asset_id_type>& assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
+| Option                           | Description                                                                                         |
+|:---------------------------------|:----------------------------------------------------------------------------------------------------|
+| `account_id_type id`             | ID of the account to get balances for                                                               |
+| `flat_set<asset_id_type> assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
 
 #### Example
 
@@ -2857,10 +2857,10 @@ Semantically equivalent to *get_account_balances*, but takes a name instead of a
 
 #### Parameters
 
-| Option                                  | Description                                                                                         |
-|:----------------------------------------|:----------------------------------------------------------------------------------------------------|
-| `const std::string& name`               | name of the account to get balances for                                                             |
-| `const flat_set<asset_id_type>& assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
+| Option                           | Description                                                                                         |
+|:---------------------------------|:----------------------------------------------------------------------------------------------------|
+| `std::string name`               | name of the account to get balances for                                                             |
+| `flat_set<asset_id_type> assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
 
 #### Example
 
@@ -2902,9 +2902,9 @@ Returns all unclaimed balance objects for a set of addresses.
 
 #### Parameters
 
-| Option                                    | Description             |
-|:------------------------------------------|:------------------------|
-| `const vector<eddsa::public_key_t>& keys` | an array of public keys |
+| Option                             | Description             |
+|:-----------------------------------|:------------------------|
+| `vector<eddsa::public_key_t> keys` | an array of public keys |
 
 #### Example
 
@@ -2949,9 +2949,9 @@ An array of balances objects.
 
 #### Parameters
 
-| Option                                | Description            |
-|:--------------------------------------|:-----------------------|
-| `const vector<balance_id_type>& objs` | an array of balance ID |
+| Option                         | Description            |
+|:-------------------------------|:-----------------------|
+| `vector<balance_id_type> objs` | an array of balance ID |
 
 #### Example
 
@@ -3077,9 +3077,9 @@ Get a list of assets by ID. This function has semantics identical to get_objects
 
 #### Parameters
 
-| Option                                   | Description                   |
-|:-----------------------------------------|:------------------------------|
-| `const vector<asset_id_type>& asset_ids` | IDs of the assets to retrieve |
+| Option                            | Description                   |
+|:----------------------------------|:------------------------------|
+| `vector<asset_id_type> asset_ids` | IDs of the assets to retrieve |
 
 #### Returns
 
@@ -3091,10 +3091,10 @@ Get assets alphabetically by symbol name.
 
 #### Parameters
 
-| Option                             | Description                                             |
-|:-----------------------------------|:--------------------------------------------------------|
-| `const string& lower_bound_symbol` | lower bound of symbol names to retrieve                 |
-| `uint32_t limit`                   | maximum number of assets to fetch (must not exceed 100) |
+| Option                      | Description                                             |
+|:----------------------------|:--------------------------------------------------------|
+| `string lower_bound_symbol` | lower bound of symbol names to retrieve                 |
+| `uint32_t limit`            | maximum number of assets to fetch (must not exceed 100) |
 
 #### Returns
 
@@ -3106,61 +3106,13 @@ Get a list of assets by symbol. This function has semantics identical to get_obj
 
 #### Parameters
 
-| Option                                 | Description                                          |
-|:---------------------------------------|:-----------------------------------------------------|
-| `const vector<string>& symbols_or_ids` | symbols or stringified IDs of the assets to retrieve |
+| Option                          | Description                                          |
+|:--------------------------------|:-----------------------------------------------------|
+| `vector<string> symbols_or_ids` | symbols or stringified IDs of the assets to retrieve |
 
 #### Returns
 
 The assets corresponding to the provided symbols or IDs.
-
-## Verifiers
-
-### get_current_verifiers(stage_num)
-
-Get a list of accounts selected to be verifiers on current round on stage provided.
-
-#### Parameters
-
-| Option                          | Description  |
-|:--------------------------------|:-------------|
-| `const uint32_t stage_num`      | stage number |
-
-#### Example
-
-```json
-{
-    "id": 4,
-    "method": "call",
-    "params": [
-        DATABASE_API_ID,
-        "get_current_verifiers",
-        [
-            "5"
-        ]
-    ]
-}
-```
-
-#### Returns
-
-List of accounts selected to be verifiers on given stage.
-
-```json
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": [
-        "1.2.11",
-        "1.2.14",
-        "1.2.15",
-        "1.2.18",
-        "1.2.32",
-        "1.2.66",
-        "1.2.73"
-    ]
-}
-```
 
 ## Committee members
 
@@ -3170,9 +3122,9 @@ Get a list of committee_members by ID. This function has semantics identical to 
 
 #### Parameters
 
-| Option                                                         | Description                              |
-|:---------------------------------------------------------------|:-----------------------------------------|
-| `const vector<committee_member_id_type>& committee_member_ids` | IDs of the committee_members to retrieve |
+| Option                                                  | Description                              |
+|:--------------------------------------------------------|:-----------------------------------------|
+| `vector<committee_member_id_type> committee_member_ids` | IDs of the committee_members to retrieve |
 
 #### Example
 
@@ -3279,10 +3231,10 @@ Get names and IDs for registered committee_members.
 
 #### Parameters
 
-| Option                           | Description                                                 |
-|:---------------------------------|:------------------------------------------------------------|
-| `const string& lower_bound_name` | lower bound of the first name to return                     |
-| `uint32_t limit`                 | maximum number of results to return -- must not exceed 1000 |
+| Option                    | Description                                                 |
+|:--------------------------|:------------------------------------------------------------|
+| `string lower_bound_name` | lower bound of the first name to return                     |
+| `uint32_t limit`          | maximum number of results to return -- must not exceed 1000 |
 
 #### Example
 
@@ -3379,9 +3331,9 @@ null will be returned for any vote ids that are not found.
 
 #### Parameters
 
-| Option                              | Description    |
-|:------------------------------------|:---------------|
-| `const vector<vote_id_type>& votes` | an array votes |
+| Option                       | Description    |
+|:-----------------------------|:---------------|
+| `vector<vote_id_type> votes` | an array votes |
 
 #### Example
 
@@ -3504,9 +3456,9 @@ Returns information about generated ethereum address, if then exist and approved
 
 #### Parameters
 
-| Option                           | Description                                        |
-|:---------------------------------|:---------------------------------------------------|
-| `const account_id_type& account` | the id of the account to provide information about |
+| Option                    | Description                                        |
+|:--------------------------|:---------------------------------------------------|
+| `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
@@ -3549,9 +3501,9 @@ Returns all approved deposits, for the given account id.
 
 #### Parameters
 
-| Option                           | Description                                        |
-|:---------------------------------|:---------------------------------------------------|
-| `const account_id_type& account` | the id of the account to provide information about |
+| Option                    | Description                                        |
+|:--------------------------|:---------------------------------------------------|
+| `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
@@ -3597,9 +3549,9 @@ Returns all approved withdrawals, for the given account id.
 
 #### Parameters
 
-| Option                           | Description                                        |
-|:---------------------------------|:---------------------------------------------------|
-| `const account_id_type& account` | the id of the account to provide information about |
+| Option                    | Description                                        |
+|:--------------------------|:---------------------------------------------------|
+| `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
@@ -3648,9 +3600,9 @@ Returns information about erc20 token, if then exist.
 
 #### Parameters
 
-| Option                             | Description                                       |
-|:-----------------------------------|:--------------------------------------------------|
-| `const eth_address_type& eth_addr` | the ethereum address of token in Ethereum network |
+| Option                      | Description                                       |
+|:----------------------------|:--------------------------------------------------|
+| `eth_address_type eth_addr` | the ethereum address of token in Ethereum network |
 
 #### Example
 
@@ -3678,9 +3630,9 @@ Returns all approved deposits, for the given account id.
 
 #### Parameters
 
-| Option                           | Description                                        |
-|:---------------------------------|:---------------------------------------------------|
-| `const account_id_type& account` | the id of the account to provide information about |
+| Option                    | Description                                        |
+|:--------------------------|:---------------------------------------------------|
+| `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
@@ -3708,9 +3660,9 @@ Returns all approved withdrawals, for the given account id.
 
 #### Parameters
 
-| Option                           | Description                                        |
-|:---------------------------------|:---------------------------------------------------|
-| `const account_id_type& account` | the id of the account to provide information about |
+| Option                    | Description                                        |
+|:--------------------------|:---------------------------------------------------|
+| `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
