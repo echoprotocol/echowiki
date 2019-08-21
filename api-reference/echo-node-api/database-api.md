@@ -3034,6 +3034,56 @@ null will be returned for any vote ids that are not found.
 |:------------------------------------|:---------------|
 | `const vector<vote_id_type>& votes` | an array votes |
 
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        2,
+        "lookup_vote_ids",
+        [
+            [
+                "0:0",
+                "0:1"
+            ]
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.4.0",
+            "committee_member_account": "1.2.6",
+            "pay_vb": "1.7.0",
+            "vote_id": "0:0",
+            "total_votes": 0,
+            "url": "",
+            "eth_address": "f372c3b578534Ac5C1Cf0Cca7049A279d1ca3e79",
+            "extensions": []
+        },
+        {
+            "id": "1.4.1",
+            "committee_member_account": "1.2.7",
+            "pay_vb": "1.7.1",
+            "vote_id": "0:1",
+            "total_votes": 0,
+            "url": "",
+            "eth_address": "Fba802D86f8d9b080eD247e712751DDBF86086A9",
+            "extensions": []
+        }
+    ]
+}
+```
+
 ## Authority / validation
 
 ### get_transaction_hex(trx)
