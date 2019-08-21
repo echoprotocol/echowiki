@@ -1521,8 +1521,10 @@ Retreive an array of account IDs associated with the given keys.
         DATABASE_API_ID,
         "get_key_references",
         [
-            "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
-            "ECHO4oFbfkABpd6jenamJyjMwx3Sj98UUusYGSX9K8hDW8oK", ...
+            [
+                "ECHO61p48u6pHnjSAYP5kzQ4RGNQzFDBDYRrfqrAuhtb2Hdm",
+                "ECHO6ffcvxMD8XrWWNRSPmusHSFFjuPe9qnnVbVQBgERd3fi", ...
+            ]
         ]
     ]
 }
@@ -1537,8 +1539,12 @@ An array of arrays of account IDs for every public key provided.
     "id": 4,
     "jsonrpc": "2.0",
     "result": [
-        [],
-        []
+        [
+            "1.2.14"
+        ],
+        [
+            "1.2.13"
+        ]
     ]
 }
 ```
