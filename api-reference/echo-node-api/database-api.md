@@ -658,9 +658,9 @@ Get the total number of transactions in block.
 
 #### Parameters
 
-| Option                            | Description                 |
-|-----------------------------------|:----------------------------|
-| `block_id_type(fc::ripemd160) id` | ID of the block to retrieve |
+| Option                        | Description                 |
+|-------------------------------|:----------------------------|
+| `block_id_type(ripemd160) id` | ID of the block to retrieve |
 
 #### Example
 
@@ -838,9 +838,9 @@ Just because it is not known does not mean it wasn’t included in the blockchai
 
 #### Parameters
 
-| Option                                  | Description           |
-|-----------------------------------------|:----------------------|
-| `transaction_id_type(fc::ripemd160) id` | ID of the transaction |
+| Option                              | Description           |
+|-------------------------------------|:----------------------|
+| `transaction_id_type(ripemd160) id` | ID of the transaction |
 
 #### Example
 
@@ -1507,9 +1507,9 @@ Retreive an array of account IDs associated with the given keys.
 
 #### Parameters
 
-| Option                             | Description             |
-|------------------------------------|:------------------------|
-| `vector<eddsa::public_key_t> keys` | an array of public keys |
+| Option                      | Description             |
+|-----------------------------|:------------------------|
+| `vector<public_key_t> keys` | an array of public keys |
 
 #### Example
 
@@ -1556,9 +1556,9 @@ to any *registered* (i.e. non-stealth) account on the blockchain.
 
 #### Parameters
 
-| Option                    | Description |
-|---------------------------|:------------|
-| `eddsa::public_key_t key` | public key  |
+| Option             | Description |
+|--------------------|:------------|
+| `public_key_t key` | public key  |
 
 #### Example
 
@@ -2097,9 +2097,9 @@ Get owner of specified address.
 
 #### Parameters
 
-| Option                  | Description                       |
-|-------------------------|:----------------------------------|
-| `fc::ripemd160 address` | address in form of ripemd160 hash | 
+| Option              | Description                       |
+|---------------------|:----------------------------------|
+| `ripemd160 address` | address in form of ripemd160 hash | 
 
 #### Example
 
@@ -2619,7 +2619,7 @@ Semantically equivalent to *get_account_balances*, but takes a name instead of a
 
 | Option                           | Description                                                                                         |
 |:---------------------------------|:----------------------------------------------------------------------------------------------------|
-| `std::string name`               | name of the account to get balances for                                                             |
+| `string name`                    | name of the account to get balances for                                                             |
 | `flat_set<asset_id_type> assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
 
 #### Example
@@ -2662,9 +2662,9 @@ Returns all unclaimed balance objects for a set of addresses.
 
 #### Parameters
 
-| Option                             | Description             |
-|:-----------------------------------|:------------------------|
-| `vector<eddsa::public_key_t> keys` | an array of public keys |
+| Option                      | Description             |
+|:----------------------------|:------------------------|
+| `vector<public_key_t> keys` | an array of public keys |
 
 #### Example
 
@@ -3395,11 +3395,109 @@ null will be returned for any vote ids that are not found.
 
 Get a hexdump of the serialized binary form of a signed transaction.
 
+#### Parameters
+
+| Option                   | Description               |
+|:-------------------------|:--------------------------|
+| `signed_transaction trx` | object signed transaction |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_transaction_hex",
+        [
+            {
+                "ref_block_num": "221",
+                "ref_block_prefix": "4141892275",
+                "expiration": "1970-01-01T00:00:00",
+                "operations": []
+            }
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": "dd00b342e0f60000000000000000"
+}
+```
+
 ### get_required_signatures(ctrx, available_keys)
 
 Takes a partially signed transaction and a set of public keys that the owner has the ability
 to sign for and return the minimal subset of public keys that should add
 signatures to the transaction.
+
+#### Parameters
+
+| Option                                  | Description               |
+|:----------------------------------------|:--------------------------|
+| `signed_transaction trx`                | object signed transaction |
+| `flat_set<public_key_t> available_keys` | an array of public keys   |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_required_signatures",
+        [
+            {
+                "ref_block_num": 1719,
+                "ref_block_prefix": 3664479505,
+                "expiration": "2019-08-21T14:16:03",
+                "operations": [
+                    [
+                        28,
+                        {
+                            "fee": {
+                                "amount": 5001,
+                                "asset_id": "1.3.0"
+                            },
+                            "owner": "1.2.26",
+                            "label": "label1",
+                            "extensions": []
+                        }
+                    ]
+                ],
+                "extensions": [],
+                "signatures": [],
+                "signed_with_echorand_key": false
+            },
+            [
+                "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu"
+            ]
+        ]
+    ]
+}
+```
+
+#### Returns
+
+An set of public keys.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu"
+    ]
+}
+```
 
 ### get_potential_signatures(ctrx)
 
@@ -3407,22 +3505,308 @@ This method will return the set of all public keys that could possibly sign for 
 This call can be used by wallets to filter their set of public keys to just
 the relevant subset prior to calling get_required_signatures to get the minimum subset.
 
+#### Parameters
+
+| Option                   | Description               |
+|:-------------------------|:--------------------------|
+| `signed_transaction trx` | object signed transaction |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_potential_signatures",
+        [
+            {
+                "ref_block_num": 1719,
+                "ref_block_prefix": 3664479505,
+                "expiration": "2019-08-21T14:16:03",
+                "operations": [
+                    [
+                        28,
+                        {
+                            "fee": {
+                                "amount": 5001,
+                                "asset_id": "1.3.0"
+                            },
+                            "owner": "1.2.26",
+                            "label": "label1",
+                            "extensions": []
+                        }
+                    ]
+                ],
+                "extensions": [],
+                "signatures": [
+                    "aa936713a49db3b2881ece72879dc2cb22c4b81368f9bbb4e57666b7277b96e153a5519a8fed82ca54ee71cc3dd0a33c614aa44613580009e2de242de5ce8902"
+                ],
+                "signed_with_echorand_key": false
+            }
+        ]
+    ]
+}
+```
+
+#### Returns
+
+An set of public keys.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu"
+    ]
+}
+```
+
 ### verify_authority(trx)
 
 Returns true of the trx has all of the required signatures, otherwise throws an exception.
+
+#### Parameters
+
+| Option                   | Description               |
+|:-------------------------|:--------------------------|
+| `signed_transaction trx` | object signed transaction |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "verify_authority",
+        [
+            {
+                "ref_block_num": 1719,
+                "ref_block_prefix": 3664479505,
+                "expiration": "2019-08-21T14:16:03",
+                "operations": [
+                    [
+                        28,
+                        {
+                            "fee": {
+                                "amount": 5001,
+                                "asset_id": "1.3.0"
+                            },
+                            "owner": "1.2.26",
+                            "label": "label1",
+                            "extensions": []
+                        }
+                    ]
+                ],
+                "extensions": [],
+                "signatures": [
+                    "aa936713a49db3b2881ece72879dc2cb22c4b81368f9bbb4e57666b7277b96e153a5519a8fed82ca54ee71cc3dd0a33c614aa44613580009e2de242de5ce8902"
+                ],
+                "signed_with_echorand_key": false
+            }
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": true
+}
+```
 
 ### verify_account_authority(name_or_id, signers)
 
 Returns true if the signers have enough authority to authorize an account.
 
+#### Parameters
+
+| Option                           | Description                   |
+|:---------------------------------|:------------------------------|
+| `string name_or_id`              | the name or ID of the account |
+| `flat_set<public_key_t> signers` | an array of public keys       |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "verify_account_authority",
+        [
+            "nathan",
+            [
+                "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu"
+            ]
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": true
+}
+```
+
 ### validate_transaction(trx)
 
 Validates a transaction against the current state without broadcasting it on the network.
+
+#### Parameters
+
+| Option                   | Description               |
+|:-------------------------|:--------------------------|
+| `signed_transaction trx` | object signed transaction |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "validate_transaction",
+        [
+            {
+                "ref_block_num": 3530,
+                "ref_block_prefix": 636194404,
+                "expiration": "2019-08-21T15:36:27",
+                "operations": [
+                    [
+                        28,
+                        {
+                            "fee": {
+                                "amount": 5002,
+                                "asset_id": "1.3.0"
+                            },
+                            "owner": "1.2.26",
+                            "label": "god_please",
+                            "extensions": []
+                        }
+                    ]
+                ],
+                "extensions": [],
+                "signatures": [
+                    "22e67b0b5072fd1e6901d983663b093b81898b318f34ee931e244f076c387cda7f32027cc31b7d50c77299072ddc516ffaf538e6b5c6d385830f1b4d050db20f"
+                ],
+                "signed_with_echorand_key": false
+            }
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "ref_block_num": 3530,
+        "ref_block_prefix": 636194404,
+        "expiration": "2019-08-21T15:36:27",
+        "operations": [
+            [
+                28,
+                {
+                    "fee": {
+                        "amount": 5002,
+                        "asset_id": "1.3.0"
+                    },
+                    "owner": "1.2.26",
+                    "label": "god_please",
+                    "extensions": []
+                }
+            ]
+        ],
+        "extensions": [],
+        "signatures": [
+            "22e67b0b5072fd1e6901d983663b093b81898b318f34ee931e244f076c387cda7f32027cc31b7d50c77299072ddc516ffaf538e6b5c6d385830f1b4d050db20f"
+        ],
+        "signed_with_echorand_key": false,
+        "operation_results": [
+            [
+                1,
+                "2.15.4"
+            ]
+        ]
+    }
+}
+```
 
 ### get_required_fees(ops, id)
 
 For each operation calculate the required fee in the specified asset type.
 If the asset type does not have a valid core_exchange_rate.
+
+#### Parameters
+
+| Option                           | Description                   |
+|:---------------------------------|:------------------------------|
+| `string name_or_id`              | the name or ID of the account |
+| `flat_set<public_key_t> signers` | an array of public keys       |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_required_fees",
+        [
+            [
+                [
+                    28,
+                    {
+                        "fee": {
+                            "amount": 5002,
+                            "asset_id": "1.3.0"
+                        },
+                        "owner": "1.2.26",
+                        "label": "god_please",
+                        "extensions": []
+                    }
+                ]
+            ],
+            "1.3.0"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "amount": 5002,
+            "asset_id": "1.3.0"
+        }
+    ]
+}
+```
 
 ## Proposed transactions
 
