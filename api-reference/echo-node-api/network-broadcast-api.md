@@ -8,9 +8,9 @@ The transaction will be checked for validity in the local database prior to broa
 
 #### Parameters
 
-| Option                          | Description                  |
-|---------------------------------|:-----------------------------|
-| `const signed_transaction &trx` | The transaction to broadcast |
+| Option                   | Description                  |
+|--------------------------|:-----------------------------|
+| `signed_transaction trx` | The transaction to broadcast |
 
 #### Example
 
@@ -36,10 +36,10 @@ The callback method includes the transaction id, block number, and transaction n
 
 #### Parameters
 
-| Option                          | Description                                                                                                    |
-|---------------------------------|:---------------------------------------------------------------------------------------------------------------|
-| `confirmation_callback cb`      | Transaction confirmation notifications with fields ID, block number, transaction number, processed transaction |
-| `const signed_transaction &trx` | The transaction to broadcast                                                                                   |
+| Option                     | Description                                                                                                    |
+|----------------------------|:---------------------------------------------------------------------------------------------------------------|
+| `confirmation_callback cb` | Transaction confirmation notifications with fields ID, block number, transaction number, processed transaction |
+| `signed_transaction trx`   | The transaction to broadcast                                                                                   |
 
 ### broadcast_transaction_synchronous(trx)
 
@@ -47,9 +47,9 @@ Synchronious version of `broadcast_transaction_with_callback`.
 
 #### Parameters
 
-| Option                          | Description                  |
-|---------------------------------|:-----------------------------|
-| `const signed_transaction &trx` | The transaction to broadcast |
+| Option                   | Description                  |
+|--------------------------|:-----------------------------|
+| `signed_transaction trx` | The transaction to broadcast |
 
 ### broadcast_block(signed_block)
 
