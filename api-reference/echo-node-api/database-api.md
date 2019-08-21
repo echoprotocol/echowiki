@@ -150,7 +150,7 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 {
     "method": "notice",
     "params": [ 
-        SUBSCRIPTION_ID,
+        CALLBACK_ID,
         [
             [
                 {
@@ -2502,9 +2502,9 @@ Get logs of specified contract.
         DATABASE_API_ID,
         "get_contract_logs",
         [
-            "1.14.0",
-            "0",
-            "3"
+            "1.9.3",
+            "500",
+            "100"
         ]
     ]
 }
@@ -2513,6 +2513,22 @@ Get logs of specified contract.
 #### Returns
 
 The contracts logs from specified blocks interval.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "address": "0100000000000000000000000000000000000003",
+            "log": [
+                "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
+            ],
+            "data": "0000000000000000000000000000000000000000000000000000000000000097"
+        }
+    ]
+}
+```
 
 ### subscribe_contracts(contracts_ids)
 
@@ -2523,6 +2539,46 @@ Request notification about contracts.
 | Option                                          | Description                       |
 |-------------------------------------------------|:----------------------------------|
 | `const vector<contract_id_type>& contracts_ids` | IDs of the contracts to subscribe |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "subscribe_contracts",
+        [
+            [
+                "1.9.3"
+            ]
+        ]
+    ]
+}
+```
+
+#### Notice example
+
+```json
+{
+    "method": "notice",
+    "params": [
+        CALLBACK_ID,
+        [
+            [
+                {
+                    "address": "0100000000000000000000000000000000000003",
+                    "log": [
+                        "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
+                    ],
+                    "data": "0000000000000000000000000000000000000000000000000000000000000097"
+                }
+            ]
+        ]
+    ]
+}
+```
 
 ### subscribe_contract_logs(callback, contract_id, from, to)
 
@@ -2541,29 +2597,56 @@ When calling this method, it will return all already existing events in the spec
 | `const uint32_t from`                | number of block to start retrieve from                      |
 | `const uint32_t to`                  | number of block to end to retrieve                          |
 
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "subscribe_contract_logs",
+        [
+            "7",
+            "1.9.3",
+            "680",
+            "100"
+        ]
+    ]
+}
+```
+
 #### Returns
 
 The contracts logs from specified blocks interval.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
 
 #### Notice example
 
 ```json
 {
     "method": "notice",
-    "params": [ 
-        SUBSCRIPTION_ID,
+    "params": [
+        CALLBACK_ID,
         [
             [
                 {
-                    "address": "0100000000000000000000000000000000000000",
+                    "address": "0100000000000000000000000000000000000003",
                     "log": [
-                        "a887d9f447f44f095186fc4a0bef9914881f330f24d2a2f63242c4c05eb26ee0"
+                        "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
                     ],
-                    "data": "000000000000000000000000000000000000000000000000000000000000001a"
+                    "data": "0000000000000000000000000000000000000000000000000000000000000097"
                 }
             ]
         ]
-    ],
+    ]
 }
 ```
 
@@ -2657,10 +2740,10 @@ Call the provided contract, but don't change the state.
         DATABASE_API_ID,
         "call_contract_no_changing_state",
         [
-            "1.14.0",
+            "1.9.3",
             "1.2.26",
             "1.3.0",
-            "cfae3217"
+            "6d4ce63c"
         ]
     ]
 }
@@ -2669,6 +2752,14 @@ Call the provided contract, but don't change the state.
 #### Returns
 
 Result of execution.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": "0000000000000000000000000000000000000000000000000000000000000093"
+}
+```
 
 ## Balances
 
@@ -2737,7 +2828,7 @@ Get an contract's balances in various assets.
         DATABASE_API_ID,
         "get_contract_balances",
         [
-            "1.14.0"
+            "1.9.0"
         ]
     ]
 }
@@ -2746,6 +2837,19 @@ Get an contract's balances in various assets.
 #### Returns
 
 An array of balances of the contract.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "amount": 100,
+            "asset_id": "1.3.0"
+        }
+    ]
+}
+```
 
 ### get_named_account_balances(name, assets)
 
