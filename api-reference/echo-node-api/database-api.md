@@ -2054,12 +2054,12 @@ Get addresses of specified account.
     "id": 4,
     "method": "call",
     "params": [
-        DATABASE_API_ID,
+        2,
         "get_account_addresses",
         [
-            "1.2.10",
-            "3",
-            "6"
+            "1.2.26",
+            "0",
+            "1"
         ]
     ]
 }
@@ -2075,10 +2075,10 @@ Addresses owned by account in specified ids interval.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "2.18.0",
-            "owner": "1.2.15",
-            "label": "test",
-            "address": "8815c69de5d32d3061e52ca9386446332225b43d",
+            "id": "2.15.0",
+            "owner": "1.2.26",
+            "label": "label1",
+            "address": "6b34edbee7b4eaf077ab8217a50ac43a00d0ba05",
             "extensions": []
         }
     ]
