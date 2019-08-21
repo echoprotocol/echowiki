@@ -83,7 +83,7 @@ leverages on-chain notification of all relevant parties that their approval is r
 multi-signature approval requires some off-chain mechanism for acquiring several signatures on a single
 transaction. This off-chain synchronization can be avoided using proposals.
 
-### Proposals
+## Proposals
 
 * [proposal_create_operation](proposals.md#proposal_create_operation) - Creates a transaction proposal, for use in multi-sig scenarios
 * [proposal_update_operation](proposals.md#proposal_update_operation) - Updates an existing transaction proposal
