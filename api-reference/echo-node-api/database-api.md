@@ -366,12 +366,63 @@ Header of the referenced block, or null if no matching block was found.
     "id": 4,
     "jsonrpc": "2.0",
     "result": {
-        "previous": "000003e7db7017a9a894ab68b0bd6e29a3a8ae03",
-        "timestamp": "2019-06-25T07:13:12",
-        "account": "1.2.8",
-        "transaction_merkle_root": "0000000000000000000000000000000000000000",
-        "vm_root": "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421.56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421 0.9a71ff66a2f503e4e96c4e9a2521d6a710f2d373b422332029da170d78fa1a68",
+        "previous": "000003e792f925703c5e033e0b0d0419d955cd38",
         "round": 1000,
+        "timestamp": "2019-08-15T15:50:15",
+        "account": "1.2.12",
+        "delegate": "1.2.0",
+        "transaction_merkle_root": "0000000000000000000000000000000000000000",
+        "vm_root": [
+            "56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b42156e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+            "0.9a71ff66a2f503e4e96c4e9a2521d6a710f2d373b422332029da170d78fa1a68"
+        ],
+        "prev_signatures": [
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 6,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "4bd5fefe4735219d3154bd773a909aca5233c0c4d881afd93a74f60a894403b501f955e49c4c058d0cab9933a463c19ddc01d093e8c76a339bbff7b5a1875d05"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 9,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "8063dc28f2d5c58119282b474e4a8aae89abbeef3b6cfc2db26e8cf929b22c3c52c01c7983df3a968286a6d48f86804d5ef283aedd433ac1f1407e5e6777f701"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 10,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "dcf2b9b38e02cdc9af772c716d2668f945e2effa3752a23dde5b3a64b27738e51eaf1847ebe2aa41d4056215db8ecc8b61504e28cb3ffa14f9675de5fc2d1b06"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 12,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "b33102eed7bafcbeffc2f10b1bfe622e888fcaaffb3a3415de35fbd8577bb7d88c2c26eea3738eee90d448116f465eb9f512fab6982adb058c0136dfad3bdf07"
+            },
+            {
+                "_step": 4,
+                "_value": 0,
+                "_leader": 12,
+                "_signer": 11,
+                "_delegate": 0,
+                "_fallback": 0,
+                "_bba_sign": "9d0505e795c4beaea4c5121be821f5b7d037142e99bc91877fad3fc2d1b635a752a5cdde2141270fbd199dee11c2ae1b35398dc31ea4cc6425defddec549220e"
+            }
+        ],
         "extensions": []
     }
 }
