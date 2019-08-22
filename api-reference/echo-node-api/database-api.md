@@ -4028,7 +4028,7 @@ Returns information about erc20 token, if then exist.
         DATABASE_API_ID,
         "get_erc20_token",
         [
-            "0102fe7702b96808f7bbc0d4a888ed1468216cfd"
+            "8B5D021C528Cb0ADb9dA277D109c039dEdFd6871"
         ]
     ]
 }
@@ -4037,6 +4037,22 @@ Returns information about erc20 token, if then exist.
 #### Returns
 
 The public erc20 token data stored in the blockchain.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "id": "1.15.0",
+        "owner": "1.2.0",
+        "eth_addr": "8B5D021C528Cb0ADb9dA277D109c039dEdFd6871",
+        "contract": "1.9.0",
+        "name": "erc20",
+        "symbol": "ERC",
+        "decimals": 0
+    }
+}
+```
 
 ### get_erc20_account_deposits(account)
 
@@ -4058,7 +4074,7 @@ Returns all approved deposits, for the given account id.
         DATABASE_API_ID,
         "get_erc20_account_deposits",
         [
-            "1.2.26"
+            "1.2.0"
         ]
     ]
 }
@@ -4067,6 +4083,24 @@ Returns all approved deposits, for the given account id.
 #### Returns
 
 The all public erc20 deposits data stored in the blockchain.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.16.0",
+            "account": "1.2.0",
+            "erc20_addr": "8B5D021C528Cb0ADb9dA277D109c039dEdFd6871",
+            "value": "1",
+            "transaction_hash": "9742f2d928365be7591107b0d8afa701f24104acd8d5ecc32516dfab410f9c4e",
+            "is_approved": true,
+            "approves": []
+        }
+    ]
+}
+```
 
 ### get_erc20_account_withdrawals(account)
 
@@ -4088,7 +4122,7 @@ Returns all approved withdrawals, for the given account id.
         DATABASE_API_ID,
         "get_erc20_account_withdrawals",
         [
-            "1.2.26"
+            "1.2.0"
         ]
     ]
 }
@@ -4097,6 +4131,25 @@ Returns all approved withdrawals, for the given account id.
 #### Returns
 
 The all public erc20 withdrawals data stored in the blockchain.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.17.0",
+            "withdraw_id": 0,
+            "account": "1.2.0",
+            "to": "1AFeEcE88325110488570146f2635C8615Ad0613",
+            "erc20_token": "1.15.0",
+            "value": "1",
+            "is_approved": true,
+            "approves": []
+        }
+    ]
+}
+```
 
 ## Contract Feepool
 
@@ -4120,7 +4173,7 @@ Get an contract's pool balance in default asset.
         DATABASE_API_ID,
         "get_contract_pool_balance",
         [
-            "1.14.0"
+            "1.9.0"
         ]
     ]
 }
@@ -4129,6 +4182,17 @@ Get an contract's pool balance in default asset.
 #### Returns
 
 Balances of the contract.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "amount": 1,
+        "asset_id": "1.3.0"
+    }
+}
+```
 
 ### get_contract_pool_whitelist(id)
 
@@ -4150,7 +4214,7 @@ Get an contract's whitelist and blacklist.
         DATABASE_API_ID,
         "get_contract_pool_whitelist",
         [
-            "1.14.0"
+            "1.9.0"
         ]
     ]
 }
@@ -4159,3 +4223,18 @@ Get an contract's whitelist and blacklist.
 #### Returns
 
 Struct contract_pool_whitelist which consist of whitelist blacklist.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "whitelist": [
+            "1.2.1"
+        ],
+        "blacklist": [
+            "1.2.2"
+        ]
+    }
+}
+```
