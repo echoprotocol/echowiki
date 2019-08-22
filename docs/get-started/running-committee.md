@@ -7,17 +7,18 @@ only acts as a wallet.
 
 To enable these features, you need to configure the sidechain connection and pass Echo and Ethereum private keys.
 
-To enable the sidechain, you should add the `sidechain-enabled` flag and specify a full node Ethereum websocket RPC URL for sidechain.
+To enable the sidechain, you should add the `sidechain` flag to '--plugins' option and specify a full node Ethereum websocket RPC URL for sidechain.
+You can specify another plugins by separating with comma.
 
 ```bash
 $ ./echo_node \
-    --sidechain-enabled --sidechain-eth-node-url="ws://1.2.3.4:8545"
+    --plugins=sidechain --sidechain-eth-node-url="ws://1.2.3.4:8545"
 ```
 
 Node configuration files and CLI flags share the same parameters, so the above flags can be added in both ways. For example, this is how you'd need to update your configuration file:
 
 ```ini
-sidechain-enabled = true
+plugins = sidechain
 sidechain-eth-node-url = "ws://1.2.3.4:8545"
 ```
 
@@ -47,7 +48,7 @@ However to enter this keys in terminal their quotes and brackets should be escap
 
 ```bash
 $ ./echo_node \
-    --sidechain-enabled --sidechain-eth-node-url="ws://1.2.3.4:8545" \
+    --plugins=sidechain --sidechain-eth-node-url="ws://1.2.3.4:8545" \
     --account-info \[\"1.2.1234\",\"6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ\"\] \
     --account-info \[\"1.2.1235\",\"B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\] \
     --sidechain-committeeman \[\"1.2.1234\", \"327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43\"\]
@@ -69,15 +70,8 @@ To enter this mode add the flag `--configure-keys` to Echo node.
 
 On the first run, when keys file wasn't created yet, you would need to specify a password which will be used to encrypt future keys. This is done by calling `set_password` command and entering your secret passphrase. You can change your password using the same command.
 
-To add a new key, you would need to call either `add_echo_key` or `add_ethereum_key` command.
+To add a new key, you would need to call either `add_echorand_key` or `add_sidechain_key` command.
 
-To exit the console, use the `exit`. In the case that you don't want to save any changes, use the `cancel` instead.
+To exit the console, use the `exit`. In the case that you don't want to save any changes, use the `Ctrl-C` instead.
 
----
-
-If private keys were added successfully, the console will output a message like this:
-
-```text
-Account 1.2.1234 ED Public Key: ECHO5PNcN4VanyKHaAEtRx1UfwgJGMVJbCmeiD6toKD1WGeU
-Account 1.2.1235 ED Public Key: ECHODP2d2c4VjsxVduMYRg4MNCCt5Cwph8H1y2nXZqbKVZRQ
-```
+You can type help in Echo Console to get more information.
