@@ -3,7 +3,7 @@
 To to run a full node that we can connect to, we need to open the RPC interface, this can be done by:
 
 ```bash
-./echo_node --rpc-endpoint=127.0.0.1:6311 --testnet
+./echo_node --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
 This will open port `6312`.
