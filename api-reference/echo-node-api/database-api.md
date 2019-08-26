@@ -156,7 +156,7 @@ If *clear_filter* is set to true, the API server will notify all newly created o
         DATABASE_API_ID,
         "set_subscribe_callback",
         [
-            "CALLBACK_ID",
+            CALLBACK_ID,
             true
         ]
     ]
@@ -220,7 +220,7 @@ Subscribe to pending transactions.
         DATABASE_API_ID,
         "set_pending_transaction_callback",
         [
-            "CALLBACK_ID"
+            CALLBACK_ID
         ]
     ]
 }
