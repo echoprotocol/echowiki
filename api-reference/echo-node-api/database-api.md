@@ -163,6 +163,16 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 }
 ```
 
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
+
 #### Notice example
 
 ```json
@@ -190,16 +200,6 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 }
 ```
 
-#### Returns
-
-```json
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": null
-}
-```
-
 ### set_pending_transaction_callback(callback)
 
 Subscribe to pending transactions.
@@ -223,6 +223,16 @@ Subscribe to pending transactions.
             CALLBACK_ID
         ]
     ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
 }
 ```
 
@@ -268,16 +278,6 @@ Subscribe to pending transactions.
 }
 ```
 
-#### Returns
-
-```json
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": null
-}
-```
-
 ### set_block_applied_callback(callback)
 
 Subscribe to block applications.
@@ -304,6 +304,16 @@ Subscribe to block applications.
 }
 ```
 
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
+
 #### Notice example
 
 ```json
@@ -315,16 +325,6 @@ Subscribe to block applications.
             "0013191865d4306288d52d2f648476508a159a0d"
         ]
     ]
-}
-```
-
-#### Returns
-
-```json
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": null
 }
 ```
 
@@ -1886,58 +1886,6 @@ All other accounts will be retrieved and subscribed.
 }
 ```
 
-#### Notice example
-
-The notification was received by performing the account update operation for changing delegating_account.
-
-```json
-{
-    "method": "notice",
-    "params": [
-        CALLBACK_ID,
-        [
-            [
-                {
-                    "id": "1.2.10",
-                    "registrar": "1.2.4",
-                    "network_fee_percentage": 2000,
-                    "name": "init4",
-                    "active": {
-                        "weight_threshold": 1,
-                        "account_auths": [],
-                        "key_auths": [
-                            [
-                                "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
-                                1
-                            ]
-                        ]
-                    },
-                    "echorand_key": "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
-                    "options": {
-                        "voting_account": "1.2.5",
-                        "delegating_account": "1.2.13",
-                        "num_committee": 0,
-                        "votes": [],
-                        "extensions": []
-                    },
-                    "statistics": "2.5.10",
-                    "whitelisting_accounts": [],
-                    "blacklisting_accounts": [],
-                    "whitelisted_accounts": [],
-                    "blacklisted_accounts": [],
-                    "active_special_authority": [
-                        0,
-                        {}
-                    ],
-                    "top_n_control_flags": 0,
-                    "extensions": []
-                }
-            ]
-        ]
-    ]
-}
-```
-
 #### Returns
 
 A map of strings from names_or_ids to the corresponding accounts.
@@ -2032,6 +1980,58 @@ A map of strings from names_or_ids to the corresponding accounts.
                 "proposals": [],
                 "assets": []
             }
+        ]
+    ]
+}
+```
+
+#### Notice example
+
+The notification was received by performing the account update operation for changing delegating_account.
+
+```json
+{
+    "method": "notice",
+    "params": [
+        CALLBACK_ID,
+        [
+            [
+                {
+                    "id": "1.2.10",
+                    "registrar": "1.2.4",
+                    "network_fee_percentage": 2000,
+                    "name": "init4",
+                    "active": {
+                        "weight_threshold": 1,
+                        "account_auths": [],
+                        "key_auths": [
+                            [
+                                "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
+                                1
+                            ]
+                        ]
+                    },
+                    "echorand_key": "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
+                    "options": {
+                        "voting_account": "1.2.5",
+                        "delegating_account": "1.2.13",
+                        "num_committee": 0,
+                        "votes": [],
+                        "extensions": []
+                    },
+                    "statistics": "2.5.10",
+                    "whitelisting_accounts": [],
+                    "blacklisting_accounts": [],
+                    "whitelisted_accounts": [],
+                    "blacklisted_accounts": [],
+                    "active_special_authority": [
+                        0,
+                        {}
+                    ],
+                    "top_n_control_flags": 0,
+                    "extensions": []
+                }
+            ]
         ]
     ]
 }
