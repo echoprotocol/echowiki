@@ -328,7 +328,7 @@ Subscribe to block applications.
 }
 ```
 
-#### cancel_all_subscriptions()
+### cancel_all_subscriptions()
 
 Stop receiving any notifications. Unsubscribe from all subscribed objects.
 
@@ -1888,7 +1888,7 @@ All other accounts will be retrieved and subscribed.
 
 #### Notice example
 
-The notification was received by performing the operation delegating_account.
+The notification was received by performing the account update operation for changing delegating_account.
 
 ```json
 {
