@@ -2582,6 +2582,16 @@ Subscription to change the contract uses database-api.md#set_subscribe_callback-
 }
 ```
 
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
+
 #### Notice example
 
 ```json
