@@ -10,25 +10,25 @@
 
 ## Asset Management
 
-* [asset_create_operation](asset_management.md#asset_create_operation) - Create new asset
-* [asset_update_operation](asset_management.md#asset_update_operation) - Update options common to all assets
-* [asset_update_bitasset_operation](asset_management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
-* [asset_update_bitasset_operation](asset_management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
-* [asset_update_feed_producers_operation](asset_management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
-* [asset_issue_operation](asset_management.md#asset_issue_operation)
-* [asset_reserve_operation](asset_management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
-* [asset_fund_fee_pool_operation](asset_management.md#asset_fund_fee_pool_operation)
-* [asset_publish_feed_operation](asset_management.md#asset_publish_feed_operation) - Publish price feeds for market-issued assets
+* [asset_create_operation](asset-management.md#asset_create_operation) - Create new asset
+* [asset_update_operation](asset-management.md#asset_update_operation) - Update options common to all assets
+* [asset_update_bitasset_operation](asset-management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
+* [asset_update_bitasset_operation](asset-management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
+* [asset_update_feed_producers_operation](asset-management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
+* [asset_issue_operation](asset-management.md#asset_issue_operation)
+* [asset_reserve_operation](asset-management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
+* [asset_fund_fee_pool_operation](asset-management.md#asset_fund_fee_pool_operation)
+* [asset_publish_feed_operation](asset-management.md#asset_publish_feed_operation) - Publish price feeds for market-issued assets
 
 ## Balance Object
 
-* [balance_claim_operation](balance_object.md#balance_claim_operation) - Claim a balance in a `balance_object`
+* [balance_claim_operation](balance-object.md#balance_claim_operation) - Claim a balance in a `balance_object`
 
 ## Committee Member
 
-* [committee_member_create_operation](committee_member.md#committee_member_create_operation) - Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network
-* [committee_member_update_operation](committee_member.md#committee_member_update_operation) - Update a `committee_member` object
-* [committee_member_update_global_parameters_operation](committee_member.md#committee_member_update_global_parameters_operation) - Used by committee members to update the global parameters of the blockchain
+* [committee_member_create_operation](committee-member.md#committee_member_create_operation) - Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network
+* [committee_member_update_operation](committee-member.md#committee_member_update_operation) - Update a `committee_member` object
+* [committee_member_update_global_parameters_operation](committee-member.md#committee_member_update_global_parameters_operation) - Used by committee members to update the global parameters of the blockchain
 
 ## Contracts
 
@@ -91,11 +91,11 @@ transaction. This off-chain synchronization can be avoided using proposals.
 
 ## Asset Transfer
 
-* [transfer_operation](asset_transfer.md#transfer_operation) - Transfers an amount of one asset from one account to another
-* [override_transfer_operation](asset_transfer.md#override_transfer_operation) - Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority
-* [transfer_to_address_operation](asset_transfer.md#transfer_to_address_operation)
+* [transfer_operation](asset-transfer.md#transfer_operation) - Transfers an amount of one asset from one account to another
+* [override_transfer_operation](asset-transfer.md#override_transfer_operation) - Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority
+* [transfer_to_address_operation](asset-transfer.md#transfer_to_address_operation)
 
 ## Vesting Balances
 
-* [vesting_balance_create_operation](vesting_balances.md#vesting_balance_create_operation) - Create a vesting balance
-* [vesting_balance_withdraw_operation](vesting_balances.md#vesting_balance_withdraw_operation) - Withdraw from a vesting balance
+* [vesting_balance_create_operation](vesting-balances.md#vesting_balance_create_operation) - Create a vesting balance
+* [vesting_balance_withdraw_operation](vesting-balances.md#vesting_balance_withdraw_operation) - Withdraw from a vesting balance
