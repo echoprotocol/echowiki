@@ -286,7 +286,7 @@ Subscribe to block applications.
 
 | Option                                      | Description                                                                  |
 |---------------------------------------------|:-----------------------------------------------------------------------------|
-| `function<void(variant block_id)> callback` | gives a notification whenever the block blockid is applied to the blockchain |
+| `function<void(variant block_id)> callback` | gives a notification whenever the block block_id is applied to the blockchain |
 
 #### Example
 
