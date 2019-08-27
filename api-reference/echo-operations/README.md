@@ -54,10 +54,6 @@
 * [sidechain_erc20_withdraw_token_operation](contracts.md#sidechain_erc20_withdraw_token_operation)
 * [sidechain_erc20_approve_token_withdraw_operation](contracts.md#sidechain_erc20_approve_token_withdraw_operation)
 
-## Custom Extension
-
-* [custom_operation](custom.md#custom_operation) - Provides a generic way to add higher level protocols on top of witness consensus
-
 ## Transaction Proposal Protocol
 
 Echo allows users to propose a transaction which requires approval of multiple accounts in order to execute.
