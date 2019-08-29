@@ -41,11 +41,11 @@
 ## Sidechain
 
 * [sidechain_eth_create_address_operation](contracts.md#sidechain_eth_create_address_operation) - used to generate address in ETH blockchain. After the address is generated eth_address_object(s) will be created in echo db and can be retrieved using get_eth_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
-* [sidechain_eth_approve_address_operation](contracts.md#sidechain_eth_approve_address_operation)
-* [sidechain_eth_deposit_operation](contracts.md#sidechain_eth_deposit_operation)
-* [sidechain_eth_withdraw_operation](contracts.md#sidechain_eth_withdraw_operation)
-* [sidechain_eth_approve_withdraw_operation](contracts.md#sidechain_eth_approve_withdraw_operation)
-* [sidechain_change_config_operation](contracts.md#sidechain_change_config_operation)
+* [sidechain_eth_approve_address_operation](contracts.md#sidechain_eth_approve_address_operation) - An internal operation by which committee members confirm the created  Ethereum address
+* [sidechain_eth_deposit_operation](contracts.md#sidechain_eth_deposit_operation) - An internal operation by which committee members confirm Ethereum deposit
+* [sidechain_eth_withdraw_operation](contracts.md#sidechain_eth_withdraw_operation) - used to withdraw the eETH and receive ETH to provided address
+* [sidechain_eth_approve_withdraw_operation](contracts.md#sidechain_eth_approve_withdraw_operation) - An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH
+* [sidechain_change_config_operation](contracts.md#sidechain_change_config_operation) - An internal operation by which committee members confirm the update of the sidechain configuration
 * [sidechain_eth_issue_operation](contracts.md#sidechain_eth_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
 * [sidechain_eth_burn_operation](contracts.md#sidechain_eth_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned(withdrawn)
 * [sidechain_erc20_register_token_operation](contracts.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
@@ -88,7 +88,7 @@ transaction. This off-chain synchronization can be avoided using proposals.
 
 * [transfer_operation](asset-transfer.md#transfer_operation) - Transfers an amount of one asset from one account to another
 * [override_transfer_operation](asset-transfer.md#override_transfer_operation) - Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority
-* [transfer_to_address_operation](asset-transfer.md#transfer_to_address_operation) - To transfer funds to the address
+* [transfer_to_address_operation](asset-transfer.md#transfer_to_address_operation) - Transfers an amount of one asset from one account to account address
 
 ## Vesting Balances
 
