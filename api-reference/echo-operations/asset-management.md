@@ -232,6 +232,8 @@ struct asset_update_feed_producers_operation : public base_operation
 
 ## asset_issue_operation
 
+Asset issue to account.
+
 ```cpp
 struct asset_issue_operation : public base_operation
 {

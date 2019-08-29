@@ -6,16 +6,15 @@
 * [account_update_operation](account-management.md#account_update_operation) - Update an existing account
 * [account_whitelist_operation](account-management.md#account_whitelist_operation) - This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets
 * [account_transfer_operation](account-management.md#account_transfer_operation) - Transfers the account to another account while clearing the white list
-* [account_address_create_operation](account-management.md#account_address_create_operation)
+* [account_address_create_operation](account-management.md#account_address_create_operation) - Create account address
 
 ## Asset Management
 
 * [asset_create_operation](asset-management.md#asset_create_operation) - Create new asset
 * [asset_update_operation](asset-management.md#asset_update_operation) - Update options common to all assets
 * [asset_update_bitasset_operation](asset-management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
-* [asset_update_bitasset_operation](asset-management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
 * [asset_update_feed_producers_operation](asset-management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
-* [asset_issue_operation](asset-management.md#asset_issue_operation)
+* [asset_issue_operation](asset-management.md#asset_issue_operation) - Asset issue to account
 * [asset_reserve_operation](asset-management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
 * [asset_fund_fee_pool_operation](asset-management.md#asset_fund_fee_pool_operation)
 * [asset_publish_feed_operation](asset-management.md#asset_publish_feed_operation) - Publish price feeds for market-issued assets
@@ -35,24 +34,24 @@
 * [contract_create_operation](contracts.md#contract_create_operation) - Creates a contract
 * [contract_call_operation](contracts.md#contract_call_operation) - Calls a contract
 * [contract_fund_pool_operation](contracts.md#contract_fund_pool_operation) - Transfer asset to fee pool
-* [contract_whitelist_operation](contracts.md#contract_whitelist_operation)
+* [contract_whitelist_operation](contracts.md#contract_whitelist_operation) - Manage the blacklist and whitelist pool of the contract
 * [contract_transfer_operation](contracts.md#contract_transfer_operation)*[VIRTUAL]* - Indicates internal contract transfers
 * [contract_update_operation](contracts.md#contract_update_operation) - Update contract data
 
 ## Sidechain
 
-* [sidechain_eth_create_address_operation](contracts.md#sidechain_eth_create_address_operation)
+* [sidechain_eth_create_address_operation](contracts.md#sidechain_eth_create_address_operation) - used to generate address in ETH blockchain. After the address is generated eth_address_object(s) will be created in echo db and can be retrieved using get_eth_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
 * [sidechain_eth_approve_address_operation](contracts.md#sidechain_eth_approve_address_operation)
 * [sidechain_eth_deposit_operation](contracts.md#sidechain_eth_deposit_operation)
 * [sidechain_eth_withdraw_operation](contracts.md#sidechain_eth_withdraw_operation)
 * [sidechain_eth_approve_withdraw_operation](contracts.md#sidechain_eth_approve_withdraw_operation)
 * [sidechain_change_config_operation](contracts.md#sidechain_change_config_operation)
-* [sidechain_eth_issue_operation](contracts.md#sidechain_eth_issue_operation)
-* [sidechain_eth_burn_operation](contracts.md#sidechain_eth_burn_operation)
-* [sidechain_erc20_register_token_operation](contracts.md#sidechain_erc20_register_token_operation)
-* [sidechain_erc20_deposit_token_operation](contracts.md#sidechain_erc20_deposit_token_operation)
-* [sidechain_erc20_withdraw_token_operation](contracts.md#sidechain_erc20_withdraw_token_operation)
-* [sidechain_erc20_approve_token_withdraw_operation](contracts.md#sidechain_erc20_approve_token_withdraw_operation)
+* [sidechain_eth_issue_operation](contracts.md#sidechain_eth_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
+* [sidechain_eth_burn_operation](contracts.md#sidechain_eth_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned(withdrawn)
+* [sidechain_erc20_register_token_operation](contracts.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
+* [sidechain_erc20_deposit_token_operation](contracts.md#sidechain_erc20_deposit_token_operation) - An internal operation by which committee members confirm the entry of tokens
+* [sidechain_erc20_withdraw_token_operation](contracts.md#sidechain_erc20_withdraw_token_operation) - Executed by the user and initiates the withdrawal of the token from the Echo network to the specified address
+* [sidechain_erc20_approve_token_withdraw_operation](contracts.md#sidechain_erc20_approve_token_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens
 
 ## Transaction Proposal Protocol
 
@@ -89,7 +88,7 @@ transaction. This off-chain synchronization can be avoided using proposals.
 
 * [transfer_operation](asset-transfer.md#transfer_operation) - Transfers an amount of one asset from one account to another
 * [override_transfer_operation](asset-transfer.md#override_transfer_operation) - Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority
-* [transfer_to_address_operation](asset-transfer.md#transfer_to_address_operation)
+* [transfer_to_address_operation](asset-transfer.md#transfer_to_address_operation) - To transfer funds to the address
 
 ## Vesting Balances
 
