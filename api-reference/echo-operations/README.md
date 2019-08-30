@@ -40,10 +40,10 @@
 
 ## Sidechain
 
-* [sidechain_eth_create_address_operation](contracts.md#sidechain_eth_create_address_operation) - used to generate address in ETH blockchain. After the address is generated eth_address_object(s) will be created in echo db and can be retrieved using get_eth_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
+* [sidechain_eth_create_address_operation](contracts.md#sidechain_eth_create_address_operation) - Used to generate address in ETH blockchain. After the address is generated eth_address_object(s) will be created in echo db and can be retrieved using get_eth_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
 * [sidechain_eth_approve_address_operation](contracts.md#sidechain_eth_approve_address_operation) - An internal operation by which committee members confirm the created  Ethereum address
 * [sidechain_eth_deposit_operation](contracts.md#sidechain_eth_deposit_operation) - An internal operation by which committee members confirm Ethereum deposit
-* [sidechain_eth_withdraw_operation](contracts.md#sidechain_eth_withdraw_operation) - used to withdraw the eETH and receive ETH to provided address
+* [sidechain_eth_withdraw_operation](contracts.md#sidechain_eth_withdraw_operation) - Used to withdraw the eETH and receive ETH to provided address
 * [sidechain_eth_approve_withdraw_operation](contracts.md#sidechain_eth_approve_withdraw_operation) - An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH
 * [sidechain_change_config_operation](contracts.md#sidechain_change_config_operation) - An internal operation by which committee members confirm the update of the sidechain configuration
 * [sidechain_eth_issue_operation](contracts.md#sidechain_eth_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
