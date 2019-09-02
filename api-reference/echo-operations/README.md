@@ -16,6 +16,7 @@
 * [asset_update_feed_producers_operation](asset-management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
 * [asset_issue_operation](asset-management.md#asset_issue_operation) - Asset issue to account
 * [asset_reserve_operation](asset-management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
+* [asset_claim_fees_operation](asset-management.md#asset_claim_fees_operation) - Used to transfer accumulated fees back to the issuer's balance
 * [asset_fund_fee_pool_operation](asset-management.md#asset_fund_fee_pool_operation)
 * [asset_publish_feed_operation](asset-management.md#asset_publish_feed_operation) - Publish price feeds for market-issued assets
 
