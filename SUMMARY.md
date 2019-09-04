@@ -21,7 +21,7 @@
   * [Echo Node API](api-reference/echo-node-api/README.md)
     * [Login API](api-reference/echo-node-api/login-api.md)
     * [Asset API](api-reference/echo-node-api/asset-api.md)
-    * [DataBase API](api-reference/echo-node-api/database-api.md)
+    * [Database API](api-reference/echo-node-api/database-api.md)
     * [History API](api-reference/echo-node-api/history-api.md)
     * [Network Broadcast API](api-reference/echo-node-api/network-broadcast-api.md)
     * [Registration API](api-reference/echo-node-api/registration-api.md)
