@@ -2836,7 +2836,7 @@ An array of balances of the account.
 
 ### get_contract_balances(contract_id)
 
-Get an contract's balances in various assets.
+Get a contract's balances in various assets.
 
 #### Parameters
 
@@ -3731,7 +3731,7 @@ signatures to the transaction.
 
 #### Returns
 
-An set of public keys.
+A set of public keys.
 
 ```json
 {
@@ -3796,7 +3796,7 @@ the relevant subset prior to calling get_required_signatures to get the minimum 
 
 #### Returns
 
-An set of public keys.
+A set of public keys.
 
 ```json
 {
@@ -4399,7 +4399,7 @@ The all public erc20 withdrawals data stored in the blockchain.
 
 ### get_contract_pool_balance(id)
 
-Get an contract's pool balance in default asset.
+Get a contract's pool balance in default asset.
 
 #### Parameters
 
@@ -4440,7 +4440,7 @@ Balances of the contract.
 
 ### get_contract_pool_whitelist(id)
 
-Get an contract's whitelist and blacklist.
+Get a contract's whitelist and blacklist.
 
 #### Parameters
 
