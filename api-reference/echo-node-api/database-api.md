@@ -2504,17 +2504,17 @@ The contracts corresponding to the provided IDs.
 }
 ```
 
-### get_contract_logs(contract_id, from, to)
+### get_contract_logs(contract_id, from, limit)
 
 Get logs of specified contract.
 
 #### Parameters
 
-| Option                         | Description                            |
-|--------------------------------|:---------------------------------------|
-| `contract_id_type contract_id` | ID of the contract                     |
-| `uint32_t from`                | number of block to start retrieve from |
-| `uint32_t to`                  | number of block to end to retrieve     |
+| Option                         | Description                                                |
+|--------------------------------|:-----------------------------------------------------------|
+| `contract_id_type contract_id` | ID of the contract                                         |
+| `uint32_t from`                | number of block to start retrieve from                     |
+| `unsigned limit`               | maximum number of addresses to return(must not exceed 100) |
 
 #### Example
 
@@ -2614,11 +2614,9 @@ Subscription to change the contract uses database-api.md#set_subscribe_callback-
 }
 ```
 
-### subscribe_contract_logs(callback, contract_id, from, to)
+### subscribe_contract_logs(callback, contract_id)
 
 Subscribe to contract's logs.
-
-If you want to always receive alerts, then you can specify a very large number as the end of the range of the blocks you listen to, for example, `999999999`.
 
 When calling this method, it will return all already existing events in the specified range as well as the `get_contract_logs` method.
 
@@ -2628,8 +2626,6 @@ When calling this method, it will return all already existing events in the spec
 |:-------------------------------|:------------------------------------------------------------|
 | `function<void(variant)> cb`   | callback method which is called when contracts has new logs |
 | `contract_id_type contract_id` | ID of the contract                                          |
-| `uint32_t from`                | number of block to start retrieve from                      |
-| `uint32_t to`                  | number of block to end to retrieve                          |
 
 #### Example
 
@@ -2643,8 +2639,6 @@ When calling this method, it will return all already existing events in the spec
         [
             "7",
             "1.9.3",
-            "680",
-            "100"
         ]
     ]
 }
@@ -2652,7 +2646,7 @@ When calling this method, it will return all already existing events in the spec
 
 #### Returns
 
-The contracts logs from specified blocks interval.
+The contracts logs by contract ID.
 
 ```json
 {
