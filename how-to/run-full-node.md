@@ -6,7 +6,7 @@ To to run a full node that we can connect to, we need to open the RPC interface,
 ./echo_node \
     --seed-node=echo-testnet-us-1.echo-dev.io:6310  \
     --seed-node=echo-testnet-eu-1.echo-dev.io:6310 \
-    --rpc-endpoint=127.0.0.1:6311 --testnet
+    --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
 This will open port `6312`.
@@ -28,7 +28,7 @@ All it takes for the CLI wallet to run is a trusted API server to connect to the
 In this example, we use the public Echo node API and connect via a secured websocket connection. But you can yse your local node IP and PORT like this:
 
 ```bash
-./echo_wallet -s ws://127.0.0.1:6311/ws
+./echo_wallet -s ws://127.0.0.1:6312/ws
 ```
 
 {% hint style="warning" %}
@@ -82,6 +82,6 @@ The CLI wallet can open an RPC port, so that in be accessed by applications or s
 * HTTP RPC via the `-H` parameter.
 
 ```bash
-./echo_wallet -s ws://127.0.0.1:6311/ws -H 127.0.0.1:8092 -r 127.0.0.1:8093
+./echo_wallet -s ws://127.0.0.1:6312/ws -H 127.0.0.1:8092 -r 127.0.0.1:8093
 ```
 
