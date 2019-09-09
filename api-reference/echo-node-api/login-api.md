@@ -1,4 +1,4 @@
-# Login API
+# APIs
 
 ### login(user, password)
 
@@ -40,7 +40,7 @@ This must be called prior to requesting other APIs. Other APIs may not be access
 }
 ```
 
-## API Methods
+#### API Methods
 
 Enable and retrieve enabled API indentifier
 
