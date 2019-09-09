@@ -3,10 +3,7 @@
 To to run a full node that we can connect to, we need to open the RPC interface, this can be done by:
 
 ```bash
-./echo_node \
-    --seed-node=echo-testnet-us-1.echo-dev.io:6310  \
-    --seed-node=echo-testnet-eu-1.echo-dev.io:6310 \
-    --rpc-endpoint=127.0.0.1:6311 --testnet
+./echo_node --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
 This will open port `6312`.

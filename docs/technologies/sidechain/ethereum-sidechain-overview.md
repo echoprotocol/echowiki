@@ -114,7 +114,7 @@ on the Echo network.
 Address `eth_receive_address` will already be created after the very
 first message from one of the committee members and can be used then for
 the balance replenishment. However, the users are advised not to use the
-address until it receives confirmation from `3/2 n + 1` of the committee members,
+address until it receives confirmation from `2/3 n + 1` of the committee members,
 where 'n' is the number of active members of the committee. This
 restriction is only a recommendation and does not limit the use of the
 address at the protocol level in any way.
@@ -125,7 +125,7 @@ As a result of the Ethereum assets transfer to `eth_receive_address`,
 the contract creates an event in the Ethereum network. This event is
 processed by all members of the committee, and each of them also creates
 an operation with information about the deposit of funds in the Echo
-network. After `3/2 n + 1` of the committee members send a message about
+network. After `2/3 n + 1` of the committee members send a message about
 funds admission, the funds will be credited to the corresponding Echo
 account.
 
@@ -159,7 +159,7 @@ a contract with the specified address in the Ethereum network, verify it
 for compliance with the ERC20 interface (the contract must contain all
 methods and events included in the ERC20 standard). Each of the
 participants sends feed with information about the contract to the Echo
-network and upon receiving the feed from `3/2 n + 1` of the committee
+network and upon receiving the feed from `2/3 n + 1` of the committee
 members the Echo network generates a mintable ERC20 token. Only the
 committee account has the right to issue this type of tokens.
 
@@ -185,9 +185,9 @@ committee members start monitoring all the `Transfer` events of the
 contract in the Ethereum network. When a new `Transfer` event arrives
 all the committee members start feeding information about the event to
 the Echo network. The recipient of such an event is one of the
-`eth_receive_address` of the Echo network. On receiving feed from `3/2 n
-\+ 1` of the committee members (n behalf of the committee account) a
-previously linked ERC20 contract s called with a request to mint the
+`eth_receive_address` of the Echo network. On receiving feed from 
+`2/3 n + 1` of the committee members (n behalf of the committee account) 
+a previously linked ERC20 contract s called with a request to mint the
 required number of tokens for the account tied to `eth_receive_address`.
 
 The result of depositing an ERC20 token into the Echo network is s the
@@ -217,7 +217,7 @@ signature is sent to the Echo network by the corresponding
 
 #### Sending of the withdrawal to the Ethereum network
 
-On receiving the required number of signatures `(3/2 n + 1)` the
+On receiving the required number of signatures `2/3 n + 1` the
 committee member, selected through the VRF, calls the `withdrow` method
 in the Echo contract on the Ethereum side.
 
@@ -225,7 +225,7 @@ in the Echo contract on the Ethereum side.
 
 Calling a contract on the Ethereum side calls an event. Each committee
 member proxy this event into an operation of the Echo network. Upon
-receiving the required number of operations (3/2 n + 1) the withdrawal
+receiving the required number of operations `2/3 n + 1` the withdrawal
 is considered closed. The amount of eETH that equals to the withdrawn
 amount gets burned. 
 
@@ -264,7 +264,7 @@ network by the corresponding `sidechain_propose_signature` operation.
 
 #### Sending of the withdrawal to the Ethereum network
 
-When receiving the required number of signatures `(3/2 n + 1)` a
+When receiving the required number of signatures `2/3 n + 1` a
 committee member selected through the VRF calls the `withdraw` method in
 the Echo contract on the Ethereum side.
 
@@ -272,7 +272,7 @@ the Echo contract on the Ethereum side.
 
 Calling a contract on the Ethereum side calls an event. Each committee
 member proxy this event into an operation of the Echo network. Upon
-receiving the required number of operations `(3/2 n + 1)` the withdrawal
+receiving the required number of operations `2/3 n + 1` the withdrawal
 is considered closed.
 
 ## Additional functionality
@@ -329,7 +329,7 @@ blocks, where 'N' is a parameterized value.
 Since a committee member can send an operation about a new wallet
 address specifying it wrong, the network must select and save the
 address that has more confirmations. A confirmed address is the one that
-has collected `3/2 n + 1` votes of the committee members. 
+has collected `2/3 n + 1` votes of the committee members. 
 
 #### The selected by VRF participant does not send a transaction to the Ethereum network
 
@@ -364,7 +364,7 @@ public keys of the contract on Ethereum. To do this, each of the current
 members of the committee sends an operation on the network with their
 signature approving the change of members. 
 
-After 3 / 2n + 1 votes of the current participants have been added to
+After `2/3 n + 1` votes of the current participants have been added to
 the network, the last added committee member sends a transaction to the
 Ethereum network, calling the contract's ‘changeCommittee’ method. 
 
@@ -374,7 +374,7 @@ committee catches this event in the Ethereum network and creates a
 corresponding operation on the Echo network. 
 
 The new committee member becomes active only in case the network has
-received 3/2 n + 1 messages about the event on the Ethereum network. 
+received `2/3 n + 1` messages about the event on the Ethereum network. 
 
 Information on how to become a member of the committee can be found in
 the corresponding section - Become the committee member 

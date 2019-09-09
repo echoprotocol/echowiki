@@ -8,16 +8,13 @@ The quickest way is to simply download the binary files from the link below and 
 
 ### Linux
 
-* [echo-linux.v0.8.3.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.v0.8.3.tar)
+* [echo-linux.v0.9.4.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.9.4.tar)
 
 ```bash
-wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.v0.8.3.tar
-tar -xvf echo-linux.v0.8.3.tar
-cd echo-linux.v0.8.3
-./echo_node \
-    --seed-node=echo-testnet-us-1.echo-dev.io:6310  \
-    --seed-node=echo-testnet-eu-1.echo-dev.io:6310 \
-    --rpc-endpoint=127.0.0.1:6312 --testnet
+wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.9.4.tar
+tar -xvf echo-linux.0.9.4
+cd echo-linux.0.9.4
+./echo_node --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
 By executing these commands, you have:
