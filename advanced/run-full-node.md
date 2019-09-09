@@ -1,14 +1,16 @@
-# Run Full Node
+# Create a Wallet
 
-To to run a full node that we can connect to, we need to open the RPC interface, this can be done by:
+In order to use the CLI Wallet, you must have an Echo full node running with an RPC port exposed. If you don't have a full node running yet, follow the installation tutorial.
+
+{% page-ref page="../how-to/install-full-node.md" %}
+
+ To run a full node that we can connect to, we need to open the RPC interface, this can be done by:
 
 ```bash
 ./echo_node --rpc-endpoint=127.0.0.1:6312 --testnet
 ```
 
 This will open port `6312`.
-
-Note, that at the first run, the node will need to synchronize the blockchain with the network first, which may take a few minutes.
 
 ## CLI Wallet
 
@@ -22,7 +24,7 @@ All it takes for the CLI wallet to run is a trusted API server to connect to the
 ./echo_wallet -s wss://testnet.echo-dev.io/ws
 ```
 
-In this example, we use the public Echo node API and connect via a secured websocket connection. But you can yse your local node IP and PORT like this:
+In this example, we use the public Echo node API and connect via a secured websocket connection. But you can also use your local node IP and PORT like this:
 
 ```bash
 ./echo_wallet -s ws://127.0.0.1:6311/ws
@@ -50,7 +52,7 @@ IMPORTANT: Private data, such as a passphrase or private keys, aren't stored by 
 ```bash
 new >>> set_password
 Input private data:
-supersecretpassphrase
+TYPE_YOUR_SECRET_PASSWORD_HERE
 locked >>>
 ```
 
