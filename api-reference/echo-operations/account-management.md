@@ -1,6 +1,6 @@
-# Account Management Operations
+# Account Management
 
-## account_create_operation
+## account\_create\_operation
 
 This operation is used to create an account
 
@@ -12,39 +12,38 @@ struct account_create_operation
        optional< void_t >            null_ext;
        optional< special_authority > active_special_authority;
    };
-   
+
    struct fee_parameters_type
    {
        uint64_t basic_fee      = 5*ECHO_BLOCKCHAIN_PRECISION; ///< the cost to register the cheapest non-free account
        uint64_t premium_fee    = 2000*ECHO_BLOCKCHAIN_PRECISION; ///< the cost to register the cheapest non-free account
        uint32_t price_per_kbyte = ECHO_BLOCKCHAIN_PRECISION;
    };
-   
+
    asset           fee;
    account_id_type registrar;
    string          name;
    authority       active;
    eddsa::public_key_t echorand_key;
-   
+
    account_options options;
    extension< ext > extensions;
 };
 ```
 
-[authority](types/common.md#authority)
+[authority](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#authority)
 
-[special_authority](types/common.md#special_authority)
+[special\_authority](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#special_authority)
 
-[asset](types/common.md#asset)
+[asset](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#asset)
 
-[buyback_account_options](types/common.md#buyback_account_options)
+[buyback\_account\_options](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#buyback_account_options)
 
-[account_options](types/common.md#account_options)
+[account\_options](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#account_options)
 
+### JSON Example
 
-### JSON Example 
-
-```json
+```javascript
 [
   1,{
     "fee": {
@@ -71,10 +70,9 @@ struct account_create_operation
 ]
 ```
 
-## account_update_operation
+## account\_update\_operation
 
-This operation is used to update an existing account. It can be used to update the authorities, or adjust the options on the account. See account_object::options_type for the options which may be updated.
-Optional fields can be added or not depending on your intentions.
+This operation is used to update an existing account. It can be used to update the authorities, or adjust the options on the account. See account\_object::options\_type for the options which may be updated. Optional fields can be added or not depending on your intentions.
 
 ```cpp
 struct account_update_operation : public base_operation
@@ -84,13 +82,13 @@ struct account_update_operation : public base_operation
        optional< void_t >            null_ext;
        optional< special_authority > owner_special_authority;
    };
-   
+
    struct fee_parameters_type
    {
        share_type fee             = 20 * ECHO_BLOCKCHAIN_PRECISION;
        uint32_t   price_per_kbyte = ECHO_BLOCKCHAIN_PRECISION;
    };
-   
+
    asset fee;
    /// The account to update
    account_id_type account;
@@ -98,26 +96,26 @@ struct account_update_operation : public base_operation
    optional<authority> active;
    // New ED25519 public key
    optional<eddsa::public_key_t> echorand_key;
-   
+
    /// New account options
    optional<account_options> new_options;
    extension< ext > extensions;
 };
 ```
 
-[authority](types/common.md#authority)
+[authority](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#authority)
 
-[special_authority](types/common.md#special_authority)
+[special\_authority](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#special_authority)
 
-[asset](types/common.md#asset)
+[asset](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#asset)
 
-[buyback_account_options](types/common.md#buyback_account_options)
+[buyback\_account\_options](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#buyback_account_options)
 
-[account_options](types/common.md#account_options)
+[account\_options](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#account_options)
 
 ### JSON Example
 
-```json
+```javascript
 [
   2,{
     "fee": {
@@ -137,15 +135,15 @@ struct account_update_operation : public base_operation
 ]
 ```
 
-## account_whitelist_operation
+## account\_whitelist\_operation
 
 This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets
 
 Accounts can freely specify opinions about other accounts, in the form of either whitelisting or blacklisting them. This information is used in chain validation only to determine whether an account is authorized to transact in an asset type which enforces a whitelist, but third parties can use this information for other uses as well, as long as it does not conflict with the use of whitelisted assets.
 
-An asset which enforces a whitelist specifies a list of accounts to maintain its whitelist, and a list of accounts to maintain its blacklist. In order for a given account A to hold and transact in a whitelisted asset S, A must be whitelisted by at least one of S's whitelist_authorities and blacklisted by none of S's blacklist_authorities. If A receives a balance of S, and is later removed from the whitelist(s) which allowed it to hold S, or added to any blacklist S specifies as authoritative, A's balance of S will be frozen until A's authorization is reinstated.
+An asset which enforces a whitelist specifies a list of accounts to maintain its whitelist, and a list of accounts to maintain its blacklist. In order for a given account A to hold and transact in a whitelisted asset S, A must be whitelisted by at least one of S's whitelist\_authorities and blacklisted by none of S's blacklist\_authorities. If A receives a balance of S, and is later removed from the whitelist\(s\) which allowed it to hold S, or added to any blacklist S specifies as authoritative, A's balance of S will be frozen until A's authorization is reinstated.
 
-This operation requires authorizing_account's signature, but not account_to_list's. The fee is paid by authorizing_account.
+This operation requires authorizing\_account's signature, but not account\_to\_list's. The fee is paid by authorizing\_account.
 
 ```cpp
 struct account_whitelist_operation : public base_operation
@@ -171,11 +169,11 @@ struct account_whitelist_operation : public base_operation
 };
 ```
 
-[asset](types/common.md#asset)
+[asset](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
-```json
+```javascript
 [
   3,{
     "fee": {
@@ -190,13 +188,13 @@ struct account_whitelist_operation : public base_operation
 ]
 ```
 
-## account_transfer_operation
+## account\_transfer\_operation
 
 transfers the account to another account while clearing the white list
 
 In theory an account can be transferred by simply updating the authorities, but that kind of transfer lacks semantic meaning and is more often done to rotate keys without transferring ownership. This operation is used to indicate the legal transfer of title to this account and a break in the operation history.
 
-The account_id's active/voting authority should be set to new_owner
+The account\_id's active/voting authority should be set to new\_owner
 
 This operation will clear the account's whitelist statuses, but not the blacklist statuses.
 
@@ -204,7 +202,7 @@ This operation will clear the account's whitelist statuses, but not the blacklis
 struct account_transfer_operation
 {
    struct fee_parameters_type { uint64_t fee = 500 * ECHO_BLOCKCHAIN_PRECISION; };
-    
+
    asset           fee;
    account_id_type account_id;
    account_id_type new_owner;
@@ -212,11 +210,11 @@ struct account_transfer_operation
 };
 ```
 
-[asset](types/common.md#asset)
+[asset](https://github.com/echoprotocol/echowiki/tree/65d2f995750c75e97f236a9377ebae98a3c9ff21/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
-```json
+```javascript
 [
   4,{
     "fee": {
@@ -230,7 +228,7 @@ struct account_transfer_operation
 ]
 ```
 
-## account_address_create_operation
+## account\_address\_create\_operation
 
 Creates an address for an account to which money can be transferred.
 
@@ -253,7 +251,7 @@ struct account_address_create_operation : public base_operation
 
 ### JSON Example
 
-```json
+```javascript
 [
   28,{
     "fee": {
@@ -266,3 +264,4 @@ struct account_address_create_operation : public base_operation
   }
 ]
 ```
+
