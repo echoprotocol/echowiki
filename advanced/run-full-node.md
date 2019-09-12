@@ -65,6 +65,19 @@ supersecretpassphrase
 unlocked >>>
 ```
 
+Once the wallet has been unlocked, you can import an existing account. If you do not have an account yet, follow the account creation tutorial.
+
+{% page-ref page="./create-account.md" %}
+
+```bash
+unlocked >>> import_key {your_account_name}
+Input private data:
+{paste_your_WIF_key_here}
+unlocked >>> 
+```
+
+If you do not import an account, the `wallet.json` file will not be created and you will have to `set_password` again next time you open the wallet. 
+
 You can get a detailed list of all commands by calling the `help` command.
 
 By pressing `TAB` you can get a list of autocomplete commands or complete current if there are no alternatives.
@@ -83,4 +96,3 @@ The CLI wallet can open an RPC port, so that in be accessed by applications or s
 ```bash
 ./echo_wallet -s ws://127.0.0.1:6311/ws -H 127.0.0.1:8092 -r 127.0.0.1:8093
 ```
-
