@@ -24,9 +24,9 @@ Get operations relevant to the specificed account.
         "get_account_history",
         [
             "1.2.12",
-            "1.10.0",
+            "1.6.0",
             "100",
-            "1.10.10"
+            "1.6.10"
         ]
     ]
 }
@@ -42,7 +42,7 @@ A list of operations performed by account, ordered from most recent to oldest.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.4",
+            "id": "1.6.4",
             "op": [
                 0,
                 {
@@ -99,8 +99,8 @@ Get only asked operations relevant to the specified account.
         [
             "1.2.0",
             "0",
-            "1.10.0",
-            "1.10.10",
+            "1.6.0",
+            "1.6.10",
             "100"
         ]
     ]
@@ -117,7 +117,7 @@ A list of operations performed by account, ordered from most recent to oldest.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.3623",
+            "id": "1.6.3623",
             "op": [
                 0,
                 {
@@ -191,7 +191,7 @@ A list of operations performed by account, ordered from most recent to oldest.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.163",
+            "id": "1.6.163",
             "op": [
                 47,
                 {
@@ -243,10 +243,10 @@ Get operations relevant to the specificed contract.
         HISTORY_API_ID,
         "get_contract_history",
         [
-            "1.14.0",
-            "1.10.0",
+            "1.9.0",
+            "1.6.0",
             "1",
-            "1.10.20"
+            "1.6.20"
         ]
     ]
 }
@@ -262,7 +262,7 @@ A list of operations performed by contract, ordered from most recent to oldest.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.0",
+            "id": "1.6.0",
             "op": [
                 34,
                 {
