@@ -115,8 +115,8 @@ Allows broadcasting of transactions.
 
 * [broadcast\_transaction](network-broadcast-api.md#broadcast_transaction-trx)
 * [broadcast\_block](network-broadcast-api.md#broadcast_block-signed_block)
-* [broadcast\_transaction\_with\_callback](network-broadcast-api.md#broadcast_transaction_with_callback-callback-trx)
-* [broadcast\_transaction\_synchronous](network-broadcast-api.md#broadcast_transaction_synchronous-cb-trx)
+* [broadcast\_transaction\_with\_callback](network-broadcast-api.md#broadcast_transaction_with_callbackcb-trx)
+* [broadcast\_transaction\_synchronous](network-broadcast-api.md#broadcast_transaction_synchronous-trx)
 
 ## Registration API
 
