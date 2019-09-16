@@ -47,3 +47,14 @@ The objects retrieved, in the order they are mentioned in ids.
     ]
 }
 ```
+
+### Returns
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
+}
+```
+
