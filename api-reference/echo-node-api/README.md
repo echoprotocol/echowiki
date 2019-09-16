@@ -25,7 +25,7 @@ Exposes accessors on the database which query state tracked by a blockchain vali
   * [set\_pending\_transaction\_callback](database-api.md#set_pending_transaction_callback-callback)
   * [set\_block\_applied\_callback](database-api.md#set_block_applied_callback-callback)
   * [cancel\_all\_subscriptions](database-api.md#cancel_all_subscriptions)
-* [Blocks and transactions](database-api.md)
+* [Blocks and transactions](database-api.md#blocks-and-transactions)
   * [get\_block\_header](database-api.md#get_block_header-block_num)
   * [get\_block\_header\_batch](database-api.md#get_block_header_batch-block_nums)
   * [get\_block](database-api.md#get_block-block_num)
@@ -95,9 +95,9 @@ Exposes accessors on the database which query state tracked by a blockchain vali
   * [get\_account\_deposits](database-api.md#get_account_deposits-account)
   * [get\_account\_withdrawals](database-api.md#get_account_withdrawals-account)
 * [Sidechain ERC20](database-api.md#sidechain-erc20)
-  * [get\_erc20\_token](database-api.md#get_erc20_token-eth_addr)
-  * [get\_erc20\_account\_deposits](database-api.md#get_erc20_account_deposits-account)
-  * [get\_erc20\_account\_withdrawals](database-api.md#get_erc20_account_withdrawals-account)
+  * [get\_erc20\_token](database-api.md#get_erc-20-_token-eth_addr)
+  * [get\_erc20\_account\_deposits](database-api.md#get_erc-20-_account_deposits-account)
+  * [get\_erc20\_account\_withdrawals](database-api.md#get_erc-20-_account_withdrawals-account)
 * [Contract Feepool](database-api.md#contract-feepool)
   * [get\_contract\_pool\_balance](database-api.md#get_contract_pool_balance-id)
   * [get\_contract\_pool\_whitelist](database-api.md#get_contract_pool_whitelist-id)
@@ -118,7 +118,7 @@ Allows broadcasting of transactions.
 * [broadcast\_transaction](network-broadcast-api.md#broadcast_transaction-trx)
 * [broadcast\_block](network-broadcast-api.md#broadcast_block-signed_block)
 * [broadcast\_transaction\_with\_callback](network-broadcast-api.md#broadcast_transaction_with_callback-callback-trx)
-* [broadcast\_transaction\_synchronous](network-broadcast-api.md#broadcast_transaction_synchronous-trx)
+* [broadcast\_transaction\_synchronous](network-broadcast-api.md#broadcast_transaction_synchronous-cb-trx)
 
 ## Registration API
 
