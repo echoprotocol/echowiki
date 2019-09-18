@@ -16,6 +16,7 @@
 * [asset\_update\_feed\_producers\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/asset-management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
 * [asset\_issue\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/asset-management.md#asset_issue_operation) - Asset issue to account
 * [asset\_reserve\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/asset-management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
+* [asset_claim_fees_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/asset-management.md#asset_claim_fees_operation) - Used to transfer accumulated fees back to the issuer's balance
 * [asset\_fund\_fee\_pool\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/asset-management.md#asset_fund_fee_pool_operation)
 * [asset\_publish\_feed\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/asset-management.md#asset_publish_feed_operation) - Publish price feeds for market-issued assets
 
