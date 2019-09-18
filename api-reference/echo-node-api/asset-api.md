@@ -1,20 +1,20 @@
 # Asset API
 
-### get_asset_holders(asset_id, start, limit)
+## get\_asset\_holders\(asset\_id, start, limit\)
 
 Retrieve the information about the holders of the specified asset.
 
-#### Parameters
+### Parameters
 
-| Option                   | Description                                                                |
-|--------------------------|:---------------------------------------------------------------------------|
-| `asset_id_type asset_id` | ID of the asset to retrieve, a string that look like 1.3.<id-of-the-asset> |
-| `uint32_t start`         | The acount id to start retrieving from                                     |
-| `uint32_t limit`         | Limit to that much accounts (max 100)                                      |
+| Option | Description |
+| :--- | :--- |
+| `asset_id_type asset_id` | ID of the asset to retrieve, a string that look like 1.3. |
+| `uint32_t start` | The acount id to start retrieving from |
+| `uint32_t limit` | Limit to that much accounts \(max 100\) |
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -30,11 +30,11 @@ Retrieve the information about the holders of the specified asset.
 }
 ```
 
-#### Returns
+### Returns
 
 An array of information about asset holders, that has the following structure:
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -58,19 +58,19 @@ An array of information about asset holders, that has the following structure:
 }
 ```
 
-### get_asset_holders_count(asset_id)
+## get\_asset\_holders\_count\(asset\_id\)
 
 Retrieve the number of holders of the provided asset.
 
-#### Parameters
+### Parameters
 
-| Option                   | Description                                                                |
-|--------------------------|:---------------------------------------------------------------------------|
-| `asset_id_type asset_id` | ID of the asset to retrieve, a string that look like 1.6.<id-of-the-asset> |
+| Option | Description |
+| :--- | :--- |
+| `asset_id_type asset_id` | ID of the asset to retrieve, a string that look like 1.6. |
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -84,11 +84,11 @@ Retrieve the number of holders of the provided asset.
 }
 ```
 
-#### Returns
+### Returns
 
 Holders count for the specified asset.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -96,13 +96,13 @@ Holders count for the specified asset.
 }
 ```
 
-### get_all_asset_holders()
+## get\_all\_asset\_holders\(\)
 
 An array of all asset IDs with the number of holders.
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -114,11 +114,11 @@ An array of all asset IDs with the number of holders.
 }
 ```
 
-#### Returns
+### Returns
 
 An array of the following structure:
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -138,3 +138,4 @@ An array of the following structure:
     ]
 }
 ```
+

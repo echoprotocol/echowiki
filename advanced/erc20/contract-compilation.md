@@ -641,5 +641,5 @@ Below are several approaches to working with a contract:
 
 * [Using CLI Wallet](working-with-cli.md)
 * [Using JavaScript Library](working-with-js.md)
-* [Using Desktop Wallet]()
+* [Using Desktop Wallet](contract-compilation.md)
 

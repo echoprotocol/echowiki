@@ -1,21 +1,21 @@
 # History API
 
-### get_account_history(account, start, stop, limit)
+## get\_account\_history\(account, stop, limit, start\)
 
 Get operations relevant to the specificed account.
 
-#### Parameters
+### Parameters
 
-| Option                            | Description                                                    |
-|-----------------------------------|:---------------------------------------------------------------|
-| `account_id_type account`         | The account whose history should be queried                    |
-| `operation_history_id_type stop`  | ID of the earliest operation to retrieve                       |
-| `unsigned limit`                  | Maximum number of operations to retrieve (must not exceed 100) |
-| `operation_history_id_type start` | ID of the most recent operation to retrieve                    |
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | The account whose history should be queried |
+| `operation_history_id_type stop` | ID of the earliest operation to retrieve |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+| `operation_history_id_type start` | ID of the most recent operation to retrieve |
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 3,
     "method": "call",
@@ -32,11 +32,11 @@ Get operations relevant to the specificed account.
 }
 ```
 
-#### Returns
+### Returns
 
 A list of operations performed by account, ordered from most recent to oldest.
 
-```json
+```javascript
 {
     "id": 3,
     "jsonrpc": "2.0",
@@ -73,23 +73,23 @@ A list of operations performed by account, ordered from most recent to oldest.
 }
 ```
 
-### get_account_history_operations(account, operation_id, start, stop, limit)
+## get\_account\_history\_operations\(account, operation\_id, start, stop, limit\)
 
 Get only asked operations relevant to the specified account.
 
-#### Parameters
+### Parameters
 
-| Option                            | Description                                                                                                   |
-|-----------------------------------|:--------------------------------------------------------------------------------------------------------------|
-| `account_id_type account`         | The account whose history should be queried                                                                   |
-| `int operation_id`                | The ID of the operation we want to get operations in the account( 0 = transfer , 1 = limit order create, ...) |
-| `operation_history_id_type start` | ID of the most recent operation to retrieve                                                                   |
-| `operation_history_id_type stop`  | ID of the earliest operation to retrieve                                                                      |
-| `unsigned limit`                  | Maximum number of operations to retrieve (must not exceed 100)                                                |
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | The account whose history should be queried |
+| `int operation_id` | The ID of the operation we want to get operations in the account\( 0 = transfer , 1 = limit order create, ...\) |
+| `operation_history_id_type start` | ID of the most recent operation to retrieve |
+| `operation_history_id_type stop` | ID of the earliest operation to retrieve |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 3,
     "method": "call",
@@ -107,11 +107,11 @@ Get only asked operations relevant to the specified account.
 }
 ```
 
-#### Returns
+### Returns
 
 A list of operations performed by account, ordered from most recent to oldest.
 
-```json
+```javascript
 {
     "id": 3,
     "jsonrpc": "2.0",
@@ -148,23 +148,22 @@ A list of operations performed by account, ordered from most recent to oldest.
 }
 ```
 
-### get_relative_account_history(account, start, stop, limit)
+## get\_relative\_account\_history\(account, stop, limit, start\)
 
-Get operations relevant to the specified account referenced by an event numbering specific to the account.
-The current number of operations for the account can be found in the account statistics (or use 0 for start).
+Get operations relevant to the specified account referenced by an event numbering specific to the account. The current number of operations for the account can be found in the account statistics \(or use 0 for start\).
 
-#### Parameters
+### Parameters
 
-| Option                    | Description                                                                                                                      |
-|---------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
-| `account_id_type account` | The account whose history should be queried                                                                                      |
-| `uint32_t stop`           | Sequence number of earliest operation. 0 is default and will query 'limit' number of operations                                  |
-| `unsigned limit`          | Maximum number of operations to retrieve (must not exceed 100)                                                                   |
-| `uint32_t start`          | Sequence number of the most recent operation to retrieve. 0 is default, which will start querying from the most recent operation |
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | The account whose history should be queried |
+| `uint32_t stop` | Sequence number of earliest operation. 0 is default and will query 'limit' number of operations |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+| `uint32_t start` | Sequence number of the most recent operation to retrieve. 0 is default, which will start querying from the most recent operation |
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 3,
     "method": "call",
@@ -181,11 +180,11 @@ The current number of operations for the account can be found in the account sta
 }
 ```
 
-#### Returns
+### Returns
 
 A list of operations performed by account, ordered from most recent to oldest.
 
-```json
+```javascript
 {
     "id": 3,
     "jsonrpc": "2.0",
@@ -220,22 +219,22 @@ A list of operations performed by account, ordered from most recent to oldest.
 }
 ```
 
-### get_contract_history(contract, start, stop, limit)
+## get\_contract\_history\(contract, stop, limit, start\)
 
 Get operations relevant to the specificed contract.
 
-#### Parameters
+### Parameters
 
-| Option                            | Description                                                    |
-|-----------------------------------|:---------------------------------------------------------------|
-| `contract_id_type contract`       | The contract whose history should be queried                   |
-| `operation_history_id_type stop`  | ID of the earliest operation to retrieve                       |
-| `unsigned limit`                  | Maximum number of operations to retrieve (must not exceed 100) |
-| `operation_history_id_type start` | ID of the most recent operation to retrieve                    |
+| Option | Description |
+| :--- | :--- |
+| `contract_id_type contract` | The contract whose history should be queried |
+| `operation_history_id_type stop` | ID of the earliest operation to retrieve |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+| `operation_history_id_type start` | ID of the most recent operation to retrieve |
 
-#### Example
+### Example
 
-```json
+```javascript
 {
     "id": 3,
     "method": "call",
@@ -252,11 +251,11 @@ Get operations relevant to the specificed contract.
 }
 ```
 
-#### Returns
+### Returns
 
 A list of operations performed by contract, ordered from most recent to oldest.
 
-```json
+```javascript
 {
     "id": 3,
     "jsonrpc": "2.0",
@@ -293,3 +292,4 @@ A list of operations performed by contract, ordered from most recent to oldest.
     ]
 }
 ```
+

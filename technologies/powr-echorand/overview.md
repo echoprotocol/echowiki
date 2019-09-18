@@ -1,12 +1,8 @@
-# Overview
-
-`team@echo.org`
-
-March 2019 WORKING DRAFT
+# Whitepaper
 
 ## Abstract
 
-EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus on which set of transactions to append to a distributed ledger. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
+Echo PoWR is the consensus mechanism used by the Echo protocol to provide fast and final consensus on which set of transactions to append to a distributed ledger. By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
 
 ## Introduction
 
@@ -105,26 +101,26 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 | Symbol | Description |
 | :---: | :--- |
-| **$$msg$$** | a message transmitted by a participating node to its peers during a specific step |
-| **$$sig(x)$$** | the EdDSA signature of $$x$$ |
-| **$$H(x)$$** | the SHA-256 hash of $$x$$ |
-| **$$r$$** | the current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $$r >= 1$$ |
-| **$$s$$** | the current step number of the algorithm in the round. $$s >= 1$$ |
-| **$$B_{r}$$** | a block created in round $$r$$, which equals to { **$$r$$**, **$$ID_{producer}$$**, **$$Q_{r}$$**, **$$H(B_{r})$$**, **$$H(B_{r-1})$$**, **$$sig(B)$$**, **$$PAY_{r}$$**, **$$CERT_{Br}$$** } |
-| **$$H(B_{r})$$** | the SHA-256 hash of **$$B_{r}$$** |
-| **$$PAY_{r}$$** | the set of transactions contained in block **$$B_{r}$$** |
-| **$$Q_{r}$$** | the shared randomness seed of round **$$r$$** |
-| **$$sig(Q_{r})$$** | the signature of a random vector of the **$$r$$** round |
-| **$$sig(B_{r})$$** | the signature of a block of the **$$r$$** round |
-| **$$l(r)$$** | the round **$$r$$** leader - determines **$$PAY_{r}$$**, creates **$$B_{r}$$** and determines **$$Q_{r}$$** |
-| **$$CERT_{r}$$** | a **$$B_{r}$$** block certificate formed out of a set of `bba_signature` messages |
-| **$$VRF(r, s)$$** | the ordered set of participants who act in step **$$s$$** of round **$$r$$** |
-| **$$VRFN(r, s)$$** | the ordered set of indexes of **$$VRF(r, s)$$** participants who are registered on the current node and participate in step **$$s$$** of round **$$r$$** |
-| **$$id$$** | an account identifier in the blockchain |
-| **$$A_s$$** | an array of account identifiers selected as participants in the step **$$s$$** |
-| **$$N_s$$** | an array of $$A_s$$ indexes which correspond to the identifiers of users authorized on the current node in the step **$$s$$** |
-| **$$l$$** | the id of the producer who is the leader in this round |
-| **$$ctx$$** | the context of the current round as an object which contains all received messages for the round |
+| $$msg$$ | a message transmitted by a participating node to its peers during a specific step |
+| $$sig(x)$$ | the EdDSA signature of $$x$$ |
+| $$H(x)$$ | the SHA-256 hash of $$x$$ |
+| $$r$$ | the current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $$r >= 1$$ |
+| $$s$$ | the current step number of the algorithm in the round. $$s >= 1$$ |
+| $$B_{r}$$ | a block created in round $$r$$, which equals to { $$r$$, $$ID_{producer}$$, $$Q_{r}$$, $$H(B_{r})$$, $$H(B_{r-1})$$, $$sig(B)$$, $$PAY_{r}$$, $$CERT_{Br}$$ } |
+| $$H(B_{r})$$ | the SHA-256 hash of $$B_{r}$$ |
+| $$PAY_{r}$$ | the set of transactions contained in block $$B_{r}$$ |
+| $$Q_{r}$$ | the shared randomness seed of round $$r$$ |
+| $$sig(Q_{r})$$ | the signature of a random vector of the $$r$$ round |
+| $$sig(B_{r})$$ | the signature of a block of the $$r$$ round |
+| $$l(r)$$ | the round $$r$$ leader - determines $$PAY_{r}$$, creates $$B_{r}$$ and determines $$Q_{r}$$ |
+| $$CERT_{r}$$ | a $$B_{r}$$ block certificate formed out of a set of `bba_signature` messages |
+| $$VRF(r, s)$$ | the ordered set of participants who act in step $$s$$ of round $$r$$ |
+| $$VRFN(r, s)$$ | the ordered set of indexes of $$VRF(r, s)$$ participants who are registered on the current node and participate in step $$s$$ of round $$r$$ |
+| $$id$$ | an account identifier in the blockchain |
+| $$A_s$$ | an array of account identifiers selected as participants in the step $$s$$ |
+| $$N_s$$ | an array of $$A_s$$ indexes which correspond to the identifiers of users authorized on the current node in the step $$s$$ |
+| $$l$$ | the id of the producer who is the leader in this round |
+| $$ctx$$ | the context of the current round as an object which contains all received messages for the round |
 
 ### Parameters
 
@@ -156,19 +152,19 @@ The concept of a verifiable random function \(VRF\) was introduced by Micali, Ra
 
 The use of VRF in EchoRand is as follows: having a pseudo-random value $$Q_r$$ for each round and the VRF function, each of the network nodes can determine the list of $$VRF(r, s)$$ executors in $$s$$ step of $$r$$ round,and based on it, perform the necessary actions if the authorized account on the node is part of $$VRF(r, s)$$, and additionally verify whether the participants have the right to act at this step.
 
-The function $$VRF_{n}(r, s)$$ returns a list of participants of a given length of round **$$r$$** and step **$$s$$**, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round **$$max({0, r - k})$$**, where **$$k = 1$$**. To calculate the function, a random vector $$Q_{r-k}$$ from round $$r-k$$ is required.
+The function $$VRF_{n}(r, s)$$ returns a list of participants of a given length of round $$r$$ and step $$s$$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $$max({0, r - k})$$, where $$k = 1$$. To calculate the function, a random vector $$Q_{r-k}$$ from round $$r-k$$ is required.
 
-##### Identification of Active Roles
+**Identification of Active Roles**
 
 The checked random function at each **r** round and **s** step is built iteratively, as follows:
 
-$$VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$ 
+$$VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$
 
-$$VRF_{1}(r, s) = H(VRF_{0}(r, s))$$ 
+$$VRF_{1}(r, s) = H(VRF_{0}(r, s))$$
 
-$$VRF_{2}(r, s) = H(VRF_{1}(r, s))$$ 
+$$VRF_{2}(r, s) = H(VRF_{1}(r, s))$$
 
-$$...$$ 
+$$...$$
 
 $$VRF_{n}(r, s) = H(VRF_{n-1}(r, s))$$
 
@@ -184,7 +180,7 @@ In other words, $$VRFN$$ is a selection of participants from $$VRF$$ who act on 
 
 At the same round and step but on different network nodes of the algorithm, the $$VRFN$$ selections will be different, while the $$VRF$$ selection will be the same.
 
-##### Generation of Randomness Seed
+**Generation of Randomness Seed**
 
 The starting seed $$Q_{0}$$ is selected randomly at blockchain database initialization.
 
@@ -196,7 +192,7 @@ In this case, the signature is generated using the EdDSA private key of the prod
 
 $$Q_{r} = H(Q_{r-1}, r)$$
 
-##### Generating a Random Value During BBA Steps
+**Generating a Random Value During BBA Steps**
 
 At each step of the BBA algorithm, all network nodes сan be divided into two sets:
 
@@ -226,11 +222,11 @@ Each network node generates a list of producers for the current block and if the
 * $$H(B_{r-1})$$ from $$CERT_{r-1}$$
 * $$A_{1}$$, $$N_{1}$$ from the context of the round
 
-##### Start
+**Start**
 
 Right after determining $$CERT_{r-1}$$
 
-##### Steps
+**Steps**
 
 1. **Verification**:
    1. If $$N_{1} = ∅$$, complete the step
@@ -255,18 +251,18 @@ This stage consists of three steps. At this stage, the goal of the verifiers is 
 
 Each of the selected verifiers tells the network which of the blocks they consider preferable for the current round.
 
-##### Input Data
+**Input Data**
 
 * $$H(B_{r-1})$$, $$Q_{r-1}$$ from $$CERT_{r-1}$$
 * $$A_{1}$$, $$A_{2}$$, $$N_{2}$$ from the context of the round
 
 $$v$$ is a local structure of a step that stores the hash of the block and the ID of the producer which created the block. The empty set symbol assigned to the elements $$v$$ means "empty block" and "unknown leader". In the application, it can be a predefined constant or a separate flag in the data structure.
 
-##### Start
+**Start**
 
 Right after determining $$CERT_{r-1}$$
 
-##### Steps
+**Steps**
 
 1. **Timer**: schedule the timer after the time equal to $$2 * λ$$, by a trigger:
    1. To define $$l$$, as $$id$$ from the received messages in $$ctx[id]$$ with a minimum index of $$A_{1}$$
@@ -320,15 +316,15 @@ Right after determining $$CERT_{r-1}$$
 
 Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes and announces the results of their count to the entire network.
 
-##### Input Data
+**Input Data**
 
 * $$A_{2}$$, $$A_{3}$$, $$N_{3}$$ from the context of the round
 
-##### Start
+**Start**
 
 Right after determining $$CERT_{r-1}$$
 
-##### Steps
+**Steps**
 
 1. **Timer**: schedule the timer after the time equal to $$3 * λ + Λ$$, by a trigger:
    1. $$v == \{ ∅, ∅ \}$$
@@ -344,12 +340,7 @@ Right after determining $$CERT_{r-1}$$
       1. $$v = \{ msg.block\_hash, msg.leader \}$$
       2. Go to **Communication**
 
-3. **Communication**: generating, signing and sending of messages
-   1. Stop timers, unsubscribe from network messages
-   2. If $$N_3 = ∅$$, end the step
-   3. $$∀n_3 ∈ N_3$$:
-      1. Get real user’s ID in the blockchain: $$id_{3} = A_{3}[n_{3}]$$
-      2. Sign with the user’s key $$id_{3}$$ and send `gc_proposal` = $$\{ r, 3, id_{3}, v \}$$
+3. **Communication**: generating, signing and sending of messages 1. Stop timers, unsubscribe from network messages 2. If $$N_3 = ∅$$, end the step 3. $$∀n_3 ∈ N_3$$: 1. Get real user’s ID in the blockchain: $$id_{3} = A_{3}[n_{3}]$$ 2. Sign with the user’s key $$id_{3}$$ and send `gc_proposal` = $$\{ r, 3, id_{3}, v \}$$
 
 #### Step 4 - Primary evaluation of the vote count
 
@@ -357,15 +348,15 @@ After receiving the voting results of the previous steps, all nodes know whether
 
 After this step, all nodes in the network have a preliminary idea of whether the best block has been determined or not. In an honest network, this would be enough to complete the round and append the block to the existing ledger. But since we allow the possibility of unscrupulous participants, the network needs an additional step to verify the data. This is the objective of the next stage.
 
-##### Input Data
+**Input Data**
 
 * $$A_{3}$$, $$A_{4}$$, $$N_{4}$$ from the context of the round
 
-##### Start
+**Start**
 
 Immediately after completing step 3.
 
-##### Steps
+**Steps**
 
 1. **Timer**: schedule the timer after the time equal to $$2 * λ$$, by a trigger:
    1. if $$∃l | ctx[l].v4.size() > t_{h}/2: v = \{ ctx[l].HB, l \}$$

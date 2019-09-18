@@ -1,22 +1,22 @@
-# Network broadcast API
+# Network Broadcast API
 
-### broadcast_transaction(trx)
+## broadcast\_transaction\(trx\)
 
 Broadcast a transaction to the network.
 
 The transaction will be checked for validity in the local database prior to broadcasting. If it fails to apply locally, an error will be thrown and the transaction will not be broadcast.
 
-#### Parameters
+### Parameters
 
-| Option                   | Description                  |
-|--------------------------|:-----------------------------|
+| Option | Description |
+| :--- | :--- |
 | `signed_transaction trx` | The transaction to broadcast |
 
-#### Example
+### Example
 
-**signed_transaction** structure
+**signed\_transaction** structure
 
-```json
+```javascript
 {
     "ref_block_num": "Least significant 16 bits from the reference block number. If
     relative_expiration is zero, this field must be zero as well.",
@@ -29,35 +29,34 @@ The transaction will be checked for validity in the local database prior to broa
 }
 ```
 
-### broadcast_transaction_with_callback(cb, trx)
+## broadcast\_transaction\_with\_callback\(cb, trx\)
 
-This version of broadcast transaction registers a callback method that will be called when the transaction is included into a block.
-The callback method includes the transaction id, block number, and transaction number in the block.
+This version of broadcast transaction registers a callback method that will be called when the transaction is included into a block. The callback method includes the transaction id, block number, and transaction number in the block.
 
-#### Parameters
+### Parameters
 
-| Option                     | Description                                                                                                    |
-|----------------------------|:---------------------------------------------------------------------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `confirmation_callback cb` | Transaction confirmation notifications with fields ID, block number, transaction number, processed transaction |
-| `signed_transaction trx`   | The transaction to broadcast                                                                                   |
+| `signed_transaction trx` | The transaction to broadcast |
 
-### broadcast_transaction_synchronous(trx)
+## broadcast\_transaction\_synchronous\(trx\)
 
 Synchronious version of `broadcast_transaction_with_callback`.
 
-#### Parameters
+### Parameters
 
-| Option                   | Description                  |
-|--------------------------|:-----------------------------|
+| Option | Description |
+| :--- | :--- |
 | `signed_transaction trx` | The transaction to broadcast |
 
-### broadcast_block(signed_block)
+## broadcast\_block\(signed\_block\)
 
 Broadcast a block to the network.
 
-**signed_block** structure
+**signed\_block** structure
 
-```json
+```javascript
 {
     "previous": "previous-block-id",
     "round" : "round-id",
@@ -72,3 +71,4 @@ Broadcast a block to the network.
     "transactions": [...]
 }
 ```
+
