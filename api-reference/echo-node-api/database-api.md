@@ -2268,34 +2268,6 @@ Map of account names to corresponding IDs.
 }
 ```
 
-### get\_account\_count\(\)
-
-Get the total number of accounts registered with the blockchain.
-
-#### Example
-
-```javascript
-{
-    "id": 3,
-    "method": "call",
-    "params": [
-        DATABASE_API_ID,
-        "get_account_count",
-        []
-    ]
-}
-```
-
-#### Returns
-
-```javascript
-{
-    "id": 3,
-    "jsonrpc": "2.0",
-    "result": 27
-}
-```
-
 ### get\_account\_addresses\(account\_id, from, limit\)
 
 Get addresses of specified account.
@@ -2381,6 +2353,34 @@ Account id of owner.
     "id": 4,
     "jsonrpc": "2.0",
     "result": "1.2.15"
+}
+```
+
+### get\_account\_count\(\)
+
+Get the total number of accounts registered with the blockchain.
+
+#### Example
+
+```javascript
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_account_count",
+        []
+    ]
+}
+```
+
+#### Returns
+
+```javascript
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": 27
 }
 ```
 

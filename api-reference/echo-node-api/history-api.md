@@ -1,6 +1,6 @@
 # History API
 
-## get\_account\_history\(account, start, stop, limit\)
+## get\_account\_history\(account, stop, limit, start\)
 
 Get operations relevant to the specificed account.
 
@@ -148,7 +148,7 @@ A list of operations performed by account, ordered from most recent to oldest.
 }
 ```
 
-## get\_relative\_account\_history\(account, start, stop, limit\)
+## get\_relative\_account\_history\(account, stop, limit, start\)
 
 Get operations relevant to the specified account referenced by an event numbering specific to the account. The current number of operations for the account can be found in the account statistics \(or use 0 for start\).
 
@@ -219,7 +219,7 @@ A list of operations performed by account, ordered from most recent to oldest.
 }
 ```
 
-## get\_contract\_history\(contract, start, stop, limit\)
+## get\_contract\_history\(contract, stop, limit, start\)
 
 Get operations relevant to the specificed contract.
 
