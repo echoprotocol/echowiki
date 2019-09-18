@@ -1,20 +1,21 @@
 # Registration API
 
-### register_account(callback, name, active_key, echorand_key)
+## register\_account\(callback, name, active\_key, echorand\_key\)
 
-#### Parameters
-| Option                        | Description                                                                   |
-|:------------------------------|:------------------------------------------------------------------------------|
+### Parameters
+
+| Option | Description |
+| :--- | :--- |
 | `variant_callback_t callback` | gives a notification whenever transaction for registation account broadcasted |
-| `string name`                 | name of account                                                               |
-| `public_key_t active`         | active ed25519 key                                                            |
-| `public_key_t echorand_key`   | ed25519 key for echorand                                                      |
+| `string name` | name of account |
+| `public_key_t active` | active ed25519 key |
+| `public_key_t echorand_key` | ed25519 key for echorand |
 
-#### Example
+### Example
 
 The objects retrieved, in the order they are mentioned in ids.
 
-```json
+```javascript
 {
     "id": 1,
     "method": "call",
@@ -31,9 +32,9 @@ The objects retrieved, in the order they are mentioned in ids.
 }
 ```
 
-#### Notice example
+### Notice example
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [
@@ -45,5 +46,15 @@ The objects retrieved, in the order they are mentioned in ids.
             }
         ]
     ]
+}
+```
+
+### Returns
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
 }
 ```
