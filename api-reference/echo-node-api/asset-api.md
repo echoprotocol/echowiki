@@ -66,7 +66,7 @@ Retrieve the number of holders of the provided asset.
 
 | Option | Description |
 | :--- | :--- |
-| `asset_id_type asset_id` | ID of the asset to retrieve, a string that look like 1.6. |
+| `asset_id_type asset_id` | ID of the asset to retrieve, a string that look like 1.3. |
 
 ### Example
 
