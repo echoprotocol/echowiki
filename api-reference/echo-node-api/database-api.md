@@ -2505,7 +2505,7 @@ Get logs of specified contract.
 | :--- | :--- |
 | `contract_id_type contract_id` | ID of the contract |
 | `uint32_t from` | number of block to start retrieve from |
-| `uint32_t to` | number of block to end to retrieve |
+| `uint32_t limit` | maximum number of addresses to return(must not exceed 100) |
 
 #### Example
 
@@ -2609,8 +2609,6 @@ Subscription to change the contract uses database-api.md\#set\_subscribe\_callba
 
 Subscribe to contract's logs.
 
-If you want to always receive alerts, then you can specify a very large number as the end of the range of the blocks you listen to, for example, `999999999`.
-
 When calling this method, it will return all already existing events in the specified range as well as the `get_contract_logs` method.
 
 #### Parameters
@@ -2634,8 +2632,6 @@ When calling this method, it will return all already existing events in the spec
         [
             "7",
             "1.9.3",
-            "680",
-            "100"
         ]
     ]
 }
@@ -2643,7 +2639,7 @@ When calling this method, it will return all already existing events in the spec
 
 #### Returns
 
-The contracts logs from specified blocks interval.
+The contracts logs by contract ID.
 
 ```javascript
 {
@@ -2827,7 +2823,7 @@ An array of balances of the account.
 
 ### get\_contract\_balances\(contract\_id\)
 
-Get an contract's balances in various assets.
+Get a contract's balances in various assets.
 
 #### Parameters
 
@@ -3719,7 +3715,7 @@ Takes a partially signed transaction and a set of public keys that the owner has
 
 #### Returns
 
-An set of public keys.
+A set of public keys.
 
 ```javascript
 {
@@ -3782,7 +3778,7 @@ This method will return the set of all public keys that could possibly sign for 
 
 #### Returns
 
-An set of public keys.
+A set of public keys.
 
 ```javascript
 {
@@ -4384,7 +4380,7 @@ The all public erc20 withdrawals data stored in the blockchain.
 
 ### get\_contract\_pool\_balance\(id\)
 
-Get an contract's pool balance in default asset.
+Get a contract's pool balance in default asset.
 
 #### Parameters
 
@@ -4425,7 +4421,7 @@ Balances of the contract.
 
 ### get\_contract\_pool\_whitelist\(id\)
 
-Get an contract's whitelist and blacklist.
+Get a contract's whitelist and blacklist.
 
 #### Parameters
 
