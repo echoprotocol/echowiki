@@ -17,16 +17,16 @@ Get operations relevant to the specificed account.
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "method": "call",
     "params": [
         HISTORY_API_ID,
         "get_account_history",
         [
-            "1.2.12",
-            "1.10.0",
+            "1.2.6",
+            "1.6.0",
             "100",
-            "1.10.10"
+            "1.6.10"
         ]
     ]
 }
@@ -38,11 +38,54 @@ A list of operations performed by account, ordered from most recent to oldest.
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.4",
+            "id": "1.6.10",
+            "op": [
+                1,
+                {
+                  "fee": {
+                      "amount": 2102,
+                      "asset_id": "1.3.0"
+                  },
+                  "registrar": "1.2.6",
+                  "name": "gordonfreeman",
+                  "active": {
+                      "weight_threshold": 1,
+                      "account_auths": [],
+                      "key_auths": [
+                          [
+                              "ECHO5yQoNcXdPpymd8U2ZyazyP3bXoQCMYrE3rZqosm7uipC",
+                              1
+                          ]
+                      ]
+                  },
+                  "echorand_key": "ECHOGAnwaHhNEUMqhjjdLdk755z1YAHiFw6SLvZ6Wm3uXgsp",
+                  "options": {
+                      "voting_account": "1.2.5",
+                      "delegating_account": "1.2.6",
+                      "delegate_share": 2000,
+                      "num_committee": 0,
+                      "votes": [],
+                      "extensions": []
+                  },
+                  "extensions": {}
+                }
+            ],
+            "result": [
+                1,
+                "1.2.16"
+            ],
+            "block_num": 19377,
+            "trx_in_block": 0,
+            "op_in_trx": 0,
+            "virtual_op": 29,
+            "extensions": []
+        },
+        {
+            "id": "1.6.1",
             "op": [
                 0,
                 {
@@ -51,7 +94,7 @@ A list of operations performed by account, ordered from most recent to oldest.
                         "asset_id": "1.3.0"
                     },
                     "from": "1.2.15",
-                    "to": "1.2.12",
+                    "to": "1.2.6",
                     "amount": {
                         "amount": "1000000000000",
                         "asset_id": "1.3.0"
@@ -63,10 +106,10 @@ A list of operations performed by account, ordered from most recent to oldest.
                 0,
                 {}
             ],
-            "block_num": 2269,
+            "block_num": 249,
             "trx_in_block": 0,
             "op_in_trx": 0,
-            "virtual_op": 33,
+            "virtual_op": 20,
             "extensions": []
         }
     ]
@@ -91,16 +134,16 @@ Get only asked operations relevant to the specified account.
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "method": "call",
     "params": [
         HISTORY_API_ID,
         "get_account_history_operations",
         [
-            "1.2.0",
+            "1.2.15",
             "0",
-            "1.10.0",
-            "1.10.10",
+            "1.6.3",
+            "1.6.0",
             "100"
         ]
     ]
@@ -113,11 +156,11 @@ A list of operations performed by account, ordered from most recent to oldest.
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.3623",
+            "id": "1.6.3",
             "op": [
                 0,
                 {
@@ -126,9 +169,9 @@ A list of operations performed by account, ordered from most recent to oldest.
                         "asset_id": "1.3.0"
                     },
                     "from": "1.2.15",
-                    "to": "1.2.0",
+                    "to": "1.2.8",
                     "amount": {
-                        "amount": "10000000000",
+                        "amount": "1000000000000",
                         "asset_id": "1.3.0"
                     },
                     "extensions": []
@@ -138,10 +181,66 @@ A list of operations performed by account, ordered from most recent to oldest.
                 0,
                 {}
             ],
-            "block_num": 732031,
+            "block_num": 250,
+            "trx_in_block": 0,
+            "op_in_trx": 0,
+            "virtual_op": 22,
+            "extensions": []
+        },
+        {
+            "id": "1.6.2",
+            "op": [
+                0,
+                {
+                    "fee": {
+                        "amount": 20,
+                        "asset_id": "1.3.0"
+                    },
+                    "from": "1.2.15",
+                    "to": "1.2.7",
+                    "amount": {
+                        "amount": "1000000000000",
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+            ],
+            "result": [
+                0,
+                {}
+            ],
+            "block_num": 249,
             "trx_in_block": 1,
             "op_in_trx": 0,
-            "virtual_op": 3652,
+            "virtual_op": 21,
+            "extensions": []
+        },
+        {
+            "id": "1.6.1",
+            "op": [
+              0,
+              {
+                  "fee": {
+                      "amount": 20,
+                      "asset_id": "1.3.0"
+                  },
+                  "from": "1.2.15",
+                  "to": "1.2.6",
+                  "amount": {
+                      "amount": "1000000000000",
+                      "asset_id": "1.3.0"
+                  },
+                  "extensions": []
+              }
+            ],
+            "result": [
+                0,
+                {}
+            ],
+            "block_num": 249,
+            "trx_in_block": 0,
+            "op_in_trx": 0,
+            "virtual_op": 20,
             "extensions": []
         }
     ]
@@ -165,15 +264,15 @@ Get operations relevant to the specified account referenced by an event numberin
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "method": "call",
     "params": [
         HISTORY_API_ID,
         "get_relative_account_history",
         [
-            "1.2.6",
+            "1.2.15",
             "0",
-            "1",
+            "3",
             "10"
         ]
     ]
@@ -186,22 +285,24 @@ A list of operations performed by account, ordered from most recent to oldest.
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.163",
+            "id": "1.6.9",
             "op": [
-                47,
+                0,
                 {
                     "fee": {
-                        "amount": 0,
+                        "amount": 20,
                         "asset_id": "1.3.0"
                     },
-                    "committee_member_id": "1.2.6",
-                    "malicious_committeemen": [],
-                    "account": "1.2.46",
-                    "eth_addr": "aCf5E99Db1b408E9CF5C2643CD9059D7E0fa6264",
+                    "from": "1.2.15",
+                    "to": "1.2.14",
+                    "amount": {
+                        "amount": "1000000000000",
+                        "asset_id": "1.3.0"
+                    },
                     "extensions": []
                 }
             ],
@@ -209,10 +310,66 @@ A list of operations performed by account, ordered from most recent to oldest.
                 0,
                 {}
             ],
-            "block_num": 4550,
-            "trx_in_block": 18,
+            "block_num": 255,
+            "trx_in_block": 0,
             "op_in_trx": 0,
-            "virtual_op": 192,
+            "virtual_op": 28,
+            "extensions": []
+        },
+        {
+            "id": "1.6.8",
+            "op": [
+                0,
+                {
+                    "fee": {
+                        "amount": 20,
+                        "asset_id": "1.3.0"
+                    },
+                    "from": "1.2.15",
+                    "to": "1.2.13",
+                    "amount": {
+                        "amount": "1000000000000",
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+            ],
+            "result": [
+                0,
+                {}
+            ],
+            "block_num": 254,
+            "trx_in_block": 0,
+            "op_in_trx": 0,
+            "virtual_op": 27,
+            "extensions": []
+        },
+        {
+            "id": "1.6.7",
+            "op": [
+                0,
+                {
+                    "fee": {
+                        "amount": 20,
+                        "asset_id": "1.3.0"
+                    },
+                    "from": "1.2.15",
+                    "to": "1.2.12",
+                    "amount": {
+                        "amount": "1000000000000",
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+            ],
+            "result": [
+                0,
+                {}
+            ],
+            "block_num": 253,
+            "trx_in_block": 1,
+            "op_in_trx": 0,
+            "virtual_op": 26,
             "extensions": []
         }
     ]
@@ -233,19 +390,18 @@ Get operations relevant to the specificed contract.
 | `operation_history_id_type start` | ID of the most recent operation to retrieve |
 
 ### Example
-
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "method": "call",
     "params": [
         HISTORY_API_ID,
         "get_contract_history",
         [
-            "1.14.0",
-            "1.10.0",
-            "1",
-            "1.10.20"
+            "1.9.1",
+            "1.6.0",
+            10,
+            "1.6.45"
         ]
     ]
 }
@@ -257,39 +413,39 @@ A list of operations performed by contract, ordered from most recent to oldest.
 
 ```javascript
 {
-    "id": 3,
+    "id": 1,
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.10.0",
+            "id": "1.6.44",
             "op": [
-                34,
+                24,
                 {
                     "fee": {
+                        "amount": 1633,
+                        "asset_id": "1.3.0"
+                    },
+                    "registrar": "1.2.38",
+                    "value": {
                         "amount": 0,
                         "asset_id": "1.3.0"
                     },
-                    "deposit_to_account": "1.2.15",
-                    "balance_to_claim": "1.13.0",
-                    "balance_owner_key": "ECHO3BhH6nPrPmh6wAtsNphRTcreo2uzZLxSP8JyNJoiRD6Q",
-                    "total_claimed": {
-                        "amount": "1000000000000000",
-                        "asset_id": "1.3.0"
-                    },
+                    "code": "CONTRACT BYTES",
+                    "supported_asset_id": "1.3.0",
+                    "eth_accuracy": true,
                     "extensions": []
                 }
             ],
             "result": [
-                0,
-                {}
+                1,
+                "1.10.1"
             ],
-            "block_num": 2250,
+            "block_num": 152375,
             "trx_in_block": 0,
             "op_in_trx": 0,
-            "virtual_op": 29,
+            "virtual_op": 63,
             "extensions": []
         }
     ]
 }
 ```
-
