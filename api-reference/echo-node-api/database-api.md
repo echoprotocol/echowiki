@@ -1,8 +1,8 @@
-# Database API
+# DataBase API
 
 ## Objects
 
-### get_objects(ids)
+#### get\_objects\(ids\)
 
 Get the objects corresponding to the provided IDs.
 
@@ -10,13 +10,13 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 
 #### Parameters
 
-| Option                       | Description                                            |
-|------------------------------|:-------------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<object_id_type> ids` | an array of object IDs, e.g. `["1.2.1", "1.2.2", ...]` |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -37,7 +37,7 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 
 The objects retrieved, in the order they are mentioned in ids.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -133,22 +133,22 @@ The objects retrieved, in the order they are mentioned in ids.
 
 ## Subscriptions
 
-### set_subscribe_callback(callback, clear_filter)
+### set\_subscribe\_callback\(callback, clear\_filter\)
 
 Subscribe to updates.
 
 #### Parameters
 
-| Option                             | Description                                                       |
-|------------------------------------|:------------------------------------------------------------------|
-| `function<void(variant)> callback` | global subscription callback can be registered                    |
-| `clear_filter`                     | whether subscribe to universal object creation and removal events |
+| Option | Description |
+| :--- | :--- |
+| `function<void(variant)> callback` | global subscription callback can be registered |
+| `clear_filter` | whether subscribe to universal object creation and removal events |
 
-If *clear_filter* is set to true, the API server will notify all newly created objects and ID of all newly removed objects to the client, no matter whether client subscribed to the objects
+If _clear\_filter_ is set to true, the API server will notify all newly created objects and ID of all newly removed objects to the client, no matter whether client subscribed to the objects
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -165,7 +165,7 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -175,7 +175,7 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 
 #### Notice example
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [ 
@@ -200,19 +200,19 @@ If *clear_filter* is set to true, the API server will notify all newly created o
 }
 ```
 
-### set_pending_transaction_callback(callback)
+### set\_pending\_transaction\_callback\(callback\)
 
 Subscribe to pending transactions.
 
 #### Parameters
 
-| Option                             | Description                                         |
-|------------------------------------|:----------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `function<void(variant)> callback` | notifications for incoming unconfirmed transactions |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -228,7 +228,7 @@ Subscribe to pending transactions.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -238,7 +238,7 @@ Subscribe to pending transactions.
 
 #### Notice example
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [
@@ -278,19 +278,19 @@ Subscribe to pending transactions.
 }
 ```
 
-### set_block_applied_callback(callback)
+### set\_block\_applied\_callback\(callback\)
 
 Subscribe to block applications.
 
 #### Parameters
 
-| Option                                      | Description                                                                  |
-|---------------------------------------------|:-----------------------------------------------------------------------------|
-| `function<void(variant block_id)> callback` | gives a notification whenever the block block_id is applied to the blockchain |
+| Option | Description |
+| :--- | :--- |
+| `function<void(variant block_id)> callback` | gives a notification whenever the block block\_id is applied to the blockchain |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -306,7 +306,7 @@ Subscribe to block applications.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -316,7 +316,7 @@ Subscribe to block applications.
 
 #### Notice example
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [
@@ -328,13 +328,13 @@ Subscribe to block applications.
 }
 ```
 
-### cancel_all_subscriptions()
+### cancel\_all\_subscriptions\(\)
 
 Stop receiving any notifications. Unsubscribe from all subscribed objects.
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -350,7 +350,7 @@ Stop receiving any notifications. Unsubscribe from all subscribed objects.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -360,19 +360,19 @@ Stop receiving any notifications. Unsubscribe from all subscribed objects.
 
 ## Blocks and transactions
 
-### get_block_header(block_num)
+### get\_block\_header\(block\_num\)
 
 Retrieve a block header.
 
 #### Parameters
 
-| Option               | Description                                         |
-|----------------------|:----------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `uint32_t block_num` | height of the block whose header should be returned |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -390,7 +390,7 @@ Retrieve a block header.
 
 Header of the referenced block, or null if no matching block was found.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -457,19 +457,19 @@ Header of the referenced block, or null if no matching block was found.
 }
 ```
 
-### get_block_header_batch(block_nums)
+### get\_block\_header\_batch\(block\_nums\)
 
 Retrieve multiple block header by block numbers.
 
 #### Parameters
 
-| Option                        | Description                                                            |
-|-------------------------------|:-----------------------------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<uint32_t> block_nums` | vector containing heights of the block whose header should be returned |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -491,7 +491,7 @@ Retrieve multiple block header by block numbers.
 
 Array of headers of the referenced blocks, or null if no matching block was found.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -689,19 +689,19 @@ Array of headers of the referenced blocks, or null if no matching block was foun
 }
 ```
 
-### get_block(block_num)
+### get\_block\(block\_num\)
 
 Retrieve a full, signed block.
 
 #### Parameters
 
-| Option               | Description                        |
-|----------------------|:-----------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `uint32_t block_num` | height of the block to be returned |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -719,7 +719,7 @@ Retrieve a full, signed block.
 
 The referenced block, or null if no matching block was found.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -836,19 +836,19 @@ The referenced block, or null if no matching block was found.
 }
 ```
 
-### get_block_tx_number(id)
+### get\_block\_tx\_number\(id\)
 
 Get the total number of transactions in block.
 
 #### Parameters
 
-| Option                        | Description                 |
-|-------------------------------|:----------------------------|
+| Option | Description |
+| :--- | :--- |
 | `block_id_type(ripemd160) id` | ID of the block to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -866,7 +866,7 @@ Get the total number of transactions in block.
 
 If block was found total number of transaction in block, or null if no matching block was found.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -874,19 +874,19 @@ If block was found total number of transaction in block, or null if no matching 
 }
 ```
 
-### get_block_virtual_ops(block_num)
+### get\_block\_virtual\_ops\(block\_num\)
 
 Get virtual ops from the block.
 
 #### Parameters
 
-| Option               | Description                        |
-|----------------------|:-----------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `uint32_t block_num` | height of the block to be returned |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -904,7 +904,7 @@ Get virtual ops from the block.
 
 Array of operation history objects, or null if no matching operation was found.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -941,20 +941,20 @@ Array of operation history objects, or null if no matching operation was found.
 }
 ```
 
-### get_transaction(block_num, trx_in_block)
+### get\_transaction\(block\_num, trx\_in\_block\)
 
 Fetch an individual transaction.
 
 #### Parameters
 
-| Option                  | Description                                          |
-|-------------------------|:-----------------------------------------------------|
-| `uint32_t block_num`    | height of the block in which the transaction resides |
-| `uint32_t trx_in_block` | index of the transaction in the block                |
+| Option | Description |
+| :--- | :--- |
+| `uint32_t block_num` | height of the block in which the transaction resides |
+| `uint32_t trx_in_block` | index of the transaction in the block |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -973,7 +973,7 @@ Fetch an individual transaction.
 
 A processed transaction object.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1014,21 +1014,19 @@ A processed transaction object.
 }
 ```
 
-### get_recent_transaction_by_id(id)
+### get\_recent\_transaction\_by\_id\(id\)
 
-If the transaction has not expired, this method will return the
-transaction for the given ID or it will return null if it is not known.
-Just because it is not known does not mean it wasn’t included in the blockchain.
+If the transaction has not expired, this method will return the transaction for the given ID or it will return null if it is not known. Just because it is not known does not mean it wasn’t included in the blockchain.
 
 #### Parameters
 
-| Option                              | Description           |
-|-------------------------------------|:----------------------|
+| Option | Description |
+| :--- | :--- |
 | `transaction_id_type(ripemd160) id` | ID of the transaction |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1046,7 +1044,7 @@ Just because it is not known does not mean it wasn’t included in the blockchai
 
 A signed transaction object.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1088,17 +1086,15 @@ A signed transaction object.
 }
 ```
 
----
-
 ## Globals
 
-### get_chain_properties()
+### get\_chain\_properties\(\)
 
 Retrieve the chain property object associated with the chain.
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1112,7 +1108,7 @@ Retrieve the chain property object associated with the chain.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1127,13 +1123,13 @@ Retrieve the chain property object associated with the chain.
 }
 ```
 
-### get_global_properties()
+### get\_global\_properties\(\)
 
 Retrieve the current global property object.
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1147,7 +1143,7 @@ Retrieve the current global property object.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1533,13 +1529,13 @@ Retrieve the current global property object.
 }
 ```
 
-### get_config()
+### get\_config\(\)
 
 Retrieve compile-time constants.
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1553,7 +1549,7 @@ Retrieve compile-time constants.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1613,13 +1609,13 @@ Retrieve compile-time constants.
 }
 ```
 
-### get_chain_id()
+### get\_chain\_id\(\)
 
 Get the chain ID.
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1633,7 +1629,7 @@ Get the chain ID.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1641,13 +1637,13 @@ Get the chain ID.
 }
 ```
 
-### get_dynamic_global_properties()
+### get\_dynamic\_global\_properties\(\)
 
 Retrieve the current dynamic global property object.
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1661,7 +1657,7 @@ Retrieve the current dynamic global property object.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1685,19 +1681,19 @@ Retrieve the current dynamic global property object.
 
 ## Keys
 
-### get_key_references(keys)
+### get\_key\_references\(keys\)
 
 Retreive an array of account IDs associated with the given keys.
 
 #### Parameters
 
-| Option                      | Description             |
-|-----------------------------|:------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<public_key_t> keys` | an array of public keys |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1718,7 +1714,7 @@ Retreive an array of account IDs associated with the given keys.
 
 An array of arrays of account IDs for every public key provided.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1733,20 +1729,19 @@ An array of arrays of account IDs for every public key provided.
 }
 ```
 
-### is_public_key_registered(public_key)
+### is\_public\_key\_registered\(public\_key\)
 
-Determine whether of a public key is *currently* linked
-to any *registered* (i.e. non-stealth) account on the blockchain.
+Determine whether of a public key is _currently_ linked to any _registered_ \(i.e. non-stealth\) account on the blockchain.
 
 #### Parameters
 
-| Option             | Description |
-|--------------------|:------------|
-| `public_key_t key` | public key  |
+| Option | Description |
+| :--- | :--- |
+| `public_key_t key` | public key |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1758,14 +1753,13 @@ to any *registered* (i.e. non-stealth) account on the blockchain.
         ]
     ]
 }
-
 ```
 
 #### Returns
 
 Whether a public key is known.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1775,19 +1769,19 @@ Whether a public key is known.
 
 ## Accounts
 
-### get_accounts(account_ids)
+### get\_accounts\(account\_ids\)
 
-Get a list of accounts by ID. This function has semantics identical to get_objects.
+Get a list of accounts by ID. This function has semantics identical to get\_objects.
 
 #### Parameters
 
-| Option                                 | Description                     |
-|----------------------------------------|:--------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<account_id_type> accounts_ids` | IDs of the accounts to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1807,7 +1801,7 @@ Get a list of accounts by ID. This function has semantics identical to get_objec
 
 The accounts corresponding to the provided IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1851,25 +1845,22 @@ The accounts corresponding to the provided IDs.
 }
 ```
 
-### get_full_accounts(names_or_ids, subscribe)
+### get\_full\_accounts\(names\_or\_ids, subscribe\)
 
 Fetch all objects relevant to the specified accounts and subscribe to updates.
 
-This function fetches all relevant objects for the given accounts,
-and subscribes to updates to the given accounts. If any of the strings in names_or_ids
-cannot be tied to an account, that input will be ignored.
-All other accounts will be retrieved and subscribed.
+This function fetches all relevant objects for the given accounts, and subscribes to updates to the given accounts. If any of the strings in names\_or\_ids cannot be tied to an account, that input will be ignored. All other accounts will be retrieved and subscribed.
 
 #### Parameters
 
-| Option                        | Description                                                                |
-|-------------------------------|:---------------------------------------------------------------------------|
-| `vector<string> names_or_ids` | an array of either the names or IDs of accounts to retrieve (can be mixed) |
-| `bool subscribe`              | whether to subscribe to updates                                            |
+| Option | Description |
+| :--- | :--- |
+| `vector<string> names_or_ids` | an array of either the names or IDs of accounts to retrieve \(can be mixed\) |
+| `bool subscribe` | whether to subscribe to updates |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -1888,9 +1879,9 @@ All other accounts will be retrieved and subscribed.
 
 #### Returns
 
-A map of strings from names_or_ids to the corresponding accounts.
+A map of strings from names\_or\_ids to the corresponding accounts.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1987,9 +1978,9 @@ A map of strings from names_or_ids to the corresponding accounts.
 
 #### Notice example
 
-The notification was received by performing the account update operation for changing delegating_account.
+The notification was received by performing the account update operation for changing delegating\_account.
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [
@@ -2037,19 +2028,19 @@ The notification was received by performing the account update operation for cha
 }
 ```
 
-### get_account_by_name(name)
+### get\_account\_by\_name\(name\)
 
 Get the account object by it's name.
 
 #### Parameters
 
-| Option        | Description  |
-|---------------|:-------------|
+| Option | Description |
+| :--- | :--- |
 | `string name` | account name |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2067,7 +2058,7 @@ Get the account object by it's name.
 
 Account object it the account exists, null otherwise.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2109,19 +2100,19 @@ Account object it the account exists, null otherwise.
 }
 ```
 
-### get_account_references(account_id)
+### get\_account\_references\(account\_id\)
 
 All accounts that refer to the key or account id in their active authorities.
 
 #### Parameters
 
-| Option                       | Description       |
-|------------------------------|:------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account_id` | id of the account |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2137,7 +2128,7 @@ All accounts that refer to the key or account id in their active authorities.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2148,19 +2139,19 @@ All accounts that refer to the key or account id in their active authorities.
 }
 ```
 
-### lookup_account_names(account_names)
+### lookup\_account\_names\(account\_names\)
 
-Get a list of accounts by name. This function has semantics identical to get_objects.
+Get a list of accounts by name. This function has semantics identical to get\_objects.
 
 #### Parameters
 
-| Option                         | Description                       |
-|--------------------------------|:----------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<string> account_names` | names of the accounts to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2180,7 +2171,7 @@ Get a list of accounts by name. This function has semantics identical to get_obj
 
 The accounts holding the provided names.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2224,20 +2215,20 @@ The accounts holding the provided names.
 }
 ```
 
-### lookup_accounts(lower_bound_name, limit)
+### lookup\_accounts\(lower\_bound\_name, limit\)
 
 Get names and IDs for registered accounts.
 
 #### Parameters
 
-| Option                    | Description                                              |
-|---------------------------|:---------------------------------------------------------|
-| `string lower_bound_name` | lower bound of the first name to return                  |
-| `uint32_t limit`          | maximum number of results to return must not exceed 1000 |
+| Option | Description |
+| :--- | :--- |
+| `string lower_bound_name` | lower bound of the first name to return |
+| `uint32_t limit` | maximum number of results to return must not exceed 1000 |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2256,7 +2247,7 @@ Get names and IDs for registered accounts.
 
 Map of account names to corresponding IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2277,49 +2268,21 @@ Map of account names to corresponding IDs.
 }
 ```
 
-### get_account_count()
-
-Get the total number of accounts registered with the blockchain.
-
-#### Example
-
-```json
-{
-    "id": 3,
-    "method": "call",
-    "params": [
-        DATABASE_API_ID,
-        "get_account_count",
-        []
-    ]
-}
-```
-
-#### Returns
-
-```json
-{
-    "id": 3,
-    "jsonrpc": "2.0",
-    "result": 27
-}
-```
-
-### get_account_addresses(account_id, from, limit)
+### get\_account\_addresses\(account\_id, from, limit\)
 
 Get addresses of specified account.
 
 #### Parameters
 
-| Option                       | Description                            |
-|------------------------------|:---------------------------------------|
-| `account_id_type account_id` | ID of the account                      |
-| `uint64_t from`              | number of block to start retrieve from |
-| `unsigned limit`             | maximum number of addresses to return  |
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account_id` | ID of the account |
+| `uint64_t from` | number of block to start retrieve from |
+| `unsigned limit` | maximum number of addresses to return |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2339,7 +2302,7 @@ Get addresses of specified account.
 
 Addresses owned by account in specified ids interval.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2355,19 +2318,19 @@ Addresses owned by account in specified ids interval.
 }
 ```
 
-### get_account_by_address(address)
+### get\_account\_by\_address\(address\)
 
 Get owner of specified address.
 
 #### Parameters
 
-| Option              | Description                       |
-|---------------------|:----------------------------------|
-| `ripemd160 address` | address in form of ripemd160 hash | 
+| Option | Description |
+| :--- | :--- |
+| `ripemd160 address` | address in form of ripemd160 hash |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2385,7 +2348,7 @@ Get owner of specified address.
 
 Account id of owner.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2393,21 +2356,49 @@ Account id of owner.
 }
 ```
 
+### get\_account\_count\(\)
+
+Get the total number of accounts registered with the blockchain.
+
+#### Example
+
+```javascript
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_account_count",
+        []
+    ]
+}
+```
+
+#### Returns
+
+```javascript
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": 27
+}
+```
+
 ## Contracts
 
-### get_contract(contract_id)
+### get\_contract\(contract\_id\)
 
 Get a contract info from VM by ID.
 
 #### Parameters
 
-| Option                         | Description                    |
-|--------------------------------|:-------------------------------|
-| `contract_id_type contract_id` | ID of the contract to retrieve | 
+| Option | Description |
+| :--- | :--- |
+| `contract_id_type contract_id` | ID of the contract to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2425,7 +2416,7 @@ Get a contract info from VM by ID.
 
 The contracts data from VM corresponding to the provided ID.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2447,19 +2438,19 @@ The contracts data from VM corresponding to the provided ID.
 }
 ```
 
-### get_contracts(contract_ids)
+### get\_contracts\(contract\_ids\)
 
- Get a list of contracts by ID.
+Get a list of contracts by ID.
 
- ##### Parameters
+**Parameters**
 
-| Option                                  | Description                      |
-|-----------------------------------------|:---------------------------------|
-| `vector<contract_id_type> contract_ids` | IDs of the contracts to retrieve | 
+| Option | Description |
+| :--- | :--- |
+| `vector<contract_id_type> contract_ids` | IDs of the contracts to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2478,7 +2469,7 @@ The contracts data from VM corresponding to the provided ID.
 
 The contracts corresponding to the provided IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2504,21 +2495,21 @@ The contracts corresponding to the provided IDs.
 }
 ```
 
-### get_contract_logs(contract_id, from, limit)
+### get\_contract\_logs\(contract\_id, from, to\)
 
 Get logs of specified contract.
 
 #### Parameters
 
-| Option                         | Description                                                |
-|--------------------------------|:-----------------------------------------------------------|
-| `contract_id_type contract_id` | ID of the contract                                         |
-| `uint32_t from`                | number of block to start retrieve from                     |
-| `unsigned limit`               | maximum number of addresses to return(must not exceed 100) |
+| Option | Description |
+| :--- | :--- |
+| `contract_id_type contract_id` | ID of the contract |
+| `uint32_t from` | number of block to start retrieve from |
+| `uint32_t limit` | maximum number of addresses to return(must not exceed 100) |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2538,7 +2529,7 @@ Get logs of specified contract.
 
 The contracts logs from specified blocks interval.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2554,19 +2545,19 @@ The contracts logs from specified blocks interval.
 }
 ```
 
-### subscribe_contracts(contracts_ids)
+### subscribe\_contracts\(contracts\_ids\)
 
-Subscription to change the contract uses database-api.md#set_subscribe_callback-callback-clear_filter.
+Subscription to change the contract uses database-api.md\#set\_subscribe\_callback-callback-clear\_filter.
 
-#### Parameters 
+#### Parameters
 
-| Option                                   | Description                       |
-|------------------------------------------|:----------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<contract_id_type> contracts_ids` | IDs of the contracts to subscribe |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2584,7 +2575,7 @@ Subscription to change the contract uses database-api.md#set_subscribe_callback-
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2594,7 +2585,7 @@ Subscription to change the contract uses database-api.md#set_subscribe_callback-
 
 #### Notice example
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [
@@ -2614,7 +2605,7 @@ Subscription to change the contract uses database-api.md#set_subscribe_callback-
 }
 ```
 
-### subscribe_contract_logs(callback, contract_id)
+### subscribe\_contract\_logs\(callback, contract\_id, from, to\)
 
 Subscribe to contract's logs.
 
@@ -2622,14 +2613,16 @@ When calling this method, it will return all already existing events in the spec
 
 #### Parameters
 
-| Option                         | Description                                                 |
-|:-------------------------------|:------------------------------------------------------------|
-| `function<void(variant)> cb`   | callback method which is called when contracts has new logs |
-| `contract_id_type contract_id` | ID of the contract                                          |
+| Option | Description |
+| :--- | :--- |
+| `function<void(variant)> cb` | callback method which is called when contracts has new logs |
+| `contract_id_type contract_id` | ID of the contract |
+| `uint32_t from` | number of block to start retrieve from |
+| `uint32_t to` | number of block to end to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2648,7 +2641,7 @@ When calling this method, it will return all already existing events in the spec
 
 The contracts logs by contract ID.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2658,7 +2651,7 @@ The contracts logs by contract ID.
 
 #### Notice example
 
-```json
+```javascript
 {
     "method": "notice",
     "params": [
@@ -2678,19 +2671,19 @@ The contracts logs by contract ID.
 }
 ```
 
-### get_contract_result(id)
+### get\_contract\_result\(id\)
 
-Get contract result from VM for specified result_id
+Get contract result from VM for specified result\_id
 
 #### Parameters
 
-| Option                       | Description              |
-|------------------------------|:-------------------------|
+| Option | Description |
+| :--- | :--- |
 | `contract_result_id_type id` | ID of result to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2708,7 +2701,7 @@ Get contract result from VM for specified result_id
 
 Result of execution.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2735,22 +2728,22 @@ Result of execution.
 }
 ```
 
-### call_contract_no_changing_state(contract_id, registrar_account, asset_type, code)
+### call\_contract\_no\_changing\_state\(contract\_id, registrar\_account, asset\_type, code\)
 
 Call the provided contract, but don't change the state.
 
 #### Parameters
 
-| Option                              | Description                                                   |
-|:------------------------------------|:--------------------------------------------------------------|
-| `contract_id_type contract_id`      | ID of the contract                                            |
-| `account_id_type registrar_account` | name of the account calling the contract                      |
-| `asset_id_type asset_type`          | the type of the asset transfered to the contract              |
-| `string code`                       | the hash of the method to call(or name for x86-x64 contracts) |
+| Option | Description |
+| :--- | :--- |
+| `contract_id_type contract_id` | ID of the contract |
+| `account_id_type registrar_account` | name of the account calling the contract |
+| `asset_id_type asset_type` | the type of the asset transfered to the contract |
+| `string code` | the hash of the method to call\(or name for x86-x64 contracts\) |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2771,7 +2764,7 @@ Call the provided contract, but don't change the state.
 
 Result of execution.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2781,20 +2774,20 @@ Result of execution.
 
 ## Balances
 
-### get_account_balances(id, assets)
+### get\_account\_balances\(id, assets\)
 
 Get an account’s balances in various assets.
 
 #### Parameters
 
-| Option                           | Description                                                                                         |
-|:---------------------------------|:----------------------------------------------------------------------------------------------------|
-| `account_id_type id`             | ID of the account to get balances for                                                               |
+| Option | Description |
+| :--- | :--- |
+| `account_id_type id` | ID of the account to get balances for |
 | `flat_set<asset_id_type> assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2815,7 +2808,7 @@ Get an account’s balances in various assets.
 
 An array of balances of the account.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2828,19 +2821,19 @@ An array of balances of the account.
 }
 ```
 
-### get_contract_balances(contract_id)
+### get\_contract\_balances\(contract\_id\)
 
 Get a contract's balances in various assets.
 
 #### Parameters
 
-| Option                         | Description                            |
-|:-------------------------------|:---------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `contract_id_type contract_id` | ID of the contract to get balances for |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2858,7 +2851,7 @@ Get a contract's balances in various assets.
 
 An array of balances of the contract.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2871,20 +2864,20 @@ An array of balances of the contract.
 }
 ```
 
-### get_named_account_balances(name, assets)
+### get\_named\_account\_balances\(name, assets\)
 
-Semantically equivalent to *get_account_balances*, but takes a name instead of an ID.
+Semantically equivalent to _get\_account\_balances_, but takes a name instead of an ID.
 
 #### Parameters
 
-| Option                           | Description                                                                                         |
-|:---------------------------------|:----------------------------------------------------------------------------------------------------|
-| `string name`                    | name of the account to get balances for                                                             |
+| Option | Description |
+| :--- | :--- |
+| `string name` | name of the account to get balances for |
 | `flat_set<asset_id_type> assets` | an array of IDs of the assets to get balances of; if empty, get all assets account has a balance in |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2903,7 +2896,7 @@ Semantically equivalent to *get_account_balances*, but takes a name instead of a
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2916,19 +2909,19 @@ Semantically equivalent to *get_account_balances*, but takes a name instead of a
 }
 ```
 
-### get_balance_objects(keys)
+### get\_balance\_objects\(keys\)
 
 Returns all unclaimed balance objects for a set of addresses.
 
 #### Parameters
 
-| Option                      | Description             |
-|:----------------------------|:------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<public_key_t> keys` | an array of public keys |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -2949,7 +2942,7 @@ Returns all unclaimed balance objects for a set of addresses.
 
 An array of balances objects.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -2968,17 +2961,17 @@ An array of balances objects.
 }
 ```
 
-### get_vested_balances(objs)
+### get\_vested\_balances\(objs\)
 
 #### Parameters
 
-| Option                         | Description            |
-|:-------------------------------|:-----------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<balance_id_type> objs` | an array of balance ID |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 3,
     "method": "call",
@@ -2999,7 +2992,7 @@ An array of balances objects.
 
 An array of assets vested.
 
-```json
+```javascript
 {
     "id": 3,
     "jsonrpc": "2.0",
@@ -3012,17 +3005,17 @@ An array of assets vested.
 }
 ```
 
-### get_vesting_balances(account_id)
+### get\_vesting\_balances\(account\_id\)
 
 #### Parameters
 
-| Option                        | Description              |
-|:------------------------------|:-------------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account_ids` | the id of account to use |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3040,7 +3033,7 @@ An array of assets vested.
 
 An array of vesting balances.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3069,19 +3062,19 @@ An array of vesting balances.
 
 ## Assets
 
-### get_assets(asset_ids)
+### get\_assets\(asset\_ids\)
 
-Get a list of assets by ID. This function has semantics identical to get_objects.
+Get a list of assets by ID. This function has semantics identical to get\_objects.
 
 #### Parameters
 
-| Option                            | Description                   |
-|:----------------------------------|:------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<asset_id_type> asset_ids` | IDs of the assets to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3102,7 +3095,7 @@ Get a list of assets by ID. This function has semantics identical to get_objects
 
 The assets corresponding to the provided IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3165,20 +3158,20 @@ The assets corresponding to the provided IDs.
 }
 ```
 
-### list_assets(lower_bound_symbol, limit)
+### list\_assets\(lower\_bound\_symbol, limit\)
 
 Get assets alphabetically by symbol name.
 
 #### Parameters
 
-| Option                      | Description                                             |
-|:----------------------------|:--------------------------------------------------------|
-| `string lower_bound_symbol` | lower bound of symbol names to retrieve                 |
-| `uint32_t limit`            | maximum number of assets to fetch (must not exceed 100) |
+| Option | Description |
+| :--- | :--- |
+| `string lower_bound_symbol` | lower bound of symbol names to retrieve |
+| `uint32_t limit` | maximum number of assets to fetch \(must not exceed 100\) |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3197,7 +3190,7 @@ Get assets alphabetically by symbol name.
 
 The assets found.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3260,19 +3253,19 @@ The assets found.
 }
 ```
 
-### lookup_asset_symbols(symbols_or_ids)
+### lookup\_asset\_symbols\(symbols\_or\_ids\)
 
-Get a list of assets by symbol. This function has semantics identical to get_objects.
+Get a list of assets by symbol. This function has semantics identical to get\_objects.
 
 #### Parameters
 
-| Option                          | Description                                          |
-|:--------------------------------|:-----------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<string> symbols_or_ids` | symbols or stringified IDs of the assets to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3293,7 +3286,7 @@ Get a list of assets by symbol. This function has semantics identical to get_obj
 
 The assets corresponding to the provided symbols or IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3358,19 +3351,19 @@ The assets corresponding to the provided symbols or IDs.
 
 ## Committee members
 
-### get_committee_members(committee_member_ids)
+### get\_committee\_members\(committee\_member\_ids\)
 
-Get a list of committee_members by ID. This function has semantics identical to get_objects.
+Get a list of committee\_members by ID. This function has semantics identical to get\_objects.
 
 #### Parameters
 
-| Option                                                  | Description                              |
-|:--------------------------------------------------------|:-----------------------------------------|
-| `vector<committee_member_id_type> committee_member_ids` | IDs of the committee_members to retrieve |
+| Option | Description |
+| :--- | :--- |
+| `vector<committee_member_id_type> committee_member_ids` | IDs of the committee\_members to retrieve |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3389,9 +3382,9 @@ Get a list of committee_members by ID. This function has semantics identical to 
 
 #### Returns
 
-The committee_members corresponding to the provided IDs.
+The committee\_members corresponding to the provided IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3420,19 +3413,19 @@ The committee_members corresponding to the provided IDs.
 }
 ```
 
-### get_committee_member_by_account(account)
+### get\_committee\_member\_by\_account\(account\)
 
-Get the committee_member owned by a given account.
+Get the committee\_member owned by a given account.
 
 #### Parameters
 
-| Option                    | Description                                                      |
-|:--------------------------|:-----------------------------------------------------------------|
-| `account_id_type account` | the ID of the account whose committee_member should be retrieved |
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | the ID of the account whose committee\_member should be retrieved |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3448,9 +3441,9 @@ Get the committee_member owned by a given account.
 
 #### Returns
 
-The committee_member object, or null if the account does not have a committee_member.
+The committee\_member object, or null if the account does not have a committee\_member.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3467,20 +3460,20 @@ The committee_member object, or null if the account does not have a committee_me
 }
 ```
 
-### lookup_committee_member_accounts(lower_bound_name, limit)
+### lookup\_committee\_member\_accounts\(lower\_bound\_name, limit\)
 
-Get names and IDs for registered committee_members.
+Get names and IDs for registered committee\_members.
 
 #### Parameters
 
-| Option                    | Description                                                 |
-|:--------------------------|:------------------------------------------------------------|
-| `string lower_bound_name` | lower bound of the first name to return                     |
-| `uint32_t limit`          | maximum number of results to return -- must not exceed 1000 |
+| Option | Description |
+| :--- | :--- |
+| `string lower_bound_name` | lower bound of the first name to return |
+| `uint32_t limit` | maximum number of results to return -- must not exceed 1000 |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3497,9 +3490,9 @@ Get names and IDs for registered committee_members.
 
 #### Returns
 
-Map of committee_member names to corresponding IDs.
+Map of committee\_member names to corresponding IDs.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3532,13 +3525,13 @@ Map of committee_member names to corresponding IDs.
 }
 ```
 
-### get_committee_count()
+### get\_committee\_count\(\)
 
 Get the total number of committee registered with the blockchain
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3552,7 +3545,7 @@ Get the total number of committee registered with the blockchain
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3562,24 +3555,23 @@ Get the total number of committee registered with the blockchain
 
 ## Votes
 
-### lookup_vote_ids(votes)
+### lookup\_vote\_ids\(votes\)
 
 Given a set of votes, return the objects they are voting for.
 
-This will be a mixture of committee_member_object.
+This will be a mixture of committee\_member\_object.
 
-The results will be in the same order as the votes.
-null will be returned for any vote ids that are not found.
+The results will be in the same order as the votes. null will be returned for any vote ids that are not found.
 
 #### Parameters
 
-| Option                       | Description    |
-|:-----------------------------|:---------------|
+| Option | Description |
+| :--- | :--- |
 | `vector<vote_id_type> votes` | an array votes |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3598,7 +3590,7 @@ null will be returned for any vote ids that are not found.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3629,19 +3621,19 @@ null will be returned for any vote ids that are not found.
 
 ## Authority / validation
 
-### get_transaction_hex(trx)
+### get\_transaction\_hex\(trx\)
 
 Get a hexdump of the serialized binary form of a signed transaction.
 
 #### Parameters
 
-| Option                   | Description               |
-|:-------------------------|:--------------------------|
+| Option | Description |
+| :--- | :--- |
 | `signed_transaction trx` | object signed transaction |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3662,7 +3654,7 @@ Get a hexdump of the serialized binary form of a signed transaction.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3670,22 +3662,20 @@ Get a hexdump of the serialized binary form of a signed transaction.
 }
 ```
 
-### get_required_signatures(ctrx, available_keys)
+### get\_required\_signatures\(ctrx, available\_keys\)
 
-Takes a partially signed transaction and a set of public keys that the owner has the ability
-to sign for and return the minimal subset of public keys that should add
-signatures to the transaction.
+Takes a partially signed transaction and a set of public keys that the owner has the ability to sign for and return the minimal subset of public keys that should add signatures to the transaction.
 
 #### Parameters
 
-| Option                                  | Description               |
-|:----------------------------------------|:--------------------------|
-| `signed_transaction trx`                | object signed transaction |
-| `flat_set<public_key_t> available_keys` | an array of public keys   |
+| Option | Description |
+| :--- | :--- |
+| `signed_transaction trx` | object signed transaction |
+| `flat_set<public_key_t> available_keys` | an array of public keys |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3727,7 +3717,7 @@ signatures to the transaction.
 
 A set of public keys.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3737,21 +3727,19 @@ A set of public keys.
 }
 ```
 
-### get_potential_signatures(ctrx)
+### get\_potential\_signatures\(ctrx\)
 
-This method will return the set of all public keys that could possibly sign for a given transaction.
-This call can be used by wallets to filter their set of public keys to just
-the relevant subset prior to calling get_required_signatures to get the minimum subset.
+This method will return the set of all public keys that could possibly sign for a given transaction. This call can be used by wallets to filter their set of public keys to just the relevant subset prior to calling get\_required\_signatures to get the minimum subset.
 
 #### Parameters
 
-| Option                   | Description               |
-|:-------------------------|:--------------------------|
+| Option | Description |
+| :--- | :--- |
 | `signed_transaction trx` | object signed transaction |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3792,7 +3780,7 @@ the relevant subset prior to calling get_required_signatures to get the minimum 
 
 A set of public keys.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3802,19 +3790,19 @@ A set of public keys.
 }
 ```
 
-### verify_authority(trx)
+### verify\_authority\(trx\)
 
 Returns true of the trx has all of the required signatures, otherwise throws an exception.
 
 #### Parameters
 
-| Option                   | Description               |
-|:-------------------------|:--------------------------|
+| Option | Description |
+| :--- | :--- |
 | `signed_transaction trx` | object signed transaction |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3853,7 +3841,7 @@ Returns true of the trx has all of the required signatures, otherwise throws an 
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3861,20 +3849,20 @@ Returns true of the trx has all of the required signatures, otherwise throws an 
 }
 ```
 
-### verify_account_authority(name_or_id, signers)
+### verify\_account\_authority\(name\_or\_id, signers\)
 
 Returns true if the signers have enough authority to authorize an account.
 
 #### Parameters
 
-| Option                           | Description                   |
-|:---------------------------------|:------------------------------|
-| `string name_or_id`              | the name or ID of the account |
-| `flat_set<public_key_t> signers` | an array of public keys       |
+| Option | Description |
+| :--- | :--- |
+| `string name_or_id` | the name or ID of the account |
+| `flat_set<public_key_t> signers` | an array of public keys |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3893,7 +3881,7 @@ Returns true if the signers have enough authority to authorize an account.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3901,19 +3889,19 @@ Returns true if the signers have enough authority to authorize an account.
 }
 ```
 
-### validate_transaction(trx)
+### validate\_transaction\(trx\)
 
 Validates a transaction against the current state without broadcasting it on the network.
 
 #### Parameters
 
-| Option                   | Description               |
-|:-------------------------|:--------------------------|
+| Option | Description |
+| :--- | :--- |
 | `signed_transaction trx` | object signed transaction |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -3952,7 +3940,7 @@ Validates a transaction against the current state without broadcasting it on the
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3989,21 +3977,20 @@ Validates a transaction against the current state without broadcasting it on the
 }
 ```
 
-### get_required_fees(ops, id)
+### get\_required\_fees\(ops, id\)
 
-For each operation calculate the required fee in the specified asset type.
-If the asset type does not have a valid core_exchange_rate.
+For each operation calculate the required fee in the specified asset type. If the asset type does not have a valid core\_exchange\_rate.
 
 #### Parameters
 
-| Option                           | Description                   |
-|:---------------------------------|:------------------------------|
-| `string name_or_id`              | the name or ID of the account |
-| `flat_set<public_key_t> signers` | an array of public keys       |
+| Option | Description |
+| :--- | :--- |
+| `string name_or_id` | the name or ID of the account |
+| `flat_set<public_key_t> signers` | an array of public keys |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4033,7 +4020,7 @@ If the asset type does not have a valid core_exchange_rate.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4048,19 +4035,19 @@ If the asset type does not have a valid core_exchange_rate.
 
 ## Proposed transactions
 
-### get_proposed_transactions(id)
+### get\_proposed\_transactions\(id\)
 
 Returns the set of proposed transactions relevant to the specified account id.
 
 #### Parameters
 
-| Option               | Description           |
-|:---------------------|:----------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type id` | the ID of the account |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4076,7 +4063,7 @@ Returns the set of proposed transactions relevant to the specified account id.
 
 #### Returns
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4102,19 +4089,19 @@ Returns the set of proposed transactions relevant to the specified account id.
 
 ## Sidechain
 
-### get_eth_address(account)
+### get\_eth\_address\(account\)
 
 Returns information about generated ethereum address, if then exist and approved, for the given account id.
 
 #### Parameters
 
-| Option                    | Description                                        |
-|:--------------------------|:---------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4132,7 +4119,7 @@ Returns information about generated ethereum address, if then exist and approved
 
 The public ethereum address data stored in the blockchain
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4147,19 +4134,19 @@ The public ethereum address data stored in the blockchain
 }
 ```
 
-### get_account_deposits(account)
+### get\_account\_deposits\(account\)
 
 Returns all approved deposits, for the given account id.
 
 #### Parameters
 
-| Option                    | Description                                        |
-|:--------------------------|:---------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4177,7 +4164,7 @@ Returns all approved deposits, for the given account id.
 
 The all public deposits data stored in the blockchain.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4195,19 +4182,19 @@ The all public deposits data stored in the blockchain.
 }
 ```
 
-### get_account_withdrawals(account)
+### get\_account\_withdrawals\(account\)
 
 Returns all approved withdrawals, for the given account id.
 
 #### Parameters
 
-| Option                    | Description                                        |
-|:--------------------------|:---------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4225,7 +4212,7 @@ Returns all approved withdrawals, for the given account id.
 
 The all public withdrawals data stored in the blockchain.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4246,19 +4233,19 @@ The all public withdrawals data stored in the blockchain.
 
 ## Sidechain ERC20
 
-### get_erc20_token(eth_addr)
+### get\_erc20\_token\(eth\_addr\)
 
 Returns information about erc20 token, if then exist.
 
 #### Parameters
 
-| Option                      | Description                                       |
-|:----------------------------|:--------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `eth_address_type eth_addr` | the ethereum address of token in Ethereum network |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4276,7 +4263,7 @@ Returns information about erc20 token, if then exist.
 
 The public erc20 token data stored in the blockchain.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4292,19 +4279,19 @@ The public erc20 token data stored in the blockchain.
 }
 ```
 
-### get_erc20_account_deposits(account)
+### get\_erc20\_account\_deposits\(account\)
 
 Returns all approved deposits, for the given account id.
 
 #### Parameters
 
-| Option                    | Description                                        |
-|:--------------------------|:---------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4322,7 +4309,7 @@ Returns all approved deposits, for the given account id.
 
 The all public erc20 deposits data stored in the blockchain.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4340,19 +4327,19 @@ The all public erc20 deposits data stored in the blockchain.
 }
 ```
 
-### get_erc20_account_withdrawals(account)
+### get\_erc20\_account\_withdrawals\(account\)
 
 Returns all approved withdrawals, for the given account id.
 
 #### Parameters
 
-| Option                    | Description                                        |
-|:--------------------------|:---------------------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4370,7 +4357,7 @@ Returns all approved withdrawals, for the given account id.
 
 The all public erc20 withdrawals data stored in the blockchain.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4391,19 +4378,19 @@ The all public erc20 withdrawals data stored in the blockchain.
 
 ## Contract Feepool
 
-### get_contract_pool_balance(id)
+### get\_contract\_pool\_balance\(id\)
 
 Get a contract's pool balance in default asset.
 
 #### Parameters
 
-| Option                | Description                            |
-|:----------------------|:---------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `contract_id_type id` | ID of the contract to get balances for |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4421,7 +4408,7 @@ Get a contract's pool balance in default asset.
 
 Balances of the contract.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4432,19 +4419,19 @@ Balances of the contract.
 }
 ```
 
-### get_contract_pool_whitelist(id)
+### get\_contract\_pool\_whitelist\(id\)
 
 Get a contract's whitelist and blacklist.
 
 #### Parameters
 
-| Option                | Description                            |
-|:----------------------|:---------------------------------------|
+| Option | Description |
+| :--- | :--- |
 | `contract_id_type id` | ID of the contract to get balances for |
 
 #### Example
 
-```json
+```javascript
 {
     "id": 4,
     "method": "call",
@@ -4460,9 +4447,9 @@ Get a contract's whitelist and blacklist.
 
 #### Returns
 
-Struct contract_pool_whitelist which consist of whitelist blacklist.
+Struct contract\_pool\_whitelist which consist of whitelist blacklist.
 
-```json
+```javascript
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -4476,3 +4463,4 @@ Struct contract_pool_whitelist which consist of whitelist blacklist.
     }
 }
 ```
+

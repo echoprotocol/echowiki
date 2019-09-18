@@ -313,6 +313,47 @@ struct asset_reserve_operation : public base_operation
 ]
 ```
 
+## asset_claim_fees_operation
+
+Used to transfer accumulated fees back to the issuer's balance
+
+```cpp
+struct asset_claim_fees_operation : public base_operation
+{
+  struct fee_parameters_type {
+      uint64_t fee = 20 * ECHO_BLOCKCHAIN_PRECISION;
+  };
+
+  asset           fee;
+  account_id_type issuer;
+  asset           amount_to_claim; /// amount_to_claim.asset_id->issuer must == issuer
+  
+  extensions_type extensions;
+
+  account_id_type fee_payer()const { return issuer; }
+  void            validate()const;
+};
+```
+
+### JSON Example
+
+```json
+[
+  23,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "issuer": "1.2.0",
+    "amount_to_claim": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "extensions": []
+  }
+]
+```
+
 ## asset_fund_fee_pool_operation
 
 ```cpp
