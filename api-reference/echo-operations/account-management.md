@@ -188,46 +188,6 @@ struct account_whitelist_operation : public base_operation
 ]
 ```
 
-## account\_transfer\_operation
-
-transfers the account to another account while clearing the white list
-
-In theory an account can be transferred by simply updating the authorities, but that kind of transfer lacks semantic meaning and is more often done to rotate keys without transferring ownership. This operation is used to indicate the legal transfer of title to this account and a break in the operation history.
-
-The account\_id's active/voting authority should be set to new\_owner
-
-This operation will clear the account's whitelist statuses, but not the blacklist statuses.
-
-```cpp
-struct account_transfer_operation
-{
-   struct fee_parameters_type { uint64_t fee = 500 * ECHO_BLOCKCHAIN_PRECISION; };
-
-   asset           fee;
-   account_id_type account_id;
-   account_id_type new_owner;
-   extensions_type extensions;
-};
-```
-
-[asset](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#asset)
-
-### JSON Example
-
-```javascript
-[
-  4,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account_id": "1.2.0",
-    "new_owner": "1.2.0",
-    "extensions": []
-  }
-]
-```
-
 ## account\_address\_create\_operation
 
 Creates an address for an account to which money can be transferred.

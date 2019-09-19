@@ -3064,6 +3064,54 @@ An array of vesting balances.
 }
 ```
 
+### get\_frozen\_balances\(account\_id\)
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account_id` | the id of account to use |
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_frozen_balances",
+        [
+            "1.2.26"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+An array of vesting balances.
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.9.0",
+            "owner": "1.2.26",
+            "balance": {
+                "amount": 1000000000,
+                "asset_id": "1.3.0"
+            },
+            "multiplier": 13000,
+            "unfreeze_time": "2019-12-18T14:49:32",
+            "extensions": []
+        }
+    ]
+}
+```
+
 ## Assets
 
 ### get\_assets\(asset\_ids\)
