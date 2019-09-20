@@ -116,13 +116,16 @@ brew install cmake git autoconf automake leveldb libtool libelf doxygen
 Ubuntu 16.04 LTS has no required `cmake` and `gcc-7` in its default repositories. They can be installed through Pip and third-party PPA repository.
 
 ```bash
-sudo add-apt-repository ppa:jonathonf/gcc-7.3
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt update
 
 sudo apt install python3-pip
 sudo pip3 install cmake
 
 sudo apt install make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl libreadline-dev autoconf libtool git ntp libcurl4-openssl-dev  libcurl4-openssl-dev libleveldb-dev libelf-dev
+
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 1 
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 1 
 ```
 
 #### Installing Dependencies on Ubuntu 18.04 LTS and Later
