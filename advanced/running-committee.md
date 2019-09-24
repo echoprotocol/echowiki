@@ -4,26 +4,37 @@
 
 By default, an Echo node doesn't generate any blocks and not participating in consensus or sidechain mechanisms, and only acts as a wallet.
 
-To enable these features, you need to configure the sidechain connection and pass Echo and Ethereum private keys.
+To enable these features, you need to configure the sidechain connection and pass Echo and Ethereum or Bitcoin private keys.
 
-To enable the sidechain, you should add the `sidechain` flag to '--plugins' option and specify a full node Ethereum websocket RPC URL for sidechain. You can specify another plugins by separating with comma.
+To enable the sidechain, you should add the `sidechain` flag to `--plugins` option and specify a full node Bitcoin or Ethereum RPC URL for sidechain. You can specify another plugins by separating with comma.
+
+Bitcoin and Ethereum sidechain can be enable either together or separately, but at least one must be enabled.
 
 ```bash
 $ ./echo_node \
-    --plugins=sidechain --eth-rpc-ip="1.2.3.4" --eth-rpc-port=8545
+    --plugins=sidechain --eth-rpc-ip="127.0.0.1" --eth-rpc-port="8545"
+    --btc-rpc-ip="127.0.0.1" --btc-rpc-port="18443" --btc-rpc-user="1" --btc-rpc-password="1"
 ```
 
 Node configuration files and CLI flags share the same parameters, so the above flags can be added in both ways. For example, this is how you'd need to update your configuration file:
 
 ```text
 plugins = sidechain
-eth-rpc-ip = "1.2.3.4"
-eth-rpc-port = 8545
+eth-rpc-ip = "127.0.0.1"
+eth-rpc-port = "8545"
+btc-rpc-ip = "127.0.0.1"
+btc-rpc-port = "18443"
+btc-rpc-user = "1"
+btc-rpc-password = "1"
 ```
+
+By default with enable `sidechain` plugin Bitcoin and Ethereum sidechain enable. If we need to disable one of them, we need to add option `--sidechain-eth-disable` or `--sidechain-btc-disable`.
+
+By default Bitcoin sidechain enable for mainnet. If we need to enable it for a testnet, we need to add option `--sidechain-btc-testnet`.
 
 ## Adding Private Keys
 
-Block production requires one or more private keys to be able to generate signatures on blocks and EchoRand messages and additional private key for Ethereum sidechain to sign its transactions.
+Block production requires one or more private keys to be able to generate signatures on blocks and EchoRand messages and additional private key for Ethereum or Bitcoin sidechains to sign its transactions.
 
 There are two ways to add private keys:
 
@@ -36,28 +47,41 @@ Note: in the current testnet, the keys are only separated by containerization, b
 
 Parameter `account-info` is used by the consensus to sign on blocks and various messages. It accepts a tuple of **account id** and **eddsa private key**.
 
-Parameter `sidechain-committeeman` is used by the sidechain to sign on Ethereum transactions. It accepts a tuple of **account id** and **Ethereum private key**.
+Parameter `sidechain-eth-committeeman` is used by the sidechain to sign on Ethereum transactions. It accepts a tuple of **account id** and **Ethereum private key**.
+
+Parameter `sidechain-btc-committeeman` is used by the sidechain to sign on Bitcoin transactions. It accepts a tuple of **account id** and **Bitcoin private key**.
 
 You can specify multiple accounts and sidechain keys for different accounts.
 
 However to enter this keys in terminal their quotes and brackets should be escaped like so:
 
-> `--account-info \[\"account id\",\"eddsa private key\"\]` `--sidechain-committeeman \[\"account id\",\"Ethereum private key\"\]`
+> `--account-info \[\"account id\",\"eddsa private key\"\]` `--sidechain-eth-committeeman \[\"account id\",\"Ethereum private key\"\]` `--sidechain-btc-committeeman \[\"account id\",\"Bitcoin private key\"\]`
 
 ```bash
 $ ./echo_node \
-    --plugins=sidechain --eth-rpc-ip="1.2.3.4" --eth-rpc-port=8545 \
+    --plugins=sidechain
+    --eth-rpc-ip="127.0.0.1" --eth-rpc-port="8545"
+    --btc-rpc-ip="127.0.0.1" --btc-rpc-port="18443" --btc-rpc-user="1" --btc-rpc-password="1"
     --account-info \[\"1.2.1234\",\"6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ\"\] \
     --account-info \[\"1.2.1235\",\"B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\] \
-    --sidechain-committeeman \[\"1.2.1234\", \"327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43\"\]
+    --sidechain-eth-committeeman \[\"1.2.1234\", \"327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43\"\]
+    --sidechain-btc-committeeman \[\"1.2.1234\", \"cQim4vm4vzhknZzR6EVEiu9QKN6CzyAP53M48Jj6XAMYgucGe8o9\"\]
 ```
 
 Alternatively, keys can be added to the config file, which can be found at `~/.echo/config.ini`:
 
 ```text
-account-info = ["1.2.1234", "6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ"]
-account-info = ["1.2.1235", "B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs"]
-sidechain-committeeman = ["1.2.1234", "327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43"]
+plugins = sidechain
+eth-rpc-ip = "127.0.0.1"
+eth-rpc-port = "8545"
+btc-rpc-ip = "127.0.0.1"
+btc-rpc-port = "18443"
+btc-rpc-user = "1"
+btc-rpc-password = "1"
+account-info ["1.2.1234", "6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ"]
+account-info ["1.2.1235", "B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\]
+sidechain-eth-committeeman ["1.2.1234", "327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43"]
+sidechain-btc-committeeman ["1.2.1234", "cQim4vm4vzhknZzR6EVEiu9QKN6CzyAP53M48Jj6XAMYgucGe8o9"]
 ```
 
 ### Adding Private Keys in Echo Console
