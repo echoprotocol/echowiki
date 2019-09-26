@@ -17,6 +17,7 @@ struct committee_member_create_operation : public base_operation
    string                                url;
    
    eth_address_type                      eth_address;
+   echo::sidechain::btc::public_key      btc_public_key;
 
    extensions_type extensions;
 
@@ -29,7 +30,7 @@ struct committee_member_create_operation : public base_operation
 
 ```json
 [
-  16,{
+  15,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -37,6 +38,7 @@ struct committee_member_create_operation : public base_operation
     "committee_member_account": "1.2.0",
     "url": "",
     "eth_address": "0000000000000000000000000000000000000000",
+    "btc_public_key": "000000000000000000000000000000000000000000000000000000000000000000",
     "extensions": []
   }
 ]
@@ -60,6 +62,7 @@ struct committee_member_update_operation : public base_operation
    account_id_type                       committee_member_account;
    optional< string >                    new_url;
    optional< eth_address_type >          new_eth_address;
+   optional< echo::sidechain::btc::public_key > new_btc_public_key;
 
    extensions_type extensions;
 
@@ -72,7 +75,7 @@ struct committee_member_update_operation : public base_operation
 
 ```json
 [
-  17,{
+  16,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -111,7 +114,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
 
 ```json
 [
-  18,{
+  17,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -121,7 +124,6 @@ struct committee_member_update_global_parameters_operation : public base_operati
         "parameters": [],
         "scale": 10000
       },
-      "block_interval": 5,
       "maintenance_interval": 86400,
       "maintenance_duration_seconds": 10,
       "committee_proposal_review_period": 1209600,
@@ -139,7 +141,15 @@ struct committee_member_update_global_parameters_operation : public base_operati
       "accounts_per_fee_scale": 1000,
       "account_fee_scale_bitshifts": 4,
       "max_authority_depth": 2,
+      "block_emission_amount": 0,
+      "block_producer_reward_ratio": 5000,
+      "frozen_balances_multipliers": [
+        [90, 13000],
+        [180, 14000],
+        [360, 15000]
+      ],
       "echorand_config": {
+        "_time_generate": 0,
         "_time_net_1mb": 0,
         "_time_net_256b": 0,
         "_creator_count": 0,
@@ -179,11 +189,18 @@ struct committee_member_update_global_parameters_operation : public base_operati
         "eth_deposit_topic": "0000000000000000000000000000000000000000000000000000000000000000",
         "eth_withdraw_topic": "0000000000000000000000000000000000000000000000000000000000000000",
         "erc20_deposit_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+        "erc20_withdraw_topic": "0000000000000000000000000000000000000000000000000000000000000000",
         "ETH_asset_id": "1.3.0",
+        "BTC_asset_id": "1.3.0",
+        "waiting_eth_blocks": 0,
+        "waiting_btc_blocks": 0,
         "fines": {
           "generate_eth_address": 0
         },
-        "waiting_blocks": 0
+        "waiting_blocks": 0,
+        "gas_price": 0,
+        "satoshis_per_byte": 0,
+        "echo_blocks_per_aggregation": 0
       },
       "erc20_config": {
         "contract_code": "",
