@@ -33,7 +33,7 @@ struct balance_claim_operation : public base_operation
 
 ```json
 [
-  21,{
+  20,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -45,6 +45,49 @@ struct balance_claim_operation : public base_operation
       "amount": 0,
       "asset_id": "1.3.0"
     },
+    "extensions": []
+  }
+]
+```
+
+## balance_freeze_operation
+
+Freeze balance to get more reward during fee distribution.
+
+Duration is indicated in days. For the selected duration, the balance modifier must be specified in the chain parameters.
+
+```cpp
+struct balance_freeze_operation : public base_operation {
+    struct fee_parameters_type {
+        uint64_t fee = 1000;
+    };
+
+    asset               fee;
+    account_id_type     account;
+    asset               amount;
+    uint16_t            duration;
+
+    extensions_type     extensions;
+
+    account_id_type fee_payer() const { return account; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  21,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "account": "1.2.0",
+    "amount": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "duration": 0,
     "extensions": []
   }
 ]

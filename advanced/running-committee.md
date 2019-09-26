@@ -10,14 +10,15 @@ To enable the sidechain, you should add the `sidechain` flag to '--plugins' opti
 
 ```bash
 $ ./echo_node \
-    --plugins=sidechain --sidechain-eth-node-url="ws://1.2.3.4:8545"
+    --plugins=sidechain --eth-rpc-ip="1.2.3.4" --eth-rpc-port=8545
 ```
 
 Node configuration files and CLI flags share the same parameters, so the above flags can be added in both ways. For example, this is how you'd need to update your configuration file:
 
 ```text
 plugins = sidechain
-sidechain-eth-node-url = "ws://1.2.3.4:8545"
+eth-rpc-ip = "1.2.3.4"
+eth-rpc-port = 8545
 ```
 
 ## Adding Private Keys
@@ -45,7 +46,7 @@ However to enter this keys in terminal their quotes and brackets should be escap
 
 ```bash
 $ ./echo_node \
-    --plugins=sidechain --sidechain-eth-node-url="ws://1.2.3.4:8545" \
+    --plugins=sidechain --eth-rpc-ip="1.2.3.4" --eth-rpc-port=8545 \
     --account-info \[\"1.2.1234\",\"6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ\"\] \
     --account-info \[\"1.2.1235\",\"B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\] \
     --sidechain-committeeman \[\"1.2.1234\", \"327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43\"\]

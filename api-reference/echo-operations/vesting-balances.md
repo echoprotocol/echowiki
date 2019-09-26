@@ -36,7 +36,7 @@ struct vesting_balance_create_operation : public base_operation
 
 ```json
 [
-  19,{
+  18,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -90,7 +90,7 @@ struct vesting_balance_withdraw_operation : public base_operation
 
 ```json
 [
-  20,{
+  19,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
