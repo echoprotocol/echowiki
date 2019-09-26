@@ -44,7 +44,7 @@ struct asset_create_operation : public base_operation
 
 ```json
 [
-  5,{
+  4,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -112,7 +112,7 @@ struct asset_update_operation : public base_operation
 
 ```json
 [
-  6,{
+  5,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -171,7 +171,7 @@ struct asset_update_bitasset_operation : public base_operation
 
 ```json
 [
-  7,{
+  6,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -217,7 +217,7 @@ struct asset_update_feed_producers_operation : public base_operation
 
 ```json
 [
-  8,{
+  7,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -258,7 +258,7 @@ struct asset_issue_operation : public base_operation
 
 ```json
 [
-  9,{
+  8,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -298,7 +298,7 @@ struct asset_reserve_operation : public base_operation
 
 ```json
 [
-  10,{
+  9,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -377,7 +377,7 @@ struct asset_fund_fee_pool_operation : public base_operation
 
 ```json
 [
-  11,{
+  10,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -419,7 +419,7 @@ struct asset_publish_feed_operation : public base_operation
 
 ```json
 [
-  12,{
+  11,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

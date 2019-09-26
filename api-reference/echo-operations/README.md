@@ -23,6 +23,7 @@
 ## Balance Object
 
 * [balance\_claim\_operation](balance-object.md#balance_claim_operation) - Claim a balance in a `balance_object`
+* [balance\_freeze\_operation](balance-object.md#balance_freeze_operation) - Freeze balance
 
 ## Committee Member
 
@@ -47,12 +48,14 @@
 * [sidechain\_eth\_withdraw\_operation](contracts.md#sidechain_eth_withdraw_operation) - Used to withdraw the eETH and receive ETH to provided address
 * [sidechain\_eth\_approve\_withdraw\_operation](contracts.md#sidechain_eth_approve_withdraw_operation) - An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH
 * [sidechain\_change\_config\_operation](contracts.md#sidechain_change_config_operation) - An internal operation by which committee members confirm the update of the sidechain configuration
-* [sidechain\_eth\_issue\_operation](contracts.md#sidechain_eth_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
-* [sidechain\_eth\_burn\_operation](contracts.md#sidechain_eth_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\)
+* [sidechain\\_issue\_operation](contracts.md#sidechain_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
+* [sidechain\\_burn\_operation](contracts.md#sidechain_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\)
 * [sidechain\_erc20\_register\_token\_operation](contracts.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
 * [sidechain\_erc20\_deposit\_token\_operation](contracts.md#sidechain_erc20_deposit_token_operation) - An internal operation by which committee members confirm the entry of tokens
 * [sidechain\_erc20\_withdraw\_token\_operation](contracts.md#sidechain_erc20_withdraw_token_operation) - Executed by the user and initiates the withdrawal of the token from the Echo network to the specified address
 * [sidechain\_erc20\_approve\_token\_withdraw\_operation](contracts.md#sidechain_erc20_approve_token_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens
+* [sidechain\_erc20\_issue\_operation](contracts.md#sidechain_erc20_issue_operation) - Virtual operation which issues erc20 token
+* [sidechain\_erc20\_burn\_operation](contracts.md#sidechain_erc20_burn_operation) - Virtual operation which burns erc20 token
 
 ## Transaction Proposal Protocol
 
