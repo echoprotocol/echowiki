@@ -498,15 +498,15 @@ struct sidechain_change_config_operation :  public base_operation
 ]
 ```
 
-## sidechain_eth_issue_operation
+## sidechain_issue_operation
 
 ```cpp
-struct sidechain_eth_issue_operation : public base_operation
+struct sidechain_issue_operation : public base_operation
 {
    struct fee_parameters_type { uint64_t fee = 0; };
    
-   sidechain_eth_issue_operation() = default;
-   sidechain_eth_issue_operation(asset v, account_id_type a, deposit_eth_id_type d) :
+   sidechain_issue_operation() = default;
+   sidechain_issue_operation(asset v, account_id_type a, deposit_eth_id_type d) :
             value(v), account(a), deposit_id(d) {}
    
    asset               fee;
@@ -542,14 +542,14 @@ struct sidechain_eth_issue_operation : public base_operation
 ]
 ```
 
-## sidechain_eth_burn_operation
+## sidechain_burn_operation
 
 ```cpp
-struct sidechain_eth_burn_operation : public base_operation
+struct sidechain_burn_operation : public base_operation
 {
    struct fee_parameters_type { uint64_t fee = 0; };
-   sidechain_eth_burn_operation() = default;
-   sidechain_eth_burn_operation(asset v, account_id_type a, withdraw_eth_id_type w) :
+   sidechain_burn_operation() = default;
+   sidechain_burn_operation(asset v, account_id_type a, withdraw_eth_id_type w) :
             value(v), account(a), withdraw_id(w) {}
    
    asset                   fee;
@@ -742,4 +742,46 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
     "extensions": []
   }
 ]
+```
+
+## sidechain_erc20_issue_operation
+
+```cpp
+struct sidechain_erc20_issue_operation : public base_operation
+{
+    struct fee_parameters_type { uint64_t fee = 0; };
+
+    asset fee;
+
+    deposit_erc20_token_id_type deposit;
+    account_id_type account;
+    erc20_token_id_type token;
+    string amount;
+
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+    share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
+};
+```
+
+## sidechain_erc20_burn_operation
+
+```cpp
+struct sidechain_erc20_burn_operation : public base_operation
+{
+    struct fee_parameters_type { uint64_t fee = 0; };
+
+    asset fee;
+    
+    withdraw_erc20_token_id_type withdraw;
+    account_id_type account;
+    erc20_token_id_type token;
+    string amount;
+
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+    share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
+};
 ```

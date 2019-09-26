@@ -44,7 +44,7 @@ struct proposal_create_operation : public base_operation
 
 ```json
 [
-  13,{
+  12,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -100,7 +100,7 @@ struct proposal_update_operation : public base_operation
 
 ```json
 [
-  14,{
+  13,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -144,7 +144,7 @@ struct proposal_delete_operation : public base_operation
 
 ```json
 [
-  15,{
+  14,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
