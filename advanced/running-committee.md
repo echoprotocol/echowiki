@@ -53,8 +53,8 @@ However to enter this keys in terminal their quotes and brackets should be escap
 ```bash
 $ ./echo_node \
     --plugin=sidechain
-    --eth-rpc-ip="127.0.0.1" --eth-rpc-port="8545"
-    --btc-rpc-ip="127.0.0.1" --btc-rpc-port="18443" --btc-rpc-user="1" --btc-rpc-password="1"
+    --eth-rpc-ip=\"127.0.0.1\" --eth-rpc-port=\"8545\"
+    --btc-rpc-ip=\"127.0.0.1\" --btc-rpc-port=\"18443\" --btc-rpc-user=\"1\" --btc-rpc-password=\"1\"
     --account-info \[\"1.2.1234\",\"6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ\"\] \
     --account-info \[\"1.2.1235\",\"B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\] \
     --sidechain-eth-committeeman \[\"1.2.1234\", \"327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43\"\]
@@ -63,18 +63,18 @@ $ ./echo_node \
 
 Alternatively, keys can be added to the config file, which can be found at `~/.echo/config.ini`:
 
-```text
+```bash
 plugin = sidechain
-eth-rpc-ip = "127.0.0.1"
-eth-rpc-port = "8545"
-btc-rpc-ip = "127.0.0.1"
-btc-rpc-port = "18443"
-btc-rpc-user = "1"
-btc-rpc-password = "1"
-account-info ["1.2.1234", "6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ"]
-account-info ["1.2.1235", "B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\]
-sidechain-eth-committeeman ["1.2.1234", "327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43"]
-sidechain-btc-committeeman ["1.2.1234", "cQim4vm4vzhknZzR6EVEiu9QKN6CzyAP53M48Jj6XAMYgucGe8o9"]
+eth-rpc-ip = \"127.0.0.1\"
+eth-rpc-port = \"8545\"
+btc-rpc-ip = \"127.0.0.1\"
+btc-rpc-port = \"18443\"
+btc-rpc-user = \"1\"
+btc-rpc-password = \"1\"
+account-info \[\"1.2.1234\", \"6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ\"\]
+account-info \[\"1.2.1235\", \"B1VyzqPkrf8o1rFMwE1GuvF81LVivfoDjxKu2gUdgBqs\"\]
+sidechain-eth-committeeman \[\"1.2.1234\", \"327bdacfdb6e548a6e2d7d770be94e11fa7234e58216865d5063fecfd6322f43\"\]
+sidechain-btc-committeeman \[\"1.2.1234\", \"cQim4vm4vzhknZzR6EVEiu9QKN6CzyAP53M48Jj6XAMYgucGe8o9\"\]
 ```
 
 ### Adding Private Keys in Echo Console
