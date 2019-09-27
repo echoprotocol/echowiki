@@ -2605,11 +2605,9 @@ Subscription to change the contract uses database-api.md\#set\_subscribe\_callba
 }
 ```
 
-### subscribe\_contract\_logs\(callback, contract\_id, from, to\)
+### subscribe\_contract\_logs\(callback, contract\_id\)
 
-Subscribe to contract's logs.
-
-When calling this method, it will return all already existing events in the specified range as well as the `get_contract_logs` method.
+Subscribe to specified contract logs.
 
 #### Parameters
 
@@ -2617,8 +2615,6 @@ When calling this method, it will return all already existing events in the spec
 | :--- | :--- |
 | `function<void(variant)> cb` | callback method which is called when contracts has new logs |
 | `contract_id_type contract_id` | ID of the contract |
-| `uint32_t from` | number of block to start retrieve from |
-| `uint32_t to` | number of block to end to retrieve |
 
 #### Example
 
@@ -2630,8 +2626,8 @@ When calling this method, it will return all already existing events in the spec
         DATABASE_API_ID,
         "subscribe_contract_logs",
         [
-            "7",
-            "1.9.3",
+            CALLBACK_ID,
+            "1.10.0"
         ]
     ]
 }
@@ -2658,13 +2654,16 @@ The contracts logs by contract ID.
         CALLBACK_ID,
         [
             [
-                {
-                    "address": "0100000000000000000000000000000000000003",
-                    "log": [
-                        "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
-                    ],
-                    "data": "0000000000000000000000000000000000000000000000000000000000000097"
-                }
+                [
+                    0,
+                    {
+                        "address": "0100000000000000000000000000000000000000",
+                        "log": [
+                            "bfed43b35c99a41ee9b8cb5a2afa74e45703b17dfd398a3b96260bdebca807cf"
+                        ],
+                        "data": ""
+                    }
+                ]
             ]
         ]
     ]
