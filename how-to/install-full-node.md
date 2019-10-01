@@ -132,7 +132,9 @@ sudo apt update
 sudo apt install cmake make g++-7 libbz2-dev libdb++-dev libdb-dev libssl-dev openssl libreadline-dev autoconf libtool git ntp libcurl4-openssl-dev  libcurl4-openssl-dev libleveldb-dev libelf-dev
 ```
 
-### Build Instructions Ubuntu 16.04
+### Build Instructions
+
+#### Preparation step
 
 ```bash
 git clone https://github.com/echoprotocol/echo.git
@@ -140,18 +142,18 @@ cd echo
 git submodule update --init --recursive
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/usr/bin/gcc-7 -DCMAKE_CXX_COMPILER=/usr/bin/g++-7 ..
+```
+
+#### Build
+
+``` bash
+cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
 
-### Build Instructions Ubuntu 18.04
+On Ubuntu 16.04 LTS you need additionally pass compiler paths to cmake:
 
 ```bash
-git clone https://github.com/echoprotocol/echo.git
-cd echo
-git submodule update --init --recursive
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/usr/bin/gcc-7 -DCMAKE_CXX_COMPILER=/usr/bin/g++-7 ..
 cmake --build .
 ```
