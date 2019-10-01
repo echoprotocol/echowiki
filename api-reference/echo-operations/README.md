@@ -34,9 +34,11 @@
 
 * [contract\_create\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_create_operation) - Creates a contract
 * [contract\_call\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_call_operation) - Calls a contract
+* [contract\_internal\_create\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_internal_create_operation) _\[VIRTUAL\]_ - Indicates contract creation from another contract
+* [contract\_internal\_call\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_internal_call_operation) _\[VIRTUAL\]_ - Indicates contract call from another contract
+* [contract\_selfdestruct\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_selfdestruct_operation) _\[VIRTUAL\]_ - Indicates contract destruction
 * [contract\_fund\_pool\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_fund_pool_operation) - Transfer asset to fee pool
 * [contract\_whitelist\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_whitelist_operation) - Manage the blacklist and whitelist pool of the contract
-* [contract\_transfer\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_transfer_operation)_\[VIRTUAL\]_ - Indicates internal contract transfers
 * [contract\_update\_operation](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/contracts.md#contract_update_operation) - Update contract data
 
 ## Sidechain
