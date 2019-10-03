@@ -407,11 +407,11 @@ right after defining $$CERT\_{r-1}$$
          3. if $$ctx\[msg.leader\].v4.size\(\) &gt; t_{h}$$
             1. `v = { msg.block_hash, msg.leader }`, `b = 0`
             2. go to **Communication**
-    3. `msg.v == { ∅, ∅ }`
-       1. `ctx.ve4.push(msg.id)`, `ve4` is _unordered\_set_ \(**v**alue **e**mpty\)
-       2. if $$ctx.ve4.size\(\) &gt; t\_{h}$$
-          1. `v = { ∅, ∅ }`, `b = 1`
-          2. go to **Communication**
+   5. `msg.v == { ∅, ∅ }`
+      1. `ctx.ve4.push(msg.id)`, `ve4` is _unordered\_set_ \(**v**alue **e**mpty\)
+      2. if $$ctx.ve4.size\(\) &gt; t\_{h}$$
+         1. `v = { ∅, ∅ }`, `b = 1`
+         2. go to **Communication**
 3. **Communication**: generating, signing and sending of messages
    1. stop timers, unsubscribe from network messages
    2. if $$N_{4} = ∅$$, end the step 1.
