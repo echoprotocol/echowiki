@@ -4,22 +4,20 @@
 
 By default, an Echo node doesn't generate any blocks and not participating in consensus or sidechain mechanisms, and only acts as a wallet.
 
-To enable these features, you need to configure the sidechain connection and pass Echo and Ethereum or Bitcoin private keys.
+To enable these features, you need to configure the sidechain connection and pass Echo and Ethereum and Bitcoin private keys.
 
-To enable the sidechain, you should add the `sidechain` flag to `--plugins` option and specify a full node Bitcoin or Ethereum RPC URL for sidechain. You can specify another plugins by separating with comma.
-
-Bitcoin and Ethereum sidechain can be enable either together or separately, but at least one must be enabled.
+To enable the sidechain, you should add the `sidechain` flag to `--plugin` option and specify a full node Bitcoin and Ethereum RPC URL for sidechain.
 
 ```bash
 $ ./echo_node \
-    --plugins=sidechain --eth-rpc-ip="127.0.0.1" --eth-rpc-port="8545"
+    --plugin=sidechain --eth-rpc-ip="127.0.0.1" --eth-rpc-port="8545"
     --btc-rpc-ip="127.0.0.1" --btc-rpc-port="18443" --btc-rpc-user="1" --btc-rpc-password="1"
 ```
 
 Node configuration files and CLI flags share the same parameters, so the above flags can be added in both ways. For example, this is how you'd need to update your configuration file:
 
 ```text
-plugins = sidechain
+plugin = sidechain
 eth-rpc-ip = "127.0.0.1"
 eth-rpc-port = "8545"
 btc-rpc-ip = "127.0.0.1"
@@ -27,11 +25,6 @@ btc-rpc-port = "18443"
 btc-rpc-user = "1"
 btc-rpc-password = "1"
 ```
-
-By default with enable `sidechain` plugin Bitcoin and Ethereum sidechain enable. If we need to disable one of them, we need to add option `--sidechain-eth-disable` or `--sidechain-btc-disable`.
-
-By default Bitcoin sidechain enable for mainnet. If we need to enable it for a testnet, we need to add option `--sidechain-btc-testnet`.
-
 ## Adding Private Keys
 
 Block production requires one or more private keys to be able to generate signatures on blocks and EchoRand messages and additional private key for Ethereum or Bitcoin sidechains to sign its transactions.
@@ -59,7 +52,7 @@ However to enter this keys in terminal their quotes and brackets should be escap
 
 ```bash
 $ ./echo_node \
-    --plugins=sidechain
+    --plugin=sidechain
     --eth-rpc-ip="127.0.0.1" --eth-rpc-port="8545"
     --btc-rpc-ip="127.0.0.1" --btc-rpc-port="18443" --btc-rpc-user="1" --btc-rpc-password="1"
     --account-info \[\"1.2.1234\",\"6L7UCPPSJrcFC6S8mTTQU4vZrhLsYPbwyyQ6cZENevbJ\"\] \
@@ -71,7 +64,7 @@ $ ./echo_node \
 Alternatively, keys can be added to the config file, which can be found at `~/.echo/config.ini`:
 
 ```text
-plugins = sidechain
+plugin = sidechain
 eth-rpc-ip = "127.0.0.1"
 eth-rpc-port = "8545"
 btc-rpc-ip = "127.0.0.1"
