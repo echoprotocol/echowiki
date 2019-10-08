@@ -18,6 +18,8 @@
   * [Bitcoin Sidechain](technologies/bitcoin-sidechain.md)
 * [Tutorials](tutorials/README.md)
   * [Running devnet](tutorials/running-devnet/README.md)
+    * [Modify genesis](tutorials/running-devnet/modify-genesis.md)
+    * [Register account](tutorials/running-devnet/register-account.md)
 * [Advanced](advanced/README.md)
   * [Work With ERC20](advanced/erc20/README.md)
     * [Contract Compilation](advanced/erc20/contract-compilation.md)
