@@ -16,6 +16,8 @@
   * [EVM Support](technologies/evm-support/README.md)
     * [Differences from Ethereum](technologies/evm-support/differences-from-ethereum.md)
   * [Bitcoin Sidechain](technologies/bitcoin-sidechain.md)
+* [Tutorials](tutorials/README.md)
+  * [Running devnet](tutorials/running-devnet.md)
 * [Advanced](advanced/README.md)
   * [Work With ERC20](advanced/erc20/README.md)
     * [Contract Compilation](advanced/erc20/contract-compilation.md)
@@ -39,4 +41,3 @@
     * [Registration API](api-reference/echo-node-api/registration-api.md)
   * [Echo Operations](api-reference/echo-operations/README.md)
     * [Account Management](api-reference/echo-operations/account-management.md)
-
