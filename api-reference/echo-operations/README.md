@@ -24,6 +24,7 @@
 
 * [balance\_claim\_operation](balance-object.md#balance_claim_operation) - Claim a balance in a `balance_object`
 * [balance\_freeze\_operation](balance-object.md#balance_freeze_operation) - Freeze balance
+* [balance\_unfreeze\_operation](balance-object.md#balance_unfreeze_operation) _\[VIRTUAL\]_ - Unfreeze balance
 
 ## Committee Member
 
