@@ -81,6 +81,95 @@ struct contract_call_operation : public contract_base_operation
 ]
 ```
 
+## contract_internal_create_operation
+Virtual operation created when contract creates another contract.
+
+```cpp
+struct contract_internal_create_operation : public base_operation
+{
+    contract_id_type caller;
+    contract_id_type new_contract;
+    asset value;
+    bool eth_accuracy = false;
+    fc::optional<asset_id_type> supported_asset_id;
+
+    extensions_type extensions;
+};
+```
+
+### JSON Example
+```json
+[
+  28,{
+    "caller": "1.10.0",
+    "new_contract": "1.10.0",
+    "value": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "eth_accuracy": false,
+    "extensions": []
+  }
+]
+```
+
+## contract_internal_call_operation
+Virtual operation created when contract calls another contract or transfers asset.
+
+```cpp
+struct contract_internal_call_operation : public base_operation
+{
+    contract_id_type caller;
+    object_id_type callee;
+    string method;
+    asset value;
+
+    extensions_type extensions;
+};
+```
+
+### JSON Example
+```json
+[
+  29,{
+    "caller": "1.10.0",
+    "callee": "0.0.0",
+    "method": "",
+    "value": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "extensions": []
+  }
+]
+```
+
+## contract_selfdestruct_operation
+Virtual operation created when contract self-destructs.
+
+```cpp
+struct contract_selfdestruct_operation : public base_operation
+{
+    contract_id_type contract;
+    object_id_type recipient;
+    vector<asset> amounts;
+
+    extensions_type extensions;
+};
+```
+
+### JSON Example
+```json
+[
+  30,{
+    "contract": "1.10.0",
+    "recipient": "0.0.0",
+    "amounts": [],
+    "extensions": []
+  }
+]
+```
+
 ## contract_fund_pool_operation
 
 ```cpp
@@ -162,52 +251,6 @@ struct contract_whitelist_operation : public base_operation
     "remove_from_whitelist": [],
     "add_to_blacklist": [],
     "remove_from_blacklist": [],
-    "extensions": []
-  }
-]
-```
-
-## contract_transfer_operation
-
-Virtual operation that indicates internal transfers from contracts.
-
-```cpp
-struct contract_transfer_operation : public base_operation
-{
-   struct fee_parameters_type {
-      uint64_t fee       = 0;
-   };
-
-   asset                fee;
-   /// Contract to transfer asset from
-   contract_id_type     from;
-   /// Account or contract to transfer asset to
-   object_id_type       to;
-   /// The amount of asset to transfer from @ref from to @ref to
-   asset                amount;
-
-   extensions_type   extensions;
-
-   void validate() const;
-   account_id_type fee_payer() const { return account_id_type(); }
-};
-```
-
-### JSON Example
-
-```json
-[
-  27,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "from": "1.9.0",
-    "to": "0.0.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
     "extensions": []
   }
 ]
