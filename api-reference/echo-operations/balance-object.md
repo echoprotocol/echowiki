@@ -92,3 +92,34 @@ struct balance_freeze_operation : public base_operation {
   }
 ]
 ```
+
+## balance_unfreeze_operation
+
+Freeze balance to get more reward during fee distribution.
+
+Duration is indicated in days. For the selected duration, the balance modifier must be specified in the chain parameters.
+
+```cpp
+struct balance_unfreeze_operation : public balance_freeze_operation {
+    account_id_type     account;
+    asset               amount;
+    extensions_type     extensions;
+
+    account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  22,{
+    "account": "1.2.0",
+    "amount": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "extensions": []
+  }
+]
+```
