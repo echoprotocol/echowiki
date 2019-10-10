@@ -98,7 +98,7 @@ struct asset_update_operation : public base_operation
 
    /// If the asset is to be given a new issuer, specify his ID here.
    optional<account_id_type>   new_issuer;
-   asset_options               new_options;
+   optional<asset_options>     new_options;
 
    extensions_type             extensions;
 
@@ -119,6 +119,7 @@ struct asset_update_operation : public base_operation
     },
     "issuer": "1.2.0",
     "asset_to_update": "1.3.0",
+    "new_issuer": "1.2.0",
     "new_options": {
       "max_supply": "1000000000000000",
       "issuer_permissions": 15,
