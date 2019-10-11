@@ -238,7 +238,6 @@ console.log(result);
       "new_address": "0000000000000000000000000000000000000000",
       "output": "0000000000000000000000000000000000000000000000000000000000000001",
       "code_deposit": "None",
-      "gas_refunded": 0,
       "gas_for_deposit": 0,
       "deposit_size": 0
     },

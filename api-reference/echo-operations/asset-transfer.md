@@ -79,7 +79,7 @@ struct override_transfer_operation : public base_operation
 
 ```json
 [
-  22,{
+  23,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -124,7 +124,7 @@ struct transfer_to_address_operation : public base_operation
 
 ```json
 [
-  29,{
+  30,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

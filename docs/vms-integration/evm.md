@@ -83,7 +83,6 @@ struct execution_result {
     std::string new_address;
     std::string output;
     std::string code_deposit;
-    std::string gas_refunded;
     unsigned deposit_size;
     std::string gas_for_deposit;
 };

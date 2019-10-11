@@ -340,7 +340,7 @@ struct asset_claim_fees_operation : public base_operation
 
 ```json
 [
-  23,{
+  24,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"

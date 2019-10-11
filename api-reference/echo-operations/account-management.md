@@ -61,6 +61,7 @@ struct account_create_operation
     "options": {
       "voting_account": "1.2.5",
       "delegating_account": "1.2.5",
+      "delegate_share": 2000,
       "num_committee": 0,
       "votes": [],
       "extensions": []
@@ -213,7 +214,7 @@ struct account_address_create_operation : public base_operation
 
 ```javascript
 [
-  28,{
+  29,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
