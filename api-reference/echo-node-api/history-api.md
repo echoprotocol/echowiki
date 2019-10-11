@@ -242,7 +242,7 @@ Get operations relevant to the specificed contract.
         HISTORY_API_ID,
         "get_contract_history",
         [
-            "1.9.0",
+            "1.11.0",
             "1.6.0",
             "1",
             "1.6.20"
