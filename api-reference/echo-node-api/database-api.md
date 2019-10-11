@@ -2637,9 +2637,9 @@ Get logs of specified contract.
 | Option | Description |
 | :--- | :--- |
 | `contract_id_type contract_id` | ID of the contract |
-| `set<string> topics` | Filters by certain events if any provided |
-| `uint32_t from` | number of block to start retrieve from |
-| `uint32_t limit` | maximum number of addresses to return(must not exceed 100) |
+| `set<string> topics` | if any provided filters output by certain events |
+| `uint32_t from` | number of the recent blocks to retrieve from |
+| `uint32_t limit` | limit of the output |
 
 #### Example
 
@@ -2652,7 +2652,7 @@ Get logs of specified contract.
         "get_contract_logs",
         [
             "1.11.0",
-            [],
+            ["a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"],
             "0",
             "100"
         ]
@@ -2720,7 +2720,7 @@ Subscription to change the contract uses database-api.md\#set\_subscribe\_callba
         "subscribe_contracts",
         [
             [
-                "1.9.3"
+                "1.11.0"
             ]
         ]
     ]
