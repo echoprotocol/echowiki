@@ -123,3 +123,20 @@ struct balance_unfreeze_operation : public balance_freeze_operation {
   }
 ]
 ```
+
+## block_reward_operation
+
+```cpp
+```
+
+### JSON Example
+
+```json
+[
+  52,{
+    "reciever": "1.2.0",
+    "amount": 0,
+    "extensions": []
+  }
+]
+```
