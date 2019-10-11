@@ -5,7 +5,6 @@
 * [account\_create\_operation](account-management.md#account_create_operation) - Create new account
 * [account\_update\_operation](account-management.md#account_update_operation) - Update an existing account
 * [account\_whitelist\_operation](account-management.md#account_whitelist_operation) - This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets
-* [account\_transfer\_operation](account-management.md#account_transfer_operation) - Transfers the account to another account while clearing the white list
 * [account\_address\_create\_operation](account-management.md#account_address_create_operation) - Create account address
 
 ## Asset Management
@@ -43,20 +42,19 @@
 
 ## Sidechain
 
-* [sidechain\_eth\_create\_address\_operation](contracts.md#sidechain_eth_create_address_operation) - Used to generate address in ETH blockchain. After the address is generated eth\_address\_object\(s\) will be created in echo db and can be retrieved using get\_eth\_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
-* [sidechain\_eth\_approve\_address\_operation](contracts.md#sidechain_eth_approve_address_operation) - An internal operation by which committee members confirm the created  Ethereum address
-* [sidechain\_eth\_deposit\_operation](contracts.md#sidechain_eth_deposit_operation) - An internal operation by which committee members confirm Ethereum deposit
-* [sidechain\_eth\_withdraw\_operation](contracts.md#sidechain_eth_withdraw_operation) - Used to withdraw the eETH and receive ETH to provided address
-* [sidechain\_eth\_approve\_withdraw\_operation](contracts.md#sidechain_eth_approve_withdraw_operation) - An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH
-* [sidechain\_change\_config\_operation](contracts.md#sidechain_change_config_operation) - An internal operation by which committee members confirm the update of the sidechain configuration
-* [sidechain\\_issue\_operation](contracts.md#sidechain_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
-* [sidechain\\_burn\_operation](contracts.md#sidechain_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\)
-* [sidechain\_erc20\_register\_token\_operation](contracts.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
-* [sidechain\_erc20\_deposit\_token\_operation](contracts.md#sidechain_erc20_deposit_token_operation) - An internal operation by which committee members confirm the entry of tokens
-* [sidechain\_erc20\_withdraw\_token\_operation](contracts.md#sidechain_erc20_withdraw_token_operation) - Executed by the user and initiates the withdrawal of the token from the Echo network to the specified address
-* [sidechain\_erc20\_approve\_token\_withdraw\_operation](contracts.md#sidechain_erc20_approve_token_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens
-* [sidechain\_erc20\_issue\_operation](contracts.md#sidechain_erc20_issue_operation) - Virtual operation which issues erc20 token
-* [sidechain\_erc20\_burn\_operation](contracts.md#sidechain_erc20_burn_operation) - Virtual operation which burns erc20 token
+* [sidechain\_eth\_create\_address\_operation](sidechain.md#sidechain_eth_create_address_operation) - Used to generate address in ETH blockchain. After the address is generated eth\_address\_object\(s\) will be created in echo db and can be retrieved using get\_eth\_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
+* [sidechain\_eth\_approve\_address\_operation](sidechain.md#sidechain_eth_approve_address_operation) - An internal operation by which committee members confirm the created  Ethereum address
+* [sidechain\_eth\_deposit\_operation](sidechain.md#sidechain_eth_deposit_operation) - An internal operation by which committee members confirm Ethereum deposit
+* [sidechain\_eth\_withdraw\_operation](sidechain.md#sidechain_eth_withdraw_operation) - Used to withdraw the eETH and receive ETH to provided address
+* [sidechain\_eth\_approve\_withdraw\_operation](sidechain.md#sidechain_eth_approve_withdraw_operation) - An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH
+* [sidechain\\_issue\_operation](sidechain.md#sidechain_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
+* [sidechain\\_burn\_operation](sidechain.md#sidechain_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\)
+* [sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
+* [sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation) - An internal operation by which committee members confirm the entry of tokens
+* [sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation) - Executed by the user and initiates the withdrawal of the token from the Echo network to the specified address
+* [sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens
+* [sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) - Virtual operation which issues erc20 token
+* [sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) - Virtual operation which burns erc20 token
 
 ## Transaction Proposal Protocol
 

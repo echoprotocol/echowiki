@@ -8,7 +8,6 @@
 | [account_update_operation](operations/account_management/_account_update_operation.md)    | Update an existing account |
 | [account_whitelist_operation](operations/account_management/_account_whitelist_operation.md) | This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets |
 | [account_upgrade_operation](operations/account_management/_account_upgrade_operation.md)   | Manage an account's membership status |
-| [account_transfer_operation](operations/account_management/_account_transfer_operation.md)  | Transfers the account to another account while clearing the white list |
 | [account_address_create_operation](operations/account_management/_account_address_create_operation.md) | |
 
 #### Assert Conditions
