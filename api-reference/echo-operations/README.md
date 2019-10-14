@@ -30,6 +30,10 @@
 * [committee\_member\_create\_operation](committee-member.md#committee_member_create_operation) - Create a `committee_member` object, as a bid to hold a `committee_member` seat on the network
 * [committee\_member\_update\_operation](committee-member.md#committee_member_update_operation) - Update a `committee_member` object
 * [committee\_member\_update\_global\_parameters\_operation](committee-member.md#committee_member_update_global_parameters_operation) - Used by committee members to update the global parameters of the blockchain
+* [committee\_member\_activate\_operation](committee-member.md#committee_member_activate_operation) - Used by active `committee_members` to propose activation of `committee_member`
+* [committee\_member\_deactivate\_operation](committee-member.md#committee_member_deactivate_operation) - Used by active `committee_members` to propose deactivation of `committee_member`
+* [committee\_frozen\_balance\_deposit\_operation](committee-member.md#committee_frozen_balance_deposit_operation) - Used by `committee_member` to deposit of frozen balance
+* [committee\_frozen\_balance\_withdraw\_operation](committee-member.md#committee_frozen_balance_withdraw_operation) - Used by `committee_member` to withdraw of frozen balance
 
 ## Contracts
 

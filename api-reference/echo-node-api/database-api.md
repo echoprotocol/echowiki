@@ -3120,6 +3120,45 @@ An array of vesting balances.
 }
 ```
 
+### get\_committee\_frozen\_balance\(committee\_member\_id\)
+
+#### Parameters
+
+| Option                                         | Description                       |
+|:-----------------------------------------------|:----------------------------------|
+| `committee_member_id_type committee_member_id` | the id of committee member to use |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_committee_frozen_balance",
+        [
+            "1.4.6"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+Frozen balance of committee member.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "amount": 1000,
+        "asset_id": "1.3.0"
+    }
+}
+```
+
 ## Assets
 
 ### get\_assets\(asset\_ids\)

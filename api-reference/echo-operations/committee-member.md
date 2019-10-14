@@ -18,6 +18,7 @@ struct committee_member_create_operation : public base_operation
    
    eth_address_type                      eth_address;
    echo::sidechain::btc::public_key      btc_public_key;
+   asset                                 deposit;
 
    extensions_type extensions;
 
@@ -39,6 +40,10 @@ struct committee_member_create_operation : public base_operation
     "url": "",
     "eth_address": "0000000000000000000000000000000000000000",
     "btc_public_key": "000000000000000000000000000000000000000000000000000000000000000000",
+    "deposit": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
     "extensions": []
   }
 ]
@@ -143,10 +148,19 @@ struct committee_member_update_global_parameters_operation : public base_operati
       "max_authority_depth": 2,
       "block_emission_amount": 0,
       "block_producer_reward_ratio": 5000,
-      "frozen_balances_multipliers": [
-        [90, 13000],
-        [180, 14000],
-        [360, 15000]
+      "committee_frozen_balance_to_activate": 1000,
+      "committee_freeze_duration_seconds": 2592000,
+      "committee_maintenance_intervals_to_deposit": 10,
+      "frozen_balances_multipliers": [[
+          90,
+          13000
+        ],[
+          180,
+          14000
+        ],[
+          360,
+          15000
+        ]
       ],
       "echorand_config": {
         "_time_generate": 0,
@@ -224,6 +238,154 @@ struct committee_member_update_global_parameters_operation : public base_operati
         "gas_amount": 1000
       },
       "extensions": []
+    },
+    "extensions": []
+  }
+]
+```
+
+## committee_member_activate_operation
+
+Used by active committee_members to propose activation of committee_member
+
+This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted.
+
+```cpp
+struct committee_member_activate_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = ECHO_BLOCKCHAIN_PRECISION; };
+
+   asset                    fee;
+
+   committee_member_id_type committee_to_activate;
+
+   extensions_type          extensions;
+
+   account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
+   void            validate()const {};
+};
+```
+
+### JSON Example
+
+```json
+[
+  23,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_to_activate": "1.4.0",
+    "extensions": []
+  }
+]
+```
+
+## committee_member_deactivate_operation
+
+Used by active committee_members to propose deactivation of committee_member
+
+This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted.
+
+```cpp
+struct committee_member_deactivate_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = ECHO_BLOCKCHAIN_PRECISION; };
+
+   asset                    fee;
+
+   committee_member_id_type committee_to_deactivate;
+
+   extensions_type          extensions;
+
+   account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
+   void            validate()const {};
+};
+```
+
+### JSON Example
+
+```json
+[
+  24,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_to_deactivate": "1.4.0",
+    "extensions": []
+  }
+]
+```
+
+## committee_frozen_balance_deposit_operation
+
+```cpp
+struct committee_frozen_balance_deposit_operation : public base_operation {
+   struct fee_parameters_type {
+      uint64_t fee = 1000;
+   };
+
+   asset                               fee;
+   committee_member_id_type            committee_member;
+   account_id_type                     committee_member_account;
+   asset                               amount;
+   extensions_type                     extensions;
+
+   account_id_type fee_payer() const { return committee_member_account; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  25,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_member": "1.4.0",
+    "committee_member_account": "1.2.0",
+    "amount": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "extensions": []
+  }
+]
+```
+
+## committee_frozen_balance_withdraw_operation
+
+```cpp
+struct committee_frozen_balance_withdraw_operation : public base_operation {
+   struct fee_parameters_type {
+      uint64_t fee = 1000;
+   };
+
+   asset                               fee;
+   account_id_type                     committee_member_account;
+   asset                               amount;
+   extensions_type                     extensions;
+
+   account_id_type fee_payer() const { return committee_member_account; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  26,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_member_account": "1.2.0",
+    "amount": {
+      "amount": 0,
+      "asset_id": "1.3.0"
     },
     "extensions": []
   }
