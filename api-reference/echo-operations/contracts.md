@@ -24,20 +24,21 @@ struct contract_create_operation : public contract_base_operation
 
 ```json
 [
-  25,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "registrar": "1.2.0",
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "code": "",
-    "eth_accuracy": false,
-    "extensions": []
-  }
+   31,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "registrar": "1.2.0",
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "code": "",
+      "eth_accuracy": false,
+      "extensions": []
+   }
 ]
 ```
 
@@ -64,20 +65,21 @@ struct contract_call_operation : public contract_base_operation
 
 ```json
 [
-  26,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "registrar": "1.2.0",
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "code": "",
-    "callee": "1.9.0",
-    "extensions": []
-  }
+   32,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "registrar": "1.2.0",
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "code": "",
+      "callee": "1.11.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -100,16 +102,17 @@ struct contract_internal_create_operation : public base_operation
 ### JSON Example
 ```json
 [
-  28,{
-    "caller": "1.10.0",
-    "new_contract": "1.10.0",
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "eth_accuracy": false,
-    "extensions": []
-  }
+   33,
+   {
+      "caller": "1.11.0",
+      "new_contract": "1.11.0",
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "eth_accuracy": false,
+      "extensions": []
+   }
 ]
 ```
 
@@ -131,16 +134,17 @@ struct contract_internal_call_operation : public base_operation
 ### JSON Example
 ```json
 [
-  29,{
-    "caller": "1.10.0",
-    "callee": "0.0.0",
-    "method": "",
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   34,
+   {
+      "caller": "1.11.0",
+      "callee": "0.0.0",
+      "method": "",
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
 
@@ -161,12 +165,54 @@ struct contract_selfdestruct_operation : public base_operation
 ### JSON Example
 ```json
 [
-  30,{
-    "contract": "1.10.0",
-    "recipient": "0.0.0",
-    "amounts": [],
-    "extensions": []
-  }
+   35,
+   {
+      "contract": "1.11.0",
+      "recipient": "0.0.0",
+      "amounts": [],
+      "extensions": []
+   }
+]
+```
+
+## contract_update_operation
+
+Update contract data.
+
+```cpp
+struct contract_update_operation : public base_operation
+{
+   struct fee_parameters_type {
+      share_type fee = 20 * ECHO_BLOCKCHAIN_PRECISION;
+   };
+
+   asset fee;
+   account_id_type sender;
+   contract_id_type contract;
+   
+   fc::optional<account_id_type> new_owner;
+
+   extensions_type extensions;
+
+   void validate() const;
+   account_id_type fee_payer() const { return sender; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   36,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "sender": "1.2.0",
+      "contract": "1.11.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -195,19 +241,20 @@ struct contract_fund_pool_operation : public base_operation
 
 ```json
 [
-  36,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "sender": "1.2.0",
-    "contract": "1.9.0",
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   37,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "sender": "1.2.0",
+      "contract": "1.11.0",
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
 
@@ -240,58 +287,19 @@ struct contract_whitelist_operation : public base_operation
 
 ```json
 [
-  37,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "sender": "1.2.0",
-    "contract": "1.9.0",
-    "add_to_whitelist": [],
-    "remove_from_whitelist": [],
-    "add_to_blacklist": [],
-    "remove_from_blacklist": [],
-    "extensions": []
-  }
-]
-```
-
-## contract_update_operation
-
-Update contract data.
-
-```cpp
-struct contract_update_operation : public base_operation
-{
-   struct fee_parameters_type {
-      share_type fee = 20 * ECHO_BLOCKCHAIN_PRECISION;
-   };
-
-   asset fee;
-   account_id_type sender;
-   contract_id_type contract;
-   
-   fc::optional<account_id_type> new_owner;
-
-   extensions_type extensions;
-
-   void validate() const;
-   account_id_type fee_payer() const { return sender; }
-};
-```
-
-### JSON Example
-
-```json
-[
-  28,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "sender": "1.2.0",
-    "contract": "1.9.0",
-    "extensions": []
-  }
+   38,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "sender": "1.2.0",
+      "contract": "1.11.0",
+      "add_to_whitelist": [],
+      "remove_from_whitelist": [],
+      "add_to_blacklist": [],
+      "remove_from_blacklist": [],
+      "extensions": []
+   }
 ]
 ```
