@@ -44,16 +44,17 @@ struct proposal_create_operation : public base_operation
 
 ```json
 [
-  12,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "fee_paying_account": "1.2.0",
-    "expiration_time": "1970-01-01T00:00:00",
-    "proposed_ops": [],
-    "extensions": []
-  }
+   16,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "fee_paying_account": "1.2.0",
+      "expiration_time": "1970-01-01T00:00:00",
+      "proposed_ops": [],
+      "extensions": []
+   }
 ]
 ```
 
@@ -100,20 +101,21 @@ struct proposal_update_operation : public base_operation
 
 ```json
 [
-  13,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "fee_paying_account": "1.2.0",
-    "proposal": "1.5.0",
-    "active_approvals_to_add": [],
-    "active_approvals_to_remove": [],
-    "owner_approvals_to_remove": [],
-    "key_approvals_to_add": [],
-    "key_approvals_to_remove": [],
-    "extensions": []
-  }
+   17,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "fee_paying_account": "1.2.0",
+      "proposal": "1.5.0",
+      "active_approvals_to_add": [],
+      "active_approvals_to_remove": [],
+      "owner_approvals_to_remove": [],
+      "key_approvals_to_add": [],
+      "key_approvals_to_remove": [],
+      "extensions": []
+   }
 ]
 ```
 
@@ -144,15 +146,16 @@ struct proposal_delete_operation : public base_operation
 
 ```json
 [
-  14,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "fee_paying_account": "1.2.0",
-    "using_owner_authority": false,
-    "proposal": "1.5.0",
-    "extensions": []
-  }
+   18,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "fee_paying_account": "1.2.0",
+      "using_owner_authority": false,
+      "proposal": "1.5.0",
+      "extensions": []
+   }
 ]
 ```

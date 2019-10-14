@@ -68,27 +68,13 @@ struct buyback_account_options
 ```cpp
 struct account_options
 {
-    /// The memo key is the key this account will typically use to encrypt/sign transaction memos and other non-
-    /// validated account activities. This field is here to prevent confusion if the active authority has zero or
-    /// multiple keys in it.
-    public_key_type  memo_key;
-    /// If this field is set to an account ID other than ECHO_PROXY_TO_SELF_ACCOUNT,
-    /// then this account's votes will be ignored; its stake
-    /// will be counted as voting for the referenced account's selected votes instead.
-    account_id_type voting_account = ECHO_PROXY_TO_SELF_ACCOUNT;
+   /// If this field is not ECHO_PROXY_TO_SELF_ACCOUNT, then the vote will be delegated to another account specified.
+   account_id_type delegating_account = ECHO_PROXY_TO_SELF_ACCOUNT;
+   /// Share of block reward for delegate account
+   uint16_t delegate_share = 20 * ECHO_1_PERCENT;
 
-    /// If this field is not ECHO_PROXY_TO_SELF_ACCOUNT, then the vote will be delegated to another account specified.
-    account_id_type delegating_account = ECHO_PROXY_TO_SELF_ACCOUNT;
+   extensions_type extensions;
 
-    /// The number of active witnesses this account votes the blockchain should appoint
-    /// Must not exceed the actual number of witnesses voted for in @ref votes
-    uint16_t num_witness = 0;
-    /// The number of active committee members this account votes the blockchain should appoint
-    /// Must not exceed the actual number of committee members voted for in @ref votes
-    uint16_t num_committee = 0;
-    /// This is the list of vote IDs this account votes for. The weight of these votes is determined by this
-    /// account's balance of core asset.
-    flat_set<vote_id_type> votes;
-    extensions_type        extensions;
+   void validate()const;
 };
 ```

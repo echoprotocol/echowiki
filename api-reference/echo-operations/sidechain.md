@@ -20,14 +20,15 @@ struct sidechain_eth_create_address_operation : public base_operation
 
 ```json
 [
-  31,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "extensions": []
-  }
+   39,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -55,17 +56,18 @@ struct sidechain_eth_approve_address_operation : public base_operation
 
 ```json
 [
-  32,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_id": "1.2.0",
-    "malicious_committeemen": [],
-    "account": "1.2.0",
-    "eth_addr": "0000000000000000000000000000000000000000",
-    "extensions": []
-  }
+   40,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "malicious_committeemen": [],
+      "account": "1.2.0",
+      "eth_addr": "0000000000000000000000000000000000000000",
+      "extensions": []
+   }
 ]
 ```
 
@@ -92,17 +94,18 @@ struct sidechain_eth_deposit_operation : public base_operation
 
 ```json
 [
-  33,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_id": "1.2.0",
-    "deposit_id": 0,
-    "account": "1.2.0",
-    "value": 0,
-    "extensions": []
-  }
+   41,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "deposit_id": 0,
+      "account": "1.2.0",
+      "value": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -128,16 +131,17 @@ struct sidechain_eth_withdraw_operation : public base_operation
 
 ```json
 [
-  34,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "eth_addr": "0000000000000000000000000000000000000000",
-    "value": 0,
-    "extensions": []
-  }
+   42,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "eth_addr": "0000000000000000000000000000000000000000",
+      "value": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -162,15 +166,16 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
 
 ```json
 [
-  35,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_id": "1.2.0",
-    "withdraw_id": 0,
-    "extensions": []
-  }
+   43,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "withdraw_id": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -202,19 +207,20 @@ struct sidechain_issue_operation : public base_operation
 
 ```json
 [
-  38,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "deposit_id": "1.13.0",
-    "extensions": []
-  }
+   44,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "deposit_id": "0.0.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -245,19 +251,20 @@ struct sidechain_burn_operation : public base_operation
 
 ```json
 [
-  39,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "value": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "withdraw_id": "1.14.0",
-    "extensions": []
-  }
+   45,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "value": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "withdraw_id": "0.0.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -290,18 +297,19 @@ struct sidechain_erc20_register_token_operation : public base_operation
 
 ```json
 [
-  40,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "eth_addr": "0000000000000000000000000000000000000000",
-    "name": "",
-    "symbol": "",
-    "decimals": 0,
-    "extensions": []
-  }
+   46,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "eth_addr": "0000000000000000000000000000000000000000",
+      "name": "",
+      "symbol": "",
+      "decimals": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -332,19 +340,20 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 
 ```json
 [
-  41,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_id": "1.2.0",
-    "malicious_committeemen": [],
-    "account": "1.2.0",
-    "erc20_token_addr": "0000000000000000000000000000000000000000",
-    "value": "",
-    "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-    "extensions": []
-  }
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "malicious_committeemen": [],
+      "account": "1.2.0",
+      "erc20_token_addr": "0000000000000000000000000000000000000000",
+      "value": "",
+      "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "extensions": []
+   }
 ]
 ```
 
@@ -372,17 +381,18 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
 
 ```json
 [
-  42,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "to": "0000000000000000000000000000000000000000",
-    "erc20_token": "1.15.0",
-    "value": "",
-    "extensions": []
-  }
+   48,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "to": "0000000000000000000000000000000000000000",
+      "erc20_token": "1.17.0",
+      "value": "",
+      "extensions": []
+   }
 ]
 ```
 
@@ -408,15 +418,16 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 
 ```json
 [
-  43,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_id": "1.2.0",
-    "withdraw_id": 0,
-    "extensions": []
-  }
+   49,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "withdraw_id": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -444,13 +455,14 @@ struct sidechain_erc20_issue_operation : public base_operation
 
 ```json
 [
-  44,{
-    "deposit": "1.17.0",
-    "account": "1.2.0",
-    "token": "1.16.0",
-    "amount": "",
-    "extensions": []
-  }
+   50,
+   {
+      "deposit": "1.18.0",
+      "account": "1.2.0",
+      "token": "1.17.0",
+      "amount": "",
+      "extensions": []
+   }
 ]
 ```
 
@@ -480,12 +492,13 @@ struct sidechain_erc20_burn_operation : public base_operation
 
 ```json
 [
-  45,{
-    "withdraw": "1.18.0",
-    "account": "1.2.0",
-    "token": "1.16.0",
-    "amount": "",
-    "extensions": []
-  }
+   51,
+   {
+      "withdraw": "1.19.0",
+      "account": "1.2.0",
+      "token": "1.17.0",
+      "amount": "",
+      "extensions": []
+   }
 ]
 ```
