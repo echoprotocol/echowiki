@@ -192,7 +192,7 @@ A list of operations performed by account, ordered from most recent to oldest.
         {
             "id": "1.6.163",
             "op": [
-                47,
+                20,
                 {
                     "fee": {
                         "amount": 0,

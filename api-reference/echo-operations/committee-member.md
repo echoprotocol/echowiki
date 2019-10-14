@@ -31,21 +31,22 @@ struct committee_member_create_operation : public base_operation
 
 ```json
 [
-  15,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_account": "1.2.0",
-    "url": "",
-    "eth_address": "0000000000000000000000000000000000000000",
-    "btc_public_key": "000000000000000000000000000000000000000000000000000000000000000000",
-    "deposit": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   19,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_account": "1.2.0",
+      "url": "",
+      "eth_address": "0000000000000000000000000000000000000000",
+      "btc_public_key": "000000000000000000000000000000000000000000000000000000000000000000",
+      "deposit": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
 
@@ -80,15 +81,16 @@ struct committee_member_update_operation : public base_operation
 
 ```json
 [
-  16,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member": "1.4.0",
-    "committee_member_account": "1.2.0",
-    "extensions": []
-  }
+   20,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member": "1.4.0",
+      "committee_member_account": "1.2.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -119,128 +121,129 @@ struct committee_member_update_global_parameters_operation : public base_operati
 
 ```json
 [
-  17,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "new_parameters": {
-      "current_fees": {
-        "parameters": [],
-        "scale": 10000
+   21,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
       },
-      "maintenance_interval": 86400,
-      "maintenance_duration_seconds": 10,
-      "committee_proposal_review_period": 1209600,
-      "maximum_transaction_size": 2097152,
-      "maximum_block_size": 5242880,
-      "maximum_time_until_expiration": 86400,
-      "maximum_proposal_lifetime": 2419200,
-      "maximum_asset_whitelist_authorities": 10,
-      "maximum_asset_feed_publishers": 10,
-      "maximum_committee_count": 1001,
-      "maximum_authority_membership": 10,
-      "reserve_percent_of_fee": 2000,
-      "network_percent_of_fee": 2000,
-      "max_predicate_opcode": 1,
-      "accounts_per_fee_scale": 1000,
-      "account_fee_scale_bitshifts": 4,
-      "max_authority_depth": 2,
-      "block_emission_amount": 0,
-      "block_producer_reward_ratio": 5000,
-      "committee_frozen_balance_to_activate": 1000,
-      "committee_freeze_duration_seconds": 2592000,
-      "committee_maintenance_intervals_to_deposit": 10,
-      "frozen_balances_multipliers": [[
-          90,
-          13000
-        ],[
-          180,
-          14000
-        ],[
-          360,
-          15000
-        ]
-      ],
-      "echorand_config": {
-        "_time_generate": 0,
-        "_time_net_1mb": 0,
-        "_time_net_256b": 0,
-        "_creator_count": 0,
-        "_verifier_count": 0,
-        "_ok_threshold": 0,
-        "_max_bba_steps": 0,
-        "_gc1_delay": 0
-      },
-      "sidechain_config": {
-        "eth_contract_address": "0000000000000000000000000000000000000000",
-        "eth_committee_update_method": {
-          "method": "",
-          "gas": 0
-        },
-        "eth_gen_address_method": {
-          "method": "",
-          "gas": 0
-        },
-        "eth_withdraw_method": {
-          "method": "",
-          "gas": 0
-        },
-        "eth_update_addr_method": {
-          "method": "",
-          "gas": 0
-        },
-        "eth_withdraw_token_method": {
-          "method": "",
-          "gas": 0
-        },
-        "eth_collect_tokens_method": {
-          "method": "",
-          "gas": 0
-        },
-        "eth_committee_updated_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "eth_gen_address_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "eth_deposit_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "eth_withdraw_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "erc20_deposit_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "erc20_withdraw_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "ETH_asset_id": "1.3.0",
-        "BTC_asset_id": "1.3.0",
-        "waiting_eth_blocks": 0,
-        "waiting_btc_blocks": 0,
-        "fines": {
-          "generate_eth_address": 0
-        },
-        "waiting_blocks": 0,
-        "gas_price": 0,
-        "satoshis_per_byte": 0,
-        "echo_blocks_per_aggregation": 0
-      },
-      "erc20_config": {
-        "contract_code": "",
-        "create_token_fee": 0,
-        "transfer_topic": "0000000000000000000000000000000000000000000000000000000000000000",
-        "check_balance_method": {
-          "method": "",
-          "gas": 0
-        },
-        "burn_method": {
-          "method": "",
-          "gas": 0
-        },
-        "issue_method": {
-          "method": "",
-          "gas": 0
-        }
-      },
-      "gas_price": {
-        "price": 1,
-        "gas_amount": 1000
+      "new_parameters": {
+         "current_fees": {
+               "parameters": [],
+               "scale": 10000
+         },
+         "maintenance_interval": 86400,
+         "maintenance_duration_seconds": 10,
+         "committee_proposal_review_period": 1209600,
+         "maximum_transaction_size": 2097152,
+         "maximum_block_size": 5242880,
+         "maximum_time_until_expiration": 86400,
+         "maximum_proposal_lifetime": 2419200,
+         "maximum_asset_whitelist_authorities": 10,
+         "maximum_asset_feed_publishers": 10,
+         "maximum_committee_count": 1001,
+         "maximum_authority_membership": 10,
+         "reserve_percent_of_fee": 2000,
+         "network_percent_of_fee": 2000,
+         "max_predicate_opcode": 1,
+         "accounts_per_fee_scale": 1000,
+         "account_fee_scale_bitshifts": 4,
+         "max_authority_depth": 2,
+         "block_emission_amount": 0,
+         "block_producer_reward_ratio": 5000,
+         "committee_frozen_balance_to_activate": "100000000000",
+         "committee_maintenance_intervals_to_deposit": 10,
+         "committee_freeze_duration_seconds": 2592000,
+         "frozen_balances_multipliers": [
+               [
+                  90,
+                  13000
+               ],
+               [
+                  180,
+                  14000
+               ],
+               [
+                  360,
+                  15000
+               ]
+         ],
+         "echorand_config": {
+               "_time_generate": 0,
+               "_time_net_1mb": 0,
+               "_time_net_256b": 0,
+               "_creator_count": 0,
+               "_verifier_count": 0,
+               "_ok_threshold": 0,
+               "_max_bba_steps": 0,
+               "_gc1_delay": 0
+         },
+         "sidechain_config": {
+               "eth_contract_address": "0000000000000000000000000000000000000000",
+               "eth_committee_update_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "eth_gen_address_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "eth_withdraw_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "eth_update_addr_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "eth_withdraw_token_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "eth_collect_tokens_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "eth_committee_updated_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "eth_gen_address_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "eth_deposit_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "eth_withdraw_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "erc20_deposit_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "erc20_withdraw_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "ETH_asset_id": "1.3.0",
+               "BTC_asset_id": "1.3.0",
+               "fines": {
+                  "generate_eth_address": 0
+               },
+               "gas_price": 0,
+               "satoshis_per_byte": 1,
+               "coefficient_waiting_blocks": 0
+         },
+         "erc20_config": {
+               "contract_code": "",
+               "create_token_fee": 0,
+               "transfer_topic": "0000000000000000000000000000000000000000000000000000000000000000",
+               "check_balance_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "burn_method": {
+                  "method": "",
+                  "gas": 0
+               },
+               "issue_method": {
+                  "method": "",
+                  "gas": 0
+               }
+         },
+         "gas_price": {
+               "price": 1,
+               "gas_amount": 1000
+         },
+         "extensions": []
       },
       "extensions": []
-    },
-    "extensions": []
-  }
+   }
 ]
 ```
 
@@ -270,14 +273,15 @@ struct committee_member_activate_operation : public base_operation
 
 ```json
 [
-  23,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_to_activate": "1.4.0",
-    "extensions": []
-  }
+   22,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_to_activate": "1.4.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -307,14 +311,15 @@ struct committee_member_deactivate_operation : public base_operation
 
 ```json
 [
-  24,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_to_deactivate": "1.4.0",
-    "extensions": []
-  }
+   23,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_to_deactivate": "1.4.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -340,19 +345,20 @@ struct committee_frozen_balance_deposit_operation : public base_operation {
 
 ```json
 [
-  25,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member": "1.4.0",
-    "committee_member_account": "1.2.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   24,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member": "1.4.0",
+      "committee_member_account": "1.2.0",
+      "amount": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
 
@@ -377,17 +383,18 @@ struct committee_frozen_balance_withdraw_operation : public base_operation {
 
 ```json
 [
-  26,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "committee_member_account": "1.2.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   25,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_account": "1.2.0",
+      "amount": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```

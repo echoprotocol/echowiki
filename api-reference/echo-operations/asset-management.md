@@ -44,35 +44,36 @@ struct asset_create_operation : public base_operation
 
 ```json
 [
-  4,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issuer": "1.2.0",
-    "symbol": "",
-    "precision": 0,
-    "common_options": {
-      "max_supply": "1000000000000000",
-      "issuer_permissions": 15,
-      "flags": 0,
-      "core_exchange_rate": {
-        "base": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        },
-        "quote": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        }
+   7,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
       },
-      "whitelist_authorities": [],
-      "blacklist_authorities": [],
-      "description": "",
+      "issuer": "1.2.0",
+      "symbol": "",
+      "precision": 0,
+      "common_options": {
+         "max_supply": "1000000000000000",
+         "issuer_permissions": 15,
+         "flags": 0,
+         "core_exchange_rate": {
+            "base": {
+                  "amount": 0,
+                  "asset_id": "1.3.0"
+            },
+            "quote": {
+                  "amount": 0,
+                  "asset_id": "1.3.0"
+            }
+         },
+         "whitelist_authorities": [],
+         "blacklist_authorities": [],
+         "description": "",
+         "extensions": []
+      },
       "extensions": []
-    },
-    "extensions": []
-  }
+   }
 ]
 ```
 
@@ -112,35 +113,16 @@ struct asset_update_operation : public base_operation
 
 ```json
 [
-  5,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issuer": "1.2.0",
-    "asset_to_update": "1.3.0",
-    "new_issuer": "1.2.0",
-    "new_options": {
-      "max_supply": "1000000000000000",
-      "issuer_permissions": 15,
-      "flags": 0,
-      "core_exchange_rate": {
-        "base": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        },
-        "quote": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        }
+   8,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
       },
-      "whitelist_authorities": [],
-      "blacklist_authorities": [],
-      "description": "",
+      "issuer": "1.2.0",
+      "asset_to_update": "1.3.0",
       "extensions": []
-    },
-    "extensions": []
-  }
+   }
 ]
 ```
 
@@ -172,21 +154,22 @@ struct asset_update_bitasset_operation : public base_operation
 
 ```json
 [
-  6,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issuer": "1.2.0",
-    "asset_to_update": "1.3.0",
-    "new_options": {
-      "feed_lifetime_sec": 86400,
-      "minimum_feeds": 1,
-      "short_backing_asset": "1.3.0",
+   9,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "issuer": "1.2.0",
+      "asset_to_update": "1.3.0",
+      "new_options": {
+         "feed_lifetime_sec": 86400,
+         "minimum_feeds": 1,
+         "short_backing_asset": "1.3.0",
+         "extensions": []
+      },
       "extensions": []
-    },
-    "extensions": []
-  }
+   }
 ]
 ```
 
@@ -218,16 +201,17 @@ struct asset_update_feed_producers_operation : public base_operation
 
 ```json
 [
-  7,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issuer": "1.2.0",
-    "asset_to_update": "1.3.0",
-    "new_feed_producers": [],
-    "extensions": []
-  }
+   10,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "issuer": "1.2.0",
+      "asset_to_update": "1.3.0",
+      "new_feed_producers": [],
+      "extensions": []
+   }
 ]
 ```
 
@@ -259,19 +243,20 @@ struct asset_issue_operation : public base_operation
 
 ```json
 [
-  8,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issuer": "1.2.0",
-    "asset_to_issue": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issue_to_account": "1.2.0",
-    "extensions": []
-  }
+   11,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "issuer": "1.2.0",
+      "asset_to_issue": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "issue_to_account": "1.2.0",
+      "extensions": []
+   }
 ]
 ```
 
@@ -299,59 +284,19 @@ struct asset_reserve_operation : public base_operation
 
 ```json
 [
-  9,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "payer": "1.2.0",
-    "amount_to_reserve": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
-]
-```
-
-## asset_claim_fees_operation
-
-Used to transfer accumulated fees back to the issuer's balance
-
-```cpp
-struct asset_claim_fees_operation : public base_operation
-{
-  struct fee_parameters_type {
-      uint64_t fee = 20 * ECHO_BLOCKCHAIN_PRECISION;
-  };
-
-  asset           fee;
-  account_id_type issuer;
-  asset           amount_to_claim; /// amount_to_claim.asset_id->issuer must == issuer
-  
-  extensions_type extensions;
-
-  account_id_type fee_payer()const { return issuer; }
-  void            validate()const;
-};
-```
-
-### JSON Example
-
-```json
-[
-  24,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "issuer": "1.2.0",
-    "amount_to_claim": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   12,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "payer": "1.2.0",
+      "amount_to_reserve": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
 
@@ -378,16 +323,17 @@ struct asset_fund_fee_pool_operation : public base_operation
 
 ```json
 [
-  10,{
-    "fee": {
+   13,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "from_account": "1.2.0",
+      "asset_id": "1.3.0",
       "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "from_account": "1.2.0",
-    "asset_id": "1.3.0",
-    "amount": 0,
-    "extensions": []
-  }
+      "extensions": []
+   }
 ]
 ```
 
@@ -420,38 +366,81 @@ struct asset_publish_feed_operation : public base_operation
 
 ```json
 [
-  11,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "publisher": "1.2.0",
-    "asset_id": "1.3.0",
-    "feed": {
-      "settlement_price": {
-        "base": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        },
-        "quote": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        }
+   14,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
       },
-      "maintenance_collateral_ratio": 1750,
-      "maximum_short_squeeze_ratio": 1500,
-      "core_exchange_rate": {
-        "base": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        },
-        "quote": {
-          "amount": 0,
-          "asset_id": "1.3.0"
-        }
-      }
-    },
-    "extensions": []
-  }
+      "publisher": "1.2.0",
+      "asset_id": "1.3.0",
+      "feed": {
+         "settlement_price": {
+            "base": {
+                  "amount": 0,
+                  "asset_id": "1.3.0"
+            },
+            "quote": {
+                  "amount": 0,
+                  "asset_id": "1.3.0"
+            }
+         },
+         "maintenance_collateral_ratio": 1750,
+         "maximum_short_squeeze_ratio": 1500,
+         "core_exchange_rate": {
+            "base": {
+                  "amount": 0,
+                  "asset_id": "1.3.0"
+            },
+            "quote": {
+                  "amount": 0,
+                  "asset_id": "1.3.0"
+            }
+         }
+      },
+      "extensions": []
+   }
+]
+```
+
+## asset_claim_fees_operation
+
+Used to transfer accumulated fees back to the issuer's balance
+
+```cpp
+struct asset_claim_fees_operation : public base_operation
+{
+  struct fee_parameters_type {
+      uint64_t fee = 20 * ECHO_BLOCKCHAIN_PRECISION;
+  };
+
+  asset           fee;
+  account_id_type issuer;
+  asset           amount_to_claim; /// amount_to_claim.asset_id->issuer must == issuer
+  
+  extensions_type extensions;
+
+  account_id_type fee_payer()const { return issuer; }
+  void            validate()const;
+};
+```
+
+### JSON Example
+
+```json
+[
+   15,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "issuer": "1.2.0",
+      "amount_to_claim": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```

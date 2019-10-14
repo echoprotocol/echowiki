@@ -43,31 +43,29 @@ struct account_create_operation
 
 ### JSON Example
 
-```javascript
+```json
 [
-  1,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "registrar": "1.2.0",
-    "name": "",
-    "active": {
-      "weight_threshold": 0,
-      "account_auths": [],
-      "key_auths": []
-    },
-    "echorand_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
-    "options": {
-      "voting_account": "1.2.5",
-      "delegating_account": "1.2.5",
-      "delegate_share": 2000,
-      "num_committee": 0,
-      "votes": [],
-      "extensions": []
-    },
-    "extensions": {}
-  }
+   3,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "registrar": "1.2.0",
+      "name": "",
+      "active": {
+         "weight_threshold": 0,
+         "account_auths": [],
+         "key_auths": []
+      },
+      "echorand_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
+      "options": {
+         "delegating_account": "1.2.5",
+         "delegate_share": 2000,
+         "extensions": []
+      },
+      "extensions": {}
+   }
 ]
 ```
 
@@ -116,23 +114,17 @@ struct account_update_operation : public base_operation
 
 ### JSON Example
 
-```javascript
+```json
 [
-  2,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "new_options": {
-        "voting_account": "1.2.5",
-        "delegating_account": "1.2.5",
-        "num_committee": 0,
-        "votes": ["0:0"],
-        "extensions": []
-    },
-    "extensions": {}
-  }
+   4,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "extensions": {}
+   }
 ]
 ```
 
@@ -174,18 +166,19 @@ struct account_whitelist_operation : public base_operation
 
 ### JSON Example
 
-```javascript
+```json
 [
-  3,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "authorizing_account": "1.2.0",
-    "account_to_list": "1.2.0",
-    "new_listing": 0,
-    "extensions": []
-  }
+   5,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "authorizing_account": "1.2.0",
+      "account_to_list": "1.2.0",
+      "new_listing": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -212,17 +205,18 @@ struct account_address_create_operation : public base_operation
 
 ### JSON Example
 
-```javascript
+```json
 [
-  29,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "owner": "1.2.0",
-    "label": "",
-    "extensions": []
-  }
+   6,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "owner": "1.2.0",
+      "label": "",
+      "extensions": []
+   }
 ]
 ```
 

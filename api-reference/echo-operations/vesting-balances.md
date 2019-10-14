@@ -36,26 +36,28 @@ struct vesting_balance_create_operation : public base_operation
 
 ```json
 [
-  18,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "creator": "1.2.0",
-    "owner": "1.2.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "policy": [
-      0,{
-        "begin_timestamp": "1970-01-01T00:00:00",
-        "vesting_cliff_seconds": 0,
-        "vesting_duration_seconds": 0
-      }
-    ],
-    "extensions": []
-  }
+   26,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "creator": "1.2.0",
+      "owner": "1.2.0",
+      "amount": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "policy": [
+         0,
+         {
+               "begin_timestamp": "1970-01-01T00:00:00",
+               "vesting_cliff_seconds": 0,
+               "vesting_duration_seconds": 0
+         }
+      ],
+      "extensions": []
+   }
 ]
 ```
 
@@ -90,18 +92,19 @@ struct vesting_balance_withdraw_operation : public base_operation
 
 ```json
 [
-  19,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "vesting_balance": "1.7.0",
-    "owner": "1.2.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   27,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "vesting_balance": "1.7.0",
+      "owner": "1.2.0",
+      "amount": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
