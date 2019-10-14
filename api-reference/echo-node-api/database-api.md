@@ -16,7 +16,7 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -37,48 +37,18 @@ If any of the provided IDs does not map to an object, a null is returned in its 
 
 The objects retrieved, in the order they are mentioned in ids.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
     "result": [
         {
             "id": "1.2.1",
-            "registrar": "1.2.1",
+            "registrar": "1.2.0",
             "network_fee_percentage": 0,
-            "name": "placeholder-account",
+            "name": "committee-account",
             "active": {
-                "weight_threshold": 1,
-                "account_auths": [],
-                "key_auths": []
-            },
-            "echorand_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
-            "options": {
-                "voting_account": "1.2.5",
-                "delegating_account": "1.2.5",
-                "num_committee": 0,
-                "votes": [],
-                "extensions": []
-            },
-            "statistics": "2.5.1",
-            "whitelisting_accounts": [],
-            "blacklisting_accounts": [],
-            "whitelisted_accounts": [],
-            "blacklisted_accounts": [],
-            "active_special_authority": [
-                0,
-                {}
-            ],
-            "top_n_control_flags": 0,
-            "extensions": []
-        },
-        {
-            "id": "1.2.2",
-            "registrar": "1.2.2",
-            "network_fee_percentage": 2000,
-            "name": "relaxed-committee-account",
-            "active": {
-                "weight_threshold": 4,
+                "weight_threshold": 14,
                 "account_auths": [
                     [
                         "1.2.6",
@@ -103,16 +73,99 @@ The objects retrieved, in the order they are mentioned in ids.
                     [
                         "1.2.11",
                         1
+                    ],
+                    [
+                        "1.2.12",
+                        1
+                    ],
+                    [
+                        "1.2.13",
+                        1
+                    ],
+                    [
+                        "1.2.14",
+                        1
+                    ],
+                    [
+                        "1.2.15",
+                        1
+                    ],
+                    [
+                        "1.2.16",
+                        1
+                    ],
+                    [
+                        "1.2.17",
+                        1
+                    ],
+                    [
+                        "1.2.18",
+                        1
+                    ],
+                    [
+                        "1.2.19",
+                        1
+                    ],
+                    [
+                        "1.2.20",
+                        1
+                    ],
+                    [
+                        "1.2.21",
+                        1
+                    ],
+                    [
+                        "1.2.22",
+                        1
+                    ],
+                    [
+                        "1.2.23",
+                        1
+                    ],
+                    [
+                        "1.2.24",
+                        1
+                    ],
+                    [
+                        "1.2.25",
+                        1
                     ]
                 ],
                 "key_auths": []
             },
             "echorand_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
             "options": {
-                "voting_account": "1.2.5",
                 "delegating_account": "1.2.5",
-                "num_committee": 0,
-                "votes": [],
+                "delegate_share": 2000,
+                "extensions": []
+            },
+            "statistics": "2.5.1",
+            "whitelisting_accounts": [],
+            "blacklisting_accounts": [],
+            "whitelisted_accounts": [],
+            "blacklisted_accounts": [],
+            "active_special_authority": [
+                0,
+                {}
+            ],
+            "top_n_control_flags": 0,
+            "accumulated_reward": 0,
+            "extensions": []
+        },
+        {
+            "id": "1.2.2",
+            "registrar": "1.2.0",
+            "network_fee_percentage": 0,
+            "name": "relaxed-committee-account",
+            "active": {
+                "weight_threshold": 1,
+                "account_auths": [],
+                "key_auths": []
+            },
+            "echorand_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
+            "options": {
+                "delegating_account": "1.2.5",
+                "delegate_share": 2000,
                 "extensions": []
             },
             "statistics": "2.5.2",
@@ -125,6 +178,7 @@ The objects retrieved, in the order they are mentioned in ids.
                 {}
             ],
             "top_n_control_flags": 0,
+            "accumulated_reward": 0,
             "extensions": []
         }
     ]
@@ -923,7 +977,7 @@ Array of operation history objects, or null if no matching operation was found.
                         "asset_id": "1.3.1"
                     },
                     "account": "1.2.1013",
-                    "deposit_id": "1.13.0",
+                    "deposit_id": "1.15.0",
                     "extensions": []
                 }
             ],
@@ -1129,7 +1183,7 @@ Retrieve the current global property object.
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -1143,7 +1197,7 @@ Retrieve the current global property object.
 
 #### Returns
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1161,56 +1215,57 @@ Retrieve the current global property object.
                     [
                         1,
                         {
-                            "basic_fee": 5000,
-                            "premium_fee": 2000,
-                            "price_per_kbyte": 1000
+                            "fee": 2000000000
                         }
                     ],
                     [
                         2,
                         {
-                            "fee": 200,
-                            "price_per_kbyte": 100
+                            "fee": 200
                         }
                     ],
                     [
                         3,
                         {
-                            "fee": 300000
+                            "basic_fee": 500000000,
+                            "premium_fee": "200000000000",
+                            "price_per_kbyte": 100000000
                         }
                     ],
                     [
                         4,
                         {
-                            "symbol3": 500000,
-                            "symbol4": 300000,
-                            "long_symbol": 5000,
+                            "fee": 2000000000,
                             "price_per_kbyte": 10
                         }
                     ],
                     [
                         5,
                         {
-                            "fee": 5000,
-                            "price_per_kbyte": 10
+                            "fee": 5000
                         }
                     ],
                     [
                         6,
                         {
-                            "fee": 5000
+                            "fee": 5000,
+                            "price_per_kbyte": 100000000
                         }
                     ],
                     [
                         7,
                         {
-                            "fee": 50000
+                            "symbol3": "50000000000000",
+                            "symbol4": "30000000000000",
+                            "long_symbol": "500000000000",
+                            "price_per_kbyte": 10
                         }
                     ],
                     [
                         8,
                         {
-                            "fee": 2000
+                            "fee": 2000,
+                            "price_per_kbyte": 10
                         }
                     ],
                     [
@@ -1234,15 +1289,13 @@ Retrieve the current global property object.
                     [
                         12,
                         {
-                            "fee": 2000,
-                            "price_per_kbyte": 10
+                            "fee": 2000
                         }
                     ],
                     [
                         13,
                         {
-                            "fee": 2000,
-                            "price_per_kbyte": 10
+                            "fee": 2000
                         }
                     ],
                     [
@@ -1260,57 +1313,63 @@ Retrieve the current global property object.
                     [
                         16,
                         {
-                            "fee": 200
+                            "fee": 200,
+                            "price_per_kbyte": 10
                         }
                     ],
                     [
                         17,
                         {
-                            "fee": 10
+                            "fee": 10,
+                            "price_per_kbyte": 10
                         }
                     ],
                     [
                         18,
                         {
-                            "fee": 1000
+                            "fee": 100
                         }
                     ],
                     [
                         19,
                         {
-                            "fee": 20000
+                            "fee": 100
                         }
                     ],
                     [
                         20,
-                        {}
+                        {
+                            "fee": 100
+                        }
                     ],
                     [
                         21,
                         {
-                            "fee": 2000
+                            "fee": 100
                         }
                     ],
                     [
                         22,
-                        {}
+                        {
+                            "fee": 1000
+                        }
                     ],
                     [
                         23,
                         {
-                            "fee": 200
+                            "fee": 20000
                         }
                     ],
                     [
                         24,
                         {
-                            "fee": 200
+                            "fee": 1000
                         }
                     ],
                     [
                         25,
                         {
-                            "fee": 200
+                            "fee": 2000
                         }
                     ],
                     [
@@ -1322,57 +1381,46 @@ Retrieve the current global property object.
                     [
                         27,
                         {
-                            "fee": 5000
+                            "fee": 200
                         }
                     ],
                     [
                         28,
-                        {
-                            "fee": 2000
-                        }
+                        {}
                     ],
                     [
                         29,
                         {
-                            "fee": 0,
-                            "price_per_kbyte": 100000000
+                            "fee": 200
                         }
                     ],
                     [
                         30,
-                        {
-                            "fee": 0
-                        }
+                        {}
                     ],
                     [
                         31,
                         {
-                            "fee": 0
+                            "fee": 5000
                         }
                     ],
                     [
                         32,
                         {
-                            "fee": 0
+                            "fee": 2000
                         }
                     ],
                     [
                         33,
-                        {
-                            "fee": 0
-                        }
+                        {}
                     ],
                     [
                         34,
-                        {
-                            "fee": 2000
-                        }
+                        {}
                     ],
                     [
                         35,
-                        {
-                            "fee": 2000
-                        }
+                        {}
                     ],
                     [
                         36,
@@ -1389,20 +1437,19 @@ Retrieve the current global property object.
                     [
                         38,
                         {
-                            "fee": 5000
+                            "fee": 2000
                         }
                     ],
                     [
                         39,
                         {
-                            "fee": 0
+                            "fee": 2000
                         }
                     ],
                     [
                         40,
                         {
-                            "fee": 0,
-                            "pool_fee": 500000000
+                            "fee": 0
                         }
                     ],
                     [
@@ -1414,11 +1461,36 @@ Retrieve the current global property object.
                     [
                         42,
                         {
-                            "fee": 0
+                            "fee": 5000
                         }
                     ],
                     [
                         43,
+                        {
+                            "fee": 0
+                        }
+                    ],
+                    [
+                        44,
+                        {
+                            "fee": 0
+                        }
+                    ],
+                    [
+                        45,
+                        {
+                            "fee": 0
+                        }
+                    ],
+                    [
+                        46,
+                        {
+                            "fee": 0,
+                            "pool_fee": 500000000
+                        }
+                    ],
+                    [
+                        47,
                         {
                             "fee": 0
                         }
@@ -1428,7 +1500,7 @@ Retrieve the current global property object.
             },
             "maintenance_interval": 300,
             "maintenance_duration_seconds": 10,
-            "committee_proposal_review_period": 1209600,
+            "committee_proposal_review_period": 60,
             "maximum_transaction_size": 2097152,
             "maximum_block_size": 5242880,
             "maximum_time_until_expiration": 86400,
@@ -1445,6 +1517,9 @@ Retrieve the current global property object.
             "max_authority_depth": 2,
             "block_emission_amount": 1000,
             "block_producer_reward_ratio": 5000,
+            "committee_frozen_balance_to_activate": "100000000000",
+            "committee_maintenance_intervals_to_deposit": 10,
+            "committee_freeze_duration_seconds": 2592000,
             "frozen_balances_multipliers": [
                 [
                     90,
@@ -1503,15 +1578,12 @@ Retrieve the current global property object.
                 "erc20_withdraw_topic": "ec7288d868c54d049bda9254803b6ddaaf0317b76e81601c0af91a480592b272",
                 "ETH_asset_id": "1.3.1",
                 "BTC_asset_id": "1.3.2",
-                "waiting_eth_blocks": 850,
-                "waiting_btc_blocks": 24,
                 "fines": {
                     "generate_eth_address": -10
                 },
-                "waiting_blocks": 30,
                 "gas_price": "10000000000",
                 "satoshis_per_byte": 23,
-                "echo_blocks_per_aggregation": 2000
+                "coefficient_waiting_blocks": 0
             },
             "erc20_config": {
                 "contract_code": "60806040523480156200001157600080fd5b5060405162001fdb38038062001fdb8339810180604052810190808051820192919060200180518201929190602001805190602001909291905050506200006733620000bd640100000000026401000000009004565b82600190805190602001906200007f9291906200033a565b508160029080519060200190620000989291906200033a565b5080600360006101000a81548160ff021916908360ff160217905550505050620003e9565b620000e18160006200012764010000000002620019d7179091906401000000009004565b8073ffffffffffffffffffffffffffffffffffffffff167f6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f660405160405180910390a250565b62000142828262000216640100000000026401000000009004565b151515620001b8576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601f8152602001807f526f6c65733a206163636f756e7420616c72656164792068617320726f6c650081525060200191505060405180910390fd5b60018260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055505050565b60008073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff1614151515620002e3576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260228152602001807f526f6c65733a206163636f756e7420697320746865207a65726f20616464726581526020017f737300000000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b8260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16905092915050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106200037d57805160ff1916838001178555620003ae565b82800160010185558215620003ae579182015b82811115620003ad57825182559160200191906001019062000390565b5b509050620003bd9190620003c1565b5090565b620003e691905b80821115620003e2576000816000905550600101620003c8565b5090565b90565b611be280620003f96000396000f3006080604052600436106100f1576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806306fdde03146100f6578063095ea7b31461018657806318160ddd146101eb57806323b872dd14610216578063313ce5671461029b57806339509351146102cc57806340c10f191461033157806342966c681461039657806370a08231146103c357806379cc67901461041a57806395d89b4114610467578063983b2d56146104f7578063986502751461053a578063a457c2d714610551578063a9059cbb146105b6578063aa271e1a1461061b578063dd62ed3e14610676575b600080fd5b34801561010257600080fd5b5061010b6106ed565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561014b578082015181840152602081019050610130565b50505050905090810190601f1680156101785780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561019257600080fd5b506101d1600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919050505061078f565b604051808215151515815260200191505060405180910390f35b3480156101f757600080fd5b506102006107a6565b6040518082815260200191505060405180910390f35b34801561022257600080fd5b50610281600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803590602001909291905050506107b0565b604051808215151515815260200191505060405180910390f35b3480156102a757600080fd5b506102b0610861565b604051808260ff1660ff16815260200191505060405180910390f35b3480156102d857600080fd5b50610317600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610878565b604051808215151515815260200191505060405180910390f35b34801561033d57600080fd5b5061037c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919050505061091d565b604051808215151515815260200191505060405180910390f35b3480156103a257600080fd5b506103c1600480360381019080803590602001909291905050506109d6565b005b3480156103cf57600080fd5b50610404600480360381019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506109e3565b6040518082815260200191505060405180910390f35b34801561042657600080fd5b50610465600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610a2c565b005b34801561047357600080fd5b5061047c610a3a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156104bc5780820151818401526020810190506104a1565b50505050905090810190601f1680156104e95780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561050357600080fd5b50610538600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610adc565b005b34801561054657600080fd5b5061054f610b8b565b005b34801561055d57600080fd5b5061059c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610b96565b604051808215151515815260200191505060405180910390f35b3480156105c257600080fd5b50610601600480360381019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190505050610c3b565b604051808215151515815260200191505060405180910390f35b34801561062757600080fd5b5061065c600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610c52565b604051808215151515815260200191505060405180910390f35b34801561068257600080fd5b506106d7600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610c6f565b6040518082815260200191505060405180910390f35b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156107855780601f1061075a57610100808354040283529160200191610785565b820191906000526020600020905b81548152906001019060200180831161076857829003601f168201915b5050505050905090565b600061079c338484610cf6565b6001905092915050565b6000600654905090565b60006107bd848484610f77565b610856843361085185600560008a73ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546112a190919063ffffffff16565b610cf6565b600190509392505050565b6000600360009054906101000a900460ff16905090565b6000610913338461090e85600560003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205461132b90919063ffffffff16565b610cf6565b6001905092915050565b600061092833610c52565b15156109c2576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260308152602001807f4d696e746572526f6c653a2063616c6c657220646f6573206e6f74206861766581526020017f20746865204d696e74657220726f6c650000000000000000000000000000000081525060400191505060405180910390fd5b6109cc83836113b5565b6001905092915050565b6109e03382611574565b50565b6000600460008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050919050565b610a368282611759565b5050565b606060028054600181600116156101000203166002900480601f016020809104026020016040519081016040528092919081815260200182805460018160011615610100020316600290048015610ad25780601f10610aa757610100808354040283529160200191610ad2565b820191906000526020600020905b815481529060010190602001808311610ab557829003601f168201915b5050505050905090565b610ae533610c52565b1515610b7f576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260308152602001807f4d696e746572526f6c653a2063616c6c657220646f6573206e6f74206861766581526020017f20746865204d696e74657220726f6c650000000000000000000000000000000081525060400191505060405180910390fd5b610b8881611800565b50565b610b943361185a565b565b6000610c313384610c2c85600560003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008973ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546112a190919063ffffffff16565b610cf6565b6001905092915050565b6000610c48338484610f77565b6001905092915050565b6000610c688260006118b490919063ffffffff16565b9050919050565b6000600560008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002054905092915050565b600073ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614151515610dc1576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260248152602001807f45524332303a20617070726f76652066726f6d20746865207a65726f2061646481526020017f726573730000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff1614151515610e8c576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260228152602001807f45524332303a20617070726f766520746f20746865207a65726f20616464726581526020017f737300000000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b80600560008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508173ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff167f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925836040518082815260200191505060405180910390a3505050565b600073ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614151515611042576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260258152602001807f45524332303a207472616e736665722066726f6d20746865207a65726f20616481526020017f647265737300000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415151561110d576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260238152602001807f45524332303a207472616e7366657220746f20746865207a65726f206164647281526020017f657373000000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b61115f81600460008673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546112a190919063ffffffff16565b600460008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055506111f481600460008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205461132b90919063ffffffff16565b600460008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508173ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040518082815260200191505060405180910390a3505050565b60008083831115151561131c576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601e8152602001807f536166654d6174683a207375627472616374696f6e206f766572666c6f77000081525060200191505060405180910390fd5b82840390508091505092915050565b60008082840190508381101515156113ab576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601b8152602001807f536166654d6174683a206164646974696f6e206f766572666c6f77000000000081525060200191505060405180910390fd5b8091505092915050565b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415151561145a576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601f8152602001807f45524332303a206d696e7420746f20746865207a65726f20616464726573730081525060200191505060405180910390fd5b61146f8160065461132b90919063ffffffff16565b6006819055506114c781600460008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000205461132b90919063ffffffff16565b600460008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020819055508173ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040518082815260200191505060405180910390a35050565b600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff161415151561163f576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260218152602001807f45524332303a206275726e2066726f6d20746865207a65726f2061646472657381526020017f730000000000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b611654816006546112a190919063ffffffff16565b6006819055506116ac81600460008573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546112a190919063ffffffff16565b600460008473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002081905550600073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff167fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef836040518082815260200191505060405180910390a35050565b6117638282611574565b6117fc82336117f784600560008873ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020546112a190919063ffffffff16565b610cf6565b5050565b6118148160006119d790919063ffffffff16565b8073ffffffffffffffffffffffffffffffffffffffff167f6ae172837ea30b801fbfcdd4108aa1d5bf8ff775444fd70256b44e6bf3dfc3f660405160405180910390a250565b61186e816000611ab490919063ffffffff16565b8073ffffffffffffffffffffffffffffffffffffffff167fe94479a9f7e1952cc78f2d6baab678adc1b772d936c6583def489e524cb6669260405160405180910390a250565b60008073ffffffffffffffffffffffffffffffffffffffff168273ffffffffffffffffffffffffffffffffffffffff1614151515611980576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260228152602001807f526f6c65733a206163636f756e7420697320746865207a65726f20616464726581526020017f737300000000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b8260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16905092915050565b6119e182826118b4565b151515611a56576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040180806020018281038252601f8152602001807f526f6c65733a206163636f756e7420616c72656164792068617320726f6c650081525060200191505060405180910390fd5b60018260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055505050565b611abe82826118b4565b1515611b58576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004018080602001828103825260218152602001807f526f6c65733a206163636f756e7420646f6573206e6f74206861766520726f6c81526020017f650000000000000000000000000000000000000000000000000000000000000081525060400191505060405180910390fd5b60008260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050505600a165627a7a72305820349dee86ac45cd218b5a45a2e9f0b85e882b152c7660c39dfceb517e911822ff0029",
@@ -1536,8 +1608,89 @@ Retrieve the current global property object.
             },
             "extensions": []
         },
-        "next_available_vote_id": 20,
-        "active_committee_members": []
+        "next_available_vote_id": 0,
+        "active_committee_members": [
+            [
+                "1.4.0",
+                "1.2.6"
+            ],
+            [
+                "1.4.1",
+                "1.2.7"
+            ],
+            [
+                "1.4.2",
+                "1.2.8"
+            ],
+            [
+                "1.4.3",
+                "1.2.9"
+            ],
+            [
+                "1.4.4",
+                "1.2.10"
+            ],
+            [
+                "1.4.5",
+                "1.2.11"
+            ],
+            [
+                "1.4.6",
+                "1.2.12"
+            ],
+            [
+                "1.4.7",
+                "1.2.13"
+            ],
+            [
+                "1.4.8",
+                "1.2.14"
+            ],
+            [
+                "1.4.9",
+                "1.2.15"
+            ],
+            [
+                "1.4.10",
+                "1.2.16"
+            ],
+            [
+                "1.4.11",
+                "1.2.17"
+            ],
+            [
+                "1.4.12",
+                "1.2.18"
+            ],
+            [
+                "1.4.13",
+                "1.2.19"
+            ],
+            [
+                "1.4.14",
+                "1.2.20"
+            ],
+            [
+                "1.4.15",
+                "1.2.21"
+            ],
+            [
+                "1.4.16",
+                "1.2.22"
+            ],
+            [
+                "1.4.17",
+                "1.2.23"
+            ],
+            [
+                "1.4.18",
+                "1.2.24"
+            ],
+            [
+                "1.4.19",
+                "1.2.25"
+            ]
+        ]
     }
 }
 ```
@@ -1548,7 +1701,7 @@ Retrieve compile-time constants.
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -1562,7 +1715,7 @@ Retrieve compile-time constants.
 
 #### Returns
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1583,6 +1736,7 @@ Retrieve compile-time constants.
         "ECHO_DEFAULT_MAX_TIME_UNTIL_EXPIRATION": 86400,
         "ECHO_DEFAULT_MAINTENANCE_INTERVAL": 86400,
         "ECHO_DEFAULT_MAINTENANCE_DURATION_SECONDS": 10,
+        "ECHO_DEFAULT_COMMITTEE_FREEZE_DURATION_SECONDS": 2592000,
         "ECHO_MIN_UNDO_HISTORY": 10,
         "ECHO_MAX_UNDO_HISTORY": 10000,
         "ECHO_MIN_BLOCK_SIZE_LIMIT": 5120,
@@ -1679,16 +1833,15 @@ Retrieve the current dynamic global property object.
     "jsonrpc": "2.0",
     "result": {
         "id": "2.1.0",
-        "head_block_number": 0,
-        "head_block_id": "0000000000000000000000000000000000000000",
-        "time": "2019-08-05T00:00:00",
-        "next_maintenance_time": "1970-01-01T00:00:00",
+        "head_block_number": 108,
+        "head_block_id": "0000006ca384bf6b3cdbbd9b6b4278390f49f44e",
+        "time": "2019-10-14T10:25:31",
+        "next_maintenance_time": "2019-10-14T10:30:00",
         "last_budget_time": "1970-01-01T00:00:00",
         "committee_budget": 0,
-        "accounts_registered_this_interval": 21,
+        "accounts_registered_this_interval": 0,
         "dynamic_flags": 0,
-        "last_irreversible_block_num": 0,
-        "last_rand_quantity": "0000000000000000000000000000000000000000000000000000000000000000",
+        "last_irreversible_block_num": 93,
         "extensions": []
     }
 }
@@ -1796,7 +1949,7 @@ Get a list of accounts by ID. This function has semantics identical to get\_obje
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -1816,7 +1969,7 @@ Get a list of accounts by ID. This function has semantics identical to get\_obje
 
 The accounts corresponding to the provided IDs.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1831,17 +1984,15 @@ The accounts corresponding to the provided IDs.
                 "account_auths": [],
                 "key_auths": [
                     [
-                        "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
+                        "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
                         1
                     ]
                 ]
             },
-            "echorand_key": "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
+            "echorand_key": "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
             "options": {
-                "voting_account": "1.2.5",
                 "delegating_account": "1.2.5",
-                "num_committee": 0,
-                "votes": [],
+                "delegate_share": 2000,
                 "extensions": []
             },
             "statistics": "2.5.10",
@@ -1854,6 +2005,7 @@ The accounts corresponding to the provided IDs.
                 {}
             ],
             "top_n_control_flags": 0,
+            "accumulated_reward": 0,
             "extensions": []
         }
     ]
@@ -1875,7 +2027,7 @@ This function fetches all relevant objects for the given accounts, and subscribe
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -1896,7 +2048,7 @@ This function fetches all relevant objects for the given accounts, and subscribe
 
 A map of strings from names\_or\_ids to the corresponding accounts.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -1914,17 +2066,15 @@ A map of strings from names\_or\_ids to the corresponding accounts.
                         "account_auths": [],
                         "key_auths": [
                             [
-                                "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
+                                "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
                                 1
                             ]
                         ]
                     },
-                    "echorand_key": "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
+                    "echorand_key": "ECHOEdjiBUy2RBJ9sMN7jKMK4x9Fa4QVR7JgtNLwbgcZtcZB",
                     "options": {
-                        "voting_account": "1.2.5",
                         "delegating_account": "1.2.5",
-                        "num_committee": 0,
-                        "votes": [],
+                        "delegate_share": 2000,
                         "extensions": []
                     },
                     "statistics": "2.5.10",
@@ -1937,51 +2087,24 @@ A map of strings from names\_or\_ids to the corresponding accounts.
                         {}
                     ],
                     "top_n_control_flags": 0,
+                    "accumulated_reward": 0,
                     "extensions": []
                 },
                 "statistics": {
                     "id": "2.5.10",
                     "owner": "1.2.10",
-                    "most_recent_op": "2.8.274",
-                    "total_ops": 8,
+                    "most_recent_op": "2.8.0",
+                    "total_ops": 0,
                     "removed_ops": 0,
-                    "total_blocks": 5295,
+                    "total_blocks": 3,
                     "total_core_in_orders": 0,
                     "generated_eth_address": false,
                     "committeeman_rating": 0,
                     "extensions": []
                 },
                 "registrar_name": "temp-account",
-                "votes": [],
-                "balances": [
-                    {
-                        "id": "2.4.6",
-                        "owner": "1.2.10",
-                        "asset_type": "1.3.0",
-                        "balance": "1000000000000",
-                        "extensions": []
-                    }
-                ],
-                "vesting_balances": [
-                    {
-                        "id": "1.7.4",
-                        "owner": "1.2.10",
-                        "balance": {
-                            "amount": 186563,
-                            "asset_id": "1.3.0"
-                        },
-                        "policy": [
-                            1,
-                            {
-                                "vesting_seconds": 86400,
-                                "start_claim": "1970-01-01T00:00:00",
-                                "coin_seconds_earned": "11835590400",
-                                "coin_seconds_earned_last_update": "2019-08-21T07:14:21"
-                            }
-                        ],
-                        "extensions": []
-                    }
-                ],
+                "balances": [],
+                "vesting_balances": [],
                 "proposals": [],
                 "assets": []
             }
@@ -2018,10 +2141,8 @@ The notification was received by performing the account update operation for cha
                     },
                     "echorand_key": "ECHOCh3WGJCMKkBJHFJpzaC378cwwYisNbNKpD6oYhcuA6nR",
                     "options": {
-                        "voting_account": "1.2.5",
-                        "delegating_account": "1.2.13",
-                        "num_committee": 0,
-                        "votes": [],
+                        "delegating_account": "1.2.5",
+                        "delegate_share": 2000,
                         "extensions": []
                     },
                     "statistics": "2.5.10",
@@ -2054,7 +2175,7 @@ Get the account object by it's name.
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -2072,12 +2193,12 @@ Get the account object by it's name.
 
 Account object it the account exists, null otherwise.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
     "result": {
-        "id": "1.2.12",
+        "id": "1.2.26",
         "registrar": "1.2.4",
         "network_fee_percentage": 2000,
         "name": "nathan",
@@ -2086,20 +2207,18 @@ Account object it the account exists, null otherwise.
             "account_auths": [],
             "key_auths": [
                 [
-                    "ECHO9GUY5DUWy5bHZWPwhdmV1oi8QdvBcwxKF73WESeHDoWQ",
+                    "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
                     1
                 ]
             ]
         },
-        "echorand_key": "ECHO9GUY5DUWy5bHZWPwhdmV1oi8QdvBcwxKF73WESeHDoWQ",
+        "echorand_key": "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
         "options": {
-            "voting_account": "1.2.5",
             "delegating_account": "1.2.5",
-            "num_committee": 0,
-            "votes": [],
+            "delegate_share": 2000,
             "extensions": []
         },
-        "statistics": "2.5.12",
+        "statistics": "2.5.26",
         "whitelisting_accounts": [],
         "blacklisting_accounts": [],
         "whitelisted_accounts": [],
@@ -2109,6 +2228,7 @@ Account object it the account exists, null otherwise.
             {}
         ],
         "top_n_control_flags": 0,
+        "accumulated_reward": 0,
         "extensions": []
     }
 }
@@ -2165,7 +2285,7 @@ Get a list of accounts by name. This function has semantics identical to get\_ob
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -2185,13 +2305,13 @@ Get a list of accounts by name. This function has semantics identical to get\_ob
 
 The accounts holding the provided names.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.2.12",
+            "id": "1.2.26",
             "registrar": "1.2.4",
             "network_fee_percentage": 2000,
             "name": "nathan",
@@ -2200,20 +2320,18 @@ The accounts holding the provided names.
                 "account_auths": [],
                 "key_auths": [
                     [
-                        "ECHO9GUY5DUWy5bHZWPwhdmV1oi8QdvBcwxKF73WESeHDoWQ",
+                        "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
                         1
                     ]
                 ]
             },
-            "echorand_key": "ECHO9GUY5DUWy5bHZWPwhdmV1oi8QdvBcwxKF73WESeHDoWQ",
+            "echorand_key": "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
             "options": {
-                "voting_account": "1.2.5",
                 "delegating_account": "1.2.5",
-                "num_committee": 0,
-                "votes": [],
+                "delegate_share": 2000,
                 "extensions": []
             },
-            "statistics": "2.5.12",
+            "statistics": "2.5.26",
             "whitelisting_accounts": [],
             "blacklisting_accounts": [],
             "whitelisted_accounts": [],
@@ -2223,6 +2341,7 @@ The accounts holding the provided names.
                 {}
             ],
             "top_n_control_flags": 0,
+            "accumulated_reward": 0,
             "extensions": []
         }
     ]
@@ -2420,7 +2539,7 @@ Get a contract info from VM by ID.
         DATABASE_API_ID,
         "get_contract",
         [
-            "1.9.0"
+            "1.11.0"
         ]
     ]
 }
@@ -2472,8 +2591,8 @@ Get a list of contracts by ID.
         DATABASE_API_ID,
         "get_contracts",
         [
-            "1.9.0",
-            "1.9.1", ...
+            "1.11.0",
+            "1.11.1", ...
         ]
     ]
 }
@@ -2489,7 +2608,7 @@ The contracts corresponding to the provided IDs.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.9.0",
+            "id": "1.11.0",
             "type": "evm",
             "destroyed": false,
             "statistics": "2.17.0",
@@ -2497,7 +2616,7 @@ The contracts corresponding to the provided IDs.
             "extensions": []
         },
         {
-            "id": "1.9.1",
+            "id": "1.11.1",
             "type": "evm",
             "destroyed": false,
             "statistics": "2.17.1",
@@ -2518,12 +2637,13 @@ Get logs of specified contract.
 | Option | Description |
 | :--- | :--- |
 | `contract_id_type contract_id` | ID of the contract |
+| `set<string> topics` | Filters by certain events if any provided |
 | `uint32_t from` | number of block to start retrieve from |
 | `uint32_t limit` | maximum number of addresses to return(must not exceed 100) |
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -2531,8 +2651,9 @@ Get logs of specified contract.
         DATABASE_API_ID,
         "get_contract_logs",
         [
-            "1.9.3",
-            "500",
+            "1.11.0",
+            [],
+            "0",
             "100"
         ]
     ]
@@ -2543,18 +2664,37 @@ Get logs of specified contract.
 
 The contracts logs from specified blocks interval.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
     "result": [
-        {
-            "address": "0100000000000000000000000000000000000003",
-            "log": [
-                "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
-            ],
-            "data": "0000000000000000000000000000000000000000000000000000000000000097"
-        }
+        [
+            0,
+            {
+                "address": "0100000000000000000000000000000000000000",
+                "log": [
+                    "d62f2308a65c15d2377649298f822091f0b33209d128566647cfed5dff92dc91"
+                ],
+                "data": "000000000000000000000000000000000000000000000000000000000000002a",
+                "block_num": 14,
+                "trx_num": 0,
+                "op_num": 0
+            }
+        ],
+        [
+            0,
+            {
+                "address": "0100000000000000000000000000000000000000",
+                "log": [
+                    "6d05ca24ec122a8b097ed38676f4717174b5ca4558e4d6d4d6dea72147fab04d"
+                ],
+                "data": "0000000000000000000000000000000000000000000000000000000000000040",
+                "block_num": 14,
+                "trx_num": 0,
+                "op_num": 0
+            }
+        ]
     ]
 }
 ```
@@ -2611,7 +2751,10 @@ Subscription to change the contract uses database-api.md\#set\_subscribe\_callba
                     "log": [
                         "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
                     ],
-                    "data": "0000000000000000000000000000000000000000000000000000000000000097"
+                    "data": "0000000000000000000000000000000000000000000000000000000000000097",
+                    "block_num": 14,
+                    "trx_num": 0,
+                    "op_num": 0
                 }
             ]
         ]
@@ -2628,7 +2771,7 @@ Subscribe to specified contract logs.
 | Option | Description |
 | :--- | :--- |
 | `function<void(variant)> cb` | callback method which is called when contracts has new logs |
-| `contract_id_type contract_id` | ID of the contract |
+| `map<contract_id_type, std::set<string>> subs` | Pairs of contract ids and topic filters |
 
 #### Example
 
@@ -2641,7 +2784,9 @@ Subscribe to specified contract logs.
         "subscribe_contract_logs",
         [
             CALLBACK_ID,
-            "1.10.0"
+            {
+                1.11.0 : []
+            }
         ]
     ]
 }
@@ -2675,7 +2820,10 @@ The contracts logs by contract ID.
                         "log": [
                             "bfed43b35c99a41ee9b8cb5a2afa74e45703b17dfd398a3b96260bdebca807cf"
                         ],
-                        "data": ""
+                        "data": "",
+                        "block_num": 14,
+                        "trx_num": 0,
+                        "op_num": 0
                     }
                 ]
             ]
@@ -2704,7 +2852,7 @@ Get contract result from VM for specified result\_id
         DATABASE_API_ID,
         "get_contract_result",
         [
-            "1.10.0"
+            "1.12.0"
         ]
     ]
 }
@@ -2853,7 +3001,7 @@ Get a contract's balances in various assets.
         DATABASE_API_ID,
         "get_contract_balances",
         [
-            "1.9.0"
+            "1.11.0"
         ]
     ]
 }
@@ -3270,7 +3418,7 @@ Get assets alphabetically by symbol name.
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -3289,11 +3437,38 @@ Get assets alphabetically by symbol name.
 
 The assets found.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
     "result": [
+        {
+            "id": "1.3.2",
+            "symbol": "EBTC",
+            "precision": 8,
+            "issuer": "1.2.1",
+            "options": {
+                "max_supply": 21000000,
+                "issuer_permissions": 15,
+                "flags": 0,
+                "core_exchange_rate": {
+                    "base": {
+                        "amount": 1,
+                        "asset_id": "1.3.0"
+                    },
+                    "quote": {
+                        "amount": 1,
+                        "asset_id": "1.3.2"
+                    }
+                },
+                "whitelist_authorities": [],
+                "blacklist_authorities": [],
+                "description": "bitcoin asset",
+                "extensions": []
+            },
+            "dynamic_asset_data_id": "2.2.2",
+            "extensions": []
+        },
         {
             "id": "1.3.0",
             "symbol": "ECHO",
@@ -3319,33 +3494,6 @@ The assets found.
                 "extensions": []
             },
             "dynamic_asset_data_id": "2.2.0",
-            "extensions": []
-        },
-        {
-            "id": "1.3.1",
-            "symbol": "EETH",
-            "precision": 6,
-            "issuer": "1.2.1",
-            "options": {
-                "max_supply": "1000000000000000",
-                "issuer_permissions": 15,
-                "flags": 0,
-                "core_exchange_rate": {
-                    "base": {
-                        "amount": 1,
-                        "asset_id": "1.3.0"
-                    },
-                    "quote": {
-                        "amount": 1,
-                        "asset_id": "1.3.1"
-                    }
-                },
-                "whitelist_authorities": [],
-                "blacklist_authorities": [],
-                "description": "ethereum asset",
-                "extensions": []
-            },
-            "dynamic_asset_data_id": "2.2.1",
             "extensions": []
         }
     ]
@@ -3462,7 +3610,7 @@ Get a list of committee\_members by ID. This function has semantics identical to
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -3483,7 +3631,7 @@ Get a list of committee\_members by ID. This function has semantics identical to
 
 The committee\_members corresponding to the provided IDs.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3491,21 +3639,17 @@ The committee\_members corresponding to the provided IDs.
         {
             "id": "1.4.0",
             "committee_member_account": "1.2.6",
-            "pay_vb": "1.7.0",
-            "vote_id": "0:0",
-            "total_votes": 0,
             "url": "",
             "eth_address": "f372c3b578534Ac5C1Cf0Cca7049A279d1ca3e79",
+            "btc_public_key": "02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e",
             "extensions": []
         },
         {
             "id": "1.4.1",
             "committee_member_account": "1.2.7",
-            "pay_vb": "1.7.1",
-            "vote_id": "0:1",
-            "total_votes": 0,
             "url": "",
             "eth_address": "Fba802D86f8d9b080eD247e712751DDBF86086A9",
+            "btc_public_key": "02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e",
             "extensions": []
         }
     ]
@@ -3524,7 +3668,7 @@ Get the committee\_member owned by a given account.
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -3542,18 +3686,16 @@ Get the committee\_member owned by a given account.
 
 The committee\_member object, or null if the account does not have a committee\_member.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
     "result": {
         "id": "1.4.0",
         "committee_member_account": "1.2.6",
-        "pay_vb": "1.7.0",
-        "vote_id": "0:0",
-        "total_votes": 0,
         "url": "",
         "eth_address": "f372c3b578534Ac5C1Cf0Cca7049A279d1ca3e79",
+        "btc_public_key": "02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e",
         "extensions": []
     }
 }
@@ -3572,7 +3714,7 @@ Get names and IDs for registered committee\_members.
 
 #### Example
 
-```javascript
+```json
 {
     "id": 4,
     "method": "call",
@@ -3591,7 +3733,7 @@ Get names and IDs for registered committee\_members.
 
 Map of committee\_member names to corresponding IDs.
 
-```javascript
+```json
 {
     "id": 4,
     "jsonrpc": "2.0",
@@ -3603,6 +3745,46 @@ Map of committee\_member names to corresponding IDs.
         [
             "init1",
             "1.4.1"
+        ],
+        [
+            "init10",
+            "1.4.10"
+        ],
+        [
+            "init11",
+            "1.4.11"
+        ],
+        [
+            "init12",
+            "1.4.12"
+        ],
+        [
+            "init13",
+            "1.4.13"
+        ],
+        [
+            "init14",
+            "1.4.14"
+        ],
+        [
+            "init15",
+            "1.4.15"
+        ],
+        [
+            "init16",
+            "1.4.16"
+        ],
+        [
+            "init17",
+            "1.4.17"
+        ],
+        [
+            "init18",
+            "1.4.18"
+        ],
+        [
+            "init19",
+            "1.4.19"
         ],
         [
             "init2",
@@ -3619,6 +3801,22 @@ Map of committee\_member names to corresponding IDs.
         [
             "init5",
             "1.4.5"
+        ],
+        [
+            "init6",
+            "1.4.6"
+        ],
+        [
+            "init7",
+            "1.4.7"
+        ],
+        [
+            "init8",
+            "1.4.8"
+        ],
+        [
+            "init9",
+            "1.4.9"
         ]
     ]
 }
@@ -3648,73 +3846,7 @@ Get the total number of committee registered with the blockchain
 {
     "id": 4,
     "jsonrpc": "2.0",
-    "result": 9
-}
-```
-
-## Votes
-
-### lookup\_vote\_ids\(votes\)
-
-Given a set of votes, return the objects they are voting for.
-
-This will be a mixture of committee\_member\_object.
-
-The results will be in the same order as the votes. null will be returned for any vote ids that are not found.
-
-#### Parameters
-
-| Option | Description |
-| :--- | :--- |
-| `vector<vote_id_type> votes` | an array votes |
-
-#### Example
-
-```javascript
-{
-    "id": 4,
-    "method": "call",
-    "params": [
-        DATABASE_API_ID,
-        "lookup_vote_ids",
-        [
-            [
-                "0:0",
-                "0:1"
-            ]
-        ]
-    ]
-}
-```
-
-#### Returns
-
-```javascript
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": [
-        {
-            "id": "1.4.0",
-            "committee_member_account": "1.2.6",
-            "pay_vb": "1.7.0",
-            "vote_id": "0:0",
-            "total_votes": 0,
-            "url": "",
-            "eth_address": "f372c3b578534Ac5C1Cf0Cca7049A279d1ca3e79",
-            "extensions": []
-        },
-        {
-            "id": "1.4.1",
-            "committee_member_account": "1.2.7",
-            "pay_vb": "1.7.1",
-            "vote_id": "0:1",
-            "total_votes": 0,
-            "url": "",
-            "eth_address": "Fba802D86f8d9b080eD247e712751DDBF86086A9",
-            "extensions": []
-        }
-    ]
+    "result": 20
 }
 ```
 
@@ -3802,7 +3934,6 @@ Takes a partially signed transaction and a set of public keys that the owner has
                 ],
                 "extensions": [],
                 "signatures": [],
-                "signed_with_echorand_key": false
             },
             [
                 "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu"
@@ -4223,7 +4354,7 @@ The public ethereum address data stored in the blockchain
     "id": 4,
     "jsonrpc": "2.0",
     "result": {
-        "id": "1.12.0",
+        "id": "1.14.0",
         "account": "1.2.21",
         "eth_addr": "1134464B537884EE89cb298eEd674C9B14BCce47",
         "is_approved": true,
@@ -4269,7 +4400,7 @@ The all public deposits data stored in the blockchain.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.13.0",
+            "id": "1.15.0",
             "deposit_id": 0,
             "account": "1.2.21",
             "value": 1000,
@@ -4317,7 +4448,7 @@ The all public withdrawals data stored in the blockchain.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.14.0",
+            "id": "1.16.0",
             "withdraw_id": 0,
             "account": "1.2.21",
             "eth_addr": "1AFeEcE88325110488570146f2635C8615Ad0613",
@@ -4367,10 +4498,10 @@ The public erc20 token data stored in the blockchain.
     "id": 4,
     "jsonrpc": "2.0",
     "result": {
-        "id": "1.15.0",
+        "id": "1.17.0",
         "owner": "1.2.0",
         "eth_addr": "8B5D021C528Cb0ADb9dA277D109c039dEdFd6871",
-        "contract": "1.9.0",
+        "contract": "1.11.0",
         "name": "erc20",
         "symbol": "ERC",
         "decimals": 0
@@ -4414,7 +4545,7 @@ The all public erc20 deposits data stored in the blockchain.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.16.0",
+            "id": "1.18.0",
             "account": "1.2.0",
             "erc20_addr": "8B5D021C528Cb0ADb9dA277D109c039dEdFd6871",
             "value": "1",
@@ -4462,11 +4593,11 @@ The all public erc20 withdrawals data stored in the blockchain.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.17.0",
+            "id": "1.19.0",
             "withdraw_id": 0,
             "account": "1.2.0",
             "to": "1AFeEcE88325110488570146f2635C8615Ad0613",
-            "erc20_token": "1.15.0",
+            "erc20_token": "1.17.0",
             "value": "1",
             "is_approved": true,
             "approves": []
@@ -4497,7 +4628,7 @@ Get a contract's pool balance in default asset.
         DATABASE_API_ID,
         "get_contract_pool_balance",
         [
-            "1.9.0"
+            "1.11.0"
         ]
     ]
 }
@@ -4538,7 +4669,7 @@ Get a contract's whitelist and blacklist.
         DATABASE_API_ID,
         "get_contract_pool_whitelist",
         [
-            "1.9.0"
+            "1.11.0"
         ]
     ]
 }

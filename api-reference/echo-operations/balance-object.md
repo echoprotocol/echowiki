@@ -33,20 +33,21 @@ struct balance_claim_operation : public base_operation
 
 ```json
 [
-  20,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "deposit_to_account": "1.2.0",
-    "balance_to_claim": "1.8.0",
-    "balance_owner_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
-    "total_claimed": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
+   28,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "deposit_to_account": "1.2.0",
+      "balance_to_claim": "1.8.0",
+      "balance_owner_key": "ECHODaQencDTLD5u6LGk9JNaMoJBh6sAkGchMnZPjtJXdvG3",
+      "total_claimed": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
 
@@ -77,19 +78,20 @@ struct balance_freeze_operation : public base_operation {
 
 ```json
 [
-  21,{
-    "fee": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "account": "1.2.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "duration": 0,
-    "extensions": []
-  }
+   29,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "account": "1.2.0",
+      "amount": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "duration": 0,
+      "extensions": []
+   }
 ]
 ```
 
@@ -113,30 +115,14 @@ struct balance_unfreeze_operation : public balance_freeze_operation {
 
 ```json
 [
-  22,{
-    "account": "1.2.0",
-    "amount": {
-      "amount": 0,
-      "asset_id": "1.3.0"
-    },
-    "extensions": []
-  }
-]
-```
-
-## block_reward_operation
-
-```cpp
-```
-
-### JSON Example
-
-```json
-[
-  52,{
-    "reciever": "1.2.0",
-    "amount": 0,
-    "extensions": []
-  }
+   30,
+   {
+      "account": "1.2.0",
+      "amount": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "extensions": []
+   }
 ]
 ```
