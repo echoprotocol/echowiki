@@ -59,7 +59,7 @@ The objects retrieved, in the order they are mentioned in ids.
 }
 ```
 
-## registration_task request\_registration\_task()
+## request\_registration\_task()
 
 ### Parameters
 
@@ -109,10 +109,10 @@ This query return data needed for calculating pow algorithm.
 }
 ```
 
-## bool submit\_registration\_solution(callback, name, active, echorand_key, nonce, rand_num)
+## submit\_registration\_solution(callback, name, active, echorand_key, nonce, rand_num)
 
-Client should submit registration solution for proof of work by sending `nonce` and `rand_num` from previous request and name and keys for account creation.
-For more information, see [account_creation](https://github.com/echoprotocol/echowiki/blob/master/api-reference/echo-operations/account-management.md#account_creation).
+Client should submit registration solution for proof of work by sending `nonce` and `rand_num` from previous request with name and keys for account creation.
+For more information, see [account_creation](../echo-operations/account-management.md#account\_create\_operation).
 Method return result of pow verification.\
 Calculating of sha256 should be next: `hash = sha256(block_id.to_bytes()+rand_num.to_bytes()+nonce.to_bytes())`
 
@@ -148,8 +148,8 @@ Calculating of sha256 should be next: `hash = sha256(block_id.to_bytes()+rand_nu
 }
 ```
 
-### Responce example
-`True` means that client sends correct nonce. If result is `False` it means nonce or rand_num is incorrect or time for calculating is expired.
+### Response example
+`true` means that client sends correct nonce. If result is `false` it means nonce or rand_num is incorrect or time for calculating is expired.
 
 ```javascript
 {
