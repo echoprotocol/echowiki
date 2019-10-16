@@ -61,22 +61,6 @@ The objects retrieved, in the order they are mentioned in ids.
 
 ## request\_registration\_task()
 
-### Parameters
-
-```cpp
-struct registration_task
-{
-   block_id_type block_id;
-   uint64_t rand_num;
-   uint8_t difficulty;
-};
-```
-| Option | Description |
-| :--- | :--- |
-| `block_id_type block_id` | gives a block_id for sha256 calculating |
-| `uint64_t rand_num` | gives a salt for sha256 calculating |
-| `uint8_t difficulty` | gives a pow complexity |
-
 ### Example
 
 This query return data needed for calculating pow algorithm.
@@ -94,7 +78,13 @@ This query return data needed for calculating pow algorithm.
 }
 ```
 
-### Response example
+### Response 
+
+| Option | Description |
+| :--- | :--- |
+| `block_id_type block_id` | gives a block_id for sha256 calculating |
+| `uint64_t rand_num` | gives a salt for sha256 calculating |
+| `uint8_t difficulty` | gives a pow complexity |
 
 ```javascript
 {
@@ -111,10 +101,10 @@ This query return data needed for calculating pow algorithm.
 
 ## submit\_registration\_solution(callback, name, active, echorand_key, nonce, rand_num)
 
-Client should submit registration solution for proof of work by sending `nonce` and `rand_num` from previous request with name and keys for account creation.
-For more information, see [account_creation](../echo-operations/account-management.md#account\_create\_operation).
-Method return result of pow verification.\
-Calculating of sha256 should be next: `hash = sha256(block_id.to_bytes()+rand_num.to_bytes()+nonce.to_bytes())`
+Submit PoW task solution to register account.
+
+You need to calcualte `hash = sha256(block_id.to_bytes() + rand_num.to_bytes() + nonce.to_bytes())` untill you get first `difficulty` bits of hash equal to `0`. Only `nonce` should be changed. After you get suitable nonce you can form a request.
+`difficulty`, `block_id` and `rand_num` is taken from `request_registration_task` response.
 
 ### Parameters
 
