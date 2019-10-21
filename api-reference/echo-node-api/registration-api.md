@@ -1,71 +1,12 @@
 # Registration API
 
-## register\_account\(callback, name, active\_key, echorand\_key\)
-
-### Parameters
-
-| Option | Description |
-| :--- | :--- |
-| `variant_callback_t callback` | gives a notification whenever transaction for registation account broadcasted |
-| `string name` | name of account |
-| `public_key_t active` | active ed25519 key |
-| `public_key_t echorand_key` | ed25519 key for echorand |
-
-### Example
-
-The objects retrieved, in the order they are mentioned in ids.
-
-```javascript
-{
-    "id": 1,
-    "method": "call",
-    "params": [
-        REGISTRATION_API_ID,
-        "register_account",
-        [
-            CALLBACK_ID,
-            "test123",
-            "ECHODvHDsAfk2M8LhYcxLZTbrNJRWT3UH5zxdaWimWc6uZkH",
-            "ECHODvHDsAfk2M8LhYcxLZTbrNJRWT3UH5zxdaWimWc6uZkH"
-        ]
-    ]
-}
-```
-
-### Notice example
-
-```javascript
-{
-    "method": "notice",
-    "params": [
-        CALLBACK_ID,
-        [
-            {
-                "block_num": 1248363,
-                "tx_id": "8b5172b6c95db447ee4b1ca4cd076651189442dd"
-            }
-        ]
-    ]
-}
-```
-
-### Returns
-
-```javascript
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": null
-}
-```
-
 ## request\_registration\_task()
 
 ### Example
 
 This query return data needed for calculating pow algorithm.
 
-```javascript
+```json
 {
     "id": 1,
     "method": "call",
@@ -78,7 +19,7 @@ This query return data needed for calculating pow algorithm.
 }
 ```
 
-### Response 
+### Response
 
 | Option | Description |
 | :--- | :--- |
@@ -86,7 +27,7 @@ This query return data needed for calculating pow algorithm.
 | `uint64_t rand_num` | gives a salt for sha256 calculating |
 | `uint8_t difficulty` | gives a pow complexity |
 
-```javascript
+```json
 {
     "id": 1,
     "jsonrpc": "2.0",
@@ -119,7 +60,7 @@ You need to calcualte `hash = sha256(block_id.to_bytes() + rand_num.to_bytes() +
 
 ### Example
 
-```javascript
+```json
 {
     "id": 1,
     "method": "call",
@@ -139,19 +80,20 @@ You need to calcualte `hash = sha256(block_id.to_bytes() + rand_num.to_bytes() +
 ```
 
 ### Response example
+
 `true` means that client sends correct nonce. If result is `false` it means nonce or rand_num is incorrect or time for calculating is expired.
 
-```javascript
+```json
 {
     "id":0,
     "jsonrpc":"2.0",
-    "result":false
+    "result":true
 }
 ```
 
 ### Notice example
 
-```javascript
+```json
 {
     "method": "notice",
     "params": [
@@ -281,6 +223,37 @@ Calculating of sha256 should be next: `hash = sha256(block_id.to_bytes()+rand_nu
             }
         ]
     ]
+}
+```
+
+## get\_registrar()
+
+Get the registrar account.
+
+### Example
+
+```json
+{
+    "id": 1,
+    "method": "call",
+    "params": [
+        REGISTRATION_API_ID,
+        "get_registrar",
+            [
+            ]
+    ]
+}
+```
+
+### Response example
+
+Account ID of the registrant.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": "1.2.15"
 }
 ```
 
