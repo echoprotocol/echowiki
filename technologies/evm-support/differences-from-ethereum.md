@@ -165,6 +165,24 @@ contract A {
 }
 ```
 
+#### `edverify`
+A function used to verify multiple eddsa signatures required to authorize a single account.
+
+`edverify(address addr, bytes memory data, bytes memory signatures)`
+- `address addr` - address of authority;
+- `bytes memory data` - byte array of arbitrary data;
+- `bytes memory signatures` - packed byte array of signatures. Length must be a product of 64.
+
+Example:
+```bash
+pragma solidity ^0.5.0;
+contract C {
+    function f(address a, bytes memory d, bytes memory s) public view returns (bool) {
+        return edverify(a, d, s);
+    }
+}
+```
+
 ### Ways to use
 
 #### Use Echo Solc
