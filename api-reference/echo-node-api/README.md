@@ -57,7 +57,7 @@ Exposes accessors on the database which query state tracked by a blockchain vali
   * [get\_contracts](database-api.md#get_contracts-contract_ids)
   * [get\_contract\_logs](database-api.md#get_contract_logs-contract_id-from-to)
   * [subscribe\_contracts](database-api.md#subscribe_contracts-contracts_ids)
-  * [subscribe\_contract\_logs](database-api.md#subscribe_contract_logs-callback-contract_id-from-to)
+  * [subscribe\_contract\_logs](database-api.md#subscribe_contract_logs-callback-contract_id)
   * [get\_contract\_result](database-api.md#get_contract_result-id)
   * [call\_contract\_no\_changing\_state](database-api.md#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
 * [Balances](database-api.md#balances)
