@@ -122,5 +122,7 @@ Allows broadcasting of transactions.
 
 API that provides method for account registration
 
-* [register\_account](registration-api.md#register_account-callback-name-active_key-echorand_key)
+* [request\_registration\_task](registration-api.md#request_registration_task)
+* [submit\_registration\_solution](registration-api.md#submit_registration_solution-callback-name-active-echorand_key-nonce-rand_num)
+* [get\_registrar](registration-api.md#get\_registrar)
 
