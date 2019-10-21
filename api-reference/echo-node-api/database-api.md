@@ -2911,7 +2911,7 @@ Call the provided contract, but don't change the state.
         DATABASE_API_ID,
         "call_contract_no_changing_state",
         [
-            "1.9.3",
+            "1.11.0",
             "1.2.26",
             "1.3.0",
             "6d4ce63c"
@@ -3254,7 +3254,7 @@ An array of vesting balances.
     "jsonrpc": "2.0",
     "result": [
         {
-            "id": "1.9.0",
+            "id": "1.11.0",
             "owner": "1.2.26",
             "balance": {
                 "amount": 1000000000,
