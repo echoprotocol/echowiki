@@ -33,6 +33,7 @@
     * [Modify genesis](advanced/running-devnet/modify-genesis.md)
     * [Register account](advanced/running-devnet/register-account.md)
 * [API Reference](api-reference/README.md)
+  * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
     * [Login API](api-reference/echo-node-api/login-api.md)
     * [Asset API](api-reference/echo-node-api/asset-api.md)
