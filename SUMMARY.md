@@ -42,6 +42,7 @@
     * [Network Broadcast API](api-reference/echo-node-api/network-broadcast-api.md)
     * [Registration API](api-reference/echo-node-api/registration-api.md)
   * [Echo Operations](api-reference/echo-operations/README.md)
+    * [Operations Order](api-reference/echo-operations/operations-order.md)
     * [Account Management](api-reference/echo-operations/account-management.md)
     * [Asset Management](api-reference/echo-operations/asset-management.md)
     * [Balance Object](api-reference/echo-operations/balance-object.md)
