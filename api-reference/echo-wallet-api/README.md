@@ -2,115 +2,124 @@
 
 ## Contents
 * Info and help
-    * [help](#help-command-name)
+    * [help](#help-[command-name])
     * [info](#info)
-    * [get_prototype_operation](#get_prototype_operation-operation_type)
-    * [get_object](#get_object-object-id)
+    * [get_prototype_operation](#get_prototype_operation-<operation_type>)
+    * [get_object](#get_object-<object-id>)
 * Getters
-    * [get_block](#get_block-block-num)
-    * [get_transaction_id](#get_transaction_id-tx)
-    * [serialize_transaction](#serialize_transaction-tx)
+    * [get_block](#get_block-<block-num>)
+    * [get_block_virtual_ops](#get_block_virtual_ops-<block-num>)
+    * [get_transaction_id](#get_transaction_id-<tx>)
+    * [serialize_transaction](#serialize_transaction-<tx>)
 * Accounts
     * [get_account_count](#get_account_count)
     * [list_my_accounts](#list_my_accounts)
-    * [list_accounts](#list_accounts-lowerbound-limit)
-    * [get_account_history](#get_account_history-name-limit)
-    * [get_relative_account_history](#get_relative_account_history-name-stop-limit-start)
-    * [get_account](#get_account-account-name-or-id)
-    * [get_account_addresses](#get_account_addresses-account-id-from-limit)
-    * [get_account_by_address](#get_account_by_address-address)
-    * [import_accounts](#import_accounts-filename-password)
-    * [register_account](#register_account-name-active-registrar-account-broadcast)
-    * [register_account_with_api](#register_account_with_api-name-active-key-echorand-key)
-    * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
-    * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
-    * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
+    * [list_accounts](#list_accounts-<lowerbound>-<limit>)
+    * [get_account_history](#get_account_history-<name>-<limit>)
+    * [get_relative_account_history](#get_relative_account_history-<name>-<stop>-<limit>-<start>)
+    * [get_account](#get_account-<account-name-or-id>)
+    * [get_account_addresses](#get_account_addresses-<account-id>-<from>-<limit>)
+    * [get_account_by_address](#get_account_by_address-<address>)
+    * [import_accounts](#import_accounts-<filename>-<password>)
+    * [register_account](#register_account-<name>-<active>-<registrar-account>-<broadcast>)
+    * [register_account_with_api](#register_account_with_api-<name>-<active-key>-<echorand-key>)
+    * [create_account_with_brain_key](#create_account_with_brain_key-<brain_key>-<account_name>-<registrar_account>-<broadcast>)
+    * [generate_account_address](#generate_account_address-<owner_account>-<label>-<broadcast>)
+    * [whitelist_account](#whitelist_account-<authorizing_account>-<account_to_list>-<new_listing_status>-<broadcast>)
 * Keys
-    * [import_key](#import_key-account_name_or_id-priv_key)
-    * [import_account_keys](#import_account_keys-filename-password-src_account_name-dest_account_name)
+    * [import_key](#import_key-<account_name_or_id>-<priv_key>)
+    * [import_account_keys](#import_account_keys-<filename>-<password>-<src_account_name>-<dest_account_name>)
+    * [create_eddsa_keypair](#create_eddsa_keypair)
+    * [get_private_key](#get_private_key-<pubkey>)
+    * [is_public_key_registered](#is_public_key_registered-<public_key>)
+    * [suggest_brain_key](#suggest_brain_key)
+    * [normalize_brain_key](#normalize_brain_key-<brain-key>)
+    * [derive_keys_from_brain_key](#derive_keys_from_brain_key-<brain_key>-<number_of_desired_keys>)
     * [dump_private_keys](#dump_private_keys)
+    * [old_key_to_wif](#old_key_to_wif-<b58>)
 * Password & lock
     * [is_new](#is_new)
     * [is_locked](#is_locked)
     * [lock](#lock)
-    * [unlock](#unlock-password)
-    * [set_password](#set_password-password)
+    * [unlock](#unlock-<password>)
+    * [set_password](#set_password-<password>)
     * [exit](#exit)
     * [cancel_all_subscriptions](#cancel_all_subscriptions)
 * Wallet file
-    * [load_wallet_file](#load_wallet_file-wallet_filename)
-    * [save_wallet_file](#save_wallet_file-wallet_filename)
+    * [load_wallet_file](#load_wallet_file-<wallet_filename>)
+    * [save_wallet_file](#save_wallet_file-<wallet_filename>)
 * Balances
-    * [import_balance](#import_balance-account_name_or_id-broadcast-private_keys)
-    * [list_account_balances](#list_account_balances-id)
-    * [list_id_balances](#list_id_balances-id)
-    * [list_frozen_balances](#list_frozen_balances-account)
-    * [get_committee_frozen_balance](#get_committee_frozen_balance-owner_account)
-    * [freeze_balance](#freeze_balance-account-amount-asset-duration-broadcast)
-    * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
-    * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
-    * [get_vesting_balances](#get_vesting_balances-account)
-    * [withdraw_vesting](#withdraw_vesting-witness_name-amount-asset_symbol-broadcast)
-    * [transfer](#transfer-from-to-amount-asset_symbol-broadcast)
+    * [import_balance](#import_balance-<account_name_or_id>-<broadcast>-<private_keys>)
+    * [list_account_balances](#list_account_balances-<id>)
+    * [list_id_balances](#list_id_balances-<id>)
+    * [list_frozen_balances](#list_frozen_balances-<account>)
+    * [get_committee_frozen_balance](#get_committee_frozen_balance-<owner_account>)
+    * [freeze_balance](#freeze_balance-<account>-<amount>-<asset>-<duration>-<broadcast>)
+    * [committee_freeze_balance](#committee_freeze_balance-<owner_account>-<amount>-<broadcast>)
+    * [committee_withdraw_balance](#committee_withdraw_balance-<owner_account>-<amount>-<broadcast>)
+    * [get_vesting_balances](#get_vesting_balances-<account>)
+    * [withdraw_vesting](#withdraw_vesting-<account>-<amount>-<asset_symbol>-<broadcast>)
+    * [transfer](#transfer-<from>-<to>-<amount>-<asset_symbol>-<broadcast>)
 * Assets
-    * [list_assets](#list_assets-lowerbound-limit)
-    * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-[bitasset_opts]-broadcast)
-    * [update_asset](#update_asset-symbol-[new_issuer]-new_options-broadcast)
-    * [update_bitasset](#update_bitasset-symbol-new_options-broadcast)
-    * [update_asset_feed_producers](#update_asset_feed_producers-symbol-new_feed_producers-broadcast)
-    * [publish_asset_feed](#publish_asset_feed-publishing_account-symbol-feed-broadcast)
-    * [issue_asset](#issue_asset-to_account-amount-symbol-broadcast)
-    * [get_asset](#get_asset-asset_name_or_id)
-    * [get_asset_id](#get_asset_id-asset_name)
-    * [get_bitasset_data](#get_bitasset_data-asset_name_or_id)
-    * [fund_asset_fee_pool](#fund_asset_fee_pool-from-symbol-amount-broadcast)
-    * [reserve_asset](#reserve_asset-from-amount-symbol-broadcast)
+    * [list_assets](#list_assets-<lowerbound>-<limit>)
+    * [create_asset](#create_asset-<issuer>-<symbol>-<precision>-<asset_opts>-[bitasset_opts]-<broadcast>)
+    * [update_asset](#update_asset-<symbol>-[new_issuer]-<new_options>-<broadcast>)
+    * [update_bitasset](#update_bitasset-<symbol>-<new_options>-<broadcast>)
+    * [update_asset_feed_producers](#update_asset_feed_producers-<symbol>-<new_feed_producers>-<broadcast>)
+    * [publish_asset_feed](#publish_asset_feed-<publishing_account>-<symbol>-<feed>-<broadcast>)
+    * [issue_asset](#issue_asset-<to_account>-<amount>-<symbol>-<broadcast>)
+    * [get_asset](#get_asset-<asset_name_or_id>)
+    * [get_asset_id](#get_asset_id-<asset_name>)
+    * [get_bitasset_data](#get_bitasset_data-<asset_name_or_id>)
+    * [fund_asset_fee_pool](#fund_asset_fee_pool-<from>-<symbol>-<amount>-<broadcast>)
+    * [reserve_asset](#reserve_asset-<from>-<amount>-<symbol>-<broadcast>)
 * Committee members
-    * [create_committee_member](#create_committee_member-owner_account-url-amount-eth_address-btc_public_key-broadcast)
-    * [update_committee_member](#update_committee_member-owner_account-committee_member-new_url-new_eth_address-new_btc_public_key-broadcast)
-    * [create_activate_committee_member_proposal](#create_activate_committee_member_proposal-sender-committee_to_activate-expiration_time-broadcast)
-    * [create_deactivate_committee_member_proposal](#create_deactivate_committee_member_proposal-sender-committee_to_activate-expiration_time-broadcast)
+    * [create_committee_member](#create_committee_member-<owner_account>-<url>-<amount>-<eth_address>-<btc_public_key>-<broadcast>)
+    * [update_committee_member](#update_committee_member-<owner_account>-<committee_member>-<new_url>-<new_eth_address>-<new_btc_public_key>-<broadcast>)
+    * [create_activate_committee_member_proposal](#create_activate_committee_member_proposal-<sender>-<committee_to_activate>-<expiration_time>-<broadcast>)
+    * [create_deactivate_committee_member_proposal](#create_deactivate_committee_member_proposal-sender-committee_to_activate-expiration_time-broadcast))
     * [list_committee_members](#list_committee_members-lowerbound-limit)
     * [get_committee_member](#get_committee_member-owner_account)
 * Globals
     * [get_chain_properties](#get_chain_properties)
     * [get_global_properties](#get_global_properties)
     * [get_dynamic_global_properties](#get_dynamic_global_properties)
-    * [propose_parameter_change](#propose_parameter_change-proposing_account-expiration_time-changed_values-broadcast)
+    * [propose_parameter_change](#propose_parameter_change-<proposing_account>-<expiration_time>-<changed_values>-<broadcast>)
     * [propose_fee_change](#propose_fee_change-proposing_account-expiration_time-changed_values-broadcast)
     * [approve_proposal](#approve_proposal-fee_paying_account-proposal_id-delta-broadcast)
 * Contracts
-    * [get_contract_object](#get_contract_object-id)
-    * [get_contract](#get_contract-id)
-    * [get_contract_result](#get_contract_result-id)
-    * [create_contract](#create_contract-registrar_account-code-value-asset_type-supported_asset_id-eth_accuracy-save_wallet)
-    * [call_contract](#call_contract-registrar_account-receiver-code-value-asset_type-save_wallet)
-    * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
-    * [get_contract_pool_balance](#get_contract_pool_balance-id)
-    * [get_contract_pool_whitelist](#get_contract_pool_whitelist-id)
-    * [contract_fund_fee_pool](#contract_fund_fee_pool-registrar_account-receiver-value-broadcast)
-    * [whitelist_contract_pool](#whitelist_contract_pool-registrar_account-contract_id-add_to_whitelist-add_to_blacklist-rm_whitelist-rm_blacklist-broadcast)
+    * [get_contract_object](#get_contract_object-<id>)
+    * [get_contract](#get_contract-<id>)
+    * [get_contract_result](#get_contract_result-<id>)
+    * [create_contract](#create_contract-<registrar_account>-<code>-<value>-<asset_type>-<supported_asset_id>-<eth_accuracy>-<save_wallet>)
+    * [call_contract](#call_contract-<registrar_account>-<receiver>-<code>-<value>-<asset_type>-<save_wallet>)
+    * [call_contract_no_changing_state](#call_contract_no_changing_state-<contract_id>-<registrar_account>-<asset_type>-<code>)
+    * [get_contract_pool_balance](#get_contract_pool_balance-<id>)
+    * [get_contract_pool_whitelist](#get_contract_pool_whitelist-<id>)
+    * [contract_fund_fee_pool](#contract_fund_fee_pool-<registrar_account>-<receiver>-<value>-<broadcast>)
+    * [whitelist_contract_pool](#whitelist_contract_pool-<registrar_account>-<contract_id>-<add_to_whitelist>-<add_to_blacklist>-<rm_whitelist>-<rm_blacklist>-<broadcast>)
 * Network
-    * [network_add_nodes](#network_add_nodes-nodes)
+    * [network_add_nodes](#network_add_nodes-<nodes>)
     * [network_get_connected_peers](#network_get_connected_peers)
+* Sidechain
+    * [get_account_deposits](#get_account_deposits-<account>-<type>)
+    * [get_account_withdrawals](#get_account_withdrawals-<account>-<type>)
 * Sidechain-Ethereum
-    * [get_eth_address](#get_eth_address-account)
-    * [get_account_deposits](#get_account_deposits-account)
-    * [get_account_withdrawals](#get_account_withdrawals-account)
-    * [generate_eth_address](#generate_eth_address-account-broadcast)
-    * [withdraw_eth](#withdraw_eth-account-eth_addr-value-broadcast)
+    * [get_eth_address](#get_eth_address-<account>)
+    * [generate_eth_address](#generate_eth_address-<account>-<broadcast>)
+    * [withdraw_eth](#withdraw_eth-<account>-<eth_addr>-<value>-<broadcast>)
 * Sidechain-ERC20
-    * [get_erc20_token](#get_erc20_token-eth_addr)
-    * [check_erc20_token](#check_erc20_token-id)
-    * [get_erc20_account_deposits](#get_erc20_account_deposits-account)
-    * [get_erc20_account_withdrawals](#get_erc20_account_withdrawals-account)
-    * [register_erc20_token](#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast)
-    * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
+    * [get_erc20_token](#get_erc20_token-<eth_addr>)
+    * [check_erc20_token](#check_erc20_token-<id>)
+    * [get_erc20_account_deposits](#get_erc20_account_deposits-<account>)
+    * [get_erc20_account_withdrawals](#get_erc20_account_withdrawals-<account>)
+    * [register_erc20_token](#register_erc20_token-<account>-<eth_addr>-<name>-<symbol>-<decimals>-<broadcast>)
+    * [withdraw_erc20_token](#withdraw_erc20_token-<account>-<to>-<erc20_token>-<value>-<broadcast>)
 * Sidechain-Bitcoin
-    * [generate_btc_deposit_address](#generate_btc_deposit_address-account-backup_address-broadcast)
-    * [get_btc_addresses](#get_btc_addresses-account)
-    * [get_btc_deposit_script](#get_btc_deposit_script-address)
-    * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
+    * [generate_btc_deposit_address](#generate_btc_deposit_address-<account>-<backup_address>-<broadcast>)
+    * [get_btc_addresses](#get_btc_addresses-<account>)
+    * [get_btc_deposit_script](#get_btc_deposit_script-<address>)
+    * [withdraw_btc](#withdraw_btc-<account>-<btc_addr>-<value>-<broadcast>)
 
 ## Info and help
 
@@ -119,7 +128,7 @@ Returns a list of all commands supported by the wallet API or detailed help on a
 
 | Option | Description |
 | :--- | :--- |
-| `command-name` | (Optional) for more detailed help on a single command |
+| `string command-name` | (Optional) for more detailed help on a single command |
 
 ### `info`
 Returns info about current chain and active committee members.
@@ -128,14 +137,14 @@ Returns info about current chain and active committee members.
 Returns an uninitialized object representing a given blockchain operation.  
 This returns a default-initialized object of the given type; it can be used during early development of the wallet when we don't yet have custom commands for creating all of the operations the blockchain supports.
 
-* `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations)) 
+* `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations) 
 
 ### `get_object <object-id>`
 Returns the blockchain object corresponding to the given id.
 
 | Option | Description |
 | :--- | :--- |
-| `object-id` | the id of the object to return |
+| `triplet object-id` | the id of the object to return |
 
 ## Blocks and transactions
 
@@ -144,28 +153,28 @@ Retrieve a full, signed block.
 
 | Option | Description |
 | :--- | :--- |
-| `block_num` | Height of the block to be returned |
+| `number block_num` | Height of the block to be returned |
 
 ### `get_block_virtual_ops <block-num>`
 Get virtual ops from the block.
 
 | Option | Description |
 | :--- | :--- |
-| `block_num` | Height of the block to be returned |
+| `number block_num` | Height of the block to be returned |
 
 ### `get_transaction_id <tx>`
 This method is used to convert a JSON transaction to its transactin ID.
 
 | Option | Description |
 | :--- | :--- |
-| `tx` | signed transaction |
+| `string tx` | signed transaction |
 
 ### `serialize_transaction <tx>`
 Converts a signed_transaction in JSON form to its binary representation.
 
 | Option | Description |
 | :--- | :--- |
-| `tx` | the transaction to serialize |
+| `string tx` | the transaction to serialize |
 
 
 ## Accounts
@@ -183,8 +192,8 @@ Use the `lowerbound` and limit parameters to page through the list. To retrieve 
 
 | Option | Description |
 | :--- | :--- |
-| `lowerbound` | the name of the first account to return. If the named account does not exist, the list will start at the account that comes after `lowerbound` |
-| `limit` | the maximum number of accounts to return (max: 1000) |
+| `string lowerbound` | the name of the first account to return. If the named account does not exist, the list will start at the account that comes after `lowerbound` |
+| `number limit` | the maximum number of accounts to return (max: 1000) |
 
 ```
 list_accounts nathan 10
@@ -195,8 +204,8 @@ Returns the most recent operations on the named account. This returns a list of 
 
 | Option | Description |
 | :--- | :--- |
-| `name` | the name or id of the account |
-| `limit` | the number of entries to return (starting from the most recent) |
+| `string name` | the name or id of the account |
+| `number limit` | the number of entries to return (starting from the most recent) |
 ```
 get_account_history nathan 10
 ```
@@ -206,10 +215,10 @@ Returns the relative operations on the named account from start number.
 
 | Option | Description |
 | :--- | :--- |
-| `name` | the name or id of the account |
-| `stop` | Sequence number of earliest operation |
-| `limit` | the number of entries to return |
-| `start` | the sequence number where to start looping back throw the history |
+| `string name` | the name or id of the account |
+| `number stop` | Sequence number of earliest operation |
+| `number limit` | the number of entries to return |
+| `number start` | the sequence number where to start looping back throw the history |
 ```
 get_relative_account_history nathan 0 10 20
 ```
@@ -219,7 +228,7 @@ Returns information about the given account.
 
 | Option | Description |
 | :--- | :--- |
-| `account-name-or-id` | the name or id of the account to provide information about |
+| `string account-name-or-id` | the name or id of the account to provide information about |
 ```
 get_account nathan or 1.2.0
 ```
@@ -229,9 +238,9 @@ Get addresses owned by account in specified ids interval
 
 | Option | Description |
 | :--- | :--- |
-| `account-id`|  ID of the account |
-| `from` | Number of block to start retrieve from |
-| `limit` | Maximum number of addresses to return |
+| `triplet account-id`|  ID of the account |
+| `number from` | Number of block to start retrieve from |
+| `number limit` | Maximum number of addresses to return |
 ```
 get_account_addresses 1.2.0 0 10
 ```
@@ -241,7 +250,7 @@ Get owner of specified address.
 
 | Option | Description |
 | :--- | :--- |
-| `address` | address in form of ripemd160 hash |
+| `ripemd160 address` | address in form of ripemd160 hash |
 ```
 get_account_by_address 8815c69de5d32d3061e52ca9386446332225b43d
 ```
@@ -252,8 +261,8 @@ Returns a map containing the accounts found and whether imported.
 
 | Option | Description |
 | :--- | :--- |
-| `filename` | the Echo wallet file to import |
-| `password` | the password to encrypt the Echo wallet file |
+| `string filename` | the Echo wallet file to import |
+| `string password` | the password to encrypt the Echo wallet file |
 
 ### `register_account <name> <active> <registrar-account> <broadcast>`
 Registers a third party's account on the blockckain.  
@@ -261,10 +270,10 @@ This function is used to register an account for which you do not own the privat
 
 | Option | Description |
 | :--- | :--- |
-| `name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
-| `active` | the active key for a new account |
-| `registrar-account`|  the account which will pay the fee to register the user |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
+| `public_key active` | the active key for a new account |
+| `string registrar-account`|  the account which will pay the fee to register the user |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu new_acc true
 ```
@@ -274,9 +283,9 @@ Request connected node to register account with provided name and keys.
 
 | Option | Description |
 | :--- | :--- |
-| `name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. \
-| `active-key` | the active key for a new account \
-| `echorand-key` | the echorand key for a new account \
+| `string name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. \
+| `public_key active-key` | the active key for a new account \
+| `public_key echorand-key` | the echorand key for a new account \
 
 
 ### `create_account_with_brain_key <brain_key> <account_name> <registrar_account> <broadcast>` 
@@ -284,10 +293,10 @@ Creates a new account and registers it on the blockchain.
 
 | Option | Description |
 | :--- | :--- |
-| `brain_key` | the brain key used for generating the account's private keys |
-| `account_name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
-| `registrar_account` | the account which will pay the fee to register the user |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string brain_key` | the brain key used for generating the account's private keys |
+| `string account_name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
+| `string registrar_account` | the account which will pay the fee to register the user |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 create_account_with_brain_key "brain_key" new_acc nathan true
 ```
@@ -297,9 +306,9 @@ Creates a transaction to generate account address.
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | The account for which the address is generated. |
-| `label` | The label for address |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `string owner_account` | The account for which the address is generated. |
+| `string label` | The label for address |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 ```
 generate_account_address nathan label true
 ```
@@ -313,10 +322,10 @@ An asset which enforces a whitelist specifies a list of accounts to maintain its
 
 | Option | Description |
 | :--- | :--- |
-| `authorizing_account` | the account who is doing the whitelisting |
-| `account_to_list` | the account being whitelisted |
-| `new_listing_status` | the new whitelisting status |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string authorizing_account` | the account who is doing the whitelisting |
+| `string account_to_list` | the account being whitelisted |
+| `account_listing new_listing_status` | the new whitelisting status |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ## Keys
 
@@ -328,8 +337,8 @@ Returns true if the key was imported.
 
 | Option | Description |
 | :--- | :--- |
-| `account_name_or_id` | the account owning the key |
-| `priv_key` | the private key, should be input interactively |
+| `string account_name_or_id` | the account owning the key |
+| `private_key priv_key` | the private key, should be input interactively |
 ```
 import_key nathan private_key
 ```
@@ -339,10 +348,10 @@ Imports from a Echo wallet file, find keys that were bound to a given account na
 
 | Option | Description |
 | :--- | :--- |
-| `filename` | the wallet file to import |
-| `password` | the password to encrypt the wallet file |
-| `src_account_name` | name of the account on chain |
-| `dest_account_name` | name of the account on chain, can be same or different to `src_account_name`|
+| `string filename` | the wallet file to import |
+| `string password` | the password to encrypt the wallet file |
+| `string src_account_name` | name of the account on chain |
+| `string dest_account_name` | name of the account on chain, can be same or different to `src_account_name`|
 
 ### `create_eddsa_keypair` 
 Create new EdDSA keypair encoded in base58 for public key and WIF for private key.
@@ -352,7 +361,7 @@ Get the WIF private key corresponding to a public key. The private key must alre
 
 | Option | Description |
 | :--- | :--- |
-| `pubkey` | eddsa public key |
+| `public_key pubkey` | eddsa public key |
 ```
 get_private_key ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu
 ```
@@ -364,7 +373,7 @@ Returns true whether a public key is known.
 
 | Option | Description |
 | :--- | :--- |
-| `public_key` | Public key |
+| `public_key public_key` | Public key |
 ```
 is_public_key_registered ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu
 ```
@@ -381,7 +390,7 @@ Returns the brain key in its normalized form
 
 | Option | Description |
 | :--- | :--- |
-| `brain-key` | the brain key as supplied by the user |
+| `string brain-key` | the brain key as supplied by the user |
 ```
 Example normalize_brain_key brain_key
 ```
@@ -395,8 +404,8 @@ NOTE: These keys may or may not match with the owner keys of any account. This f
 
 | Option | Description |
 | :--- | :--- |
-| `brain_key` | Brain key |
-| `number_of_desired_keys` | Number of desired keys |
+| `string brain_key` | Brain key |
+| `number number_of_desired_keys` | Number of desired keys |
 ```
 derive_keys_from_brain_key brain_key 1
 ```
@@ -413,7 +422,7 @@ Returns string new in WIF eddsa private key
 
 | Option | Description |
 | :--- | :--- |
-| `b58` | old b58 format eddsa private_key |
+| `string b58` | old b58 format eddsa private_key |
 
 ## Password & lock
 
@@ -434,7 +443,7 @@ The wallet remain unlocked until the `lock` is called or the program exits.
 
 | Option | Description |
 | :--- | :--- |
-| `password` | the password previously set with `set_password`, in the wallet it should be input interactively |
+| `string password` | the password previously set with `set_password`, in the wallet it should be input interactively |
 ```
 unlock some_password
 ```
@@ -445,7 +454,7 @@ The wallet must be either 'new' or 'unlocked' to execute this command.
 
 | Option | Description |
 | :--- | :--- |
-| `password` | the password, should be input automatically in the wallet |
+| `string password` | the password, should be input automatically in the wallet |
 ```
 set_password your_password
 ```
@@ -465,7 +474,7 @@ Returns true if the specified wallet is loaded
 
 | Option | Description |
 | :--- | :--- |
-| `wallet_filename` | the filename of the wallet JSON file to load. If `wallet_filename` is empty, it reloads the existing wallet file |
+| `string wallet_filename` | the filename of the wallet JSON file to load. If `wallet_filename` is empty, it reloads the existing wallet file |
 
 ### `save_wallet_file <wallet_filename>` 
 Saves the current wallet to the given filename.  
@@ -473,7 +482,7 @@ This does not change the wallet filename that will be used for future writes, so
 
 | Option | Description |
 | :--- | :--- |
-| `wallet_filename` | the filename of the new wallet JSON file to create or overwrite. If `wallet_filename` is empty, save to the current filename. |
+| `string wallet_filename` | the filename of the new wallet JSON file to create or overwrite. If `wallet_filename` is empty, save to the current filename. |
 
 ## Balances
 
@@ -483,9 +492,9 @@ This call will construct transaction(s) that will claim all balances controled b
 
 | Option | Description |
 | :--- | :--- |
-| `account_name_or_id` | the account owning the key |
-| `broadcast` | true to broadcast the transaction on the network |
-| `private_keys` | array of eddsa private keys |
+| `string account_name_or_id` | the account owning the key |
+| `bool broadcast` | true to broadcast the transaction on the network |
+| `list<private_key> private_keys` | array of eddsa private keys |
 ```
 import_balance nathan true [ private_keys ]
 ```
@@ -496,7 +505,7 @@ Returns a list of the given account's balances
 
 | Option | Description |
 | :--- | :--- |
-| `id` | the name or id of the account whose balances you want |
+| `string id` | the name or id of the account whose balances you want |
 ```
 list_account_balances nathan or 1.2.0
 ```
@@ -506,7 +515,7 @@ List the balances of an account or a contract.
 
 | Option | Description |
 | :--- | :--- |
-| `id` | the id of either an account or a contract |
+| `string id` | the id of either an account or a contract |
 ```
 list_id_balances 1.2.0 or 1.9.0
 ```
@@ -516,7 +525,7 @@ List frozen balances of an account.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | the name or id of the account whose balances you want |
+| `string account` | the name or id of the account whose balances you want |
 ```
 list_frozen_balances nathan
 ```
@@ -526,7 +535,7 @@ List frozen balances of an committee member account.
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | the name or id of the committee members account whose balances you want |
+| `string owner_account` | the name or id of the committee members account whose balances you want |
 ```
 get_committee_frozen_balance nathan
 ```
@@ -536,11 +545,11 @@ Freezes part of your balance for the specified amount of time.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | the name or id of the balance holder |
-| `amount` | the amount of asset to freeze |
-| `asset` | the name of asset you want to freeze |
-| `duration` | duration of freeze in days |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string account` | the name or id of the balance holder |
+| `string amount` | the amount of asset to freeze |
+| `string asset` | the name of asset you want to freeze |
+| `number duration` | duration of freeze in days |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 freeze_balance nathan 1 ECHO 90 true
 ```
@@ -550,9 +559,9 @@ Freezes balance required for committee members to operate.
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | the name or id of the committee member account |
-| `amount` | the amount of asset to freeze |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string owner_account` | the name or id of the committee member account |
+| `number amount` | the amount of asset to freeze |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 committee_freeze_balance nathan 10 true
 ```
@@ -562,9 +571,9 @@ Withdraws part of frozen committee members balance.
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | the name or id of the committee member account |
-| `amount` | the amount of frozen committee balance to withdraw |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string owner_account` | the name or id of the committee member account |
+| `number amount` | the amount of frozen committee balance to withdraw |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 committee_withdraw_balance nathan 1 true
 ```
@@ -574,20 +583,20 @@ Get information about a vesting balance object.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | An account name or account ID or vesting balance object ID. |
+| `string account` | An account name or account ID or vesting balance object ID. |
 ```
 get_vesting_balances nathan
 ```
 
-### `withdraw_vesting <witness_name> <amount> <asset_symbol> <broadcast>` 
+### `withdraw_vesting <account> <amount> <asset_symbol> <broadcast>` 
 Withdraw a vesting balance.
 
 | Option | Description |
 | :--- | :--- |
-| `witness_name` | The account name of the witness, also accepts account ID or vesting balance ID type. |
-| `amount` | The amount to withdraw. |
-| `asset_symbol` | The symbol of the asset to withdraw. |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `string account` | The account ID or vesting balance ID type. |
+| `string amount` | The amount to withdraw. |
+| `string asset_symbol` | The symbol of the asset to withdraw. |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 ```
 withdraw_vesting nathan 10 ECHO true
 ```
@@ -598,11 +607,11 @@ Returns the signed transaction transferring funds
 
 | Option | Description |
 | :--- | :--- |
-| `from` | the name or id of the account sending the funds |
-| `to` | the name or id of the account receiving the funds |
-| `amount` | the amount to send (in nominal units  to send half of a BTS, specify 0.5) |
-| `asset_symbol` | the symbol or id of the asset to send |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string from` | the name or id of the account sending the funds |
+| `string to` | the name or id of the account receiving the funds |
+| `string amount` | the amount to send (in nominal units  to send half of a BTS, specify 0.5) |
+| `string asset_symbol` | the symbol or id of the asset to send |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 transfer 1.2.0 1.2.1 10 ECHO true
 ```
@@ -616,8 +625,8 @@ Returns the list of asset objects, ordered by symbol
 
 | Option | Description |
 | :--- | :--- |
-| `lowerbound` | the symbol of the first asset to include in the list. |
-| `limit` | the maximum number of assets to return (max: 100) |
+| `string lowerbound` | the symbol of the first asset to include in the list. |
+| `number limit` | the maximum number of assets to return (max: 100) |
 ```
 list_assets ECHO 10
 list_assets "" 10
@@ -632,12 +641,12 @@ Returns the signed transaction creating a new asset
 
 | Option | Description |
 | :--- | :--- |
-| `issuer` | the name or id of the account who will pay the fee and become the issuer of the new asset. This can be updated later |
-| `symbol` | the ticker symbol of the new asset |
-| `precision` | the number of digits of precision to the right of the decimal point, must be less than or equal to 12 |
-| `asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. |
-| `bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string issuer` | the name or id of the account who will pay the fee and become the issuer of the new asset. This can be updated later |
+| `string symbol` | the ticker symbol of the new asset |
+| `number precision` | the number of digits of precision to the right of the decimal point, must be less than or equal to 12 |
+| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. |
+| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `update_asset <symbol> [new_issuer] <new_options> <broadcast>` 
 Update the core options on an asset. There are a number of options which all assets in the network use. These options are enumerated in the asset_object::asset_options struct. This command is used to update these options for an existing asset.  
@@ -647,10 +656,10 @@ Returns the signed transaction updating the asset
 
 | Option | Description |
 | :--- | :--- |
-| `symbol` | the name or id of the asset to update |
-| `new_issuer` | (Optional) if changing the asset's issuer, the name or id of the new issuer. null if you wish to remain the issuer of the asset |
-| `new_options` | the new asset_options object, which will entirely replace the existing options. |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string symbol` | the name or id of the asset to update |
+| `string new_issuer` | (Optional) if changing the asset's issuer, the name or id of the new issuer. null if you wish to remain the issuer of the asset |
+| `asset_options new_options` | the new asset_options object, which will entirely replace the existing options. |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `update_bitasset <symbol> <new_options> <broadcast>` 
 Update the options specific to a BitAsset.  
@@ -660,9 +669,9 @@ Returns the signed transaction updating the bitasset
 
 | Option | Description |
 | :--- | :--- |
-| `symbol` | the name or id of the asset to update, which must be a market-issued asset |
-| `new_options` | the new bitasset_options object, which will entirely replace the existing options. |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string symbol` | the name or id of the asset to update, which must be a market-issued asset |
+| `bitasset_options new_options` | the new bitasset_options object, which will entirely replace the existing options. |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `update_asset_feed_producers <symbol> <new_feed_producers> <broadcast>` 
 Update the set of feed-producing accounts for a BitAsset.  
@@ -672,9 +681,9 @@ Returns the signed transaction updating the bitasset's feed producers
 
 | Option | Description |
 | :--- | :--- |
-| `symbol` | the name or id of the asset to update |
-| `new_feed_producers` | a list of account names or ids which are authorized to produce feeds for the asset. this list will completely replace the existing list |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string symbol` | the name or id of the asset to update |
+| `list<string> new_feed_producers` | a list of account names or ids which are authorized to produce feeds for the asset. this list will completely replace the existing list |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 update_asset_feed_producers UIA [nathan, foobar] true
 ```
@@ -688,10 +697,10 @@ Returns the signed transaction updating the price feed for the given asset
 
 | Option | Description |
 | :--- | :--- |
-| `publishing_account` | the account publishing the price feed |
-| `symbol` | the name or id of the asset whose feed we're publishing |
-| `feed` | the price_feed object containing the three prices making up the feed |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string publishing_account` | the account publishing the price feed |
+| `string symbol` | the name or id of the asset whose feed we're publishing |
+| `price_feed feed` | the price_feed object containing the three prices making up the feed |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `issue_asset <to_account> <amount> <symbol> <broadcast>` 
 Issue new shares of an asset.
@@ -700,17 +709,17 @@ Returns the signed transaction issuing the new shares
 
 | Option | Description |
 | :--- | :--- |
-| `to_account` | the name or id of the account to receive the new shares |
-| `amount` | the amount to issue, in nominal units |
-| `symbol` | the ticker symbol of the asset to issue |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string to_account` | the name or id of the account to receive the new shares |
+| `string amount` | the amount to issue, in nominal units |
+| `string symbol` | the ticker symbol of the asset to issue |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `get_asset <asset_name_or_id>` 
 Returns information about the given asset.
 
 | Option | Description |
 | :--- | :--- |
-| `asset_name_or_id` | the symbol or id of the asset in question |
+| `string asset_name_or_id` | the symbol or id of the asset in question |
 ```
 get_asset ECHO
 ```
@@ -720,7 +729,7 @@ Lookup the id of a named asset.
 
 | Option | Description |
 | :--- | :--- |
-| `asset_name` | the symbol of an asset to look up |
+| `string asset_name` | the symbol of an asset to look up |
 ```
 get_asset_id ECHO
 ```
@@ -730,7 +739,7 @@ Returns the BitAsset-specific data for a given asset. Market-issued assets's beh
 
 | Option | Description |
 | :--- | :--- |
-| `asset_name_or_id` | the symbol or id of the BitAsset in question |
+| `string asset_name_or_id` | the symbol or id of the BitAsset in question |
 ```
 get_bitasset_data ECHO
 ```
@@ -744,10 +753,10 @@ Returns the signed transaction funding the fee pool
 
 | Option | Description |
 | :--- | :--- |
-| `from` | the name or id of the account sending the core asset |
-| `symbol` | the name or id of the asset whose fee pool you wish to fund |
-| `amount` | the amount of the core asset to deposit |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string from` | the name or id of the account sending the core asset |
+| `string symbol` | the name or id of the asset whose fee pool you wish to fund |
+| `string amount` | the amount of the core asset to deposit |
+| `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `reserve_asset <from> <amount> <symbol> <broadcast>` 
 Burns the given user-issued asset.  
@@ -757,10 +766,10 @@ Returns the signed transaction burning the asset
 
 | Option | Description |
 | :--- | :--- |
-| `from` | the account containing the asset you wish to burn |
-| `amount` | the amount to burn, in nominal units |
-| `symbol` | the name or id of the asset to burn |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string from` | the account containing the asset you wish to burn |
+| `string amount` | the amount to burn, in nominal units |
+| `string symbol` | the name or id of the asset to burn |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 reserve_asset nathan 10 ECHO true
 ```
@@ -775,12 +784,12 @@ Returns the signed transaction registering a committee_member
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | the name or id of the account which is creating the committee_member |
-| `url` | a URL to include in the committee_member record in the blockchain. Clients may display this when showing a list of committee_members. May be blank. |
-| `amount` | amount of ECHO asset to freeze |
-| `eth_address` | address of the account in the ethereum network |
-| `btc_public_key` | public key of the account in the bitcoin network |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string owner_account` | the name or id of the account which is creating the committee_member |
+| `string url` | a URL to include in the committee_member record in the blockchain. Clients may display this when showing a list of committee_members. May be blank. |
+| `string amount` | amount of ECHO asset to freeze |
+| `string eth_address` | address of the account in the ethereum network |
+| `string btc_public_key` | public key of the account in the bitcoin network |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 create_committee_member nathan example.com 1000 E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
@@ -792,12 +801,12 @@ Returns the signed transaction updating a committee_member.
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | the name or id of the account which is updating the committee_member |
-| `committee_member` | a committee_member owned by the owner_account |
-| `new_url` | a new URL of the committee_member_object, enter empty string if you don't want to change it |
-| `new_eth_address` | a new ethereum address of the committee_member object, enter empty string if you don't want to change it |
-| `new_btc_public_key` | a new bitcoin public key of the committee_member object, enter empty string if you don't want to change it |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string owner_account` | the name or id of the account which is updating the committee_member |
+| `triplet committee_member` | a committee_member owned by the owner_account |
+| `string new_url` | a new URL of the committee_member_object, enter empty string if you don't want to change it |
+| `string new_eth_address` | a new ethereum address of the committee_member object, enter empty string if you don't want to change it |
+| `string new_btc_public_key` | a new bitcoin public key of the committee_member object, enter empty string if you don't want to change it |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 update_committee_member nathan 1.4.0 new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
@@ -810,10 +819,10 @@ Returns the signed transaction registering a committee_member
 
 | Option | Description |
 | :--- | :--- |
-| `sender` | the name or id of the account which is creating proposal |
-| `committee_to_activate` | a committee member |
-| `expiration_time` | expiration time of created proposal |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string sender` | the name or id of the account which is creating proposal |
+| `triplet committee_to_activate` | a committee member |
+| `time_point expiration_time` | expiration time of created proposal |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 create_activate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00 true
 ```
@@ -826,10 +835,10 @@ Returns the signed transaction registering a committee_member
 
 | Option | Description |
 | :--- | :--- |
-| `sender` | the name or id of the account which is creating proposal |
-| `committee_to_activate` | a committee member |
-| `expiration_time` | expiration time of created proposal |
-| `broadcast` | true to broadcast the transaction on the network |
+| `string sender` | the name or id of the account which is creating proposal |
+| `triplet committee_to_activate` | a committee member |
+| `time_point expiration_time` | expiration time of created proposal |
+| `bool broadcast` | true to broadcast the transaction on the network |
 ```
 create_deactivate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00 true
 ```
@@ -841,8 +850,8 @@ Use the `lowerbound` and limit parameters to page through the list. To retrieve 
 
 | Option | Description |
 | :--- | :--- |
-| `lowerbound` | the name of the first committee_member to return. If the named committee_member does not exist, the list will start at the committee_member that comes after `lowerbound`|
-| `limit` | the maximum number of committee_members to return (max: 1000) |
+| `string lowerbound` | the name of the first committee_member to return. If the named committee_member does not exist, the list will start at the committee_member that comes after `lowerbound`|
+| `number limit` | the maximum number of committee_members to return (max: 1000) |
 ```
 list_committee_members
 ```
@@ -852,7 +861,7 @@ Returns information about the given committee_member.
 
 | Option | Description |
 | :--- | :--- |
-| `owner_account` | the name or id of the committee_member account owner, or the id of the committee_member |
+| `string owner_account` | the name or id of the committee_member account owner, or the id of the committee_member |
 ```
 get_committee_member nathan
 ```
@@ -876,30 +885,30 @@ Multiple parameters can be specified if an atomic change is desired.
 
 | Option | Description |
 | :--- | :--- |
-| `proposing_account` | The account paying the fee to propose the tx |
-| `expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
-| `changed_values` | The values to change; all other chain parameters are filled in with default values |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `string proposing_account` | The account paying the fee to propose the tx |
+| `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
+| `string changed_values` | The values to change; all other chain parameters are filled in with default values |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 
 ### `propose_fee_change proposing_account expiration_time changed_values broadcast` 
 Propose a fee change.
 
 | Option | Description |
 | :--- | :--- |
-| `proposing_account` | The account paying the fee to propose the tx |
-| `expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
-| `changed_values` | Map of operation type to new fee. Operations may be specified by name or ID. The "scale" key changes the scale. All other operations will maintain current values. |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `string proposing_account` | The account paying the fee to propose the tx |
+| `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
+| `string changed_values` | Map of operation type to new fee. Operations may be specified by name or ID. The "scale" key changes the scale. All other operations will maintain current values. |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 
 ### `approve_proposal fee_paying_account proposal_id delta broadcast` 
 Approve or disapprove a proposal.
 
 | Option | Description |
 | :--- | :--- |
-| `fee_paying_account` | The account paying the fee for the op. |
-| `proposal_id` | The proposal to modify. |
-| `delta` | Members contain approvals to create or remove. In JSON you can leave empty members undefined. |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `string fee_paying_account` | The account paying the fee for the op. |
+| `string proposal_id` | The proposal to modify. |
+| `approval_delta delta` | Members contain approvals to create or remove. In JSON you can leave empty members undefined. |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 
 
 ## Contracts
@@ -909,7 +918,7 @@ Get the contract object from the database by it's id.
 
 | Option | Description |
 | :--- | :--- |
-| `id` | the id of the contract |
+| `triplet id` | the id of the contract |
 ```
 get_contract_object 1.9.0
 ```
@@ -919,7 +928,7 @@ Get the contract information by the contract's id
 
 | Option | Description |
 | :--- | :--- |
-| `id` | id of the contract |
+| `triplet id` | id of the contract |
 ```
 get_contract 1.9.0
 ```
@@ -929,7 +938,7 @@ Get the result of contract execution.
 
 | Option | Description |
 | :--- | :--- |
-| `id` | the id of the conract result |
+| `triplet id` | the id of the conract result |
 ```
 get_contract_result 1.10.0
 ```
@@ -941,13 +950,13 @@ Returns the signed transaction creating the contract
 
 | Option | Description |
 | :--- | :--- |
-| `registrar_account` | name of the account creating the contract |
-| `code` | code of the contract |
-| `value` | the amount of asset transfered to the contract |
-| `asset_type` | the type of the asset transfered to the contract |
-| `supported_asset_id` | the asset that can be used to create/call the contract (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset)) |
-| `eth_accuracy` | whether to use the ethereum asset accuracy (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)) |
-| `save_wallet` | whether to save the contract to the wallet |
+| `string registrar_account` | name of the account creating the contract |
+| `string code` | code of the contract in hex format |
+| `number value` | the amount of asset transfered to the contract |
+| `string asset_type` | the type of the asset transfered to the contract |
+| `string supported_asset_id` | the asset that can be used to create/call the contract (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset)) |
+| `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)) |
+| `bool save_wallet` | whether to save the contract to the wallet |
 ```
 create_contract nathan code_contract 0 ECHO "" false true
 ```
@@ -959,12 +968,12 @@ Returns the signed transaction calling the contract
 
 | Option | Description |
 | :--- | :--- |
-| `registrar_account` | name of the account calling the contract |
-| `receiver` | the id of the contract to call |
-| `code` | the hash of the method to call |
-| `value` | the amount of asset transfered to the contract |
-| `asset_type` | the type of the asset transfered to the contract |
-| `save_wallet` | whether to save the contract call to the wallet |
+| `string registrar_account` | name of the account calling the contract |
+| `triplet receiver` | the id of the contract to call |
+| `string code` | the hash of the method to call |
+| `number value` | the amount of asset transfered to the contract |
+| `string asset_type` | the type of the asset transfered to the contract |
+| `bool save_wallet` | whether to save the contract call to the wallet |
 ```
 call_contract nathan 1.9.0 code_contract 0 ECHO false
 ```
@@ -976,10 +985,10 @@ Returns result of execution
 
 | Option | Description |
 | :--- | :--- |
-| `contract_id` | ID of the contract |
-| `registrar_account` | name of the account calling the contract |
-| `asset_type` | the type of the asset transfered to the contract |
-| `code` | the hash of the method to call |
+| `triplet contract_id` | ID of the contract |
+| `string registrar_account` | name of the account calling the contract |
+| `string asset_type` | the type of the asset transfered to the contract |
+| `string code` | the hash of the method to call |
 ```
 call_contract_no_changing_state 1.9.0 1.2.0 ECHO "greet()"
 ```
@@ -989,7 +998,7 @@ Get contract's feepool balance.
 
 | Option | Description |
 | :--- | :--- |
-| `id` | for getting feepool balance. |
+| `triplet id` | for getting feepool balance. |
 ```
 get_contract_pool_balance 1.9.0
 ```
@@ -999,7 +1008,7 @@ Get contract's whitelist and blacklist.
 
 | Option | Description |
 | :--- | :--- |
-| `id` | for getting whitelist and blacklist of feepool object. |
+| `triplet id` | for getting whitelist and blacklist of feepool object. |
 ```
 get_contract_pool_whitelist 1.9.0
 ```
@@ -1009,10 +1018,10 @@ Fund feepool of contract.
 
 | Option | Description |
 | :--- | :--- |
-| `registrar_account` | name of the account which fund contract's feepool |
-| `receiver` | the id of the contract's feepool |
-| `value` | the amount of asset transfered to the contract in default asset_id_type() |
-| `broadcast` | whether to broadcast the fund contract operation to the network |
+| `string registrar_account` | name of the account which fund contract's feepool |
+| `triplet receiver` | the id of the contract's feepool |
+| `number value` | the amount of asset transfered to the contract in default asset_id_type() |
+| `bool broadcast` | whether to broadcast the fund contract operation to the network |
 ```
 contract_fund_fee_pool nathan 1.9.0 0 true
 ```
@@ -1024,13 +1033,13 @@ Returns the signed version of the transaction.
 
 | Option | Description |
 | :--- | :--- |
-| `registrar_account` | is an owner of contract which perform whitelistining or blacklistining. |
-| `contract_id` | Whitelistining or blacklistining applying for this contract. |
-| `add_to_whitelist` | Leave it empty if you don't want to add some account to whitelist. |
-| `add_to_blacklist` | Leave it empty if you don't want to add some account to blacklist. |
-| `rm_whitelist` | Leave it empty if you don't want to remove some account from whitelist. |
-| `rm_blacklist` | Leave it empty if you don't want to remove some account from blacklist. |
-| `broadcast` | true if you wish to broadcast the contract whitelist operation |
+| `string registrar_account` | is an owner of contract which perform whitelistining or blacklistining. |
+| `triplet contract_id` | Whitelistining or blacklistining applying for this contract. |
+| `list<triplet> add_to_whitelist` | Leave it empty if you don't want to add some account to whitelist. |
+| `list<triplet> add_to_blacklist` | Leave it empty if you don't want to add some account to blacklist. |
+| `list<triplet> rm_whitelist` | Leave it empty if you don't want to remove some account from whitelist. |
+| `list<triplet> rm_blacklist` | Leave it empty if you don't want to remove some account from blacklist. |
+| `bool broadcast` | true if you wish to broadcast the contract whitelist operation |
 ```
 whitelist_contract_pool nathan 1.9.0 [] [] [] [] true
 ```
@@ -1042,7 +1051,7 @@ Adding nodes to network.
 
 | Option | Description |
 | :--- | :--- |
-| `nodes` | endpoints your nodes |
+| `list<string> nodes` | endpoints your nodes |
 ```
 network_add_nodes 127.0.0.1:8090
 ```
@@ -1052,34 +1061,38 @@ Get connected peers.
 
 ## Sidechain
 
+### `get_account_deposits <account> <type>` 
+Returns all approved deposits, for the given account id.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet account` | the id of the account to provide information about |
+| `string type` | the type of the deposits may be "", "eth" or "bts". By default "" = all deposits |
+```
+get_account_deposits 1.2.0 ""
+```
+
+### `get_account_withdrawals <account> <type>` 
+Returns all approved withdrawals, for the given account id.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet account` | the id of the account to provide information about |
+| `string type` | the type of the deposits may be "", "eth" or "bts". By default "" = all deposits |
+```
+get_account_withdrawals 1.2.0 ""
+```
+
+## Sidechain Ethereum
+
 ### `get_eth_address <account>` 
 Returns information about generated eth address, if then exist and approved, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | the id of the account to provide information about |
+| `triplet account` | the id of the account to provide information about |
 ```
 get_eth_address 1.2.0
-```
-
-### `get_account_deposits <account>` 
-Returns all approved deposits, for the given account id.
-
-| Option | Description |
-| :--- | :--- |
-| `account` | the id of the account to provide information about |
-```
-get_account_deposits 1.2.0
-```
-
-### `get_account_withdrawals <account>` 
-Returns all approved withdrawals, for the given account id.
-
-| Option | Description |
-| :--- | :--- |
-| `account` | the id of the account to provide information about |
-```
-get_account_withdrawals 1.2.0
 ```
 
 ### `generate_eth_address <account> <broadcast>` 
@@ -1087,8 +1100,8 @@ Creates a transaction to generate ethereum address.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | The account for which the ethereum address is generated. |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `triplet account` | The account for which the ethereum address is generated. |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 ```
 generate_eth_address nathan true
 ```
@@ -1098,10 +1111,10 @@ Creates a transaction to withdraw ethereum.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | The account who withdraw ethereum. |
-| `eth_addr` | The Ethereum address where withdraw. |
-| `value` | The amount withdraw. |
-| `broadcast` | true if you wish to broadcast the transaction. |
+| `string account` | The account who withdraw ethereum. |
+| `string eth_addr` | The Ethereum address where withdraw. |
+| `number value` | withdraw amount. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 withdraw_eth nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10 true
 ```
@@ -1113,7 +1126,7 @@ Get erc20 token information.
 
 | Option | Description |
 | :--- | :--- |
-| `eth_addr` | the ethereum address of token in Ethereum network |
+| `eth_address eth_addr` | the ethereum address of token in Ethereum network |
 ```
 get_erc20_token 0102fe7702b96808f7bbc0d4a888ed1468216cfd
 ```
@@ -1123,7 +1136,7 @@ Checks if erc20 token exist.
 
 | Option | Description |
 | :--- | :--- |
-| `id` | ID of the contract to get erc20 token |
+| `triplet id` | ID of the contract to get erc20 token |
 ```
 check_erc20_token 1.9.0
 ```
@@ -1133,7 +1146,7 @@ Returns all approved deposits, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | the id of the account to provide information about |
+| `triplet account` | the id of the account to provide information about |
 ```
 get_erc20_account_deposits 1.2.0
 ```
@@ -1143,7 +1156,7 @@ Returns all approved withdrawals for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | the id of the account to provide information about |
+| `triplet account` | the id of the account to provide information about |
 ```
 get_erc20_account_withdrawals 1.2.0
 ```
@@ -1155,12 +1168,12 @@ Returns the signed version of the transaction.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | The account who create erc20 token and become his owner. |
-| `eth_addr` | The address of token erc20 token in ethereum network. |
-| `name` | Name of the token in echo network. |
-| `symbol` | Symbol of the token in echo network. |
-| `decimals` | Number of the digist after the comma of the token in echo network. |
-| `broadcast` | true if you wish to broadcast the transaction. |
+| `string account` | The account who create erc20 token and become his owner. |
+| `string eth_addr` | The address of token erc20 token in ethereum network. |
+| `string name` | Name of the token in echo network. |
+| `string symbol` | Symbol of the token in echo network. |
+| `number decimals` | Number of the digist after the comma of the token in echo network. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 register_erc20_token nathan E62627255a4BC0c92E190E01c515Ba28233c9207 erc20DbeVxoV QIGMPUZ 8 true
 ```
@@ -1172,11 +1185,11 @@ Returns the signed version of the transaction.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | The account who withdraw erc20 token. |
-| `to` | The Ethereum address where withdraw erc20 token. |
-| `erc20_token` | The erc20 token id in ECHO. |
-| `value` | The amount withdraw. |
-| `broadcast` | true if you wish to broadcast the transaction. |
+| `string account` | The account who withdraw erc20 token. |
+| `string to` | The Ethereum address where withdraw erc20 token. |
+| `string erc20_token` | The erc20 token id in ECHO. |
+| `string value` | The amount withdraw. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
 
 
 ## Sidechain Bitcoin
@@ -1186,9 +1199,9 @@ Creates a transaction to generate bitcoin deposit address.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | The account for which the bitcoin address is generated. |
-| `backup_address` | The P2PK address to transfer satoshis back. |
-| `broadcast` | true if you wish to broadcast the transaction |
+| `string account` | The account for which the bitcoin address is generated. |
+| `string backup_address` | The P2PK address to transfer satoshis back. |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 ```
 generate_btc_deposit_address nathan 04ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84c true
 ```
@@ -1198,7 +1211,7 @@ Returns information about generated btc addresses, if then exist and approved, f
 
 | Option | Description |
 | :--- | :--- |
-| `account` | the id of the account to provide information about |
+| `triplet account` | the id of the account to provide information about |
 ```
 get_btc_address 1.2.0
 ```
@@ -1208,7 +1221,7 @@ Returns bitcoin script for generated bitcoin deposit address, if then exist, for
 
 | Option | Description |
 | :--- | :--- |
-| `address` | the id of the bitcoin address to provide script |
+| `triplet address` | the id of the bitcoin address to provide script |
 ```
 get_btc_deposit_script 1.22.0
 ```
@@ -1218,10 +1231,10 @@ Creates a transaction to withdraw btc.
 
 | Option | Description |
 | :--- | :--- |
-| `account` | The account who withdraw btc. |
-| `btc_addr` | The Bitcoin address where withdraw. |
-| `value` | The amount withdraw in satoshis. |
-| `broadcast` | true if you wish to broadcast the transaction. |
+| `string account` | The account who withdraw btc. |
+| `string btc_addr` | The Bitcoin address where withdraw. |
+| `number value` | The amount withdraw in satoshis. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
 ```
