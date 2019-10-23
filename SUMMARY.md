@@ -7,9 +7,9 @@
   * [Interact with a Smart Contract](how-to/interact-with-a-smart-contract.md)
   * [Install a Full Node](how-to/install-full-node.md)
 * [Technologies](technologies/README.md)
-  * [Echo PoWR Consensus](technologies/powr-echorand/README.md)
-    * [Whitepaper](technologies/powr-echorand/overview.md)
-    * [Architecture](technologies/powr-echorand/architecture.md)
+  * [Echo PoWR Consensus](technologies/echo-powr.md)
+<!--    * [Whitepaper](technologies/powr-echorand/overview.md)-->
+<!--    * [Architecture](technologies/powr-echorand/architecture.md)-->
   * [x86-64 Virtual Machine](technologies/x86-64-virtual-machine/README.md)
     * [C++ Smart Contracts](technologies/x86-64-virtual-machine/c++-smart-contracts.md)
     * [x86-64 Specification](technologies/x86-64-virtual-machine/x86-64-specification.md)
