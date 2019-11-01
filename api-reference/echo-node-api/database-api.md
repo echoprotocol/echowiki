@@ -2699,6 +2699,61 @@ The contracts logs from specified blocks interval.
 }
 ```
 
+### get_contract_logs2(contract_logs_filter_options)
+
+Returns an array of all logs matching a given filter object.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `contract_logs_filter_options opts` | The filter object |
+
+#### The filter options
+
+| Option | Description |
+| :--- | :--- |
+| `set<contract_id_type> contracts` | (optional) A list of contract ids from which logs should originate |
+| `vector<set<string>> topics` | (optional) Topics are order-dependent. It’s possible to pass in empty array to match any topic, or a subarray of multiple topics of which one should be matching. |
+| `optional<uint32_t> from_block` | (optional) Default: `head_block_num - 1000`. |
+| `optional<uint32_t> to_block` | (optional) Default: `head_block_num`. |
+
+{% hint style="info" %}
+A note on specifying topic filters:  
+Topics are order-dependent. A transaction with a log with topics [A, B] will be matched by the following topic filters:
+* `[]` “anything”
+* `[A]` “A in first position (and anything after)”
+* `[[], B]` “anything in first position AND B in second position (and anything after)”
+* `[A, B]` “A in first position AND B in second position (and anything after)”
+* `[[A, B], [A, B]]` “(A OR B) in first position AND (A OR B) in second position (and anything after)”
+{% endhint %}
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_contract_logs2",
+        [{
+            "contracts": ["1.11.0"],
+            "topics": [
+                ["a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"],
+                [],
+                [
+                    "0000000000000000000000000000000000000000000000000000000000000002",
+                    "0000000000000000000000000000000000000000000000000000000000000004"
+                ]
+            ],
+            "from_block": "0",
+            "to_block": "100"
+        }]
+    ]
+}
+```
+
 ### subscribe\_contracts\(contracts\_ids\)
 
 Subscription to change the contract uses database-api.md\#set\_subscribe\_callback-callback-clear\_filter.
