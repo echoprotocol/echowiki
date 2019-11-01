@@ -2630,6 +2630,10 @@ The contracts corresponding to the provided IDs.
 
 ### get\_contract\_logs\(contract\_id, from, to\)
 
+{% hint style="danger" %}
+This method is depacted and would be removed in next version. Use `get_contract_logs2` insead
+{% endhint %}
+
 Get logs of specified contract.
 
 #### Parameters
