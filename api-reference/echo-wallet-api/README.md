@@ -986,7 +986,7 @@ Returns result of execution
 | Option | Description |
 | :--- | :--- |
 | `triplet contract_id` | ID of the contract |
-| `string caller` | name of the account calling the contract |
+| `string caller` | ID of the account or contract that calls contract |
 | `string amount` | amount in ECHO. 1 ECHO is 100000000 |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `string code` | the hash of the method to call |
