@@ -2956,7 +2956,7 @@ Call the provided contract, but don't change the state.
 | Option | Description |
 | :--- | :--- |
 | `contract_id_type contract_id` | ID of the contract |
-| `object_id_type caller` | name of the account calling the contract |
+| `object_id_type caller` | id of the caller(contract or account) |
 | `asset value` | the type of the asset transfered to the contract |
 | `string code` | the hash of the method to call\(or name for x86-x64 contracts\) |
 
