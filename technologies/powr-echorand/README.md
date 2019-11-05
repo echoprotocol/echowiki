@@ -74,7 +74,7 @@ In the latter case, undecided nodes again use a VRF to generate a shared random 
 
 The stage consists of rounds, which include 3 steps each. At each step in the cycle, a new set of verifiers chosen by VRF sends their determination of the result vote in binary form. If, as a result of the round, 2/3rds + 1 \(~67%\) of verifiers agree on the outcome, the block is considered valid and appended to the chain. If consensus is not met, a new round begins.
 
-If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random sets of verifiers\) the network is unable to come to consensus about which block to add, an empty block is applied by the network and the entire consensus mechanism begins again from the the very first step - cryptographic sortition for new block producers.
+If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random sets of verifiers\) the network is unable to come to consensus about which block to add, the iteration number is increased by the network and the entire consensus mechanism begins again from the very first step - cryptographic sortition for new block producers. Since the iteration number is used in calculating verifiers sets, this action starts the generation of new producers and verifiers sets.
 
 ### Block application
 
@@ -84,7 +84,7 @@ All network nodes receive all messages sent by producers and verifiers at each s
 
 Because the selection of block producers and verifiers is weighted by the users balance of tokens, EchoRand transforms the typical byzantine fault tolerance requirement of 2/3rd of honest nodes to a more sybil-resistant requirement that **2/3rds of tokens** are held by honest nodes. This assumption is also improved because the nodes with the highest token balances have the most "skin in the game", and thus the most economic value to lose of the network is attacked. As long as 2/3rds of tokens are held by honest nodes participating in consensus, the network will run at maximum performance, with no loss of capacity.
 
-In the case that **less than 2/3rds of tokens are held by honest users** participating in consensus, the network will begin to suffer from degraded performance in the form of empty blocks being added to the ledger. As this honest participation rate declines from 67% to 33%, the statistical probability of empty blocks being added to the ledger increases linearly from 0 to 100%.
+In the case that **less than 2/3rds of tokens are held by honest users** participating in consensus, the network will begin to suffer from degraded performance in the form of an increase in the number of attempts to agree among themselves. As this honest participation rate declines from 67% to 33%, the statistical probability of reach consensus decreases linearly from 100% to 0%.
 
 With more than 67% of tokens held by an attacker, the attacker could continually disrupt the consensus mechanism and prevent new blocks from being added to the ledger or censor transactions, just as an attacking miner with 51% of hash rate in a proof of work-based currency.
 
@@ -92,7 +92,4 @@ With more than 67% of tokens held by an attacker, the attacker could continually
 
 EchoRand introduces a formal incentive scheme to reward users for participating in the consensus process either by running a full node or delegating to another node. This incentive scheme is designed to balance the optimal security and performance of EchoRand network by incentivizing more nodes to participate in consensus whenever performance drops below optimal levels, while maintaining adequate security and decentralization.
 
-Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly created tokens, similarly to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller amount of newly created tokens. In the case that an empty block is added to the network, no nodes receive a block reward.
-
-When the network begins to generate empty blocks due to failure of consensus \(whether because of an attacker or through low participation in consensus by honest users\), the protocol increases the block reward \(which inflates the entire token supply\) in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate.
-
+Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly created tokens, similarly to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller amount of newly created tokens.
