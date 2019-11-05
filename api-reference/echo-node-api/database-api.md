@@ -2947,7 +2947,7 @@ Result of execution.
 }
 ```
 
-### call\_contract\_no\_changing\_state\(contract\_id, registrar\_account, asset\_type, code\)
+### call\_contract\_no\_changing\_state\(contract\_id, caller, value, code\)
 
 Call the provided contract, but don't change the state.
 
@@ -2956,8 +2956,8 @@ Call the provided contract, but don't change the state.
 | Option | Description |
 | :--- | :--- |
 | `contract_id_type contract_id` | ID of the contract |
-| `account_id_type registrar_account` | name of the account calling the contract |
-| `asset_id_type asset_type` | the type of the asset transfered to the contract |
+| `object_id_type caller` | name of the account calling the contract |
+| `asset value` | the type of the asset transfered to the contract |
 | `string code` | the hash of the method to call\(or name for x86-x64 contracts\) |
 
 #### Example
@@ -2972,7 +2972,7 @@ Call the provided contract, but don't change the state.
         [
             "1.11.0",
             "1.2.26",
-            "1.3.0",
+            {"amount": 100,"asset_id": "1.3.0"},
             "6d4ce63c"
         ]
     ]

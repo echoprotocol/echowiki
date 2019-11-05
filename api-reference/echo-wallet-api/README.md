@@ -517,7 +517,7 @@ List the balances of an account or a contract.
 | :--- | :--- |
 | `string id` | the id of either an account or a contract |
 ```
-list_id_balances 1.2.0 or 1.9.0
+list_id_balances 1.11.0
 ```
 
 ### `list_frozen_balances account` 
@@ -920,7 +920,7 @@ Get the contract object from the database by it's id.
 | :--- | :--- |
 | `triplet id` | the id of the contract |
 ```
-get_contract_object 1.9.0
+get_contract_object 1.11.0
 ```
 
 ### `get_contract id` 
@@ -930,7 +930,7 @@ Get the contract information by the contract's id
 | :--- | :--- |
 | `triplet id` | id of the contract |
 ```
-get_contract 1.9.0
+get_contract 1.11.0
 ```
 
 ### `get_contract_result id` 
@@ -975,7 +975,7 @@ Returns the signed transaction calling the contract
 | `string asset_type` | the type of the asset transfered to the contract |
 | `bool save_wallet` | whether to save the contract call to the wallet |
 ```
-call_contract nathan 1.9.0 code_contract 0 ECHO false
+call_contract nathan 1.11.0 code_contract 0 ECHO false
 ```
 
 ### `call_contract_no_changing_state contract_id registrar_account asset_type code` 
@@ -986,11 +986,12 @@ Returns result of execution
 | Option | Description |
 | :--- | :--- |
 | `triplet contract_id` | ID of the contract |
-| `string registrar_account` | name of the account calling the contract |
+| `string caller` | name of the account calling the contract |
+| `string amount` | amount in ECHO. 1 ECHO is 100000000 |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `string code` | the hash of the method to call |
 ```
-call_contract_no_changing_state 1.9.0 1.2.0 ECHO "greet()"
+call_contract_no_changing_state 1.11.0 1.2.0 0 ECHO "6d4ce63c"
 ```
 
 ### `get_contract_pool_balance id` 
@@ -1000,7 +1001,7 @@ Get contract's feepool balance.
 | :--- | :--- |
 | `triplet id` | for getting feepool balance. |
 ```
-get_contract_pool_balance 1.9.0
+get_contract_pool_balance 1.11.0
 ```
 
 ### `get_contract_pool_whitelist id` 
@@ -1010,7 +1011,7 @@ Get contract's whitelist and blacklist.
 | :--- | :--- |
 | `triplet id` | for getting whitelist and blacklist of feepool object. |
 ```
-get_contract_pool_whitelist 1.9.0
+get_contract_pool_whitelist 1.11.0
 ```
 
 ### `contract_fund_fee_pool registrar_account receiver value broadcast` 
@@ -1023,7 +1024,7 @@ Fund feepool of contract.
 | `number value` | the amount of asset transfered to the contract in default asset_id_type() |
 | `bool broadcast` | whether to broadcast the fund contract operation to the network |
 ```
-contract_fund_fee_pool nathan 1.9.0 0 true
+contract_fund_fee_pool nathan 1.11.0 0 true
 ```
 
 ### `whitelist_contract_pool registrar_account contract_id add_to_whitelist add_to_blacklist rm_whitelist rm_blacklist broadcast` 
@@ -1041,7 +1042,7 @@ Returns the signed version of the transaction.
 | `listtriplet rm_blacklist` | Leave it empty if you don't want to remove some account from blacklist. |
 | `bool broadcast` | true if you wish to broadcast the contract whitelist operation |
 ```
-whitelist_contract_pool nathan 1.9.0 [] [] [] [] true
+whitelist_contract_pool nathan 1.11.0 [] [] [] [] true
 ```
 
 ## Network
@@ -1138,7 +1139,7 @@ Checks if erc20 token exist.
 | :--- | :--- |
 | `triplet id` | ID of the contract to get erc20 token |
 ```
-check_erc20_token 1.9.0
+check_erc20_token 1.11.0
 ```
 
 ### `get_erc20_account_deposits account` 

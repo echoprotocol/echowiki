@@ -60,7 +60,7 @@ Exposes accessors on the database which query state tracked by a blockchain vali
   * [subscribe\_contracts](database-api.md#subscribe_contracts-contracts_ids)
   * [subscribe\_contract\_logs](database-api.md#subscribe_contract_logs-callback-contract_id)
   * [get\_contract\_result](database-api.md#get_contract_result-id)
-  * [call\_contract\_no\_changing\_state](database-api.md#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
+  * [call\_contract\_no\_changing\_state](database-api.md#call_contract_no_changing_state-contract_id-caller-value-code)
 * [Balances](database-api.md#balances)
   * [get\_account\_balances](database-api.md#get_account_balances-id-assets)
   * [get\_contract\_balances](database-api.md#get_contract_balances-contract_id)
