@@ -532,7 +532,11 @@ The syncing node must determine the moment when its local database will be in sy
 
 Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + k`. However, the randomness seed for the round `r + k` will be affected by the outcome of the round `r + k - 1`.
 
-So since the producer cannot predict the seed that will be received as a result of the round `r + k - 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round. The latest is true only if there is a block at interval `[r + 1, r + k - 1]`. Otherwise, randomness seed can be easily calculated from `r` to `r + k`.
+So since the producer cannot predict the seed that will be received as a result of the round `r + k - 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round. The latest is true only if there is a non-empty block at interval `[r + 1, r + k - 1]`. Otherwise, randomness seed can be easily calculated from `r` to `r + k`.
+
+#### The problem of empty blocks
+
+Empty blocks are disabled in the blockchain. If empty block is generated, the round must be restarted incrementing the attempt. Number of round attempt is used at calculation of **VRF**, therefore set of accounts in **VRF** will be changed at next generation attempt for the same round for all steps. Number of attempts is limited by blockchain configuration. Block generation is stopped after reaching the limit. Block production can be restored at new transaction arrival or by restarting certain node with **--start-echorand** command-line key.
 
 #### Insufficient Node Participation
 
