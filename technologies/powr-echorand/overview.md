@@ -114,8 +114,8 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 | $sig(B_{r})$ | the signature of a block of the $r$ round |
 | $l(r)$       | the round $r$ leader - determines $PAY_{r}$, creates $B_{r}$ and determines $Q_{r}$ |
 | $CERT_{r}$   | a $B_{r}$ block certificate formed out of a set of `bba_signature` messages |
-| $VRF(r, s)$  | the ordered set of participants who act in step $s$ of round $r$ |
-| $VRFN(r, s)$ | the ordered set of indexes of $VRF(r, s)$ participants who are registered on the current node and participate in step $s$ of round $r$ |
+| $VRF(r, a, s)$  | the ordered set of participants who act in attempt $a$ for step $s$ of round $r$ |
+| $VRFN(r, a, s)$ | the ordered set of indexes of $VRF(r, a, s)$ participants who are registered on the current node and participate in in attempt $a$ for step $s$ of round $r$ |
 | $id$         | an account identifier in the blockchain |
 | $A_s$        | an array of account identifiers selected as participants in the step $s$ |
 | $N_s$        | an array of $A_s$ indexes which correspond to the identifiers of users authorized on the current node in the step $s$ |
@@ -130,8 +130,8 @@ The following algorithm parameters are set by constants, or configured at the **
 | -----------: | :----------------------------------------------------- |
 | $Λ$          | "large" interval, the average time required to distribute a 1 MB message across the network |
 | $λ$          | "small" interval, the average time required to distribute a 256-bit message across the network |
-| $N_g$        | the number of block producers in a round, used in the function $VRF(r, 1)$ |
-| $N_c$        | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$ |
+| $N_g$        | the number of block producers in a round, used in the function $VRF(r, a, 1)$ |
+| $N_c$        | the number of block verifiers in a round, used in the function $VRF(r, a, s), s > 1$ |
 | $t_h$        | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
 | $μ$          | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created |
 
@@ -150,35 +150,35 @@ The following algorithm parameters are set by constants, or configured at the **
 
 The concept of a verifiable random function \(VRF\) was introduced by Micali, Rabin, and Vadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value $x$, the owner of the secret key $SK$ can calculate the value of the function $y = F_{SK}(x)$ and the proof $P_{SK}(x)$. Using the proof and public key $PK = g^{SK}$, everyone can verify that the value of $y = F_{SK}(x)$ is indeed calculated correctly, but this information cannot be used to discover the secret key.
 
-The use of VRF in EchoRand is as follows: having a pseudo-random value $Q_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF(r, s)$ executors in $s$ step of $r$ round,and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, s)$, and additionally verify whether the participants have the right to act at this step.
+The use of VRF in EchoRand is as follows: having a pseudo-random value $Q_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF(r, a, s)$ executors in attempt $a$ for $s$ step of $r$ round, and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, a, s)$, and additionally verify whether the participants have the right to act at this step.
 
-The function $VRF_{n}(r, s)$ returns a list of participants of a given length of round $r$ and step $s$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $max({0, r - k})$, where $k = 1$. To calculate the function, a random vector $Q_{r-k}$ from round $r-k$ is required.
+The function $VRF_{n}(r, a, s)$ returns a list of participants of a given length of attempt $a$ for round $r$ and step $s$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $max({0, r - k})$, where $k = 1$. To calculate the function, a random vector $Q_{r-k}$ from round $r-k$ is required.
 
 **Identification of Active Roles**
 
-The checked random function at each **r** round and **s** step is built iteratively, as follows:
+The checked random function at each attempt **a** for **r** round and **s** step is built iteratively, as follows:
 
-$$VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$
+$$VRF_{0}(r, a, s) = H(Q_{r-1}, r, a, s)$$
 
-$$VRF_{1}(r, s) = H(VRF_{0}(r, s))$$
+$$VRF_{1}(r, a, s) = H(VRF_{0}(r, a, s))$$
 
-$$VRF_{2}(r, s) = H(VRF_{1}(r, s))$$
+$$VRF_{2}(r, a, s) = H(VRF_{1}(r, a, s))$$
 
 $$...$$
 
-$$VRF_{n}(r, s) = H(VRF_{n-1}(r, s))$$
+$$VRF_{n}(r, a, s) = H(VRF_{n-1}(r, a, s))$$
 
 The result of this function is an array of random values:
 
-$$VRF(r, s) = {[ VRF_{0}(r, s), VRF_{1}(r, s), ... ]}$$
+$$VRF(r, a, s) = {[ VRF_{0}(r, a, s), VRF_{1}(r, a, s), ... ]}$$
 
-A specific executor is calculated from the $VRF_i(r, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - 2$ block.
+A specific executor is calculated from the $VRF_i(r, a, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - k$ block, where **k** is some positive constant value. The meaning of constant **k** here is to prevent prediction of distribution $$VFR(r + 1, a, s)$$ with reasonably enough probability to attack the block generation scheme.
 
-The set $VRFN (r,s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN (r,s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,s)$.
+The set $VRFN(r, a, s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN(r,s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,s)$.
 
-In other words, $VRFN$ is a selection of participants from $VRF$ who act on a particular node, round, and step.
+In other words, $VRFN$ is a selection of participants from $VRF$ who act on a particular node, attempt, round, and step.
 
-At the same round and step but on different network nodes of the algorithm, the $VRFN$ selections will be different, while the $VRF$ selection will be the same.
+At the same attempt, round and step but on different network nodes of the algorithm, the $VRFN$ selections will be different, while the $VRF$ selection will be the same.
 
 **Generation of Randomness Seed**
 
@@ -209,7 +209,7 @@ Where $lsb$ is the least significant bit.
 
 ### Step 1 - Block Generation
 
-For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, s)$ as described above. As a result, each network node receives a $VRF(r, s)$ set and a $VRFN(r, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
+For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, a, s)$ as described above. As a result, each network node receives a $VRF(r, a, s)$ set and a $VRFN(r, a, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, a, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
 Since all input data for the VRF is already included in the previous blocks, each node in the network determines the list of producers independently, and it is the same for everyone \(deterministic\).
 
@@ -402,7 +402,7 @@ If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random set
 
 ### Block application by the network participants
 
-All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the $VRFN(r,s)$ algorithm.
+All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the $VRFN(r, a, s)$ algorithm.
 
 Accordingly, each node individually determines when consensus has been reached on the next block and understands which block to apply and add to its own local copy of the distributed ledger. Thus, all the network nodes reach the end of the round at one of the stages of the `BBA` algorithm and get a formed $CERT_{r}$. Therefore, a final message with the resulting information isn’t broadcast by any node, as each node has already determined this information independently.
 
@@ -535,9 +535,13 @@ The syncing node must determine the moment when its local database will be in sy
 
 #### Block Producer Influence on VRF
 
-Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + 2`. However, the randomness seed for the round `r + 2` will be affected by the outcome of the round `r + 1`.
+Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + k`. However, the randomness seed for the round `r + k` will be affected by the outcome of the round `r + k - 1`.
 
-So since the producer cannot predict the seed that will be received as a result of the round `r + 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round.
+So since the producer cannot predict the seed that will be received as a result of the round `r + k - 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round. The latest is true only if there is a non-empty block at interval `[r + 1, r + k - 1]`. Otherwise, randomness seed can be easily calculated from `r` to `r + k`.
+
+#### The problem of empty blocks
+
+Empty blocks are disabled in the blockchain. If empty block is generated, the round must be restarted incrementing the attempt. Number of round attempt is used at calculation of **VRF**, therefore set of accounts in **VRF** will be changed at next generation attempt for the same round for all steps. Number of attempts is limited by blockchain configuration. Block generation is stopped after reaching the limit. Block production can be restored at new transaction arrival or by restarting certain node with **--start-echorand** command-line key.
 
 #### Insufficient Node Participation
 
@@ -568,7 +572,7 @@ The protocol provides a second, fallback level of delegators who are authorized 
 
 Through this mechanism, at each step of the consensus for each verifier \(but not block producers\), a fallback delegate is determined from the list of active committee members. As a result, each of the active members of the committee receives its set of accounts delegated to him at a particular step of consensus. The important criteria for these delegates is that the messages from the committee member \(on behalf of account `A`\) is considered when counting votes only if during the full time interval allocated for the current step, the node has not received any messages from the verifier selected for the round `A` or from his explicit delegate `B`.
 
-The committee member corresponding to the $VRF_{n}(r, s)$ account at step `s` round `r` is determined by the following formula:
+The committee member corresponding to the $VRF_{n}(r, a, s)$ account at step `s` round `r` is determined by the following formula:
 
 $$C_{n} = ceil\{n * K / N_{c}\}$$
 
