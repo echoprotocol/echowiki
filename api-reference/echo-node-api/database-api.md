@@ -4432,6 +4432,7 @@ Returns all approved deposits, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
+| `string type` | the type of the deposits may be "", "eth" or "bts" |
 
 #### Example
 
@@ -4443,7 +4444,8 @@ Returns all approved deposits, for the given account id.
         DATABASE_API_ID,
         "get_account_deposits",
         [
-            "1.2.21"
+            "1.2.21",
+            ""
         ]
     ]
 }
@@ -4466,6 +4468,23 @@ The all public deposits data stored in the blockchain.
             "is_approved": true,
             "approves": [],
             "extensions": []
+        },
+        {
+            "id": "1.22.0",
+            "account": "1.2.21",
+            "intermediate_deposit_id": "1.21.0",
+            "tx_info": {
+                "block_number": 156,
+                "out": {
+                    "tx_id": "dcab5ff32590b8385ef89d1b4c07f08260b3be921f56e78dbd11685cca0be1ff",
+                    "index": 0,
+                    "amount": 1000
+                }
+            },
+            "block_number": 1654,
+            "is_approved": true,
+            "approves": [],
+            "extensions": []
         }
     ]
 }
@@ -4480,6 +4499,7 @@ Returns all approved withdrawals, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
+| `string type` | the type of the withdrawals may be "", "eth" or "bts" |
 
 #### Example
 
@@ -4491,7 +4511,8 @@ Returns all approved withdrawals, for the given account id.
         DATABASE_API_ID,
         "get_account_withdrawals",
         [
-            "1.2.21"
+            "1.2.21",
+            ""
         ]
     ]
 }
@@ -4512,6 +4533,16 @@ The all public withdrawals data stored in the blockchain.
             "account": "1.2.21",
             "eth_addr": "1AFeEcE88325110488570146f2635C8615Ad0613",
             "value": 1000,
+            "is_approved": true,
+            "approves": [],
+            "extensions": []
+        },
+        {
+            "id": "1.23.0",
+            "account": "1.2.21",
+            "btc_addr": "mxhWhgx46cqvpHYzTMuGL9eir59V7vqM9c",
+            "value": 12,
+            "block_number": 561,
             "is_approved": true,
             "approves": [],
             "extensions": []
