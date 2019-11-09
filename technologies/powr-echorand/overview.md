@@ -88,7 +88,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ## The EchoRand Mechanism
 
-![EchoRand Steps](../../.gitbook/assets/echorand-steps%20%281%29.png)
+![EchoRand Steps](../../.gitbook/assets/echorand-steps.png)
 
 ### Other Terms
 
@@ -104,6 +104,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 | $msg$        | a message transmitted by a participating node to its peers during a specific step |
 | $sig(x)$     | the EdDSA signature of $x$ |
 | $H(x)$       | the SHA-256 hash of $x$ |
+| $a$          | the current attempt to build a block |
 | $r$          | the current round of the algorithm, which is equivalent to the number of blocks in the database plus one. $r >= 1$ |
 | $s$          | the current step number of the algorithm in the round. $s >= 1$ |
 | $B_{r}$      | a block created in round $r$, which equals to { $r$, $ID_{producer}$, $Q_{r}$, $H(B_{r})$, $H(B_{r-1})$, $sig(B)$, $PAY_{r}$, $CERT_{Br}$ } |
@@ -114,8 +115,8 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 | $sig(B_{r})$ | the signature of a block of the $r$ round |
 | $l(r)$       | the round $r$ leader - determines $PAY_{r}$, creates $B_{r}$ and determines $Q_{r}$ |
 | $CERT_{r}$   | a $B_{r}$ block certificate formed out of a set of `bba_signature` messages |
-| $VRF(r, s)$  | the ordered set of participants who act in step $s$ of round $r$ |
-| $VRFN(r, s)$ | the ordered set of indexes of $VRF(r, s)$ participants who are registered on the current node and participate in step $s$ of round $r$ |
+| $VRF(r, a, s)$  | the ordered set of participants who act in attempt $a$ for step $s$ of round $r$ |
+| $VRFN(r, a, s)$ | the ordered set of indexes of $VRF(r, a, s)$ participants who are registered on the current node and participate in in attempt $a$ for step $s$ of round $r$ |
 | $id$         | an account identifier in the blockchain |
 | $A_s$        | an array of account identifiers selected as participants in the step $s$ |
 | $N_s$        | an array of $A_s$ indexes which correspond to the identifiers of users authorized on the current node in the step $s$ |
@@ -130,10 +131,10 @@ The following algorithm parameters are set by constants, or configured at the **
 | -----------: | :----------------------------------------------------- |
 | $Λ$          | "large" interval, the average time required to distribute a 1 MB message across the network |
 | $λ$          | "small" interval, the average time required to distribute a 256-bit message across the network |
-| $N_g$        | the number of block producers in a round, used in the function $VRF(r, 1)$ |
-| $N_c$        | the number of block verifiers in a round, used in the function $VRF(r, s), s > 1$ |
+| $N_g$        | the number of block producers in a round, used in the function $VRF(r, a, 1)$ |
+| $N_c$        | the number of block verifiers in a round, used in the function $VRF(r, a, s), s > 1$ |
 | $t_h$        | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
-| $μ$          | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which an empty new block is created |
+| $μ$          | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which consensus will be restarted |
 
 ### Cryptographic Primitives
 
@@ -150,47 +151,45 @@ The following algorithm parameters are set by constants, or configured at the **
 
 The concept of a verifiable random function \(VRF\) was introduced by Micali, Rabin, and Vadhan. This is a pseudo-random function that provides publicly verifiable evidence for the correctness of its conclusion. For a given input value $x$, the owner of the secret key $SK$ can calculate the value of the function $y = F_{SK}(x)$ and the proof $P_{SK}(x)$. Using the proof and public key $PK = g^{SK}$, everyone can verify that the value of $y = F_{SK}(x)$ is indeed calculated correctly, but this information cannot be used to discover the secret key.
 
-The use of VRF in EchoRand is as follows: having a pseudo-random value $Q_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF(r, s)$ executors in $s$ step of $r$ round,and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, s)$, and additionally verify whether the participants have the right to act at this step.
+The use of VRF in EchoRand is as follows: having a pseudo-random value $Q_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF(r, a, s)$ executors in attempt $a$ for $s$ step of $r$ round, and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, a, s)$, and additionally verify whether the participants have the right to act at this step.
 
-The function $VRF_{n}(r, s)$ returns a list of participants of a given length of round $r$ and step $s$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $max({0, r - k})$, where $k = 1$. To calculate the function, a random vector $Q_{r-k}$ from round $r-k$ is required.
+The function $VRF_{n}(r, a, s)$ returns a list of participants of a given length of attempt $a$ for round $r$ and step $s$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $max({0, r - k})$, where $k = 1$. To calculate the function, a random vector $Q_{r-k}$ from round $r-k$ is required.
 
 **Identification of Active Roles**
 
-The checked random function at each **r** round and **s** step is built iteratively, as follows:
+The checked random function at each attempt **a** for **r** round and **s** step is built iteratively, as follows:
 
-$$VRF_{0}(r, s) = H(Q_{r-1}, r, s)$$
+$$VRF_{0}(r, a, s) = H(Q_{r-1}, r, a, s)$$
 
-$$VRF_{1}(r, s) = H(VRF_{0}(r, s))$$
+$$VRF_{1}(r, a, s) = H(VRF_{0}(r, a, s))$$
 
-$$VRF_{2}(r, s) = H(VRF_{1}(r, s))$$
+$$VRF_{2}(r, a, s) = H(VRF_{1}(r, a, s))$$
 
 $$...$$
 
-$$VRF_{n}(r, s) = H(VRF_{n-1}(r, s))$$
+$$VRF_{n}(r, a, s) = H(VRF_{n-1}(r, a, s))$$
 
 The result of this function is an array of random values:
 
-$$VRF(r, s) = {[ VRF_{0}(r, s), VRF_{1}(r, s), ... ]}$$
+$$VRF(r, a, s) = {[ VRF_{0}(r, a, s), VRF_{1}(r, a, s), ... ]}$$
 
-A specific executor is calculated from the $VRF_i(r, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - 2$ block.
+A specific executor is calculated from the $VRF_i(r, a, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - k$ block, where **k** is some positive constant value. The meaning of constant **k** here is to prevent prediction of distribution $$VFR(r + 1, a, s)$$ with reasonably enough probability to attack the block generation scheme.
 
-The set $VRFN (r,s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN (r,s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,s)$.
+The set $VRFN(r, a, s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN(r,s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,s)$.
 
-In other words, $VRFN$ is a selection of participants from $VRF$ who act on a particular node, round, and step.
+In other words, $VRFN$ is a selection of participants from $VRF$ who act on a particular node, attempt, round, and step.
 
-At the same round and step but on different network nodes of the algorithm, the $VRFN$ selections will be different, while the $VRF$ selection will be the same.
+At the same attempt, round and step but on different network nodes of the algorithm, the $VRFN$ selections will be different, while the $VRF$ selection will be the same.
 
 **Generation of Randomness Seed**
 
 The starting seed $Q_{0}$ is selected randomly at blockchain database initialization.
 
-Then, at the creation of a new block in round $r$ the $Q_{r}$ vector is calculated. For a non-empty block $B_{r}$:
+Then, at the creation of a new block in round $r$ the $Q_{r}$ vector is calculated.
 
 $$Q_{r} = H(sig(Q_{r-1}), r)$$
 
-In this case, the signature is generated using the EdDSA private key of the producer that created the block. In case $$B_{r}$$ block is empty:
-
-$$Q_{r} = H(Q_{r-1}, r)$$
+In this case, the signature is generated using the EdDSA private key of the producer that created the block.
 
 **Generating a Random Value During BBA Steps**
 
@@ -209,7 +208,7 @@ Where $lsb$ is the least significant bit.
 
 ### Step 1 - Block Generation
 
-For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, s)$ as described above. As a result, each network node receives a $VRF(r, s)$ set and a $VRFN(r, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
+For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, a, s)$ as described above. As a result, each network node receives a $VRF(r, a, s)$ set and a $VRFN(r, a, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, a, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
 Since all input data for the VRF is already included in the previous blocks, each node in the network determines the list of producers independently, and it is the same for everyone \(deterministic\).
 
@@ -256,7 +255,7 @@ Each of the selected verifiers tells the network which of the blocks they consid
 * $H(B_{r-1})$, $Q_{r-1}$ from $CERT_{r-1}$
 * $A_{1}$, $A_{2}$, $N_{2}$ from the context of the round
 
-$v$ is a local structure of a step that stores the hash of the block and the ID of the producer which created the block. The empty set symbol assigned to the elements $v$ means "empty block" and "unknown leader". In the application, it can be a predefined constant or a separate flag in the data structure.
+$v$ is a local structure of a step that stores the hash of the block and the ID of the producer which created the block.
 
 **Start**
 
@@ -398,18 +397,13 @@ In the latter case, undecided nodes again use a VRF to generate a shared random 
 
 The stage consists of rounds, which include 3 steps each. At each step in the cycle, a new set of verifiers chosen by VRF sends their determination of the voting result in binary form. If, as a result of the round, 2/3rds + 1 \(~67%\) of verifiers agree on the outcome, the block is considered valid and appended to the chain. If consensus is not met, a new round begins.
 
-If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random sets of verifiers\) the network is unable to come to consensus about which block to add, an empty block is applied by the network and the entire consensus mechanism begins again from the very first step - cryptographic sortition for new block producers.
+If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random sets of verifiers\) the network is unable to come to consensus about which block to add, parameter $a$ is increasing and the entire consensus mechanism begins again from the very first step - cryptographic sortition for new block producers.
 
 ### Block application by the network participants
 
-All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the $VRFN(r,s)$ algorithm.
+All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the $VRFN(r, a, s)$ algorithm.
 
 Accordingly, each node individually determines when consensus has been reached on the next block and understands which block to apply and add to its own local copy of the distributed ledger. Thus, all the network nodes reach the end of the round at one of the stages of the `BBA` algorithm and get a formed $CERT_{r}$. Therefore, a final message with the resulting information isn’t broadcast by any node, as each node has already determined this information independently.
-
-If the value $ctx[l].B != ∅$, then the block is received. If the value $ctx[l].B == ∅$, then:
-
-* $ctx[l].signQ == Q_{r-1}$ means that an empty block has been created.
-* $ctx[l].signQ != Q_{r-1}$ means that a non-empty block has been created and the node has not received it.
 
 ## Network Communication
 
@@ -507,8 +501,7 @@ To reduce the number of messages with information about the proposed block, the 
 The number of steps of the algorithm and dependence on the state of the whole account database makes the possibility of forks unlikely. However, EchoRand still has a mechanism for choosing between diverging chains. The fork selection takes place according to one of the following scenarios:
 
 1. To switch to the longest chain \(with the highest number of completed non zero rounds\) in the presence of several chains.
-2. If there is more than one long chain, to follow the one, in which the last block is not empty. If all of them have empty blocks in the end, to check the second and subsequent blocks from the end to the first non-empty block.
-3. If there is more than one long chain with non-empty blocks at the end of a `r`-length chain, to follow the one in which the `r` block has the smallest hash value.
+2. If there is more than one long chain at the end of a `r`-length chain, to follow the one in which the `r` block has the smallest hash value.
 
 This process is based on [algorand-v9](https://drive.google.com/file/d/1dohyg2LMNxHFzzTc5VpUwm_qjegBPKe2) \(9. Handling Forks, page 70\).
 
@@ -516,13 +509,15 @@ This process is based on [algorand-v9](https://drive.google.com/file/d/1dohyg2LM
 
 In the case a node is not able to communicate with peers or stops receiving message broadcast, the node's internal state of the current round and step will only advance when the timer is triggered.
 
-Since the conclusion of the current round at the moment occurs only upon receiving a successful BBA message from peers, the node will continue executing the BBA steps in a loop until reaching the `μ` constant. As a result, an empty block will be generated.
+Since the conclusion of the current round at the moment occurs only upon receiving a successful BBA message from peers, the node will continue executing the BBA steps in a loop until reaching the `μ` constant.
+
+Without reaching consensus, the mechanism will start 3 times in a row from fist step, after which echorand will stop and will be started again after receiving a message from the network.
 
 #### Network Restored
 
-Nodes that receive messages only from the middle of a consensus round, as a result of an interrupted network connection, will possess incomplete data about the context and progress of the round. As a consequence, they will reach either an _incorrect_ evaluation for the best block or vote for an _empty block_.
+Nodes that receive messages only from the middle of a consensus round, as a result of an interrupted network connection, will possess incomplete data about the context and progress of the round.
 
-In either case, the node will act as if it was a malicious node, passing incorrect information to the network. Consequently, the information coming from such nodes will be filtered by the `BBA` algorithm. Once the node realizes that its view of the ledger is inconsistent with the rest of network, a reconciliation will occur automatically, when the rest of the network goes forwards in the process of generating new blocks.
+The node will act as if it was a malicious node, passing incorrect information to the network. Consequently, the information coming from such nodes will be filtered by the `BBA` algorithm. Once the node realizes that its view of the ledger is inconsistent with the rest of network, a reconciliation will occur automatically, when the rest of the network goes forwards in the process of generating new blocks.
 
 #### Incomplete Local Block Database
 
@@ -535,26 +530,19 @@ The syncing node must determine the moment when its local database will be in sy
 
 #### Block Producer Influence on VRF
 
-Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + 2`. However, the randomness seed for the round `r + 2` will be affected by the outcome of the round `r + 1`.
+Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + k`. However, the randomness seed for the round `r + k` will be affected by the outcome of the round `r + k - 1`.
 
-So since the producer cannot predict the seed that will be received as a result of the round `r + 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round.
+So since the producer cannot predict the seed that will be received as a result of the round `r + k - 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round. The latest is true only if there is a block at interval `[r + 1, r + k - 1]`. Otherwise, randomness seed can be easily calculated from `r` to `r + k`.
 
 #### Insufficient Node Participation
 
 Given that each network node must independently use the VRF to determine their role in each consensus round, the distribution of roles does not depend on the availability or actual participation of each node. The VRF distributes roles based on the entire set of network nodes and registered accounts, not merely the active ones. Because of this, there exists the possibility that for some step of the consensus algorithm, none of the nodes selected for that role are online or available.
 
-In this case, the timeout threshold will be reached for that step of the round, and the active nodes will simply proceed to the next step or append an empty block to the ledger \(in case this occurs at the final step\), triggering the distribution of a new set of roles.
-
-Network simulations suggest that:
-
-* When **70%** of accounts are active, the network generates 4% empty blocks and a 5.5s efficient block generation time
-* When **65%** of accounts are active, the network generates 16% empty blocks and a 14s efficient block generation time
-* When **60%** of accounts are active, the network generates 30% empty blocks and a 32s efficient block generation time
-* When **50%** of accounts are active, the network generates 70%+ empty blocks and a 120s+ efficient block generation time
+To prevent the situation with consensus stopping for this reason, Echo implements the delegation mechanism described below.
 
 #### Delegating Consensus Participation
 
-Given that a high participation rate in the consensus mechanism \(through block production and verification\) is important in order to maintain maximum network throughput and avoid the generation of empty blocks, the protocol provides two levels of delegating this participation.
+Given that a high participation rate in the consensus mechanism \(through block production and verification\) is important in order to maintain maximum network throughput, the protocol provides two levels of delegating this participation.
 
 **Level One - Explicit Delegation**
 
@@ -568,7 +556,7 @@ The protocol provides a second, fallback level of delegators who are authorized 
 
 Through this mechanism, at each step of the consensus for each verifier \(but not block producers\), a fallback delegate is determined from the list of active committee members. As a result, each of the active members of the committee receives its set of accounts delegated to him at a particular step of consensus. The important criteria for these delegates is that the messages from the committee member \(on behalf of account `A`\) is considered when counting votes only if during the full time interval allocated for the current step, the node has not received any messages from the verifier selected for the round `A` or from his explicit delegate `B`.
 
-The committee member corresponding to the $VRF_{n}(r, s)$ account at step `s` round `r` is determined by the following formula:
+The committee member corresponding to the $VRF_{n}(r, a, s)$ account at step `s` round `r` is determined by the following formula:
 
 $$C_{n} = ceil\{n * K / N_{c}\}$$
 
@@ -578,7 +566,7 @@ where $K$ is the number of active committee members.
 
 Because the selection of block producers and verifiers is weighted by the accounts balance, EchoRand transforms the typical Byzantine fault tolerance requirement of 2/3rd of honest nodes to a more Sybil-resistant requirement that **2/3rds of balances** are held by honest nodes. This assumption is also improved because the nodes with the highest balances have the most "skin in the game", and thus the most economic value to lose of the network is attacked. As long as 2/3rds of balances are held by honest nodes participating in consensus, the network will run at maximum performance, with no loss of capacity.
 
-In the case that **less than 2/3rds of balances are held by honest users** participating in consensus, the network will begin to suffer from degraded performance in the form of empty blocks being added to the ledger. As this honest participation rate declines from 67% to 33%, the statistical probability of empty blocks being added to the ledger increases linearly from 0 to 100%.
+In the case that **less than 2/3rds of balances are held by honest users** participating in consensus, the network will begin to suffer from degraded performance in the form of an increase in the number of attempts to build a block.
 
 With more than 67% of tokens held by an attacker, the attacker could continually disrupt the consensus mechanism and prevent new blocks from being added to the ledger or censor transactions, just as an attacking miner with 51% of the total hash rate in a proof of work-based currency.
 
@@ -586,13 +574,12 @@ With more than 67% of tokens held by an attacker, the attacker could continually
 
 EchoRand introduced a formal incentive scheme to reward accounts for participating in the consensus process either by running an active node or delegating to another active node. This incentive scheme is designed to balance the optimal security and performance of EchoRand network by incentivizing more accounts to participate in consensus whenever performance drops below optimal levels while maintaining adequate security and decentralization.
 
-Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly generated balance, similar to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller balance. In the case that an empty block is added to the network, no nodes receive a block reward.
+Under this incentive mechanism, the block producers which generate a block which is successfully added to the ledger are reward with some newly generated balance, similar to a block reward in Bitcoin. Additionally, all verifiers who participated in the voting and validation process of a successful block are also rewarded with a smaller balance.
 
-When the network begins to generate empty blocks due to a failure of consensus \(whether because of an attacker or through low participation in consensus by honest users\), the protocol increases the block reward through inflation in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate. Research is ongoing into the idea rate of change and limits for the inflation rate.
+When the nodes of the committee begin to participate in the generation of the block due to the lack of live participants, the protocol increases the block reward through inflation in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate. Research is ongoing into the idea rate of change and limits for the inflation rate.
 
 ## Conclusion
 
 EchoRand is the consensus mechanism used by the Echo protocol to provide fast and final consensus. In EchoRand consensus, every account is automatically able to participate in the block production and validation process, either by running a node or delegating to an existing node. Each new block of transactions is generated by a committee randomly chosen from the set of all network accounts. There is no requirement to lock up or "stake" currency, add computing power, or earn the votes of other users - every network user is eligible. However, the task of securely choosing this committee out of the pool of all users would typically require a large coordination, communication, or computation overhead for the network. In addition, when this committee of block producers is announced by the network, the chosen actors could become the subject of bribe or DDoS attacks.
 
 By randomly selecting validators for each block rather than forcing every node to validate every block, EchoRand minimizes the resource requirements of running a node without compromising speed or security.
-
