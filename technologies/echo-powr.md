@@ -4,7 +4,7 @@ description: An overview of the consensus mechanism used by Echo to achieve fast
 
 # Echo PoWR Consensus
 
-{% file src="powr-whitepaper.pdf" %}
+[Read Full PoWR Whitepaper](https://github.com/echoprotocol/echowiki/blob/master/.gitbook/assets/powr-whitepaper.pdf)
 
 ## Consensus Types
 
