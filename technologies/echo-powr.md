@@ -3,6 +3,7 @@ description: An overview of the consensus mechanism used by Echo to achieve fast
 ---
 
 # Echo PoWR Consensus
+{% file src="powr-whitepaper.pdf" title="Read PoWR Whitepaper" %}
 
 ## Consensus Types
 
