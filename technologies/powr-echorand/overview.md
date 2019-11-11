@@ -422,6 +422,7 @@ This message is sent in step `1` by producers to propose a newly created block w
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key corresponding to the **id** |
@@ -434,6 +435,7 @@ This message is sent during step **1** if there is at least one participant for 
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key **id** |
@@ -449,6 +451,7 @@ This message is sent during step **2** and step **3** if there is at least one p
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key **id** |
@@ -462,13 +465,14 @@ This message is sent during step **4** and all the subsequent steps of the algor
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the message |
 | **value** | the result of the **BBA** algorithm, either 0 or 1 |
 | **block\_hash** | the selected block hash |
 | **leader** | the ID of a selected leader, who created the block |
-| **\_bba\_sign** | the signature for the fields **round**, **step**, **value**, **block\_hash**, **leader** with the participant’s key **id** |
-| **signature** | the signature for the fields **value**, **block\_hash**, **leader** with the participant’s key **id** |
+| **bba\_sign** | the signature for the fields **round**, **attempt**, **step**, **value**, **block\_hash**, **leader** with the participant’s key **id** |
+| **signature** | the signature of the message with the participant’s key **id** |
 
 ### Message Processing
 
