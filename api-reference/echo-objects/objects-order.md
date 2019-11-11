@@ -1,28 +1,50 @@
 # Objects order
 
+## Protocol types
+
 | Objects | id |
 | :--- | :--- |
-|null_object_type|0|
-|base_object_type|1|
-|account_object_type|2|
-|asset_object_type|3|
-|committee_member_object_type|4|
-|proposal_object_type|5|
-|operation_history_object_type|6|
-|vesting_balance_object_type|7|
-|balance_object_type|8|
-|frozen_balance_object_type|9|
-|committee_frozen_balance_object_type|10|
-|contract_object_type|11|
-|contract_result_object_type|12|
-|eth_address_object_type|13|
-|deposit_eth_object_type|14|
-|withdraw_eth_object_type|15|
-|erc20_token_object_type|16|
-|deposit_erc20_token_object_type|17|
-|withdraw_erc20_token_object_type|18|
-|btc_address_object_type|19|
-|btc_intermediate_deposit_object_type|20|
-|btc_deposit_object_type|21|
-|btc_withdraw_object_type|22|
-|btc_aggregating_object_type|23|
+|account_object_type|1.2.x|
+|asset_object_type|1.3.x|
+|committee_member_object_type|1.4.x|
+|proposal_object_type|1.5.x|
+|operation_history_object_type|1.6.x|
+|vesting_balance_object_type|1.7.x|
+|balance_object_type|1.8.x|
+|frozen_balance_object_type|1.9.x|
+|committee_frozen_balance_object_type|1.10.x|
+|contract_object_type|1.11.x|
+|contract_result_object_type|1.12.x|
+|eth_address_object_type|1.13.x|
+|deposit_eth_object_type|1.14.x|
+|withdraw_eth_object_type|1.15.x|
+|erc20_token_object_type|1.16.x|
+|deposit_erc20_token_object_type|1.17.x|
+|withdraw_erc20_token_object_type|1.18.x|
+|btc_address_object_type|1.19.x|
+|btc_intermediate_deposit_object_type|1.20.x|
+|btc_deposit_object_type|1.21.x|
+|btc_withdraw_object_type|1.22.x|
+|btc_aggregating_object_type|1.23.x|
+
+## Implementation types
+
+| Objects | id |
+| :--- | :--- |
+|global_property_object|2.0.x|
+|dynamic_global_property_object|2.1.x|
+|asset_dynamic_data_object|2.2.x|
+|asset_bitasset_data_object|2.3.x|
+|account_balance_object|2.4.x|
+|account_statistics_object|2.5.x|
+|transaction_object|2.6.x|
+|block_summary_object|2.7.x|
+|account_transaction_history_object|2.8.x|
+|chain_property_object|2.9.x|
+|special_authority_object|2.10.x|
+|contract_balance_object|2.11.x|
+|contract_history_object|2.12.x|
+|contract_statistics_object|2.13.x|
+|account_address_object|2.14.x|
+|contract_pool_object|2.15.x|
+|malicious_committeemen_object|2.16.x|
