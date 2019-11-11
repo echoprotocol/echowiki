@@ -53,6 +53,7 @@
     * [Sidechain](api-reference/echo-operations/sidechain.md)
     * [Vesting Balances](api-reference/echo-operations/vesting-balances.md)
 * [Changelogs](changelogs/README.md)
+  * [0.13](changelogs/0.13.md)
   * [0.12](changelogs/0.12.md)
   * [0.11](changelogs/0.11.md)
   * [0.10](changelogs/0.10.md)
