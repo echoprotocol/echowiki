@@ -20,4 +20,8 @@ The user can transfer funds from the account balance to the frozen balance of co
 
 ## Withdrawal of funds
 
-If committee member can withdraw excessive balance with the help of wallet method `committee_withdraw_balance` that uses [committee\_frozen\_balance\_withdraw\_operation](/api-reference/echo-operations/committee-member.md#committee_frozen_balance_withdraw_operation). The main part of the balance can be withdrawn only 1 month after committee member left the committee for the last time. When you become an active committee member again, the countdown resets.
+If committee member can withdraw excessive balance with the help of wallet method `committee_withdraw_balance` that uses [committee\_frozen\_balance\_withdraw\_operation](/api-reference/echo-operations/committee-member.md#committee_frozen_balance_withdraw_operation). The main part of the balance can be withdrawn only `committee_freeze_duration_seconds` after committee member left the committee for the last time. When you become an active committee member again, the countdown resets.
+
+## Withdrawal of surpluses
+
+If as a result of the interval maintenance the chain parameter `committee_frozen_balance_to_activate` has decreased, then you can remove the excess after the time specified by the chain parameter `committee_freeze_duration_seconds` using the operation [committee\_frozen\_balance\_withdraw\_operation](/api-reference/echo-operations/committee-member.md#committee_frozen_balance_withdraw_operation).
