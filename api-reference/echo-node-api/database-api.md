@@ -4451,7 +4451,7 @@ The public ethereum address data stored in the blockchain
 }
 ```
 
-### get\_account\_deposits\(account\)
+### get\_account\_deposits\(account, type\)
 
 Returns all approved deposits, for the given account id.
 
@@ -4460,7 +4460,7 @@ Returns all approved deposits, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
-| `string type` | the type of the deposits may be "", "eth" or "bts" |
+| `string type` | the type of the deposits may be "", "eth" or "btc" |
 
 #### Example
 
@@ -4518,7 +4518,7 @@ The all public deposits data stored in the blockchain.
 }
 ```
 
-### get\_account\_withdrawals\(account\)
+### get\_account\_withdrawals\(account, type\)
 
 Returns all approved withdrawals, for the given account id.
 
@@ -4527,7 +4527,7 @@ Returns all approved withdrawals, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `account_id_type account` | the id of the account to provide information about |
-| `string type` | the type of the withdrawals may be "", "eth" or "bts" |
+| `string type` | the type of the withdrawals may be "", "eth" or "btc" |
 
 #### Example
 
