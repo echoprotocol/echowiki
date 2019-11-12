@@ -26,7 +26,7 @@ struct chain_parameters
    uint64_t committee_maintenance_intervals_to_deposit      = ECHO_DEFAULT_COMMITTEE_MAINTENANCE_INTERVALS_TO_DEPOSIT;
    uint32_t committee_freeze_duration_seconds               = ECHO_DEFAULT_COMMITTEE_FREEZE_DURATION_SECONDS;
 
-   uint64_t x86_64_maximum_contract_size                    = 200'000;
+   uint64_t x86_64_maximum_contract_size                    = ECHO_DEFAULT_MAX_X86_64_CONTRACT_SIZE;
 
    std::map<uint16_t, uint32_t> frozen_balances_multipliers = {
       {90,  130 * ECHO_1_PERCENT},

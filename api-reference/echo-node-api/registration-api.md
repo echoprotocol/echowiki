@@ -138,4 +138,3 @@ Account ID of the registrant.
     "result": "1.2.15"
 }
 ```
-

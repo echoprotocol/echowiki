@@ -141,11 +141,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
          "maximum_proposal_lifetime": 2419200,
          "maximum_asset_whitelist_authorities": 10,
          "maximum_asset_feed_publishers": 10,
-         "maximum_committee_count": 1001,
          "maximum_authority_membership": 10,
-         "reserve_percent_of_fee": 2000,
-         "network_percent_of_fee": 2000,
-         "max_predicate_opcode": 1,
          "accounts_per_fee_scale": 1000,
          "account_fee_scale_bitshifts": 4,
          "max_authority_depth": 2,
@@ -154,6 +150,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
          "committee_frozen_balance_to_activate": "100000000000",
          "committee_maintenance_intervals_to_deposit": 10,
          "committee_freeze_duration_seconds": 2592000,
+         "x86_64_maximum_contract_size": 200000,
          "frozen_balances_multipliers": [
                [
                   90,
@@ -332,7 +329,6 @@ struct committee_frozen_balance_deposit_operation : public base_operation {
    };
 
    asset                               fee;
-   committee_member_id_type            committee_member;
    account_id_type                     committee_member_account;
    asset                               amount;
    extensions_type                     extensions;
@@ -351,7 +347,6 @@ struct committee_frozen_balance_deposit_operation : public base_operation {
          "amount": 0,
          "asset_id": "1.3.0"
       },
-      "committee_member": "1.4.0",
       "committee_member_account": "1.2.0",
       "amount": {
          "amount": 0,

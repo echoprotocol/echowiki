@@ -83,7 +83,6 @@ struct proposal_update_operation : public base_operation
    proposal_id_type              proposal;
    flat_set<account_id_type>     active_approvals_to_add;
    flat_set<account_id_type>     active_approvals_to_remove;
-   flat_set<account_id_type>     owner_approvals_to_remove;
    flat_set<eddsa::public_key_t> key_approvals_to_add;
    flat_set<eddsa::public_key_t> key_approvals_to_remove;
 
@@ -111,7 +110,6 @@ struct proposal_update_operation : public base_operation
       "proposal": "1.5.0",
       "active_approvals_to_add": [],
       "active_approvals_to_remove": [],
-      "owner_approvals_to_remove": [],
       "key_approvals_to_add": [],
       "key_approvals_to_remove": [],
       "extensions": []

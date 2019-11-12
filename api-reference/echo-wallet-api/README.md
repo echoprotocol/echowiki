@@ -2,27 +2,30 @@
 
 ## Contents
 * Info and help
-    * [help](#help-command-name)
     * [info](#info)
+    * [about](#about)
+    * [help](#help)
+    * [help_method](#help_method-method)
     * [get_prototype_operation](#get_prototype_operation-operation_type)
-    * [get_object](#get_object-object-id)
-* Getters
-    * [get_block](#get_block-block-num)
-    * [get_block_virtual_ops](#get_block_virtual_ops-block-num)
+    * [get_object](#get_object-object_id)
+* Blocks and transactions
+    * [get_block](#get_block-block_num)
+    * [get_block_virtual_ops](#get_block_virtual_ops-block_num)
     * [get_transaction_id](#get_transaction_id-tx)
     * [serialize_transaction](#serialize_transaction-tx)
+    * [sign_transaction](#sign_transaction-tx-broadcast)
 * Accounts
     * [get_account_count](#get_account_count)
     * [list_my_accounts](#list_my_accounts)
     * [list_accounts](#list_accounts-lowerbound-limit)
     * [get_account_history](#get_account_history-name-limit)
     * [get_relative_account_history](#get_relative_account_history-name-stop-limit-start)
-    * [get_account](#get_account-account-name-or-id)
-    * [get_account_addresses](#get_account_addresses-account-id-from-limit)
+    * [get_account](#get_account-account_name_or_id)
+    * [get_account_id](#account_name_or_id-account_name_or_id)
+    * [get_account_addresses](#get_account_addresses-account_id-from-limit)
     * [get_account_by_address](#get_account_by_address-address)
     * [import_accounts](#import_accounts-filename-password)
-    * [register_account](#register_account-name-active-registrar-account-broadcast)
-    * [register_account_with_api](#register_account_with_api-name-active-key-echorand-key)
+    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
@@ -33,7 +36,7 @@
     * [get_private_key](#get_private_key-pubkey)
     * [is_public_key_registered](#is_public_key_registered-public_key)
     * [suggest_brain_key](#suggest_brain_key)
-    * [normalize_brain_key](#normalize_brain_key-brain-key)
+    * [normalize_brain_key](#normalize_brain_key-brain_key)
     * [derive_keys_from_brain_key](#derive_keys_from_brain_key-brain_key-number_of_desired_keys)
     * [dump_private_keys](#dump_private_keys)
     * [old_key_to_wif](#old_key_to_wif-b58)
@@ -44,7 +47,6 @@
     * [unlock](#unlock-password)
     * [set_password](#set_password-password)
     * [exit](#exit)
-    * [cancel_all_subscriptions](#cancel_all_subscriptions)
 * Wallet file
     * [load_wallet_file](#load_wallet_file-wallet_filename)
     * [save_wallet_file](#save_wallet_file-wallet_filename)
@@ -52,14 +54,14 @@
     * [import_balance](#import_balance-account_name_or_id-broadcast-private_keys)
     * [list_account_balances](#list_account_balances-id)
     * [list_id_balances](#list_id_balances-id)
+    * [get_vesting_balances](#get_vesting_balances-account)
+    * [withdraw_vesting](#withdraw_vesting-account-amount-asset_symbol-broadcast)
+    * [transfer](#transfer-from-to-amount-asset_symbol-broadcast)
     * [list_frozen_balances](#list_frozen_balances-account)
     * [get_committee_frozen_balance](#get_committee_frozen_balance-owner_account)
     * [freeze_balance](#freeze_balance-account-amount-asset-duration-broadcast)
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
-    * [get_vesting_balances](#get_vesting_balances-account)
-    * [withdraw_vesting](#withdraw_vesting-account-amount-asset_symbol-broadcast)
-    * [transfer](#transfer-from-to-amount-asset_symbol-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
@@ -123,15 +125,21 @@
 
 ## Info and help
 
-### `help command-name`
+### `info`
+Returns info about current chain and active committee members.
+
+### `about`
+Returns info such as client version, git version of graphene/fc, version of boost, openssl.
+
+### `help`
+Returns a list of all commands supported by the wallet API. This lists each command, along with its arguments and return types. For more detailed help on a single command, use help_method
+
+### `help_method method`
 Returns a list of all commands supported by the wallet API or detailed help on a single command.
 
 | Option | Description |
 | :--- | :--- |
-| `string command-name` | (Optional) for more detailed help on a single command |
-
-### `info`
-Returns info about current chain and active committee members.
+| `string method` | (Optional) for more detailed help on a single command |
 
 ### `get_prototype_operation operation_type` 
 Returns an uninitialized object representing a given blockchain operation.  
@@ -139,23 +147,23 @@ This returns a default-initialized object of the given type; it can be used duri
 
 * `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations) 
 
-### `get_object object-id`
+### `get_object object_id`
 Returns the blockchain object corresponding to the given id.
 
 | Option | Description |
 | :--- | :--- |
-| `triplet object-id` | the id of the object to return |
+| `triplet object_id` | the id of the object to return |
 
 ## Blocks and transactions
 
-### `get_block block-num`
+### `get_block block_num`
 Retrieve a full, signed block.
 
 | Option | Description |
 | :--- | :--- |
 | `number block_num` | Height of the block to be returned |
 
-### `get_block_virtual_ops block-num`
+### `get_block_virtual_ops block_num`
 Get virtual ops from the block.
 
 | Option | Description |
@@ -176,6 +184,13 @@ Converts a signed_transaction in JSON form to its binary representation.
 | :--- | :--- |
 | `string tx` | the transaction to serialize |
 
+### `sign_transaction tx broadcast`
+Signs a transaction.
+
+| Option | Description |
+| :--- | :--- |
+| `string tx` | the unsigned transaction |
+| `bool broadcast` | true if you wish to broadcast the transaction |
 
 ## Accounts
 
@@ -223,22 +238,32 @@ Returns the relative operations on the named account from start number.
 get_relative_account_history nathan 0 10 20
 ```
 
-### `get_account account-name-or-id`
+### `get_account account_name_or_id`
 Returns information about the given account.
 
 | Option | Description |
 | :--- | :--- |
-| `string account-name-or-id` | the name or id of the account to provide information about |
+| `string account_name_or_id` | the name or id of the account to provide information about |
 ```
 get_account nathan or 1.2.0
 ```
 
-### `get_account_addresses account-id from limit`
+### `get_account_id account_name_or_id`
+Lookup the id of a named account.
+
+| Option | Description |
+| :--- | :--- |
+| `string account_name_or_id` | the name of the account to look up |
+```
+get_account_id 1.2.0
+```
+
+### `get_account_addresses account_id from limit`
 Get addresses owned by account in specified ids interval
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account-id`|  ID of the account |
+| `triplet account_id`|  ID of the account |
 | `number from` | Number of block to start retrieve from |
 | `number limit` | Maximum number of addresses to return |
 ```
