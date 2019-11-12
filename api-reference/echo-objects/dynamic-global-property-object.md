@@ -25,3 +25,9 @@ class dynamic_global_property_object
     extensions_type extensions;
 };
 ```
+
+## Types
+
+**block_id_type** is a 160-bit cryptographic hash function
+
+**share_type** it's just a number with automatic checks for integer overflow and default initialization
