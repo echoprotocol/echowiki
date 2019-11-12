@@ -1062,23 +1062,23 @@ Get connected peers.
 ## Sidechain
 
 ### `get_account_deposits account type` 
-Returns all approved deposits, for the given account id.
+Returns all deposits, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
-| `string type` | the type of the deposits may be "", "eth" or "bts". By default "" = all deposits |
+| `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
 ```
 get_account_deposits 1.2.0 ""
 ```
 
 ### `get_account_withdrawals account type` 
-Returns all approved withdrawals, for the given account id.
+Returns all withdrawals, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
-| `string type` | the type of the deposits may be "", "eth" or "bts". By default "" = all deposits |
+| `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
 ```
 get_account_withdrawals 1.2.0 ""
 ```
@@ -1086,7 +1086,7 @@ get_account_withdrawals 1.2.0 ""
 ## Sidechain Ethereum
 
 ### `get_eth_address account` 
-Returns information about generated eth address, if then exist and approved, for the given account id.
+Returns information about generated eth address, if exist and approved, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
@@ -1113,7 +1113,7 @@ Creates a transaction to withdraw ethereum.
 | :--- | :--- |
 | `string account` | The account who withdraw ethereum. |
 | `string eth_addr` | The Ethereum address where withdraw. |
-| `number value` | withdraw amount. |
+| `number value` | Withdraw amount. |
 | `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 withdraw_eth nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10 true
@@ -1132,17 +1132,17 @@ get_erc20_token 0102fe7702b96808f7bbc0d4a888ed1468216cfd
 ```
 
 ### `check_erc20_token id` 
-Checks if erc20 token exist.
+Checks the contract exists and is ERC20 token contract registered by register_erc20_contract operation
 
 | Option | Description |
 | :--- | :--- |
-| `triplet id` | ID of the contract to get erc20 token |
+| `triplet id` | ID of the contract |
 ```
 check_erc20_token 1.9.0
 ```
 
 ### `get_erc20_account_deposits account` 
-Returns all approved deposits, for the given account id.
+Returns all deposits, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
@@ -1152,7 +1152,7 @@ get_erc20_account_deposits 1.2.0
 ```
 
 ### `get_erc20_account_withdrawals account` 
-Returns all approved withdrawals for the given account id.
+Returns all withdrawals for the given account id.
 
 | Option | Description |
 | :--- | :--- |
@@ -1162,7 +1162,7 @@ get_erc20_account_withdrawals 1.2.0
 ```
 
 ### `register_erc20_token account eth_addr name symbol decimals broadcast` 
-Creates a transaction to register erc20_token for sidecain.
+Creates a transaction to register erc20_token for sidechain.
 
 Returns the signed version of the transaction.
 
@@ -1203,11 +1203,11 @@ Creates a transaction to generate bitcoin deposit address.
 | `string backup_address` | The P2PK address to transfer satoshis back. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 ```
-generate_btc_deposit_address nathan 04ae1a62fe09c5f51b13905f07f06b99a2f7159b2225f374cd378d71302fa28414e7aab37397f554a7df5f142c21c1b7303b8a0626f1baded5c72a704f7e6cd84c true
+generate_btc_deposit_address nathan n4cLNDfyVPGoNFUpUEyBP8TzDPRNaVBm6E true
 ```
 
-### `get_btc_addresses account` 
-Returns information about generated btc addresses, if then exist and approved, for the given account id.
+### `get_btc_address account` 
+Returns information about generated btc address, if exist and approved, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
@@ -1217,7 +1217,7 @@ get_btc_address 1.2.0
 ```
 
 ### `get_btc_deposit_script address` 
-Returns bitcoin script for generated bitcoin deposit address, if then exist, for the given address id.
+Returns bitcoin script for generated bitcoin deposit address, if exist, for the given address id.
 
 | Option | Description |
 | :--- | :--- |
