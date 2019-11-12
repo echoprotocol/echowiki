@@ -1,5 +1,7 @@
 # Chain parameters
 
+Default configuration values for chain parameters can be obtained using the method [get_config](../echo-node-api/database-api.md#get_config).
+
 ```cpp
 struct chain_parameters
 {
@@ -32,9 +34,9 @@ struct chain_parameters
       {360, 150 * ECHO_1_PERCENT},
    };
 
-   echo::rand::config echorand_config; ///< See Configuration parameters for EchoRand algorithm implementation in chain-parameters.md
-   echo::sidechain::config sidechain_config; ///< See Configuration parameters for Echo Sidechain in chain-parameters.md
-   echo::sidechain::erc20_config erc20_config; ///< See Configuration parameters for Echo ERC20 in chain-parameters.md
+   echo::rand::config echorand_config;
+   echo::sidechain::config sidechain_config;
+   echo::sidechain::erc20_config erc20_config;
 
    gas_price_t gas_price;
 
@@ -42,70 +44,14 @@ struct chain_parameters
 };
 ```
 
-## Gas price type
+## Types
 
-```cpp
-struct gas_price_t
-{
-   uint64_t price = 1;
-   uint64_t gas_amount = 1000;
-};
-```
+[fee_schedule](types.md#Fee-schedule)
 
-## Configuration parameters for EchoRand algorithm implementation
+[echorand_config](echorand-config.md#Configuration-parameters-for-EchoRand-algorithm-implementation)
 
-```cpp
-struct config
-{
-   unsigned _time_generate  = 0;    ///< timeout in mills to generate block on GC1
-   unsigned _time_net_1mb   = 0;    ///< timeout in mills for 1Mb message spreads over the network
-   unsigned _time_net_256b  = 0;    ///< timeout in mills for 256b message spreads over the network
-   unsigned _creator_count  = 0;    ///< number of max block creators for this node
-   unsigned _verifier_count = 0;    ///< number of max block verifiers for this node
-   unsigned _ok_threshold   = 0;    ///< threshold to made ok decision, recommended eq. 0.69 * _creator_count
-   unsigned _max_bba_steps  = 0;    ///< max number of BBA steps
-   unsigned _gc1_delay      = 0;    ///< delay before sending GC1 messages in milliseconds
-   unsigned _round_attempts = 0;    ///< number of max attempts to generate non-empty block on round before stop EchoRand
-};
-```
+[sidechain_config](sidechain-config.md#Configuration-parameters-for-Echo-Sidechain)
 
-## Configuration parameters for Echo Sidechain
+[erc20_config](sidechain-config.md#Configuration-parameters-for-Echo-ERC20)
 
-```cpp
-struct config
-{
-   eth_address_type eth_contract_address;
-   eth_method eth_committee_update_method;
-   eth_method eth_gen_address_method;
-   eth_method eth_withdraw_method;
-   eth_method eth_update_addr_method;
-   eth_method eth_withdraw_token_method;
-   eth_method eth_collect_tokens_method;
-   eth_topic_type eth_committee_updated_topic;
-   eth_topic_type eth_gen_address_topic;
-   eth_topic_type eth_deposit_topic;
-   eth_topic_type eth_withdraw_topic;
-   eth_topic_type erc20_deposit_topic;
-   eth_topic_type erc20_withdraw_topic;
-   asset_id_type ETH_asset_id;
-   asset_id_type BTC_asset_id;
-   sidechain_fines fines;
-   gas_price_type gas_price;
-   uint32_t satoshis_per_byte = 1;
-   uint32_t coefficient_waiting_blocks = 0;
-};
-```
-
-## Configuration parameters for Echo ERC20
-
-```cpp
-struct erc20_config
-{
-   std::string contract_code;
-   uint64_t create_token_fee;
-   eth_topic_type transfer_topic;
-   eth_method check_balance_method;
-   eth_method burn_method;
-   eth_method issue_method;
-};
-```
+[gas_price_t](types.md#Gas-price-type)

@@ -995,6 +995,36 @@ Array of operation history objects, or null if no matching operation was found.
 }
 ```
 
+### get\_block\_rewards\(block\_num\)
+
+Get block rewards by number block.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `uint32_t block_num` | height of the block to be returned |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_block_rewards",
+        [
+            "100"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+Fee distribution emission, fees and map rewards.
+
 ### get\_transaction\(block\_num, trx\_in\_block\)
 
 Fetch an individual transaction.
