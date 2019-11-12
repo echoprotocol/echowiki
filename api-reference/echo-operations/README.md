@@ -75,8 +75,8 @@ Note that at any time, a proposal can be approved in a single transaction if suf
 
 ## Sidechain
 
-* [sidechain\_eth\_create\_address\_operation](sidechain.md#sidechain_eth_create_address_operation) - Used to generate address in ETH blockchain. After the address is generated eth\_address\_object\(s\) will be created in echo db and can be retrieved using get\_eth\_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
-* [sidechain\_eth\_approve\_address\_operation](sidechain.md#sidechain_eth_approve_address_operation) - An internal operation by which committee members confirm the created  Ethereum address
+* [sidechain\_eth\_create\_address\_operation](sidechain.md#sidechain_eth_create_address_operation) - Used to generate address in ETH blockchain. After the address is generated eth\_address\_object\(s\) will be created in echo db and can be retrieved using get\_eth\_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one
+* [sidechain\_eth\_approve\_address\_operation](sidechain.md#sidechain_eth_approve_address_operation) - An internal operation by which committee members confirm the created Ethereum address
 * [sidechain\_eth\_deposit\_operation](sidechain.md#sidechain_eth_deposit_operation) - An internal operation by which committee members confirm Ethereum deposit
 * [sidechain\_eth\_withdraw\_operation](sidechain.md#sidechain_eth_withdraw_operation) - Used to withdraw the eETH and receive ETH to provided address
 * [sidechain\_eth\_approve\_withdraw\_operation](sidechain.md#sidechain_eth_approve_withdraw_operation) - An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH
@@ -88,6 +88,13 @@ Note that at any time, a proposal can be approved in a single transaction if suf
 * [sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens
 * [sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) - Virtual operation which issues erc20 token
 * [sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) - Virtual operation which burns erc20 token
+* [sidechain\_btc\_create\_address\_operation](sidechain.md#sidechain_btc_create_address_operation) - Used to generate address in BTC blockchain. After the address is generated btc\_address\_object\(s\) will be created in echo db and can be retrieved using get\_btc\_address method
+* [sidechain\_btc\_create\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_create_intermediate_deposit_operation) - An internal operation by which committee members processed deposit to account
+* [sidechain\_btc\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_intermediate_deposit_operation) - An internal operation by which committee members send from intermediate address to deposit address
+* [sidechain\_btc\_deposit\_operation](sidechain.md#sidechain_btc_deposit_operation) -  An internal operation by which committee members processed deposit to deposit address from intermediate address
+* [sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation) - Used to withdraw the eBTC and receive BTC to provided address
+* [sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation) - An internal operation by which committee members collect an aggregate transaction
+* [sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation) - An internal operation by which committee members confirm the aggregate transaction
 
 ## Block Reward
 
