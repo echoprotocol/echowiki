@@ -50,6 +50,7 @@
     * [Contracts](api-reference/echo-operations/contracts.md)
     * [Proposals](api-reference/echo-operations/proposals.md)
     * [Asset Transfer](api-reference/echo-operations/asset-transfer.md)
+    * [Sidechain](api-reference/echo-operations/sidechain.md)
     * [Vesting Balances](api-reference/echo-operations/vesting-balances.md)
 * [Changelogs](changelogs/README.md)
   * [0.12](changelogs/0.12.md)
