@@ -2720,7 +2720,7 @@ The contracts corresponding to the provided IDs.
 }
 ```
 
-### get_contract_logs(contract_logs_filter_options)
+### get\_contract\_logs\(contract\_logs\_filter\_options\)
 
 Returns an array of all logs matching a given filter object.
 
