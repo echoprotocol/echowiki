@@ -19,7 +19,7 @@
 
 * [asset\_create\_operation](asset-management.md#asset_create_operation) - Create new asset
 * [asset\_update\_operation](asset-management.md#asset_update_operation) - Update options common to all assets
-* [asset\_update\_bitasset\_operation]( asset-management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
+* [asset\_update\_bitasset\_operation](asset-management.md#asset_update_bitasset_operation) - Update options specific to BitAssets
 * [asset\_update\_feed\_producers\_operation](asset-management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
 * [asset\_issue\_operation](asset-management.md#asset_issue_operation) - Asset issue to account
 * [asset\_reserve\_operation](asset-management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
@@ -60,7 +60,7 @@ Note that at any time, a proposal can be approved in a single transaction if suf
 
 * [balance\_claim\_operation](balance-object.md#balance_claim_operation) - Claim a balance in a `balance_object`
 * [balance\_freeze\_operation](balance-object.md#balance_freeze_operation) - Freeze balance
-* [balance\_unfreeze\_operation](balance-object.md#balance_unfreeze_operation) _\[VIRTUAL\]_ - Unfreeze balance
+* [balance\_unfreeze\_operation](balance-object.md#balance_unfreeze_operation) - Unfreeze balance
 
 ## Contracts
 
