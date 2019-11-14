@@ -123,7 +123,7 @@ contract ERC20 {
 
     string public symbol = 'TEST';
 
-    string public symbol = 'Test Token';
+    string public name = 'Test Token';
 
     uint8 public decimals = 8;
 
