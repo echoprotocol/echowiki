@@ -422,6 +422,7 @@ This message is sent in step `1` by producers to propose a newly created block w
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key corresponding to the **id** |
@@ -434,6 +435,7 @@ This message is sent during step **1** if there is at least one participant for 
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key **id** |
@@ -449,6 +451,7 @@ This message is sent during step **2** and step **3** if there is at least one p
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the block |
 | **signature** | the signature of the message with the participant’s key **id** |
@@ -462,13 +465,14 @@ This message is sent during step **4** and all the subsequent steps of the algor
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
+| **attempt** | the current round attempt |
 | **step** | the current step |
 | **id** | the ID of the participant who created the message |
 | **value** | the result of the **BBA** algorithm, either 0 or 1 |
 | **block\_hash** | the selected block hash |
 | **leader** | the ID of a selected leader, who created the block |
-| **\_bba\_sign** | the signature for the fields **round**, **step**, **value**, **block\_hash**, **leader** with the participant’s key **id** |
-| **signature** | the signature for the fields **value**, **block\_hash**, **leader** with the participant’s key **id** |
+| **bba\_sign** | the signature for the fields **round**, **attempt**, **step**, **value**, **block\_hash**, **leader** with the participant’s key **id** |
+| **signature** | the signature of the message with the participant’s key **id** |
 
 ### Message Processing
 
@@ -532,7 +536,11 @@ The syncing node must determine the moment when its local database will be in sy
 
 Account balances formed as a result of the `r` round will be used in the VRF only when assigning a set of producers and verifiers for the round `r + k`. However, the randomness seed for the round `r + k` will be affected by the outcome of the round `r + k - 1`.
 
-So since the producer cannot predict the seed that will be received as a result of the round `r + k - 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round. The latest is true only if there is a block at interval `[r + 1, r + k - 1]`. Otherwise, randomness seed can be easily calculated from `r` to `r + k`.
+So since the producer cannot predict the seed that will be received as a result of the round `r + k - 1`, he cannot predict how the choice of performers will be affected by manipulating account balances on the `r` round. The latest is true only if there is a non-empty block at interval `[r + 1, r + k - 1]`. Otherwise, randomness seed can be easily calculated from `r` to `r + k`.
+
+#### The problem of empty blocks
+
+Empty blocks are disabled in the blockchain. If empty block is generated, the round must be restarted incrementing the attempt. Number of round attempt is used at calculation of **VRF**, therefore set of accounts in **VRF** will be changed at next generation attempt for the same round for all steps. Number of attempts is limited by blockchain configuration. Block generation is stopped after reaching the limit. Block production can be restored at new transaction arrival or by restarting certain node with **--start-echorand** command-line key.
 
 #### Insufficient Node Participation
 
