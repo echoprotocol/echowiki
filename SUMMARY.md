@@ -8,7 +8,7 @@
   * [Install a Full Node](how-to/install-full-node.md)
 * [Technologies](technologies/README.md)
   * [Echo PoWR Consensus](technologies/echo-powr/README.md)
-  * [Sidechains](technologies/sidechains/REAMDE.md)
+  * [Sidechains](technologies/sidechains/README.md)
 <!--    * [Whitepaper](technologies/powr-echorand/overview.md)-->
 <!--    * [Architecture](technologies/powr-echorand/architecture.md)-->
   * [x86-64 Virtual Machine](technologies/x86-64-virtual-machine/README.md)
