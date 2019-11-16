@@ -88,7 +88,7 @@ The set of verifiers begin listening for proposed next blocks and begin the proc
 
 ## The EchoRand Mechanism
 
-![EchoRand Steps](../../.gitbook/assets/echorand-steps.png)
+![EchoRand Steps](../../../.gitbook/assets/echorand-steps.png)
 
 ### Other Terms
 
@@ -244,7 +244,7 @@ Right after determining $CERT_{r-1}$
 
 This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
 
-![GC Steps](../../.gitbook/assets/gc-steps.png)
+![GC Steps](../../../.gitbook/assets/gc-steps.png)
 
 #### Step 2 - Voting
 
@@ -328,7 +328,11 @@ Right after determining $CERT_{r-1}$
 1. **Timer**: schedule the timer after the time equal to $3 * λ + Λ$, by a trigger:
    1. $v == \{ ∅, ∅ \}$
    2. Go to **Communication**
-2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving 1. Verify the round number and the step number in the message 2. Verify that $msg.id ∈ A_{2}$ and get the user's public key 3. Verify the signature of the whole message 4. Verify that $msg.v = \{ msg.block\_hash, msg.leader \}$ is in the context of the round.
+2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
+   1. Verify the round number and the step number in the message
+   2. Verify that $msg.id ∈ A_{2}$ and get the user's public key
+   3. Verify the signature of the whole message
+   4. Verify that $msg.v = \{ msg.block\_hash, msg.leader \}$ is in the context of the round.
 
    It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
 
