@@ -8,7 +8,7 @@ The quickest way is to simply download the binary files from the link below and 
 
 ### Linux
 
-1. Download the Echo node binary: [echo-linux.v0.13.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.tar)
+1. Download the Echo node binary: [echo-linux.0.13.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.tar)
 
 
 
