@@ -22,8 +22,6 @@ Smart contract should have entry point `void __apply()`. There is no other requi
 
     startup 
 
-Contract parameters can be retrieved by `get_parameters` variadic functions, should return false on error. Contract return value can be set using `set_return_values` variadic functions.
-
 Several standard classes and functions are provided as a part of development environment:
 
 * string, vector, hashmap
@@ -31,7 +29,9 @@ Several standard classes and functions are provided as a part of development env
 * classes/functions for accessing chain
 * classes/functions for accessing persistent storage
 
-`include` for them we can find in `x86-64/contracts/`.
+Contract parameters can be retrieved by `get_parameters` variadic functions, should return false on error. Contract return value can be set using `set_return_values` variadic functions.
+
+Headers for these classes and functions are located in `x86-64/contracts/`.
 
 Following smart contract written in C++ implements simple program for custom token.
 
@@ -107,45 +107,15 @@ public:
    }
 };
 
-extern "C" void __apply()
-{
-   CONTRACT(c);
-   string function;
-
-   parameters::get_function_name(function);
-
-   if (function == "total_supply")
-   {
-       set_return_values(c.total_supply());
-   }
-   else if (function == "balance_of")
-   {
-       string account;
-       if(get_parameters(account))
-           set_return_values(c.balance_of(account));
-   }
-   else if (function == "mint")
-   {
-       std::uint64_t amount = 0;
-       if(get_parameters(amount))
-           set_return_values(c.mint(amount));
-   }
-   else if (function == "transfer")
-   {
-       string from, to;
-       std::uint64_t amount = 0;
-       if(get_parameters(from, to, amount))
-           set_return_values(c.transfer(from, to, amount));
-   }
-}
+MAIN(contract, FUNC(total_supply) FUNC(balance_of) FUNC(mint) FUNC(transfer))
 }
 ```
 
-This smart contract receives the name of the function to be invoked as a parameter, calls the corresponding function of the contract and returns the value back to the blockchain.
+This smart contract implements a simple token, each of the functions declared in MAIN can be invoked from the chain via `call_contract` operation and the result will be available for the user. Constructor is invoked automatically during contract creation.
 
 ## Storage variables
 
-For saving variables in chain for the contract exists DB classes. These variables are global for the contract and joint for the all who сalls the contract. Now we have following classes:
+DB classes allows to save variables in the persistent storage so their values will be accessible during future invocations of the contract. These variables values can be retrieved via `call_contract_no_changin_state` operation. Following types are supporting persistence:
 
 * DB_UINT8(var)
 * DB_UINT16(var)
@@ -162,7 +132,7 @@ For saving variables in chain for the contract exists DB classes. These variable
 
 ## Contract events
 
-In contracts we can use event mechanism. In contract namespace we should add event signature `EVENT(event_name, variable_type1, variable_type2)` and then we can emit the event in the place we need. Event records in the result logs:
+Events mechanism is supported in x86-64 contracts. Following event signature `EVENT(event_name, variable_type1, variable_type2)`is defined in contract namespace we and later in can be emited in the contract functions. Event will be saved in the contract result:
 
 ```sh
 get_contract_result 1.11.4
@@ -185,14 +155,14 @@ get_contract_result 1.11.4
 ```
 
 where
-* `logs` - array of logs, where every logs represents:
-    * `hash` - hash(keccak256) of event. Event signature for get the hash must like as `event_name(bool,string,uint64)`, without spaces between variables
-    * `log` - hex of log
-    * `id` - id of the contract that generated the logs
+* `logs` - array of logs, where every logs consists of:
+    * `hash` - hash(keccak256) of event. This value represents the hash of the signature `event_name(bool,string,uint64)`, without spaces between variables.
+    * `log` - hex of log.
+    * `id` - id of the contract that generated the logs.
 
 ## Errors of executing smart contract
 
-Errors may occur during the execution of the contract. Errors records in the result logs:
+Different types of errors can occur during the execution of the contract. Errors are recorded in the result logs:
 
 ```sh
 get_contract_result 1.11.25
@@ -210,7 +180,7 @@ get_contract_result 1.11.25
 ```
 
 where
-* `error` - the type of error if it was, else `none`
+* `error` - is the type of error, `none` if contract finished execution successfully.
 
 Errors types:
 * unknown
@@ -231,7 +201,7 @@ Errors types:
 
 ## Compilation and linkage
 
-C++ smart contract should be compiled and linked into ELF executable.
+C++ smart contract should be compiled and linked into ELF executable using standard toolchain.
 
 ### gcc toolchain
 
@@ -241,7 +211,7 @@ gcc compiler flags
 -O0 -masm=intel -Wall -Wno-return-type -nostdlib -mno-tbm -fno-rtti -fno-exceptions -fno-unwind-tables -no-pie -mno-mmx -mno-sse -mno-sse2 -mno-sse3 -mno-sse4.1 -ffreestanding -mno-sse4.2
 ```
 
-for otpimizatsiya we can use the flags `-01` or `-Os`. Recommended use `-Os`.
+for optimization `-01` or `-Os` can be used. `-Os` is recommended to use.
 
 gcc linker flags
 
