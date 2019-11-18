@@ -12,6 +12,7 @@
 <!--    * [Whitepaper](technologies/powr-echorand/overview.md)-->
 <!--    * [Architecture](technologies/powr-echorand/architecture.md)-->
   * [x86-64 Virtual Machine](technologies/x86-64-virtual-machine/README.md)
+    * [Smart contract development](technologies/x86-64-virtual-machine/smart_contract_development.md)
     * [C++ Smart Contracts](technologies/x86-64-virtual-machine/c++-smart-contracts.md)
     * [x86-64 Specification](technologies/x86-64-virtual-machine/x86-64-specification.md)
   * [EVM Support](technologies/evm-support/README.md)
