@@ -8,12 +8,12 @@ The quickest way is to simply download the binary files from the link below and 
 
 ### Linux
 
-1. Download the Echo node binary: [echo-linux.v0.11.2.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.11.2.tar)
+1. Download the Echo node binary: [echo-linux.v0.13.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.tar)
 
 
 
    ```bash
-   wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.11.2.tar
+   wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.tar
    ```
 
 2. Unzip the binary:
@@ -21,8 +21,8 @@ The quickest way is to simply download the binary files from the link below and 
 
 
    ```bash
-   tar -xvf echo-linux.0.11.2.tar
-   cd echo-linux.0.11.2
+   tar -xvf echo-linux.0.13.tar
+   cd echo-linux.0.13
    ```
 
 3. Launch the Echo node with an activate RPC interface on port 6312
