@@ -51,7 +51,7 @@ There are several advantages of using the Echo blockchain compared to alternativ
 
 
 
-## Echo X86-64 VM
+## Echo x86-64 VM
 
 
 
@@ -61,7 +61,7 @@ This flow also allows to use the compiler optimization flags, thus shrinking the
 
 
 
-## X86-64 and EVM comparison
+## x86-64 and EVM comparison
 
 
 

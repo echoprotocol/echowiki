@@ -1,5 +1,7 @@
 # x86-64 Virtual Machine
 
+[Read Full x86-64 VM Whitepaper](https://github.com/echoprotocol/echowiki/blob/master/.gitbook/assets/x86-64-vm-whitepaper.pdf)
+
 ## Overview
 
 The purpose of x86-64 smart contracts in the Echo blockchain is to allow owners of Echo accounts to create and run smart contracts implemented in any high level programming language that can be compiled into sequence of x86-64 instructions.
