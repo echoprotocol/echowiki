@@ -15,14 +15,10 @@ Development, deployment and execution of the x86-64 smart contract includes the 
   development environment familiar to the developer 
 
 * compile and link smart contract into 64 bit ELF executable 
-* run the resulted executable through the repackager utility program
+* run the resulted executable through the repackager utility program provided along with the Echo blockchain package
 
-  provided along with the ECHO blockchain package
-
-* upload the contract into ECHO blockchain 
-* call smart contract with provided parameters and get the return result
-
-  stored in the ECHO 
+* upload the contract into Echo blockchain 
+* call smart contract with provided parameters and get the return result stored in the Echo 
 
 These steps are covered in detail in the corresponding sections.
 
