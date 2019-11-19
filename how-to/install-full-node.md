@@ -4,38 +4,49 @@ There are several ways to install and run a full Echo node on your machine.
 
 ## Downloading Files
 
-The quickest way is to simply download the binary files from the link below and run the node with the default configuration. The minimum recommended resource requirements for now are  1 CPU core and 1GB RAM.
+The quickest way is to simply download the binary files from the link below and run the node with the default configuration. The minimum recommended resource requirements for now are 1 CPU core and 1GB RAM.
 
 ### Linux
 
-1. Download the Echo node binary: [echo-linux.0.13.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.tar)
-
-
+1. Download the Echo node binary: [echo-linux.0.13.3.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.3.tar)
 
    ```bash
-   wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.tar
+   wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.3.tar
    ```
 
 2. Unzip the binary:
 
-
-
    ```bash
-   tar -xvf echo-linux.0.13.tar
-   cd echo-linux.0.13
+   tar -xvf echo-linux.0.13.3.tar
+   cd echo-linux.0.13.3
    ```
 
-3. Launch the Echo node with an activate RPC interface on port 6312
+### Mac OS
+
+1. Download the Echo node binary: [echo-mac.0.13.3.tar](https://d14s13k07yt1gw.cloudfront.net/echo-mac.0.13.3.tar)
+
+   ```bash
+   wget https://d14s13k07yt1gw.cloudfront.net/echo-mac.0.13.3.tar
+   ```
+
+2. Unzip the binary:
+
+   ```bash
+   tar -xvf echo-mac.0.13.3.tar
+   cd echo-mac.0.13.3
+   ```
+
+### Windows
+
+* Not supported yet.
+
+### Launch the Echo node with an active RPC interface on port 6312
 
    ```bash
    ./echo_node --rpc-endpoint=127.0.0.1:6312 --testnet
    ```
 
 At this point, the Echo node should connect to some default seed nodes and begin downloading and verifying the complete blockchain. The time to sync to the latest block \(as shown on the [block explorer](https://explorer.echo.org/)\) depends on the bandwidth and CPU available, but typically take 0.5-2 hours on the current network. An example of the node log output during sync is below.
-
-{% hint style="info" %}
-If you see warning messages during the sync process saying that "Signature verifier is invalid", you can safely ignore these and the blockchain download will still proceed.
-{% endhint %}
 
 ```text
 17:10:37.574833    570 th_a       application.cpp:145           reset_p2p_node       ] Adding seed node 165.22.120.218:6310
@@ -63,14 +74,6 @@ If you see warning messages during the sync process saying that "Signature verif
 17:10:45.793360 784009 th_a       application.cpp:477           handle_block         ] Synchronized block 10449 ...
 17:10:47.831909 2.039s th_a       application.cpp:477           handle_block         ] Synchronized block 11449 ...
 ```
-
-### Mac OS
-
-* Build from sources only.
-
-### Windows
-
-* Not supported yet.
 
 ## Running as a Docker Image
 
