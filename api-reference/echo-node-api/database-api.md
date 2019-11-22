@@ -4762,7 +4762,7 @@ Returns information about generated bitcoin address, if exist, for the given acc
 
 | Option | Description |
 | :--- | :--- |
-| `account_id_type account` | the id of the account to provide information about |
+| `std::string account` | the account name or id to provide information about |
 
 #### Example
 
@@ -4774,7 +4774,7 @@ Returns information about generated bitcoin address, if exist, for the given acc
         DATABASE_API_ID,
         "get_btc_address",
         [
-            "1.2.26"
+            "nathan"
         ]
     ]
 }
