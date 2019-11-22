@@ -32,7 +32,7 @@
 |[vesting\_balance\_withdraw\_operation](vesting-balances.md#vesting_balance_withdraw_operation)|27|
 |[balance\_claim\_operation](balance-object.md#balance_claim_operation)|28|
 |[balance\_freeze\_operation](balance-object.md#balance_freeze_operation)|29|
-|[balance\_unfreeze\_operation](balance-object.md#balance_unfreeze_operation)|30|
+|[balance\_unfreeze\_operation](balance-object.md#balance_unfreeze_operation) // VIRTUAL|30|
 |[contract\_create\_operation](contracts.md#contract_create_operation)|31|
 |[contract\_call\_operation](contracts.md#contract_call_operation)|32|
 |[contract\_internal\_create\_operation](contracts.md#contract_internal_create_operation) // VIRTUAL|33|
