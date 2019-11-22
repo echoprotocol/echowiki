@@ -109,6 +109,21 @@ Contains methods to access account histories.
 * [get\_account\_history\_operations](history-api.md#get_account_history_operations-account-operation_id-start-stop-limit)
 * [get\_contract\_history](history-api.md#get_contract_history-contract-stop-limit-start)
 
+## Key Config API
+
+API that provides methods for config of keys.
+
+* [set\_password](key-config-api.md#set_password-key)
+* [add\_echorand\_key](key-config-api.md#add_echorand_key-acc_id-key)
+* [add\_sidechains\_keys](key-config-api.md#add_sidechains_keys-acc_id-btc_key-eth_key)
+* [rm\_echorand\_key\_by\_account](key-config-api.md#rm_echorand_key_by_account-acc_id)
+* [rm\_echorand\_key\_by\_echo\_key](key-config-api.md#rm_echorand_key_by_echo_key-key)
+* [rm\_sidechains\_keys\_by\_account](key-config-api.md#rm_sidechains_keys_by_account-acc_id)
+* [rm\_sidechains\_keys\_by\_btc](key-config-api.md#rm_sidechains_keys_by_btc-key)
+* [rm\_sidechains\_keys\_by\_eth](key-config-api.md#rm_sidechains_keys_by_eth-key)
+* [list](key-config-api.md#list)
+* [help](key-config-api.md#help)
+
 ## Network Broadcast API
 
 Allows broadcasting of transactions.

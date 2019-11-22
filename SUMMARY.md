@@ -42,6 +42,7 @@
     * [Asset API](api-reference/echo-node-api/asset-api.md)
     * [Database API](api-reference/echo-node-api/database-api.md)
     * [History API](api-reference/echo-node-api/history-api.md)
+    * [Key Config API](api-reference/echo-node-api/key-config-api.md)
     * [Network Broadcast API](api-reference/echo-node-api/network-broadcast-api.md)
     * [Registration API](api-reference/echo-node-api/registration-api.md)
   * [Echo Operations](api-reference/echo-operations/README.md)
