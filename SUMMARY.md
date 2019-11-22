@@ -15,7 +15,6 @@
   * [x86-64 Virtual Machine](technologies/x86-64-virtual-machine/README.md)
   * [EVM Support](technologies/evm-support/README.md)
     * [Differences from Ethereum](technologies/evm-support/differences-from-ethereum.md)
-  * [Bitcoin Sidechain](technologies/bitcoin-sidechain.md)
 * [Advanced](advanced/README.md)
   * [Work With ERC20](advanced/erc20/README.md)
     * [Contract Compilation](advanced/erc20/contract-compilation.md)
