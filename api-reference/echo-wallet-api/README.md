@@ -1226,10 +1226,10 @@ Creates a transaction to generate bitcoin deposit address.
 | Option | Description |
 | :--- | :--- |
 | `string account` | The account for which the bitcoin address is generated. |
-| `string backup_address` | The P2PK address to transfer satoshis back. |
+| `string backup_address` | The P2PKH address to transfer satoshis back. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 ```
-generate_btc_deposit_address nathan n4cLNDfyVPGoNFUpUEyBP8TzDPRNaVBm6E true
+generate_btc_deposit_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
 ```
 
 ### `get_btc_address account` 
@@ -1237,7 +1237,7 @@ Returns information about generated btc address, if exist and approved, for the 
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | The account name or id to provide information about |
 ```
 get_btc_address 1.2.0
 ```
