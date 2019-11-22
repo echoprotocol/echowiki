@@ -238,6 +238,54 @@ As the deposit addresses are also multi-signature addresses containing committee
 
 Since after changing (replacing, adding or deleting) a single or several committee addresses, it is still possible to use the previously generated replenishment addresses, addresses marked as outdated continue to be processed by the committee. In the case when incoming funds to such address can no longer be spent by the committee (it is not possible to reach the threshold), the address is marked as unsupported and removed from the list of observed addresses.
 
+### Fee payment
+
+All fees below are specified in bytes, which are calculated based on transactions virtual sizes. Fees in satoshi and approximate fees in USD are provided in the table below.
+
+
+|            | Deposit fee | Withdrawal fee | Minimum deposit | Minimum withdrawal |
+|------------|-------------|----------------|-----------------|--------------------|
+| Bytes      |     1000    |      1000      |      10000      |        10000       |
+| Satoshi    |    12000    |      12000     |      120000     |       120000       |
+| USD(appox) |     0.98    |      0.98      |       9.8       |         9.8        |
+
+Satoshi per byte is defined to be equal to 12 initially, which will allow the transactions to be mined in the nearest blocks.
+All parameters (fees, minumums and satoshi per byte) are defined in the Echo config and can be increased or decreased by commiittee members.
+
+
+#### Fee calculations
+
+
+Below are the calculations of the sizes of the transactions in the case of low activity, i.e. SMA transactions include only one deposit or one withdrawal. Resulting numbers shows that in such case there will be almost no profit, even some loss in the case of 19 committee members.
+
+
+| Committee member count | Deposit <br> to intermediate | Intermediate<br> to SMA | Total size <br> for deposit | With-<br>drawal | Total size |
+|:----------------------:|:----------------------------:|:-----------------------:|:---------------------------:|:---------------:|:----------:|
+|            5           |              243             |           460           |             703             |       294       |     997    |
+|           10           |              341             |           657           |             998             |       393       |    1391    |
+|           15           |              421             |           890           |             1311            |       509       |    1820    |
+|           19           |              492             |           1032          |             1524            |       581       |    2105    |
+
+
+#### Decrease of fees
+
+
+Fees can be decreased in the future in case of activity growth. Fee calculations for more active deposit/withdrawals distibution provided below for the deposit fee 750 bytes and withdrawal fee 750 bytes.
+
+
+| Distribution | Deposit + withdrawal count | Profit/loss |
+|:------------:|:--------------------------:|:-----------:|
+|      10%     |              1             |    -3025    |
+|      20%     |              2             |    -1340    |
+|      40%     |              4             |    16160    |
+|      20%     |              6             |    17500    |
+|      10%     |              8             |    13460    |
+
+Overall profit after 100 SMA aggregating transactions during 17 days will be 42755 bytes.
+All the possible profit remaining on the SMA address will allow to use CPFP or to update SMA address in case of committee members update.
+
+
+
 ### Bitcoin scripts
 
 Deposit address script example for 15 committee members
@@ -268,6 +316,11 @@ ELSE
 ENDIF
 <PubKey ComMember 1> ... <PubKey ComMember 15> <Unique Hash> 16 CHECKMULTISIG
 ```
+
+### Bitcoin node
+
+Committee members should run Bitcoin full node in order to fully validate transactions and blocks and have the most up to date state of the chain.
+Recomended verision is 0.18+.
 
 ## Ethereum Sidechain
 
