@@ -1,4 +1,4 @@
-# generate_eth_address_operation
+# create_eth_address_operation
 
 ## JSON Example
 
