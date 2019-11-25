@@ -1726,7 +1726,7 @@ Retrieve the current global property object.
                 "ETH_asset_id": "1.3.1",
                 "BTC_asset_id": "1.3.2",
                 "fines": {
-                    "generate_eth_address": -10
+                    "create_eth_address": -10
                 },
                 "gas_price": "10000000000",
                 "satoshis_per_byte": 23,
@@ -2193,7 +2193,7 @@ A map of strings from names\_or\_ids to the corresponding accounts.
                     "removed_ops": 0,
                     "total_blocks": 3,
                     "total_core_in_orders": 0,
-                    "generated_eth_address": false,
+                    "created_eth_address": false,
                     "committeeman_rating": 0,
                     "extensions": []
                 },
