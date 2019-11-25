@@ -63,8 +63,8 @@
 
 | Name | Description |
 | -------- | -------- |
-| [generate_eth_address_operation](operations/contracts/_generate_eth_address_operation.md) | |
 | [create_eth_address_operation](operations/contracts/_create_eth_address_operation.md) | |
+| [approve_eth_address_operation](operations/contracts/_approve_eth_address_operation.md) | |
 | [deposit_eth_operation](operations/contracts/_deposit_eth_operation.md) | |
 | [withdraw_eth_operation](operations/contracts/_withdraw_eth_operation.md) | |
 | [approve_withdraw_eth_operation](operations/contracts/_approve_withdraw_eth_operation.md) | |
