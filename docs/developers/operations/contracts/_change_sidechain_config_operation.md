@@ -43,7 +43,7 @@
       "erc20_deposit_topic": "",
       "ETH_asset_id": "1.3.0",
       "fines": {
-        "generate_eth_address": 0
+        "create_eth_address": 0
       },
       "waiting_blocks": 0
     },

@@ -210,7 +210,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
                "ETH_asset_id": "1.3.0",
                "BTC_asset_id": "1.3.0",
                "fines": {
-                  "generate_eth_address": 0
+                  "create_eth_address": 0
                },
                "gas_price": 0,
                "satoshis_per_byte": 1,

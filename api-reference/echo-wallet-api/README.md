@@ -108,7 +108,7 @@
     * [get_account_withdrawals](#get_account_withdrawals-account-type)
 * Sidechain-Ethereum
     * [get_eth_address](#get_eth_address-account)
-    * [generate_eth_address](#generate_eth_address-account-broadcast)
+    * [create_eth_address](#create_eth_address-account-broadcast)
     * [withdraw_eth](#withdraw_eth-account-eth_addr-value-broadcast)
 * Sidechain-ERC20
     * [get_erc20_token](#get_erc20_token-eth_addr)
@@ -118,7 +118,7 @@
     * [register_erc20_token](#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast)
     * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
 * Sidechain-Bitcoin
-    * [generate_btc_deposit_address](#generate_btc_deposit_address-account-backup_address-broadcast)
+    * [create_btc_deposit_address](#create_btc_deposit_address-account-backup_address-broadcast)
     * [get_btc_addresses](#get_btc_addresses-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
@@ -1121,7 +1121,7 @@ Returns information about generated eth address, if exist and approved, for the 
 get_eth_address 1.2.0
 ```
 
-### `generate_eth_address account broadcast` 
+### `create_eth_address account broadcast` 
 Creates a transaction to generate ethereum address.
 
 | Option | Description |
@@ -1129,7 +1129,7 @@ Creates a transaction to generate ethereum address.
 | `triplet account` | The account for which the ethereum address is generated. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 ```
-generate_eth_address nathan true
+create_eth_address nathan true
 ```
 
 ### `withdraw_eth account eth_addr value broadcast` 
@@ -1220,7 +1220,7 @@ Returns the signed version of the transaction.
 
 ## Sidechain Bitcoin
 
-### `generate_btc_deposit_address account backup_address broadcast` 
+### `create_btc_deposit_address account backup_address broadcast` 
 Creates a transaction to generate bitcoin deposit address.
 
 | Option | Description |
@@ -1229,7 +1229,7 @@ Creates a transaction to generate bitcoin deposit address.
 | `string backup_address` | The P2PKH address to transfer satoshis back. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 ```
-generate_btc_deposit_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
+create_btc_deposit_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
 ```
 
 ### `get_btc_address account` 
