@@ -119,8 +119,8 @@ API that provides methods for config of keys.
 * [rm\_echorand\_key\_by\_account](key-config-api.md#rm_echorand_key_by_account-acc_id)
 * [rm\_echorand\_key\_by\_echo\_key](key-config-api.md#rm_echorand_key_by_echo_key-key)
 * [rm\_sidechains\_keys\_by\_account](key-config-api.md#rm_sidechains_keys_by_account-acc_id)
-* [rm\_sidechains\_keys\_by\_btc](key-config-api.md#rm_sidechains_keys_by_btc-key)
-* [rm\_sidechains\_keys\_by\_eth](key-config-api.md#rm_sidechains_keys_by_eth-key)
+* [rm\_sidechains\_keys\_by\_btc\_key](key-config-api.md#rm_sidechains_keys_by_btc-key)
+* [rm\_sidechains\_keys\_by\_eth\_key](key-config-api.md#rm_sidechains_keys_by_eth-key)
 * [list](key-config-api.md#list)
 * [help](key-config-api.md#help)
 
