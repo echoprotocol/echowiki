@@ -93,8 +93,10 @@
     * [get_contract_object](#get_contract_object-id)
     * [get_contract](#get_contract-id)
     * [get_contract_result](#get_contract_result-id)
-    * [create_contract](#create_contract-registrar_account-code-amount-asset_type-supported_asset_id-eth_accuracy-save_wallet)
-    * [call_contract](#call_contract-registrar_account-receiver-code-amount-asset_type-save_wallet)
+    * [get_contract_history](#get_contract_history-contract_id-limit)
+    * [get_relative_contract_history](#get_relative_contract_history-contract_id-stop-limit-start)
+    * [create_contract](#create_contract-registrar_account-code-value-asset_type-supported_asset_id-eth_accuracy-save_wallet)
+    * [call_contract](#call_contract-registrar_account-receiver-code-value-asset_type-save_wallet)
     * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
     * [get_contract_pool_balance](#get_contract_pool_balance-id)
     * [get_contract_pool_whitelist](#get_contract_pool_whitelist-id)
@@ -966,7 +968,31 @@ Get the result of contract execution.
 | :--- | :--- |
 | `triplet id` | the id of the conract result |
 ```
-get_contract_result 1.10.0
+get_contract_result 1.12.0
+```
+
+### `get_contract_history contract_id limit` 
+Returns the most recent operations on the contract id. This returns a list of operation history objects, which describe activity on the contract.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet contract_id` | the ID of the contract |
+| `unsigned limit` | the number of entries to return (starting from the most recent) |
+```
+get_contract_history 1.11.0 10
+```
+
+### `get_relative_contract_history contract_id stop limit start` 
+Returns the relative operations on the id contract from start number.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet contract_id` | the ID of the contract |
+| `uint32_t stop` | Sequence number of earliest operation |
+| `unsigned limit` | the number of entries to return (starting from the most recent) |
+| `uint32_t start` | the sequence number where to start looping back throw the history |
+```
+get_relative_contract_history 1.11.0 0 10 20
 ```
 
 ### `create_contract registrar_account code amount asset_type supported_asset_id eth_accuracy save_wallet` 
