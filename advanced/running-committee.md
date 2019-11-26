@@ -85,7 +85,7 @@ To enter this mode add the flag `--configure-keys` to Echo node.
 
 On the first run, when keys file wasn't created yet, you would need to specify a password which will be used to encrypt future keys. This is done by calling `set_password` command and entering your secret passphrase. You can change your password using the same command.
 
-To add a new key, you would need to call either `add_echorand_key` or `add_sidechain_key` command.
+To add a new key, you would need to call either `add_echorand_key` or `add_sidechains_keys` command.
 
 To exit the console, use the `exit`. In the case that you don't want to save any changes, use the `Ctrl-C` instead.
 
