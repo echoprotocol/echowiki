@@ -109,6 +109,40 @@ struct sidechain_eth_deposit_operation : public base_operation
 ]
 ```
 
+## sidechain_eth_send_deposit_operation
+
+```cpp
+struct sidechain_erc20_send_withdraw_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "deposit_id": "1.14.0",
+      "extensions": []
+   }
+]
+```
+
 ## sidechain_eth_withdraw_operation
 
 ```cpp
@@ -140,6 +174,40 @@ struct sidechain_eth_withdraw_operation : public base_operation
       "account": "1.2.0",
       "eth_addr": "0000000000000000000000000000000000000000",
       "value": 0,
+      "extensions": []
+   }
+]
+```
+
+## sidechain_eth_send_withdraw_operation
+
+```cpp
+struct sidechain_erc20_send_withdraw_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "withdraw_id": "1.15.0",
       "extensions": []
    }
 ]
@@ -357,6 +425,40 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 ]
 ```
 
+## sidechain_erc20_send_deposit_operation
+
+```cpp
+struct sidechain_erc20_send_deposit_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "deposit_id": "1.17.0",
+      "extensions": []
+   }
+]
+```
+
 ## sidechain_erc20_withdraw_token_operation
 
 ```cpp
@@ -391,6 +493,40 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
       "to": "0000000000000000000000000000000000000000",
       "erc20_token": "1.17.0",
       "value": "",
+      "extensions": []
+   }
+]
+```
+
+## sidechain_erc20_send_withdraw_operation
+
+```cpp
+struct sidechain_erc20_send_withdraw_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "withdraw_id": "1.18.0",
       "extensions": []
    }
 ]

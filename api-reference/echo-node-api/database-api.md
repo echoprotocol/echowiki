@@ -4438,6 +4438,8 @@ The all public deposits data stored in the blockchain.
             "account": "1.2.21",
             "value": 1000,
             "is_approved": true,
+            "is_sent": false,
+            "echo_block_number": 1654,
             "approves": [],
             "extensions": []
         },
@@ -4506,6 +4508,8 @@ The all public withdrawals data stored in the blockchain.
             "eth_addr": "1AFeEcE88325110488570146f2635C8615Ad0613",
             "value": 1000,
             "is_approved": true,
+            "is_sent": false,
+            "echo_block_number": 1654,
             "approves": [],
             "extensions": []
         },
@@ -4698,6 +4702,8 @@ The all public erc20 deposits data stored in the blockchain.
             "value": "1",
             "transaction_hash": "9742f2d928365be7591107b0d8afa701f24104acd8d5ecc32516dfab410f9c4e",
             "is_approved": true,
+            "is_sent": false,
+            "echo_block_number": 1654,
             "approves": []
         }
     ]
@@ -4747,6 +4753,8 @@ The all public erc20 withdrawals data stored in the blockchain.
             "erc20_token": "1.17.0",
             "value": "1",
             "is_approved": true,
+            "is_sent": false,
+            "echo_block_number": 1654,
             "approves": []
         }
     ]
