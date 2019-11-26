@@ -44,21 +44,25 @@
 |[sidechain\_eth\_create\_address\_operation](sidechain.md#sidechain_eth_create_address_operation)|39|
 |[sidechain\_eth\_approve\_address\_operation](sidechain.md#sidechain_eth_approve_address_operation)|40|
 |[sidechain\_eth\_deposit\_operation](sidechain.md#sidechain_eth_deposit_operation)|41|
-|[sidechain\_eth\_withdraw\_operation](sidechain.md#sidechain_eth_withdraw_operation)|42|
-|[sidechain\_eth\_approve\_withdraw\_operation](sidechain.md#sidechain_eth_approve_withdraw_operation)|43|
-|[sidechain\_issue\_operation](sidechain.md#sidechain_issue_operation) // VIRTUAL|44|
-|[sidechain\_burn\_operation](sidechain.md#sidechain_burn_operation) // VIRTUAL|45|
-|[sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation)|46|
-|[sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation)|47|
-|[sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation)|48|
-|[sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation)|49|
-|[sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) // VIRTUAL|50|
-|[sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) // VIRTUAL|51|
-|[sidechain\_btc\_create\_address\_operation](sidechain.md#sidechain_btc_create_address_operation)|52|
-|[sidechain\_btc\_create\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_create_intermediate_deposit_operation)|53|
-|[sidechain\_btc\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_intermediate_deposit_operation)|54|
-|[sidechain\_btc\_deposit\_operation](sidechain.md#sidechain_btc_deposit_operation)|55|
-|[sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation)|56|
-|[sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation)|57|
-|[sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation)|58|
-|[block\_reward\_operation](/api-reference/echo-operations/block-reward.md#block_reward_operation) // VIRTUAL|59|
+|[sidechain\_eth\_send\_deposit\_operation](sidechain.md#sidechain_eth_send_deposit_operation)|42|
+|[sidechain\_eth\_withdraw\_operation](sidechain.md#sidechain_eth_withdraw_operation)|43|
+|[sidechain\_eth\_send\_withdraw\_operation](sidechain.md#sidechain_eth_send_withdraw_operation)|44|
+|[sidechain\_eth\_approve\_withdraw\_operation](sidechain.md#sidechain_eth_approve_withdraw_operation)|45|
+|[sidechain\_issue\_operation](sidechain.md#sidechain_issue_operation) // VIRTUAL|46|
+|[sidechain\_burn\_operation](sidechain.md#sidechain_burn_operation) // VIRTUAL|47|
+|[sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation)|48|
+|[sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation)|49|
+|[sidechain\_erc20\_send\_deposit\_token\_operation](sidechain.md#sidechain_erc20_send_deposit_operation)|50|
+|[sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation)|51|
+|[sidechain\_erc20\_send\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation)|52|
+|[sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation)|53|
+|[sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) // VIRTUAL|54|
+|[sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) // VIRTUAL|55|
+|[sidechain\_btc\_create\_address\_operation](sidechain.md#sidechain_btc_create_address_operation)|56|
+|[sidechain\_btc\_create\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_create_intermediate_deposit_operation)|57|
+|[sidechain\_btc\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_intermediate_deposit_operation)|58|
+|[sidechain\_btc\_deposit\_operation](sidechain.md#sidechain_btc_deposit_operation)|59|
+|[sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation)|60|
+|[sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation)|61|
+|[sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation)|62|
+|[block\_reward\_operation](/api-reference/echo-operations/block-reward.md#block_reward_operation) // VIRTUAL|63|
