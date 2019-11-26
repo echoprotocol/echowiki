@@ -4527,6 +4527,110 @@ The all public withdrawals data stored in the blockchain.
 }
 ```
 
+## Sidechain Bitcoin
+
+### get\_btc\_address\(account\)
+
+Returns information about generated btc addresses, if exist, for the given account id.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | the id of the account to provide information about |
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_btc_address",
+        [
+            "1.2.26"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+The btc address data stored in the blockchain
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "id": "1.19.0",
+        "account": "1.2.26",
+        "deposit_address": {
+            "address": "3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX"
+        },
+        "committee_member_ids_in_script": [[
+            "1.2.6",
+            "024c1705f188828553da9cc3a0983b11c447a00009f84582b642fd0efd210bf197"
+            ],[
+            "1.2.7",
+            "026e89f955990a7d6773535fade4b15ea86313d6057b89d36460301f61e1873923"
+            ],[
+            "1.2.8",
+            "038360571d18a4eada8353278494a2336ed824be36ae690885aca8edfaa0df8cef"
+            ],[
+            "1.2.9",
+            "02fdf1ca88a271753ce2001fa58fe26c86183ead98e479f5d813fa73a0cb56a1b3"
+            ],[
+            "1.2.10",
+            "03e621a92197013f899b73b500280b8fb7b9de614767bc5d2e40eef7516475d98a"
+            ]
+        ],
+        "is_relevant": true,
+        "backup_address": "n4cLNDfyVPGoNFUpUEyBP8TzDPRNaVBm6E",
+        "extensions": []
+    }
+}
+```
+
+### get\_btc\_deposit\_script\(address\)
+
+Returns bitcoin script for generated bitcoin deposit address, if exist, for the given address id.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `btc_address_id_type address` | the id of the bitcoin address to provide script |
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_btc_address",
+        [
+            "1.19.26"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+The bitcoin script
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": "03e621a92197013f899b73b500280b8fb7b9de614767bc5d2e40eef7516475d98a026e89f955990a7d6773535fade4b15ea86313d6057b89d36460301f61e1873923"
+}
+```
+
 ## Sidechain Ethereum
 
 ### get\_eth\_address\(account\)
