@@ -36,6 +36,8 @@
   * [x86-64 Virtual Machine](advanced/x86-64-virtual-machine/README.md)
     * [Smart contract development](advanced/x86-64-virtual-machine/smart_contract_development.md)
     * [Smart contracts in C++](advanced/x86-64-virtual-machine/c++-smart-contracts.md)
+  * [Ethereum Virtual Machine](advanced/ethereum-virtual-machine/README.md)
+    * [Contract Fee Pool](advanced/ethereum-virtual-machine/fee-pool.md)
 * [API Reference](api-reference/README.md)
   * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
