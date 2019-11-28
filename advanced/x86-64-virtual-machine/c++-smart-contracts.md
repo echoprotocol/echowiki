@@ -4,23 +4,12 @@
 
 Smart contract should have entry point `void __apply()`. There is no other requirement for the rest of the code of the smart contract, though the approach for writing smart contract used in the examples is encouraged. There are several limitations to the C++ language in order to get small and portable bytecode
 
-* dynamic linked libraries and runtime loading of the dynamic library is
-
-  not supported 
-
-* C++ and C standard libraries are not supported fully on all the C++
-
-  toolchains, only classes/functions defined as header only can be
-
-  included. As a consequence of that the following language features are
-
-  not supported
-
+* floating point tyypes and operations 
+* dynamic linked libraries and runtime loading of the dynamic library is not supported 
+* C++ and C standard libraries are not supported fully on all the C++ toolchains, only classes/functions defined as header only can be included. As a consequence of that the following language features are not supported
 * RTTI
   * exceptions
-  * constructors of global variables are not called on the program
-
-    startup 
+  * constructors of global variables are not called on the program startup 
 
 Several standard classes and functions are provided as a part of development environment:
 
@@ -29,7 +18,7 @@ Several standard classes and functions are provided as a part of development env
 * classes/functions for accessing chain
 * classes/functions for accessing persistent storage
 
-Contract parameters can be retrieved by `get_parameters` variadic functions, should return false on error. Contract return value can be set using `set_return_values` variadic functions.
+Contract parameters can be retrieved by `get_parameters` variadic functions, should return false on error. Contract return value can be set using `set_return_values` variadic functions. These functions can be called directly or using macro MAIN as in the example below.
 
 Headers for these classes and functions are located in `x86-64/contracts/`.
 
