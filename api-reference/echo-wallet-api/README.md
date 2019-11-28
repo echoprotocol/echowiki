@@ -110,6 +110,7 @@
     * [get_eth_address](#get_eth_address-account)
     * [create_eth_address](#create_eth_address-account-broadcast)
     * [withdraw_eth](#withdraw_eth-account-eth_addr-value-broadcast)
+    * [propose_eth_update_contract_address](#propose_eth_update_contract_address-sender-expiration_time-new_addr_broadcast)
 * Sidechain-ERC20
     * [get_erc20_token](#get_erc20_token-eth_addr)
     * [check_erc20_token](#check_erc20_token-id)
@@ -1143,6 +1144,19 @@ Creates a transaction to withdraw ethereum.
 | `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 withdraw_eth nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10 true
+```
+
+### `propose_eth_update_contract_address sender expiration_time new_addr broadcast` 
+Creates a transaction to propose change the eth address of logic.
+
+| Option | Description |
+| :--- | :--- |
+| `string sender` | The account paying the fee to propose the tx. |
+| `fc::time_point_sec expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
+| `string new_addr` | The new address for ethereum logic. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
+```
+propose_eth_update_contract_address 1.2.6 "2019-11-28T13:50:00" "0e7057518879d5DE1F842b77e8F6F3e22931a1be" true
 ```
 
 ## Sidechain ERC20
