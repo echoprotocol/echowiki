@@ -1,7 +1,6 @@
 # Using echo chain interface
 
-To interact with the echo chain there is `chain interface`. For using needed include `chain.hpp`.
-Echo interfacial functions are members of classes that have the following hierarchy: the `object` class is the base class and the `account` class is inherited from it, the `contract_base` class is inherited from the `account`.
+There is a set of classes and functions in `chain.hpp` and `contract_base.hpp` for the interaction with the Echo chain.
 
 ### `chain interface` includes:
 
