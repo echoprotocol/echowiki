@@ -70,6 +70,7 @@
 | [sidechain_eth_withdraw_operation](operations/contracts/_sidechain_eth_withdraw_operation.md) | |
 | [sidechain_eth_send_withdraw_operation](operations/contracts/_sidechain_eth_send_withdraw_operation.md) | |
 | [sidechain_eth_approve_withdraw_operation](operations/contracts/_sidechain_eth_approve_withdraw_operation.md) | |
+| [sidechain_eth_update_contract_address_operation](operations/contracts/sidechain_eth_update_contract_address_operation.md) | |
 | [sidechain_issue_operation](operations/contracts/_sidechain_issue_operation.md) | |
 | [sidechain_burn_operation](operations/contracts/_sidechain_burn_operation.md) | |
 | [sidechain_erc20_register_token_operation](operations/contracts/_sidechain_erc20_register_token_operation.md) | |
