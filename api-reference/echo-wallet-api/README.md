@@ -93,8 +93,8 @@
     * [get_contract_object](#get_contract_object-id)
     * [get_contract](#get_contract-id)
     * [get_contract_result](#get_contract_result-id)
-    * [create_contract](#create_contract-registrar_account-code-value-asset_type-supported_asset_id-eth_accuracy-save_wallet)
-    * [call_contract](#call_contract-registrar_account-receiver-code-value-asset_type-save_wallet)
+    * [create_contract](#create_contract-registrar_account-code-amount-asset_type-supported_asset_id-eth_accuracy-save_wallet)
+    * [call_contract](#call_contract-registrar_account-receiver-code-amount-asset_type-save_wallet)
     * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
     * [get_contract_pool_balance](#get_contract_pool_balance-id)
     * [get_contract_pool_whitelist](#get_contract_pool_whitelist-id)
@@ -969,7 +969,7 @@ Get the result of contract execution.
 get_contract_result 1.10.0
 ```
 
-### `create_contract registrar_account code value asset_type supported_asset_id eth_accuracy save_wallet` 
+### `create_contract registrar_account code amount asset_type supported_asset_id eth_accuracy save_wallet` 
 Upload/Create a contract.
 
 Returns the signed transaction creating the contract
@@ -978,7 +978,7 @@ Returns the signed transaction creating the contract
 | :--- | :--- |
 | `string registrar_account` | name of the account creating the contract |
 | `string code` | code of the contract in hex format |
-| `number value` | the amount of asset transfered to the contract |
+| `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `string supported_asset_id` | the asset that can be used to create/call the contract (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset)) |
 | `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)) |
@@ -987,7 +987,7 @@ Returns the signed transaction creating the contract
 create_contract nathan code_contract 0 ECHO "" false true
 ```
 
-### `call_contract registrar_account receiver code value asset_type save_wallet` 
+### `call_contract registrar_account receiver code amount asset_type save_wallet` 
 Call a contract.
 
 Returns the signed transaction calling the contract
@@ -997,7 +997,7 @@ Returns the signed transaction calling the contract
 | `string registrar_account` | name of the account calling the contract |
 | `triplet receiver` | the id of the contract to call |
 | `string code` | the hash of the method to call |
-| `number value` | the amount of asset transfered to the contract |
+| `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `bool save_wallet` | whether to save the contract call to the wallet |
 ```

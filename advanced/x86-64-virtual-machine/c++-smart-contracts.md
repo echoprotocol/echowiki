@@ -4,7 +4,7 @@
 
 Smart contract should have entry point `void __apply()`. There is no other requirement for the rest of the code of the smart contract, though the approach for writing smart contract used in the examples is encouraged. There are several limitations to the C++ language in order to get small and portable bytecode
 
-* floating point tyypes and operations 
+* floating point types and operations 
 * dynamic linked libraries and runtime loading of the dynamic library is not supported 
 * C++ and C standard libraries are not supported fully on all the C++ toolchains, only classes/functions defined as header only can be included. As a consequence of that the following language features are not supported
 * RTTI
