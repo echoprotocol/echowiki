@@ -1,6 +1,6 @@
 # Chain parameters
 
-Default configuration values for chain parameters can be obtained using the method [get_config](../echo-node-api/database-api.md#get_config).
+Default configuration values for chain parameters can be obtained using the method [get_config](../echo-node-api/database-api/globals-api.md#get_config).
 
 ```cpp
 struct chain_parameters

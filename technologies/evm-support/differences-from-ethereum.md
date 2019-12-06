@@ -8,7 +8,7 @@ In order to minimize the risk, the mechanism of transaction fee payment for the 
 
 ### Transaction fee amount estimation
 
-For transaction fee amount estimation, Echo uses the following method [get\_required\_fees](/api-reference/echo-node-api/database-api.md#get_required_feesops-id). In responding to the request, when creating or executing a contract, Echo performs the following actions:
+For transaction fee amount estimation, Echo uses the following method [get\_required\_fees](/api-reference/echo-node-api/database-api/authority-api.md#get_required_fees-ops-id). In responding to the request, when creating or executing a contract, Echo performs the following actions:
 
 * estimates the required amount of Gas to execute or create a contract;
 * transfers Gas to the amount in a specified asset, based on the exchange rate of the asset and the cost of a Gas unit;
