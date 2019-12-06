@@ -448,7 +448,7 @@ Get a contract's whitelist and blacklist.
 
 | Option | Description |
 | :--- | :--- |
-| `contract_id_type id` | ID of the contract to get balances for |
+| `contract_id_type id` | ID of the contract |
 
 #### Example
 
