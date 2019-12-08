@@ -897,6 +897,7 @@ struct sidechain_btc_aggregate_operation : public base_operation
     p2sh_p2wsh sma_address;
     commitee_pub_keys_map_t committee_member_ids_in_script;
     uint64_t aggregation_out_value = 0;
+    uint32_t btc_block_number = 0;
 
     fc::optional<btc_aggregating_id_type> previous_aggregation;
     uint8_t cpfp_depth = 0;
@@ -926,6 +927,7 @@ struct sidechain_btc_aggregate_operation : public base_operation
       "sma_address": "2NBVhof6ntL76Kpy1D4znTqqt13Rt5J8SeS",
       "committee_member_ids_in_script": [],
       "aggregation_out_value": 0,
+      "uint32_t btc_block_number": 0,
       "previous_aggregation": "1.23.0", // optional
       "cpfp_depth": 0,
       "signatures": [],
