@@ -25,7 +25,7 @@ This query return data needed for calculating pow algorithm.
 | :--- | :--- |
 | `block_id_type block_id` | gives a block_id for sha256 calculating |
 | `uint64_t rand_num` | gives a salt for sha256 calculating |
-| `uint8_t difficulty` | gives a pow complexity |
+| `uint16_t difficulty` | gives a pow complexity |
 
 ```json
 {
