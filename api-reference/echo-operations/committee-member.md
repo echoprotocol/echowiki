@@ -149,7 +149,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
          "block_producer_reward_ratio": 5000,
          "committee_frozen_balance_to_activate": "100000000000",
          "committee_maintenance_intervals_to_deposit": 10,
-         "committee_freeze_duration_seconds": 2592000,
+         "committee_balance_unfreeze_duration_seconds": 2592000,
          "x86_64_maximum_contract_size": 200000,
          "frozen_balances_multipliers": [
                [

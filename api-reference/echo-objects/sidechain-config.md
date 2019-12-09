@@ -10,6 +10,7 @@ struct config
    eth_method eth_gen_address_method;
    eth_method eth_withdraw_method;
    eth_method eth_update_addr_method;
+   eth_method eth_update_contract_address;
    eth_method eth_withdraw_token_method;
    eth_method eth_collect_tokens_method;
    eth_topic_type eth_committee_updated_topic;
