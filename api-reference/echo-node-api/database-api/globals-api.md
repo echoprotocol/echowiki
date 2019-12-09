@@ -27,9 +27,6 @@ Retrieve the chain property object associated with the chain.
     "result": {
         "id": "2.9.0",
         "chain_id": "ee3aa7f1a6cc08a2759c2c9844a0dd475d5e9ee5a4a032f74c6d9fa1c0b9c89e",
-        "immutable_parameters": {
-            "min_committee_member_count": 11
-        },
         "extensions": []
     }
 }
@@ -441,7 +438,7 @@ Retrieve the current global property object.
             "block_producer_reward_ratio": 5000,
             "committee_frozen_balance_to_activate": "100000000000",
             "committee_maintenance_intervals_to_deposit": 10,
-            "committee_freeze_duration_seconds": 2592000,
+            "committee_balance_unfreeze_duration_seconds": 2592000,
             "x86_64_maximum_contract_size": 200000,
             "frozen_balances_multipliers": [
                 [

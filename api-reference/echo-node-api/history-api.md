@@ -293,3 +293,76 @@ A list of operations performed by contract, ordered from most recent to oldest.
 }
 ```
 
+## get\_relative\_contract\_history\(contract, stop, limit, start\)
+
+Get operations relevant to the specified contract referenced by an event numbering specific to the contract. The current number of operations for the contract can be found in the contract statistics (or use 0 for start).
+
+### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `contract_id_type contract` | The contract whose history should be queried |
+| `uint32_t stop` | Sequence number of earliest operation. 0 is default and will query 'limit' number of operations |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+| `uint32_t start` | Sequence number of the most recent operation to retrieve. 0 is default, which will start querying from the most recent operation |
+
+### Example
+
+```json
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        HISTORY_API_ID,
+        "get_relative_contract_history",
+        [
+            "1.11.0",
+            "0",
+            "1",
+            "10"
+        ]
+    ]
+}
+```
+
+### Returns
+
+A list of operations performed by contract, ordered from most recent to oldest.
+
+```json
+{
+    "id": 3,
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "id": "1.6.0",
+            "op": [
+                34,
+                {
+                    "fee": {
+                        "amount": 0,
+                        "asset_id": "1.3.0"
+                    },
+                    "deposit_to_account": "1.2.15",
+                    "balance_to_claim": "1.13.0",
+                    "balance_owner_key": "ECHO3BhH6nPrPmh6wAtsNphRTcreo2uzZLxSP8JyNJoiRD6Q",
+                    "total_claimed": {
+                        "amount": "1000000000000000",
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+            ],
+            "result": [
+                0,
+                {}
+            ],
+            "block_num": 2250,
+            "trx_in_block": 0,
+            "op_in_trx": 0,
+            "virtual_op": 29,
+            "extensions": []
+        }
+    ]
+}
+```

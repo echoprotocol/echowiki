@@ -117,6 +117,7 @@ Returns an array of all logs matching a given filter object.
 
 | Option | Description |
 | :--- | :--- |
+| `function<void(const variant&)> cb` | callback method which is called when contracts has logs |
 | `contract_logs_filter_options opts` | The filter object |
 
 #### The filter options
@@ -147,19 +148,54 @@ Topics are order-dependent. A transaction with a log with topics [A, B] will be 
     "params": [
         DATABASE_API_ID,
         "get_contract_logs",
-        [{
-            "contracts": ["1.11.0"],
-            "topics": [
-                ["a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"],
-                [],
+        [
+            CALLBACK_ID,
+            {
+                "contracts": [
+                    "1.11.0"
+                ],
+                "topics": [
+                    [
+                        "a1f905024bf9f0430b6d981173eb6df240bdf128fbadea8a869257b4015673e5"
+                    ],
+                    [],
+                    [
+                        "0000000000000000000000000000000000000000000000000000000000000002",
+                        "0000000000000000000000000000000000000000000000000000000000000004"
+                    ]
+                ],
+                "from_block": "0",
+                "to_block": "100"
+            }
+        ]
+    ]
+}
+```
+
+#### Notice example
+
+```json
+{
+    "method": "notice",
+    "params": [
+        CALLBACK_ID,
+        [
+            [
                 [
-                    "0000000000000000000000000000000000000000000000000000000000000002",
-                    "0000000000000000000000000000000000000000000000000000000000000004"
+                    0,
+                    {
+                        "address": "0100000000000000000000000000000000000000",
+                        "log": [
+                            "bfed43b35c99a41ee9b8cb5a2afa74e45703b17dfd398a3b96260bdebca807cf"
+                        ],
+                        "data": "",
+                        "block_num": 14,
+                        "trx_num": 0,
+                        "op_num": 0
+                    }
                 ]
-            ],
-            "from_block": "0",
-            "to_block": "100"
-        }]
+            ]
+        ]
     ]
 }
 ```
@@ -227,7 +263,7 @@ Subscription to change the contract uses database-api.md\#set\_subscribe\_callba
 }
 ```
 
-### subscribe\_contract\_logs\(callback, contract\_id\)
+### subscribe\_contract\_logs\(cb_id, cb, contract\_id\)
 
 Subscribe to specified contract logs.
 
@@ -235,6 +271,7 @@ Subscribe to specified contract logs.
 
 | Option | Description |
 | :--- | :--- |
+| `uint64_t cb_id` | Callback id which is referenced in notice when contracts has new logs |
 | `function<void(variant)> cb` | callback method which is called when contracts has new logs |
 | `map<contract_id_type, std::set<string>> subs` | Pairs of contract ids and topic filters |
 
@@ -294,6 +331,42 @@ The contracts logs by contract ID.
             ]
         ]
     ]
+}
+```
+
+### unsubscribe\_contract\_logs(cb\_id)
+
+Unsubscribe from contract log subscription
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `uint64_t cb_id` | Callback id of subscription |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "unsubscribe_contract_logs",
+        [
+            CALLBACK_ID
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": null
 }
 ```
 
