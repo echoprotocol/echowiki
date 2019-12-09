@@ -927,7 +927,7 @@ struct sidechain_btc_aggregate_operation : public base_operation
       "sma_address": "2NBVhof6ntL76Kpy1D4znTqqt13Rt5J8SeS",
       "committee_member_ids_in_script": [],
       "aggregation_out_value": 0,
-      "uint32_t btc_block_number": 0,
+      "btc_block_number": 0,
       "previous_aggregation": "1.23.0", // optional
       "cpfp_depth": 0,
       "signatures": [],
