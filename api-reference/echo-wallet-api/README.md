@@ -93,6 +93,8 @@
     * [get_contract_object](#get_contract_object-id)
     * [get_contract](#get_contract-id)
     * [get_contract_result](#get_contract_result-id)
+    * [get_contract_history](#get_contract_history-contract_id-limit)
+    * [get_relative_contract_history](#get_relative_contract_history-contract_id-stop-limit-start)
     * [create_contract](#create_contract-registrar_account-code-value-asset_type-supported_asset_id-eth_accuracy-save_wallet)
     * [call_contract](#call_contract-registrar_account-receiver-code-value-asset_type-save_wallet)
     * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
@@ -108,8 +110,9 @@
     * [get_account_withdrawals](#get_account_withdrawals-account-type)
 * Sidechain-Ethereum
     * [get_eth_address](#get_eth_address-account)
-    * [generate_eth_address](#generate_eth_address-account-broadcast)
+    * [create_eth_address](#create_eth_address-account-broadcast)
     * [withdraw_eth](#withdraw_eth-account-eth_addr-value-broadcast)
+    * [propose_eth_update_contract_address](#propose_eth_update_contract_address-sender-expiration_time-new_addr_broadcast)
 * Sidechain-ERC20
     * [get_erc20_token](#get_erc20_token-eth_addr)
     * [check_erc20_token](#check_erc20_token-id)
@@ -118,7 +121,7 @@
     * [register_erc20_token](#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast)
     * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
 * Sidechain-Bitcoin
-    * [generate_btc_deposit_address](#generate_btc_deposit_address-account-backup_address-broadcast)
+    * [create_btc_deposit_address](#create_btc_deposit_address-account-backup_address-broadcast)
     * [get_btc_addresses](#get_btc_addresses-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
@@ -965,10 +968,34 @@ Get the result of contract execution.
 | :--- | :--- |
 | `triplet id` | the id of the conract result |
 ```
-get_contract_result 1.10.0
+get_contract_result 1.12.0
 ```
 
-### `create_contract registrar_account code value asset_type supported_asset_id eth_accuracy save_wallet` 
+### `get_contract_history contract_id limit` 
+Returns the most recent operations on the contract id. This returns a list of operation history objects, which describe activity on the contract.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet contract_id` | the ID of the contract |
+| `unsigned limit` | the number of entries to return (starting from the most recent) |
+```
+get_contract_history 1.11.0 10
+```
+
+### `get_relative_contract_history contract_id stop limit start` 
+Returns the relative operations on the id contract from start number.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet contract_id` | the ID of the contract |
+| `uint32_t stop` | Sequence number of earliest operation |
+| `unsigned limit` | the number of entries to return (starting from the most recent) |
+| `uint32_t start` | the sequence number where to start looping back throw the history |
+```
+get_relative_contract_history 1.11.0 0 10 20
+```
+
+### `create_contract registrar_account code amount asset_type supported_asset_id eth_accuracy save_wallet` 
 Upload/Create a contract.
 
 Returns the signed transaction creating the contract
@@ -977,7 +1004,7 @@ Returns the signed transaction creating the contract
 | :--- | :--- |
 | `string registrar_account` | name of the account creating the contract |
 | `string code` | code of the contract in hex format |
-| `number value` | the amount of asset transfered to the contract |
+| `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `string supported_asset_id` | the asset that can be used to create/call the contract (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset)) |
 | `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)) |
@@ -986,7 +1013,7 @@ Returns the signed transaction creating the contract
 create_contract nathan code_contract 0 ECHO "" false true
 ```
 
-### `call_contract registrar_account receiver code value asset_type save_wallet` 
+### `call_contract registrar_account receiver code amount asset_type save_wallet` 
 Call a contract.
 
 Returns the signed transaction calling the contract
@@ -996,7 +1023,7 @@ Returns the signed transaction calling the contract
 | `string registrar_account` | name of the account calling the contract |
 | `triplet receiver` | the id of the contract to call |
 | `string code` | the hash of the method to call |
-| `number value` | the amount of asset transfered to the contract |
+| `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `bool save_wallet` | whether to save the contract call to the wallet |
 ```
@@ -1121,7 +1148,7 @@ Returns information about generated eth address, if exist and approved, for the 
 get_eth_address 1.2.0
 ```
 
-### `generate_eth_address account broadcast` 
+### `create_eth_address account broadcast` 
 Creates a transaction to generate ethereum address.
 
 | Option | Description |
@@ -1129,7 +1156,7 @@ Creates a transaction to generate ethereum address.
 | `triplet account` | The account for which the ethereum address is generated. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 ```
-generate_eth_address nathan true
+create_eth_address nathan true
 ```
 
 ### `withdraw_eth account eth_addr value broadcast` 
@@ -1143,6 +1170,19 @@ Creates a transaction to withdraw ethereum.
 | `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 withdraw_eth nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10 true
+```
+
+### `propose_eth_update_contract_address sender expiration_time new_addr broadcast` 
+Creates a transaction to propose change the eth contract address.
+
+| Option | Description |
+| :--- | :--- |
+| `string sender` | The account paying the fee to propose the tx. |
+| `fc::time_point_sec expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
+| `string new_addr` | The new address for ethereum contract. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
+```
+propose_eth_update_contract_address 1.2.6 "2019-11-28T13:50:00" "0e7057518879d5DE1F842b77e8F6F3e22931a1be" true
 ```
 
 ## Sidechain ERC20
@@ -1220,16 +1260,16 @@ Returns the signed version of the transaction.
 
 ## Sidechain Bitcoin
 
-### `generate_btc_deposit_address account backup_address broadcast` 
+### `create_btc_deposit_address account backup_address broadcast` 
 Creates a transaction to generate bitcoin deposit address.
 
 | Option | Description |
 | :--- | :--- |
 | `string account` | The account for which the bitcoin address is generated. |
-| `string backup_address` | The P2PK address to transfer satoshis back. |
+| `string backup_address` | The P2PKH address to transfer satoshis back. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 ```
-generate_btc_deposit_address nathan n4cLNDfyVPGoNFUpUEyBP8TzDPRNaVBm6E true
+create_btc_deposit_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
 ```
 
 ### `get_btc_address account` 
@@ -1237,7 +1277,7 @@ Returns information about generated btc address, if exist and approved, for the 
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | The account name or id to provide information about |
 ```
 get_btc_address 1.2.0
 ```

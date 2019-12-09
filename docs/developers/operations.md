@@ -63,18 +63,22 @@
 
 | Name | Description |
 | -------- | -------- |
-| [generate_eth_address_operation](operations/contracts/_generate_eth_address_operation.md) | |
-| [create_eth_address_operation](operations/contracts/_create_eth_address_operation.md) | |
-| [deposit_eth_operation](operations/contracts/_deposit_eth_operation.md) | |
-| [withdraw_eth_operation](operations/contracts/_withdraw_eth_operation.md) | |
-| [approve_withdraw_eth_operation](operations/contracts/_approve_withdraw_eth_operation.md) | |
-| [change_sidechain_config_operation](operations/contracts/_change_sidechain_config_operation.md) | |
+| [sidechain_eth_create_address_operation](operations/contracts/_sidechain_eth_create_address_operation.md) | |
+| [sidechain_eth_approve_address_operation](operations/contracts/_sidechain_eth_approve_address_operation.md) | |
+| [sidechain_eth_deposit_operation](operations/contracts/_sidechain_eth_deposit_operation.md) | |
+| [sidechain_eth_send_deposit_operation](operations/contracts/_sidechain_eth_send_deposit_operation.md) | |
+| [sidechain_eth_withdraw_operation](operations/contracts/_sidechain_eth_withdraw_operation.md) | |
+| [sidechain_eth_send_withdraw_operation](operations/contracts/_sidechain_eth_send_withdraw_operation.md) | |
+| [sidechain_eth_approve_withdraw_operation](operations/contracts/_sidechain_eth_approve_withdraw_operation.md) | |
+| [sidechain_eth_update_contract_address_operation](operations/contracts/sidechain_eth_update_contract_address_operation.md) | |
 | [sidechain_issue_operation](operations/contracts/_sidechain_issue_operation.md) | |
 | [sidechain_burn_operation](operations/contracts/_sidechain_burn_operation.md) | |
-| [register_erc20_token_operation](operations/contracts/_register_erc20_token_operation.md) | |
-| [deposit_erc20_token_operation](operations/contracts/_deposit_erc20_token_operation.md) | |
-| [withdraw_erc20_token_operation](operations/contracts/_withdraw_erc20_token_operation.md) | |
-| [approve_erc20_token_withdraw_operation](operations/contracts/_approve_erc20_token_withdraw_operation.md) | |
+| [sidechain_erc20_register_token_operation](operations/contracts/_sidechain_erc20_register_token_operation.md) | |
+| [sidechain_erc20_deposit_token_operation](operations/contracts/_sidechain_erc20_deposit_token_operation.md) | |
+| [sidechain_erc20_send_deposit_operation](operations/contracts/_sidechain_erc20_send_deposit_operation.md) | |
+| [sidechain_erc20_withdraw_token_operation](operations/contracts/_sidechain_erc20_withdraw_token_operation.md) | |
+| [sidechain_erc20_send_withdraw_operation](operations/contracts/_sidechain_erc20_send_withdraw_operation.md) | |
+| [sidechain_erc20_approve_token_withdraw_operation](operations/contracts/_sidechain_erc20_approve_token_withdraw_operation.md) | |
 
 #### Custom Extension
 

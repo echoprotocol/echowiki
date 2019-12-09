@@ -34,12 +34,12 @@ The executable generated during the previous step should be passed through the r
 User should upload the bytecode of the contract to the ECHO blockchain. See below for the example of command uploading the contract through his wallet.
 
 ```bash
-create_contract <username> "<bytecode>" <value> <asset_type> "" false true
+create_contract <username> "<bytecode>" <amount> <asset_type> "" false true
 ```
 
 * `username` - name of the account creating the contract, can be id or name, as an example "1.2.1214" or "alex"
 * `bytecode` - code of the contract
-* `value` - the amount of asset transfered to the contract, as an example "1000"
+* `amount` - the amount of asset transfered to the contract, as an example "1000"
 * `asset_type` - the type of the asset transfered to the contract, can be id or name, as an example "1.3.0" or "ECHO"
 
 Once the contract is uploaded it can be executed.
@@ -51,13 +51,13 @@ x86-64 Smart contract uploaded into ECHO blockchain can be executed as ordinary 
 Example of executing smart contract
 
 ```bash
-call_contract <username> <contract_id> "<function_with_parameters>" <value> <asset_type> true
+call_contract <username> <contract_id> "<function_with_parameters>" <amount> <asset_type> true
 ```
 
 * `username` - name of the account calling the contract, can be either id or name, as an example "1.2.1214" or "alex"
 * `contract_id` - the id of the contract to call, as an example "1.10.754"
 * `function_with_parameters` - function with parameters for call, as an example "get_balance(\"1.2.16\",\"1.3.0\")"
-* `value` - the amount of asset transfered to the contract, as an example "1000"
+* `amount` - the amount of asset transfered to the contract, as an example "1000"
 * `asset_type` - the type of the asset transfered to the contract, can be id or name, as an example "1.3.0" or "ECHO"
 
 ## Get result of upload or execution

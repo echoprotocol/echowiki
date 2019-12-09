@@ -21,7 +21,7 @@ create_contract nathan "608060405234801561001057600080fd5b5061013f80610020600039
 ```
 create_contract(
     string registrar_account, string code,
-    uint64_t value, string asset_type,
+    string amount, string asset_type,
     uint64_t gasPrice, uint64_t gas,
     string supported_asset_id,
     bool broadcast, bool save_wallet,
@@ -31,7 +31,7 @@ create_contract(
 
 - `registrar_account` - аккаунт владельца контракта
 - `code` - строка с байт-кодом контракта вместе с аргументами конструктора в hex-виде
-- `value` и `asset_type` - количество и тип ассета, передающиеся в транзакции
+- `amount` и `asset_type` - количество и тип ассета, передающиеся в транзакции
 - `gasPrice` и `gas` - цена и количество газа
 - `supported_asset_id` - ограничение при работе с данным контрактом до указанного ассета (по умолчанию ``)
 - `broadcast` - флаг, отвечающий за распространение транзакции по сети (по умолчанию `false`)

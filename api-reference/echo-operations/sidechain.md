@@ -109,6 +109,40 @@ struct sidechain_eth_deposit_operation : public base_operation
 ]
 ```
 
+## sidechain_eth_send_deposit_operation
+
+```cpp
+struct sidechain_erc20_send_withdraw_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "deposit_id": "1.14.0",
+      "extensions": []
+   }
+]
+```
+
 ## sidechain_eth_withdraw_operation
 
 ```cpp
@@ -145,6 +179,40 @@ struct sidechain_eth_withdraw_operation : public base_operation
 ]
 ```
 
+## sidechain_eth_send_withdraw_operation
+
+```cpp
+struct sidechain_erc20_send_withdraw_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   47,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "withdraw_id": "1.15.0",
+      "extensions": []
+   }
+]
+```
+
 ## sidechain_eth_approve_withdraw_operation
 
 ```cpp
@@ -166,7 +234,7 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
 
 ```json
 [
-   43,
+   45,
    {
       "fee": {
          "amount": 0,
@@ -174,6 +242,38 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
       },
       "committee_member_id": "1.2.0",
       "withdraw_id": 0,
+      "extensions": []
+   }
+]
+```
+
+## sidechain_eth_update_contract_address_operation
+
+```cpp
+struct sidechain_eth_update_contract_address_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = ECHO_BLOCKCHAIN_PRECISION; };
+
+   asset fee;
+   eth_address_type new_addr;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return ECHO_COMMITTEE_ACCOUNT; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   46,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "new_addr": "0e7057518879d5DE1F842b77e8F6F3e22931a1be",
       "extensions": []
    }
 ]
@@ -207,7 +307,7 @@ struct sidechain_issue_operation : public base_operation
 
 ```json
 [
-   44,
+   47,
    {
       "fee": {
          "amount": 0,
@@ -251,7 +351,7 @@ struct sidechain_burn_operation : public base_operation
 
 ```json
 [
-   45,
+   48,
    {
       "fee": {
          "amount": 0,
@@ -297,7 +397,7 @@ struct sidechain_erc20_register_token_operation : public base_operation
 
 ```json
 [
-   46,
+   49,
    {
       "fee": {
          "amount": 0,
@@ -340,7 +440,7 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 
 ```json
 [
-   47,
+   50,
    {
       "fee": {
          "amount": 0,
@@ -352,6 +452,40 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
       "erc20_token_addr": "0000000000000000000000000000000000000000",
       "value": "",
       "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "extensions": []
+   }
+]
+```
+
+## sidechain_erc20_send_deposit_operation
+
+```cpp
+struct sidechain_erc20_send_deposit_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   51,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "deposit_id": "1.17.0",
       "extensions": []
    }
 ]
@@ -381,7 +515,7 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
 
 ```json
 [
-   48,
+   52,
    {
       "fee": {
          "amount": 0,
@@ -391,6 +525,40 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
       "to": "0000000000000000000000000000000000000000",
       "erc20_token": "1.17.0",
       "value": "",
+      "extensions": []
+   }
+]
+```
+
+## sidechain_erc20_send_withdraw_operation
+
+```cpp
+struct sidechain_erc20_send_withdraw_operation : public base_operation
+{
+   struct fee_parameters_type { uint64_t fee = 0; };
+
+   asset fee;
+   account_id_type committee_member_id;
+   deposit_erc20_token_id_type deposit_id;
+
+   extensions_type extensions;
+
+   account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   53,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "committee_member_id": "1.2.0",
+      "withdraw_id": "1.18.0",
       "extensions": []
    }
 ]
@@ -418,7 +586,7 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 
 ```json
 [
-   49,
+   54,
    {
       "fee": {
          "amount": 0,
@@ -455,7 +623,7 @@ struct sidechain_erc20_issue_operation : public base_operation
 
 ```json
 [
-   50,
+   55,
    {
       "deposit": "1.18.0",
       "account": "1.2.0",
@@ -492,7 +660,7 @@ struct sidechain_erc20_burn_operation : public base_operation
 
 ```json
 [
-   51,
+   56,
    {
       "withdraw": "1.19.0",
       "account": "1.2.0",
@@ -528,7 +696,7 @@ struct sidechain_btc_create_address_operation : public base_operation
 
 ```json
 [
-   52,
+   57,
    {
       "fee": {
          "amount": 0,
@@ -566,7 +734,7 @@ struct sidechain_btc_create_intermediate_deposit_operation : public base_operati
 
 ```json
 [
-   53,
+   58,
    {
       "fee": {
          "amount": 0,
@@ -611,7 +779,7 @@ struct sidechain_btc_intermediate_deposit_operation : public base_operation
 
 ```json
 [
-   54,
+   59,
    {
       "fee": {
          "amount": 0,
@@ -651,7 +819,7 @@ struct sidechain_btc_deposit_operation : public base_operation
 
 ```json
 [
-   55,
+   60,
    {
       "fee": {
          "amount": 0,
@@ -697,7 +865,7 @@ struct sidechain_btc_withdraw_operation : public base_operation
 
 ```json
 [
-   56,
+   61,
    {
       "fee": {
          "amount": 0,
@@ -745,7 +913,7 @@ struct sidechain_btc_aggregate_operation : public base_operation
 
 ```json
 [
-   57,
+   62,
    {
       "fee": {
          "amount": 0,
@@ -788,7 +956,7 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 
 ```json
 [
-   58,
+   63,
    {
       "fee": {
          "amount": 0,
