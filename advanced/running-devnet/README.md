@@ -43,7 +43,7 @@ Now you can import account keys.
 ## Working with keys
 You can get private keys of devnet accounts in your `config.ini`. Here listed accounts from `init0` to `init8` and `nathan` which is the only account with init balance in default devnet genesis.
 
-Using this private keys you can import accounts in your wallet and do any paid operations.
+Using these private keys you can import accounts into your wallet and do any paid operations.
 
 To import key into wallet you need to run `import_key <account> <private key>` command:
 ```
