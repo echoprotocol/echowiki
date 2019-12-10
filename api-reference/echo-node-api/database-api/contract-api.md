@@ -202,7 +202,7 @@ Topics are order-dependent. A transaction with a log with topics [A, B] will be 
 
 ### subscribe\_contracts\(contracts\_ids\)
 
-Subscription to change the contract uses database-api.md\#set\_subscribe\_callback-callback-clear\_filter.
+Subscription to change the contract uses [set\_subscribe\_callback](objects_subscription-api.md#set_subscribe_callback-callback-clear_filter).
 
 #### Parameters
 

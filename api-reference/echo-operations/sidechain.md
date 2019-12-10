@@ -625,6 +625,10 @@ struct sidechain_erc20_issue_operation : public base_operation
 [
    55,
    {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
       "deposit": "1.18.0",
       "account": "1.2.0",
       "token": "1.17.0",
@@ -662,6 +666,10 @@ struct sidechain_erc20_burn_operation : public base_operation
 [
    56,
    {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
       "withdraw": "1.19.0",
       "account": "1.2.0",
       "token": "1.17.0",
