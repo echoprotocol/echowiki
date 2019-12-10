@@ -59,10 +59,10 @@ contract_whitelist_operation.
 
 ### Returning the Whitelist and Blacklist: `get_contract_pool_whitelist`
 
-The [get_contract_pool_whitelist](/api-reference/echo-node-api/database-api.md#get_contract_pool_balance-id) method returns both the whitelist and
+The [get_contract_pool_whitelist](/api-reference/echo-node-api/database-api/contract-api.md#get_contract_pool_balance-id) method returns both the whitelist and
 blacklist for the specified contract. 
 
 ### Returning the Fee Pool Balance: `get_contract_pool_balance`
 
-The [get_contract_pool_balance](/api-reference/echo-node-api/database-api.md#get_contract_pool_whitelist-id) method returns the current fee pool
+The [get_contract_pool_balance](/api-reference/echo-node-api/database-api/contract-api.md#get_contract_pool_whitelist-id) method returns the current fee pool
 balance for the specified contract.
