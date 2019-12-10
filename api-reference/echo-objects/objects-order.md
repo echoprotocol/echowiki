@@ -16,11 +16,11 @@
 |contract_object_type|1.11.x|
 |contract_result_object_type|1.12.x|
 |eth_address_object_type|1.13.x|
-|deposit_eth_object_type|1.14.x|
-|withdraw_eth_object_type|1.15.x|
+|eth_deposit_object_type|1.14.x|
+|eth_withdraw_object_type_type|1.15.x|
 |erc20_token_object_type|1.16.x|
-|deposit_erc20_token_object_type|1.17.x|
-|withdraw_erc20_token_object_type|1.18.x|
+|erc20_deposit_token_object_type|1.17.x|
+|erc20_withdraw_token_object_type|1.18.x|
 |btc_address_object_type|1.19.x|
 |btc_intermediate_deposit_object_type|1.20.x|
 |btc_deposit_object_type|1.21.x|
