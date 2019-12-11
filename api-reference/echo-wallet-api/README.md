@@ -909,20 +909,32 @@ Returns the block chain's rapidly-changing properties. The returned object conta
 Creates a transaction to propose a parameter change.  
 Multiple parameters can be specified if an atomic change is desired.
 
+Returns the signed transaction with new global parameters and proposal id.
+
 | Option | Description |
 | :--- | :--- |
 | `string proposing_account` | The account paying the fee to propose the tx |
 | `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string changed_values` | The values to change; all other chain parameters are filled in with default values |
+```
+propose_parameter_change 1.2.6 "2093-12-11T10:26:00" { "sidechain_config" : { "eth_committee_update_method" : { "method" : "ffffffff" } } } true
+```
 
 ### `propose_fee_change proposing_account expiration_time changed_values` 
 Propose a fee change.
+
+Returns the signed transaction with new global parameters and proposal id.
 
 | Option | Description |
 | :--- | :--- |
 | `string proposing_account` | The account paying the fee to propose the tx |
 | `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string changed_values` | Map of operation type to new fee. Operations may be specified by name or ID. The "scale" key changes the scale. All other operations will maintain current values. |
+```
+propose_fee_change 1.2.6 "2014-12-11T12:42:00" { 59 : { "fee" :123 } } true
+propose_fee_change 1.2.6 "2122-12-11T07:53:00" { "sidechain_btc_intermediate_deposit" : { "fee" :123 } } true
+propose_fee_change 1.2.6 "2179-12-11T07:53:00" { "scale" : 1000 } true
+```
 
 ### `approve_proposal fee_paying_account proposal_id delta broadcast` 
 Approve or disapprove a proposal.

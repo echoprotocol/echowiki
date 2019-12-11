@@ -28,6 +28,7 @@
   * [Create Account](advanced/create-account.md)
   * [Generate Address](advanced/generate-address.md)
   * [Running Committee Node](advanced/running-committee.md)
+  * [Create and Processing Propose](advanced/propose.md)
   * [Running devnet](advanced/running-devnet/README.md)
     * [Modify genesis](advanced/running-devnet/modify-genesis.md)
     * [Account registration](advanced/running-devnet/account-registration.md)
