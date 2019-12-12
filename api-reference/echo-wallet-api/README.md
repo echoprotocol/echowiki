@@ -78,16 +78,16 @@
 * Committee members
     * [create_committee_member](#create_committee_member-owner_account-url-amount-eth_address-btc_public_key-broadcast)
     * [update_committee_member](#update_committee_member-owner_account-committee_member-new_url-new_eth_address-new_btc_public_key-broadcast)
-    * [create_activate_committee_member_proposal](#create_activate_committee_member_proposal-sender-committee_to_activate-expiration_time-broadcast)
-    * [create_deactivate_committee_member_proposal](#create_deactivate_committee_member_proposal-sender-committee_to_activate-expiration_time-broadcast))
+    * [create_activate_committee_member_proposal](#create_activate_committee_member_proposal-sender-committee_to_activate-expiration_time)
+    * [create_deactivate_committee_member_proposal](#create_deactivate_committee_member_proposal-sender-committee_to_activate-expiration_time))
     * [list_committee_members](#list_committee_members-lowerbound-limit)
     * [get_committee_member](#get_committee_member-owner_account)
 * Globals
     * [get_chain_properties](#get_chain_properties)
     * [get_global_properties](#get_global_properties)
     * [get_dynamic_global_properties](#get_dynamic_global_properties)
-    * [propose_parameter_change](#propose_parameter_change-proposing_account-expiration_time-changed_values-broadcast)
-    * [propose_fee_change](#propose_fee_change-proposing_account-expiration_time-changed_values-broadcast)
+    * [propose_parameter_change](#propose_parameter_change-proposing_account-expiration_time-changed_values)
+    * [propose_fee_change](#propose_fee_change-proposing_account-expiration_time-changed_values)
     * [approve_proposal](#approve_proposal-fee_paying_account-proposal_id-delta-broadcast)
 * Contracts
     * [get_contract_object](#get_contract_object-id)
@@ -112,7 +112,7 @@
     * [get_eth_address](#get_eth_address-account)
     * [create_eth_address](#create_eth_address-account-broadcast)
     * [withdraw_eth](#withdraw_eth-account-eth_addr-value-broadcast)
-    * [propose_eth_update_contract_address](#propose_eth_update_contract_address-sender-expiration_time-new_addr_broadcast)
+    * [propose_eth_update_contract_address](#propose_eth_update_contract_address-sender-expiration_time-new_addr)
 * Sidechain-ERC20
     * [get_erc20_token](#get_erc20_token-eth_addr)
     * [check_erc20_token](#check_erc20_token-id)
@@ -839,7 +839,7 @@ Returns the signed transaction updating a committee_member.
 update_committee_member nathan 1.4.0 new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
 
-### `create_activate_committee_member_proposal sender committee_to_activate expiration_time broadcast` 
+### `create_activate_committee_member_proposal sender committee_to_activate expiration_time` 
 Creates a proposal to activate given commitee.  
 An account can have at most one committee_member object.
 
@@ -850,12 +850,11 @@ Returns the signed transaction registering a committee_member
 | `string sender` | the name or id of the account which is creating proposal |
 | `triplet committee_to_activate` | a committee member |
 | `time_point expiration_time` | expiration time of created proposal |
-| `bool broadcast` | true to broadcast the transaction on the network |
 ```
-create_activate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00 true
+create_activate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00
 ```
 
-### `create_deactivate_committee_member_proposal sender committee_to_activate expiration_time broadcast)` 
+### `create_deactivate_committee_member_proposal sender committee_to_activate expiration_time)` 
 Creates a proposal to deactivate given commitee.  
 An account can have at most one committee_member object.
 
@@ -866,9 +865,8 @@ Returns the signed transaction registering a committee_member
 | `string sender` | the name or id of the account which is creating proposal |
 | `triplet committee_to_activate` | a committee member |
 | `time_point expiration_time` | expiration time of created proposal |
-| `bool broadcast` | true to broadcast the transaction on the network |
 ```
-create_deactivate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00 true
+create_deactivate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00
 ```
 
 ### `list_committee_members lowerbound limit` 
@@ -907,7 +905,7 @@ Returns the block chain's slowly-changing settings. This object contains all of 
 Returns the block chain's rapidly-changing properties. The returned object contains information that changes every block interval such as the head block number, etc.  
 **See also**: `get_global_properties` for less-frequently changing properties 
 
-### `propose_parameter_change proposing_account expiration_time changed_values broadcast` 
+### `propose_parameter_change proposing_account expiration_time changed_values` 
 Creates a transaction to propose a parameter change.  
 Multiple parameters can be specified if an atomic change is desired.
 
@@ -916,9 +914,8 @@ Multiple parameters can be specified if an atomic change is desired.
 | `string proposing_account` | The account paying the fee to propose the tx |
 | `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string changed_values` | The values to change; all other chain parameters are filled in with default values |
-| `bool broadcast` | true if you wish to broadcast the transaction |
 
-### `propose_fee_change proposing_account expiration_time changed_values broadcast` 
+### `propose_fee_change proposing_account expiration_time changed_values` 
 Propose a fee change.
 
 | Option | Description |
@@ -926,7 +923,6 @@ Propose a fee change.
 | `string proposing_account` | The account paying the fee to propose the tx |
 | `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string changed_values` | Map of operation type to new fee. Operations may be specified by name or ID. The "scale" key changes the scale. All other operations will maintain current values. |
-| `bool broadcast` | true if you wish to broadcast the transaction |
 
 ### `approve_proposal fee_paying_account proposal_id delta broadcast` 
 Approve or disapprove a proposal.
@@ -1172,7 +1168,7 @@ Creates a transaction to withdraw ethereum.
 withdraw_eth nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10 true
 ```
 
-### `propose_eth_update_contract_address sender expiration_time new_addr broadcast` 
+### `propose_eth_update_contract_address sender expiration_time new_addr` 
 Creates a transaction to propose change the eth contract address.
 
 | Option | Description |
@@ -1180,9 +1176,8 @@ Creates a transaction to propose change the eth contract address.
 | `string sender` | The account paying the fee to propose the tx. |
 | `fc::time_point_sec expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string new_addr` | The new address for ethereum contract. |
-| `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
-propose_eth_update_contract_address 1.2.6 "2019-11-28T13:50:00" "0e7057518879d5DE1F842b77e8F6F3e22931a1be" true
+propose_eth_update_contract_address 1.2.6 "2019-11-28T13:50:00" "0e7057518879d5DE1F842b77e8F6F3e22931a1be"
 ```
 
 ## Sidechain ERC20
