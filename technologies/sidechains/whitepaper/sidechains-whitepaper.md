@@ -240,7 +240,7 @@ Since after changing (replacing, adding or deleting) a single or several committ
 
 ### Fee payment
 
-All fees below are specified in bytes, which are calculated based on transactions virtual sizes. Fees in satoshi and approximate fees in USD are provided in the table below.
+All fees below are specified in bytes, which are calculated based on transactions virtual sizes. Fees in satoshi and approximate fees in USD are provided in the table below as well.
 
 
 |            | Deposit fee | Withdrawal fee | Minimum deposit | Minimum withdrawal |
@@ -401,7 +401,23 @@ Since the committee addresses are stored in the main smart contract deployed on 
 
 ### Fee payment
 
-Committee members pay all fees connected with smart contract calls on the Ethereum chain. The gas price is defined in the Echo blockchain config. Fees related to the ERC20 smart contract calls on the Echo side are covered by the fee pool of the contract.
+All fees below are calculated based on ethereum gas unit. Fees in GWei and approximate fees in USD are provided in the table below as well. Please note that additional gas will be charged from the user's Ethereum account for transfers to sidechain addresses in Ethereum network.
+Deposit fee is intended to cover gas spended for deposit contract deployement in Ethereum network so it will be charged only for the first transfer to the address of that contract, subsequent deposits will be free of charge. 
+Withdrawal fees will be divided and setteled on committee members' accounts in eETH asset.
+
+| Operation                               | Gas                   | Gwei (gas price 4 Gwei) | USD (approx) |
+|-----------------------------------------|-----------------------|-------------------------|--------------|
+| Deposit fee (first deposit for account) | ~540,000              | 2,160,000               | 0.3          |
+| Deposit fee (subsequent deposits)       | 0                     | 0                       | 0            |
+| Minimum deposit                         | Deposit fee + 250,000 | 3,160,000 (1,000,000)   | 0.4 (0.1)    |
+| Withdraw fee                            | 1,000,000             | 4,000,000               | 0.5          |
+| Minimum withdrawal                      | 2,000,000             | 8,000,000               | 1            |
+
+Gas price is defined to be equal to 4 GWei initially, which will allow the transactions to be mined in the nearest blocks.
+All parameters (fees, minumums and gas price) are defined in the Echo config and can be increased or decreased by committee members.
+
+ER20 tokens deposits and withdrawals are free of charge. Fees related to the ERC20 smart contract calls on the Echo side are covered by the fee pool of the contract.
+
 
 ## Further Development
 
