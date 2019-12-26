@@ -28,8 +28,8 @@ The defaultBlock parameter is string and left only for backward compatibility. D
   - `totalDifficulty`: `QUANTITY` - zero. No POW in Echo.
   - `extraData`: `DATA` - zero.
   - `size`: `QUANTITY` - integer the size of this block in bytes.
-  - `gasLimit`: `QUANTITY` - the maximum gas allowed in this block.
-  - `gasUsed`: `QUANTITY` - the total used gas by all transactions in this block. // fees collected?
+  - `gasUsed`: `QUANTITY` - the total used gas by all transactions in this block. fees_collected from block
+  - `gasLimit`: `QUANTITY` - the maximum gas allowed in this block. Is equal `to gasUsed`
   - `timestamp`: `QUANTITY` - the unix timestamp of the block
   - `transactions`: `Array` - Array of [transaction object](#echo-to-eth-transaction-conversion), or 32 Bytes [transaction hashes](#transaction-hash-format) depending on the last given parameter.
   - `uncles`: `Array` - Empty array. No uncle blocks in Echo.
@@ -76,8 +76,8 @@ Converts to next Ethereum block:
     "totalDifficulty":  "0x00",
     "extraData": "0x00",
     "size":  "0x0812", // 2066 bytes
-    "gasLimit": "0x9f759", // 653145
-    "gasUsed": "0x9f759", // 653145
+    "gasLimit": "0x9f7", // 2551
+    "gasUsed": "0x9f7", // 2551
     "timestamp": "0x5df7ba9d", // 1576516253
     "transactions": [{...}],
     "uncles": []
@@ -918,7 +918,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{see 
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "0x5208" // 21000
+  "result": "0x14" // 20 for transfer
 }
 ```
 
@@ -970,8 +970,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0
     "totalDifficulty":  "0x00",
     "extraData": "0x00",
     "size":  "0x0812", // 2066 bytes
-    "gasLimit": "0x9f759", // 653145
-    "gasUsed": "0x9f759", // 653145
+    "gasLimit": "0x9f", // 159
+    "gasUsed": "0x9f", // 159
     "timestamp": "0x5df7ba9d", // 1576516253
     "transactions": [{...}],
     "uncles": []
@@ -1024,8 +1024,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
     "totalDifficulty":  "0x00",
     "extraData": "0x00",
     "size":  "0x0812", // 2066 bytes
-    "gasLimit": "0x9f759", // 653145
-    "gasUsed": "0x9f759", // 653145
+    "gasLimit": "0x9f", // 159
+    "gasUsed": "0x9f", // 159
     "timestamp": "0x5df7ba9d", // 1576516253
     "transactions": [{...}],
     "uncles": []
@@ -1215,7 +1215,7 @@ params: [
   - `from`: `DATA`, 20 Bytes - address of the sender.
   - `to`: `DATA`, 20 Bytes - address of the receiver. null when it's a contract creation transaction.
   - `cumulativeGasUsed `: `QUANTITY ` - The total amount of gas used when this transaction was executed in the block.
-  - `gasUsed `: `QUANTITY ` - The amount of gas used by this specific transaction alone.
+  - `gasUsed `: `QUANTITY ` - Equal to `cumulativeGasUsed`.
   - `contractAddress `: `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
   - `logs`: `Array` - Array of log objects, which this transaction generated.
   - `logsBloom`: `DATA`, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
@@ -1240,8 +1240,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","para
      transactionIndex:  '0x00', // 0
      blockNumber: '0xbb8', // 3000
      blockHash: '0x00000000000000000000000000000bb8ad06b5654a7d5b2537df4c7c5ae29c18',
-     cumulativeGasUsed: '0x33bc', // 13244
-     gasUsed: '0x4dc', // 1244
+     cumulativeGasUsed: '0x4d', // 77
+     gasUsed: '0x4d', // 77
      contractAddress: '0xb60e8dd61c5d32be8058bb8eb970870f07233155', // or null, if none was created
      logs: [{
          // logs as returned by getFilterLogs, etc.
@@ -1278,8 +1278,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_pendingTransactions","params
     blockHash: '0x0000000000000000000000000000000000000000000000000000000000000000',
     blockNumber: null,
     from: '0x000000000000000000000000000000000000000a',
-    gas: '0x204734',
-    gasPrice: '0x4a817c800',
+    gas: '0xda',
+    gasPrice: '0x01',
     hash: '0x000000000000000000000000f975cb125cd12efc9bc783e5a444435e0337f494',
     input: '0x6080604052600',
     nonce: '0x00',
