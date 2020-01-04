@@ -70,6 +70,8 @@
     * [Asset Transfer](api-reference/echo-operations/asset-transfer.md)
     * [Sidechain](api-reference/echo-operations/sidechain.md)
     * [Vesting Balances](api-reference/echo-operations/vesting-balances.md)
+  * [JSON RPC](api-reference/json-rpc/README.md)
+    * [Methods](api-reference/json-rpc/methods.md)
 * [Changelogs](changelogs/README.md)
   * [0.14](changelogs/0.14.md)
   * [0.13](changelogs/0.13.md)
