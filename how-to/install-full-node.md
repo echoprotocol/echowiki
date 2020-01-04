@@ -8,32 +8,32 @@ The quickest way is to simply download the binary files from the link below and 
 
 ### Linux
 
-1. Download the Echo node binary: [echo-linux.0.13.9.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.9.tar)
+1. Download the Echo node binary: [echo-linux.0.14.1.tar](https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.14.1.tar)
 
    ```bash
-   wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.13.9.tar
+   wget https://d14s13k07yt1gw.cloudfront.net/echo-linux.0.14.1.tar
    ```
 
 2. Unzip the binary:
 
    ```bash
-   tar -xvf echo-linux.0.13.9.tar
-   cd echo-linux.0.13.9
+   tar -xvf echo-linux.0.14.1.tar
+   cd echo-linux.0.14.1
    ```
 
 ### Mac OS
 
-1. Download the Echo node binary: [echo-mac.0.13.9.tar](https://d14s13k07yt1gw.cloudfront.net/echo-mac.0.13.9.tar)
+1. Download the Echo node binary: [echo-mac.0.14.1.tar](https://d14s13k07yt1gw.cloudfront.net/echo-mac.0.14.1.tar)
 
    ```bash
-   wget https://d14s13k07yt1gw.cloudfront.net/echo-mac.0.13.9.tar
+   wget https://d14s13k07yt1gw.cloudfront.net/echo-mac.0.14.1.tar
    ```
 
 2. Unzip the binary:
 
    ```bash
-   tar -xvf echo-mac.0.13.9.tar
-   cd echo-mac.0.13.9
+   tar -xvf echo-mac.0.14.1.tar
+   cd echo-mac.0.14.1
    ```
 
 ### Windows
