@@ -1,7 +1,9 @@
 # Echo TestRPC API
 
+TestRPC API is the extension of [Ethereum JSON RPC API](../json-rpc/methods.md) which relies on new features of simplified block generator and integrated test wallet.
+
 ### eth_mining
-Returns `true` if client is actively mining new blocks, otherwise `false`.
+Returns `true` if client is generating new blocks, otherwise `false`. 
 
 ##### Example
 ```json
@@ -17,7 +19,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":1}'
 ```
 
 ### miner_start
-Start the block mining process.
+Start the block generation process.
 
 ##### Example
 ```json
@@ -33,7 +35,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}
 ```
 
 ### miner_stop
-Stop the block mining process.
+Stop the block generation process.
 
 ##### Example
 ```json
@@ -53,31 +55,30 @@ Generates a new private key and create new account with it.
 
 | Option | Description |
 | :--- | :--- |
-| `string name` | New account name |
 | `string passphrase` | Passphrase which is used to unlock account |
 | Returns | The address of the new account |
 
 ##### Example
 ```json
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"miner_stop","params":["swordfish"],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"personal_newAccount","params":["swordfish"],"id":1}'
 
 // Result
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": "0x000000000000000000000000000000000000001a"
 }
 ```
 
 ### personal_listAccounts
-Returns all account addresses of all keys in the key store.
+Returns all account addresses of all keys in the integrated test wallet.
 
 ### personal_lockAccounts
-Removes the private key with given address from memory. The account can no longer be used to send transactions.
+Locks the account's private key so, it can no longer be used to send transactions.
 
 ### personal_unlockAccounts
-Decrypts the key with the given address from the key store.  
+Decrypts the key with the given address from the integrated test wallet.  
 The account can be used with eth_sign and eth_sendTransaction while it is unlocked.
 
 ### eth_sign
@@ -87,14 +88,13 @@ The sign method calculates an Ethereum specific signature with: sign(keccak256("
 
 | Option | Description |
 | :--- | :--- |
-| `string message` | Message to sign in hex |
-| `string account` | Account name |
-| `string passphrase` | Account passphrase |
+| `string address` | Account address |
+| `string message` | Message to sign |
 | Returns | Hex-encoded signature |
 
 ##### Example
 ```json
-curl -X POST --data '{"id":1,"jsonrpc":"2.0","method":"eth_sign","params":["0xdeadbeaf","nathan",""]}'
+curl -X POST --data '{"id":1,"jsonrpc":"2.0","method":"eth_sign","params":["0x000000000000000000000000000000000000001a","0xdeadbeaf"]}'
 
 // Result
 {
@@ -111,23 +111,19 @@ Returns hex-encoded transaction id.
 Parameters object options:
 | Option | Description |
 | :--- | :--- |
-| `string from` | Name or id of the account the transaction is send from |
-| `string to` |  (optional when creating new contract) Name or id of the account or contract the transaction is directed to. |
+| `string from` | Address of the account the transaction is send from |
+| `string to` |  (optional when creating new contract) Address of the account or contract the transaction is directed to. |
 | `string gas` | (optional, default: estimated) Integer of the **fee** provided for the transaction execution. |
 | `string value` | (optional) Integer of the value sent with this transaction |
-| `string value_asset` | (optional) Integer of the asset id of value |
 | `string data` | The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. |
-
-
 
 Example parameters:
 ```json
 params: [{
-  "from": "nathan",
-  "to": "1.11.54",
+  "from": "0x000000000000000000000000000000000000001a",
+  "to": "0100000000000000000000000000000000000005",
   "gas": "0x76c0", // 30400
   "value": "0x9184e72a", // 2441406250
-  "value_asset": "0x01", // eETH
   "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
 }]
 ```
@@ -141,7 +137,7 @@ curl -X POST --data '{"id":1,"jsonrpc":"2.0","method":"eth_sendTransaction","par
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": "0x4ca35a1a6b75ee3d5145a99d05921026d1527331"
+  "result": "0x0000000000000000000000004ca35a1a6b75ee3d5145a99d05921026d1527331"
 }
 ```
 
