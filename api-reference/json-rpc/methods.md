@@ -175,7 +175,7 @@ Echo `block_id = 00000baf371addf365df0d9df9333c0af8a5e9a1` converts to
 
 Transaction hash consists of 2 parts:
 1. Applied operation data, that consists of Block number and index of operation in block.
-2. Ripemd160 hash of serialized operation with appended expiration_time from transaction. Helps to identify operation from pending.
+2. Ripemd160 hash of serialized operation with appended operation index and block number. Helps to identify operation from pending.
 
 And looks like:
 
@@ -183,7 +183,7 @@ And looks like:
 "0x"[4bytes zero][4bytes blocknum][4bytes opnum][20bytes ophash] 
 ```
 
-ophash is `ripemd160(serialize(op) + serialize(trx.expiration))`
+ophash is `ripemd160(serialize(op) + serialize(op_num) + serialize(block_num))`
 
 ### Example
 
