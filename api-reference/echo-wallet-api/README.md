@@ -24,6 +24,7 @@
     * [get_account_id](#account_name_or_id-account_name_or_id)
     * [get_account_addresses](#get_account_addresses-account_id-from-limit)
     * [get_account_by_address](#get_account_by_address-address)
+    * [get_evm_addresses](#get_evm_addresses-account_id)
     * [import_accounts](#import_accounts-filename-password)
     * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
@@ -281,6 +282,16 @@ Get owner of specified address.
 | `ripemd160 address` | address in form of ripemd160 hash |
 ```
 get_account_by_address 8815c69de5d32d3061e52ca9386446332225b43d
+```
+
+### `get_evm_addresses account_id`
+Get EVM addresses, if exist, for the given account id.
+
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account_id` | ID of the account |
+```
+get_evm_addresses 1.2.0
 ```
 
 ### `import_accounts filename password`

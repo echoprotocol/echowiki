@@ -26,6 +26,7 @@
 |btc_deposit_object_type|1.21.x|
 |btc_withdraw_object_type|1.22.x|
 |btc_aggregating_object_type|1.23.x|
+|evm_address_object_type|1.24.x|
 
 ## Implementation types
 
