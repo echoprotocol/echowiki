@@ -97,9 +97,7 @@ struct balance_freeze_operation : public base_operation {
 
 ## balance_unfreeze_operation
 
-Freeze balance to get more reward during fee distribution.
-
-Duration is indicated in days. For the selected duration, the balance modifier must be specified in the chain parameters.
+Unfreeze balance.
 
 ```cpp
 struct balance_unfreeze_operation : public balance_freeze_operation {
