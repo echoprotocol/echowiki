@@ -312,7 +312,7 @@ An array of vesting balances.
 
 #### Returns
 
-An array of vesting balances.
+An array of frozen balances.
 
 ```javascript
 {
