@@ -2,6 +2,8 @@
 
 ## request\_registration\_task()
 
+Request connected node to register account.
+
 ### Example
 
 This query return data needed for calculating pow algorithm.
