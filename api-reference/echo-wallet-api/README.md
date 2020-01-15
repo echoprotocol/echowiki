@@ -317,7 +317,7 @@ This function is used to register an account for which you do not own the privat
 register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu new_acc true
 ```
 
-### `register_account_with_api name active-key echorand-key`
+### `register_account_with_api name active_key echorand_key`
 Request connected node to register account with provided name and keys.
 
 | Option | Description |
