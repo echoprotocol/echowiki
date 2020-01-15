@@ -187,7 +187,7 @@ contract C {
 
 #### Use Echo Solc
 
-To compile contracts with additional methods, an advanced Solc compiler can be used - [https://github.com/echoprotocol/solc](https://github.com/echoprotocol/solc).
+To compile contracts with additional methods, an advanced Solc compiler can be used - [solc-bin](https://github.com/echoprotocol/solc-bin).
 
 #### Use predefined contracts
 
