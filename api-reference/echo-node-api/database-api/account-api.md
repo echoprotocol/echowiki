@@ -547,6 +547,53 @@ Account id of owner.
 }
 ```
 
+### get\_evm\_addresses(account_id\)
+
+Get EVM addresses, if exist, for the given account id.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account_id` | address in form of ripemd160 hash |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_evm_addresses",
+        [
+            "1.2.10"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+EVM addresses owned by account.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        [
+            {
+                "id": "1.24.0",
+                "owner": "1.2.10",
+                "evm_address": "0102fe7702b96808f7bbc0d4a888ed1468216cfd",
+                "extensions": []
+            }
+        ]
+    ]
+}
+```
+
 ### get\_account\_count\(\)
 
 Get the total number of accounts registered with the blockchain.
