@@ -235,6 +235,26 @@ unsigned long int my_get_send_value()
 ```
 
 
+##### Get sender for current contract call
+
+Member of class `contract_base`.
+
+You can get sender for current contract call.
+
+###### Return
+
+`string` - triplet id of sender.
+
+###### Example
+
+```c++
+string my_get_sender()
+{
+    return get_sender();
+}
+```
+
+
 ##### Get origin sender for current contract call
 
 Member of class `contract_base`.
@@ -293,6 +313,37 @@ string my_get_full_contract_id()
     return get_full_contract_id();
 }
 ```
+
+
+##### Get balance
+
+Member of class `contract_object`.
+
+You can call another x86-64 contract. For the call, you will need to pass the call line, the amount and size of gas to perform. If you do not want to limit the call to the gas, 0 is transmitted.
+
+###### Parameters
+
+| Option | Description | Example |
+| :--- | :--- | :--- |
+| `string id` | triplet id of contract | 1.11.165 |
+| `string call_line` | call line | get_balance(\"1.2.236\", \"1.3.0\") |
+| `unsigned long int amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
+| `unsigned long int gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
+
+###### Return
+
+`string` - result of executing an internal contract call. First 4 bytes(8 characters) - size of output.
+
+###### Example
+
+```c++
+long int call_contract(string id, string call_line, unsigned long int amount, unsigned long int gas)
+{
+    contract_object c(id);
+    return c.call(call_line, amount, gas);
+}
+```
+
 
 ### Echo interface contract example
 

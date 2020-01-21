@@ -220,3 +220,39 @@ struct account_address_create_operation : public base_operation
 ]
 ```
 
+## evm\_address\_register\_operation
+
+Creates an ethereum address for an account.
+
+```cpp
+struct evm_address_register_operation : public base_operation
+   {
+      struct fee_parameters_type 
+      { 
+         uint64_t fee = 0;
+      };
+
+      asset fee;
+
+      account_id_type owner;
+      eth_address_type evm_address;
+
+      extensions_type extensions;
+   };
+```
+
+### JSON Example
+
+```json
+[
+   65,{
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+    },
+    "owner": "1.2.0",
+    "evm_address": "0000000000000000000000000000000000000000",
+    "extensions": []
+  }
+]
+```
