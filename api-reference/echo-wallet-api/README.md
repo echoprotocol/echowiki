@@ -1013,8 +1013,8 @@ Returns the signed transaction creating the contract
 | `string code` | code of the contract in hex format |
 | `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
-| `string supported_asset_id` | the asset that can be used to create/call the contract (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-supported-asset)) |
-| `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy](https://echo-dev.io/developers/smart-contracts/solidity/introduction/#flag-of-using-ethereum-accuracy)) |
+| `string supported_asset_id` | the asset that can be used to create/call the contract (see [Flag of supported asset](../../technologies/evm-support/README.md#flag-of-supported-asset)) |
+| `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [Flag of using Ethereum accuracy](../../technologies/evm-support/README.md#flag-of-using-ethereum-accuracy)) |
 | `bool save_wallet` | whether to save the contract to the wallet |
 ```
 create_contract nathan code_contract 0 ECHO "" false true
