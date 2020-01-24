@@ -79,7 +79,7 @@
 * [Sidechain Ethereum](sidechain-api.md#sidechain_Ethereum)
   * [get\_eth\_address](sidechain-api.md#get_eth_address-account)
 * [Sidechain ERC20](sidechain-api.md#sidechain-erc20)
-  * [get\_erc20\_token](sidechain-api.md#get_erc-20-_token-eth_addr)
+  * [get\_erc20\_token](sidechain-api.md#get_erc-20-_token-eth_addr_or_id)
   * [get\_erc20\_account\_deposits](sidechain-api.md#get_erc-20-_account_deposits-account)
   * [get\_erc20\_account\_withdrawals](sidechain-api.md#get_erc-20-_account_withdrawals-account)
 * [Contract Feepool](contract-api.md#contract-feepool)
