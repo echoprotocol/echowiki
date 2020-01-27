@@ -30,7 +30,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"miner_start","params":[],"id":1}
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": null
 }
 ```
 
@@ -46,7 +46,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"miner_stop","params":[],"id":1}'
 {
   "id":1,
   "jsonrpc": "2.0",
-  "result": true
+  "result": null
 }
 ```
 
@@ -72,14 +72,67 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"personal_newAccount","params":["
 ```
 
 ### personal_listAccounts
-Returns all account addresses of all keys in the integrated test wallet.
+Returns list of all account addresses in the integrated test wallet.
 
-### personal_lockAccounts
-Locks the account's private key so, it can no longer be used to send transactions.
+##### Example
+```json
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"personal_listAccounts","params":[],"id":1}'
 
-### personal_unlockAccounts
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": [
+    "0x000000000000000000000000000000000000001a"
+  ]
+}
+```
+
+### personal_lockAccount
+Locks the account's private key so, it can no longer be used to send transactions. Returns `true`.
+
+| Option | Description |
+| :--- | :--- |
+| `string address` | Account address to lock |
+| Returns | `true` or error |
+
+##### Example
+```json
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"personal_lockAccount","params":["0x000000000000000000000000000000000000001a"],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
+
+### personal_unlockAccount
 Decrypts the key with the given address from the integrated test wallet.  
 The account can be used with eth_sign and eth_sendTransaction while it is unlocked.
+
+| Option | Description |
+| :--- | :--- |
+| `string address` | Account address to unlock |
+| `string passphrase` | Account's passphrase |
+| `number duration` | (optional) Unlock duration in seconds |
+| Returns | `true` or error |
+
+##### Example
+```json
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"personal_unlockAccount","params":["0x000000000000000000000000000000000000001a", "swordfish", 300],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": true
+}
+```
 
 ### eth_sign
 The sign method calculates an Ethereum specific signature with: sign(keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))).
