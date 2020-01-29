@@ -315,20 +315,51 @@ string my_get_full_contract_id()
 ```
 
 
-##### Get balance
+##### Get contract variable from another x86-64 contract
 
 Member of class `contract_object`.
 
-You can call another x86-64 contract. For the call, you will need to pass the call line, the amount and size of gas to perform. If you do not want to limit the call to the gas, 0 is transmitted.
+You can call get storage variable from another x86-64 contract. For the get, you will need to pass the amount by 0, count of gas by 0 and the variable name.
 
 ###### Parameters
 
 | Option | Description | Example |
 | :--- | :--- | :--- |
 | `string id` | triplet id of contract | 1.11.165 |
-| `string call_line` | call line | get_balance(\"1.2.236\", \"1.3.0\") |
+| `unsigned long int amount` | amount, doesn't affect anything | 0 |
+| `unsigned long int gas` | gas, doesn't affect anything | 0 |
+| `string var_name` | variable name | "var_name" |
+
+###### Return
+
+`string` - result of executing an internal contract call. First 4 bytes(8 characters) - size of output.
+
+###### Example
+
+```c++
+void call_contract(string id, string var_name, unsigned long int amount, unsigned long int gas)
+{
+    contract_object c(id);
+    int var_1 = c.call(amount, gas, var_name);
+    int var_2 = c.call(amount, gas, string("var_name"));
+}
+```
+
+
+##### Call x86-64 contract from another x86-64 contract with call line
+
+Member of class `contract_object`.
+
+You can call another x86-64 contract. For the call, you will need to pass the amount, count of gas to perform and the call line. If you do not want to limit the call to the gas, 0 is transmitted.
+
+###### Parameters
+
+| Option | Description | Example |
+| :--- | :--- | :--- |
+| `string id` | triplet id of contract | 1.11.165 |
 | `unsigned long int amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
 | `unsigned long int gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
+| `string call_line` | call line | greet() or get_balance(\"1.2.236\", \"1.3.0\") |
 
 ###### Return
 
@@ -340,7 +371,41 @@ You can call another x86-64 contract. For the call, you will need to pass the ca
 long int call_contract(string id, string call_line, unsigned long int amount, unsigned long int gas)
 {
     contract_object c(id);
-    return c.call(call_line, amount, gas);
+    return c.call(amount, gas, call_line);
+}
+```
+
+
+##### Call x86-64 contract from another x86-64 contract with parameters
+
+Member of class `contract_object`.
+
+You can call another x86-64 contract. For the call, you will need to pass the amount, count of gas to perform, callee function name and the call params. If you do not want to limit the call to the gas, 0 is transmitted.
+
+###### Parameters
+
+| Option | Description | Example |
+| :--- | :--- | :--- |
+| `string id` | triplet id of contract | 1.11.165 |
+| `unsigned long int amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
+| `unsigned long int gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
+| `string function_name` | callee function name | get_balance |
+| `args... params` | call params | a, true, 637, string("string_param") |
+
+###### Return
+
+`string` - result of executing an internal contract call. First 4 bytes(8 characters) - size of output.
+
+###### Example
+
+```c++
+long int call_contract(string id, string var_1, unsigned int var_2, unsigned long int amount, unsigned long int gas)
+{
+    int var_local = 544;
+    bool var_bool = true;
+
+    contract_object c(id);
+    return c.call(amount, gas, string("my_function"), var_1, var_2, var_local, var_bool, -45);
 }
 ```
 
