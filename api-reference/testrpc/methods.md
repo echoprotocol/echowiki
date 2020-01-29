@@ -89,6 +89,30 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"personal_listAccounts","params":
 }
 ```
 
+### personal_listRawAccounts
+Non-standard method to extract raw test accounts.
+Returns list of objects with address, private key, passphrase and lock status of test accounts.
+
+##### Example
+```json
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"personal_listRawAccounts","params":[],"id":1}'
+
+// Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "address": "0x000000000000000000000000000000000000001a",
+      "privkey": "0x2261f3980a845d125667c6ed176a2fc7a8007588f41f509051e31445babeb928",
+      "passprase", "swordfish",
+      "locked": false
+    }
+  ]
+}
+```
+
 ### personal_lockAccount
 Locks the account's private key so, it can no longer be used to send transactions. Returns `true`.
 
