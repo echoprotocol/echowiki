@@ -1210,9 +1210,10 @@ Get erc20 token information.
 
 | Option | Description |
 | :--- | :--- |
-| `eth_address eth_addr` | the ethereum address of token in Ethereum network |
+| `string eth_addr_or_id` | the ethereum address of token in Ethereum network or the id in ECHO |
 ```
 get_erc20_token 0102fe7702b96808f7bbc0d4a888ed1468216cfd
+get_erc20_token 1.16.155
 ```
 
 ### `check_erc20_token id` 

@@ -286,7 +286,7 @@ The public ethereum address data stored in the blockchain
 
 ## Sidechain ERC20
 
-### get\_erc20\_token\(eth\_addr\)
+### get\_erc20\_token\(eth\_addr\_or\_id\)
 
 Returns information about erc20 token, if exist.
 
@@ -294,7 +294,7 @@ Returns information about erc20 token, if exist.
 
 | Option | Description |
 | :--- | :--- |
-| `eth_address_type eth_addr` | the ethereum address of token in Ethereum network |
+| `string eth_addr_or_id` | the ethereum address of token in Ethereum network or the id in ECHO |
 
 #### Example
 
@@ -307,6 +307,18 @@ Returns information about erc20 token, if exist.
         "get_erc20_token",
         [
             "8B5D021C528Cb0ADb9dA277D109c039dEdFd6871"
+        ]
+    ]
+}
+
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_erc20_token",
+        [
+            "1.16.156"
         ]
     ]
 }
