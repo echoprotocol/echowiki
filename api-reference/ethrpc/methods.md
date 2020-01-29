@@ -1,4 +1,4 @@
-# Echo JSON RPC protocol
+# EthRPC protocol
 
 ## The default block parameter
 
@@ -199,7 +199,7 @@ Operation with index `1` from block `2467` with hash `34b8cbaf371addf365df0d9df9
 
 > 0x00000000000009a30000000134b8cbaf371addf365df0d9df9333c0af8a5e9a1
 
-## JSON-RPC methods
+## EthRPC methods
 
 ### Implemented
 
