@@ -13,7 +13,7 @@ More details on the API can be found on [TestRPC API page](methods.md).
 New block generates instantly after push or transaction if miner enabled. When miner is disabled blocks wouldn't be generated. Echorand consensus and block generator are disabled in TestRPC.
 
 By-default all plugins are disabled, but can be enabled in config or program arguments. Echorand and network APIs are not supported.  
-To enable plugin specify it in config options `plugins`, for example `--plugins="sidechain,history". All supported APIs are always enabled.  
+To enable plugin specify it in config options `plugins`, for example `--plugins="sidechain,history"`. All supported APIs are always enabled.  
 Lists of supported plugins and APIs:
 - Plugins: history, registration, sidechain, snapshot, json_rpc
 - APIs: login_api, block_api, database_api, history_api, asset_api, registration_api, json_rpc_api
