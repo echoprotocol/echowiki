@@ -10,7 +10,7 @@ Echo TestRPC provides separate executable designed to make testing faster and ea
 Echo TestRPC API is based on Ethereum TestRPC protocol and extends JSON API.  
 More details on the API can be found on [TestRPC API page](methods.md).
 
-The new block generation mechanism generates a new block every 5 seconds if any new transaction presents. This period can be changed in config. Echorand consensus and block generator are disabled in TestRPC.
+New block generates instantly after push or transaction if miner enabled. When miner is disabled blocks wouldn't be generated. Echorand consensus and block generator are disabled in TestRPC.
 
 By-default all plugins are disabled, but can be enabled in config or program arguments. Echorand and network APIs are not supported.  
 To enable plugin specify it in config options `plugins`, for example `--plugins="sidechain,history". All supported APIs are always enabled.  
@@ -20,4 +20,4 @@ Lists of supported plugins and APIs:
 
 
 Integrated test wallet can create accounts with specified balance during TestRPC startup.  
-To add new inital account add new config option with its address and initial balance, for example `--init-account=["0x0000000000000000000000000000000000000006", 1000]`.
+To add inital account with balance should be specifieds `init-balances` option. For example `--init-balances=[1000, 2000, 3000]`. Also available `accounts` option that creates addintional accounts and splits all initial balance between them equally. For example `--acounts=5`
