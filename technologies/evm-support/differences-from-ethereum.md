@@ -183,6 +183,106 @@ contract C {
 }
 ```
 
+### Call with context
+
+In order to be able to make an external call to the contract, for which the supported asset type is rigidly set, with another asset type, methods have been added for calling with changing the asset type in the context.
+
+Available since version 0.6.0 of solidity.
+
+#### `callwithcontext`
+
+External call of contract with change asset type for context of callee.
+
+```cpp
+(bool success, bytes memory data) callwithcontext(bytes bytes, uint assetId)
+```
+
+* `bytes` - bytes, bytes of call.
+* `assetId` - uint, new assetId for context of callee, only for current call.
+
+Example:
+
+```cpp
+contract Call {
+    function call_with_context() {
+        address addr = 0x0100000000000000000000000000000000000003;
+        uint newAssetId = 5;
+        addr.callwithcontext(abi.encodeWithSignature("tr()"), newAssetId);
+    }
+}
+```
+
+#### `callcodewithcontext`
+
+External call code of contract with change asset type for context of callee.
+
+Function `callcode` and `callcodewithcontext` is now disallowed (in favor of `delegatecall` and `delegatecallwithcontext`). It is still possible to use it via inline assembly.
+
+```cpp
+(bool success, bytes memory data) callcodewithcontext(bytes bytes, uint assetId)
+```
+
+* `bytes` - bytes, bytes of call.
+* `assetId` - uint, new assetId for context of callee, only for current call.
+
+Example:
+
+```cpp
+contract Call {
+    function call_with_context() {
+        address addr = 0x0100000000000000000000000000000000000003;
+        uint newAssetId = 5;
+        addr.callcodewithcontext(abi.encodeWithSignature("tr()"), newAssetId);
+    }
+}
+```
+
+#### `delegatecallwithcontext`
+
+External delegate call of contract with change asset type for context of callee.
+
+```cpp
+(bool success, bytes memory data) delegatecallwithcontext(bytes bytes, uint assetId)
+```
+
+* `bytes` - bytes, bytes of call.
+* `assetId` - uint, new assetId for context of callee, only for current call.
+
+Example:
+
+```cpp
+contract Call {
+    function call_with_context() {
+        address addr = 0x0100000000000000000000000000000000000003;
+        uint newAssetId = 5;
+        addr.delegatecallwithcontext(abi.encodeWithSignature("tr()"), newAssetId);
+    }
+}
+```
+
+#### `staticcallwithcontext`
+
+External static call of contract with change asset type for context of callee.
+
+```cpp
+(bool success, bytes memory data) staticcallwithcontext(bytes bytes, uint assetId)
+```
+
+* `bytes` - bytes, bytes of call.
+* `assetId` - uint, new assetId for context of callee, only for current call.
+
+Example:
+
+```cpp
+contract Call {
+    function call_with_context() {
+        address addr = 0x0100000000000000000000000000000000000003;
+        uint newAssetId = 5;
+        addr.staticcallwithcontext(abi.encodeWithSignature("tr()"), newAssetId);
+    }
+}
+```
+
 ### Ways to use
 
 #### Use Echo Solc
