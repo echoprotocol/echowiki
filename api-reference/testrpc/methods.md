@@ -148,7 +148,7 @@ The account can be used with eth_sign and eth_sendTransaction while it is unlock
 ##### Example
 ```json
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"personal_unlockAccount","params":["0x000000000000000000000000000000000000001a", "swordfish", 300],"id":1}'
+curl -X POST --data '{"jsonrpc":"2.0","method":"personal_unlockAccount","params":["0x000000000000000000000000000000000000001a", "swordfish", "0x12c"],"id":1}'
 
 // Result
 {
