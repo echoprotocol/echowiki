@@ -1,6 +1,6 @@
 # Echorand API
 
-## set\_agreement\_message\_callback(cb)
+## set\_echorand\_message\_callback(cb)
 
 Set callback, that sends echorand notifications.
 
@@ -18,7 +18,7 @@ Set callback, that sends echorand notifications.
     "method": "call",
     "params": [
         ECHORAND_API_ID,
-        "set_agreement_message_callback",
+        "set_echorand_message_callback",
         [
             CALLBACK_ID
         ]

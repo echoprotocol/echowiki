@@ -77,5 +77,5 @@ API that provides method for account registration
 
 Contains methods to access echorand notifications.
 
-* [set\_agreement\_message\_callback](echorand-api.md#set_agreement_message_callback-cb)
+* [set\_echorand\_message\_callback](echorand-api.md#set_echorand_message_callback-cb)
 
