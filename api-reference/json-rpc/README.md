@@ -4,4 +4,4 @@ The Ethereum node provides the [JSON RPC interface](https://github.com/ethereum/
 
 ## Echo implementation
 
-In Echo JSON RPC implemented via additional plugin that enables with help of `--plugins=jsonrpc`. If you enables plugin, you must also specify endpoint that webserver should listen with option `--ethrpc-endpoint`, for example `--ethrpc-endpoint=0.0.0.0:8092`. Plugin starts a webserver and binds implemented api on every connection. That api implements described [methods](methods-list.md) converting Echo data format tio specified one. 
+In Echo JSON RPC implemented via additional plugin that enables with help of `--plugins=ethrpc`. If you enables plugin, you must also specify endpoint that webserver should listen with option `--ethrpc-endpoint`, for example `--ethrpc-endpoint=0.0.0.0:8092`. Plugin starts a webserver and binds implemented api on every connection. That api implements described [methods](methods-list.md) converting Echo data format tio specified one. 
