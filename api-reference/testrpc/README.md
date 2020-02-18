@@ -15,8 +15,8 @@ New block generates instantly after push or transaction if miner enabled. When m
 By-default all plugins are disabled, but can be enabled in config or program arguments. Echorand and network APIs are not supported.  
 To enable plugin specify it in config options `plugins`, for example `--plugins="sidechain,history"`. All supported APIs are always enabled.  
 Lists of supported plugins and APIs:
-- Plugins: history, registration, sidechain, snapshot, json_rpc
-- APIs: login_api, block_api, database_api, history_api, asset_api, registration_api, json_rpc_api
+- Plugins: history, registration, sidechain, snapshot
+- APIs: login_api, block_api, database_api, history_api, asset_api, registration_api
 
 
 Integrated test wallet can create accounts with specified balance during TestRPC startup.  
