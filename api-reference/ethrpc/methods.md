@@ -237,6 +237,7 @@ Operation with index `1` from block `2467` with hash `34b8cbaf371addf365df0d9df9
 * [eth_getFilterChanges](#eth_getfilterchanges)
 * [eth_getFilterLogs](#eth_getfilterlogs)
 * [eth_getLogs](#eth_getlogs)
+* [eth_chainId](#eth_chainid)
 
 ### Not implemented
 
@@ -1557,6 +1558,29 @@ Result see [eth_getFilterChanges](#eth_getfilterchanges)
 
 ***
 
+### eth_chainId
+
+Returns the currently configured chain ID.
+
+##### Parameters
+
+None.
+
+##### Returns
+
+`DATA`, 32 bytes - current chain ID.
+
+##### Example
+```js
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}'
+
+// Result
+{
+  "id": 83,
+  "jsonrpc": "2.0",
+  "result": "0x21d093ffd383548869fbb869a27845badc920b33cf449603ba8df7f098727701"
+}
+```
 
 ### Wallet mode methods
 
