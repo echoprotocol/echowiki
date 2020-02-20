@@ -22,7 +22,7 @@ Exposes accessors on the database which query state tracked by a blockchain vali
 
 ## History API
 
-Contains methods to access account histories.
+Contains methods to access account and contract histories.
 
 * [get\_account\_history](history-api.md#get_account_history-account-stop-limit-start)
 * [get\_relative\_account\_history](history-api.md#get_relative_account_history-account-stop-limit-start)
@@ -54,6 +54,17 @@ Allows broadcasting of transactions.
 * [broadcast\_transaction\_with\_callback](network-broadcast-api.md#broadcast_transaction_with_callbackcb-trx)
 * [broadcast\_transaction\_synchronous](network-broadcast-api.md#broadcast_transaction_synchronous-trx)
 
+## Network Node API
+
+Allows maintenance of p2p connections.
+
+* [get\_info](network-node-api.md#get_info)
+* [add\_node](network-node-api.md#add_node-ep)
+* [get\_connected\_peers](network-node-api.md#get_connected_peers)
+* [get\_potential\_peers](network-node-api.md#get_potential_peers)
+* [get\_advanced\_node\_parameters](network-node-api.md#get_advanced_node_parameters)
+* [set\_advanced\_node\_parameters](network-node-api.md#set_advanced_node_parameters-params)
+
 ## Registration API
 
 API that provides method for account registration
@@ -61,4 +72,10 @@ API that provides method for account registration
 * [request\_registration\_task](registration-api.md#request_registration_task)
 * [submit\_registration\_solution](registration-api.md#submit_registration_solution-callback-name-active-echorand_key-nonce-rand_num)
 * [get\_registrar](registration-api.md#get\_registrar)
+
+## Echorand API
+
+Contains methods to access echorand notifications.
+
+* [set\_echorand\_message\_callback](echorand-api.md#set_echorand_message_callback-cb)
 
