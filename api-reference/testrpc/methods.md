@@ -1,6 +1,6 @@
 # Echo TestRPC API
 
-TestRPC API is the extension of [Ethereum JSON RPC API](../json-rpc/methods.md) which relies on new features of simplified block generator and integrated test wallet.
+TestRPC API is the extension of [EthRPC API](../ethrpc/methods.md) which relies on new features of simplified block generator and integrated test wallet.
 
 ### eth_mining
 Returns `true` if client is generating new blocks, otherwise `false`. 
