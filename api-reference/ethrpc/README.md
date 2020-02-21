@@ -1,4 +1,4 @@
-# Echo JSON RPC
+# EthRPC
 
 The Ethereum node provides the [JSON RPC interface](https://github.com/ethereum/wiki/wiki/JSON-RPC#json-rpc-methods), which is used by libraries such as Web3, as well as applications directly. The goal is to implement an interface that will work with requests and responses of a similar format. This is necessary to facilitate the migration of applications from the Ethereum platform to Echo.
 
