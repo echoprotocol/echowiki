@@ -89,6 +89,9 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"personal_listAccounts","params":
 }
 ```
 
+### eth_accounts
+Same as [personal_listAccounts](#personal_listAccounts)
+
 ### personal_listRawAccounts
 Non-standard method to extract raw test accounts.
 Returns list of objects with address, private key, passphrase and lock status of test accounts.

@@ -123,7 +123,7 @@
     * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
 * Sidechain-Bitcoin
     * [create_btc_deposit_address](#create_btc_deposit_address-account-backup_address-broadcast)
-    * [get_btc_addresses](#get_btc_addresses-account)
+    * [get_btc_address](#get_btc_address-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
 
