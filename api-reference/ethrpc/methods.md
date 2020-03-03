@@ -1596,9 +1596,9 @@ None.
 ##### Returns
 
 `Object` - The filter options:
+  - `blockId`:  `DATA`, 32 Bytes - Hash of the block on registration task was requested.
   - `randNum`: `QUANTITY`, - Rand num used to solve POW task.
   - `difficulty`: `QUANTITY`, - Difficulty of POW task to be solved.
-  - `blockHash`:  `DATA`, 32 Bytes - Hash of the block on registration task was requested with.
 
 ##### Example
 ```js
@@ -1619,6 +1619,10 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"echo_requestRegistrationTask","p
 ### echo_submitRegistrationSolution
 
 Submits registration solution and registers account if solved correctly.
+
+You need to calcualte `hash = sha256(blockId.right160().to_bytes() + randNum.to_bytes() + nonce.to_bytes())` untill you get first `difficulty` bits of hash equal to `0`. Only `nonce` should be changed. After you get suitable `nonce` you can form a request. `difficulty`, `blockId` and `randNum` is taken from `echo_requestRegistrationTask` response.
+
+Notice that `randNum` and `nonce` should be interpreted as `uint64`.
 
 ##### Parameters
 
