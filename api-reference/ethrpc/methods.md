@@ -239,6 +239,11 @@ Operation with index `1` from block `2467` with hash `34b8cbaf371addf365df0d9df9
 * [eth_getLogs](#eth_getlogs)
 * [eth_chainId](#eth_chainid)
 
+### Extension methods
+
+* [echo_requestRegistrationTask](#echo_requestregistrationtask)
+* [echo_submitRegistrationSolution](#echo_submitregistrationsolution)
+
 ### Not implemented
 
 * [eth_accounts](#eth_accounts)
@@ -1576,6 +1581,63 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}
   "jsonrpc": "2.0",
   "result": "0x21d093ffd383548869fbb869a27845badc920b33cf449603ba8df7f098727701"
 }
+```
+
+## Extension methods
+
+### echo_requestRegistrationTask
+
+Returns new registration task
+
+##### Parameters
+
+None.
+
+##### Returns
+
+`Object` - The filter options:
+  - `randNum`: `QUANTITY`, - Rand num used to solve POW task.
+  - `difficulty`: `QUANTITY`, - Difficulty of POW task to be solved.
+  - `blockHash`:  `DATA`, 32 Bytes - Hash of the block on registration task was requested with.
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"echo_requestRegistrationTask","params":[],"id":74}'
+// Result
+{
+    "id": 67,
+    "jsonrpc": "2.0",
+    "result": {
+        "blockId": "0x000000000000000000000000000000a7e4f3751300ef87c5ec6302a4da10d494",
+        "randNum": "0x32a39e5008a0412e",
+        "difficulty": "0x14"
+    }
+}
+```
+
+### echo_submitRegistrationSolution
+
+Submits registration solution and registers account if solved correctly.
+
+##### Parameters
+
+1. `name`: `string` - Name of the account to be registered.
+2. `activeKey`: `PUBLIC KEY` - Prefixed base58 public key used in active authority.
+3. `echorandKey`: `PUBLIC KEY`, -  Prefixed base58 public key used as consensus key.
+4. `nonce`: `QUANTITY`, - Nonce found as solution of POW task.
+5. `randNum`:  `QUANTITY` - Rand num to identify requested task.
+
+##### Returns
+
+`Address` - Address of registered account
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":["testname1", "ECHOHCcqrvESxeg4Kmmpr73FdQSQR6TbusCMsHeuXvx2rM1G", "ECHOHCcqrvESxeg4Kmmpr73FdQSQR6TbusCMsHeuXvx2rM1G", "0x86315", "0xa33969e0db6a5a44"],"id":74}'
+// Result
+{"id":67,"jsonrpc":"2.0","result":"0x000000000000000000000000000000000000001b"}
 ```
 
 ### Wallet mode methods
