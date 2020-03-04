@@ -5,7 +5,7 @@
   * [Download an Echo Wallet](how-to/download-an-echo-wallet.md)
   * [Deploy a Solidity Contract](how-to/deploy-a-solidity-contract.md)
   * [Interact with a Smart Contract](how-to/interact-with-a-smart-contract.md)
-  * [Install a Full Node](how-to/install-full-node.md)
+  <!-- * [Install a Full Node](how-to/install-full-node.md) -->
   * [Register account](how-to/register-account.md)
   * [Use CLI Wallet](how-to/use-cli-wallet.md)
 * [Technologies](technologies/README.md)
