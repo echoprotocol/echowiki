@@ -1219,11 +1219,7 @@ params: [
   - `contractAddress `: `DATA`, 20 Bytes - The contract address created, if the transaction was a contract creation, otherwise `null`.
   - `logs`: `Array` - Array of log objects, which this transaction generated.
   - `logsBloom`: `DATA`, 256 Bytes - Bloom filter for light clients to quickly retrieve related logs.
-  
-It also returns _either_ :
-
-  - `root` : `DATA` 32 bytes of post-transaction state root (pre Byzantium)
-  - `status`: `QUANTITY` either `1` (success) or `0` (failure) 
+  - `status`: `QUANTITY` - `1` (success) or `0` (failure) 
 
 
 ##### Example
