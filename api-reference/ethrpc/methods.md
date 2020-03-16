@@ -243,6 +243,7 @@ Operation with index `1` from block `2467` with hash `34b8cbaf371addf365df0d9df9
 
 * [echo_requestRegistrationTask](#echo_requestregistrationtask)
 * [echo_submitRegistrationSolution](#echo_submitregistrationsolution)
+* [echo_getAddressReference](#echo_getaddressreference)
 
 ### Not implemented
 
@@ -1640,6 +1641,26 @@ Notice that `randNum` and `nonce` should be interpreted as `uint64`.
 ```js
 // Request
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":["testname1", "ECHOHCcqrvESxeg4Kmmpr73FdQSQR6TbusCMsHeuXvx2rM1G", "ECHOHCcqrvESxeg4Kmmpr73FdQSQR6TbusCMsHeuXvx2rM1G", "0x86315", "0xa33969e0db6a5a44"],"id":74}'
+// Result
+{"id":67,"jsonrpc":"2.0","result":"0x000000000000000000000000000000000000001b"}
+```
+
+### echo_getAddressReference
+
+Gets echo address of referenced account by evm address.
+
+##### Parameters
+
+1. `evm_address`: `Address` - Evm address related to the account
+
+##### Returns
+
+`Address` - Echo address of account
+
+##### Example
+```js
+// Request
+curl -X POST --data '{"jsonrpc":"2.0","method":"echo_getAddressReference","params":["0x07932e92CE3C075222F85901A686d76fFAd09dFE"],"id":74}'
 // Result
 {"id":67,"jsonrpc":"2.0","result":"0x000000000000000000000000000000000000001b"}
 ```
