@@ -26,8 +26,9 @@
     * [get_account_by_address](#get_account_by_address-address)
     * [get_evm_addresses](#get_evm_addresses-account_id)
     * [import_accounts](#import_accounts-filename-password)
-    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
-    * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
+    * [register_account](#register_account-name-active-echorand-evm_address-registrar_account-broadcast)
+    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
+    * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-evm_address-broadcast-save_wallet)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
 * Keys
@@ -303,7 +304,7 @@ Returns a map containing the accounts found and whether imported.
 | `string filename` | the Echo wallet file to import |
 | `string password` | the password to encrypt the Echo wallet file |
 
-### `register_account name active registrar-account broadcast`
+### `register_account name active echorand evm_address registrar-account broadcast`
 Registers a third party's account on the blockckain.  
 This function is used to register an account for which you do not own the private keys. When acting as a registrar, an end user will generate their own private keys and send you the public keys. The registrar will use this function to register the account on behalf of the end user.
 
@@ -311,13 +312,15 @@ This function is used to register an account for which you do not own the privat
 | :--- | :--- |
 | `string name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
 | `public_key active` | the active key for a new account |
+| `public_key echorand` | the echorand key for a new account |
+| `eth_address_t evm_address` | evm address related to the account
 | `string registrar-account`|  the account which will pay the fee to register the user |
 | `bool broadcast` | true to broadcast the transaction on the network |
 ```
-register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu new_acc true
+register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu 517CF26a16127c4A58072FB7C24D1140F1b63A67 new_acc true
 ```
 
-### `register_account_with_api name active_key echorand_key`
+### `register_account_with_api name active_key echorand_key evm_address`
 Request connected node to register account with provided name and keys.
 
 | Option | Description |
@@ -325,9 +328,13 @@ Request connected node to register account with provided name and keys.
 | `string name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap.
 | `public_key active-key` | the active key for a new account
 | `public_key echorand-key` | the echorand key for a new account
+| `eth_address_t evm_address` | evm address related to the account
+``` 
+register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu 517CF26a16127c4A58072FB7C24D1140F1b63A67 new_acc true
+```
 
 
-### `create_account_with_brain_key brain_key account_name registrar_account broadcast` 
+### `create_account_with_brain_key brain_key account_name registrar_account evm_address broadcast save_wallet` 
 Creates a new account and registers it on the blockchain.
 
 | Option | Description |
@@ -335,9 +342,11 @@ Creates a new account and registers it on the blockchain.
 | `string brain_key` | the brain key used for generating the account's private keys |
 | `string account_name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
 | `string registrar_account` | the account which will pay the fee to register the user |
+| `eth_address_t evm_address` | evm address related to the account |
 | `bool broadcast` | true to broadcast the transaction on the network |
+| `bool save_wallet` | whether to save the account to the wallet |
 ```
-create_account_with_brain_key "brain_key" new_acc nathan true
+create_account_with_brain_key "brain_key" new_acc nathan 517CF26a16127c4A58072FB7C24D1140F1b63A67 true true
 ```
 
 ### `generate_account_address owner_account label broadcast` 
