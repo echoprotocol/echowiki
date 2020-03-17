@@ -304,7 +304,7 @@ Returns a map containing the accounts found and whether imported.
 | `string filename` | the Echo wallet file to import |
 | `string password` | the password to encrypt the Echo wallet file |
 
-### `register_account name active echorand evm_address registrar-account broadcast`
+### `register_account name active echorand evm_address registrar_account broadcast`
 Registers a third party's account on the blockckain.  
 This function is used to register an account for which you do not own the private keys. When acting as a registrar, an end user will generate their own private keys and send you the public keys. The registrar will use this function to register the account on behalf of the end user.
 
@@ -314,7 +314,7 @@ This function is used to register an account for which you do not own the privat
 | `public_key active` | the active key for a new account |
 | `public_key echorand` | the echorand key for a new account |
 | `eth_address_t evm_address` | evm address related to the account
-| `string registrar-account`|  the account which will pay the fee to register the user |
+| `string registrar_account`|  the account which will pay the fee to register the user |
 | `bool broadcast` | true to broadcast the transaction on the network |
 ```
 register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu 517CF26a16127c4A58072FB7C24D1140F1b63A67 new_acc true
@@ -462,15 +462,6 @@ derive_keys_from_brain_key brain_key 1
 Dumps all private keys owned by the wallet.  
 The keys are printed in WIF format. You can import these keys into another wallet using `import_key`.  
 Returns a map containing the private keys, indexed by their public key
-
-### `old_key_to_wif b58` 
-Dumps private key from old b58 format to new WIF.  
-The keys are printed in WIF format. You can import these key into another wallet using `import_key`.  
-Returns string new in WIF eddsa private key
-
-| Option | Description |
-| :--- | :--- |
-| `string b58` | old b58 format eddsa private_key |
 
 ## Password & lock
 
