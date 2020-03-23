@@ -25,14 +25,12 @@
     * [get_account_addresses](#get_account_addresses-account_id-from-limit)
     * [get_account_by_address](#get_account_by_address-address)
     * [get_evm_addresses](#get_evm_addresses-account_id)
-    * [import_accounts](#import_accounts-filename-password)
     * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
-    * [import_account_keys](#import_account_keys-filename-password-src_account_name-dest_account_name)
     * [create_eddsa_keypair](#create_eddsa_keypair)
     * [get_private_key](#get_private_key-pubkey)
     * [is_public_key_registered](#is_public_key_registered-public_key)
@@ -40,7 +38,6 @@
     * [normalize_brain_key](#normalize_brain_key-brain_key)
     * [derive_keys_from_brain_key](#derive_keys_from_brain_key-brain_key-number_of_desired_keys)
     * [dump_private_keys](#dump_private_keys)
-    * [old_key_to_wif](#old_key_to_wif-b58)
 * Password & lock
     * [is_new](#is_new)
     * [is_locked](#is_locked)
@@ -294,15 +291,6 @@ Get EVM addresses, if exist, for the given account id.
 get_evm_addresses 1.2.0
 ```
 
-### `import_accounts filename password`
-Imports accounts from a Echo wallet file. Current wallet file must be unlocked to perform the import.  
-Returns a map containing the accounts found and whether imported.
-
-| Option | Description |
-| :--- | :--- |
-| `string filename` | the Echo wallet file to import |
-| `string password` | the password to encrypt the Echo wallet file |
-
 ### `register_account name active registrar-account broadcast`
 Registers a third party's account on the blockckain.  
 This function is used to register an account for which you do not own the private keys. When acting as a registrar, an end user will generate their own private keys and send you the public keys. The registrar will use this function to register the account on behalf of the end user.
@@ -382,16 +370,6 @@ Returns true if the key was imported.
 import_key nathan private_key
 ```
 
-### `import_account_keys filename password src_account_name dest_account_name` 
-Imports from a Echo wallet file, find keys that were bound to a given account name on the Echo chain, rebind them to an account name on the Echo chain. Current wallet file must be unlocked to perform the import.
-
-| Option | Description |
-| :--- | :--- |
-| `string filename` | the wallet file to import |
-| `string password` | the password to encrypt the wallet file |
-| `string src_account_name` | name of the account on chain |
-| `string dest_account_name` | name of the account on chain, can be same or different to `src_account_name`|
-
 ### `create_eddsa_keypair` 
 Create new EdDSA keypair encoded in base58 for public key and WIF for private key.
 
@@ -453,15 +431,6 @@ derive_keys_from_brain_key brain_key 1
 Dumps all private keys owned by the wallet.  
 The keys are printed in WIF format. You can import these keys into another wallet using `import_key`.  
 Returns a map containing the private keys, indexed by their public key
-
-### `old_key_to_wif b58` 
-Dumps private key from old b58 format to new WIF.  
-The keys are printed in WIF format. You can import these key into another wallet using `import_key`.  
-Returns string new in WIF eddsa private key
-
-| Option | Description |
-| :--- | :--- |
-| `string b58` | old b58 format eddsa private_key |
 
 ## Password & lock
 
