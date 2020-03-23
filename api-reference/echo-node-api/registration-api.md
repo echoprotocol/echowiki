@@ -42,7 +42,7 @@ This query return data needed for calculating pow algorithm.
 }
 ```
 
-## submit\_registration\_solution(callback, name, active, echorand_key, nonce, rand_num)
+## submit\_registration\_solution(callback, name, active, echorand_key, evm_address, nonce, rand_num)
 
 Submit PoW task solution to register account.
 
@@ -57,7 +57,7 @@ You need to calcualte `hash = sha256(block_id.to_bytes() + rand_num.to_bytes() +
 | `string name` | name of account |
 | `public_key_t active` | active ed25519 key |
 | `public_key_t echorand_key` | ed25519 key for echorand |
-| `optinal<eth_address_t> evm_address` | evm address that will ne assosiated with account. could be specified as null |
+| `optinal<eth_address_t> evm_address` | evm address that will be assosiated with account. could be specified as null |
 | `uint64_t nonce` | used for verification of pow algorithm |
 | `uint64_t rand_num` | used as salt for sha256 and id for request_registration_task query |
 

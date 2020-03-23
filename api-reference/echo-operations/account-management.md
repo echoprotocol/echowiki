@@ -25,6 +25,7 @@ struct account_create_operation
    string          name;
    authority       active;
    eddsa::public_key_t echorand_key;
+   fc::optional<eth_address_type> evm_address;
 
    account_options options;
    extension< ext > extensions;
