@@ -78,3 +78,135 @@ struct account_options
    void validate()const;
 };
 ```
+
+## asset_issuer_permission_flags
+
+```cpp
+enum asset_issuer_permission_flags
+{
+   white_list           = 0x01, /**< accounts must be whitelisted in order to hold this asset */
+   override_authority   = 0x02, /**< issuer may transfer asset back to himself */
+   transfer_restricted  = 0x04, /**< require the issuer to be one party to every transfer */
+   committee_fed_asset  = 0x08  /**< allow the asset to be fed by the committee */
+};
+```
+
+## asset_options
+
+```cpp
+struct asset_options 
+{
+   /// The maximum supply of this asset which may exist at any given time. This can be as large as
+   /// ECHO_MAX_SHARE_SUPPLY
+   share_type max_supply = ECHO_MAX_SHARE_SUPPLY;
+
+   /// The flags which the issuer has permission to update. See @ref asset_issuer_permission_flags
+   uint16_t issuer_permissions = UIA_ASSET_ISSUER_PERMISSION_MASK;
+   /// The currently active flags on this permission. See @ref asset_issuer_permission_flags
+   uint16_t flags = 0;
+
+   /// When a non-core asset is used to pay a fee, the blockchain must convert that asset to core asset in
+   /// order to accept the fee. If this asset's fee pool is funded, the chain will automatically deposite fees
+   /// in this asset to its accumulated fees, and withdraw from the fee pool the same amount as converted at
+   /// the core exchange rate.
+   price core_exchange_rate;
+
+   /// A set of accounts which maintain whitelists to consult for this asset. If whitelist_authorities
+   /// is non-empty, then only accounts in whitelist_authorities are allowed to hold, use, or transfer the asset.
+   flat_set<account_id_type> whitelist_authorities;
+   /// A set of accounts which maintain blacklists to consult for this asset. If flags & white_list is set,
+   /// an account may only send, receive, trade, etc. in this asset if none of these accounts appears in
+   /// its account_object::blacklisting_accounts field. If the account is blacklisted, it may not transact in
+   /// this asset even if it is also whitelisted.
+   flat_set<account_id_type> blacklist_authorities;
+
+   /**
+      * data that describes the meaning/purpose of this asset, fee will be charged proportional to
+      * size of description.
+      */
+   string description;
+   extensions_type extensions;
+};
+```
+
+## bitasset_options
+
+```cpp
+struct bitasset_options 
+{
+   /// Time before a price feed expires
+   uint32_t feed_lifetime_sec = ECHO_DEFAULT_PRICE_FEED_LIFETIME;
+   /// Minimum number of unexpired feeds required to extract a median feed from
+   uint8_t minimum_feeds = 1;
+   /// This speicifies which asset type is used to collateralize short sales
+   /// This field may only be updated if the current supply of the asset is zero.
+   asset_id_type short_backing_asset;
+   extensions_type extensions;
+};
+```
+
+## price
+
+```cpp
+struct price
+{
+   asset base;
+   asset quote;
+};
+```
+
+## price_feed
+
+```cpp
+struct price_feed
+{
+   /**
+      *  Required maintenance collateral is defined
+      *  as a fixed point number with a maximum value of 10.000
+      *  and a minimum value of 1.000.  (denominated in ECHO_COLLATERAL_RATIO_DENOM)
+      *
+      *  A black swan event occurs when value_of_collateral equals
+      *  value_of_debt, to avoid a black swan a margin call is
+      *  executed when value_of_debt * required_maintenance_collateral
+      *  equals value_of_collateral using rate.
+      *
+      *  Default requirement is $1.75 of collateral per $1 of debt
+      *
+      *  BlackSwan ---> SQR ---> MCR ----> SP
+      */
+   ///@{
+   /**
+      * Forced settlements will evaluate using this price, defined as BITASSET / COLLATERAL
+      */
+   price settlement_price;
+
+   /// Price at which automatically exchanging this asset for ECHO from fee pool occurs (used for paying fees)
+   price core_exchange_rate;
+
+   /** Fixed point between 1.000 and 10.000, implied fixed point denominator is ECHO_COLLATERAL_RATIO_DENOM */
+   uint16_t maintenance_collateral_ratio = ECHO_DEFAULT_MAINTENANCE_COLLATERAL_RATIO;
+
+   /** Fixed point between 1.000 and 10.000, implied fixed point denominator is ECHO_COLLATERAL_RATIO_DENOM */
+   uint16_t maximum_short_squeeze_ratio = ECHO_DEFAULT_MAX_SHORT_SQUEEZE_RATIO;
+
+   /**
+      *  When updating a call order the following condition must be maintained:
+      *
+      *  debt * maintenance_price() < collateral
+      *  debt * settlement_price    < debt * maintenance
+      *  debt * maintenance_price() < debt * max_short_squeeze_price()
+   price maintenance_price()const;
+      */
+
+   /** When selling collateral to pay off debt, the least amount of debt to receive should be
+      *  min_usd = max_short_squeeze_price() * collateral
+      *
+      *  This is provided to ensure that a black swan cannot be trigged due to poor liquidity alone, it
+      *  must be confirmed by having the max_short_squeeze_price() move below the black swan price.
+      */
+   price max_short_squeeze_price()const;
+   ///@}
+};
+```
+
+[price](#price)
