@@ -1,6 +1,6 @@
 # Registration API
 
-## request\_registration\_task()
+## request_registration_task
 
 Request connected node to register account.
 
@@ -42,7 +42,7 @@ This query return data needed for calculating pow algorithm.
 }
 ```
 
-## submit\_registration\_solution(callback, name, active, echorand_key, evm_address, nonce, rand_num)
+## submit_registration_solution callback name active echorand_key evm_address nonce rand_num
 
 Submit PoW task solution to register account.
 
@@ -113,7 +113,7 @@ You need to calcualte `hash = sha256(block_id.to_bytes() + rand_num.to_bytes() +
 }
 ```
 
-## get_registrar()
+## get_registrar
 
 Get the registrar account.
 
