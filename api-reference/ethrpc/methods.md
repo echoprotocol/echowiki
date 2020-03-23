@@ -1630,8 +1630,9 @@ Notice that `randNum` and `nonce` should be interpreted as `uint64`.
 1. `name`: `string` - Name of the account to be registered.
 2. `activeKey`: `PUBLIC KEY` - Prefixed base58 public key used in active authority.
 3. `echorandKey`: `PUBLIC KEY`, -  Prefixed base58 public key used as consensus key.
-4. `nonce`: `QUANTITY`, - Nonce found as solution of POW task.
-5. `randNum`:  `QUANTITY` - Rand num to identify requested task.
+4. `evm_address`: `string` - Evm address that will be assosiated with account. could be specified as null
+5. `nonce`: `QUANTITY`, - Nonce found as solution of POW task.
+6. `randNum`:  `QUANTITY` - Rand num to identify requested task.
 
 ##### Returns
 
