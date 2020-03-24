@@ -1,9 +1,9 @@
 # contract types
 
-## base_contract_operation
+## contract_base_operation
 
 ```cpp
-struct base_contract_operation
+struct contract_base_operation
 {
     asset fee;
     account_id_type registrar;
