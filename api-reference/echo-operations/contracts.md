@@ -20,6 +20,8 @@ struct contract_create_operation : public contract_base_operation
 };
 ```
 
+[contract_base_operation](/api-reference/echo-operations/types/contract.md#contract_base_operation)
+
 ### JSON Example
 
 ```json
@@ -60,6 +62,8 @@ struct contract_call_operation : public contract_base_operation
    void validate() const;
 };
 ```
+
+[contract_base_operation](/api-reference/echo-operations/types/contract.md#contract_base_operation)
 
 ### JSON Example
 
