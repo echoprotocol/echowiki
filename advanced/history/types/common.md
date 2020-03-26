@@ -59,6 +59,10 @@ class contract_history_object
       uint64_t                  sequence = 0; /// the operation position within the given contract
       contract_history_id_type  next;
 
+      //id of the history object containing parent contract operation
+      //if this object refers to contract internal operation
+      optional<operation_history_id_type> parent_op_id;
+
       extensions_type           extensions;
 };
 ```
