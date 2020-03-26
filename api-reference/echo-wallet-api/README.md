@@ -6,7 +6,7 @@
     * [about](#about)
     * [help](#help)
     * [help_method](#help_method-method)
-    * [get_prototype_operation](#get_prototype_operation-operation_type)
+* Objects
     * [get_object](#get_object-object_id)
 * Blocks and transactions
     * [get_block](#get_block-block_num)
@@ -24,16 +24,14 @@
     * [get_account_id](#account_name_or_id-account_name_or_id)
     * [get_account_addresses](#get_account_addresses-account_id-from-limit)
     * [get_account_by_address](#get_account_by_address-address)
-    * [get_evm_addresses](#get_evm_addresses-account_id)
-    * [import_accounts](#import_accounts-filename-password)
-    * [register_account](#register_account-name-active-echorand-evm_address-registrar_account-broadcast)
-    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
-    * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-evm_address-broadcast-save_wallet)
+    * [get_evm_addresses](#get_evm_addresses-account-id)
+    * [register_account](#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast)
+    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
+    * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
-    * [import_account_keys](#import_account_keys-filename-password-src_account_name-dest_account_name)
     * [create_eddsa_keypair](#create_eddsa_keypair)
     * [get_private_key](#get_private_key-pubkey)
     * [is_public_key_registered](#is_public_key_registered-public_key)
@@ -41,7 +39,6 @@
     * [normalize_brain_key](#normalize_brain_key-brain_key)
     * [derive_keys_from_brain_key](#derive_keys_from_brain_key-brain_key-number_of_desired_keys)
     * [dump_private_keys](#dump_private_keys)
-    * [old_key_to_wif](#old_key_to_wif-b58)
 * Password & lock
     * [is_new](#is_new)
     * [is_locked](#is_locked)
@@ -100,6 +97,7 @@
     * [create_contract](#create_contract-registrar_account-code-amount-asset_type-supported_asset_id-eth_accuracy-save_wallet)
     * [call_contract](#call_contract-registrar_account-receiver-code-amount-asset_type-save_wallet)
     * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
+* Contract feepool    
     * [get_contract_pool_balance](#get_contract_pool_balance-id)
     * [get_contract_pool_whitelist](#get_contract_pool_whitelist-id)
     * [contract_fund_fee_pool](#contract_fund_fee_pool-registrar_account-receiver-value-broadcast)
@@ -116,7 +114,7 @@
     * [withdraw_eth](#withdraw_eth-account-eth_addr-value-broadcast)
     * [propose_eth_update_contract_address](#propose_eth_update_contract_address-sender-expiration_time-new_addr)
 * Sidechain-ERC20
-    * [get_erc20_token](#get_erc20_token-eth_addr)
+    * [get_erc20_token](#get_erc20_token-eth_addr_or_id)
     * [check_erc20_token](#check_erc20_token-id)
     * [get_erc20_account_deposits](#get_erc20_account_deposits-account)
     * [get_erc20_account_withdrawals](#get_erc20_account_withdrawals-account)
@@ -127,6 +125,8 @@
     * [get_btc_address](#get_btc_address-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
+* Operations
+    * [get_prototype_operation](#get_prototype_operation-operation_type)
 
 ## Info and help
 
@@ -285,26 +285,17 @@ Get owner of specified address.
 get_account_by_address 8815c69de5d32d3061e52ca9386446332225b43d
 ```
 
-### `get_evm_addresses account_id`
-Get EVM addresses, if exist, for the given account id.
+### `get_evm_addresses account-id`
+Get EVM addresses, if exist, for the given account id
 
 | Option | Description |
 | :--- | :--- |
-| `account_id_type account_id` | ID of the account |
+| `triplet account-id` | ID of the account |
 ```
 get_evm_addresses 1.2.0
 ```
 
-### `import_accounts filename password`
-Imports accounts from a Echo wallet file. Current wallet file must be unlocked to perform the import.  
-Returns a map containing the accounts found and whether imported.
-
-| Option | Description |
-| :--- | :--- |
-| `string filename` | the Echo wallet file to import |
-| `string password` | the password to encrypt the Echo wallet file |
-
-### `register_account name active echorand evm_address registrar_account broadcast`
+### `register_account name active echorand-key registrar-account evm-address broadcast`
 Registers a third party's account on the blockckain.  
 This function is used to register an account for which you do not own the private keys. When acting as a registrar, an end user will generate their own private keys and send you the public keys. The registrar will use this function to register the account on behalf of the end user.
 
@@ -312,12 +303,12 @@ This function is used to register an account for which you do not own the privat
 | :--- | :--- |
 | `string name` | the name of the account, must be unique on the blockchain. Shorter names are more expensive to register; the rules are still in flux, but in general names of more than 8 characters with at least one digit will be cheap. |
 | `public_key active` | the active key for a new account |
-| `public_key echorand` | the echorand key for a new account |
-| `eth_address_t evm_address` | evm address related to the account
-| `string registrar_account`|  the account which will pay the fee to register the user |
+| `public_key echorand-key` | the echorand key for a new account |
+| `string registrar-account`|  the account which will pay the fee to register the user |
+| `eth_address evm_address` | (Optional) the ethereum address of the account or null |
 | `bool broadcast` | true to broadcast the transaction on the network |
 ```
-register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu 517CF26a16127c4A58072FB7C24D1140F1b63A67 new_acc true
+register_account new_acc ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu nathan E8fd4Db0C38d48493AD167A268683fAb7230a88A true
 ```
 
 ### `register_account_with_api name active_key echorand_key evm_address`
@@ -390,16 +381,6 @@ Returns true if the key was imported.
 ```
 import_key nathan private_key
 ```
-
-### `import_account_keys filename password src_account_name dest_account_name` 
-Imports from a Echo wallet file, find keys that were bound to a given account name on the Echo chain, rebind them to an account name on the Echo chain. Current wallet file must be unlocked to perform the import.
-
-| Option | Description |
-| :--- | :--- |
-| `string filename` | the wallet file to import |
-| `string password` | the password to encrypt the wallet file |
-| `string src_account_name` | name of the account on chain |
-| `string dest_account_name` | name of the account on chain, can be same or different to `src_account_name`|
 
 ### `create_eddsa_keypair` 
 Create new EdDSA keypair encoded in base58 for public key and WIF for private key.
@@ -1205,7 +1186,7 @@ propose_eth_update_contract_address 1.2.6 "2019-11-28T13:50:00" "0e7057518879d5D
 
 ## Sidechain ERC20
 
-### `get_erc20_token eth_addr` 
+### `get_erc20_token eth_addr_or_id` 
 Get erc20 token information.
 
 | Option | Description |
