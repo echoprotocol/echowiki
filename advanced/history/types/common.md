@@ -25,6 +25,9 @@ class operation_history_object
       /** any virtual operations implied by operation in block */
       uint16_t          virtual_op = 0;
 
+      /** id of the operation_history_object containing proposal_create_operation*/
+      optional<operation_history_object> proposal_hist_id;
+
       extensions_type   extensions;
 };
 ```
