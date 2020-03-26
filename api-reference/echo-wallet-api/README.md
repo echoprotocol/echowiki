@@ -97,7 +97,7 @@
     * [create_contract](#create_contract-registrar_account-code-amount-asset_type-supported_asset_id-eth_accuracy-save_wallet)
     * [call_contract](#call_contract-registrar_account-receiver-code-amount-asset_type-save_wallet)
     * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
-* Contract feepool    
+* Contract pool    
     * [get_contract_pool_balance](#get_contract_pool_balance-id)
     * [get_contract_pool_whitelist](#get_contract_pool_whitelist-id)
     * [contract_fund_fee_pool](#contract_fund_fee_pool-registrar_account-receiver-value-broadcast)
