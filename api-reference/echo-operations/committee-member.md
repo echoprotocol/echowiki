@@ -322,6 +322,8 @@ struct committee_member_deactivate_operation : public base_operation
 
 ## committee_frozen_balance_deposit_operation
 
+Used by a committee_member to deposit a frozen balance
+
 ```cpp
 struct committee_frozen_balance_deposit_operation : public base_operation {
    struct fee_parameters_type {
@@ -358,6 +360,8 @@ struct committee_frozen_balance_deposit_operation : public base_operation {
 ```
 
 ## committee_frozen_balance_withdraw_operation
+
+Used by a committee_member to withdraw a frozen balance
 
 ```cpp
 struct committee_frozen_balance_withdraw_operation : public base_operation {
