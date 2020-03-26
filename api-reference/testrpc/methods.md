@@ -225,3 +225,49 @@ curl -X POST --data '{"id":1,"jsonrpc":"2.0","method":"eth_sendTransaction","par
 Validate the given passphrase and submit transaction.
 
 The transaction is the same argument as for `eth_sendTransaction` and contains the `from` address. If the passphrase can be used to decrypt the private key belogging to `tx.from` the transaction is verified, signed and send onto the network. The account is not unlocked globally in the node and cannot be used in other RPC calls.
+
+
+### evm_mine
+Force a block to be mined. Takes no parameters. Mines a block independent of whether or not mining is started or stopped.
+
+##### Parameters
+
+none
+
+##### Returns
+
+`null` - block is mined or error
+
+##### Example
+```json
+//Request
+curl -X POST --data '{"id":1,"jsonrpc":"2.0","method":"evm_mine","params":[]}'
+
+//Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": null
+}
+```
+
+### evm_increaseTime
+Jump forward in time
+
+| Option | Description |
+| :--- | :--- |
+| `number time_diff` | Amount of time to increase in seconds |
+| Returns | the total time adjustment, seconds in hex, or error |
+
+##### Example
+```json
+//Request
+curl -X POST --data '{"id":1,"jsonrpc":"2.0","method":"evm_increaseTime","params":[60]}'
+
+//Result
+{
+  "id":1,
+  "jsonrpc": "2.0",
+  "result": "0x3c"
+}
+```

@@ -40,6 +40,10 @@ struct asset_create_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+[asset_options](/api-reference/echo-operations/types/common.md#asset_options)
+[bitasset_options](/api-reference/echo-operations/types/common.md#bitasset_options)
+
 ### JSON Example
 
 ```json
@@ -109,6 +113,9 @@ struct asset_update_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+[asset_options](/api-reference/echo-operations/types/common.md#asset_options)
+
 ### JSON Example
 
 ```json
@@ -149,6 +156,9 @@ struct asset_update_bitasset_operation : public base_operation
    void            validate()const;
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
+[bitasset_options](/api-reference/echo-operations/types/common.md#bitasset_options)
 
 ### JSON Example
 
@@ -197,6 +207,8 @@ struct asset_update_feed_producers_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -239,6 +251,8 @@ struct asset_issue_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -280,6 +294,8 @@ struct asset_reserve_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -318,6 +334,8 @@ struct asset_fund_fee_pool_operation : public base_operation
    void       validate()const;
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
@@ -361,6 +379,8 @@ struct asset_publish_feed_operation : public base_operation
    void            validate()const;
 };
 ```
+[asset](/api-reference/echo-operations/types/common.md#asset)
+[price_feed](/api-reference/echo-operations/types/common.md#price_feed)
 
 ### JSON Example
 
@@ -424,6 +444,8 @@ struct asset_claim_fees_operation : public base_operation
   void            validate()const;
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
