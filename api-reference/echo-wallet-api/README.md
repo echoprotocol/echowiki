@@ -67,7 +67,7 @@
     * [update_asset](#update_asset-symbol-new_issuer-new_options-broadcast)
     * [update_bitasset](#update_bitasset-symbol-new_options-broadcast)
     * [update_asset_feed_producers](#update_asset_feed_producers-symbol-new_feed_producers-broadcast)
-    * [publish_asset_feed](#publish_asset_feed-publishing_account-symbol-feed-broadcast)
+    * [publish_asset_feed](#publish_asset_feed-publishing_account-symbol-core_exchange_rate-broadcast)
     * [issue_asset](#issue_asset-to_account-amount-symbol-broadcast)
     * [get_asset](#get_asset-asset_name_or_id)
     * [get_asset_id](#get_asset_id-asset_name)
@@ -708,7 +708,7 @@ Returns the signed transaction updating the bitasset's feed producers
 update_asset_feed_producers UIA [nathan, foobar] true
 ```
 
-### `publish_asset_feed publishing_account symbol feed broadcast` 
+### `publish_asset_feed publishing_account symbol core_exchange_rate broadcast` 
 Publishes a price feed for the named asset.  
 Price feed providers use this command to publish their price feeds for market-issued assets. A price feed is used to tune the market for a particular market-issued asset. For each value in the feed, the median across all committee_member feeds for that asset is calculated and the market for the asset is configured with the median of that value.  
 The feed object in this command contains three prices: a call price limit, a short price limit, and a settlement price. The call limit price is structured as (collateral asset) / (debt asset) and the short limit price is structured as (asset for sale) / (collateral asset). Note that the asset IDs are opposite to eachother, so if we're publishing a feed for USD, the call limit price will be ECHO/USD and the short limit price will be USD/ECHO. The settlement price may be flipped either direction, as long as it is a ratio between the market-issued asset and its collateral.
@@ -719,7 +719,7 @@ Returns the signed transaction updating the price feed for the given asset
 | :--- | :--- |
 | `string publishing_account` | the account publishing the price feed |
 | `string symbol` | the name or id of the asset whose feed we're publishing |
-| `price_feed feed` | the price_feed object containing the three prices making up the feed |
+| `price core_exchange_rate` | the price object containing price making up the feed |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ### `issue_asset to_account amount symbol broadcast` 

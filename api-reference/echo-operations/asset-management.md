@@ -371,7 +371,7 @@ struct asset_publish_feed_operation : public base_operation
    asset                  fee; ///< paid for by publisher
    account_id_type        publisher;
    asset_id_type          asset_id; ///< asset for which the feed is published
-   price_feed             feed;
+   price                  core_exchange_rate;
 
    extensions_type        extensions;
 
@@ -380,7 +380,6 @@ struct asset_publish_feed_operation : public base_operation
 };
 ```
 [asset](/api-reference/echo-operations/types/common.md#asset)
-[price_feed](/api-reference/echo-operations/types/common.md#price_feed)
 
 ### JSON Example
 
