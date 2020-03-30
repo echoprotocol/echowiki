@@ -65,6 +65,8 @@ struct buyback_account_options
 
 ## account_options
 
+The asset_options struct contains options available on all assets in the network.
+
 ```cpp
 struct account_options
 {
@@ -94,7 +96,7 @@ enum asset_issuer_permission_flags
 ## asset_options
 
 ```cpp
-struct asset_options 
+struct asset_options
 {
    /// The maximum supply of this asset which may exist at any given time. This can be as large as
    /// ECHO_MAX_SHARE_SUPPLY
@@ -131,8 +133,10 @@ struct asset_options
 
 ## bitasset_options
 
+The bitasset_options struct contains configurable options available only to BitAssets.
+
 ```cpp
-struct bitasset_options 
+struct bitasset_options
 {
    /// Time before a price feed expires
    uint32_t feed_lifetime_sec = ECHO_DEFAULT_PRICE_FEED_LIFETIME;
@@ -146,6 +150,17 @@ struct bitasset_options
 ```
 
 ## price
+
+The price struct stores asset prices in the Graphene system.
+
+A price is defined as a ratio between two assets, and represents a possible exchange rate between those two
+assets. prices are generally not stored in any simplified form, i.e. a price of (1000 ECHO)/(20 USD) is perfectly
+normal.
+
+The assets within a price are labeled base and quote. Throughout the Graphene code base, the convention used is
+that the base asset is the asset being sold, and the quote asset is the asset being purchased, where the price is
+represented as base/quote, so in the example price above the seller is looking to sell ECHO asset and get USD in
+return.
 
 ```cpp
 struct price
