@@ -1,6 +1,6 @@
 # Echo Operations
 
-[Operations order](operations-order.md) 
+* [Operations order](operations-order.md)
 
 ## Asset Transfer
 
