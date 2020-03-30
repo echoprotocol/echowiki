@@ -56,9 +56,7 @@ Each of the selected verifiers tells the network which of the blocks they consid
 
 #### Step 2 - Vote Counting
 
-Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes and announces the results of their count to the entire network.
-
-#### Step 3 - Primary evaluation of the vote count
+Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes.
 
 After receiving the voting results of the previous steps, all nodes know whether the verifiers were able to agree on the choice of the best block for the current round. Each verifier creates a message including information on the outcome \(whether an agreement was reached or not\) and the details of the block agreement and broadcasts this message to the network.
 
