@@ -41,6 +41,7 @@
     * [Using echo chain interface](advanced/x86-64-virtual-machine/echo-chain-interface.md)
   * [Ethereum Virtual Machine](advanced/ethereum-virtual-machine/README.md)
     * [Contract Fee Pool](advanced/ethereum-virtual-machine/fee-pool.md)
+  * [Build for Raspberry Pi](advanced/raspberry-pi/build.md)
 * [API Reference](api-reference/README.md)
   * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
