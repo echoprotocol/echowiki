@@ -73,6 +73,7 @@
     * [Account Management](api-reference/echo-operations/account-management.md)
     * [Asset Management](api-reference/echo-operations/asset-management.md)
     * [Balance Object](api-reference/echo-operations/balance-object.md)
+    * [Block Reward](api-reference/echo-operations/block-reward.md)
     * [Committee Member](api-reference/echo-operations/committee-member.md)
     * [Contracts](api-reference/echo-operations/contracts.md)
     * [Proposals](api-reference/echo-operations/proposals.md)

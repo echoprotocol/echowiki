@@ -1,6 +1,6 @@
 # Block Reward Operations
 
-## block_reward_operation
+## block\_reward\_operation
 
 Virtual operation that indicates payout of block reward
 
@@ -23,10 +23,15 @@ struct block_reward_operation : public base_operation
 
 ```json
 [
-    59,
+    64,
     {
         "receiver": "1.2.0",
-        "assets": [],
+        "assets": [
+            {
+                "amount": 3606,
+                "asset_id": "1.3.0"
+            }
+        ],
         "extensions": []
     }
 ]
