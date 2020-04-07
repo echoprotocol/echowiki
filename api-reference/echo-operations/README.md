@@ -96,3 +96,9 @@
 ## Block Reward
 
 * [block\_reward\_operation](block-reward.md#block_reward_operation) - Virtual operation that indicates payout of block reward
+
+## DID Management
+
+* [did\_create\_operation](did.md#didcreateoperation) - Create new DID
+* [did\_update\_operation](did.md#didupdateoperation) - Update an existing DID
+* [did\_delete\_operation](did.md#diddeleteoperation) - Remove DID

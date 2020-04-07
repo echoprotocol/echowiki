@@ -127,6 +127,14 @@
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
 * Operations
     * [get_prototype_operation](#get_prototype_operation-operation_type)
+* Verifiable Credentials
+    * [add_verifiable_credential](#add_verifiable_credential-keyword-verifiable_cred)
+    * [get_vc_keywords](#get_vc_keywords)
+    * [get_verifiable_credential](#get_verifiable_credential-keyword)
+    * [get_all_verifiable_credentials](#get_all_verifiable_credentials)
+    * [get_key_by_id_string](#get_key_by_id_string-id_string)
+    * [get_verifiable_presentation](#get_verifiable_presentation-vc_keywords)
+    * [validate_verifiable_presentation](#validate_verifiable_presentation-presentation)
 
 ## Info and help
 
@@ -1303,4 +1311,78 @@ Creates a transaction to withdraw btc.
 | `bool broadcast` | true if you wish to broadcast the transaction. |
 ```
 withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
+```
+
+
+# Verifiable Credentials)
+
+### `add_verifiable_credential keyword verifiable_cred`
+Writing Verifiable Credentials to encrypted wallet storage. Verifiable Credentials data
+can be used to authenticate claims.
+
+| Option | Description |
+| :--- | :--- |
+| `string keyword` | name associated with Verifiable Credentials |
+| `string verifiable_cred` | Verifiable Credentials presented in json format |
+
+```
+add_verifiable_credential "keyword" "{json}"
+```
+
+### `get_vc_keywords`
+Get all saved verifiable credential names.
+
+```
+get_vc_keywords
+```
+
+### `get_verifiable_credential keyword`
+Get verifiable credentials recorded under a specific name.
+
+| Option | Description |
+| :--- | :--- |
+| `string keyword` | name associated with Verifiable Credentials |
+
+```
+get_verifiable_credential "keyword"
+```
+
+### `get_all_verifiable_credentials`
+Get all verifiable credentials saved in wallet.
+
+```
+get_all_verifiable_credentials
+```
+
+### `get_key_by_id_string id_string`
+Get key from DID object by DID uri with key number.
+
+| Option | Description |
+| :--- | :--- |
+| `string id_string` | DID uri with key number |
+
+```
+get_key_by_id_string "did:echo:0.1.25.0"
+```
+
+### `get_verifiable_presentation vc_keywords`
+Get verifiable presentation from given VC keywords.
+
+| Option | Description |
+| :--- | :--- |
+| `string_vector vc_keywords` | vector of VC keywords |
+
+```
+get_verifiable_presentation ["keyword_1", "keyword_2"]
+```
+
+### `validate_verifiable_presentation presentation`
+Validate given verifiable presentation.
+
+| Option | Description |
+| :--- | :--- |
+| `string presentation` | presentation in JSON format |
+
+```
+validate_verifiable_presentation "verifiable_presentation"
 ```
