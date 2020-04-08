@@ -1314,7 +1314,7 @@ withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
 ```
 
 
-# Verifiable Credentials)
+# Verifiable Credentials
 
 ### `add_verifiable_credential keyword verifiable_cred`
 Writing Verifiable Credentials to encrypted wallet storage. Verifiable Credentials data
