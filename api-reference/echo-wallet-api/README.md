@@ -135,6 +135,7 @@
     * [get_key_by_id_string](#get_key_by_id_string-id_string)
     * [get_verifiable_presentation](#get_verifiable_presentation-vc_keywords)
     * [validate_verifiable_presentation](#validate_verifiable_presentation-presentation)
+    * [validate_verifiable_credential](#validate_verifiable_credential-credential)
 
 ## Info and help
 
@@ -1385,4 +1386,15 @@ Validate given verifiable presentation.
 
 ```
 validate_verifiable_presentation "verifiable_presentation"
+```
+
+### `validate_verifiable_credential credential`
+Validate given verifiable credential.
+
+| Option | Description |
+| :--- | :--- |
+| `string credential` | credential in JSON format |
+
+```
+validate_verifiable_credential "verifiable_credential"
 ```
