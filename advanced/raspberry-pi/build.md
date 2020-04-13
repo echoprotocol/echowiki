@@ -1,9 +1,12 @@
 # Build Echo for Raspberry Pi
 
 ## Building on Raspberry Pi itself
-Echo build is memory-heavy, so you have to create a swap space for at least 4 GB. Compiling is done in one thread/job for the same reason.
+Echo build is supported for Raspberry Pi 4 with 4 GB RAM.
+Ubuntu 18.04 64 bit OS should be installed for Raspberry PI 4.
 
-Not an every target can be compiled for RaspPi, but `echo_node` and `echo_wallet` should do fine.
+Echo build is memory-heavy, so a swap space for at least 4 GB should be created. Compiling should be done in one thread/job for the same reason.
+
+To build `echo_node` and `echo_wallet` please use following commands. Other targets are not supported yet.
 
 ```bash
 mkdir build-rp
