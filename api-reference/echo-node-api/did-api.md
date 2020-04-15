@@ -39,7 +39,7 @@ Did object in json view. If there is no object, an empty DID Document will be re
 }
 ```
 
-## get\_key\_by\_id\_string\(id\_string\)
+## get\_key(id\_string\)
 
 Get the verification method and public key for a specific key identifier.
 
@@ -56,7 +56,7 @@ Get the verification method and public key for a specific key identifier.
   "jsonrpc": "2.0",
   "params": [
     "did",
-    "get_key_by_id_string",
+    "get_key",
     [
       "did:echo:255.1.25.0#key-1"
     ]
@@ -81,7 +81,7 @@ Verification method and public key. If there is no object, an empty "null" will 
 }
 ```
 
-## get\_keys\_by\_id\_string\(id\_string\)
+## get\_keys(id\_string\)
 
 Get the list verification methods and public keys for a specific did identifier.
 
@@ -98,7 +98,7 @@ Get the list verification methods and public keys for a specific did identifier.
   "jsonrpc": "2.0",
   "params": [
     "did",
-    "get_keys_by_id_string",
+    "get_keys",
     [
       "did:echo:255.1.25.0"
     ]

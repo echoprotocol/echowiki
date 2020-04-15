@@ -129,11 +129,11 @@
     * [get_prototype_operation](#get_prototype_operation-operation_type)
 * Verifiable Credentials
     * [add_verifiable_credential](#add_verifiable_credential-keyword-verifiable_cred)
-    * [get_vc_keywords](#get_vc_keywords)
+    * [get_verifiable_credential_keywords](#get_verifiable_credential_keywords)
     * [get_verifiable_credential](#get_verifiable_credential-keyword)
     * [get_all_verifiable_credentials](#get_all_verifiable_credentials)
-    * [get_key_by_id_string](#get_key_by_id_string-id_string)
-    * [get_verifiable_presentation](#get_verifiable_presentation-vc_keywords)
+    * [get_did_object_key](#get_did_object_key-id_string)
+    * [get_verifiable_presentation](#get_verifiable_presentation-keywords)
     * [validate_verifiable_presentation](#validate_verifiable_presentation-presentation)
     * [validate_verifiable_credential](#validate_verifiable_credential-credential)
 
@@ -1330,11 +1330,11 @@ can be used to authenticate claims.
 add_verifiable_credential "keyword" "{json}"
 ```
 
-### `get_vc_keywords`
+### `get_verifiable_credential_keywords`
 Get all saved verifiable credential names.
 
 ```
-get_vc_keywords
+get_verifiable_credential_keywords
 ```
 
 ### `get_verifiable_credential keyword`
@@ -1355,7 +1355,7 @@ Get all verifiable credentials saved in wallet.
 get_all_verifiable_credentials
 ```
 
-### `get_key_by_id_string id_string`
+### `get_did_object_key id_string`
 Get key from DID object by DID uri with key number.
 
 | Option | Description |
@@ -1363,15 +1363,15 @@ Get key from DID object by DID uri with key number.
 | `string id_string` | DID uri with key number |
 
 ```
-get_key_by_id_string "did:echo:0.1.25.0"
+get_did_object_key "did:echo:0.1.25.0"
 ```
 
-### `get_verifiable_presentation vc_keywords`
+### `get_verifiable_presentation keywords`
 Get verifiable presentation from given VC keywords.
 
 | Option | Description |
 | :--- | :--- |
-| `string_vector vc_keywords` | vector of VC keywords |
+| `string_vector keywords` | vector of VC keywords |
 
 ```
 get_verifiable_presentation ["keyword_1", "keyword_2"]

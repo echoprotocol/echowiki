@@ -84,5 +84,5 @@ Contains methods to access echorand notifications.
 Contains methods to access DID object.
 
 * [get\_did\_object](did-api.md#getdidobjectid)
-* [get\_key\_by\_id\_string](did-api.md#getkeybyidstringidstring)
-* [get\_keys\_by\_id\_string](did-api.md#getkeysbyidstringidstring)
+* [get\_key](did-api.md#getkeybyidstringidstring)
+* [get\_keys](did-api.md#getkeysbyidstringidstring)
