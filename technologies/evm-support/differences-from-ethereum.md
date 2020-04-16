@@ -183,6 +183,25 @@ contract C {
 }
 ```
 
+#### `ecrecover`
+A function used to recover the echo account address associated with the its public key from elliptic curve signature. Returns echo account address or zero on error
+
+`ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s)`
+- `bytes32 hash` - hash of the message
+- `uint8 v` - final 1 byte of signature
+- `bytes32 r` - first 32 bytes of signature
+- `bytes32 s` - second 32 bytes of signature
+
+Example:
+```bash
+pragma solidity ^0.5.0;
+contract C {
+    function recover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) public returns (address)  {
+            return ecrecover(hash, v, r, s);
+    }
+}
+```
+
 ### Call with context
 
 In order to be able to make an external call to the contract, for which the supported asset type is rigidly set, with another asset type, methods have been added for calling with changing the asset type in the context.
