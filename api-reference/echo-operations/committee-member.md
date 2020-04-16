@@ -23,7 +23,6 @@ struct committee_member_create_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return committee_member_account; }
-   void            validate()const;
 };
 ```
 
@@ -73,7 +72,6 @@ struct committee_member_update_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return committee_member_account; }
-   void            validate()const;
 };
 ```
 
@@ -112,8 +110,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
 
    extensions_type extensions;
 
-   account_id_type fee_payer()const { return account_id_type(); }
-   void            validate()const;
+   account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
 };
 ```
 
@@ -262,7 +259,6 @@ struct committee_member_activate_operation : public base_operation
    extensions_type          extensions;
 
    account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
-   void            validate()const {};
 };
 ```
 
@@ -300,7 +296,6 @@ struct committee_member_deactivate_operation : public base_operation
    extensions_type          extensions;
 
    account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
-   void            validate()const {};
 };
 ```
 

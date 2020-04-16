@@ -35,7 +35,6 @@ struct asset_create_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee( const fee_parameters_type& k )const;
 };
 ```
@@ -108,7 +107,6 @@ struct asset_update_operation : public base_operation
    extensions_type             extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```
@@ -153,7 +151,6 @@ struct asset_update_bitasset_operation : public base_operation
    extensions_type  extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
 };
 ```
 
@@ -203,7 +200,6 @@ struct asset_update_feed_producers_operation : public base_operation
    extensions_type           extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
 };
 ```
 
@@ -246,7 +242,6 @@ struct asset_issue_operation : public base_operation
    extensions_type      extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```
@@ -290,7 +285,6 @@ struct asset_reserve_operation : public base_operation
    extensions_type   extensions;
 
    account_id_type fee_payer()const { return payer; }
-   void            validate()const;
 };
 ```
 
@@ -331,7 +325,6 @@ struct asset_fund_fee_pool_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return from_account; }
-   void       validate()const;
 };
 ```
 
@@ -376,7 +369,6 @@ struct asset_publish_feed_operation : public base_operation
    extensions_type        extensions;
 
    account_id_type fee_payer()const { return publisher; }
-   void            validate()const;
 };
 ```
 [asset](/api-reference/echo-operations/types/common.md#asset)
@@ -426,7 +418,6 @@ struct asset_claim_fees_operation : public base_operation
   extensions_type extensions;
 
   account_id_type fee_payer()const { return issuer; }
-  void            validate()const;
 };
 ```
 
