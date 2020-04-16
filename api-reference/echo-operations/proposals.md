@@ -22,20 +22,7 @@ struct proposal_create_operation : public base_operation
 
    extensions_type    extensions;
 
-   /**
-   * Constructs a proposal_create_operation suitable for committee
-   * proposals, with expiration time and review period set
-   * appropriately.  No proposed_ops are added.  When used to
-   * create a proposal to change chain parameters, this method
-   * expects to receive the currently effective parameters, not
-   * the proposed parameters.  (The proposed parameters will go
-   * in proposed_ops, and proposed_ops is untouched by this
-   * function.)
-   */
-   static proposal_create_operation committee_proposal(const chain_parameters& param, fc::time_point_sec head_block_time );
-
    account_id_type fee_payer()const { return fee_paying_account; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```

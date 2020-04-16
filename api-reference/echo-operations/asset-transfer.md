@@ -22,7 +22,6 @@ struct transfer_operation : public base_operation
    extensions_type   extensions;
 
    account_id_type fee_payer()const { return from; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```
@@ -67,7 +66,6 @@ struct transfer_to_address_operation : public base_operation
    extensions_type   extensions;
 
    account_id_type fee_payer()const { return from; }
-   void            validate()const;
 };
 ```
 
@@ -115,7 +113,6 @@ struct override_transfer_operation : public base_operation
    extensions_type   extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```
