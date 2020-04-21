@@ -28,8 +28,7 @@ struct asset_create_operation : public base_operation
    /// ID is not known at the time this operation is created, create this price as though the new asset has instance
    /// ID 1, and the chain will overwrite it with the new asset's ID.
    asset_options              common_options;
-   /// Options only available for BitAssets. MUST be non-null if and only if the @ref market_issued flag is set in
-   /// common_options.flags
+   /// Options only available for BitAssets. MUST be non-null if and only if the asset is a bitasset
    optional<bitasset_options> bitasset_opts;
 
    extensions_type extensions;
