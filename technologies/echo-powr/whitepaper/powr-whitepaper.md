@@ -84,7 +84,7 @@ Once each node computes its role at the beginning of a round, the set of produce
 
 ### Best Block Voting and Application
 
-The set of verifiers begin listening for proposed next blocks and begin the process of voting for the best block using a 2 stage Byzantine fault tolerant \(BFT\) consensus process. At the first stage, **Graded Consensus \(GC\)**, each verifier announces their preliminary determination regarding the best block to append to the distributed ledger in a three-step process. The second stage, **Binary Byzantine Agreement \(BBA\)**, Byzantine consensus is reached through the transfer of binary data between the verifiers and a reconciliation of the overall state of the network. At each step of each stage, the protocol selects a new set of verifiers - accounts that must perform an action according to the step of the consensus. The selection of verifiers is similar to the selection process for block producers, using a VRF on input data from a previous block. After BBA is complete, verifiers sign the best block and propagate it to the Echo network, where acceptors verify the signatures by verifiers and append the block to their own local instance of the distributed ledger.
+The set of verifiers begin listening for proposed next blocks and begin the process of voting for the best block using a 2 stage Byzantine fault tolerant \(BFT\) consensus process. At the first stage, **Graded Consensus \(GC\)**, each verifier announces their preliminary determination regarding the best block to append to the distributed ledger in a two-step process. The second stage, **Binary Byzantine Agreement \(BBA\)**, Byzantine consensus is reached through the transfer of binary data between the verifiers and a reconciliation of the overall state of the network. At each step of each stage, the protocol selects a new set of verifiers - accounts that must perform an action according to the step of the consensus. The selection of verifiers is similar to the selection process for block producers, using a VRF on input data from a previous block. After BBA is complete, verifiers sign the best block and propagate it to the Echo network, where acceptors verify the signatures by verifiers and append the block to their own local instance of the distributed ledger.
 
 ## The EchoRand Mechanism
 
@@ -131,10 +131,12 @@ The following algorithm parameters are set by constants, or configured at the **
 | -----------: | :----------------------------------------------------- |
 | $Λ$          | "large" interval, the average time required to distribute a 1 MB message across the network |
 | $λ$          | "small" interval, the average time required to distribute a 256-bit message across the network |
+| $λ_g$        | maximum time interval for block generation  |
+| $N_a$        | maximum number of round attempts before EchoRand stops |
 | $N_g$        | the number of block producers in a round, used in the function $VRF(r, a, 1)$ |
 | $N_c$        | the number of block verifiers in a round, used in the function $VRF(r, a, s), s > 1$ |
 | $t_h$        | the threshold for making a positive decision when verifying, and can be selected by $0.69*N_{c}$ |
-| $μ$          | $4 + 3*k, k > 0$ - maximum number of algorithm steps after which consensus will be restarted |
+| $μ$          | $3 + 3*k, k > 0$ - maximum number of algorithm steps after which consensus will be restarted |
 
 ### Cryptographic Primitives
 
@@ -153,7 +155,7 @@ The concept of a verifiable random function \(VRF\) was introduced by Micali, Ra
 
 The use of VRF in EchoRand is as follows: having a pseudo-random value $Q_r$ for each round and the VRF function, each of the network nodes can determine the list of $VRF(r, a, s)$ executors in attempt $a$ for $s$ step of $r$ round, and based on it, perform the necessary actions if the authorized account on the node is part of $VRF(r, a, s)$, and additionally verify whether the participants have the right to act at this step.
 
-The function $VRF_{n}(r, a, s)$ returns a list of participants of a given length of attempt $a$ for round $r$ and step $s$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $max({0, r - k})$, where $k = 1$. To calculate the function, a random vector $Q_{r-k}$ from round $r-k$ is required.
+The function $VRF_{n}(r, a, s)$ returns a list of participants of a given length of attempt $a$ for round $r$ and step $s$, which is the same for all the nodes in the network. It should be noted that the function uses a fixed state of the blockchain database to calculate the participants' balances. In the general case, this function can use a state of the round $max({0, r - k})$, where $k = 15$. To calculate the function, a random vector $Q_{r-k}$ from round $r-k$ is required.
 
 **Identification of Active Roles**
 
@@ -175,7 +177,7 @@ $$VRF(r, a, s) = {[ VRF_{0}(r, a, s), VRF_{1}(r, a, s), ... ]}$$
 
 A specific executor is calculated from the $VRF_i(r, a, s)$ hash in such a way, that the probability of the choice of the participant as active, is proportional to his balance in the system at the time of the $r - k$ block, where **k** is some positive constant value. The meaning of constant **k** here is to prevent prediction of distribution $$VFR(r + 1, a, s)$$ with reasonably enough probability to attack the block generation scheme.
 
-The set $VRFN(r, a, s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN(r,s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,s)$.
+The set $VRFN(r, a, s)$ is an array of indexes that is different for each node of the network, and if $i ∈ VRFN(r, a, s)$, then the user ID that is the executor for the given round and step at the selected node is calculated using function $VRF_i (r,a,s)$.
 
 In other words, $VRFN$ is a selection of participants from $VRF$ who act on a particular node, attempt, round, and step.
 
@@ -206,13 +208,19 @@ $$BBA\_RAND(s) = lsb\{SHA256(Q_{r-1}, r)\}$$
 
 Where $lsb$ is the least significant bit.
 
+### Graded Consensus \(GC\)
+
+This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
+
+![GC Steps](../../../.gitbook/assets/gc-steps.png)
+
 ### Step 1 - Block Generation
 
 For each block, a new list of possible **producers** is determined with the help of a verifiable random function $VRF(r, a, s)$ as described above. As a result, each network node receives a $VRF(r, a, s)$ set and a $VRFN(r, a, s)$ subset - a list of accounts authorized at this node. If $VRFN(r, a, s)$ is not empty, the node issues a block proposal based on the transactions that are in the node mempool.
 
 Since all input data for the VRF is already included in the previous blocks, each node in the network determines the list of producers independently, and it is the same for everyone \(deterministic\).
 
-The mechanism is as follows: for block $B$ from round $r$, we have a hash $H(B_{r})$, which is the result of the producer's signature $sig(H(B_{r-1}))$ of the previous block hash. Since the producer can’t manipulate the result of the hash function \(as the data that is hashed and the private key are strictly defined\), and the hashing is checked using the producer's public key, we receive a new pseudo-random number in each block. This number \(hash\) from the block $B_{r}$ is used as a random index to select the first producer on the list to generate a block. The index of this producer is used to get the next producer on the list, etc. until a complete list of those who will generate a block is created.
+The mechanism is as follows: for block $B$ from round $r$, we have a seed $Q_{r}$, which is the result of the producer's signature $sig(H(Q_{r-1}))$ of the previous block seed. Since the producer can’t manipulate the result of the hash function \(as the data that is hashed and the private key are strictly defined\), and the hashing is checked using the producer's public key, we receive a new pseudo-random number in each block. This number \(hash\) from the block $B_{r}$ is used as a random index to select the first producer on the list to generate a block. The index of this producer is used to get the next producer on the list, etc. until a complete list of those who will generate a block is created.
 
 Each network node generates a list of producers for the current block and if the authorized account on the node is a member of the list, it generates and sends a block to the network using the following mechanism:
 
@@ -238,13 +246,7 @@ Right after determining $CERT_{r-1}$
    3. If $PAY_{r} != ∅$, create a new block $B_{r} = \{r, PAY_{r}, Q_{r-1}, sig(Q_{r-1}), H(B_{r-1})\}$
 3. **Communication, generation, signature and a simultaneous broadcast:**
    1. Sign with the key $id_{1}$ and send message `gc_block` = $\{r, id_{1}, B_{r}, sig(B_{r})\}$
-   2. Sign with the key $id_{1}$ and send `gc_signature` = $\{r, id_{1}, sig(Q_{r-1}), H(B_{r})\}$
-
-### Graded Consensus \(GC\)
-
-This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
-
-![GC Steps](../../../.gitbook/assets/gc-steps.png)
+   2. Sign with the key $id_{1}$ and send `gc_signature` = $\{r, id_{1}, sig(Q_{r-1})\}$
 
 #### Step 2 - Voting
 
@@ -266,7 +268,7 @@ Right after determining $CERT_{r-1}$
 1. **Timer**: schedule the timer after the time equal to $2 * λ$, by a trigger:
    1. To define $l$, as $id$ from the received messages in $ctx[id]$ with a minimum index of $A_{1}$
    2. If the local cache for $l$ has the block $B_{r}$
-      1. $v = \{ctx[l].HB, l\}$
+      1. $v = \{ctx[l].rand, l\}$
       2. Go to **Communication**
 2. **Timer**: schedule the timer after the time equal to $λ + Λ$, by a trigger:
    1. $v == \{∅, ∅\}$
@@ -275,7 +277,7 @@ Right after determining $CERT_{r-1}$
    1. After receiving a message `gc_block` of the round $r$
       1. Verify the round number in the message
       2. Verify the message step equals `1`
-      3. Verify that $msg.id ∈ A_{1}$ and get the user's public key
+      3. Verify that $msg.producer ∈ A_{1}$ and get the user's public key
       4. Verify the signature of the whole message
       5. Verify that $msg.block$ is correct
          1. Verify the block's round for equality to the current
@@ -284,24 +286,22 @@ Right after determining $CERT_{r-1}$
          4. Verify the block signature using `producer-id` of the block
          5. Verify $H(B_{r-1})$ from the block for equality to the local one from $CERT_{r-1}$
          6. Verify the correctness of $PAY_{r}$ in the block
-      6. If $ctx[msg.id]$ already exists
-         1. Verify $ctx[msg.id].HB == H(msg.block)$
-      7. If it does not exist, save $msg.id, msg.block$ in the context of the round:
-         1. $ctx[msg.id].B = msg.block$
-         2. $ctx[msg.id].HB = H(msg.block)$
+      6. If $ctx[msg.producer]$ already exists
+         1. Verify $ctx[msg.producer].rand == msg.block.rand$
+      7. If it does not exist, save $msg.producer, msg.block$ in the context of the round:
+         1. $ctx[msg.producer].B = msg.block$
+         2. $ctx[msg.producer].rand = msg.block.rand$
       8. If $l$ and $l == id$ are installed:
-         1. $v = \{ctx[l].HB, l\}$
+         1. $v = \{ctx[l].rand, l\}$
          2. Go to **Communication**
    2. After receiving a message `gc_signature` of the round $r$
       1. Verify the round number in the message
-      2. Verify that $msg.id ∈ A_{1}$ and get the user's public key
+      2. Verify that $msg.producer ∈ A_{1}$ and get the user's public key
       3. Verify the signature of the whole message
-      4. $msg.block\_hash = ∅$: verify $msg.rand$ for equality to the local one from $CERT_{r-1}$
-      5. $msg.block\_hash != ∅$: verify the signature $msg.rand$ using $Q_{r-1}$ from $CERT_{r-1}$
-      6. Save $msg.id => ∅$ in the context of the round if it’s not saved yet:
-         1. $ctx[msg.id].B = ∅$
-         2. $ctx[msg.id].HB = msg.block\_hash$
-         3. $ctx[msg.id].rand = msg.rand$
+      4. Verify $msg.rand$ for equality to the local one from $CERT_{r-1}$
+      5. Save $msg.producer$ in the context of the round if it’s not saved yet:
+         1. $ctx[msg.producer].B = ∅$
+         3. $ctx[msg.producer].rand = H(msg.rand)$
 4. **Communication**: generating, signing and sending of messages
    1. Stop timers, **do not** unsubscribe from network messages
    2. If $N_{2} = ∅$, end the step
@@ -311,9 +311,11 @@ Right after determining $CERT_{r-1}$
          1. if $v != ∅$: `gc_proposal` = $\{ r, 2, id_{2}, v \}$
          2. if $v == ∅$: `gc_proposal` = $\{ r, 2, id_{2}, ∅ \}$
 
-#### Step 3 - Vote Counting
+#### Step 3 - Primary evaluation of the vote count
 
-Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes and announces the results of their count to the entire network.
+After receiving the voting results of the previous steps, all nodes know whether the verifiers were able to agree on the choice of the best block for the current round. Each verifier creates a message including information on the outcome \(whether an agreement was reached or not\) and the details of the block agreement and broadcasts this message to the network.
+
+After this step, all nodes in the network have a preliminary idea of whether the best block has been determined or not. In an honest network, this would be enough to complete the round and append the block to the existing ledger. But since we allow the possibility of unscrupulous participants, the network needs an additional step to verify the data. This is the objective of the next stage.
 
 **Input Data**
 
@@ -326,69 +328,33 @@ Right after determining $CERT_{r-1}$
 **Steps**
 
 1. **Timer**: schedule the timer after the time equal to $3 * λ + Λ$, by a trigger:
-   1. $v == \{ ∅, ∅ \}$
-   2. Go to **Communication**
-2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
-   1. Verify the round number and the step number in the message
-   2. Verify that $msg.id ∈ A_{2}$ and get the user's public key
-   3. Verify the signature of the whole message
-   4. Verify that $msg.v = \{ msg.block\_hash, msg.leader \}$ is in the context of the round.
-
-   It should be collected in the context in the previous step, as a result of `gc_block` and `gc_signature` message processing.
-
-   1. $∃ ctx[msg.leader]$ - a record for such a potential leader exists in the context
-   2. $ctx[msg.leader].HB == msg.block\_hash$ - the block hash coincides
-   3. $ctx[msg.leader].v3.push(msg.id)$, where $v3$ is an _unordered\_set_
-   4. If the counter is more than the threshold $t_{h}$: $ctx[msg.leader].v3.size() > t_{h}$
-      1. $v = \{ msg.block\_hash, msg.leader \}$
-      2. Go to **Communication**
-
-3. **Communication**: generating, signing and sending of messages 1. Stop timers, unsubscribe from network messages 2. If $N_3 = ∅$, end the step 3. $∀n_3 ∈ N_3$: 1. Get real user’s ID in the blockchain: $id_{3} = A_{3}[n_{3}]$ 2. Sign with the user’s key $id_{3}$ and send `gc_proposal` = $\{ r, 3, id_{3}, v \}$
-
-#### Step 4 - Primary evaluation of the vote count
-
-After receiving the voting results of the previous steps, all nodes know whether the verifiers were able to agree on the choice of the best block for the current round. Each verifier creates a message including information on the outcome \(whether an agreement was reached or not\) and the details of the block agreement and broadcasts this message to the network.
-
-After this step, all nodes in the network have a preliminary idea of whether the best block has been determined or not. In an honest network, this would be enough to complete the round and append the block to the existing ledger. But since we allow the possibility of unscrupulous participants, the network needs an additional step to verify the data. This is the objective of the next stage.
-
-**Input Data**
-
-* $A_{3}$, $A_{4}$, $N_{4}$ from the context of the round
-
-**Start**
-
-Immediately after completing step 3.
-
-**Steps**
-
-1. **Timer**: schedule the timer after the time equal to $2 * λ$, by a trigger:
-   1. if $∃l | ctx[l].v4.size() > t_{h}/2: v = \{ ctx[l].HB, l \}$
+   1. if $∃l | ctx[l].v3.size() > t_{h}/2: v = \{ ctx[l].rand, l \}$
       1. otherwise: $v = \{ ∅, ∅ \}$
    2. $b = 1$
    3. Go to **Communication**
 2. **Network**: subscribe to network messages `gc_proposal` at the start of a step, after receiving
    1. Verify the round number and the step number in the message
-   2. Verify that $id ∈ A\{3\}$ and get the user's public key
+   2. Verify that $id ∈ A\{2\}$ and get the user's public key
    3. Verify the signature of the whole message
-   4. $msg.v = \{ msg.block\_hash, msg.leader \}$
+   4. $msg.v = \{ msg.rand, msg.leader \}$
    5. $msg.v != \{ ∅, ∅ \}$: verify that $msg.v$ is in the context of the round \(should be collected in step 2\)
       1. $∃ ctx[msg.leader]$ - a record for such a potential leader exists in the context
-      2. $ctx[msg.leader].HB == msg.block\_hash$ - the block hash coincides
-      3. $ctx[msg.leader].v4.push(msg.id)$, $v4$ is an _unordered\_set_
-      4. if $ctx[msg.leader].v4.size() > t_{h}$
-         1. $v = \{ msg.block\_hash, msg.leader \}$ , $b = 0$
+      2. $ctx[msg.leader].rand == msg.rand$ - the block rand coincides
+      3. $ctx[msg.leader].v3.push(msg.producer)$, $v4$ is an _unordered\_set_
+      4. if $ctx[msg.leader].v3.size() > t_{h}$
+         1. $v = \{ msg.rand, msg.leader \}$ , $b = 0$
          2. Go to **Communication**
    6. $msg.v == \{ ∅, ∅ \}$
-      1. $ctx.ve4.push(msg.id)$, $ve4$ is an _unordered\_set_ \(**v**alue **e**mpty\)
-      2. if $ctx.ve4.size() > t_{h}$
+      1. $ctx.ve3.push(msg.producer)$, $ve4$ is an _unordered\_set_ \(**v**alue **e**mpty\)
+      2. if $ctx.ve3.size() > t_{h}$
          1. $v = \{ ∅, ∅ \}$, $b = 1$
          2. Go to **Communication**
 3. **Communication**: generating, signing and sending of messages
    1. Stop timers, unsubscribe from network messages
-   2. If $N_4 = ∅$, end the step
-   3. $∀ n_4 ∈ N_4$:
-      1. Get real user’s ID in the blockchain: $id_{4} = A_{4}[n_{4}]$
-      2. Sign with the user’s key $id_{4}$ and send `bba_signature` = $\{ r, 4, id_{4}, b, v, sig(0, v) \}$
+   2. If $N_3 = ∅$, end the step
+   3. $∀ n_3 ∈ N_3$:
+      1. Get real user’s ID in the blockchain: $id_{3} = A_{3}[n_{3}]$
+      2. Sign with the user’s key $id_{3}$ and send `bba_signature` = $\{ r, 3, id_{4}, b, v, sig(0, v) \}$
 
 ### Binary Byzantine Agreement \(BBA\)
 
@@ -399,15 +365,17 @@ At each step of the algorithm work, all nodes in the network can be divided into
 
 In the latter case, undecided nodes again use a VRF to generate a shared random number from the set of {0, 1} \(e.g. a coin flip\) to make a decision about which message to apply. Since the random number will be the same for all “unsure” nodes, all these nodes will reach the same decision on the outcome.
 
-The stage consists of rounds, which include 3 steps each. At each step in the cycle, a new set of verifiers chosen by VRF sends their determination of the voting result in binary form. If, as a result of the round, 2/3rds + 1 \(~67%\) of verifiers agree on the outcome, the block is considered valid and appended to the chain. If consensus is not met, a new round begins.
+The stage consists of rounds, which include 3 steps each. At each step in the cycle, a new set of verifiers chosen by VRF sends their determination of the voting result in binary form. If, as a result of the round, 2/3rds + 1 \(~67%\) of verifiers agree on the outcome, the block is considered valid and appended to the chain. If consensus is not met, a new BBA round begins.
 
-If over 4 rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random sets of verifiers\) the network is unable to come to consensus about which block to add, parameter $a$ is increasing and the entire consensus mechanism begins again from the very first step - cryptographic sortition for new block producers.
+If over 4 BBA rounds \(which involves 4 rounds x 3 verifiers = 12 unique, random sets of verifiers\) the network is unable to come to consensus about which block to add, parameter $a$ is increasing and the entire consensus mechanism begins again from the very first step - cryptographic sortition for new block producers.
 
 ### Block application by the network participants
 
 All network nodes receive all messages sent by producers and verifiers at all stages of the consensus. All the network nodes perform the round steps. Messages are sent to the network only by the nodes that have already been selected for participation at a given step using the $VRFN(r, a, s)$ algorithm.
 
-Accordingly, each node individually determines when consensus has been reached on the next block and understands which block to apply and add to its own local copy of the distributed ledger. Thus, all the network nodes reach the end of the round at one of the stages of the `BBA` algorithm and get a formed $CERT_{r}$. Therefore, a final message with the resulting information isn’t broadcast by any node, as each node has already determined this information independently.
+Accordingly, each node individually determines when consensus has been reached on the next block and understands which block to apply and add to its own local copy of the distributed ledger. 
+
+Thus, all the network nodes reach the end of the round at one of the stages of the `BBA` algorithm and get a formed $CERT_{r}$. Therefore, a final message with the resulting information isn’t broadcast by any node, as each node has already determined this information independently.
 
 ## Network Communication
 
@@ -428,7 +396,9 @@ This message is sent in step `1` by producers to propose a newly created block w
 | **round** | the current round |
 | **attempt** | the current round attempt |
 | **step** | the current step |
-| **id** | the ID of the participant who created the block |
+| **producer** | ID of the participant who created the block |
+| **delegate** | Not used |
+| **fallback** | Not used |
 | **signature** | the signature of the message with the participant’s key corresponding to the **id** |
 | **block** | a valid block containing the current round, the participant's ID, the block signature, etc. |
 
@@ -441,37 +411,42 @@ This message is sent during step **1** if there is at least one participant for 
 | **round** | the current round |
 | **attempt** | the current round attempt |
 | **step** | the current step |
-| **id** | the ID of the participant who created the block |
+| **producer** | ID of the participant who created the block |
+| **delegate** | Not used |
+| **fallback** | Not used |
 | **signature** | the signature of the message with the participant’s key **id** |
-| **rand** | $sig(Q_{r})$, the signature of a previous randomness seed with the participant’s key **id** |
-| **block\_hash** | the new block hash |
-| **prev\_rand** | $sig(Q_{r})$, the signature of the randomness seed from the previous block |
+| **rand** | $sig(Q_{r-1})$, the signature of a previous randomness seed with the participant’s key **id** |
+| **prev\_rand** | $Q_{r-1}$, randomness seed from the previous block |
 | **prev\_block\_hash** | the previous block hash |
 
 #### 3. Selection of a Leader and a Block: `gc_proposal`
 
-This message is sent during step **2** and step **3** if there is at least one participant for the node for this step.
+This message is sent during step **2** if there is at least one participant for the node for this step.
 
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
 | **attempt** | the current round attempt |
 | **step** | the current step |
-| **id** | the ID of the participant who created the block |
+| **producer** | ID of the verifier who created this proposal |
+| **delegate** | ID of the delegate for this verifier, if any |
+| **fallback** | ID of committee member generated the message on behalf of the verifier, if any |
 | **signature** | the signature of the message with the participant’s key **id** |
-| **block\_hash** | the selected block hash |
-| **leader** | the ID of a selected leader who created the block |
+| **block\_rand** | rand value of selected block |
+| **leader** | ID of a selected leader who created the block |
 
 #### 4. BBA Consensus Result: `bba_signature`
 
-This message is sent during step **4** and all the subsequent steps of the algorithm if there is at least one participant for the node for this step.
+This message is sent during step **3** and all the subsequent steps of the algorithm if there is at least one participant for the node for this step.
 
 | Field | Description |
 | :--- | :--- |
 | **round** | the current round |
 | **attempt** | the current round attempt |
 | **step** | the current step |
-| **id** | the ID of the participant who created the message |
+| **producer** | ID of the verifier who created this message |
+| **delegate** | ID of the delegate for this verifier, if any |
+| **fallback** | ID of committee member generated the message on behalf of the verifier, if any |
 | **value** | the result of the **BBA** algorithm, either 0 or 1 |
 | **block\_hash** | the selected block hash |
 | **leader** | the ID of a selected leader, who created the block |
@@ -482,7 +457,7 @@ This message is sent during step **4** and all the subsequent steps of the algor
 
 Network message processing begun in step **2** does not stop at the completion of the step but continues until the completion of the round.
 
-Network message processing for steps **BBA** \(**s = 5, ...**\) is practically the same and does not depend on the step number. For these steps, the messaging process differs based on a subsequent analysis of the internal counters of the round. Consequently, network processing for these steps can be effectively implemented in the base class.
+Network message processing for steps **BBA** \(**s = 4, ...**\) is practically the same and does not depend on the step number. For these steps, the messaging process differs based on a subsequent analysis of the internal counters of the round. Consequently, network processing for these steps can be effectively implemented in the base class.
 
 ### Messages Distribution via Gossip
 
@@ -519,7 +494,7 @@ In the case a node is not able to communicate with peers or stops receiving mess
 
 Since the conclusion of the current round at the moment occurs only upon receiving a successful BBA message from peers, the node will continue executing the BBA steps in a loop until reaching the `μ` constant.
 
-Without reaching consensus, the mechanism will start 3 times in a row from fist step, after which echorand will stop and will be started again after receiving a message from the network.
+Without reaching consensus, the mechanism will start with pre-configured number of times (default: 3) in a row from fist step, after which echorand will stop and will be started again after receiving a message from the network.
 
 #### Network Restored
 
