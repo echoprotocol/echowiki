@@ -697,7 +697,7 @@ curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": [
 ### eth_getTransactionCount
 
 Returns the number of transactions *sent* from an address.
-
+To use this method you need to enable *--plugin=history*. 
 
 ##### Parameters
 
