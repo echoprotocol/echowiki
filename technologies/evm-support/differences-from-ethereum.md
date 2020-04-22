@@ -184,7 +184,9 @@ contract C {
 ```
 
 #### `ecrecover`
-A function used to recover the echo account address associated with the its public key from elliptic curve signature. Returns echo account address or zero on error
+A function used to recover the echo account address associated with the its public key from elliptic curve signature. Returns echo account address or zero on error.
+
+First, you need to associate the evm address generated from the existing private key with the existing account in the echo using the operation [evm_address_register_operation](/api-reference/echo-operations/account-management.md#evm_address_register_operation). Next, you need to sign the message with this private key. The account address in the echo will be received from this signature.
 
 `ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s)`
 - `bytes32 hash` - hash of the message
