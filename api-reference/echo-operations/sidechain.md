@@ -2,6 +2,10 @@
 
 ## sidechain_eth_create_address_operation
 
+Used to generate address in ETH blockchain. After the address is generated eth\_address\_object\(s\) will be created in echo db and can be retrieved using get\_eth\_address method. Until one of the objects will receive sufficient amount of approvals the number of objects connected to account id can be more than one.
+
+User use this operation to generate ethereum address which can be used to interact with eth sidechain. Before user can use the address it must be approved by the committee.
+
 ```cpp
 struct sidechain_eth_create_address_operation : public base_operation
 {
@@ -33,6 +37,10 @@ struct sidechain_eth_create_address_operation : public base_operation
 ```
 
 ## sidechain_eth_approve_address_operation
+
+An internal operation by which committee members confirm the created Ethereum address.
+
+Committee member sends this operation to approve created address. After the required number of approvals has been collected user can use his eth address to interact with eth sidechain.
 
 ```cpp
 struct sidechain_eth_approve_address_operation : public base_operation
@@ -75,6 +83,10 @@ struct sidechain_eth_approve_address_operation : public base_operation
 
 ## sidechain_eth_deposit_operation
 
+An internal operation by which committee members confirm Ethereum deposit.
+
+This operation is sent by the committee member to indicate that eth transaction with deposit was processed in the echo.
+
 ```cpp
 struct sidechain_eth_deposit_operation : public base_operation
 {
@@ -115,6 +127,10 @@ struct sidechain_eth_deposit_operation : public base_operation
 
 ## sidechain_eth_send_deposit_operation
 
+An internal operation by which committee members confirm Ethereum deposit after 24h and credit eETH.
+
+This operation is sent by the committee member after 24h after receiving deposit to approve deposit. After the required number of approvals has been collected eETH are credited to the account to which the eth address is attached.
+
 ```cpp
 struct sidechain_eth_send_deposit_operation : public base_operation
 {
@@ -148,6 +164,10 @@ struct sidechain_eth_send_deposit_operation : public base_operation
 ```
 
 ## sidechain_eth_withdraw_operation
+
+Used to withdraw the eETH and receive ETH to provided address.
+
+User use this operation to withdraw eETH and receive back ethereum to provided address.
 
 ```cpp
 struct sidechain_eth_withdraw_operation : public base_operation
@@ -185,6 +205,10 @@ struct sidechain_eth_withdraw_operation : public base_operation
 
 ## sidechain_eth_send_withdraw_operation
 
+An internal operation by which committee members confirm the withdrawal of ETH after 24h.
+
+This operation is used by the commitee member to approve withdrawal of ETH after 24h.
+
 ```cpp
 struct sidechain_eth_send_withdraw_operation : public base_operation
 {
@@ -218,6 +242,10 @@ struct sidechain_eth_send_withdraw_operation : public base_operation
 ```
 
 ## sidechain_eth_approve_withdraw_operation
+
+An internal operation by which committee members confirm the withdrawal of ETH and burn the eETH.
+
+This operation is used by the commitee member to approve withdrawal. After the required number of approvals has been collected indicated amount of ETH is transfered back to provided address and eETH are burned.
 
 ```cpp
 struct sidechain_eth_approve_withdraw_operation : public base_operation
@@ -255,6 +283,10 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
 
 ## sidechain_eth_update_contract_address_operation
 
+An internal operation, sent by committee member to propose update of the eth contract address.
+
+This operation is used by the committee only through proposals to change address of the eth sidechain contract.
+
 ```cpp
 struct sidechain_eth_update_contract_address_operation : public base_operation
 {
@@ -286,6 +318,10 @@ struct sidechain_eth_update_contract_address_operation : public base_operation
 ```
 
 ## sidechain_issue_operation
+
+Virtual operation, which reports that the money entered with the help of sidechain.
+
+This operation is used to credit sidechain assets.
 
 ```cpp
 struct sidechain_issue_operation : public base_operation
@@ -323,6 +359,10 @@ struct sidechain_issue_operation : public base_operation
 
 ## sidechain_burn_operation
 
+Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\).
+
+This operation is used to burn sidechain assets.
+
 ```cpp
 struct sidechain_burn_operation : public base_operation
 {
@@ -358,6 +398,10 @@ struct sidechain_burn_operation : public base_operation
 ```
 
 ## sidechain_erc20_register_token_operation
+
+Used to register a token in the sidechain.
+
+User use this operation to register his erc20 token in echo network.
 
 ```cpp
 struct sidechain_erc20_register_token_operation : public base_operation
@@ -403,6 +447,10 @@ struct sidechain_erc20_register_token_operation : public base_operation
 
 ## sidechain_erc20_deposit_token_operation
 
+An internal operation by which committee members confirm the entry of tokens.
+
+This operation is sent by the committee member to indicate that eth transaction with erc20 deposit was processed in the echo. 
+
 ```cpp
 struct sidechain_erc20_deposit_token_operation : public base_operation
 {
@@ -447,6 +495,10 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 
 ## sidechain_erc20_send_deposit_operation
 
+An internal operation by which committee members confirm the entry of tokens after 24h and credit token.
+
+This operation is sent by the committee member after 24h after receiving erc20 deposit to approve deposit. After the required number of approvals has been collected provided amount of tokens are credited to the account in the echo network.
+
 ```cpp
 struct sidechain_erc20_send_deposit_operation : public base_operation
 {
@@ -480,6 +532,10 @@ struct sidechain_erc20_send_deposit_operation : public base_operation
 ```
 
 ## sidechain_erc20_withdraw_token_operation
+
+Executed by the user and initiates the withdrawal of the token from the Echo network to the specified address.
+
+User use this operation to withdraw erc20 tokens and receive back this tokens to provided eth address.
 
 ```cpp
 struct sidechain_erc20_withdraw_token_operation : public base_operation
@@ -520,6 +576,10 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
 
 ## sidechain_erc20_send_withdraw_operation
 
+An internal operation by which committee members confirm the removal of tokens after 24h.
+
+This operation is used by the commitee member to approve withdrawal of erc20 tokens after 24h.
+
 ```cpp
 struct sidechain_erc20_send_withdraw_operation : public base_operation
 {
@@ -553,6 +613,10 @@ struct sidechain_erc20_send_withdraw_operation : public base_operation
 ```
 
 ## sidechain_erc20_approve_token_withdraw_operation
+
+An internal operation by which committee members confirm the removal of tokens.
+
+This operation is used by the commitee member to approve withdrawal. After the required number of approvals has been collected indicated amount of erc20 tokens is transfered back to provided address and erc20 tokens are burned.
 
 ```cpp
 struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
@@ -591,6 +655,10 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 
 ## sidechain_erc20_issue_operation
 
+Virtual operation which issues erc20 token.
+
+This operation is used to credit erc20 tokens.
+
 ```cpp
 struct sidechain_erc20_issue_operation : public base_operation
 {
@@ -621,6 +689,10 @@ struct sidechain_erc20_issue_operation : public base_operation
 
 
 ## sidechain_erc20_burn_operation
+
+Virtual operation which burns erc20 tokens.
+
+This operation is used to burn erc20 tokens.
 
 ```cpp
 struct sidechain_erc20_burn_operation : public base_operation
@@ -653,6 +725,11 @@ struct sidechain_erc20_burn_operation : public base_operation
 
 
 ## sidechain_btc_create_address_operation
+
+Used to generate address in BTC blockchain. After the address is generated btc\_address\_object\(s\) will be created in echo db and can be retrieved using get\_btc\_address method.
+
+User use this operation to generate bitcoin address which can be used to interact with btc sidechain. Backup address must be only P2PK.
+
 ```cpp
 struct sidechain_btc_create_address_operation : public base_operation
 {
@@ -688,6 +765,11 @@ struct sidechain_btc_create_address_operation : public base_operation
 
 
 ## sidechain_btc_create_intermediate_deposit_operation
+
+An internal operation by which committee members processed deposit to account.
+
+This operation is sent by the committee member to indicate that btc transaction with deposit was processed in the echo.
+
 ```cpp
 struct sidechain_btc_create_intermediate_deposit_operation : public base_operation
 {
@@ -735,6 +817,11 @@ struct sidechain_btc_create_intermediate_deposit_operation : public base_operati
 
 
 ## sidechain_btc_intermediate_deposit_operation
+
+An internal operation by which committee members send from intermediate address to deposit address.
+
+This operations is used by the committee member to send btc from intermediate address to deposit address.
+
 ```cpp
 struct sidechain_btc_intermediate_deposit_operation : public base_operation
 {
@@ -772,6 +859,11 @@ struct sidechain_btc_intermediate_deposit_operation : public base_operation
 
 
 ## sidechain_btc_deposit_operation
+
+An internal operation by which committee members processed deposit to deposit address from intermediate address.
+
+This operation is used by the committee member to indicate that transfer from intermediate address to deposit address was processed.
+
 ```cpp
 struct sidechain_btc_deposit_operation : public base_operation
 {
@@ -818,6 +910,11 @@ struct sidechain_btc_deposit_operation : public base_operation
 
 
 ## sidechain_btc_withdraw_operation
+
+Used to withdraw the eBTC and receive BTC to provided address.
+
+User use this operation to withdraw eBTC and receive back bitcoins to provided address.
+
 ```cpp
 struct sidechain_btc_withdraw_operation : public base_operation
 {
@@ -856,6 +953,11 @@ struct sidechain_btc_withdraw_operation : public base_operation
 
 
 ## sidechain_btc_aggregate_operation
+
+An internal operation by which committee members collect an aggregate transaction.
+
+This operation is used to collect all deposits and withdrawals into aggregate transaction.
+
 ```cpp
 struct sidechain_btc_aggregate_operation : public base_operation
 {
@@ -913,6 +1015,11 @@ struct sidechain_btc_aggregate_operation : public base_operation
 
 
 ## sidechain_btc_approve_aggregate_operation
+
+An internal operation by which committee members confirm the aggregate transaction.
+
+Used by the committee member to approve aggregate transaction. After the required number of approvals has been collected aggregate transaction is sent to bitcoin network and eBTC are credited/burned.
+
 ```cpp
 struct sidechain_btc_approve_aggregate_operation : public base_operation
 {
