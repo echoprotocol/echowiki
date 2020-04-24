@@ -64,5 +64,5 @@ In Echo contracts there was added a flag showing the need to attaining an Ethere
 
 By default, this flag is set to `false`. The flag can be set when creating a contract by making `true` or `false` the parameter of `eth_accuracy`.
 
-For example, let's take an asset `ECHO` that has 5 decimal places and, if the flag is set to `false`, then, when sending 1 ECHO, the contract will receive the amount of `100000`. And if the flag is set to `true`, when sending the same 1 ECHO, the contract will receive the amount of `10000000000000000`. The flag was added to enable full-fledged contracts written for `Ethereum`.
+For example, let's take an asset `ECHO` that has 5 decimal places and, if the flag is set to `false`, then, when sending 1 ECHO, the contract will receive the amount of `100000`. And if the flag is set to `true`, when sending the same 1 ECHO, the contract will receive the amount of `1000000000000000000`. The flag was added to enable full-fledged contracts written for `Ethereum`.
 
