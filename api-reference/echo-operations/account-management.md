@@ -4,6 +4,8 @@
 
 This operation is used to create an account
 
+User can specify the evm address with which it will be possible to restore the account in the future via [ecrecover](/technologies/evm-support/differences-from-ethereum.md#ecrecover).
+
 ```cpp
 struct account_create_operation
 {
@@ -224,6 +226,8 @@ struct account_address_create_operation : public base_operation
 ## evm\_address\_register\_operation
 
 Creates an ethereum address for an account.
+
+The specified `evm_address` can be used in the future to restore account via [ecrecover](/technologies/evm-support/differences-from-ethereum.md#ecrecover).
 
 ```cpp
 struct evm_address_register_operation : public base_operation

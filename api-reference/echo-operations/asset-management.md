@@ -311,6 +311,8 @@ struct asset_reserve_operation : public base_operation
 
 ## asset_fund_fee_pool_operation
 
+Used to transfer asset from account to asset fee pool
+
 ```cpp
 struct asset_fund_fee_pool_operation : public base_operation
 {

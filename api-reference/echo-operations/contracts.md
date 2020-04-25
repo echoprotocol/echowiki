@@ -4,6 +4,8 @@
 
 Creates new contract.
 
+See [Ethereum network contracts compatibility](/technologies/evm-support/README.md#Ethereum-network-contracts-compatibility) for more information about `eth_accuracy` and `supported_asset_id` fields.
+
 ```cpp
 struct contract_create_operation : public contract_base_operation
 {
@@ -88,7 +90,10 @@ struct contract_call_operation : public contract_base_operation
 ```
 
 ## contract_internal_create_operation
+
 Virtual operation created when contract creates another contract.
+
+See [Ethereum network contracts compatibility](/technologies/evm-support/README.md#Ethereum-network-contracts-compatibility) for more information about `eth_accuracy` and `supported_asset_id` fields.
 
 ```cpp
 struct contract_internal_create_operation : public base_operation
@@ -121,6 +126,7 @@ struct contract_internal_create_operation : public base_operation
 ```
 
 ## contract_internal_call_operation
+
 Virtual operation created when contract calls another contract or transfers asset.
 
 ```cpp
@@ -153,6 +159,7 @@ struct contract_internal_call_operation : public base_operation
 ```
 
 ## contract_selfdestruct_operation
+
 Virtual operation created when contract self-destructs.
 
 ```cpp
@@ -182,6 +189,8 @@ struct contract_selfdestruct_operation : public base_operation
 ## contract_update_operation
 
 Update contract data.
+
+Currently this operation can update only the owner of the specified contract.
 
 ```cpp
 struct contract_update_operation : public base_operation
@@ -221,6 +230,8 @@ struct contract_update_operation : public base_operation
 ```
 
 ## contract_fund_pool_operation
+
+Transfer asset from sender account to contract pool.
 
 ```cpp
 struct contract_fund_pool_operation : public base_operation
@@ -263,6 +274,10 @@ struct contract_fund_pool_operation : public base_operation
 ```
 
 ## contract_whitelist_operation
+
+Manage the blacklist and whitelist pool of the contract.
+
+This operation is used to manage accounts in whitelist and blacklist of the specified contract.
 
 ```cpp
 struct contract_whitelist_operation : public base_operation

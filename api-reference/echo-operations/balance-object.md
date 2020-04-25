@@ -99,6 +99,8 @@ struct balance_freeze_operation : public base_operation {
 
 Unfreeze balance.
 
+This operation is used to unfreeze frozen balance so you can use this balance in transactions.
+
 ```cpp
 struct balance_unfreeze_operation : public balance_freeze_operation {
     account_id_type     account;

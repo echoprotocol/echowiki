@@ -4,7 +4,7 @@
 
 Create a committee_member object, as a bid to hold a committee_member seat on the network.
 
-Accounts which wish to become committee_members may use this operation to create a committee_member object which stakeholders may vote on to approve its position as a committee_member.
+Accounts which wish to become committee_members may use this operation to create a committee member object which stakeholders may vote on to approve its position as a committee_member. Field `eth_address` specifies the address in ethereum to be used in eth sidechain to approve deposits, withdrawals and etc. Field `btc_public_key` specifies pubkey of this committee member in bitcoin newtwork to be used in btc sidechain to approve deposits, withdrawals and etc.
 
 ```cpp
 struct committee_member_create_operation : public base_operation
@@ -53,7 +53,7 @@ struct committee_member_create_operation : public base_operation
 
 Update a committee_member object.
 
-Currently the only field which can be updated is the `url` field.
+This operation is used by the committee member to update his url, eth_address used in eth sidechain or btc pubkey used in btc sidechain.
 
 ```cpp
 struct committee_member_update_operation : public base_operation
@@ -245,7 +245,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
 
 Used by active committee_members to propose activation of committee_member
 
-This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted.
+This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted. To activate a committee member he needs a certain amount of frozen balance specified in global properties. See [committee_frozen_balance_deposit_operation](#committee_frozen_balance_deposit_operation).
 
 ```cpp
 struct committee_member_activate_operation : public base_operation
