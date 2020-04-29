@@ -155,11 +155,11 @@ Returns a list of all commands supported by the wallet API or detailed help on a
 | :--- | :--- |
 | `string method` | (Optional) for more detailed help on a single command |
 
-### `get_prototype_operation operation_type` 
-Returns an uninitialized object representing a given blockchain operation.  
-This returns a default-initialized object of the given type; it can be used during early development of the wallet when we don't yet have custom commands for creating all of the operations the blockchain supports.
+```
+help_method get_object
+```
 
-* `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations) 
+## Objects
 
 ### `get_object object_id`
 Returns the blockchain object corresponding to the given id.
@@ -167,6 +167,10 @@ Returns the blockchain object corresponding to the given id.
 | Option | Description |
 | :--- | :--- |
 | `triplet object_id` | the id of the object to return |
+
+```
+get_object 1.2.0
+```
 
 ## Blocks and transactions
 
@@ -177,12 +181,20 @@ Retrieve a full, signed block.
 | :--- | :--- |
 | `number block_num` | Height of the block to be returned |
 
+```
+get_block 10
+```
+
 ### `get_block_virtual_ops block_num`
 Get virtual ops from the block.
 
 | Option | Description |
 | :--- | :--- |
 | `number block_num` | Height of the block to be returned |
+
+```
+get_block_virtual_ops 10
+```
 
 ### `get_transaction_id tx`
 This method is used to convert a JSON transaction to its transactin ID.
@@ -191,12 +203,20 @@ This method is used to convert a JSON transaction to its transactin ID.
 | :--- | :--- |
 | `string tx` | signed transaction |
 
+```
+get_transaction_id JSON_transaction
+```
+
 ### `serialize_transaction tx`
 Converts a signed_transaction in JSON form to its binary representation.
 
 | Option | Description |
 | :--- | :--- |
 | `string tx` | the transaction to serialize |
+
+```
+serialize_transaction JSON_transaction
+```
 
 ### `sign_transaction tx broadcast`
 Signs a transaction.
@@ -205,6 +225,10 @@ Signs a transaction.
 | :--- | :--- |
 | `string tx` | the unsigned transaction |
 | `bool broadcast` | true if you wish to broadcast the transaction |
+
+```
+sign_transaction JSON_transaction true
+```
 
 ## Accounts
 
@@ -1314,8 +1338,15 @@ Creates a transaction to withdraw btc.
 withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
 ```
 
+## Operations
 
-# Verifiable Credentials
+### `get_prototype_operation operation_type` 
+Returns an uninitialized object representing a given blockchain operation.  
+This returns a default-initialized object of the given type; it can be used during early development of the wallet when we don't yet have custom commands for creating all of the operations the blockchain supports.
+
+* `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations) 
+
+## Verifiable Credentials
 
 ### `add_verifiable_credential keyword verifiable_cred`
 Writing Verifiable Credentials to encrypted wallet storage. Verifiable Credentials data

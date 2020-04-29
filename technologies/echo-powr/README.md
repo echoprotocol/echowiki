@@ -50,15 +50,17 @@ Voting for the choice of the best block takes place in two stages, which is divi
 
 This stage consists of three steps. At this stage, the goal of the verifiers is to vote and announce to the network which of the potential next blocks broadcast by producers they consider to be the best candidate for addition to the network.
 
-#### Step 1 - Voting
+#### Step 1 - Block Generation
+
+Each of the selected producers generates new block and announce it to the network.
+
+#### Step 2 - Voting
 
 Each of the selected verifiers tells the network which of the blocks they consider preferable for the current round.
 
-#### Step 2 - Vote Counting
-
-Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes and announces the results of their count to the entire network.
-
 #### Step 3 - Primary evaluation of the vote count
+
+Based on the messages received from other verifiers in step 1, each verifier tallies the votes to determine which of the potential blocks got the most votes.
 
 After receiving the voting results of the previous steps, all nodes know whether the verifiers were able to agree on the choice of the best block for the current round. Each verifier creates a message including information on the outcome \(whether an agreement was reached or not\) and the details of the block agreement and broadcasts this message to the network.
 

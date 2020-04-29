@@ -298,8 +298,6 @@ struct sidechain_issue_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return ECHO_NULL_ACCOUNT; }
-   void            validate ()const {};
-   share_type      calculate_fee(const fee_parameters_type& schedule)const { return schedule.fee; }
 };
 ```
 
@@ -342,8 +340,6 @@ struct sidechain_burn_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return account; }
-   void            validate ()const {};
-   share_type      calculate_fee(const fee_parameters_type& schedule)const { return schedule.fee; }
 };
 ```
 
@@ -389,7 +385,6 @@ struct sidechain_erc20_register_token_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer() const { return account; }
-   share_type calculate_fee(const fee_parameters_type& fp) const { return fp.fee + fp.pool_fee; }
 };
 ```
 
@@ -616,7 +611,6 @@ struct sidechain_erc20_issue_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
-    share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 ### JSON Example
@@ -656,7 +650,6 @@ struct sidechain_erc20_burn_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
-    share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
@@ -694,9 +687,6 @@ struct sidechain_btc_create_address_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return account; }
-
-    void validate() const { FC_ASSERT(!backup_address.empty()); }
-    share_type calculate_fee(const fee_parameters_type& k) const { return k.fee; }
 };
 ```
 
@@ -818,8 +808,6 @@ struct sidechain_btc_deposit_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return committee_member_id; }
-
-    share_type calculate_fee(const fee_parameters_type& k) const { return k.fee; }
 };
 ```
 

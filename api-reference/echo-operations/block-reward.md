@@ -11,7 +11,7 @@ struct block_reward_operation : public base_operation
 
    asset fee;
    account_id_type receiver;
-   std::set<asset> assets;
+   std::vector<asset> assets;
 
    extensions_type extensions;
 

@@ -28,14 +28,12 @@ struct asset_create_operation : public base_operation
    /// ID is not known at the time this operation is created, create this price as though the new asset has instance
    /// ID 1, and the chain will overwrite it with the new asset's ID.
    asset_options              common_options;
-   /// Options only available for BitAssets. MUST be non-null if and only if the @ref market_issued flag is set in
-   /// common_options.flags
+   /// Options only available for BitAssets. MUST be non-null if and only if the asset is a bitasset
    optional<bitasset_options> bitasset_opts;
 
    extensions_type extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee( const fee_parameters_type& k )const;
 };
 ```
@@ -108,7 +106,6 @@ struct asset_update_operation : public base_operation
    extensions_type             extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```
@@ -153,7 +150,6 @@ struct asset_update_bitasset_operation : public base_operation
    extensions_type  extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
 };
 ```
 
@@ -203,7 +199,6 @@ struct asset_update_feed_producers_operation : public base_operation
    extensions_type           extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
 };
 ```
 
@@ -246,7 +241,6 @@ struct asset_issue_operation : public base_operation
    extensions_type      extensions;
 
    account_id_type fee_payer()const { return issuer; }
-   void            validate()const;
    share_type      calculate_fee(const fee_parameters_type& k)const;
 };
 ```
@@ -290,7 +284,6 @@ struct asset_reserve_operation : public base_operation
    extensions_type   extensions;
 
    account_id_type fee_payer()const { return payer; }
-   void            validate()const;
 };
 ```
 
@@ -331,7 +324,6 @@ struct asset_fund_fee_pool_operation : public base_operation
    extensions_type extensions;
 
    account_id_type fee_payer()const { return from_account; }
-   void       validate()const;
 };
 ```
 
@@ -376,7 +368,6 @@ struct asset_publish_feed_operation : public base_operation
    extensions_type        extensions;
 
    account_id_type fee_payer()const { return publisher; }
-   void            validate()const;
 };
 ```
 [asset](/api-reference/echo-operations/types/common.md#asset)
@@ -426,7 +417,6 @@ struct asset_claim_fees_operation : public base_operation
   extensions_type extensions;
 
   account_id_type fee_payer()const { return issuer; }
-  void            validate()const;
 };
 ```
 
