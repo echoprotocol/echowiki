@@ -2,7 +2,8 @@
 
 ## did\_create\_operation
 
-This struct represents the operation for create decentralized identifier (DID).
+This struct represents the operation to create decentralized identifier (DID).
+Only the account/asset/contract owner will be able to create DIDs for these objects.
 
 ```cpp
 struct did_create_operation : public base_operation
@@ -43,7 +44,8 @@ struct did_create_operation : public base_operation
 
 ## did\_update\_operation
 
-This struct represents the operation for update decentralized identifier (DID).
+This struct represents the operation to update decentralized identifier (DID).
+Only the account/asset/contract owner will be able to update DIDs for these objects.
 
 ```cpp
 struct did_update_operation : public base_operation
@@ -88,7 +90,8 @@ struct did_update_operation : public base_operation
 
 ## did\_delete\_operation
 
-This struct represents the operation for remove decentralized identifier (DID).
+This struct represents the operation to remove decentralized identifier (DID).
+Only the account/asset/contract owner will be able to delete DIDs for these objects.
 
 ```cpp
 struct did_delete_operation : public base_operation
