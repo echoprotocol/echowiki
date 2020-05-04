@@ -25,6 +25,10 @@ struct config
    gas_price_type gas_price;
    uint32_t satoshis_per_byte = 1;
    uint32_t coefficient_waiting_blocks = 0;
+   uint64_t btc_deposit_withdrawal_min = 0;
+   uint64_t btc_deposit_withdrawal_fee = 0;
+   uint64_t eth_withdrawal_fee = 0;
+   uint64_t eth_withdrawal_min = 0;
 };
 ```
 
