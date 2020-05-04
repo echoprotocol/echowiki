@@ -284,13 +284,10 @@ struct sidechain_eth_update_contract_address_operation : public base_operation
 ```cpp
 struct sidechain_issue_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
-   
    sidechain_issue_operation() = default;
    sidechain_issue_operation(asset v, account_id_type a, deposit_eth_id_type d) :
             value(v), account(a), deposit_id(d) {}
    
-   asset           fee;
    asset           value;
    account_id_type account;
    object_id_type  deposit_id;
@@ -307,10 +304,6 @@ struct sidechain_issue_operation : public base_operation
 [
    47,
    {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
       "value": {
          "amount": 0,
          "asset_id": "1.3.0"
@@ -327,12 +320,10 @@ struct sidechain_issue_operation : public base_operation
 ```cpp
 struct sidechain_burn_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
    sidechain_burn_operation() = default;
    sidechain_burn_operation(asset v, account_id_type a, withdraw_eth_id_type w) :
             value(v), account(a), withdraw_id(w) {}
-   
-   asset           fee;
+
    asset           value;
    account_id_type account;
    object_id_type  withdraw_id;
@@ -349,10 +340,6 @@ struct sidechain_burn_operation : public base_operation
 [
    48,
    {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
       "value": {
          "amount": 0,
          "asset_id": "1.3.0"
@@ -599,18 +586,14 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 ```cpp
 struct sidechain_erc20_issue_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   deposit_erc20_token_id_type deposit;
+   account_id_type account;
+   erc20_token_id_type token;
+   string amount;
 
-    asset fee;
+   extensions_type extensions;
 
-    deposit_erc20_token_id_type deposit;
-    account_id_type account;
-    erc20_token_id_type token;
-    string amount;
-
-    extensions_type extensions;
-
-    account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
 };
 ```
 ### JSON Example
@@ -619,10 +602,6 @@ struct sidechain_erc20_issue_operation : public base_operation
 [
    55,
    {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
       "deposit": "1.18.0",
       "account": "1.2.0",
       "token": "1.17.0",
@@ -638,18 +617,14 @@ struct sidechain_erc20_issue_operation : public base_operation
 ```cpp
 struct sidechain_erc20_burn_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   withdraw_erc20_token_id_type withdraw;
+   account_id_type account;
+   erc20_token_id_type token;
+   string amount;
 
-    asset fee;
-    
-    withdraw_erc20_token_id_type withdraw;
-    account_id_type account;
-    erc20_token_id_type token;
-    string amount;
+   extensions_type extensions;
 
-    extensions_type extensions;
-
-    account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
 };
 ```
 
@@ -659,10 +634,6 @@ struct sidechain_erc20_burn_operation : public base_operation
 [
    56,
    {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
       "withdraw": "1.19.0",
       "account": "1.2.0",
       "token": "1.17.0",
