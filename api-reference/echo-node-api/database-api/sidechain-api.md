@@ -237,6 +237,39 @@ The bitcoin script for deposit for generated bitcoin address
 }
 ```
 
+### get_btc_sidechain_fees()
+
+Returns information about min withdrawal value and withdrawal fee used in bitcoin sidechain
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_btc_sidechain_fees",
+        []
+    ]
+}
+```
+
+#### Returns
+
+Pair of uints where the first element is min withdrawal value and the second is the withdrawal fee in satoshis
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        0, 
+        0
+    ]
+}
+```
+
 ## Sidechain Ethereum
 
 ### get\_eth\_address\(account\)
@@ -281,6 +314,39 @@ The public ethereum address data stored in the blockchain
         "approves": [],
         "extensions": []
     }
+}
+```
+
+### get_eth_sidechain_fees()
+
+Returns information about min withdrawal value and withdrawal fee used in ethereum sidechain
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_eth_sidechain_fees",
+        []
+    ]
+}
+```
+
+#### Returns
+
+Pair of uints where the first element is min withdrawal value and the second is the withdrawal fee in Wei
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        0, 
+        0
+    ]
 }
 ```
 

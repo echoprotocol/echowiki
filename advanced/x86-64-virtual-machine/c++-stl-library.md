@@ -7,7 +7,6 @@ As x64-vm is running in an isolated environment it does not support system calls
 The most common examples are:
 - I/O Streams
 - Multithreading
-- 
 - [C-style I/O, formatting](https://en.cppreference.com/w/cpp/io/c)
 
 ## CMake project setup and examples
