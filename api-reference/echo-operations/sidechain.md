@@ -112,13 +112,13 @@ struct sidechain_eth_deposit_operation : public base_operation
 ## sidechain_eth_send_deposit_operation
 
 ```cpp
-struct sidechain_erc20_send_withdraw_operation : public base_operation
+struct sidechain_eth_send_deposit_operation : public base_operation
 {
    struct fee_parameters_type { uint64_t fee = 0; };
 
    asset fee;
    account_id_type committee_member_id;
-   deposit_erc20_token_id_type deposit_id;
+   eth_deposit_id_type deposit_id;
 
    extensions_type extensions;
 
@@ -182,13 +182,13 @@ struct sidechain_eth_withdraw_operation : public base_operation
 ## sidechain_eth_send_withdraw_operation
 
 ```cpp
-struct sidechain_erc20_send_withdraw_operation : public base_operation
+struct sidechain_eth_send_withdraw_operation : public base_operation
 {
    struct fee_parameters_type { uint64_t fee = 0; };
 
    asset fee;
    account_id_type committee_member_id;
-   deposit_erc20_token_id_type deposit_id;
+   eth_withdraw_id_type withdraw_id;
 
    extensions_type extensions;
 
@@ -448,7 +448,7 @@ struct sidechain_erc20_send_deposit_operation : public base_operation
 
    asset fee;
    account_id_type committee_member_id;
-   deposit_erc20_token_id_type deposit_id;
+   erc20_deposit_token_id_type deposit_id;
 
    extensions_type extensions;
 
@@ -521,7 +521,7 @@ struct sidechain_erc20_send_withdraw_operation : public base_operation
 
    asset fee;
    account_id_type committee_member_id;
-   deposit_erc20_token_id_type deposit_id;
+   erc20_withdraw_token_id_type withdraw_id;
 
    extensions_type extensions;
 
@@ -586,7 +586,7 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 ```cpp
 struct sidechain_erc20_issue_operation : public base_operation
 {
-   deposit_erc20_token_id_type deposit;
+   erc20_deposit_token_id_type deposit;
    account_id_type account;
    erc20_token_id_type token;
    string amount;
@@ -617,7 +617,7 @@ struct sidechain_erc20_issue_operation : public base_operation
 ```cpp
 struct sidechain_erc20_burn_operation : public base_operation
 {
-   withdraw_erc20_token_id_type withdraw;
+   erc20_withdraw_token_id_type withdraw;
    account_id_type account;
    erc20_token_id_type token;
    string amount;
@@ -648,16 +648,16 @@ struct sidechain_erc20_burn_operation : public base_operation
 ```cpp
 struct sidechain_btc_create_address_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type account;
-    std::string backup_address;
+   account_id_type account;
+   std::string backup_address;
 
-    extensions_type extensions;
+   extensions_type extensions;
 
-    account_id_type fee_payer() const { return account; }
+   account_id_type fee_payer() const { return account; }
 };
 ```
 
@@ -683,19 +683,19 @@ struct sidechain_btc_create_address_operation : public base_operation
 ```cpp
 struct sidechain_btc_create_intermediate_deposit_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type committee_member_id;
+   account_id_type committee_member_id;
 
-    account_id_type account;
-    btc_address_id_type btc_address_id;
-    btc_transaction_details tx_info;
+   account_id_type account;
+   btc_address_id_type btc_address_id;
+   btc_transaction_details tx_info;
 
-    extensions_type extensions;
+   extensions_type extensions;
 
-    account_id_type fee_payer()const { return committee_member_id; }
+   account_id_type fee_payer()const { return committee_member_id; }
 };
 ```
 
@@ -730,17 +730,17 @@ struct sidechain_btc_create_intermediate_deposit_operation : public base_operati
 ```cpp
 struct sidechain_btc_intermediate_deposit_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type committee_member_id;
-    btc_intermediate_deposit_id_type intermediate_address_id;
-    btc_signature_type signature;
+   account_id_type committee_member_id;
+   btc_intermediate_deposit_id_type intermediate_address_id;
+   btc_signature_type signature;
 
-    extensions_type extensions;
+   extensions_type extensions;
 
-    account_id_type fee_payer()const { return committee_member_id; }
+   account_id_type fee_payer()const { return committee_member_id; }
 };
 ```
 
@@ -767,18 +767,18 @@ struct sidechain_btc_intermediate_deposit_operation : public base_operation
 ```cpp
 struct sidechain_btc_deposit_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type committee_member_id;
-    account_id_type account;
-    btc_intermediate_deposit_id_type intermediate_deposit_id;
-    btc_transaction_details tx_info;
+   account_id_type committee_member_id;
+   account_id_type account;
+   btc_intermediate_deposit_id_type intermediate_deposit_id;
+   btc_transaction_details tx_info;
 
-    extensions_type extensions;
+   extensions_type extensions;
 
-    account_id_type fee_payer() const { return committee_member_id; }
+   account_id_type fee_payer() const { return committee_member_id; }
 };
 ```
 
@@ -813,18 +813,18 @@ struct sidechain_btc_deposit_operation : public base_operation
 ```cpp
 struct sidechain_btc_withdraw_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type account;
+   account_id_type account;
 
-    std::string btc_addr;
-    uint64_t value;
+   std::string btc_addr;
+   uint64_t value;
 
-    extensions_type extensions;
+   extensions_type extensions;
 
-    account_id_type fee_payer()const { return account; }
+   account_id_type fee_payer()const { return account; }
 };
 ```
 
@@ -851,29 +851,29 @@ struct sidechain_btc_withdraw_operation : public base_operation
 ```cpp
 struct sidechain_btc_aggregate_operation : public base_operation
 {
-    struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type committee_member_id;
+   account_id_type committee_member_id;
 
-    std::set<btc_deposit_id_type> deposits;
-    std::set<btc_withdraw_id_type> withdrawals;
+   std::set<btc_deposit_id_type> deposits;
+   std::set<btc_withdraw_id_type> withdrawals;
 
-    fc::sha256 transaction_id;
-    p2sh_p2wsh sma_address;
-    commitee_pub_keys_map_t committee_member_ids_in_script;
-    uint64_t aggregation_out_value = 0;
-    uint32_t btc_block_number = 0;
+   fc::sha256 transaction_id;
+   p2sh_p2wsh sma_address;
+   commitee_pub_keys_map_t committee_member_ids_in_script;
+   uint64_t aggregation_out_value = 0;
+   uint32_t btc_block_number = 0;
 
-    fc::optional<btc_aggregating_id_type> previous_aggregation;
-    uint8_t cpfp_depth = 0;
+   fc::optional<btc_aggregating_id_type> previous_aggregation;
+   uint8_t cpfp_depth = 0;
 
-    std::map<std::uint32_t, btc_signature_type> signatures;
+   std::map<std::uint32_t, btc_signature_type> signatures;
 
-    extensions_type extensions;
+   extensions_type extensions;
 
-    account_id_type fee_payer()const { return committee_member_id; }
+   account_id_type fee_payer()const { return committee_member_id; }
 };
 ```
 
