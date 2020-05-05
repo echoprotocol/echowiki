@@ -78,7 +78,7 @@
     * [create_committee_member](#create_committee_member-owner_account-url-amount-eth_address-btc_public_key-broadcast)
     * [update_committee_member](#update_committee_member-owner_account-committee_member-new_url-new_eth_address-new_btc_public_key-broadcast)
     * [create_activate_committee_member_proposal](#create_activate_committee_member_proposal-sender-committee_to_activate-expiration_time)
-    * [create_deactivate_committee_member_proposal](#create_deactivate_committee_member_proposal-sender-committee_to_activate-expiration_time))
+    * [create_deactivate_committee_member_proposal](#create_deactivate_committee_member_proposal-sender-committee_to_activate-expiration_time)
     * [list_committee_members](#list_committee_members-lowerbound-limit)
     * [get_committee_member](#get_committee_member-owner_account)
 * Globals
