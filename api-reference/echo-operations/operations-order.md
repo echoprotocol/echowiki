@@ -68,3 +68,6 @@
 |[sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation)|63|
 |[block\_reward\_operation](block-reward.md#block_reward_operation) // VIRTUAL|64|
 |[evm\_address\_register\_operation](account-management.md#evm_address_register_operation)|65|
+|[did\_create\_operation](did.md#didcreateoperation)|66|
+|[did\_update\_operation](did.md#didupdateoperation)|67|
+|[did\_delete\_operation](did.md#diddeleteoperation)|68|

@@ -79,3 +79,10 @@ Contains methods to access echorand notifications.
 
 * [set\_echorand\_message\_callback](echorand-api.md#set_echorand_message_callback-cb)
 
+## DID API
+
+Contains methods to access DID object.
+
+* [get\_did\_object](did-api.md#getdidobjectid)
+* [get\_key](did-api.md#getkeybyidstringidstring)
+* [get\_keys](did-api.md#getkeysbyidstringidstring)

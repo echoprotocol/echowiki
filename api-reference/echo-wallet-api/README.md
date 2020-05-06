@@ -127,6 +127,15 @@
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
 * Operations
     * [get_prototype_operation](#get_prototype_operation-operation_type)
+* Verifiable Credentials
+    * [add_verifiable_credential](#add_verifiable_credential-keyword-verifiable_cred)
+    * [get_verifiable_credential_keywords](#get_verifiable_credential_keywords)
+    * [get_verifiable_credential](#get_verifiable_credential-keyword)
+    * [get_all_verifiable_credentials](#get_all_verifiable_credentials)
+    * [get_did_object_key](#get_did_object_key-id_string)
+    * [get_verifiable_presentation](#get_verifiable_presentation-keywords)
+    * [validate_verifiable_presentation](#validate_verifiable_presentation-presentation)
+    * [validate_verifiable_credential](#validate_verifiable_credential-credential)
 
 ## Info and help
 
@@ -1336,3 +1345,87 @@ Returns an uninitialized object representing a given blockchain operation.
 This returns a default-initialized object of the given type; it can be used during early development of the wallet when we don't yet have custom commands for creating all of the operations the blockchain supports.
 
 * `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations) 
+
+## Verifiable Credentials
+
+### `add_verifiable_credential keyword verifiable_cred`
+Writing Verifiable Credentials to encrypted wallet storage. Verifiable Credentials data
+can be used to authenticate claims.
+
+| Option | Description |
+| :--- | :--- |
+| `string keyword` | name associated with Verifiable Credentials |
+| `string verifiable_cred` | Verifiable Credentials presented in json format |
+
+```
+add_verifiable_credential "keyword" "{json}"
+```
+
+### `get_verifiable_credential_keywords`
+Get all saved verifiable credential names.
+
+```
+get_verifiable_credential_keywords
+```
+
+### `get_verifiable_credential keyword`
+Get verifiable credentials recorded under a specific name.
+
+| Option | Description |
+| :--- | :--- |
+| `string keyword` | name associated with Verifiable Credentials |
+
+```
+get_verifiable_credential "keyword"
+```
+
+### `get_all_verifiable_credentials`
+Get all verifiable credentials saved in wallet.
+
+```
+get_all_verifiable_credentials
+```
+
+### `get_did_object_key id_string`
+Get key from DID object by DID uri with key number.
+
+| Option | Description |
+| :--- | :--- |
+| `string id_string` | DID uri with key number |
+
+```
+get_did_object_key "did:echo:0.1.25.0"
+```
+
+### `get_verifiable_presentation keywords`
+Get verifiable presentation from given VC keywords.
+
+| Option | Description |
+| :--- | :--- |
+| `string_vector keywords` | vector of VC keywords |
+
+```
+get_verifiable_presentation ["keyword_1", "keyword_2"]
+```
+
+### `validate_verifiable_presentation presentation`
+Validate given verifiable presentation.
+
+| Option | Description |
+| :--- | :--- |
+| `string presentation` | presentation in JSON format |
+
+```
+validate_verifiable_presentation "verifiable_presentation"
+```
+
+### `validate_verifiable_credential credential`
+Validate given verifiable credential.
+
+| Option | Description |
+| :--- | :--- |
+| `string credential` | credential in JSON format |
+
+```
+validate_verifiable_credential "verifiable_credential"
+```
