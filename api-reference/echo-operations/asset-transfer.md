@@ -26,6 +26,8 @@ struct transfer_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Examples
 
 ```json
@@ -70,6 +72,8 @@ struct transfer_to_address_operation : public base_operation
    account_id_type fee_payer()const { return from; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

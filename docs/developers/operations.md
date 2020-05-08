@@ -56,7 +56,7 @@
 | [call_contract_operation](operations/contracts/_call_contract_operation.md) | Calls a contract. |
 | [contract_transfer_operation](operations/contracts/_contract_transfer_operation.md) *[VIRTUAL]* | Indicates internal contract transfers |
 | [contract_update_operation](operations/contracts/_contract_update_operation.md) | Update contract data |
-| [contract_fund_pool_operation](operations/contracts/_contract_fund_pool_operation.md) | Transfer asset to fee pool. |
+| [contract_fund_pool_operation](operations/contracts/_contract_fund_pool_operation.md) | Transfer asset to contract fee pool. |
 | [contract_whitelist_operation](operations/contracts/_contract_whitelist_operation.md) | |
 
 #### Sidechain operations

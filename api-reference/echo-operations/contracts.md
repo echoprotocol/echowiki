@@ -108,6 +108,8 @@ struct contract_internal_create_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 ```json
 [
@@ -140,6 +142,8 @@ struct contract_internal_call_operation : public base_operation
     extensions_type extensions;
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 ```json
@@ -212,6 +216,8 @@ struct contract_update_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -231,7 +237,7 @@ struct contract_update_operation : public base_operation
 
 ## contract_fund_pool_operation
 
-Transfer asset from sender account to contract pool.
+Transfer asset from sender account to contract [fee pool](/advanced/contract-fee-pool.md).
 
 ```cpp
 struct contract_fund_pool_operation : public base_operation
@@ -251,6 +257,8 @@ struct contract_fund_pool_operation : public base_operation
    account_id_type fee_payer() const { return sender; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
@@ -275,7 +283,7 @@ struct contract_fund_pool_operation : public base_operation
 
 ## contract_whitelist_operation
 
-Manage the blacklist and whitelist pool of the contract.
+Manage the blacklist and whitelist pool of the contract. For more informattion see `Whitelisting and Blacklisting` section in [fee pool](/advanced/contract-fee-pool.md)
 
 This operation is used to manage accounts in whitelist and blacklist of the specified contract.
 
@@ -301,6 +309,8 @@ struct contract_whitelist_operation : public base_operation
    account_id_type fee_payer() const { return sender; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

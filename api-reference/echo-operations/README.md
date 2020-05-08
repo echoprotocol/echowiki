@@ -62,7 +62,7 @@
 * [contract\_internal\_call\_operation](contracts.md#contract_internal_call_operation) _\[VIRTUAL\]_ - Indicates contract call from another contract
 * [contract\_selfdestruct\_operation](contracts.md#contract_selfdestruct_operation) _\[VIRTUAL\]_ - Indicates contract destruction
 * [contract\_update\_operation](contracts.md#contract_update_operation) - Update contract data
-* [contract\_fund\_pool\_operation](contracts.md#contract_fund_pool_operation) - Transfer asset to fee pool
+* [contract\_fund\_pool\_operation](contracts.md#contract_fund_pool_operation) - Transfer asset to contract fee pool
 * [contract\_whitelist\_operation](contracts.md#contract_whitelist_operation) - Manage the blacklist and whitelist pool of the contract
 
 ## Sidechain

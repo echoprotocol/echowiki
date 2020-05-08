@@ -26,6 +26,8 @@ struct committee_member_create_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -94,7 +96,7 @@ struct committee_member_update_operation : public base_operation
 
 ## committee_member_update_global_parameters_operation
 
-Used by committee_members to update the global parameters of the blockchain.
+Used by committee_members to update the global parameters of the blockchain. See [chain_parameters](/api-reference/echo-objects/chain-parameters.md) to get info about parameters which can be modified by this operation.
 
 This operation allows the committee_members to update the global parameters on the blockchain. These control various tunable aspects of the chain, including block and maintenance intervals, maximum data sizes, the fees charged by the network, etc.
 
@@ -113,6 +115,10 @@ struct committee_member_update_global_parameters_operation : public base_operati
    account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
+[chain_parameters](/api-reference/echo-objects/chain-parameters.md)
 
 ### JSON Example
 
@@ -245,7 +251,7 @@ struct committee_member_update_global_parameters_operation : public base_operati
 
 Used by active committee_members to propose activation of committee_member
 
-This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted. To activate a committee member he needs a certain amount of frozen balance specified in global properties. See [committee_frozen_balance_deposit_operation](#committee_frozen_balance_deposit_operation).
+This operation may only be used in a proposed transaction, and a proposed transaction which contains this operation must have a review period specified in the current global parameters before it may be accepted. To activate a committee member he needs a certain amount of frozen balance specified in global properties. See `committee_frozen_balance_to_activate` from [chain_parameters](/api-reference/echo-objects/chain-parameters.md) to get the amount to be frozen.
 
 ```cpp
 struct committee_member_activate_operation : public base_operation
@@ -261,6 +267,8 @@ struct committee_member_activate_operation : public base_operation
    account_id_type fee_payer()const { return ECHO_COMMITTEE_ACCOUNT; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
@@ -299,6 +307,8 @@ struct committee_member_deactivate_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -334,6 +344,8 @@ struct committee_frozen_balance_deposit_operation : public base_operation {
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -356,7 +368,7 @@ struct committee_frozen_balance_deposit_operation : public base_operation {
 
 ## committee_frozen_balance_withdraw_operation
 
-Used by a committee_member to withdraw a frozen balance
+Used by a committee_member to withdraw a frozen balance. See `committee_balance_unfreeze_duration_seconds` in [chain_parameters](/api-reference/echo-objects/chain-parameters.md) to get the time that must pass after deactivation to be able to withdraw frozen balance.
 
 ```cpp
 struct committee_frozen_balance_withdraw_operation : public base_operation {
@@ -372,6 +384,8 @@ struct committee_frozen_balance_withdraw_operation : public base_operation {
    account_id_type fee_payer() const { return committee_member_account; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

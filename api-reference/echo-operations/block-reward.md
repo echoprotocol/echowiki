@@ -15,6 +15,8 @@ struct block_reward_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
