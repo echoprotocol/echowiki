@@ -45,6 +45,7 @@ struct sidechain_eth_approve_address_operation : public base_operation
 
    account_id_type account;
    eth_address_type eth_addr;
+   sha256 transaction_hash;
 
    extensions_type extensions;
 
@@ -66,6 +67,7 @@ struct sidechain_eth_approve_address_operation : public base_operation
       "malicious_committeemen": [],
       "account": "1.2.0",
       "eth_addr": "0000000000000000000000000000000000000000",
+      "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
       "extensions": []
    }
 ]
@@ -83,6 +85,7 @@ struct sidechain_eth_deposit_operation : public base_operation
    uint64_t deposit_id;
    account_id_type account;
    uint64_t value;
+   sha256 transaction_hash;
 
    extensions_type extensions;
 
@@ -104,6 +107,7 @@ struct sidechain_eth_deposit_operation : public base_operation
       "deposit_id": 0,
       "account": "1.2.0",
       "value": 0,
+      "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
       "extensions": []
    }
 ]
@@ -223,6 +227,7 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
    asset fee;
    account_id_type committee_member_id;
    uint64_t withdraw_id;
+   sha256 transaction_hash;
 
    extensions_type extensions;
 
@@ -242,6 +247,7 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
       },
       "committee_member_id": "1.2.0",
       "withdraw_id": 0,
+      "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
       "extensions": []
    }
 ]
@@ -557,6 +563,7 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 
    account_id_type committee_member_id;
    uint64_t withdraw_id;
+   sha256 transaction_hash;
 
    extensions_type extensions;
 
@@ -576,6 +583,7 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
       },
       "committee_member_id": "1.2.0",
       "withdraw_id": 0,
+      "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
       "extensions": []
    }
 ]
