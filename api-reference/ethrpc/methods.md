@@ -211,7 +211,6 @@ Operation with index `1` from block `2467` with hash `34b8cbaf371addf365df0d9df9
 * [eth_protocolVersion](#eth_protocolversion)
 * [eth_syncing](#eth_syncing)
 * [eth_coinbase](#eth_coinbase)
-* [eth_mining](#eth_mining)
 * [eth_gasPrice](#eth_gasprice)
 * [eth_blockNumber](#eth_blocknumber)
 * [eth_getBalance](#eth_getbalance)
@@ -511,33 +510,6 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_coinbase","params":[],"id":6
   "jsonrpc": "2.0",
   "result": "0x000000000000000000000000000000000000000a" // 1.2.10
 }
-```
-
-***
-
-### eth_mining
-
-Returns `true` if client has any imported account to participate in consensus.
-
-##### Parameters
-none
-
-##### Returns
-
-`Boolean` - `true` if client has any imported account to participate in consensus, otherwise `false`.
-
-##### Example
-```js
-// Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":71}'
-
-// Result
-{
-  "id":71,
-  "jsonrpc": "2.0",
-  "result": true
-}
-
 ```
 
 ***
