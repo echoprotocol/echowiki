@@ -1,5 +1,5 @@
 ---
-description: Echo is a network for building smart contracts and decentralized applications that work with Bitcoin.
+description: Echo is a network for building smart contracts and decentralized applications that work with Bitcoin and Ethereum.
 
 ---
 
@@ -23,17 +23,17 @@ A fast, final and scalable BFT consensus mechanism using Proof of Weighted Rando
 
 {% page-ref page="technologies/powr-echorand/README.md" %}
 
-### x64 Virtual Machine
+### x86-64 Virtual Machine
 
 Echo implements a new, blockchain-specific x86-64 virtual machine allowing developers to write and deploy smart contract in higher level languages. With Echo, smart contracts can be written both in Solidity and in more familiar and convenient languages, such as C, C++, Rust, Go and many more.
 
 {% page-ref page="technologies/x86-64-virtual-machine/README.md" %}
 
-### Bitcoin Sidechain
+### Bitcoin and Ethereum Sidechain
 
-Echo implements a Bitcoin sidechain, allowing you to use deposit and withdraw BTC from the Echo network. Through the sidechain, you can build smart contract and applications that interact with BTC , such as decentralized finance (DeFi) applications including stablecoins that are collateralized with Bitcoin.
+Echo implements a Bitcoin and Ethereum sidechains, allowing you to use deposit and withdraw BTC and ETH from the Echo network. Through the sidechain, you can build smart contract and applications that can use BTC and ETH as asset in ECHO, such as decentralized finance (DeFi) applications including stablecoins that are collateralized with Bitcoin and Ethereum.
 
-{% page-ref page="technologies/sidechain/bitcoin-sidechain.md" %}
+{% page-ref page="technologies/sidechains/README.md" %}
 
 ## Current Status
 
@@ -43,8 +43,8 @@ The project is currently under heavy development and testing as early-stage expe
 * Participate in the EchoRand consensus.
 * Create and issue new assets.
 * Transfer assets.
-* Deploy and access smart contracts written in Solidity with the  EVM.
-* Deploy and access smart contracts written in С++ via x64 VM.
+* Deploy and access smart contracts written in Solidity with the EVM.
+* Deploy and access smart contracts written in С++ via x86-64 VM.
 * Create and use account addresses.
 * Launch your node and access its API to communicate with the blockchain.
 
