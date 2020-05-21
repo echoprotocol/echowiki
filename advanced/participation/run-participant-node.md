@@ -2,7 +2,7 @@
 
 Every user can opt to participate in the consensus. To do this, you must have a running node with an account or accounts authorized in it.
 
-To start participating in EchoRand consensus, you should add the option --account-info="\[\"account\_id\", \"echorand\_private\_key\"\]". Where account\_id is ID of your account and echorand\_private\_key is the ED215519 key that you have been issued with.
+To start participating in EchoRand consensus, you should add the option `--account-info="\[\"account\_id\", \"echorand\_private\_key\"\]"`. Where account\_id is ID of your account and echorand\_private\_key is the ED215519 key that you have been issued with.
 
 ```bash
 ./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info="[\"1.2.514\", \"5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA\"]"
