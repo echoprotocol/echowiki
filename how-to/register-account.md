@@ -37,18 +37,25 @@ register_account_with_api foobar ECHOHFABt7AMmNdQT3bPDSfSLCDmUTddxFmaWp81CNQaCqK
 ## Via import
 If you already have an account, then you can simply import it to your wallet with private key.
 
-`import_key` accepts account name and account's private key in such manner:
+`import_key` accepts account name and account's private key. 
+
+> `import_key <account_name> <private_key>`. 
+The `<private_key>` will need to be entered in a separate line after the prompt
+
 ```
-import_key <account name>
-<private key>
+import_key nathan
+5JonrZyVnEVYZGDWykH8KAMSkq2qULNtW6agCuWgAApgHh8QNQk
 ```
 
 ### Importing balance
-If you have initial balance embed into genesis you can import it to your account. This can be done with `import_balance` which accepts recipient account name and private keys of initial balances in such manner: 
+If you have initial balance embed into genesis you can import it to your account. This can be done with `import_balance` which accepts recipient account name and private keys of initial balances.
+
+> `import_balance <recipient_account_name> true [<private_keys>]`. 
+The array with keys `[<private_keys>]` related to `<recipient_account_name>` will need to be entered in a separate line after the prompt.
 
 ```
-import_balance <recipient account name> true
-[<private keys separated by comma>]
+import_balance nathan true
+[5JonrZyVnEVYZGDWykH8KAMSkq2qULNtW6agCuWgAApgHh8QNQk]
 ```
 
 ### Private devnet test account
