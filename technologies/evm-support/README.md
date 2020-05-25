@@ -6,6 +6,8 @@ Echo has an Ethereum virtual machine \(EVM\) integrated, which allows for upload
 
 Solidity - is a high-level object-oriented programming language for writing smart contracts. Full documentation on it is available [here](https://solidity.readthedocs.io).
 
+Version of EVM used for fork - Aleth 1.8.0. Version of solidity used for fork - 0.6.0.
+
 ## Object IDs
 
 Unlike Ethereum, where addresses are presented in the form of hashes, Echo uses incremental IDs in the form of triplets for account and contract identification.
@@ -33,7 +35,7 @@ ff0000000000000000000000ffffffffffffffff  | Conversion of decimal Echo type
 [][ 11 bytes of zeros  ][   8 bytes    ]  |       to hex short type:
 ^ 1 byte id short type    id instance     |   2 -> 00 - account
                                           |  11 -> 01 - contract
-1.2.26 = account 26 (0x1a) =              |  dd -> xx - everything else
+1.2.26 = account 26 (0x1a) =              |
 000000000000000000000000000000000000001a  |
                                           |
 1.11.5 = contract 5 =                     |
