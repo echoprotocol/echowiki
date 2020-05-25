@@ -22,5 +22,10 @@ Development, deployment and execution of the x86-64 smart contract includes the 
 * upload the contract into Echo blockchain 
 * call smart contract with provided parameters and get the return result stored in the Echo 
 
-These steps are covered in detail in the corresponding sections.
-
+More information about x86-64 virtual machine you can find in the corresponding sections:
+    
+{% page-ref page="../../advanced/x86-64-virtual-machine/smart_contract_development.md" %}
+{% page-ref page="../../advanced/x86-64-virtual-machine/c++-smart-contracts.md" %}
+{% page-ref page="../../advanced/x86-64-virtual-machine/echo-chain-interface.md" %}
+{% page-ref page="../../advanced/x86-64-virtual-machine/c++-stl-library.md" %}
+{% page-ref page="../../advanced/x86-64-virtual-machine/rust-smart-contracts.md" %}

@@ -29,7 +29,7 @@ A user can receive her personal deposit addresses and history of the deposits an
 
 ## Bitcoin Sidechain
 
-Echo BTC sidechain allows Echo account owners to exchange their BTC with the corresponding asset in the Echo network (eBTC). User operations on the Echo chain and transactions on the Bitcoin chain trigger the processes inside the sidechain which result in various Echo operations and Bitcoin transactions signed and sent by the committee members.
+Echo BTC sidechain allows Echo account owners to exchange their BTC with the corresponding asset in the Echo network (eBTC). User operations on the Echo chain and transactions on the Bitcoin chain trigger the processes inside the sidechain which result in various Echo operations and Bitcoin transactions signed and sent by the committee members. The Bitcoin sidechain tracks the deposits and withdrawals to and from its adresses and performs corresponding operations on the Echo side after the block where the transaction with the deposit or withdrawal is located and confirmed on the Bitcoin network.
 
 ## Ethereum Sidechain
 
