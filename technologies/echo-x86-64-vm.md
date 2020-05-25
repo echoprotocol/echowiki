@@ -1,12 +1,12 @@
 # ECHO x86-64 virtual machine 
 ## Technical specification
 
-
+
 ECHO x86-64 virtual machine has the following structure
 
 ![x86-64-structure.png](./x86-64-structure.png)
 
-x86-64 virtual machine consists of main instruction decoder,
+x86-64 virtual machine consists of main instruction decoder,
 instruction decoders for each type of instruction (add, mov, logical,
 etc), set of instructions, different type of operands and emulators of
 hardware (memory and CPU). Operands are CPU registers, memory location
@@ -20,7 +20,7 @@ outside world are performed through the VM via special instructions. For
 that interaction VM requires the following interfaces:
 
 - Contract interface is required to get the start address and different
-  sections of the ELF executable bytecode
+  sections of the ELF of Mach-O executable bytecode
 - ECHO blockchain interface is required for interaction with blockchain,
   retrieving the contract parameters, read/write into blokchain,
   etc.

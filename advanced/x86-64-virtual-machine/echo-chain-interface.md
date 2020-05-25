@@ -20,12 +20,12 @@ You can get balance of account or contract in needed assets.
 
 ###### Return
 
-`long int` - requested balance.
+`int64_t` - requested balance.
 
 ###### Example
 
 ```c++
-long int my_get_balance(string id, string asset_id)
+int64_t my_get_balance(string id, string asset_id)
 {
     account other(id);
     return other.get_balance(asset_id);
@@ -45,7 +45,7 @@ You can transfer assets from contract to the recipient.
 | :--- | :--- | :--- |
 | `string to` | triplet id of account | 1.2.5646 |
 | `string asset_id` | triplet asset id | 1.3.0 |
-| `long int amount` | transferred amount | 100 |
+| `int64_t amount` | transferred amount | 100 |
 
 ###### Return
 
@@ -54,7 +54,7 @@ You can transfer assets from contract to the recipient.
 ###### Example
 
 ```c++
-void my_transfer(string to, string asset_id, long int amount)
+void my_transfer(string to, string asset_id, int64_t amount)
 {
     transfer(to, asset_id, amount);
 }
@@ -97,12 +97,12 @@ You can get asset id with which the contract was called.
 
 ###### Return
 
-`unsigned long int` - asset id with which the contract was called.
+`uint64_t` - asset id with which the contract was called.
 
 ###### Example
 
 ```c++
-unsigned long int my_get_call_asset_id()
+uint64_t my_get_call_asset_id()
 {
     return get_call_asset_id();
 }
@@ -119,7 +119,7 @@ You can get block hash by number.
 
 | Option | Description | Example |
 | :--- | :--- | :--- |
-| `unsigned int number` | number of block | 15445 |
+| `uint32_t number` | number of block | 15445 |
 
 ###### Return
 
@@ -128,7 +128,7 @@ You can get block hash by number.
 ###### Example
 
 ```c++
-string my_get_block_hash(unsigned int number)
+string my_get_block_hash(uint32_t number)
 {
     return chain::get_block_hash(number);
 }
@@ -163,12 +163,12 @@ You can get current gas limit.
 
 ###### Return
 
-`unsigned long int` - current gas limit in 10^-8^ ECHO.
+`uint64_t int` - current gas limit in 10^-8^ ECHO.
 
 ###### Example
 
 ```c++
-unsigned long int my_get_gas_limit()
+uint64_t int my_get_gas_limit()
 {
     return get_gas_limit();
 }
@@ -183,12 +183,12 @@ You can get current head block number.
 
 ###### Return
 
-`unsigned int` - block number.
+`uint32_t` - block number.
 
 ###### Example
 
 ```c++
-unsigned int my_get_block_number()
+uint32_t my_get_block_number()
 {
     return get_block_number();
 }
@@ -203,12 +203,12 @@ You can get current head block timestamp.
 
 ###### Return
 
-`unsigned int` - block timestamp in seconds.
+`uint32_t` - block timestamp in seconds.
 
 ###### Example
 
 ```c++
-unsigned int my_get_block_timestamp()
+uint32_t my_get_block_timestamp()
 {
     return get_block_timestamp();
 }
@@ -223,12 +223,12 @@ You can get send value for current contract call.
 
 ###### Return
 
-`unsigned long int` - amount of send.
+`int64_t` - amount of send.
 
 ###### Example
 
 ```c++
-unsigned long int my_get_send_value()
+int64_t my_get_send_value()
 {
     return get_send_value();
 }
@@ -283,12 +283,12 @@ You can get called contract id.
 
 ###### Return
 
-`unsigned int` - id of contract.
+`uint32_t` - id of contract.
 
 ###### Example
 
 ```c++
-unsigned int my_get_contract_id()
+uint32_t my_get_contract_id()
 {
     return chain::get_contract_id();
 }
@@ -326,8 +326,8 @@ You can call get storage variable from another x86-64 contract. For the get, you
 | Option | Description | Example |
 | :--- | :--- | :--- |
 | `string id` | triplet id of contract | 1.11.165 |
-| `unsigned long int amount` | amount, doesn't affect anything | 0 |
-| `unsigned long int gas` | gas, doesn't affect anything | 0 |
+| `uint64_t amount` | amount, doesn't affect anything | 0 |
+| `uint64_t gas` | gas, doesn't affect anything | 0 |
 | `string var_name` | variable name | "var_name" |
 
 ###### Return
@@ -337,11 +337,11 @@ You can call get storage variable from another x86-64 contract. For the get, you
 ###### Example
 
 ```c++
-void call_contract(string id, string var_name, unsigned long int amount, unsigned long int gas)
+void call_contract(string id, string var_name, uint64_t amount, uint64_t gas)
 {
     contract_object c(id);
-    int var_1 = c.call(amount, gas, var_name);
-    int var_2 = c.call(amount, gas, string("var_name"));
+    string var_1 = c.call(amount, gas, var_name);
+    string var_2 = c.call(amount, gas, string("var_name"));
 }
 ```
 
@@ -357,8 +357,8 @@ You can call another x86-64 contract. For the call, you will need to pass the am
 | Option | Description | Example |
 | :--- | :--- | :--- |
 | `string id` | triplet id of contract | 1.11.165 |
-| `unsigned long int amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
-| `unsigned long int gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
+| `uint64_t amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
+| `uint64_t gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
 | `string call_line` | call line | greet() or get_balance(\"1.2.236\", \"1.3.0\") |
 
 ###### Return
@@ -368,7 +368,7 @@ You can call another x86-64 contract. For the call, you will need to pass the am
 ###### Example
 
 ```c++
-long int call_contract(string id, string call_line, unsigned long int amount, unsigned long int gas)
+string call_contract(string id, string call_line, uint64_t amount, uint64_t gas)
 {
     contract_object c(id);
     return c.call(amount, gas, call_line);
@@ -387,8 +387,8 @@ You can call another x86-64 contract. For the call, you will need to pass the am
 | Option | Description | Example |
 | :--- | :--- | :--- |
 | `string id` | triplet id of contract | 1.11.165 |
-| `unsigned long int amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
-| `unsigned long int gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
+| `uint64_t amount` | amount allocated to the contract, in the smallest units | 0 or 1000000 |
+| `uint64_t int gas` | gas restriction for internal call, if you set 0, then there will be no limit | 0  or 10000000 |
 | `string function_name` | callee function name | get_balance |
 | `args... params` | call params | a, true, 637, string("string_param") |
 
@@ -399,7 +399,7 @@ You can call another x86-64 contract. For the call, you will need to pass the am
 ###### Example
 
 ```c++
-long int call_contract(string id, string var_1, unsigned int var_2, unsigned long int amount, unsigned long int gas)
+string call_contract(string id, string var_1, unsigned int var_2, uint64_t amount, uint64_t gas)
 {
     int var_local = 544;
     bool var_bool = true;

@@ -2,7 +2,7 @@
 
 ## x86-64 smart contract development
 
-Smart contract can be written in any complied programming language including C++, ADA, D, Eiffel, Go, Haskell, Pascal, Rust. For the details on each of the programming language please refer to the corresponding section. Developers of the x86-64 smart contracts have access to the following features for implementation of the contract:
+Smart contract can be written in any complied programming language including C++, ADA, D, Eiffel, Go, Haskell, Pascal, Rust. C++ and Rust only supported now. For the details on each of the programming language please refer to the corresponding section. Developers of the x86-64 smart contracts have access to the following features for implementation of the contract:
 
 Several classes/functions are provided allowing easy development of the smart contract
 
@@ -19,14 +19,14 @@ In order to receive the x86-64 bytecode of the contract developer should run the
 
 ## Debugging of x86-64 smart contract
 
-Debugging environment is provided in order to help developers to test their smart contracts before deploying into the Echo blockchain. It allows developer to run the contract on the local environment, get the return result, analyze debug outputs from the contract. 
+Debugging environment will be provided in order to help developers to test their smart contracts before deploying into the Echo blockchain. It will allow developer to run the contract on the local environment, get the return result, analyze debug outputs from the contract. 
 
 ## Repackaging
 
 The executable generated during the previous step should be passed through the repakager utility which is a part of smart contract development environment. Command line example for repakager
 
 ```bash
-./repakager contract contract.out
+./repackager contract contract.out
 ```
 
 ## Uploading of smart contract
@@ -62,7 +62,7 @@ call_contract <username> <contract_id> "<function_with_parameters>" <amount> <as
 
 ## Get result of upload or execution
 
-To get results of the uploading or execution of contracts, just call the method `get_contract_result (contract_result_id id)` , which takes the id of the results of contracts, for example `1.11.2`.
+To get results of the uploading or execution of contracts, just call the method `get_contract_result (contract_result_id id)` , which takes the id of the results of contracts, for example `1.12.2`.
 
 ```bash
 get_contract_result <contract_result_id>
@@ -75,7 +75,7 @@ result of call:
 ```bash
 [
   1,{
-    "contract_id": "1.10.1544",
+    "contract_id": "1.11.1544",
     "result": {
       "error": "none",
       "gas_used": 32554,
