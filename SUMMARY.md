@@ -44,7 +44,7 @@
   * [Ethereum Virtual Machine](advanced/ethereum-virtual-machine/README.md)
     * [Contract Fee Pool](advanced/ethereum-virtual-machine/fee-pool.md)
   * [History](advanced/history/echo-history.md)
-  * [Build for Raspberry Pi](advanced/raspberry-pi/build.md)
+  * [Build](advanced/build.md)
 * [API Reference](api-reference/README.md)
   * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
