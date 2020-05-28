@@ -1394,7 +1394,7 @@ Get key from DID object by DID uri with key number.
 | `string id_string` | DID uri with key number |
 
 ```
-get_did_object_key "did:echo:0.1.25.0"
+get_did_object_key "did:echo:0.1.25.0#key-1"
 ```
 
 ### `get_verifiable_presentation keywords`
