@@ -142,11 +142,23 @@
 ### `info`
 Returns info about current chain and active committee members.
 
+```
+info
+```
+
 ### `about`
 Returns info such as client version, git version of graphene/fc, version of boost, openssl.
 
+```
+about
+```
+
 ### `help`
 Returns a list of all commands supported by the wallet API. This lists each command, along with its arguments and return types. For more detailed help on a single command, use help_method
+
+```
+help
+```
 
 ### `help_method method`
 Returns a list of all commands supported by the wallet API or detailed help on a single command.
@@ -235,8 +247,16 @@ sign_transaction JSON_transaction true
 ### `get_account_count`
 Returns the number of accounts registered on the blockchain.
 
+```
+get_account_count
+```
+
 ### `list_my_accounts`
 Lists all accounts controlled by this wallet. This returns a list of the full account objects for all accounts whose private keys we possess.
+
+```
+list_my_accounts
+```
 
 ### `list_accounts lowerbound limit`
 Lists all accounts registered in the blockchain. This returns a list of all account names and their account ids, sorted by account name.
@@ -259,6 +279,7 @@ Returns the most recent operations on the named account. This returns a list of 
 | :--- | :--- |
 | `string name` | the name or id of the account |
 | `number limit` | the number of entries to return (starting from the most recent) |
+
 ```
 get_account_history nathan 10
 ```
@@ -272,6 +293,7 @@ Returns the relative operations on the named account from start number.
 | `number stop` | Sequence number of earliest operation |
 | `number limit` | the number of entries to return |
 | `number start` | the sequence number where to start looping back throw the history |
+
 ```
 get_relative_account_history nathan 0 10 20
 ```
@@ -282,6 +304,7 @@ Returns information about the given account.
 | Option | Description |
 | :--- | :--- |
 | `string account_name_or_id` | the name or id of the account to provide information about |
+
 ```
 get_account nathan or 1.2.0
 ```
@@ -292,6 +315,7 @@ Lookup the id of a named account.
 | Option | Description |
 | :--- | :--- |
 | `string account_name_or_id` | the name of the account to look up |
+
 ```
 get_account_id 1.2.0
 ```
@@ -304,6 +328,7 @@ Get addresses owned by account in specified ids interval
 | `triplet account_id`|  ID of the account |
 | `number from` | Number of block to start retrieve from |
 | `number limit` | Maximum number of addresses to return |
+
 ```
 get_account_addresses 1.2.0 0 10
 ```
@@ -314,6 +339,7 @@ Get owner of specified address.
 | Option | Description |
 | :--- | :--- |
 | `ripemd160 address` | address in form of ripemd160 hash |
+
 ```
 get_account_by_address 8815c69de5d32d3061e52ca9386446332225b43d
 ```
@@ -324,6 +350,7 @@ Get EVM addresses, if exist, for the given account id
 | Option | Description |
 | :--- | :--- |
 | `triplet account-id` | ID of the account |
+
 ```
 get_evm_addresses 1.2.0
 ```
@@ -340,8 +367,9 @@ This function is used to register an account for which you do not own the privat
 | `string registrar-account`|  the account which will pay the fee to register the user |
 | `eth_address evm_address` | (Optional) the ethereum address of the account or null |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
-register_account new_acc ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu nathan E8fd4Db0C38d48493AD167A268683fAb7230a88A true
+register_account new_acc ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu nathan E8fd4Db0C38d48493AD167A268683fAb7230a88A true
 ```
 
 ### `register_account_with_api name active_key echorand_key evm_address`
@@ -353,8 +381,9 @@ Request connected node to register account with provided name and keys.
 | `public_key active-key` | the active key for a new account
 | `public_key echorand-key` | the echorand key for a new account
 | `eth_address_t evm_address` | evm address related to the account
+
 ``` 
-register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu 517CF26a16127c4A58072FB7C24D1140F1b63A67 new_acc true
+register_account nathan ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu 517CF26a16127c4A58072FB7C24D1140F1b63A67
 ```
 
 
@@ -369,6 +398,7 @@ Creates a new account and registers it on the blockchain.
 | `eth_address_t evm_address` | evm address related to the account |
 | `bool broadcast` | true to broadcast the transaction on the network |
 | `bool save_wallet` | whether to save the account to the wallet |
+
 ```
 create_account_with_brain_key "brain_key" new_acc nathan 517CF26a16127c4A58072FB7C24D1140F1b63A67 true true
 ```
@@ -381,6 +411,7 @@ Creates a transaction to generate account address.
 | `string owner_account` | The account for which the address is generated. |
 | `string label` | The label for address |
 | `bool broadcast` | true if you wish to broadcast the transaction |
+
 ```
 generate_account_address nathan label true
 ```
@@ -399,6 +430,10 @@ An asset which enforces a whitelist specifies a list of accounts to maintain its
 | `account_listing new_listing_status` | the new whitelisting status |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
+```
+whitelist_account nathan acc 0 true
+```
+
 ## Keys
 
 ### `import_key account_name_or_id priv_key`
@@ -411,6 +446,7 @@ Returns true if the key was imported.
 | :--- | :--- |
 | `string account_name_or_id` | the account owning the key |
 | `private_key priv_key` | the private key, should be input interactively |
+
 ```
 import_key nathan private_key
 ```
@@ -418,12 +454,17 @@ import_key nathan private_key
 ### `create_eddsa_keypair` 
 Create new EdDSA keypair encoded in base58 for public key and WIF for private key.
 
+```
+create_eddsa_keypair
+```
+
 ### `get_private_key pubkey` 
 Get the WIF private key corresponding to a public key. The private key must already be in the wallet.
 
 | Option | Description |
 | :--- | :--- |
 | `public_key pubkey` | eddsa public key |
+
 ```
 get_private_key ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu
 ```
@@ -436,12 +477,17 @@ Returns true whether a public key is known.
 | Option | Description |
 | :--- | :--- |
 | `public_key public_key` | Public key |
+
 ```
 is_public_key_registered ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu
 ```
 
 ### `suggest_brain_key`
 Suggests a safe brain key to use for creating your account. [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast) requires you to specify a 'brain key', a long passphrase that provides enough entropy to generate cyrptographic keys. This function will suggest a suitably random string that should be easy to write down (and, with effort, memorize). 
+
+```
+suggest_brain_key
+```
 
 ### `normalize_brain_key brain-key`
 Transforms a brain key to reduce the chance of errors when re-entering the key from memory.
@@ -453,8 +499,9 @@ Returns the brain key in its normalized form
 | Option | Description |
 | :--- | :--- |
 | `string brain-key` | the brain key as supplied by the user |
+
 ```
-Example normalize_brain_key brain_key
+normalize_brain_key brain_key
 ```
 
 ### `derive_keys_from_brain_key brain_key number_of_desired_keys`
@@ -468,6 +515,7 @@ NOTE: These keys may or may not match with the owner keys of any account. This f
 | :--- | :--- |
 | `string brain_key` | Brain key |
 | `number number_of_desired_keys` | Number of desired keys |
+
 ```
 derive_keys_from_brain_key brain_key 1
 ```
@@ -477,18 +525,34 @@ Dumps all private keys owned by the wallet.
 The keys are printed in WIF format. You can import these keys into another wallet using `import_key`.  
 Returns a map containing the private keys, indexed by their public key
 
+```
+dump_private_keys
+```
+
 ## Password & lock
 
 ### `is_new`
 Checks whether the wallet has just been created and has not yet had a password set.
-Calling `set_password` will transition the wallet to the locked state. 
+Calling `set_password` will transition the wallet to the locked state.
+
+```
+is_new
+```
 
 ### `is_locked` 
 Checks whether the wallet is locked (is unable to use its private keys).
 This state can be changed by calling `lock` or `unlock`.
 
+```
+is_locked
+```
+
 ### `lock` 
 Locks the wallet immediately.
+
+```
+lock
+```
 
 ### `unlock password` 
 Unlocks the wallet.
@@ -497,6 +561,7 @@ The wallet remain unlocked until the `lock` is called or the program exits.
 | Option | Description |
 | :--- | :--- |
 | `string password` | the password previously set with `set_password`, in the wallet it should be input interactively |
+
 ```
 unlock some_password
 ```
@@ -508,6 +573,7 @@ The wallet must be either 'new' or 'unlocked' to execute this command.
 | Option | Description |
 | :--- | :--- |
 | `string password` | the password, should be input automatically in the wallet |
+
 ```
 set_password your_password
 ```
@@ -515,7 +581,9 @@ set_password your_password
 ### `exit` 
 Exit from wallet
 
-### `cancel_all_subscriptions`
+```
+exit
+```
 
 ## Wallet file
 
@@ -529,6 +597,10 @@ Returns true if the specified wallet is loaded
 | :--- | :--- |
 | `string wallet_filename` | the filename of the wallet JSON file to load. If `wallet_filename` is empty, it reloads the existing wallet file |
 
+```
+load_wallet_file wallet.json
+```
+
 ### `save_wallet_file wallet_filename` 
 Saves the current wallet to the given filename.  
 This does not change the wallet filename that will be used for future writes, so think of this function as 'Save a Copy As...' instead of 'Save As...'. Use `set_wallet_filename` to make the filename persist. 
@@ -536,6 +608,10 @@ This does not change the wallet filename that will be used for future writes, so
 | Option | Description |
 | :--- | :--- |
 | `string wallet_filename` | the filename of the new wallet JSON file to create or overwrite. If `wallet_filename` is empty, save to the current filename. |
+
+```
+save_wallet_file wallet.json
+```
 
 ## Balances
 
@@ -548,6 +624,7 @@ This call will construct transaction(s) that will claim all balances controled b
 | `string account_name_or_id` | the account owning the key |
 | `bool broadcast` | true to broadcast the transaction on the network |
 | `listprivate_key private_keys` | array of eddsa private keys |
+
 ```
 import_balance nathan true [ private_keys ]
 ```
@@ -559,6 +636,7 @@ Returns a list of the given account's balances
 | Option | Description |
 | :--- | :--- |
 | `string id` | the name or id of the account whose balances you want |
+
 ```
 list_account_balances nathan or 1.2.0
 ```
@@ -569,6 +647,7 @@ List the balances of an account or a contract.
 | Option | Description |
 | :--- | :--- |
 | `string id` | the id of either an account or a contract |
+
 ```
 list_id_balances 1.11.0
 ```
@@ -579,6 +658,7 @@ List frozen balances of an account.
 | Option | Description |
 | :--- | :--- |
 | `string account` | the name or id of the account whose balances you want |
+
 ```
 list_frozen_balances nathan
 ```
@@ -589,6 +669,7 @@ List frozen balances of an committee member account.
 | Option | Description |
 | :--- | :--- |
 | `string owner_account` | the name or id of the committee members account whose balances you want |
+
 ```
 get_committee_frozen_balance nathan
 ```
@@ -603,6 +684,7 @@ Freezes part of your balance for the specified amount of time.
 | `string asset` | the name of asset you want to freeze |
 | `number duration` | duration of freeze in days |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 freeze_balance nathan 1 ECHO 90 true
 ```
@@ -615,6 +697,7 @@ Freezes balance required for committee members to operate.
 | `string owner_account` | the name or id of the committee member account |
 | `number amount` | the amount of asset to freeze |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 committee_freeze_balance nathan 10 true
 ```
@@ -627,6 +710,7 @@ Withdraws part of frozen committee members balance.
 | `string owner_account` | the name or id of the committee member account |
 | `number amount` | the amount of frozen committee balance to withdraw |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 committee_withdraw_balance nathan 1 true
 ```
@@ -637,6 +721,7 @@ Get information about a vesting balance object.
 | Option | Description |
 | :--- | :--- |
 | `string account` | An account name or account ID or vesting balance object ID. |
+
 ```
 get_vesting_balances nathan
 ```
@@ -650,6 +735,7 @@ Withdraw a vesting balance.
 | `string amount` | The amount to withdraw. |
 | `string asset_symbol` | The symbol of the asset to withdraw. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
+
 ```
 withdraw_vesting nathan 10 ECHO true
 ```
@@ -665,6 +751,7 @@ Returns the signed transaction transferring funds
 | `string amount` | the amount to send (in nominal units  to send half of a BTS, specify 0.5) |
 | `string asset_symbol` | the symbol or id of the asset to send |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 transfer 1.2.0 1.2.1 10 ECHO true
 ```
@@ -680,6 +767,7 @@ Returns the list of asset objects, ordered by symbol
 | :--- | :--- |
 | `string lowerbound` | the symbol of the first asset to include in the list. |
 | `number limit` | the maximum number of assets to return (max: 100) |
+
 ```
 list_assets ECHO 10
 list_assets "" 10
@@ -701,7 +789,11 @@ Returns the signed transaction creating a new asset
 | `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
-### `update_asset symbol[new_issuer new_options broadcast` 
+```
+create_asset nathan myasset 10 {asset_opts} null true
+```
+
+### `update_asset symbol new_issuer new_options broadcast` 
 Update the core options on an asset. There are a number of options which all assets in the network use. These options are enumerated in the asset_object::asset_options struct. This command is used to update these options for an existing asset.  
 This operation cannot be used to update BitAsset-specific options. For these options, `update_bitasset` instead.
 
@@ -713,6 +805,10 @@ Returns the signed transaction updating the asset
 | `string new_issuer` | (Optional) if changing the asset's issuer, the name or id of the new issuer. null if you wish to remain the issuer of the asset |
 | `asset_options new_options` | the new asset_options object, which will entirely replace the existing options. |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+update_asset myasset nathan {asset_opts} true
+```
 
 ### `update_bitasset symbol new_options broadcast` 
 Update the options specific to a BitAsset.  
@@ -726,6 +822,10 @@ Returns the signed transaction updating the bitasset
 | `bitasset_options new_options` | the new bitasset_options object, which will entirely replace the existing options. |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
+```
+update_bitasset myasset {bitasset_opts} true
+```
+
 ### `update_asset_feed_producers symbol new_feed_producers broadcast` 
 Update the set of feed-producing accounts for a BitAsset.  
 BitAssets have price feeds selected by taking the median values of recommendations from a set of feed producers. This command is used to specify which accounts may produce feeds for a given BitAsset. 
@@ -737,6 +837,7 @@ Returns the signed transaction updating the bitasset's feed producers
 | `string symbol` | the name or id of the asset to update |
 | `liststring new_feed_producers` | a list of account names or ids which are authorized to produce feeds for the asset. this list will completely replace the existing list |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 update_asset_feed_producers UIA [nathan, foobar] true
 ```
@@ -755,6 +856,10 @@ Returns the signed transaction updating the price feed for the given asset
 | `price core_exchange_rate` | the price object containing price making up the feed |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
+```
+publish_asset_fee nathan myasset {price} true
+```
+
 ### `issue_asset to_account amount symbol broadcast` 
 Issue new shares of an asset.
 
@@ -767,12 +872,17 @@ Returns the signed transaction issuing the new shares
 | `string symbol` | the ticker symbol of the asset to issue |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
+```
+issue_asset nathan 10 myasset true
+```
+
 ### `get_asset asset_name_or_id` 
 Returns information about the given asset.
 
 | Option | Description |
 | :--- | :--- |
 | `string asset_name_or_id` | the symbol or id of the asset in question |
+
 ```
 get_asset ECHO
 ```
@@ -783,6 +893,7 @@ Lookup the id of a named asset.
 | Option | Description |
 | :--- | :--- |
 | `string asset_name` | the symbol of an asset to look up |
+
 ```
 get_asset_id ECHO
 ```
@@ -793,6 +904,7 @@ Returns the BitAsset-specific data for a given asset. Market-issued assets's beh
 | Option | Description |
 | :--- | :--- |
 | `string asset_name_or_id` | the symbol or id of the BitAsset in question |
+
 ```
 get_bitasset_data ECHO
 ```
@@ -811,6 +923,10 @@ Returns the signed transaction funding the fee pool
 | `string amount` | the amount of the core asset to deposit |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
+```
+fund_asset_fee_pool nathan myasset 10 true
+```
+
 ### `reserve_asset from amount symbol broadcast` 
 Burns the given user-issued asset.  
 This command burns the user-issued asset to reduce the amount in circulation. you cannot burn market-issued assets. 
@@ -823,6 +939,7 @@ Returns the signed transaction burning the asset
 | `string amount` | the amount to burn, in nominal units |
 | `string symbol` | the name or id of the asset to burn |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 reserve_asset nathan 10 ECHO true
 ```
@@ -843,6 +960,7 @@ Returns the signed transaction registering a committee_member
 | `string eth_address` | address of the account in the ethereum network |
 | `string btc_public_key` | public key of the account in the bitcoin network |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 create_committee_member nathan example.com 1000 E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
@@ -860,6 +978,7 @@ Returns the signed transaction updating a committee_member.
 | `string new_eth_address` | a new ethereum address of the committee_member object, enter empty string if you don't want to change it |
 | `string new_btc_public_key` | a new bitcoin public key of the committee_member object, enter empty string if you don't want to change it |
 | `bool broadcast` | true to broadcast the transaction on the network |
+
 ```
 update_committee_member nathan 1.4.0 new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
@@ -875,6 +994,7 @@ Returns the signed transaction registering a committee_member
 | `string sender` | the name or id of the account which is creating proposal |
 | `triplet committee_to_activate` | a committee member |
 | `time_point expiration_time` | expiration time of created proposal |
+
 ```
 create_activate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00
 ```
@@ -890,6 +1010,7 @@ Returns the signed transaction registering a committee_member
 | `string sender` | the name or id of the account which is creating proposal |
 | `triplet committee_to_activate` | a committee member |
 | `time_point expiration_time` | expiration time of created proposal |
+
 ```
 create_deactivate_committee_member_proposal nathan 1.4.0 1970-01-01T00:00:00
 ```
@@ -903,8 +1024,9 @@ Use the `lowerbound` and limit parameters to page through the list. To retrieve 
 | :--- | :--- |
 | `string lowerbound` | the name of the first committee_member to return. If the named committee_member does not exist, the list will start at the committee_member that comes after `lowerbound`|
 | `number limit` | the maximum number of committee_members to return (max: 1000) |
+
 ```
-list_committee_members
+list_committee_members 1.4.0 10
 ```
 
 ### `get_committee_member owner_account` 
@@ -913,6 +1035,7 @@ Returns information about the given committee_member.
 | Option | Description |
 | :--- | :--- |
 | `string owner_account` | the name or id of the committee_member account owner, or the id of the committee_member |
+
 ```
 get_committee_member nathan
 ```
@@ -922,13 +1045,25 @@ get_committee_member nathan
 ### `get_chain_properties` 
 Retrieve the chain_property_object associated with the chain
 
+```
+get_chain_properties
+```
+
 ### `get_global_properties` 
 Returns the block chain's slowly-changing settings. This object contains all of the properties of the blockchain that are fixed or that change only once per maintenance interval (daily) such as the current list of committee_members, block interval, etc.  
 **See also**: `get_dynamic_global_properties` for frequently changing properties.
 
+```
+get_global_properties
+```
+
 ### `get_dynamic_global_properties` 
 Returns the block chain's rapidly-changing properties. The returned object contains information that changes every block interval such as the head block number, etc.  
-**See also**: `get_global_properties` for less-frequently changing properties 
+**See also**: `get_global_properties` for less-frequently changing properties
+
+```
+get_dynamic_global_properties
+```
 
 ### `propose_parameter_change proposing_account expiration_time changed_values` 
 Creates a transaction to propose a parameter change.  
@@ -941,6 +1076,7 @@ Returns the signed transaction with new global parameters and proposal id.
 | `string proposing_account` | The account paying the fee to propose the tx |
 | `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string changed_values` | The values to change; all other chain parameters are filled in with default values |
+
 ```
 propose_parameter_change 1.2.6 "2093-12-11T10:26:00" { "sidechain_config" : { "eth_committee_update_method" : { "method" : "ffffffff" } } } true
 ```
@@ -955,6 +1091,7 @@ Returns the signed transaction with new global parameters and proposal id.
 | `string proposing_account` | The account paying the fee to propose the tx |
 | `time_point expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string changed_values` | Map of operation type to new fee. Operations may be specified by name or ID. The "scale" key changes the scale. All other operations will maintain current values. |
+
 ```
 propose_fee_change 1.2.6 "2014-12-11T12:42:00" { 59 : { "fee" :123 } } true
 propose_fee_change 1.2.6 "2122-12-11T07:53:00" { "sidechain_btc_intermediate_deposit" : { "fee" :123 } } true
@@ -971,6 +1108,9 @@ Approve or disapprove a proposal.
 | `approval_delta delta` | Members contain approvals to create or remove. In JSON you can leave empty members undefined. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
 
+```
+approve_proposal 1.2.6 1.5.0 {"active_approvals_to_add": ["1.2.6", "1.2.7", "1.2.8", "1.2.9", "1.2.10"],"active_approvals_to_remove": [],"key_approvals_to_add": [],"key_approvals_to_remove": []} true
+```
 
 ## Contracts
 
@@ -980,6 +1120,7 @@ Get the contract object from the database by it's id.
 | Option | Description |
 | :--- | :--- |
 | `triplet id` | the id of the contract |
+
 ```
 get_contract_object 1.11.0
 ```
@@ -990,6 +1131,7 @@ Get the contract information by the contract's id
 | Option | Description |
 | :--- | :--- |
 | `triplet id` | id of the contract |
+
 ```
 get_contract 1.11.0
 ```
@@ -1000,6 +1142,7 @@ Get the result of contract execution.
 | Option | Description |
 | :--- | :--- |
 | `triplet id` | the id of the conract result |
+
 ```
 get_contract_result 1.12.0
 ```
@@ -1011,6 +1154,7 @@ Returns the most recent operations on the contract id. This returns a list of op
 | :--- | :--- |
 | `triplet contract_id` | the ID of the contract |
 | `unsigned limit` | the number of entries to return (starting from the most recent) |
+
 ```
 get_contract_history 1.11.0 10
 ```
@@ -1024,6 +1168,7 @@ Returns the relative operations on the id contract from start number.
 | `uint32_t stop` | Sequence number of earliest operation |
 | `unsigned limit` | the number of entries to return (starting from the most recent) |
 | `uint32_t start` | the sequence number where to start looping back throw the history |
+
 ```
 get_relative_contract_history 1.11.0 0 10 20
 ```
@@ -1042,6 +1187,7 @@ Returns the signed transaction creating the contract
 | `string supported_asset_id` | the asset that can be used to create/call the contract (see [Flag of supported asset](../../technologies/evm-support/README.md#flag-of-supported-asset)) |
 | `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [Flag of using Ethereum accuracy](../../technologies/evm-support/README.md#flag-of-using-ethereum-accuracy)) |
 | `bool save_wallet` | whether to save the contract to the wallet |
+
 ```
 create_contract nathan code_contract 0 ECHO "" false true
 ```
@@ -1059,6 +1205,7 @@ Returns the signed transaction calling the contract
 | `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `bool save_wallet` | whether to save the contract call to the wallet |
+
 ```
 call_contract nathan 1.11.0 code_contract 0 ECHO false
 ```
@@ -1075,6 +1222,7 @@ Returns result of execution
 | `string amount` | amount in ECHO. 1 ECHO is 100000000 |
 | `string asset_type` | the type of the asset transfered to the contract |
 | `string code` | the hash of the method to call |
+
 ```
 call_contract_no_changing_state 1.11.0 1.2.0 0 ECHO "6d4ce63c"
 ```
@@ -1085,6 +1233,7 @@ Get contract's feepool balance.
 | Option | Description |
 | :--- | :--- |
 | `triplet id` | for getting feepool balance. |
+
 ```
 get_contract_pool_balance 1.11.0
 ```
@@ -1095,6 +1244,7 @@ Get contract's whitelist and blacklist.
 | Option | Description |
 | :--- | :--- |
 | `triplet id` | for getting whitelist and blacklist of feepool object. |
+
 ```
 get_contract_pool_whitelist 1.11.0
 ```
@@ -1108,6 +1258,7 @@ Fund feepool of contract.
 | `triplet receiver` | the id of the contract's feepool |
 | `number value` | the amount of asset transfered to the contract in default asset_id_type() |
 | `bool broadcast` | whether to broadcast the fund contract operation to the network |
+
 ```
 contract_fund_fee_pool nathan 1.11.0 0 true
 ```
@@ -1126,6 +1277,7 @@ Returns the signed version of the transaction.
 | `listtriplet rm_whitelist` | Leave it empty if you don't want to remove some account from whitelist. |
 | `listtriplet rm_blacklist` | Leave it empty if you don't want to remove some account from blacklist. |
 | `bool broadcast` | true if you wish to broadcast the contract whitelist operation |
+
 ```
 whitelist_contract_pool nathan 1.11.0 [] [] [] [] true
 ```
@@ -1138,12 +1290,17 @@ Adding nodes to network.
 | Option | Description |
 | :--- | :--- |
 | `liststring nodes` | endpoints your nodes |
+
 ```
 network_add_nodes 127.0.0.1:8090
 ```
 
 ### `network_get_connected_peers` 
 Get connected peers.
+
+```
+network_get_connected_peers
+```
 
 ## Sidechain
 
@@ -1154,6 +1311,7 @@ Returns all deposits, for the given account id.
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
 | `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
+
 ```
 get_account_deposits 1.2.0 ""
 ```
@@ -1165,6 +1323,7 @@ Returns all withdrawals, for the given account id.
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
 | `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
+
 ```
 get_account_withdrawals 1.2.0 ""
 ```
@@ -1177,6 +1336,7 @@ Returns information about generated eth address, if exist and approved, for the 
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
+
 ```
 get_eth_address 1.2.0
 ```
@@ -1188,6 +1348,7 @@ Creates a transaction to generate ethereum address.
 | :--- | :--- |
 | `triplet account` | The account for which the ethereum address is generated. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
+
 ```
 create_eth_address nathan true
 ```
@@ -1201,6 +1362,7 @@ Creates a transaction to withdraw ethereum.
 | `string eth_addr` | The Ethereum address where withdraw. |
 | `number value` | Withdraw amount. |
 | `bool broadcast` | true if you wish to broadcast the transaction. |
+
 ```
 withdraw_eth nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10 true
 ```
@@ -1213,6 +1375,7 @@ Creates a transaction to propose change the eth contract address.
 | `string sender` | The account paying the fee to propose the tx. |
 | `fc::time_point_sec expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
 | `string new_addr` | The new address for ethereum contract. |
+
 ```
 propose_eth_update_contract_address 1.2.6 "2019-11-28T13:50:00" "0e7057518879d5DE1F842b77e8F6F3e22931a1be"
 ```
@@ -1225,6 +1388,7 @@ Get erc20 token information.
 | Option | Description |
 | :--- | :--- |
 | `string eth_addr_or_id` | the ethereum address of token in Ethereum network or the id in ECHO |
+
 ```
 get_erc20_token 0102fe7702b96808f7bbc0d4a888ed1468216cfd
 get_erc20_token 1.16.155
@@ -1236,6 +1400,7 @@ Checks the contract exists and is ERC20 token contract registered by register_er
 | Option | Description |
 | :--- | :--- |
 | `triplet id` | ID of the contract |
+
 ```
 check_erc20_token 1.11.0
 ```
@@ -1246,6 +1411,7 @@ Returns all deposits, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
+
 ```
 get_erc20_account_deposits 1.2.0
 ```
@@ -1256,6 +1422,7 @@ Returns all withdrawals for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
+
 ```
 get_erc20_account_withdrawals 1.2.0
 ```
@@ -1273,6 +1440,7 @@ Returns the signed version of the transaction.
 | `string symbol` | Symbol of the token in echo network. |
 | `number decimals` | Number of the digist after the comma of the token in echo network. |
 | `bool broadcast` | true if you wish to broadcast the transaction. |
+
 ```
 register_erc20_token nathan E62627255a4BC0c92E190E01c515Ba28233c9207 erc20DbeVxoV QIGMPUZ 8 true
 ```
@@ -1291,6 +1459,11 @@ Returns the signed version of the transaction.
 | `bool broadcast` | true if you wish to broadcast the transaction. |
 
 
+```
+withdraw_erc20_token nathan 545a68602db30bf5db9692267f8f84b7f1e70ec3 1.16.0 10 true
+```
+
+
 ## Sidechain Bitcoin
 
 ### `create_btc_deposit_address account backup_address broadcast` 
@@ -1301,6 +1474,7 @@ Creates a transaction to generate bitcoin deposit address.
 | `string account` | The account for which the bitcoin address is generated. |
 | `string backup_address` | The P2PKH address to transfer satoshis back. |
 | `bool broadcast` | true if you wish to broadcast the transaction |
+
 ```
 create_btc_deposit_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
 ```
@@ -1311,6 +1485,7 @@ Returns information about generated btc address, if exist and approved, for the 
 | Option | Description |
 | :--- | :--- |
 | `string account` | The account name or id to provide information about |
+
 ```
 get_btc_address 1.2.0
 ```
@@ -1321,6 +1496,7 @@ Returns bitcoin script for generated bitcoin deposit address, if exist, for the 
 | Option | Description |
 | :--- | :--- |
 | `triplet address` | the id of the bitcoin address to provide script |
+
 ```
 get_btc_deposit_script 1.22.0
 ```
@@ -1334,6 +1510,7 @@ Creates a transaction to withdraw btc.
 | `string btc_addr` | The Bitcoin address where withdraw. |
 | `number value` | The amount withdraw in satoshis. |
 | `bool broadcast` | true if you wish to broadcast the transaction. |
+
 ```
 withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
 ```
@@ -1344,7 +1521,11 @@ withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
 Returns an uninitialized object representing a given blockchain operation.  
 This returns a default-initialized object of the given type; it can be used during early development of the wallet when we don't yet have custom commands for creating all of the operations the blockchain supports.
 
-* `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations) 
+* `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations)
+
+```
+get_prototype_operation transfer
+```
 
 ## Verifiable Credentials
 
