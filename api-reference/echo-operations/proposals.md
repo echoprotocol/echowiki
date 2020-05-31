@@ -45,6 +45,8 @@ struct proposal_create_operation : public base_operation
 ]
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ## proposal_update_operation
 
 The proposal_update_operation updates an existing transaction proposal.
@@ -82,6 +84,8 @@ struct proposal_update_operation : public base_operation
    void get_required_active_authorities( flat_set<account_id_type>& )const;
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
@@ -126,6 +130,8 @@ struct proposal_delete_operation : public base_operation
    void       validate()const;
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

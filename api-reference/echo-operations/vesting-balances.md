@@ -32,6 +32,8 @@ struct vesting_balance_create_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -87,6 +89,8 @@ struct vesting_balance_withdraw_operation : public base_operation
    }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

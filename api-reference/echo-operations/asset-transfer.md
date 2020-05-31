@@ -26,6 +26,8 @@ struct transfer_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Examples
 
 ```json
@@ -48,6 +50,8 @@ struct transfer_operation : public base_operation
 
 ## transfer_to_address_operation
 
+Transfers an amount of one asset from one account to account address.
+
 ```cpp
 struct transfer_to_address_operation : public base_operation
 {
@@ -58,7 +62,7 @@ struct transfer_to_address_operation : public base_operation
    asset            fee;
    /// Account to transfer asset from
    account_id_type  from;
-   /// Account to transfer asset to
+   /// Account address to transfer asset to
    fc::ripemd160  to;
    /// The amount of asset to transfer from @ref from to @ref to
    asset            amount;
@@ -68,6 +72,8 @@ struct transfer_to_address_operation : public base_operation
    account_id_type fee_payer()const { return from; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
@@ -92,7 +98,7 @@ struct transfer_to_address_operation : public base_operation
 
 ## override_transfer_operation
 
-Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority.
+Allows the issuer of an asset to transfer an asset from any account to any account if they have override_authority. See [asset_issuer_permission_flags](/api-reference/echo-operations/types/common.md#asset_issuer_permission_flags).
 
 ```cpp
 struct override_transfer_operation : public base_operation

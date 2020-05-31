@@ -2,9 +2,9 @@
 
 ## balance_claim_operation
 
-Claim a balance in a @ref balance_object.
+Claim a balance in a balance_object.
 
-This operation is used to claim the balance in a given @ref balance_object. If the balance object contains a vesting balance, `total_claimed` must not exceed @ref balance_object::available at the time of evaluation. If the object contains a non-vesting balance, `total_claimed` must be the full balance of the object.
+This operation is used to claim the balance in a given balance_object. If the balance object contains a vesting balance, `total_claimed` must not exceed available vasting balance to withdraw at the time of evaluation. If the object contains a non-vesting balance, `total_claimed` must be the full balance of the object.
 
 ```cpp
 struct balance_claim_operation : public base_operation
@@ -28,6 +28,10 @@ struct balance_claim_operation : public base_operation
    }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
+[authority](/api-reference/echo-operations/types/common.md#authority)
 
 ### JSON Example
 
@@ -74,6 +78,8 @@ struct balance_freeze_operation : public base_operation {
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -99,6 +105,8 @@ struct balance_freeze_operation : public base_operation {
 
 Unfreeze balance.
 
+This operation is used to unfreeze frozen balance so you can use this balance in transactions.
+
 ```cpp
 struct balance_unfreeze_operation : public balance_freeze_operation {
     account_id_type     account;
@@ -108,6 +116,8 @@ struct balance_unfreeze_operation : public balance_freeze_operation {
     account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
 };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

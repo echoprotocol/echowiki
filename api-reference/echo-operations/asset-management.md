@@ -83,7 +83,7 @@ struct asset_create_operation : public base_operation
 
 Update options common to all assets.
 
-There are a number of options which all assets in the network use. These options are enumerated in the asset_options struct. This operation is used to update these options for an existing asset.
+There are a number of options which all assets in the network use. These options are enumerated in the `asset_options` struct. This operation is used to update these options for an existing asset.
 
 ```cpp
 struct asset_update_operation : public base_operation
@@ -134,7 +134,7 @@ struct asset_update_operation : public base_operation
 
 Update options specific to BitAssets.
 
-BitAssets have some options which are not relevant to other asset types. This operation is used to update those options an an existing BitAsset.
+BitAssets have some options which are not relevant to other asset types. This operation is used to update those options for existing BitAsset.
 
 ```cpp
 struct asset_update_bitasset_operation : public base_operation
@@ -311,6 +311,8 @@ struct asset_reserve_operation : public base_operation
 
 ## asset_fund_fee_pool_operation
 
+Used to transfer asset from account to asset fee pool. For more information see [Asset Fee Pool](/advanced/asset-fee-pool.md).
+
 ```cpp
 struct asset_fund_fee_pool_operation : public base_operation
 {
@@ -349,7 +351,7 @@ struct asset_fund_fee_pool_operation : public base_operation
 
 ## asset_publish_feed_operation
 
-Publish price feeds for market-issued assets.
+Publish price feeds for market-issued assets (BitAssets).
 
 Price feed providers use this operation to publish their price feeds for market-issued assets. A price feed is used to tune the market for a particular market-issued asset. For each value in the feed, the median across all committee_member feeds for that asset is calculated and the market for the asset is configured with the median of that value.
 
