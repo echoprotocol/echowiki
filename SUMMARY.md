@@ -6,8 +6,8 @@
   * [Deploy a Solidity Contract](how-to/deploy-a-solidity-contract.md)
   * [Interact with a Smart Contract](how-to/interact-with-a-smart-contract.md)
   <!-- * [Install a Full Node](how-to/install-full-node.md) -->
-  * [Register account](how-to/register-account.md)
   * [Use CLI Wallet](how-to/use-cli-wallet.md)
+  * [Register account](how-to/register-account.md)
 * [Technologies](technologies/README.md)
   * [Echo PoWR Consensus](technologies/echo-powr/README.md)
   * [Sidechains](technologies/sidechains/README.md)

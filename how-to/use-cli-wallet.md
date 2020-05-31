@@ -65,16 +65,9 @@ supersecretpassphrase
 unlocked >>>
 ```
 
-Once the wallet has been unlocked, you can import an existing account. If you do not have an account yet, follow the account creation tutorial.
+Once the wallet has been unlocked, you can import an existing account. If you do not have an account yet, follow the account creation and key importing tutorial.
 
-{% page-ref page="./create-account.md" %}
-
-```bash
-unlocked >>> import_key {your_account_name}
-Input private data:
-{paste_your_WIF_key_here}
-unlocked >>> 
-```
+{% page-ref page="./register-account.md" %}
 
 If you do not import an account, the `wallet.json` file will not be created and you will have to `set_password` again next time you open the wallet. 
 
