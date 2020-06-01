@@ -4,6 +4,8 @@
 
 This operation is used to create an account
 
+User can specify the evm address with which it will be possible to restore the account in the future via [ecrecover](/technologies/evm-support/differences-from-ethereum.md#ecrecover).
+
 ```cpp
 struct account_create_operation
 {
@@ -32,15 +34,13 @@ struct account_create_operation
 };
 ```
 
-[authority](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#authority)
+[authority](/api-reference/echo-operations/types/common.md#authority)
 
-[special\_authority](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#special_authority)
+[special\_authority](/api-reference/echo-operations/types/common.md#special_authority)
 
-[asset](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#asset)
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
-[buyback\_account\_options](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#buyback_account_options)
-
-[account\_options](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#account_options)
+[account\_options](/api-reference/echo-operations/types/common.md#account_options)
 
 ### JSON Example
 
@@ -72,7 +72,7 @@ struct account_create_operation
 
 ## account\_update\_operation
 
-This operation is used to update an existing account. It can be used to update the authorities, or adjust the options on the account. See account\_object::options\_type for the options which may be updated. Optional fields can be added or not depending on your intentions.
+This operation is used to update an existing account. It can be used to update the authorities, or adjust the options on the account. See [account\_options](/api-reference/echo-operations/types/common.md#account_options) for the options which may be updated. Optional fields can be added or not depending on your intentions.
 
 ```cpp
 struct account_update_operation : public base_operation
@@ -103,15 +103,13 @@ struct account_update_operation : public base_operation
 };
 ```
 
-[authority](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#authority)
+[authority](/api-reference/echo-operations/types/common.md#authority)
 
-[special\_authority](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#special_authority)
+[special\_authority](/api-reference/echo-operations/types/common.md#special_authority)
 
-[asset](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#asset)
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
-[buyback\_account\_options](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#buyback_account_options)
-
-[account\_options](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#account_options)
+[account\_options](/api-reference/echo-operations/types/common.md#account_options)
 
 ### JSON Example
 
@@ -131,11 +129,7 @@ struct account_update_operation : public base_operation
 
 ## account\_whitelist\_operation
 
-This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets
-
-Accounts can freely specify opinions about other accounts, in the form of either whitelisting or blacklisting them. This information is used in chain validation only to determine whether an account is authorized to transact in an asset type which enforces a whitelist, but third parties can use this information for other uses as well, as long as it does not conflict with the use of whitelisted assets.
-
-An asset which enforces a whitelist specifies a list of accounts to maintain its whitelist, and a list of accounts to maintain its blacklist. In order for a given account A to hold and transact in a whitelisted asset S, A must be whitelisted by at least one of S's whitelist\_authorities and blacklisted by none of S's blacklist\_authorities. If A receives a balance of S, and is later removed from the whitelist\(s\) which allowed it to hold S, or added to any blacklist S specifies as authoritative, A's balance of S will be frozen until A's authorization is reinstated.
+This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets. For more info see `Whitelisting and Blacklisting` section in [Asset Fee Pool](/advanced/asset-fee-pool.md).
 
 This operation requires authorizing\_account's signature, but not account\_to\_list's. The fee is paid by authorizing\_account.
 
@@ -163,7 +157,7 @@ struct account_whitelist_operation : public base_operation
 };
 ```
 
-[asset](https://github.com/echoprotocol/echowiki/tree/cec007eab21c178f4566db72e33f835d613e3592/api-reference/echo-operations/types/common.md#asset)
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 
@@ -204,6 +198,8 @@ struct account_address_create_operation : public base_operation
 };
 ```
 
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
 ### JSON Example
 
 ```json
@@ -225,6 +221,8 @@ struct account_address_create_operation : public base_operation
 
 Creates an ethereum address for an account.
 
+The specified `evm_address` can be used in the future to restore account via [ecrecover](/technologies/evm-support/differences-from-ethereum.md#ecrecover).
+
 ```cpp
 struct evm_address_register_operation : public base_operation
    {
@@ -241,6 +239,8 @@ struct evm_address_register_operation : public base_operation
       extensions_type extensions;
    };
 ```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
 
 ### JSON Example
 

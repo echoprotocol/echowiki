@@ -31,6 +31,8 @@ using special_authority = static_variant<
 
 ## asset
 
+Struct that is used as a parameter in many operations in the network related to the movement of currency.
+
 ```cpp
 struct asset
 {
@@ -39,33 +41,9 @@ struct asset
 }
 ```
 
-## buyback_account_options
-
-```cpp
-struct buyback_account_options
-{
-   /**
-    * The asset to buy.
-    */
-   asset_id_type       asset_to_buy;
-
-   /**
-    * Issuer of the asset.  Must sign the transaction, must match issuer
-    * of specified asset.
-    */
-   account_id_type     asset_to_buy_issuer;
-
-   /**
-    * What assets the account is willing to buy with.
-    * Other assets will just sit there since the account has null authority.
-    */
-   flat_set< asset_id_type > markets;
-};
-```
-
 ## account_options
 
-The asset_options struct contains options available on all assets in the network.
+The account_options struct contains options available for all accounts in the network.
 
 ```cpp
 struct account_options
@@ -83,6 +61,8 @@ struct account_options
 
 ## asset_issuer_permission_flags
 
+Flags which can be used in [asset_options](#asset_options).
+
 ```cpp
 enum asset_issuer_permission_flags
 {
@@ -95,11 +75,13 @@ enum asset_issuer_permission_flags
 
 ## asset_options
 
+The `asset_options` struct contains options available for all assets in the network.
+
 ```cpp
 struct asset_options
 {
    /// The maximum supply of this asset which may exist at any given time. This can be as large as
-   /// ECHO_MAX_SHARE_SUPPLY
+   /// ECHO_MAX_SHARE_SUPPLY = 10^15
    share_type max_supply = ECHO_MAX_SHARE_SUPPLY;
 
    /// The flags which the issuer has permission to update. See @ref asset_issuer_permission_flags
@@ -131,9 +113,11 @@ struct asset_options
 };
 ```
 
+[price](/api-reference/echo-operations/types/common.md#price)
+
 ## bitasset_options
 
-The bitasset_options struct contains configurable options available only to BitAssets.
+The `bitasset_options` struct contains configurable options available only for BitAssets.
 
 ```cpp
 struct bitasset_options
@@ -169,3 +153,5 @@ struct price
    asset quote;
 };
 ```
+
+[asset](#asset)

@@ -2,14 +2,16 @@
 
 ## Writing a C++ smart contract
 
-Smart contract should have entry point `void __apply()` or if you include header from `x86-64/contracts/contract_base.hpp` you can use macro `MAIN(<contract_name> FUNC(<function1_name>) FUNC(<function2_name>))` which includes `__apply` function as the entry point. This macro supports a maximum of 10 functions. There is no other requirement for the rest of the code of the smart contract, though the approach for writing smart contract used in the examples is encouraged. There are several limitations to the C++ language in order to get small and portable bytecode
+Smart contract should have entry point `void __apply()` or if you include header from `x86-64/contracts/contract_base.hpp` you can use macro `MAIN(<contract_name> FUNC(<function1_name>) FUNC(<function2_name>))` which includes `__apply` function as the entry point. This macro supports a maximum of 10 functions. There is no other requirement for the rest of the code of the smart contract, though the approach for writing smart contract used in the examples is encouraged. There are several limitations to the C++ language in order to get small and portable bytecode. 
 
-* floating point types and operations 
-* dynamic linked libraries and runtime loading of the dynamic library is not supported 
+Several standard classes and functions that are not supported:
+
+* floating point types and operations
+* dynamic linked libraries and runtime loading of the dynamic library
 * C++ and C standard libraries are not supported fully on all the C++ toolchains. For more information about STL support see [Using C++ STL library](advanced/x86-64-virtual-machine/c++-stl-library.md).
 * RTTI
-  * exceptions
-  * constructors of global variables are not called on the program startup 
+* exceptions
+* constructors of global variables are not called on the program startup 
 
 Several standard classes and functions are provided as a part of development environment:
 

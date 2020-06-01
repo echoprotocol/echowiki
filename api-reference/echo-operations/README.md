@@ -23,7 +23,7 @@
 * [asset\_update\_feed\_producers\_operation](asset-management.md#asset_update_feed_producers_operation) - Update the set of feed-producing accounts for a BitAsset
 * [asset\_issue\_operation](asset-management.md#asset_issue_operation) - Asset issue to account
 * [asset\_reserve\_operation](asset-management.md#asset_reserve_operation) - Used to take an asset out of circulation, returning to the issuer
-* [asset\_fund\_fee\_pool\_operation](asset-management.md#asset_fund_fee_pool_operation)
+* [asset\_fund\_fee\_pool\_operation](asset-management.md#asset_fund_fee_pool_operation) - Used to transfer asset to fee pool
 * [asset\_publish\_feed\_operation](asset-management.md#asset_publish_feed_operation) - Publish price feeds for market-issued assets
 * [asset_claim_fees_operation](asset-management.md#asset_claim_fees_operation) - Used to transfer accumulated fees back to the issuer's balance
 
@@ -62,7 +62,7 @@
 * [contract\_internal\_call\_operation](contracts.md#contract_internal_call_operation) _\[VIRTUAL\]_ - Indicates contract call from another contract
 * [contract\_selfdestruct\_operation](contracts.md#contract_selfdestruct_operation) _\[VIRTUAL\]_ - Indicates contract destruction
 * [contract\_update\_operation](contracts.md#contract_update_operation) - Update contract data
-* [contract\_fund\_pool\_operation](contracts.md#contract_fund_pool_operation) - Transfer asset to fee pool
+* [contract\_fund\_pool\_operation](contracts.md#contract_fund_pool_operation) - Transfer asset to contract fee pool
 * [contract\_whitelist\_operation](contracts.md#contract_whitelist_operation) - Manage the blacklist and whitelist pool of the contract
 
 ## Sidechain

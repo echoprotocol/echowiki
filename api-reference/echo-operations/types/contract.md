@@ -2,6 +2,8 @@
 
 ## contract_base_operation
 
+Base operation for all contract operations.
+
 ```cpp
 struct contract_base_operation
 {
