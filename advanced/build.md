@@ -33,7 +33,7 @@ To build after all dependencies are installed:
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
 
-## Building on Raspberry Pi itself
+## Building on Raspberry Pi
 
 Echo build is supported for Raspberry Pi 4 with 4 GB RAM. Ubuntu 18.04 64 bit OS should be installed for Raspberry PI 4.
 
