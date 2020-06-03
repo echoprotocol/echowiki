@@ -1,9 +1,26 @@
 # Build instructions
 
+## Dependencies on Ubuntu
+
 We recommend building on Ubuntu 16.04 LTS, and the build dependencies may be installed with:
 
     sudo apt-get update
     sudo apt-get install autoconf cmake git g++ libtool
+
+## Dependencies on MacOS
+
+To install dependencies for Mac OS, follow these steps:
+
+1. [Install Homebrew.](http://brew.sh/)
+2. Update Homebrew:
+    1. `brew doctor`
+    2. `brew update`
+3. Install the necessary packages:
+```
+brew install cmake git autoconf automake libtool doxygen
+```
+
+## Build (Ubuntu/MacOS)
 
 To build after all dependencies are installed:
 
