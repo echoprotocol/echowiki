@@ -46,6 +46,7 @@
   * [Contract Fee Pool](advanced/contract-fee-pool.md)
   * [Asset Fee Pool](advanced/asset-fee-pool.md)
   * [Build](advanced/build.md)
+  * [DID](advanced/did.md)
 * [API Reference](api-reference/README.md)
   * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
