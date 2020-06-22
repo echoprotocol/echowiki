@@ -41,7 +41,6 @@
     * [Using echo chain interface](advanced/x86-64-virtual-machine/echo-chain-interface.md)
     * [Using C++ STL library](advanced/x86-64-virtual-machine/c++-stl-library.md)
     * [Smart contracts in Rust](advanced/x86-64-virtual-machine/rust-smart-contracts.md)
-  * [Ethereum Virtual Machine](advanced/ethereum-virtual-machine/README.md)
   * [History](advanced/history/echo-history.md)
   * [Contract Fee Pool](advanced/contract-fee-pool.md)
   * [Asset Fee Pool](advanced/asset-fee-pool.md)
