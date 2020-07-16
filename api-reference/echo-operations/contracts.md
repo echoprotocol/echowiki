@@ -4,7 +4,7 @@
 
 Creates new contract.
 
-See [Ethereum network contracts compatibility](/technologies/evm-support/README.md#Ethereum-network-contracts-compatibility) for more information about `eth_accuracy` and `supported_asset_id` fields.
+See [Ethereum network contracts compatibility](/technologies/evm-support/README.md#ethereum-network-contracts-compatibility) for more information about `eth_accuracy` and `supported_asset_id` fields.
 
 ```cpp
 struct contract_create_operation : public contract_base_operation
@@ -93,7 +93,7 @@ struct contract_call_operation : public contract_base_operation
 
 Virtual operation created when contract creates another contract.
 
-See [Ethereum network contracts compatibility](/technologies/evm-support/README.md#Ethereum-network-contracts-compatibility) for more information about `eth_accuracy` and `supported_asset_id` fields.
+See [Ethereum network contracts compatibility](/technologies/evm-support/README.md#ethereum-network-contracts-compatibility) for more information about `eth_accuracy` and `supported_asset_id` fields.
 
 ```cpp
 struct contract_internal_create_operation : public base_operation
