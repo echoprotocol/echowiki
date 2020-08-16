@@ -25,6 +25,10 @@ A fast, final and scalable BFT consensus mechanism using Proof of Weighted Rando
 
 ### x86-64 Virtual Machine
 
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 Echo implements a new, blockchain-specific x86-64 virtual machine allowing developers to write and deploy smart contract in higher level languages. With Echo, smart contracts can be written both in Solidity and in more familiar and convenient languages, such as C, C++, Rust, Go and many more.
 
 {% page-ref page="technologies/x86-64-virtual-machine/README.md" %}

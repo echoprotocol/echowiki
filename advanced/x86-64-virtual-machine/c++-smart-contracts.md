@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # C++ Smart Contracts
 
 ## Writing a C++ smart contract

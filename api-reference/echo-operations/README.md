@@ -99,6 +99,10 @@
 
 ## DID Management
 
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 * [did\_create\_operation](did.md#didcreateoperation) - Create new DID
 * [did\_update\_operation](did.md#didupdateoperation) - Update an existing DID
 * [did\_delete\_operation](did.md#diddeleteoperation) - Remove DID

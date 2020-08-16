@@ -127,6 +127,11 @@
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
 * Operations
     * [get_prototype_operation](#get_prototype_operation-operation_type)
+
+{% hint style="warning" %}
+Verifiable Credentials is now in the development stage.
+{% endhint %}
+
 * Verifiable Credentials
     * [add_verifiable_credential](#add_verifiable_credential-keyword-verifiable_cred)
     * [get_verifiable_credential_keywords](#get_verifiable_credential_keywords)
@@ -1535,6 +1540,10 @@ get_prototype_operation transfer
 ```
 
 ## Verifiable Credentials
+
+{% hint style="warning" %}
+Verifiable Credentials is now in the development stage.
+{% endhint %}
 
 ### `add_verifiable_credential keyword verifiable_cred`
 Writing Verifiable Credentials to encrypted wallet storage. Verifiable Credentials data

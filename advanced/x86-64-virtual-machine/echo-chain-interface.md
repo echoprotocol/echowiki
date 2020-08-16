@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # Using echo chain interface
 
 There is a set of classes and functions in `chain.hpp` and `contract_base.hpp` for the interaction with the Echo chain.

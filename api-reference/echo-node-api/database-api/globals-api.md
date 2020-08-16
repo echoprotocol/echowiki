@@ -1,5 +1,9 @@
 ## Globals
 
+{% hint style="warning" %}
+x86 is now in the development stage.
+{% endhint %}
+
 ### get\_chain\_properties\(\)
 
 Retrieve the chain property object associated with the chain.

@@ -122,6 +122,10 @@ struct committee_member_update_global_parameters_operation : public base_operati
 
 ### JSON Example
 
+{% hint style="warning" %}
+x86 is now in the development stage.
+{% endhint %}
+
 ```json
 [
    21,

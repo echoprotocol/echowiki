@@ -1,5 +1,9 @@
 ## Contracts
 
+{% hint style="warning" %}
+x86 is now in the development stage.
+{% endhint %}
+
 ### get\_contract\(contract\_id\)
 
 Get a contract info from VM by ID.

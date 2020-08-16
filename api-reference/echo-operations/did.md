@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # DID Management
 
 ## did\_create\_operation

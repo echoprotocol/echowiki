@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # DID API
 
 ## get\_did\_object\(id\)

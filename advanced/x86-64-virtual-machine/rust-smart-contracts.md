@@ -1,3 +1,6 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
 # Rust smart-contracts
 
 ## Project set up

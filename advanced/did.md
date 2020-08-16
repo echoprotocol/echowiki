@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # DID
 
 ## Decentralized Identifiers

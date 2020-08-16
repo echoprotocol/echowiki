@@ -1,5 +1,9 @@
 # Chain parameters
 
+{% hint style="warning" %}
+x86 is now in the development stage.
+{% endhint %}
+
 Default configuration values for chain parameters can be obtained using the method [get_config](../echo-node-api/database-api/globals-api.md#get_config).
 
 ```cpp

@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # x86-64 Virtual Machine
 
 [Read Full x86-64 VM Whitepaper](https://github.com/echoprotocol/echowiki/blob/master/.gitbook/assets/x86-64-vm-whitepaper.pdf)

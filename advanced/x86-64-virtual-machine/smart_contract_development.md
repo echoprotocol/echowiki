@@ -1,3 +1,7 @@
+{% hint style="warning" %}
+Is now in the development stage.
+{% endhint %}
+
 # Smart contract implementation
 
 ## x86-64 smart contract development
