@@ -1065,6 +1065,13 @@ Returns the block chain's rapidly-changing properties. The returned object conta
 get_dynamic_global_properties
 ```
 
+### `get_git_revision`
+Returns information about git revision of the running node. The returned object contains commit hash, approximate relative time of commit and revision description.
+
+```
+get_git_revision
+```
+
 ### `propose_parameter_change proposing_account expiration_time changed_values` 
 Creates a transaction to propose a parameter change.  
 Multiple parameters can be specified if an atomic change is desired.

@@ -713,3 +713,31 @@ Retrieve the current dynamic global property object.
     }
 }
 ```
+
+### `get\_git\_revision\(\)`
+
+Retrieve info about git revision of running node
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_git_revision",
+        []
+    ]
+}
+```
+
+#### Returns
+
+```javascript
+{
+  "ECHO_GIT_REVISION_SHA": "e910d1a1d8f00f4c2c86d047373e68bb6c482396",
+  "ECHO_GIT_REVISION_UNIX_TIMESTAMP": "5 days ago",
+  "ECHO_GIT_REVISION_DESCRIPTION": "0.20-rc.0-27-ge910d1a1"
+}
+```

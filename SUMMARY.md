@@ -94,6 +94,7 @@
   * [TestRPC](api-reference/testrpc/README.md)
     * [Methods](api-reference/testrpc/methods.md)
 * [Changelogs](changelogs/README.md)
+  * [0.21](changelogs/0.21.md)
   * [0.20](changelogs/0.20.md)
   * [0.19](changelogs/0.19.md)
   * [0.18](changelogs/0.18.md)
