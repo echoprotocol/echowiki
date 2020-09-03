@@ -99,6 +99,7 @@
     * [Ethereum](tutorials/sidechains/eth.md)
     * [ERC20](tutorials/sidechains/erc20.md)
 * [Changelogs](changelogs/README.md)
+  * [0.22](changelogs/0.22.md)
   * [0.21](changelogs/0.21.md)
   * [0.20](changelogs/0.20.md)
   * [0.19](changelogs/0.19.md)
