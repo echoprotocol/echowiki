@@ -14,7 +14,7 @@ struct chain_parameters
 
    uint32_t                maintenance_interval                = ECHO_DEFAULT_MAINTENANCE_INTERVAL; ///< interval in sections between blockchain maintenance events
    uint8_t                 maintenance_duration_seconds        = ECHO_DEFAULT_MAINTENANCE_DURATION_SECONDS; ///< duration of maintenance(time to stop echorand)
-   uint32_t                balance_unfreezing_time               = ECHO_DEFAULT_UNFREEZE_BALANCE_TIME; ///< number of intervals after which the requested frozen balance to be unfreezed
+   uint32_t                balance_unfreezing_time             = ECHO_DEFAULT_UNFREEZE_BALANCE_TIME; ///< number of intervals after which the requested frozen balance to be unfreezed
    uint32_t                committee_proposal_review_period    = ECHO_DEFAULT_COMMITTEE_PROPOSAL_REVIEW_PERIOD_SEC; ///< minimum time in seconds that a proposed transaction requiring committee authority may not be signed, prior to expiration
    uint32_t                maximum_transaction_size            = ECHO_DEFAULT_MAX_TRANSACTION_SIZE; ///< maximum allowable size in bytes for a transaction
    uint32_t                maximum_block_size                  = ECHO_DEFAULT_MAX_BLOCK_SIZE; ///< maximum allowable size in bytes for a block
@@ -61,5 +61,7 @@ struct chain_parameters
 [sidechain_config](sidechain-config.md#Configuration-parameters-for-Echo-Sidechain)
 
 [erc20_config](sidechain-config.md#Configuration-parameters-for-Echo-ERC20)
+
+[economy_config](economy-config.md#Configuration-parameters-for-block-rewards-distribution)
 
 [gas_price_t](types.md#Gas-price-type)

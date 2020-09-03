@@ -33,7 +33,7 @@
 |[balance\_claim\_operation](balance-object.md#balance_claim_operation)|28|
 |[balance\_freeze\_operation](balance-object.md#balance_freeze_operation)|29|
 |[balance\_unfreeze\_operation](balance-object.md#balance_unfreeze_operation) // VIRTUAL|30|
-|[request\_unfreeze\_balance\_operation](balance-object.md#request_balance_unfreeze_operation) // |31|
+|[request\_balance\_ufreeze\_operation](balance-object.md#request_balance_unfreeze_operation) |31|
 |[contract\_create\_operation](contracts.md#contract_create_operation)|21|
 |[contract\_call\_operation](contracts.md#contract_call_operation)|33|
 |[contract\_internal\_create\_operation](contracts.md#contract_internal_create_operation) // VIRTUAL|34|
