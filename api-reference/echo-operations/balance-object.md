@@ -134,3 +134,38 @@ struct balance_unfreeze_operation : public balance_freeze_operation {
    }
 ]
 ```
+
+## request_balance_unfreeze_operation
+
+Request to unfreeze balance.
+
+This operation is used to unfreeze frozen balance so you can use this balance in transactions.
+
+```cpp
+
+struct request_balance_unfreeze_operation : public base_operation
+{
+    asset               fee;
+    account_id_type account;
+    std::vector<frozen_balance_id_type> objects_to_unfreeze;
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return account; }
+};
+```
+
+[asset](/api-reference/echo-operations/types/common.md#asset)
+
+### JSON Example
+
+```json
+[
+   31,
+   {
+      "account": "1.2.0",
+
+      "objects_to_unfreeze": ["1.9.1", "1.9.2"],
+      "extensions": []
+   }
+]
+```

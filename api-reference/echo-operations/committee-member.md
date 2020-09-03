@@ -141,6 +141,7 @@ x86 is now in the development stage.
          },
          "maintenance_interval": 86400,
          "maintenance_duration_seconds": 10,
+         "balance_unfreezing_time": 7,
          "committee_proposal_review_period": 1209600,
          "maximum_transaction_size": 2097152,
          "maximum_block_size": 5242880,
@@ -239,6 +240,13 @@ x86 is now in the development stage.
                   "method": "",
                   "gas": 0
                }
+         },
+         "economy_config": {
+               "blocks_in_interval": 1,
+               "maintenances_in_interval": 1,
+               "block_emission_amount": 0,
+               "block_producer_reward_ratio": 5000,
+               "pool_divider": 30
          },
          "gas_price": {
                "price": 1,
