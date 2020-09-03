@@ -5,7 +5,6 @@
     * [info](#info)
     * [about](#about)
     * [help](#help)
-    * [help_method](#help_method-method)
 * Objects
     * [get_object](#get_object-object_id)
 * Blocks and transactions
@@ -59,6 +58,7 @@
     * [list_frozen_balances](#list_frozen_balances-account)
     * [get_committee_frozen_balance](#get_committee_frozen_balance-owner_account)
     * [freeze_balance](#freeze_balance-account-amount-asset-duration-broadcast)
+    * [request_unfreeze_balance](#request_unfreeze_balance-account-objects_to_unfreeze-broadcast)
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
 * Assets
@@ -159,13 +159,6 @@ about
 ```
 
 ### `help`
-Returns a list of all commands supported by the wallet API. This lists each command, along with its arguments and return types. For more detailed help on a single command, use help_method
-
-```
-help
-```
-
-### `help_method method`
 Returns a list of all commands supported by the wallet API or detailed help on a single command.
 
 | Option | Description |
@@ -173,6 +166,7 @@ Returns a list of all commands supported by the wallet API or detailed help on a
 | `string method` | (Optional) for more detailed help on a single command |
 
 ```
+help
 help_method get_object
 ```
 
@@ -692,6 +686,19 @@ Freezes part of your balance for the specified amount of time.
 
 ```
 freeze_balance nathan 1 ECHO 90 true
+```
+
+### `request_unfreeze_balance account objects_to_unfreeze broadcast` 
+Request to unfreeze your frozen balance's.
+
+| Option | Description |
+| :--- | :--- |
+| `string account` | the name or id of the balance holder |
+| `vector objects_to_unfreeze` | frozen_balance_id's to unfreeze |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+request_unfreeze_balance nathan ["1.9.1", "1.9.2"] true
 ```
 
 ### `committee_freeze_balance owner_account amount broadcast` 
