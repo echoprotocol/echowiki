@@ -7,23 +7,25 @@ This is an implementation detail. The values here are calculated during normal c
 ```cpp
 class dynamic_global_property_object
 {
-    uint32_t       head_block_number = 0;
-    block_id_type  head_block_id;
+    uint32_t head_block_number = 0;
+    block_id_type head_block_id;
     time_point_sec time;
     time_point_sec next_maintenance_time;
     time_point_sec last_budget_time;
-    share_type     committee_budget;
+    share_type committee_budget;
 
     /**
-    * dynamic_flags specifies chain state properties that can be
-    * expressed in one bit.
-    */
+     * dynamic_flags specifies chain state properties that can be
+     * expressed in one bit.
+     */
     uint32_t dynamic_flags = 0;
 
     uint32_t last_irreversible_block_num = 0;
+    uint32_t last_block_of_previous_interval = 1;
 
     extensions_type extensions;
 };
+
 ```
 
 ## Types

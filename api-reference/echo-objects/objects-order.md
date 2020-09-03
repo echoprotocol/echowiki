@@ -27,7 +27,7 @@
 |btc_withdraw_object_type|1.22.x|
 |btc_aggregating_object_type|1.23.x|
 |evm_address_object_type|1.24.x|
-|did\_object|1.25.x|
+|did_object|1.25.x|
 
 ## Implementation types
 
@@ -50,3 +50,4 @@
 |account_address_object|2.14.x|
 |contract_pool_object|2.15.x|
 |malicious_committeemen_object|2.16.x|
+|rewards_pool_object|2.17.x|
