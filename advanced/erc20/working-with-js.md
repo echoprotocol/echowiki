@@ -141,7 +141,7 @@ const balance = await echo.api.callContractNoChangingState('1.14.352', '1.2.1334
 console.log(parseInt(balance, 16)); // 10000
 ```
 
-The last argument in the method is the hash of the contract's called method and the argument joined with the arguments that were passed along with the call. In this case `70a08231` is the hash of `balanceOf(address)` method, and `0000000000000000000000000000000000000000000000000000000000000536` is the "address" \(derived from account ID\), the balance of which we need are trying to get \(zeroes are added to increase the size of the address to 32 bytes\). This address belongs to Echo account `1.2.1334`. More information on converting the IDs to address formats can be found in [EVM. Introduction](https://github.com/echoprotocol/echowiki/tree/f71e492770fc748547dd36ac897a747ea2257dc6/tutorials/erc20/developers/evm/introduction.md) .
+The last argument in the method is the hash of the contract's called method and the argument joined with the arguments that were passed along with the call. In this case `70a08231` is the hash of `balanceOf(address)` method, and `0000000000000000000000000000000000000000000000000000000000000536` is the "address" \(derived from account ID\), the balance of which we need are trying to get \(zeroes are added to increase the size of the address to 32 bytes\). This address belongs to Echo account `1.2.1334`. More information on converting the IDs to address formats can be found in [EVM. Introduction](../../docs/developers/smart-contracts/solidity/introduction.md) .
 
 ## Transfer ERC20 Token
 

@@ -11,7 +11,7 @@ To start participating in EchoRand consensus, you should add the option `--accou
 `--account-info` argument can be used multiple times to give the node access to numerous accounts.
 
 {% hint style="info" %}
-You can also specify the private key\(s\) in the [configuration file](https://github.com/echoprotocol/echowiki/tree/baca73a3ccc555edddbb68c221cbf5d08bbde51a/how-to/advanced/config.md).
+You can also specify the private key\(s\) in the [configuration file](../node-operators/node-config.md).
 {% endhint %}
 
 Starting from version 0.9.0, private keys can be specified via Echo console. This allows you to use private keys in a more secure manner since the keys are saved to a file in an encrypted format and a password must be provided to decrypt and use them.
