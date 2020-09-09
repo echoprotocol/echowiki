@@ -42,6 +42,7 @@
     * [Using C++ STL library](advanced/x86-64-virtual-machine/c++-stl-library.md)
     * [Smart contracts in Rust](advanced/x86-64-virtual-machine/rust-smart-contracts.md)
   * [History](advanced/history/echo-history.md)
+    * [Types](advanced/history/types/common.md)
   * [Contract Fee Pool](advanced/contract-fee-pool.md)
   * [Asset Fee Pool](advanced/asset-fee-pool.md)
   * [Build](advanced/build.md)

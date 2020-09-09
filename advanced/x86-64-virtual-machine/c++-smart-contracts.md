@@ -12,7 +12,7 @@ Several standard classes and functions that are not supported:
 
 * floating point types and operations
 * dynamic linked libraries and runtime loading of the dynamic library
-* C++ and C standard libraries are not supported fully on all the C++ toolchains. For more information about STL support see [Using C++ STL library](advanced/x86-64-virtual-machine/c++-stl-library.md).
+* C++ and C standard libraries are not supported fully on all the C++ toolchains. For more information about STL support see [Using C++ STL library](c++-stl-library.md).
 * RTTI
 * exceptions
 * constructors of global variables are not called on the program startup 

@@ -14,7 +14,7 @@ If you don't wish to download the desktop wallet, you can use the RPC API of a p
 
 Details of the request can be found [here](https://dev.echo.org/developers/apis/registration-api/).
 
-Finally, if you already have at least one registered account, you can register a new account by yourself by sending an account creation operation to the blockchain. More info about this operation you can find [here](https://dev.echo.org/developers/operations/account_management/_account_create_operation/)
+Finally, if you already have at least one registered account, you can register a new account by yourself by sending an account creation operation to the blockchain. More info about this operation you can find [here](https://dev.echo.org/developers/operations/account_management/_account_create_operation/).
 
 ## Account Name Requirements
 
