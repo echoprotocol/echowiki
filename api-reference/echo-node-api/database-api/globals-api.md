@@ -718,7 +718,7 @@ Retrieve the current dynamic global property object.
 }
 ```
 
-### `get\_git\_revision\(\)`
+### get\_git\_revision\(\)
 
 Retrieve info about git revision of running node
 
