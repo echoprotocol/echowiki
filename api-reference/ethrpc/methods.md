@@ -1542,7 +1542,11 @@ None.
 
 ##### Returns
 
-`DATA`, 32 bytes - current chain ID.
+`QUANTITY` - Current chain ID.
+- `222`: Echo Mainnet
+- `223`: Echo Testnet
+- `224`: Echo Devnet
+- `255`: Default chain ID 
 
 ##### Example
 ```js
@@ -1552,7 +1556,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}
 {
   "id": 83,
   "jsonrpc": "2.0",
-  "result": "0x21d093ffd383548869fbb869a27845badc920b33cf449603ba8df7f098727701"
+  "result": 223
 }
 ```
 
