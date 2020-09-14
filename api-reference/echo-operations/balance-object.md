@@ -162,6 +162,10 @@ struct request_balance_unfreeze_operation : public base_operation
 [
    31,
    {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
       "account": "1.2.0",
 
       "objects_to_unfreeze": ["1.9.1", "1.9.2"],
