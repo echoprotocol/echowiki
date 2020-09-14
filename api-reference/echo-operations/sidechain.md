@@ -24,7 +24,7 @@ struct sidechain_eth_create_address_operation : public base_operation
 
 ```json
 [
-   39,
+   40,
    {
       "fee": {
          "amount": 0,
@@ -65,7 +65,7 @@ struct sidechain_eth_approve_address_operation : public base_operation
 
 ```json
 [
-   40,
+   41,
    {
       "fee": {
          "amount": 0,
@@ -109,7 +109,7 @@ struct sidechain_eth_deposit_operation : public base_operation
 
 ```json
 [
-   41,
+   42,
    {
       "fee": {
          "amount": 0,
@@ -150,7 +150,7 @@ struct sidechain_eth_send_deposit_operation : public base_operation
 
 ```json
 [
-   47,
+   43,
    {
       "fee": {
          "amount": 0,
@@ -189,7 +189,7 @@ struct sidechain_eth_withdraw_operation : public base_operation
 
 ```json
 [
-   42,
+   44,
    {
       "fee": {
          "amount": 0,
@@ -228,7 +228,7 @@ struct sidechain_eth_send_withdraw_operation : public base_operation
 
 ```json
 [
-   47,
+   45,
    {
       "fee": {
          "amount": 0,
@@ -267,7 +267,7 @@ struct sidechain_eth_approve_withdraw_operation : public base_operation
 
 ```json
 [
-   45,
+   46,
    {
       "fee": {
          "amount": 0,
@@ -305,7 +305,7 @@ struct sidechain_eth_update_contract_address_operation : public base_operation
 
 ```json
 [
-   46,
+   47,
    {
       "fee": {
          "amount": 0,
@@ -344,7 +344,7 @@ struct sidechain_issue_operation : public base_operation
 
 ```json
 [
-   47,
+   48,
    {
       "value": {
          "amount": 0,
@@ -384,7 +384,7 @@ struct sidechain_burn_operation : public base_operation
 
 ```json
 [
-   48,
+   49,
    {
       "value": {
          "amount": 0,
@@ -429,7 +429,7 @@ struct sidechain_erc20_register_token_operation : public base_operation
 
 ```json
 [
-   49,
+   50,
    {
       "fee": {
          "amount": 0,
@@ -476,7 +476,7 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 
 ```json
 [
-   50,
+   51,
    {
       "fee": {
          "amount": 0,
@@ -518,7 +518,7 @@ struct sidechain_erc20_send_deposit_operation : public base_operation
 
 ```json
 [
-   51,
+   52,
    {
       "fee": {
          "amount": 0,
@@ -559,7 +559,7 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
 
 ```json
 [
-   52,
+   53,
    {
       "fee": {
          "amount": 0,
@@ -599,7 +599,7 @@ struct sidechain_erc20_send_withdraw_operation : public base_operation
 
 ```json
 [
-   53,
+   54,
    {
       "fee": {
          "amount": 0,
@@ -639,7 +639,7 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 
 ```json
 [
-   54,
+   55,
    {
       "fee": {
          "amount": 0,
@@ -676,7 +676,7 @@ struct sidechain_erc20_issue_operation : public base_operation
 
 ```json
 [
-   55,
+   56,
    {
       "deposit": "1.18.0",
       "account": "1.2.0",
@@ -712,7 +712,7 @@ struct sidechain_erc20_burn_operation : public base_operation
 
 ```json
 [
-   56,
+   57,
    {
       "withdraw": "1.19.0",
       "account": "1.2.0",
@@ -750,7 +750,7 @@ struct sidechain_btc_create_address_operation : public base_operation
 
 ```json
 [
-   57,
+   58,
    {
       "fee": {
          "amount": 0,
@@ -793,7 +793,7 @@ struct sidechain_btc_create_intermediate_deposit_operation : public base_operati
 
 ```json
 [
-   58,
+   59,
    {
       "fee": {
          "amount": 0,
@@ -843,7 +843,7 @@ struct sidechain_btc_intermediate_deposit_operation : public base_operation
 
 ```json
 [
-   59,
+   60,
    {
       "fee": {
          "amount": 0,
@@ -886,7 +886,7 @@ struct sidechain_btc_deposit_operation : public base_operation
 
 ```json
 [
-   60,
+   61,
    {
       "fee": {
          "amount": 0,
@@ -937,7 +937,7 @@ struct sidechain_btc_withdraw_operation : public base_operation
 
 ```json
 [
-   61,
+   62,
    {
       "fee": {
          "amount": 0,
@@ -991,7 +991,7 @@ struct sidechain_btc_aggregate_operation : public base_operation
 
 ```json
 [
-   62,
+   63,
    {
       "fee": {
          "amount": 0,
@@ -1040,7 +1040,7 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 
 ```json
 [
-   63,
+   64,
    {
       "fee": {
          "amount": 0,
