@@ -867,8 +867,8 @@ Returns the signed transaction creating a new asset
 | `string issuer` | the name or id of the account who will pay the fee and become the issuer of the new asset. This can be updated later |
 | `string symbol` | the ticker symbol of the new asset |
 | `number precision` | the number of digits of precision to the right of the decimal point, must be less than or equal to 12 |
-| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. |
-| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags |
+| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. ([asset_options](/api-reference/echo-operations/types/common.md#asset_options)) |
+| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags. ([bitasset_options](/api-reference/echo-operations/types/common.md#bitasset_options)) |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
