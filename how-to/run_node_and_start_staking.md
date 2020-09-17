@@ -104,34 +104,28 @@ unlocked >>> list_frozen_balances nathan
 ID делегата можно увидеть в объекте аккаунта. Поле `options.delegating_account`.
 
 ```bash
-unlocked >>> get_account myacc
+locked >>> get_account nathan
 {
-  "id": "1.2.503",
-  "membership_expiration_date": "1970-01-01T00:00:00",
-  "registrar": "1.2.8",
-  "referrer": "1.2.8",
-  "lifetime_referrer": "1.2.8",
-  "lifetime_referrer_fee_percentage": 3000,
-  "referrer_rewards_percentage": 7500,
-  "name": "myacc",
+  "id": "1.2.26",
+  "registrar": "1.2.4",
+  "name": "nathan",
   "active": {
     "weight_threshold": 1,
     "account_auths": [],
     "key_auths": [[
-        "ECHOB3uKK5kjHrKSszvxpCjrHf9yMzXEfWXwyWmHyFENaVux",
+        "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
         1
       ]
     ]
   },
-  "echorand_key": "ECHOB3uKK5kjHrKSszvxpCjrHf9yMzXEfWXwyWmHyFENaVux",
+  "echorand_key": "ECHO6XS3BMVnEHAzo1PhHWt9vndrZn2P27tCbU9WdqCM8sJu",
+  "active_delegate_share": 2000,
   "options": {
-    "voting_account": "1.2.5",
-    "delegating_account": "1.2.8",
-    "num_committee": 0,
-    "votes": [],
+    "delegating_account": "1.2.5",
+    "delegate_share": 2000,
     "extensions": []
   },
-  "statistics": "2.6.503",
+  "statistics": "2.5.26",
   "whitelisting_accounts": [],
   "blacklisting_accounts": [],
   "whitelisted_accounts": [],
@@ -140,13 +134,14 @@ unlocked >>> get_account myacc
     0,{}
   ],
   "top_n_control_flags": 0,
+  "accumulated_reward": [],
   "extensions": []
 }
 ```
 
 По умолчанию аккаунт, который зарегистрировал ваш акканут, становится вашим делегатом.
 
-Делегатом аккаунта `1.2.503` из примера выше является аккаунт `1.2.8`.
+Делегатом аккаунта `1.2.26` из примера выше является аккаунт `1.2.5`.
 
 Поменять делегата можно следующим образом:
 
