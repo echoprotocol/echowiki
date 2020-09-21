@@ -1619,7 +1619,7 @@ This returns a default-initialized object of the given type; it can be used duri
 * `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations)
 
 ```
-get_prototype_operation transfer
+get_prototype_operation account_create_operation
 ```
 
 ## Verifiable Credentials
