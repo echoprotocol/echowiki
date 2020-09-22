@@ -21,7 +21,7 @@ struct block_reward_operation : public base_operation
 
 ```json
 [
-    64,
+    66,
     {
         "receiver": "1.2.0",
         "assets": [
