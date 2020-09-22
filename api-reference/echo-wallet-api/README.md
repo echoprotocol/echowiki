@@ -1153,6 +1153,13 @@ Returns information about git revision of the running node. The returned object 
 get_git_revision
 ```
 
+### `get_incentives_info`
+Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
+
+```
+get_incentives_info
+```
+
 ### `propose_parameter_change proposing_account expiration_time changed_values` 
 Creates a transaction to propose a parameter change.  
 Multiple parameters can be specified if an atomic change is desired.
