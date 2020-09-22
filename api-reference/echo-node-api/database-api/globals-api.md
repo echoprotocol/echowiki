@@ -740,8 +740,50 @@ Retrieve info about git revision of running node
 
 ```javascript
 {
-  "ECHO_GIT_REVISION_SHA": "e910d1a1d8f00f4c2c86d047373e68bb6c482396",
-  "ECHO_GIT_REVISION_UNIX_TIMESTAMP": "5 days ago",
-  "ECHO_GIT_REVISION_DESCRIPTION": "0.20-rc.0-27-ge910d1a1"
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "ECHO_GIT_REVISION_SHA": "e910d1a1d8f00f4c2c86d047373e68bb6c482396",
+        "ECHO_GIT_REVISION_UNIX_TIMESTAMP": "5 days ago",
+        "ECHO_GIT_REVISION_DESCRIPTION": "0.20-rc.0-27-ge910d1a1"
+    }
 }
 ```
+
+### `get_incentives_info`
+
+Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_incentives_info",
+        []
+    ]
+}
+```
+
+#### Returns
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": {
+        "incentives_pool": [[
+            "1.3.0",
+            1506532392
+            ]
+        ],
+        "incentives": [[
+            0,
+            502177
+            ]
+        ]
+    }
+}
