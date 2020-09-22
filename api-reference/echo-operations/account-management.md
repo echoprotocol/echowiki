@@ -246,7 +246,7 @@ struct evm_address_register_operation : public base_operation
 
 ```json
 [
-   65,{
+   67,{
       "fee": {
          "amount": 0,
          "asset_id": "1.3.0"

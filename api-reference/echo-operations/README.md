@@ -14,6 +14,7 @@
 * [account\_update\_operation](account-management.md#account_update_operation) - Update an existing account
 * [account\_whitelist\_operation](account-management.md#account_whitelist_operation) - This operation is used to whitelist and blacklist accounts, primarily for transacting in whitelisted assets
 * [account\_address\_create\_operation](account-management.md#account_address_create_operation) - Create account address
+* [evm\_address\_register\_operation](account-management.md#evm_address_register_operation) - Creates an ethereum address for an account
 
 ## Asset Management
 
@@ -104,6 +105,6 @@
 Is now in the development stage.
 {% endhint %}
 
-* [did\_create\_operation](did.md#didcreateoperation) - Create new DID
-* [did\_update\_operation](did.md#didupdateoperation) - Update an existing DID
-* [did\_delete\_operation](did.md#diddeleteoperation) - Remove DID
+* [did\_create\_operation](did.md#did_create_operation) - Create new DID
+* [did\_update\_operation](did.md#did_update_operation) - Update an existing DID
+* [did\_delete\_operation](did.md#did_delete_operation) - Remove DID

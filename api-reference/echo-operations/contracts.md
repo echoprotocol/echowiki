@@ -28,7 +28,7 @@ struct contract_create_operation : public contract_base_operation
 
 ```json
 [
-   31,
+   32,
    {
       "fee": {
          "amount": 0,
@@ -71,7 +71,7 @@ struct contract_call_operation : public contract_base_operation
 
 ```json
 [
-   32,
+   33,
    {
       "fee": {
          "amount": 0,
@@ -113,7 +113,7 @@ struct contract_internal_create_operation : public base_operation
 ### JSON Example
 ```json
 [
-   33,
+   34,
    {
       "caller": "1.11.0",
       "new_contract": "1.11.0",
@@ -148,7 +148,7 @@ struct contract_internal_call_operation : public base_operation
 ### JSON Example
 ```json
 [
-   34,
+   35,
    {
       "caller": "1.11.0",
       "callee": "0.0.0",
@@ -180,7 +180,7 @@ struct contract_selfdestruct_operation : public base_operation
 ### JSON Example
 ```json
 [
-   35,
+   36,
    {
       "contract": "1.11.0",
       "recipient": "0.0.0",
@@ -222,7 +222,7 @@ struct contract_update_operation : public base_operation
 
 ```json
 [
-   36,
+   37,
    {
       "fee": {
          "amount": 0,
@@ -264,7 +264,7 @@ struct contract_fund_pool_operation : public base_operation
 
 ```json
 [
-   37,
+   38,
    {
       "fee": {
          "amount": 0,
@@ -316,7 +316,7 @@ struct contract_whitelist_operation : public base_operation
 
 ```json
 [
-   38,
+   39,
    {
       "fee": {
          "amount": 0,

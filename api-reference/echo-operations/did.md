@@ -34,7 +34,7 @@ struct did_create_operation : public base_operation
 
 ```json
 [
-  66,{
+  68,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -79,7 +79,7 @@ struct did_update_operation : public base_operation
 
 ```json
 [
-  67,{
+  69,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
@@ -119,7 +119,7 @@ struct did_delete_operation : public base_operation
 
 ```json
 [
-  68,{
+  70,{
     "fee": {
       "amount": 0,
       "asset_id": "1.3.0"
