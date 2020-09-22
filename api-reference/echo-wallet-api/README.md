@@ -29,6 +29,7 @@
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
+    * [update_account](#update_account)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
     * [create_eddsa_keypair](#create_eddsa_keypair)
@@ -61,6 +62,9 @@
     * [request_unfreeze_balance](#request_unfreeze_balance-account-objects_to_unfreeze-broadcast)
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
+    * [transfer_to_address](#transfer_to_address)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy)
+    * [create_vesting_cdd_policy](#create_vesting_cdd_policy)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
@@ -88,6 +92,7 @@
     * [propose_parameter_change](#propose_parameter_change-proposing_account-expiration_time-changed_values)
     * [propose_fee_change](#propose_fee_change-proposing_account-expiration_time-changed_values)
     * [approve_proposal](#approve_proposal-fee_paying_account-proposal_id-delta-broadcast)
+    * [get_incentives_info](#get_incentives_info)
 * Contracts
     * [get_contract_object](#get_contract_object-id)
     * [get_contract](#get_contract-id)
@@ -433,6 +438,22 @@ An asset which enforces a whitelist specifies a list of accounts to maintain its
 whitelist_account nathan acc 0 true
 ```
 
+### `update_account account_name_or_id new_options broadcast broadcast new_active new_echorand_key` 
+Update an existing account. It can be used to update the authorities, or adjust the options.
+Returns the signed transaction updating the asset
+
+| Option | Description |
+| :--- | :--- |
+| `string account_name_or_id` | The name or id of the account to update |
+| `variant_object new_options` | Map of options field to update. The new [account_options](/api-reference/echo-operations/types/common.md#account_options) object, which will entirely replace the existing options. |
+| `bool broadcast` | true to broadcast the transaction on the network |
+| `authority new_active`| (Optional) The new active [authority](/api-reference/echo-operations/types/common.md#authority). This can be updated by the current active authority. null if you don't want to change the authority |
+| `public_key new_echorand_key`| (Optional) The new public echorand key, which will entirely replace the existing key. null if you don't want to change the echorand key |
+
+```
+update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true
+```
+
 ## Keys
 
 ### `import_key account_name_or_id priv_key`
@@ -725,6 +746,54 @@ Withdraws part of frozen committee members balance.
 
 ```
 committee_withdraw_balance nathan 1 true
+```
+
+### `transfer_to_address`
+Transfer an amount from one account to address.
+
+| Option | Description |
+| :--- | :--- |
+| `string from` | The name or id of the account sending the funds |
+| `ripemd160 address` | The address of the account receiving the funds in form of ripemd160 hash |
+| `string amount` | The amount to send (in nominal units -- to send half of a ECHO, specify 0.5) |
+| `string asset_symbol` | The symbol or id of the asset to send |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
+```
+
+### `create_vesting_linear_policy`
+Create a vesting balance with linear policy.
+
+| Option | Description |
+| :--- | :--- |
+| `string creator_name` | The account name or id of vesting creator |
+| `string owner_name` | The account name or id of vesting creator |
+| `string amount` | The amount to create vesting |
+| `string asset_symbol` | The symbol of the asset to create vesting |
+| `number vesting_cliff_seconds` | The vesting cliff seconds |
+| `number vesting_duration_seconds` | The vesting duration seconds |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+create_vesting_linear_policy nathan nathan 10 ECHO 10 10 true
+```
+
+### `create_vesting_cdd_policy`
+Create a vesting balance with cdd policy.
+
+| Option | Description |
+| :--- | :--- |
+| `string creator_name` | The account name or id of vesting creator |
+| `string owner_name` | The account name or id of vesting creator |
+| `string amount` | The amount to create vesting |
+| `string asset_symbol` | The symbol of the asset to create vesting |
+| `number vesting_seconds` | The vesting duration seconds |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+create_vesting_cdd_policy nathan nathan 10 ECHO 10 true
 ```
 
 ### `get_vesting_balances account` 
@@ -1129,6 +1198,13 @@ Approve or disapprove a proposal.
 
 ```
 approve_proposal 1.2.6 1.5.0 {"active_approvals_to_add": ["1.2.6", "1.2.7", "1.2.8", "1.2.9", "1.2.10"],"active_approvals_to_remove": [],"key_approvals_to_add": [],"key_approvals_to_remove": []} true
+```
+
+### `get_incentives_info`
+Retrieve the current info about current incentives pool and incentives.
+
+```
+get_incentives_info
 ```
 
 ## Contracts
