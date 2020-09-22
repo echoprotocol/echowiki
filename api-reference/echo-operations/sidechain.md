@@ -1056,7 +1056,7 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 
 ## sidechain_btc_block_process_operation
 
-Store Bitcoin block in ECHO network. Used only by committie.
+Store Bitcoin block in ECHO network. Used only by committee.
 
 ```cpp
 struct sidechain_btc_block_process_operation : public base_operation
