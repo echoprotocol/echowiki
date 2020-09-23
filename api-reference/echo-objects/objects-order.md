@@ -51,4 +51,4 @@
 |account_address_object|2.14.x|
 |contract_pool_object|2.15.x|
 |malicious_committeemen_object|2.16.x|
-|rewards_pool_object|2.17.x|
+|incentives_pool_object|2.17.x|
