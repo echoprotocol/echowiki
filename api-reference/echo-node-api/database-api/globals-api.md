@@ -750,7 +750,7 @@ Retrieve info about git revision of running node
 }
 ```
 
-### `get_incentives_info`
+### get\_incentives\_info(\)
 
 Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
 
@@ -787,3 +787,4 @@ Returns information about incentives. The returned object contains incentives_po
         ]
     }
 }
+```

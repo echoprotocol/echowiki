@@ -29,7 +29,7 @@
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
-    * [update_account](#update_account)
+    * [update_account](#update_account-account_name_or_id-new_options-broadcast-new_active-new_echorand_key)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
     * [create_eddsa_keypair](#create_eddsa_keypair)
@@ -62,9 +62,9 @@
     * [request_unfreeze_balance](#request_unfreeze_balance-account-objects_to_unfreeze-broadcast)
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
-    * [transfer_to_address](#transfer_to_address)
-    * [create_vesting_linear_policy](#create_vesting_linear_policy)
-    * [create_vesting_cdd_policy](#create_vesting_cdd_policy)
+    * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-vesting_cliff_seconds-vesting_duration-second-broadcast)
+    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
@@ -438,7 +438,7 @@ An asset which enforces a whitelist specifies a list of accounts to maintain its
 whitelist_account nathan acc 0 true
 ```
 
-### `update_account account_name_or_id new_options broadcast broadcast new_active new_echorand_key` 
+### `update_account account_name_or_id new_options broadcast new_active new_echorand_key` 
 Update an existing account. It can be used to update the authorities, or adjust the options.
 Returns the signed transaction updating the asset
 
@@ -748,7 +748,7 @@ Withdraws part of frozen committee members balance.
 committee_withdraw_balance nathan 1 true
 ```
 
-### `transfer_to_address`
+### `transfer_to_address from address amount asset_symbol broadcast`
 Transfer an amount from one account to address.
 
 | Option | Description |
@@ -763,7 +763,7 @@ Transfer an amount from one account to address.
 transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
 ```
 
-### `create_vesting_linear_policy`
+### `create_vesting_linear_policy creator_name owner_name amount asset_symbol vesting_cliff_seconds vesting_duration-second broadcast`
 Create a vesting balance with linear policy.
 
 | Option | Description |
@@ -780,7 +780,7 @@ Create a vesting balance with linear policy.
 create_vesting_linear_policy nathan nathan 10 ECHO 10 10 true
 ```
 
-### `create_vesting_cdd_policy`
+### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol vesting_second broadcast`
 Create a vesting balance with cdd policy.
 
 | Option | Description |
