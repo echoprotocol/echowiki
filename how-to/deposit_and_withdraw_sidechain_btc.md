@@ -9,10 +9,36 @@
 После создания адреса вы можете посмотреть его при помощи метода [get_btc_address](/api-reference/echo-wallet-api/README.md#get_btc_address-account). Пример адреса:
 
 ```bash
-"deposit_address": {
-  "address": "2NA1MLubzNsYtdWt6Qzh6aFiGbYAqasWv1Q"
+unlocked >>> get_btc_address nathan
+{
+  "id": "1.19.0",
+  "account": "1.2.26",
+  "deposit_address": {
+    "address": "2NA1MLubzNsYtdWt6Qzh6aFiGbYAqasWv1Q"
+  },
+  "committee_member_ids_in_script": [[
+      "1.2.6",
+      "022baf06eb26d86d0ab247bbe1cd9518748dd88fa4d829512b971e82f9cdbef5c2"
+    ],[
+      "1.2.7",
+      "029931c5e30c2611646588fdb9a40ad70e37e55dfee401aab619c2f5a861b6ce4a"
+    ],[
+      "1.2.8",
+      "03b4a79d201c1220a10826f13148cf5240a667bd75cea411c0806b7b13ad3eeb14"
+    ],[
+      "1.2.9",
+      "036a5aaa511a9a0ec7bb1b7fb24254bd1f66d78864d2fbce975a949337b4064761"
+    ],[
+      "1.2.10",
+      "03039e925d447e6aa98160a2224e91091388659f2188988c7efc4323c925736d5f"
+    ]
+  ],
+  "is_relevant": true,
+  "backup_address": "muBbJomENuCpiaW6NtBE4byah7sQXZFoHu",
+  "extensions": []
 }
 ```
+`deposit_address` - наш депозит адрес.
 
 Далее мы можем переводить средства в сети Bitcoin на этот адрес. Для этого можно использовать любой кошелёк. Например, перевод через bitcoin-cli будет выглядить следующим образом:
 
