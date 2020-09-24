@@ -54,7 +54,7 @@ unlocked >>> get_account_deposits 1.2.26 eth
 
 ## Withdraw
 
-Если вы решите совершить вывод ваших eBTC с вашего Echo аккаунта в Bitcoin, необходимо вызвать метод [withdraw_eth](/api-reference/echo-wallet-api/README.md#withdraw_btc-account-eth_addr-value-broadcast). Вы просто должны указать адрес в сети Ethereum, на который хотите перевести средства.
+Если вы решите совершить вывод ваших eETH с вашего Echo аккаунта на адрес в сети Ethereum, необходимо вызвать метод [withdraw_eth](/api-reference/echo-wallet-api/README.md#withdraw_btc-account-eth_addr-value-broadcast). Вы просто должны указать адрес в сети Ethereum, на который хотите перевести средства.
 
 ```bash
 unlocked >>> withdraw_eth 1.2.26 D742C3fA5957De7c08A9F4981e9e8b3FdfC879C6 50000 true 
