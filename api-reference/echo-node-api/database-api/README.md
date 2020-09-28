@@ -21,6 +21,8 @@
   * [get\_config](globals-api.md#get_config)
   * [get\_chain\_id](globals-api.md#get_chain_id)
   * [get\_dynamic\_global\_properties](globals-api.md#get_dynamic_global_properties)
+  * [get_incentives_info](globals-api.md#get_incentives_info-start_block-end_block)
+  * [get_current_incentives_info](globals-api.md#get_current_incentives_info)
 * [Keys](account-api.md#keys)
   * [get\_key\_references](account-api.md#get_key_references-keys)
   * [is\_public\_key\_registered](account-api.md#is_public_key_registered-public_key)
