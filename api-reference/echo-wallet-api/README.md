@@ -780,7 +780,7 @@ Create a vesting balance with linear policy.
 create_vesting_linear_policy nathan nathan 10 ECHO 10 10 true
 ```
 
-### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol vesting_second broadcast`
+### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol start_claim vesting_second broadcast`
 Create a vesting balance with cdd policy.
 
 | Option | Description |
@@ -789,11 +789,12 @@ Create a vesting balance with cdd policy.
 | `string owner_name` | The account name or id of vesting creator |
 | `string amount` | The amount to create vesting |
 | `string asset_symbol` | The symbol of the asset to create vesting |
+| `time_point start_claim` | Start claim |
 | `number vesting_seconds` | The vesting duration seconds |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
-create_vesting_cdd_policy nathan nathan 10 ECHO 10 true
+create_vesting_cdd_policy nathan nathan 10 ECHO "2093-12-11T10:26:00" 10 true
 ```
 
 ### `get_vesting_balances account` 
