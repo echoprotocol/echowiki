@@ -826,7 +826,10 @@ Returns the info about incentives in given block range [start_block, end_block]
           ],
           "block_number": 67
         },
-        "incentives": []
+        "incentives": [[
+            "1.3.0",
+            0
+          ]]
       },{
         "incentives_pool": {
           "id": "2.17.68",
@@ -837,7 +840,10 @@ Returns the info about incentives in given block range [start_block, end_block]
           ],
           "block_number": 68
         },
-        "incentives": []
+        "incentives": [[
+            "1.3.0",
+            0
+          ]]
       },{
         "incentives_pool": {
           "id": "2.17.69",
@@ -848,7 +854,10 @@ Returns the info about incentives in given block range [start_block, end_block]
           ],
           "block_number": 69
         },
-        "incentives": []
+        "incentives": [[
+            "1.3.0",
+            0
+          ]]
       },{
         "incentives_pool": {
           "id": "2.17.70",
@@ -860,7 +869,7 @@ Returns the info about incentives in given block range [start_block, end_block]
           "block_number": 70
         },
         "incentives": [[
-            "1.2.0",
+            "1.3.0",
             92333
           ]
         ]
@@ -875,7 +884,7 @@ Returns the info about incentives in given block range [start_block, end_block]
           "block_number": 71
         },
         "incentives": [[
-            "1.2.0",
+            "1.3.0",
             92333
           ]
         ]
