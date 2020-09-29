@@ -1055,14 +1055,13 @@ Returns the signed transaction updating a committee_member.
 | Option | Description |
 | :--- | :--- |
 | `string owner_account` | the name or id of the account which is updating the committee_member |
-| `triplet committee_member` | a committee_member owned by the owner_account |
 | `string new_url` | a new URL of the committee_member_object, enter empty string if you don't want to change it |
 | `string new_eth_address` | a new ethereum address of the committee_member object, enter empty string if you don't want to change it |
 | `string new_btc_public_key` | a new bitcoin public key of the committee_member object, enter empty string if you don't want to change it |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
-update_committee_member nathan 1.4.0 new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
+update_committee_member nathan new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
 
 ### `create_activate_committee_member_proposal sender committee_to_activate expiration_time` 
