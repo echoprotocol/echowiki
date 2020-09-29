@@ -10,6 +10,7 @@
   * [Register account](how-to/register-account.md)
 * [Technologies](technologies/README.md)
   * [Echo PoWR Consensus](technologies/echo-powr/README.md)
+  * [Echo Financial Model](technologies/financial-model/echo-financial-model.md)
   * [Sidechains](technologies/sidechains/README.md)
 <!--    * [Whitepaper](technologies/powr-echorand/overview.md)-->
 <!--    * [Architecture](technologies/powr-echorand/architecture.md)-->
