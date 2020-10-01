@@ -1,0 +1,17 @@
+# FAQ
+
+  * [What is Echo?](question1.md)
+  * [What blockchains does Echo work with?](question2.md)
+  * [What is layer 2 and why Echo is different from other layer 2 solutions?](question3.md)
+  * [What are the utilities of this network?](question4.md)
+  * [How do end users benefit from Echo?](question5.md)
+  * [How does Bitcoin and Ethereum interexchange to eBTC and eETH?](question6.md)
+  * [Does Echo have a token?](question7.md)
+  * [Who controls Echo? How can I get more information to participate?](question8.md)
+  * [Is Echo decentralized?](question9.md)
+  * [Is there a set date for Echo and it’s sidechains to go live?](question10.md)
+  * [Do I need ECHOs to use the Echo Network?](question11.md)
+  * [What is staking and how do I start using it?](question12.md)
+  * [What is Echo delegate and how to become one?](question13.md)
+  * [How to lock your Echo funds to participate in staking?](question14.md)
+  * [How to register a token in the Echo network?](question15.md)
