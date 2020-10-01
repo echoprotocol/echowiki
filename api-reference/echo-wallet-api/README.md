@@ -25,7 +25,7 @@
     * [get_account_by_address](#get_account_by_address-address)
     * [get_evm_addresses](#get_evm_addresses-account-id)
     * [register_account](#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast)
-    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
+    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
