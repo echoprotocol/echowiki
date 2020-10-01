@@ -1,4 +1,4 @@
-# Deploy a Solidity Contract
+# How to: Deploy a Solidity Contract
 
 Echo implements the Ethereum Virtual Machine \(EVM\) and supports smart contracts written in Solidity natively. In this example, we'll create, deploy, and call a contract on the Echo network written in Solidity.
 

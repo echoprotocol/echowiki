@@ -1,4 +1,4 @@
-# How to: Deploy an ERC-20 token to Echo with Solidity
+# How to: Deploy an ERC20 token to Echo with Solidity
 
 ## General guidelines
 

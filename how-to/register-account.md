@@ -1,4 +1,4 @@
-# How to : How can I register an account on Echo? 
+# How to: How can I register an account on Echo?
 
 ## Generate key pair
 To create account you need to generate new set of public and private keys. This can be easily done with `create_eddsa_keypair` command which will output public and private keys respectively.

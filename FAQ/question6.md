@@ -1,4 +1,0 @@
-### How does Bitcoin and Ethereum interexchange to eBTC and eETH?
-
-Echo implements a 2-way pegged sidechain ("bridge") that allows users to deposit, withdraw, and use BTC and Ethereum with applications on the Echo network. Echo's sidechains work through a 2-way peg to the native blockchain. For example, for Bitcoin, this means that BTC is deposited into a multisig address and a corresponding amount of Echo BTC, or eBTC, is minted on the Echo blockchain to the user who initiated the deposit. The new eBTC can be user to interact with a smart contract, traded on a decentralized exchange, or transferred to another user. When the eBTC needs to be converted back to BTC, it can be locked into a contract and the corresponding amount of BTC will be released on the bitcoin chain. The protocol ensures that the same BTC cannot be valid on both blockchains at the same time.
-The same processing is for Ethereum, or eETH.
