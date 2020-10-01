@@ -2,33 +2,35 @@
 
 ## Download binary
 
-Для начала  необходимо скачать и распаковать архив с двоичными файлами Echo. Вы можете найти их [здесь]().
+First, you have to download and unpack the archive with the Echo binary files. You will find it here [here]().
 
-## Run echo_node
+## Run Echo node
 
-Следующим шагом необходимо запустить полную ноду, если вы хотите участвовать в консенсусе.
+Next, set up a full node if you are going to participate in the consensus. 
 
 ```bash
 ./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info="[\"1.2.514\", \"5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA\"]"
 ```
 
-`--account-info` - первый параметр это ID вашего акаунта, второй - ED25519 ключ, который вам был выдан для аккаунта.
+Where `--account-info` the first parameter is your account ID, and the second is the ED25519 key you received for your account.
 
-Вывзвав `./echo_node --help` вы можете увидеть полный список параметров.
+Call `./echo_node --help` to see the complete list of parameters.
 
-> Если вы не хотите поднимать свою полную ноду, но хотите принимать участие в консенсусе через [делегирование](#delegating-stake), вы можете подключить echo_wallet к уже существующим публичным нодам, которые участвуют в блокчейне. Эти публичные ноды запущены как предприятиями, так и частными лицами.
+> If you don’t want to run a full node yourself but are going to participate in consensus through [delegating](#delegating-stake), you can connect your echo_wallet to the existing public nodes run by companies or individuals on this blockchain. 
 
 ## Run echo_wallet
 
-Далее нужно запусть [echo_wallet](/how-to/use-cli-wallet.md#Use_CLI_Wallet), подключиться к ноде и создать собственный кошелёк.
+## Run echo_wallet
 
-> У вас должен быть зарегистрирован аккаунт в блокчейне. И на нём необходимо иметь баланс в ECHO. Документ по регистрации аккаунта можно найти [здесь](/how-to/register-account.md#Register_account).
+Now, you need to start [echo_wallet](/how-to/use-cli-wallet.md#Use_CLI_Wallet), get connected to the node and create your own wallet.
+
+> You need to register an account in the blockchain network and deposit ECHO funds to it. You can find all the registration info [here](/how-to/register-account.md#Register_account).
 
 ## Freeze balance
 
-Для того чтобы принимать участие в консенсусе вам необходимо заморозить ECHO на определённый срок. Чтобы посмотреть на сколько дней вы можете заморозить свои средства и какой будет повышающий коэффициент, вызовите `get_global_properties` и найдите поле `frozen_balances_multipliers` в полученном объекте. Первое число - на сколько вы можете заморозить свои средства, второе - какой повышающий коэффициент будет при такой заморозке(умноженный на 100).
+To take part in the consensus mechanism, you need to lock some ECHO in the system for a certain period. To see the length of this period in days and the increase coefficient applied, call  `get_global_properties` and find the field `frozen_balances_multipliers`in the object you get. The first digit is the number of days, the second is the increase coefficient applied when you freeze your funds for this number of days (multiplied by 100).
 
-Пример объекта:
+Object example:
 
 ```bash
 "frozen_balances_multipliers": [
@@ -38,16 +40,17 @@
 ]
 ```
 
-Из примера выше следует, что при заморозке на 360 дней множитель будет 150%.
+In the example above, the funds locked for 360 days will be multiplied by 150%.
 
-> Чем больше ECHO и чем длинее срок их заморозки, тем у вас больше шансов участвовать в консенсусе.
+> The more ECHO tokens you freeze, the bigger are your chances to participate in consensus.
 
-После всего выше перечисленного можно вызывать метод заморозки средств:
+Now, you can call the method of funds freezing:
+
 ```bash
 unlocked >>> freeze_balance your_acc 10 ECHO 180 true
 ```
 
-Если операция прошла успешно, то в консоли вы увидите такой лог с транзакцией:
+If this operation was successful, you will see this transaction log in the console:
 
 ```bash
 {
@@ -78,7 +81,7 @@ unlocked >>> freeze_balance your_acc 10 ECHO 180 true
 }
 ```
 
-Вы можете посмотреть свои замороженные балансы:
+To see your frozen balances, use:
 
 ```bash
 unlocked >>> list_frozen_balances nathan
@@ -97,11 +100,11 @@ unlocked >>> list_frozen_balances nathan
 ```
 ## Delegating Stake
 
-Аккаунт может делегировать отправку сообщений от своего имени другому акккаунту. Это второй вариант участия в консенсусе - делегирование. Делегируя право на отправку сообщений учетной записи, авторизованной на узле, вы можете получить часть вознаграждения за сообщение, которое было отправлено от имени вашей учетной записи.
+An account can delegate another account to send messages on its behalf. This second participation option is called delegating. By delegating your right to send messages to another account, authorised with a node, you can receive your share of the reward for the message sent on your behalf. 
 
-Для участия в консенсусе через делегирование у вас всё равно должен быть [заморожен баланс](#freeze-balance) на акаунте. 
+To participate in the consensus mechanism through delegating, you still need to have [freeze balance](#freeze-balance) locked in your account.
 
-ID делегата можно увидеть в объекте аккаунта. Поле `options.delegating_account`.
+See the delegate’s ID in your account object. The field is `options.delegating_account`.
 
 ```bash
 locked >>> get_account nathan
@@ -139,12 +142,43 @@ locked >>> get_account nathan
 }
 ```
 
-По умолчанию аккаунт, который зарегистрировал ваш акканут, становится вашим делегатом.
+By default, the account that registered your account in the system, becomes your delegate. 
 
-Делегатом аккаунта `1.2.26` из примера выше является аккаунт `1.2.5`.
+In the example above, the delegate of the account `1.2.26` is the account `1.2.5`.
 
-Поменять делегата можно следующим образом:
+To change your delegate, use:
 
 ```bash
-Пример изменения, которого ещё нету.
+unlocked >>> update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true null null
+```
+
+If this operation was successful, you will see this transaction log in the console:
+
+```bash
+{
+  "ref_block_num": 66,
+  "ref_block_prefix": 1728289044,
+  "expiration": "2020-10-01T12:14:32",
+  "operations": [[
+      4,{
+        "fee": {
+          "amount": 201,
+          "asset_id": "1.3.0"
+        },
+        "account": "1.2.26",
+        "new_options": {
+          "delegating_account": "1.2.10",
+          "delegate_share": 3000,
+          "extensions": []
+        },
+        "extensions": {}
+      }
+    ]
+  ],
+  "extensions": [],
+  "signatures": [
+    "dcc41abf82466f0790ec2addd5f60ea90b9e431de59be12f79e8ee0760b5825fa2a61c452b1e2e077f3da9949a9412ba824adab6a4ea72989246b9ad78431800"
+  ],
+  "signed_with_echorand_key": false
+}
 ```
