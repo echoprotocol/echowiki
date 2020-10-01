@@ -1,6 +1,6 @@
 # How to: Deposit and withdraw sidechain ERC20
 
-Прежде всего вам нужно создать токен на стороне Ethereum. Затем его нужно зарегистрировать в сети Echo. Для этого надо вызывать метод [register_erc20_token](/api-reference/echo-wallet-api/README.md#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast).
+Start with creating a token on the Ethereum blockchain. Then, register this token in the Echo network. To do it, call the method [register_erc20_token](/api-reference/echo-wallet-api/README.md#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast).
 
 ```bash
 unlocked >>> register_erc20_token 1.2.26 e3e87ec35500a8e2eed1d1be2e2da1b7a8101aa9 TestToken tToken 6 true
@@ -31,7 +31,7 @@ unlocked >>> register_erc20_token 1.2.26 e3e87ec35500a8e2eed1d1be2e2da1b7a8101aa
 }
 ```
 
-Проверить, что токен успешно зарегестрирован, можно методами [get_erc20_token](/api-reference/echo-wallet-api/README.md#get_erc20_token-eth_addr_or_id) и [check_erc20_token](/api-reference/echo-wallet-api/README.md#check_erc20_token-id).
+Use the methods [check_erc20_token](/api-reference/echo-wallet-api/README.md#check_erc20_token-id) and [get_erc20_token](/api-reference/echo-wallet-api/README.md#get_erc20_token-eth_addr_or_id) to check if the registration was successful.
 
 ```bash
 unlocked >>> check_erc20_token 1.11.0
@@ -51,11 +51,12 @@ unlocked >>> get_erc20_token e3e87ec35500a8e2eed1d1be2e2da1b7a8101aa9
 
 ## Deposit
 
-После того как токен зарегестрирован, необходимо создать депозит адрес. Об этом можно почитать в документе о [Ethereum Sidechain](deposit-and-withdraw-sidechain-eth.md). После чего необходимо перевести токены на полученный депозит адрес. 
+The token successfully registered, you need to create a deposit address. To know more about this procedure, reed this doc about [Ethereum Sidechain](deposit-and-withdraw-sidechain-eth.md). 
+After it, you have to transfer the tokens to the deposit address you created.
 
-Средства дойдут на ваш аккаунт после того, как получат достаточное количество подтверждений.
+The funds will reach your account after it has the required number of validations. 
+Also, you can watch over your ERC20 deposits using this method [get_erc20_account_deposits](/api-reference/echo-wallet-api/README.md#get_erc20_account_deposits-account).
 
-Также вы можете наблюдать все ваши ERC20 депозиты методом [get_erc20_account_deposits](/api-reference/echo-wallet-api/README.md#get_erc20_account_deposits-account).
 
 ```bash
 unlocked >>> get_erc20_account_deposits 1.2.26
@@ -76,7 +77,9 @@ unlocked >>> get_erc20_account_deposits 1.2.26
 
 ## Withdraw
 
-Если вы решите вернуть свой ERC20 токены обратно в сеть Ethereum, для этого необходимо вызвать метод [withdraw_erc20_token](/api-reference/echo-wallet-api/README.md#withdraw_erc20_token-account-to-erc20_token-value-broadcast). Вы просто должны указать адрес в сети Ethereum, на который хотите перевести средства.
+In case you decide to withdraw your ERC20 tokens back to the Ethereum network, call the method [withdraw_erc20_token](/api-reference/echo-wallet-api/README.md#withdraw_erc20_token-account-to-erc20_token-value-broadcast).
+
+Just indicate the address in the Ethereum network where you want to withdraw your funds to:
 
 ```bash
 unlocked >>> withdraw_erc20_token 1.2.26 d742c3fa5957de7c08a9f4981e9e8b3fdfc879c6 1.16.0 1000000 true
@@ -106,9 +109,9 @@ unlocked >>> withdraw_erc20_token 1.2.26 d742c3fa5957de7c08a9f4981e9e8b3fdfc879c
 }
 ```
 
-Баланс с вашего аккаунта спишется сразу, а в Ethereum сети средства придут через определенное время.
+Note that your account balance will be corrected at once, but it will take some time for the funds to reach the Ethereum network. 
 
-Чтобы увидеть все ваши ERC20 выводы, используйте метод [get_erc20_account_withdrawals](/api-reference/echo-wallet-api/README.md#get_erc20_account_withdrawals-account).
+To view all your ERC20 withdrawals, use the method [get_erc20_account_withdrawals](/api-reference/echo-wallet-api/README.md#get_erc20_account_withdrawals-account).
 
 ```bash
 unlocked >>> get_erc20_account_withdrawals 1.2.26
