@@ -1,11 +1,10 @@
-## How to: How to create your own token with Echo
+# How to: How to create your own token with Echo
 
-### General guidelines
+## General guidelines
 
 To create your own currency (customer or market asset) and start trading it on an exchange, first you need to deposit BTC, ETH or Echo to your account. The amount we charge depends on the name length of your asset.
 
-
-### New asset creation example
+## New asset creation example
 
 To create an `asset` use [echo wallet](use-cli-wallet.md).
 
