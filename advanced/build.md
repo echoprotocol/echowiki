@@ -4,8 +4,10 @@
 
 We recommend building on Ubuntu 16.04 LTS, and the build dependencies may be installed with:
 
+```bash
     sudo apt-get update
     sudo apt-get install autoconf cmake git g++ libtool
+```
 
 ## Dependencies on MacOS
 
@@ -16,7 +18,8 @@ To install dependencies for Mac OS, follow these steps:
     1. `brew doctor`
     2. `brew update`
 3. Install the necessary packages:
-```
+
+```bash
 brew install cmake git autoconf automake libtool doxygen
 ```
 
@@ -24,6 +27,7 @@ brew install cmake git autoconf automake libtool doxygen
 
 To build after all dependencies are installed:
 
+```bash
     git clone https://github.com/echoprotocol/echo.git
     cd echo
     git checkout <LATEST_RELEASE_TAG>
@@ -32,6 +36,7 @@ To build after all dependencies are installed:
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
     cmake --build .
+```
 
 ## Building on Raspberry Pi
 
@@ -41,7 +46,9 @@ Echo build is memory-heavy, so a swap space for at least 4 GB should be created.
 
 To build echo_node and echo_wallet please use following commands. Other targets are not supported yet.
 
+```bash
     mkdir build
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchains/rpi-native.cmake ..
     cmake --build .
+```
