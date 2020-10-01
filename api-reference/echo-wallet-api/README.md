@@ -451,7 +451,7 @@ Returns the signed transaction updating the asset
 | `public_key new_echorand_key`| (Optional) The new public echorand key, which will entirely replace the existing key. null if you don't want to change the echorand key |
 
 ```
-update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true
+update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true null null
 ```
 
 ## Keys
