@@ -9,7 +9,7 @@ To create your own currency (customer or market asset) and start trading it on a
 
 To create an `asset` use [echo wallet](use-cli-wallet.md).
 
-1. if you have no account in the Echo network, create it using [echo wallet](use-cli-wallet.md) [register_account](../api-reference/echo-wallet-api/README.md#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast) or [register_account_with_api](../api-reference/echo-wallet-api/README.md#register_account_with_api-name-active_key-echorand_key-evm_address).
+1. If you have no account in the Echo network, create it using [register_account](register-account.md).
 
 2. Import your account private key to [import_key](../api-reference/echo-wallet-api/README.md#import_key-account_name_or_id-priv_key).
 
