@@ -2,11 +2,13 @@
 
 ## Deposit
 
-Чтобы перевести ETH на свой аккаунт в сети Echo, необходимо создать `eth_deposit_address` для вашего аккаунта на стороне Echo. 
+To transfer ETH to your Echo account, create `eth_deposit_address` for your Echo account.
 
-Для этого нужно вызвать метод [create_eth_address](/api-reference/echo-wallet-api/README.md#create_eth_address-account-broadcast).
+Firstly, call the method [create_eth_address](/api-reference/echo-wallet-api/README.md#create_eth_address-account-broadcast).
 
-После создания адреса вы можете посмотреть его при помощи метода [get_eth_address](/api-reference/echo-wallet-api/README.md#get_eth_address-account). Пример адреса:
+After creating an address, you can view it using the method [get_eth_address](/api-reference/echo-wallet-api/README.md#get_eth_address-account). 
+
+Address example:
 
 ```bash
 unlocked >>> get_eth_address 1.2.26
@@ -21,11 +23,13 @@ unlocked >>> get_eth_address 1.2.26
 }
 ```
 
-Необходимое поле - `eth_addr`: `0xde0b295669a9fd93d5f28d9ec85e40f4cb697Bae`.
+The required field is `eth_addr`: `0xde0b295669a9fd93d5f28d9ec85e40f4cb697Bae`.
 
-Далее мы можем переводить средства в сети Ethereum на этот адрес. Для этого можно использовать любой кошелёк.
+Then, let’s see how to transfer our Ethereum funds to this address. For it, you may use any wallet.
 
-Средства дойдут на ваш аккаунт после того, как получат достаточное количество подтверждений. Проверить свой баланс можно методами [list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-id). Баланс будет отображаться в eETH.
+The funds will reach your account after the transaction gets the required number of validations. To check your balance, use these methods [list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-id).
+
+The balance will be expressed in `eETH`.
 
 ```bash
 unlocked >>> list_account_balances 1.2.26
@@ -33,7 +37,7 @@ unlocked >>> list_account_balances 1.2.26
 0.050000 EETH
 ```
 
-Также вы можете наблюдать все ваши депозиты методом [get_account_deposits](/api-reference/echo-wallet-api/README.md#get_account_deposits-account-type).
+Also, you can watch over your deposits using this method [get_account_deposits](/api-reference/echo-wallet-api/README.md#get_account_deposits-account-type).
 
 ```bash
 unlocked >>> get_account_deposits 1.2.26 eth
@@ -54,7 +58,9 @@ unlocked >>> get_account_deposits 1.2.26 eth
 
 ## Withdraw
 
-Если вы решите совершить вывод ваших eETH с вашего Echo аккаунта на адрес в сети Ethereum, необходимо вызвать метод [withdraw_eth](/api-reference/echo-wallet-api/README.md#withdraw_btc-account-eth_addr-value-broadcast). Вы просто должны указать адрес в сети Ethereum, на который хотите перевести средства.
+If you decide to withdraw your eETH from the Echo network back to Ethereum, call the method [withdraw_eth](/api-reference/echo-wallet-api/README.md#withdraw_eth-account-eth_addr-value-broadcast).
+
+Just indicate the address in the Ethereum network where you are sending the funds to.
 
 ```bash
 unlocked >>> withdraw_eth 1.2.26 D742C3fA5957De7c08A9F4981e9e8b3FdfC879C6 50000 true 
@@ -83,9 +89,9 @@ unlocked >>> withdraw_eth 1.2.26 D742C3fA5957De7c08A9F4981e9e8b3FdfC879C6 50000 
 }
 ```
 
-Баланс с вашего аккаунта спишется сразу, а в Ethereum сети средства придут через определенное время.
+Though your account balance will be corrected at once, it will take some time for the funds to reach the Ethereum network.
 
-Чтобы увидеть все ваши выводы, используйте метод [get_account_withdrawals](/api-reference/echo-wallet-api/README.md#get_account_withdrawals-account-type).
+To view all your withdrawals, use the method [get_account_withdrawals](/api-reference/echo-wallet-api/README.md#get_account_withdrawals-account-type).
 
 ```bash
 unlocked >>> get_account_withdrawals 1.2.26 eth
@@ -104,5 +110,3 @@ unlocked >>> get_account_withdrawals 1.2.26 eth
   }
 ]
 ```
-
-
