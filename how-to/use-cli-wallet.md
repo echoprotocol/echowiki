@@ -1,4 +1,6 @@
-# Use CLI Wallet
+# How to start using the Echo Wallet
+
+## General guidelines
 
 In order to use the CLI Wallet, you must have an Echo full node running with an RPC port exposed. If you don't have a full node running yet, follow the installation tutorial.
 
