@@ -1424,7 +1424,7 @@ Returns all withdrawals, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
-| `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
+| `string type` | the type of the withdrawals may be "", "eth" or "btc". By default "" = all withdrawals |
 
 ```
 get_account_withdrawals 1.2.0 ""

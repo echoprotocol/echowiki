@@ -2,11 +2,13 @@
 
 ## Deposit
 
-Чтобы перевести BTC на свой аккаунт в сети Echo, необходимо создать `btc_deposit_address` для вашего аккаунта на стороне Echo. 
+To transfer BTC to your Echo account, you have to create `btc_deposit_address` for your account in the Echo network.
 
-Для этого нужно вызвать метод [create_btc_deposit_address](/api-reference/echo-wallet-api/README.md#create_btc_deposit_address-account-backup_address-broadcast). Второй параметр - это backup P2PKH адрес вашего аккаунта в Bitcoin сети. На mainnet он начинается с цифры `1` - `1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2`, на tesnet он начинается с `m` или `n` - `mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn`.
+For it, call the method [create_btc_deposit_address](/api-reference/echo-wallet-api/README.md#create_btc_deposit_address-account-backup_address-broadcast). The second parameter here is the backup of your Bitcoin network account. In the mainnet, it starts with ‘1’ (`1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2`). In the test net, it starts with `m` or `n` (`mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn`)
 
-После создания адреса вы можете посмотреть его при помощи метода [get_btc_address](/api-reference/echo-wallet-api/README.md#get_btc_address-account). Пример адреса:
+After creating an address you can view it using the method
+[get_btc_address](/api-reference/echo-wallet-api/README.md#get_btc_address-account). 
+Example:
 
 ```bash
 unlocked >>> get_btc_address nathan
@@ -38,15 +40,20 @@ unlocked >>> get_btc_address nathan
   "extensions": []
 }
 ```
-`deposit_address` - наш депозит адрес.
+`deposit_address` is our deposit address.
 
-Далее мы можем переводить средства в сети Bitcoin на этот адрес. Для этого можно использовать любой кошелёк. Например, перевод через bitcoin-cli будет выглядить следующим образом:
+Now, we can make in-network transfers using this address. To do it, you can use any wallet. For instance, here is what a transfer via bitcoin-cli looks like: 
 
 ```bash
 ./bitcoin-cli sendtoaddress 2NA1MLubzNsYtdWt6Qzh6aFiGbYAqasWv1Q 25
 ```
 
-Средства дойдут на ваш аккаунт примерно через сутки. Проверить свой баланс можно методами [list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-id). Баланс будет отображаться в eBTC.
+Normally, the funds reach your account within 24 hours. You can check your balance using the methods
+
+[list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-id). 
+
+The balance will be expressed in eBTC.
+
 
 ```bash
 list_account_balances nathan
@@ -54,18 +61,19 @@ list_account_balances nathan
 624.99892000 EBTC
 ```
 
-> Не пугайтесь, если пришло чуть меньше средств, чем вы отправили. В данном примере отправляли суммарно 625 BTC. 0.00108 BTC было взято коммиссии, чтобы покрыть fee в BTC за отправку транзакций членами коммитета.
+> If the amount you see is less than the one you sent, don’t worry. In the example above, the total amount sent was 625 BTC. The transaction fee was 0.00108 BTC. The system charges this fee to reward the committee members for transaction verification. 
 
-Также вы можете наблюдать все ваши депозиты методом [get_account_deposits](/api-reference/echo-wallet-api/README.md#get_account_deposits-account-type).
+Also, you can view your deposits using the method
+[get_account_deposits](/api-reference/echo-wallet-api/README.md#get_account_deposits-account-type).
 
-Если вы хотите получить скрипт btc, который использовался для создания вашего адреса, вы можете использовать метод [get_btc_deposit_script](/api-reference/echo-wallet-api/README.md#get_btc_deposit_script-address).
+If you want to get the btc script used to create your address, call the method
+[get_btc_deposit_script](/api-reference/echo-wallet-api/README.md#get_btc_deposit_script-address).
 
 ## Withdraw
 
-Если вы решите совершить вывод ваших eBTC с вашего Echo аккаунта в Bitcoin, необходимо вызвать метод [withdraw_btc](/api-reference/echo-wallet-api/README.md#withdraw_btc-account-btc_addr-value-broadcast).
+If you want to withdraw your eBTC from your Echo account to your BTC account, call the method
+[withdraw_btc](/api-reference/echo-wallet-api/README.md#withdraw_btc-account-btc_addr-value-broadcast).
 
-Баланс с вашего аккаунта спишется сразу, а в Bitcoin сети средства придут через определенное время.
+The balance of your account will change immediately, but it takes some time for the funds to reach the Bitcoin network. 
 
-Чтобы увидеть все ваши выводы, используйте метод [get_account_withdrawals](/api-reference/echo-wallet-api/README.md#get_account_withdrawals-account-type).
-
-
+To get your withdrawals you can use [get_account_withdrawals](/api-reference/echo-wallet-api/README.md#get_account_withdrawals-account-type) method.
