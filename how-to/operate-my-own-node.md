@@ -156,26 +156,6 @@ Domains from which to accept cross origin requests.
 > ./echo_node --rpccorsdomain example.com
 ```
 
-#### RPC TLS endpoint
-Endpoint for TLS websocket RPC to listen on. Should be specified with TLS certificate and TLS certificate password described below.
-
-```bash
-> ./echo_node --rpc-tls-endpoint "127.0.0.1:8089"
-```
-
-#### TLS certificate
-The TLS certificate file for this server.
-
-```bash
-> ./echo_node --server-pem /tmp/echo_dir/server.pem
-```
-
-#### TLS certificate password
-Password for this certificate.
-
-```bash
-> ./echo_node --server-pem-password password
-```
 
 #### Genesis JSON file
 File to read Genesis State from.
