@@ -1,4 +1,4 @@
-# Freeze and unfreeze committee frozen balance
+# How to: Freeze and unfreeze Echo funds for committee member
 
 ## Deposit funds
 
@@ -33,7 +33,7 @@ unlocked >>> committee_freeze_balance 1.2.26 1000 true
 }
 ```
 
-To get committee frozen balance you can use wallet method [committee_freeze_balance](/api-reference/echo-wallet-api/README.md#committee_freeze_balance-owner_account-amount-broadcast)
+To get committee frozen balance you can use wallet method [get_committee_frozen_balance](/api-reference/echo-wallet-api/README.md#get_committee_frozen_balance-owner_account)
 
 ```bash
 unlocked >>> get_committee_frozen_balance 1.2.26

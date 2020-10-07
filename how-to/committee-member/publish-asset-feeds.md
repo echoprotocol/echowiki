@@ -1,7 +1,6 @@
-# Publishing feeds for committee assets
+# How to: Echo Committee publishes new rates for ETH and BTC
 
-Committee members can publish feeds for committee fed asset via method in wallet api []
-
+Committee members can publish feeds for committee fed asset via method in wallet api.
 
 ```bash
 unlocked >>> publish_asset_feed 1.2.6 "EETH" {"base": {"amount": 1, "asset_id": "1.3.1"}, "quote": {"amount": 2, "asset_id": "1.3.0"}} true 

@@ -1,4 +1,4 @@
-# Activating and deactivating committee member
+# How to: Activate and deactivate committee member
 
 ## Adding an active committee member
 
@@ -51,8 +51,8 @@ unlocked >>> get_committee_member 1.2.26
 ```
 
 To register as committee member Ethereum address and Bitcoin public key are needed for sidechains. Also you need to have enough funds that will be frozen. The amount should be equal or greater than the value of `committee_frozen_balance_to_activate` from [chain_parameters](/api-reference/echo-objects/chain-parameters.md). More info about committee frozen balance you can get [here](freeze-unfreeze-committee-frozen-balance.md).
-   
-In case of increasing of deposit amount committee should replenish committee frozen balance to the required amount in time of 10 * `maintenance_interval` (parameter in [chain_parameters](/api-reference/echo-objects/chain-parameters.md)) . If after this amount of time the balance has not been replenished committee member is excluded from the active committee. But if the balance is not replenished by 1/3 of the participants or more this period of time is extended by another day and so on until more than 2/3 of the participants have a required amount on the frozen balance. Recalculation occurs during maintenance.
+
+In case of increasing of deposit amount committee should replenish committee frozen balance to the required amount in time of 10 * `maintenance_interval` (parameter in [chain_parameters](/api-reference/echo-objects/chain-parameters.md)). If after this amount of time the balance has not been replenished committee member is excluded from the active committee. But if the balance is not replenished by 1/3 of the participants or more this period of time is extended by another day and so on until more than 2/3 of the participants have a required amount on the frozen balance. Recalculation occurs during maintenance.
 
 Once a committee member has been created, any of the active committee can use the wallet method [create_activate_committee_member_proposal](/api-reference/echo-wallet-api/README.md#create_activate_committee_member_proposal-sender-committee_to_activate-expiration_time) that adding [committee_member_activate_operation](/api-reference/echo-operations/committee-member.md#committee_member_activate_operation) to proposal. 
 
