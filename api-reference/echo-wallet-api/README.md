@@ -5,7 +5,6 @@
     * [info](#info)
     * [about](#about)
     * [help](#help)
-    * [help_method](#help_method-method)
 * Objects
     * [get_object](#get_object-object_id)
 * Blocks and transactions
@@ -26,10 +25,11 @@
     * [get_account_by_address](#get_account_by_address-address)
     * [get_evm_addresses](#get_evm_addresses-account-id)
     * [register_account](#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast)
-    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
+    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
+    * [update_account](#update_account-account_name_or_id-new_options-broadcast-new_active-new_echorand_key)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
     * [create_eddsa_keypair](#create_eddsa_keypair)
@@ -59,8 +59,12 @@
     * [list_frozen_balances](#list_frozen_balances-account)
     * [get_committee_frozen_balance](#get_committee_frozen_balance-owner_account)
     * [freeze_balance](#freeze_balance-account-amount-asset-duration-broadcast)
+    * [request_unfreeze_balance](#request_unfreeze_balance-account-objects_to_unfreeze-broadcast)
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
+    * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-vesting_cliff_seconds-vesting_duration-second-broadcast)
+    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
@@ -88,6 +92,7 @@
     * [propose_parameter_change](#propose_parameter_change-proposing_account-expiration_time-changed_values)
     * [propose_fee_change](#propose_fee_change-proposing_account-expiration_time-changed_values)
     * [approve_proposal](#approve_proposal-fee_paying_account-proposal_id-delta-broadcast)
+    * [get_incentives_info](#get_incentives_info)
 * Contracts
     * [get_contract_object](#get_contract_object-id)
     * [get_contract](#get_contract-id)
@@ -159,13 +164,6 @@ about
 ```
 
 ### `help`
-Returns a list of all commands supported by the wallet API. This lists each command, along with its arguments and return types. For more detailed help on a single command, use help_method
-
-```
-help
-```
-
-### `help_method method`
 Returns a list of all commands supported by the wallet API or detailed help on a single command.
 
 | Option | Description |
@@ -173,6 +171,7 @@ Returns a list of all commands supported by the wallet API or detailed help on a
 | `string method` | (Optional) for more detailed help on a single command |
 
 ```
+help
 help_method get_object
 ```
 
@@ -439,6 +438,22 @@ An asset which enforces a whitelist specifies a list of accounts to maintain its
 whitelist_account nathan acc 0 true
 ```
 
+### `update_account account_name_or_id new_options broadcast new_active new_echorand_key` 
+Update an existing account. It can be used to update the authorities, or adjust the options.
+Returns the signed transaction updating the asset
+
+| Option | Description |
+| :--- | :--- |
+| `string account_name_or_id` | The name or id of the account to update |
+| `variant_object new_options` | Map of options field to update. The new [account_options](/api-reference/echo-operations/types/common.md#account_options) object, which will entirely replace the existing options. |
+| `bool broadcast` | true to broadcast the transaction on the network |
+| `authority new_active`| (Optional) The new active [authority](/api-reference/echo-operations/types/common.md#authority). This can be updated by the current active authority. null if you don't want to change the authority |
+| `public_key new_echorand_key`| (Optional) The new public echorand key, which will entirely replace the existing key. null if you don't want to change the echorand key |
+
+```
+update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true null null
+```
+
 ## Keys
 
 ### `import_key account_name_or_id priv_key`
@@ -694,6 +709,19 @@ Freezes part of your balance for the specified amount of time.
 freeze_balance nathan 1 ECHO 90 true
 ```
 
+### `request_unfreeze_balance account objects_to_unfreeze broadcast` 
+Request to unfreeze your frozen balance's.
+
+| Option | Description |
+| :--- | :--- |
+| `string account` | the name or id of the balance holder |
+| `vector objects_to_unfreeze` | frozen_balance_id's to unfreeze |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+request_unfreeze_balance nathan ["1.9.1", "1.9.2"] true
+```
+
 ### `committee_freeze_balance owner_account amount broadcast` 
 Freezes balance required for committee members to operate.
 
@@ -718,6 +746,55 @@ Withdraws part of frozen committee members balance.
 
 ```
 committee_withdraw_balance nathan 1 true
+```
+
+### `transfer_to_address from address amount asset_symbol broadcast`
+Transfer an amount from one account to address.
+
+| Option | Description |
+| :--- | :--- |
+| `string from` | The name or id of the account sending the funds |
+| `ripemd160 address` | The address of the account receiving the funds in form of ripemd160 hash |
+| `string amount` | The amount to send (in nominal units -- to send half of a ECHO, specify 0.5) |
+| `string asset_symbol` | The symbol or id of the asset to send |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
+```
+
+### `create_vesting_linear_policy creator_name owner_name amount asset_symbol vesting_cliff_seconds vesting_duration-second broadcast`
+Create a vesting balance with linear policy.
+
+| Option | Description |
+| :--- | :--- |
+| `string creator_name` | The account name or id of vesting creator |
+| `string owner_name` | The account name or id of vesting creator |
+| `string amount` | The amount to create vesting |
+| `string asset_symbol` | The symbol of the asset to create vesting |
+| `number vesting_cliff_seconds` | The vesting cliff seconds |
+| `number vesting_duration_seconds` | The vesting duration seconds |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+create_vesting_linear_policy nathan nathan 10 ECHO 10 10 true
+```
+
+### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol start_claim vesting_second broadcast`
+Create a vesting balance with cdd policy.
+
+| Option | Description |
+| :--- | :--- |
+| `string creator_name` | The account name or id of vesting creator |
+| `string owner_name` | The account name or id of vesting creator |
+| `string amount` | The amount to create vesting |
+| `string asset_symbol` | The symbol of the asset to create vesting |
+| `time_point start_claim` | Start claim |
+| `number vesting_seconds` | The vesting duration seconds |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+create_vesting_cdd_policy nathan nathan 10 ECHO "2093-12-11T10:26:00" 10 true
 ```
 
 ### `get_vesting_balances account` 
@@ -790,8 +867,8 @@ Returns the signed transaction creating a new asset
 | `string issuer` | the name or id of the account who will pay the fee and become the issuer of the new asset. This can be updated later |
 | `string symbol` | the ticker symbol of the new asset |
 | `number precision` | the number of digits of precision to the right of the decimal point, must be less than or equal to 12 |
-| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. |
-| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags |
+| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. ([asset_options](/api-reference/echo-operations/types/common.md#asset_options)) |
+| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags. ([bitasset_options](/api-reference/echo-operations/types/common.md#bitasset_options)) |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
@@ -978,14 +1055,13 @@ Returns the signed transaction updating a committee_member.
 | Option | Description |
 | :--- | :--- |
 | `string owner_account` | the name or id of the account which is updating the committee_member |
-| `triplet committee_member` | a committee_member owned by the owner_account |
 | `string new_url` | a new URL of the committee_member_object, enter empty string if you don't want to change it |
 | `string new_eth_address` | a new ethereum address of the committee_member object, enter empty string if you don't want to change it |
 | `string new_btc_public_key` | a new bitcoin public key of the committee_member object, enter empty string if you don't want to change it |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
-update_committee_member nathan 1.4.0 new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
+update_committee_member nathan new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
 
 ### `create_activate_committee_member_proposal sender committee_to_activate expiration_time` 
@@ -1077,6 +1153,13 @@ Returns information about git revision of the running node. The returned object 
 get_git_revision
 ```
 
+### `get_incentives_info`
+Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
+
+```
+get_incentives_info
+```
+
 ### `propose_parameter_change proposing_account expiration_time changed_values` 
 Creates a transaction to propose a parameter change.  
 Multiple parameters can be specified if an atomic change is desired.
@@ -1122,6 +1205,13 @@ Approve or disapprove a proposal.
 
 ```
 approve_proposal 1.2.6 1.5.0 {"active_approvals_to_add": ["1.2.6", "1.2.7", "1.2.8", "1.2.9", "1.2.10"],"active_approvals_to_remove": [],"key_approvals_to_add": [],"key_approvals_to_remove": []} true
+```
+
+### `get_incentives_info`
+Retrieve the current info about current incentives pool and incentives.
+
+```
+get_incentives_info
 ```
 
 ## Contracts
@@ -1334,7 +1424,7 @@ Returns all withdrawals, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
-| `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
+| `string type` | the type of the withdrawals may be "", "eth" or "btc". By default "" = all withdrawals |
 
 ```
 get_account_withdrawals 1.2.0 ""
@@ -1536,7 +1626,7 @@ This returns a default-initialized object of the given type; it can be used duri
 * `operation_type` the type of operation to return, must be one of the operations described in [Operation section](/api-reference/echo-operations/README.md#Echo-Operations)
 
 ```
-get_prototype_operation transfer
+get_prototype_operation account_create_operation
 ```
 
 ## Verifiable Credentials
