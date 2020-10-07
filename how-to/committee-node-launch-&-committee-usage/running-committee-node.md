@@ -1,4 +1,8 @@
-# Running Committee Node
+# How to: Run a Echo committee node
+
+A committee member is an account that has certain privileges in relation to other accounts. Responsibilities of the committee member includes regulation of the operation of echo network and, in particular, bitcoin and ethereum [sidechains](/technologies/sidechains/README.md).
+Also committee members are responsible for updating [chain_parameters](/api-reference/echo-objects/chain-parameters.md) for correct network operation.
+Committee members also feed prices for bitassets.
 
 ## Enabling EchoRand Consensus and Sidechain
 
@@ -25,6 +29,11 @@ btc-rpc-port = "18443"
 btc-rpc-user = "1"
 btc-rpc-password = "1"
 ```
+
+To enable only Bitcoin sidechain or Ethereum sidechain, use `sidechain-eth-disable` and `sidechain-btc-disable` flags respectively.
+
+To use Bitcoin sidechain with Bitcoin testnet or regtest, `sidechain-btc-testnet` flag should be added.
+
 ## Adding Private Keys
 
 Block production requires one or more private keys to be able to generate signatures on blocks and EchoRand messages and additional private key for Ethereum or Bitcoin sidechains to sign its transactions.
@@ -90,4 +99,3 @@ To add a new key, you would need to call either `add_echorand_key` or `add_sidec
 To exit the console, use the `exit`. In the case that you don't want to save any changes, use the `Ctrl-C` instead.
 
 You can type help in Echo Console to get more information.
-
