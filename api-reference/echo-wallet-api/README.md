@@ -25,7 +25,7 @@
     * [get_account_by_address](#get_account_by_address-address)
     * [get_evm_addresses](#get_evm_addresses-account-id)
     * [register_account](#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast)
-    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key)
+    * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
@@ -451,7 +451,7 @@ Returns the signed transaction updating the asset
 | `public_key new_echorand_key`| (Optional) The new public echorand key, which will entirely replace the existing key. null if you don't want to change the echorand key |
 
 ```
-update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true
+update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true null null
 ```
 
 ## Keys
@@ -780,7 +780,7 @@ Create a vesting balance with linear policy.
 create_vesting_linear_policy nathan nathan 10 ECHO 10 10 true
 ```
 
-### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol vesting_second broadcast`
+### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol start_claim vesting_second broadcast`
 Create a vesting balance with cdd policy.
 
 | Option | Description |
@@ -789,11 +789,12 @@ Create a vesting balance with cdd policy.
 | `string owner_name` | The account name or id of vesting creator |
 | `string amount` | The amount to create vesting |
 | `string asset_symbol` | The symbol of the asset to create vesting |
+| `time_point start_claim` | Start claim |
 | `number vesting_seconds` | The vesting duration seconds |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
-create_vesting_cdd_policy nathan nathan 10 ECHO 10 true
+create_vesting_cdd_policy nathan nathan 10 ECHO "2093-12-11T10:26:00" 10 true
 ```
 
 ### `get_vesting_balances account` 
@@ -866,8 +867,8 @@ Returns the signed transaction creating a new asset
 | `string issuer` | the name or id of the account who will pay the fee and become the issuer of the new asset. This can be updated later |
 | `string symbol` | the ticker symbol of the new asset |
 | `number precision` | the number of digits of precision to the right of the decimal point, must be less than or equal to 12 |
-| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. |
-| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags |
+| `asset_options asset_opts` | asset options required for all new assets. Note that core_exchange_rate technically needs to store the asset ID of this new asset. Since this ID is not known at the time this operation is created, create this price as though the new asset has instance ID 1, and the chain will overwrite it with the new asset's ID. ([asset_options](/api-reference/echo-operations/types/common.md#asset_options)) |
+| `bitasset_options bitasset_opts` | (Optional) options specific to BitAssets. This may be null unless the `market_issued` flag is set in common.flags. ([bitasset_options](/api-reference/echo-operations/types/common.md#bitasset_options)) |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
@@ -1054,14 +1055,13 @@ Returns the signed transaction updating a committee_member.
 | Option | Description |
 | :--- | :--- |
 | `string owner_account` | the name or id of the account which is updating the committee_member |
-| `triplet committee_member` | a committee_member owned by the owner_account |
 | `string new_url` | a new URL of the committee_member_object, enter empty string if you don't want to change it |
 | `string new_eth_address` | a new ethereum address of the committee_member object, enter empty string if you don't want to change it |
 | `string new_btc_public_key` | a new bitcoin public key of the committee_member object, enter empty string if you don't want to change it |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
-update_committee_member nathan 1.4.0 new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
+update_committee_member nathan new_url E8fd4Db0C38d48493AD167A268683fAb7230a88A 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
 ```
 
 ### `create_activate_committee_member_proposal sender committee_to_activate expiration_time` 
@@ -1424,7 +1424,7 @@ Returns all withdrawals, for the given account id.
 | Option | Description |
 | :--- | :--- |
 | `triplet account` | the id of the account to provide information about |
-| `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
+| `string type` | the type of the withdrawals may be "", "eth" or "btc". By default "" = all withdrawals |
 
 ```
 get_account_withdrawals 1.2.0 ""
