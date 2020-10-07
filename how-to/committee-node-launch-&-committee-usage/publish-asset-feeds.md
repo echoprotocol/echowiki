@@ -1,4 +1,4 @@
-# How to: Echo Committee publishes new rates for ETH and BTC
+# How to: Echo committee publishes new rates for ETH and BTC
 
 Committee members can publish feeds for committee fed asset via method in wallet api.
 
