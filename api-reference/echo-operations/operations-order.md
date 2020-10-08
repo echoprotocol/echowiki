@@ -54,9 +54,9 @@
 |[sidechain\_burn\_operation](sidechain.md#sidechain_burn_operation) // VIRTUAL|49|
 |[sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation)|50|
 |[sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation)|51|
-|[sidechain\_erc20\_send\_deposit\_token\_operation](sidechain.md#sidechain_erc20_send_deposit_operation)|52|
+|[sidechain\_erc20\_send\_deposit\_operation](sidechain.md#sidechain_erc20_send_deposit_operation)|52|
 |[sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation)|53|
-|[sidechain\_erc20\_send\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation)|54|
+|[sidechain\_erc20\_send\_withdraw\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation)|54|
 |[sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation)|55|
 |[sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) // VIRTUAL|56|
 |[sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) // VIRTUAL|57|

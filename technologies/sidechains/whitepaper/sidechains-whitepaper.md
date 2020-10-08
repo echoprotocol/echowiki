@@ -378,13 +378,13 @@ Deposit and withdrawal flow are described in detail below.
 ERC20 token transfer to Echo takes place in 2 stages:
 
 1. After the transfer event is emitted by the ERC20 contract, each of the committee members creates and sends `sidechain_erc20_deposit_token_operation` into the Echo network with the transaction details, token info and amount.
-1. In 24 hours each of the committee members creates and sends `sidechain_erc20_send_deposit_token_operation` which approves the deposit.
+1. In 24 hours each of the committee members creates and sends `sidechain_erc20_send_deposit_operation` which approves the deposit.
 1. After the operation is approved by the committee, ERC20 tokens are issued to the user account on the Echo network using `sidechain_erc20_issue_operation`.
 
 ERC20 token transfer to Ethereum chain takes place in 4 stages:
 
 1. When the ERC20 token withdrawal operation is received, the specified amount of tokens are withdrawn from the user’s account and pending ERC20 withdrawal object is created in the Echo chain
-1. 24 hours after the ERC20 withdrawal operation is sent by the user, each committee member is sending `sidechain_erc20_send_withdraw_token_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the ERC20 withdraw method of the main smart contract.
+1. 24 hours after the ERC20 withdrawal operation is sent by the user, each committee member is sending `sidechain_erc20_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the ERC20 withdraw method of the main smart contract.
 1. After the withdrawal operation is approved on the smart contract side, the tokens are transferred to the specified account and appropriate event is emitted.
 1. Each of committee members sends `sidechain_erc20_approve_token_withdraw_operation` into the Echo network after receiving this event.
 1. After the operation is approved by the committee, the token withdrawal is marked as processed and tokens are burned by `sidechain_erc20_burn_operation`.

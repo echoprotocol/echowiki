@@ -81,9 +81,9 @@
 * [sidechain\_burn\_operation](sidechain.md#sidechain_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\)
 * [sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
 * [sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation) - An internal operation by which committee members confirm the entry of tokens
-* [sidechain\_erc20\_send\_deposit\_token\_operation](sidechain.md#sidechain_erc20_send_deposit_operation) - An internal operation by which committee members confirm the entry of tokens after 24h and credit token
+* [sidechain\_erc20\_send\_deposit\_operation](sidechain.md#sidechain_erc20_send_deposit_operation) - An internal operation by which committee members confirm the entry of tokens after 24h and credit token
 * [sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation) - Executed by the user and initiates the withdrawal of the token from the Echo network to the specified address
-* [sidechain\_erc20\_send\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens after 24h
+* [sidechain\_erc20\_send\_withdraw\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens after 24h
 * [sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation) - An internal operation by which committee members confirm the removal of tokens
 * [sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) - Virtual operation which issues erc20 token
 * [sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) - Virtual operation which burns erc20 token
@@ -94,6 +94,7 @@
 * [sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation) - Used to withdraw the eBTC and receive BTC to provided address
 * [sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation) - An internal operation by which committee members collect an aggregate transaction
 * [sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation) - An internal operation by which committee members confirm the aggregate transaction
+* [sidechain\_btc\_block\_process\_operation](sidechain.md#sidechain_btc_block_process_operation) - An internal operation by which committee members confirm the aggregate transaction.
 
 ## Block Reward
 
