@@ -38,7 +38,7 @@ The executable generated during the previous step should be passed through the r
 User should upload the bytecode of the contract to the ECHO blockchain. See below for the example of command uploading the contract through his wallet.
 
 ```bash
-create_contract <username> "<bytecode>" <amount> <asset_type> "" false true
+create_contract <username> "<bytecode>" <amount> <asset_type> "" false
 ```
 
 * `username` - name of the account creating the contract, can be id or name, as an example "1.2.1214" or "alex"
@@ -55,7 +55,7 @@ x86-64 Smart contract uploaded into ECHO blockchain can be executed as ordinary 
 Example of executing smart contract
 
 ```bash
-call_contract <username> <contract_id> "<function_with_parameters>" <amount> <asset_type> true
+call_contract <username> <contract_id> "<function_with_parameters>" <amount> <asset_type>
 ```
 
 * `username` - name of the account calling the contract, can be either id or name, as an example "1.2.1214" or "alex"

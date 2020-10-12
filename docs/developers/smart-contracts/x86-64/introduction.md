@@ -84,7 +84,7 @@ See below for the example of command uploading the contract through his
 wallet.
 
 ```bash
-create_contract <username> <bytecode> 500 ECHO "" false true true
+create_contract <username> <bytecode> 500 ECHO "" false true
 ```
 
 Once the contract is uploaded it can be executed.

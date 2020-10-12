@@ -104,8 +104,8 @@
     * [get_contract_result](#get_contract_result-id)
     * [get_contract_history](#get_contract_history-contract_id-limit)
     * [get_relative_contract_history](#get_relative_contract_history-contract_id-stop-limit-start)
-    * [create_contract](#create_contract-registrar_account-code-amount-asset_type-supported_asset_id-eth_accuracy-save_wallet)
-    * [call_contract](#call_contract-registrar_account-receiver-code-amount-asset_type-save_wallet)
+    * [create_contract](#create_contract-registrar_account-code-amount-asset_type-supported_asset_id-eth_accuracy)
+    * [call_contract](#call_contract-registrar_account-receiver-code-amount-asset_type)
     * [call_contract_no_changing_state](#call_contract_no_changing_state-contract_id-registrar_account-asset_type-code)
 * Contract pool    
     * [get_contract_pool_balance](#get_contract_pool_balance-id)
@@ -1346,7 +1346,7 @@ Returns the relative operations on the id contract from start number.
 get_relative_contract_history 1.11.0 0 10 20
 ```
 
-### `create_contract registrar_account code amount asset_type supported_asset_id eth_accuracy save_wallet` 
+### `create_contract registrar_account code amount asset_type supported_asset_id eth_accuracy` 
 Upload/Create a contract.
 
 Returns the signed transaction creating the contract
@@ -1359,13 +1359,12 @@ Returns the signed transaction creating the contract
 | `string asset_type` | the type of the asset transfered to the contract |
 | `string supported_asset_id` | the asset that can be used to create/call the contract (see [Flag of supported asset](../../technologies/evm-support/README.md#flag-of-supported-asset)) |
 | `bool eth_accuracy` | whether to use the ethereum asset accuracy (see [Flag of using Ethereum accuracy](../../technologies/evm-support/README.md#flag-of-using-ethereum-accuracy)) |
-| `bool save_wallet` | whether to save the contract to the wallet |
 
 ```
-create_contract nathan code_contract 0 ECHO "" false true
+create_contract nathan code_contract 0 ECHO "" false
 ```
 
-### `call_contract registrar_account receiver code amount asset_type save_wallet` 
+### `call_contract registrar_account receiver code amount asset_type` 
 Call a contract.
 
 Returns the signed transaction calling the contract
@@ -1377,10 +1376,9 @@ Returns the signed transaction calling the contract
 | `string code` | the hash of the method to call |
 | `string amount` | the amount of asset transfered to the contract |
 | `string asset_type` | the type of the asset transfered to the contract |
-| `bool save_wallet` | whether to save the contract call to the wallet |
 
 ```
-call_contract nathan 1.11.0 code_contract 0 ECHO false
+call_contract nathan 1.11.0 code_contract 0 ECHO
 ```
 
 ### `call_contract_no_changing_state contract_id registrar_account asset_type code` 
