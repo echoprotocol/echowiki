@@ -4,3 +4,4 @@
 * [How to build and start Echo node on Raspberry Pi (RPi)](build-echo-node-on-rpi.md)
 * [How can I register an account on Echo](register-account.md)
 * [How to operate my own Echo node](operate-my-own-node.md)
+* [How to become a registrar and start earn money with Echo](become-a-registrator.md)

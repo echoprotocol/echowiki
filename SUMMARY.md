@@ -9,6 +9,7 @@
     * [How can I register an account on Echo](/how-to/registration-&-node-launch/register-account.md)
     * [How to Deploy a "Hello Echo!" Solidity smart contract to Echo](/how-to/hello-echo.md)
     * [How to operate my own Echo node](/how-to/registration-&-node-launch/operate-my-own-node.md)
+    * [How to become a registrar and start earn money with Echo](/how-to/registration-&-node-launch/become-a-registrator.md)
   * [Committee Node launch & Committee usage](/how-to/committee-node-launch-&-committee-usage/README.md)
     * [How to run a Echo committee node](/how-to/committee-node-launch-&-committee-usage/running-committee-node.md)
     * [How to activate and deactivate committee member](/how-to/committee-node-launch-&-committee-usage/activate-deactive-committee-member.md)
