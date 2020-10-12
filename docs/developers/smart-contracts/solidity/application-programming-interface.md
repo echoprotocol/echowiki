@@ -24,7 +24,7 @@ create_contract(
     string amount, string asset_type,
     uint64_t gasPrice, uint64_t gas,
     string supported_asset_id,
-    bool broadcast, bool save_wallet,
+    bool broadcast,
     bool eth_accuracy
     )
 ```
@@ -35,7 +35,6 @@ create_contract(
 - `gasPrice` и `gas` - цена и количество газа
 - `supported_asset_id` - ограничение при работе с данным контрактом до указанного ассета (по умолчанию ``)
 - `broadcast` - флаг, отвечающий за распространение транзакции по сети (по умолчанию `false`)
-- `save_wallet` - флаг, отвечающий за сохранение транзакции в кошельке (по умолчанию `true`)
 - `eth_accuracy` - флаг, при установке которого точность при работе с контрактом устанавливается равной точности `Ethereum` (по умолчанию `false`)
 
 После вызова функции, можно подтвердить, что контракт создался с помощью Echo Explorer.
