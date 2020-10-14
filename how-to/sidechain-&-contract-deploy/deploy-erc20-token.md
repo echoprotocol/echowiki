@@ -2,8 +2,7 @@
 
 ## General guidelines
 
-Before proceeding, please read this document to know how to create a token `Hello, Echo!` [contract]
-(/how-to/deploy-a-solidity-contract.md#hello-echo.md).
+Before proceeding, please read this document to know how to create a token [Hello Echo! contract](/how-to/hello-echo.md).
 
 ERC20 is the token standard we use on the Echo blockchain. It’s a set of rules a token must comply with. Basically, an ERC20 token is a smart contract following these rules.
 
