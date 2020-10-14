@@ -148,6 +148,86 @@ A list of operations performed by account, ordered from most recent to oldest.
 }
 ```
 
+## get\_account\_address\_history\(address, start, stop, limit\)
+
+Get only transfers of to the specified address.
+
+### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `ripemd160 address` | The address whose history should be queried |
+| `operation_history_id_type start` | ID of the most recent operation to retrieve |
+| `operation_history_id_type stop` | ID of the earliest operation to retrieve |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+
+### Example
+
+```javascript
+{
+    "id": 3,
+    "method": "call",
+    "params": [
+        HISTORY_API_ID,
+        "get_account_address_history",
+        [
+            "f149bd2883b1179965bd6706092573be4d68fec8",
+            "0",
+            "1.6.0",
+            "1.6.10",
+            "100"
+        ]
+    ]
+}
+```
+
+### Returns
+
+A list of operations performed by address, ordered from most recent to oldest.
+
+```javascript
+{
+  "id": 3,
+  "jsonrpc": "2.0",
+  "result": [
+    {
+      "id": "1.6.24",
+      "op": [
+        1,
+        {
+          "fee": {
+            "amount": 20,
+            "asset_id": "1.3.0"
+          },
+          "from": "1.2.11",
+          "to": "f149bd2883b1179965bd6706092573be4d68fec8",
+          "amount": {
+            "amount": 300000000,
+            "asset_id": "1.3.0"
+          },
+          "extensions": [
+            
+          ]
+        }
+      ],
+      "result": [
+        0,
+        {
+          
+        }
+      ],
+      "block_num": 68,
+      "trx_in_block": 0,
+      "op_in_trx": 0,
+      "virtual_op": 77,
+      "extensions": [
+        
+      ]
+    }
+  ]
+}
+```
+
 ## get\_relative\_account\_history\(account, stop, limit, start\)
 
 Get operations relevant to the specified account referenced by an event numbering specific to the account. The current number of operations for the account can be found in the account statistics \(or use 0 for start\).

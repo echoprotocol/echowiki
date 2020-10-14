@@ -24,12 +24,16 @@
     * [get_account_addresses](#get_account_addresses-account_id-from-limit)
     * [get_account_by_address](#get_account_by_address-address)
     * [get_evm_addresses](#get_evm_addresses-account-id)
+    * [get_account_address_by_label](#get_account_address_by_label-account_name_or_id-label)
     * [register_account](#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast)
     * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
     * [update_account](#update_account-account_name_or_id-new_options-broadcast-new_active-new_echorand_key)
+    * [get_account_address_by_label](#get_account_address_by_label-account_name_or_id-label)
+    * [get_account_address_history](#get_account_address_history-address-start-stop-limit)
+    * [get_account_history_operations](#get_account_history_operations-account-operation_id-start-stop-limit)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
     * [create_eddsa_keypair](#create_eddsa_keypair)
@@ -360,6 +364,18 @@ Get EVM addresses, if exist, for the given account id
 get_evm_addresses 1.2.0
 ```
 
+### `get_account_address_by_label account_name_or_id label`
+Get account address by owner account and label
+
+| Option | Description |
+| :--- | :--- |
+| `string account_name_or_id` | the name or id of the owner account |
+| `string label` | the label of account address object |
+
+```
+get_account_address_by_label 1.2.26 primary
+```
+
 ### `register_account name active echorand-key registrar-account evm-address broadcast`
 Registers a third party's account on the blockckain.  
 This function is used to register an account for which you do not own the private keys. When acting as a registrar, an end user will generate their own private keys and send you the public keys. The registrar will use this function to register the account on behalf of the end user.
@@ -453,6 +469,55 @@ Returns the signed transaction updating the asset
 
 ```
 update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true null null
+```
+
+### `get_account_address_by_label account_name_or_id label` 
+Get account address by owner account and label
+
+| Option | Description |
+| :--- | :--- |
+| `string account_name_or_id` | the name or id of the owner account |
+| `string label` | the label of account address object |
+
+```
+get_account_address_by_label 1.2.26 primary
+```
+
+### `get_account_address_history address start stop limit` 
+Get all transfers about this address.
+
+### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `ripemd160 address` | The address whose history should be queried |
+| `operation_history_id_type start` | ID of the most recent operation to retrieve |
+| `operation_history_id_type stop` | ID of the earliest operation to retrieve |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+
+### Example
+
+```
+get_account_address_history f149bd2883b1179965bd6706092573be4d68fec8 1.6.67 1.6.0 100
+```
+
+### `get_account_history_operations account operation_id start stop limit` 
+Get operations relevant to the specificed account.
+
+### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | The account whose history should be queried |
+| `uint64 operation_id` | The ID of the operation we want to get operations in the account |
+| `operation_history_id_type start` | ID of the most recent operation to retrieve |
+| `operation_history_id_type stop` | ID of the earliest operation to retrieve |
+| `unsigned limit` | Maximum number of operations to retrieve \(must not exceed 100\) |
+
+### Example
+
+```
+get_account_history_operations 1.2.12 1 1.6.10 1.6.0 100
 ```
 
 ## Keys
