@@ -27,6 +27,7 @@ Contains methods to access account and contract histories.
 * [get\_account\_history](history-api.md#get_account_history-account-stop-limit-start)
 * [get\_relative\_account\_history](history-api.md#get_relative_account_history-account-stop-limit-start)
 * [get\_account\_history\_operations](history-api.md#get_account_history_operations-account-operation_id-start-stop-limit)
+* [get\_account\_address\_history](history-api.md#get_account_address_history-address-start-stop-limit)
 * [get\_contract\_history](history-api.md#get_contract_history-contract-stop-limit-start)
 * [get\_relative\_contract\_history](history-api.md#get_relative_contract_history-contract-stop-limit-start)
 

@@ -35,6 +35,7 @@
   * [lookup\_accounts](account-api.md#lookup_accounts-lower_bound_name-limit)
   * [get\_account\_addresses](account-api.md#get_account_addresses-account_id-from-limit)
   * [get\_account\_by\_address](account-api.md#get_account_by_address-address)
+  * [get\_account\_address\_by\_label](account-api.md#get_account_address_by_label-account_name_or_id-label)
   * [get\_account\_count](account-api.md#get_account_count)
 * [Contracts](contract-api.md#contracts)
   * [get\_contract](contract-api.md#get_contract-contract_id)

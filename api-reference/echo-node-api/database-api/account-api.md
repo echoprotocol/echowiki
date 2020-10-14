@@ -547,7 +547,7 @@ Account id of owner.
 }
 ```
 
-### get\_evm\_addresses(account_id\)
+### get\_evm\_addresses\(account_id\)
 
 Get EVM addresses, if exist, for the given account id.
 
@@ -590,6 +590,48 @@ EVM addresses owned by account.
                 "extensions": []
             }
         ]
+    ]
+}
+```
+
+### get\_account\_address\_by\_label\(account\_name\_or\_id, label\)
+
+Get account address by owner account and label.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `string account_name_or_id` | the name or id of the owner account |
+| `string label` | the label of account address object |
+
+#### Example
+
+```json
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_account_address_by_label",
+        [
+            "1.2.10",
+            "primary"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+EVM addresses owned by account.
+
+```json
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [
+        "f149bd2883b1179965bd6706092573be4d68fec8"
     ]
 }
 ```
