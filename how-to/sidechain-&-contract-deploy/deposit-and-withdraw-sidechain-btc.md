@@ -4,7 +4,7 @@
 
 To transfer BTC to your Echo account, you have to create `btc_deposit_address` for your account in the Echo network.
 
-For it, call the method [create_btc_deposit_address](/api-reference/echo-wallet-api/README.md#create_btc_deposit_address-account-backup_address-broadcast). The second parameter here is the backup of your Bitcoin network account. In the mainnet, it starts with ‘1’ (`1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2`). In the test net, it starts with `m` or `n` (`mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn`)
+For it, call the method [create_btc_address](/api-reference/echo-wallet-api/README.md#create_btc_address-account-backup_address-broadcast). The second parameter here is the backup of your Bitcoin network account. In the mainnet, it starts with ‘1’ (`1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2`). In the test net, it starts with `m` or `n` (`mipcBbFg9gMiCh81Kj8tqqdgoZub1ZJRfn`)
 
 After creating an address you can view it using the method
 [get_btc_address](/api-reference/echo-wallet-api/README.md#get_btc_address-account). 

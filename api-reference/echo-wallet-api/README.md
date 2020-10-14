@@ -126,7 +126,7 @@
     * [register_erc20_token](#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast)
     * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
 * Sidechain-Bitcoin
-    * [create_btc_deposit_address](#create_btc_deposit_address-account-backup_address-broadcast)
+    * [create_btc_address](#create_btc_address-account-backup_address-broadcast)
     * [get_btc_address](#get_btc_address-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
@@ -1568,7 +1568,7 @@ withdraw_erc20_token nathan 545a68602db30bf5db9692267f8f84b7f1e70ec3 1.16.0 10 t
 
 ## Sidechain Bitcoin
 
-### `create_btc_deposit_address account backup_address broadcast` 
+### `create_btc_address account backup_address broadcast`
 Creates a transaction to generate bitcoin deposit address.
 
 | Option | Description |
@@ -1578,7 +1578,7 @@ Creates a transaction to generate bitcoin deposit address.
 | `bool broadcast` | true if you wish to broadcast the transaction |
 
 ```
-create_btc_deposit_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
+create_btc_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
 ```
 
 ### `get_btc_address account` 
@@ -1600,7 +1600,7 @@ Returns bitcoin script for generated bitcoin deposit address, if exist, for the 
 | `triplet address` | the id of the bitcoin address to provide script |
 
 ```
-get_btc_deposit_script 1.22.0
+get_btc_deposit_script 1.19.0
 ```
 
 ### `withdraw_btc account btc_addr value broadcast` 
