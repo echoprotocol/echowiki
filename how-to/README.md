@@ -4,6 +4,7 @@
   * [How to run Echo node in 5 min and begin staking](/how-to/registration-&-node-launch/run_node_and_start_staking.md)
   * [How to build and start Echo node on Raspberry Pi (RPi)](/how-to/registration-&-node-launch/build-echo-node-on-rpi.md)
   * [How can I register an account on Echo](/how-to/registration-&-node-launch/register-account.md)
+  * [How to Deploy a "Hello, Echo!" Solidity smart contract to Echo](/how-to/hello-echo.md)
   * [How to operate my own Echo node](/how-to/registration-&-node-launch/operate-my-own-node.md)
 * [Committee Node launch & Committee usage](/how-to/committee-node-launch-&-committee-usage/README.md)
   * [How to run a Echo committee node](/how-to/committee-node-launch-&-committee-usage/running-committee-node.md)
