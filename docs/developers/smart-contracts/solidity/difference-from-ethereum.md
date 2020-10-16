@@ -42,16 +42,16 @@ Example:
 ```cpp
 contract assetbalance {
     uint public balance;
-    function saveBalance(address addr, string assetId) {
+    function saveBalance(address addr, uint64 assetId) public {
         balance = addr.assetbalance(assetId);
     }
 }
 
 contract assetbalance2 {
     uint public balance;
-    function saveBalance() {
+    function saveBalance() public {
         address addr = 0x0000000000000000000000000000000000000005;
-        balance = addr.assetbalance("1.3.1");
+        balance = addr.assetbalance(1);
     }
 }
 
@@ -72,14 +72,14 @@ Example:
 
 ```cpp
 contract transferasset {
-    function transfer(address addr, uint value, uint assetId) {
+    function transfer(address payable addr, uint value, uint assetId) public {
         addr.transferasset(value, assetId);
     }
 }
 
 contract transferasset2 {
-    function transfer() {
-        address addr = 0x0000000000000000000000000000000000000003;
+    function transfer() public {
+        address payable addr = 0x0000000000000000000000000000000000000003;
         addr.transferasset(100000, 1);
     }
 }
@@ -100,15 +100,15 @@ Example:
 ```cpp
 contract property {
     bytes public data;
-    function getProperty(string idAndProperty) {
+    function getProperty(string memory idAndProperty) public {
         data = db.property(idAndProperty);
     }
 }
 
 contract property2 {
     bytes public data;
-    function getProperty() {
-        data = db.property("1.2.5 options.memo_key");
+    function getProperty() public {
+        data = db.property("1.2.5 options.delegate_share");
     }
 }
 ```
@@ -131,7 +131,7 @@ Example:
 contract convert {
     bytes public data;
     uint public value;
-    function getPropertyAndConvert(string idAndProperty) {
+    function getPropertyAndConvert(string memory idAndProperty) public {
         data = db.property(idAndProperty);
         value = db.convert(data);
     }
@@ -145,8 +145,8 @@ Returns the asset ID, with the help of which the transaction of creating or invo
 Example:
 
 ```cpp
-contract transfer {
-    function transfer(address addr, uint value) {
+contract transferContract {
+    function transfer(address payable addr, uint value) public {
         addr.transferasset(value, msg.idasset);  
     }
 }
@@ -160,7 +160,7 @@ Example:
 
 ```cpp
 contract A {
-    function f(address addr) returns (bool) {
+    function f(address addr) public returns (bool) {
         return addr.isCommittee;
     }
 }

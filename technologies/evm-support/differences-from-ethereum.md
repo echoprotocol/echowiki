@@ -10,10 +10,10 @@ In order to minimize the risk, the mechanism of transaction fee payment for the 
 
 For transaction fee amount estimation, Echo uses the following method [get\_required\_fees](/api-reference/echo-node-api/database-api/authority-api.md#get_required_fees-ops-id). In responding to the request, when creating or executing a contract, Echo performs the following actions:
 
-* estimates the required amount of Gas to execute or create a contract;
-* transfers Gas to the amount in a specified asset, based on the exchange rate of the asset and the cost of a Gas unit;
-* adds an additional fee to the received amount for the creation of an operation and the size of an operation;
-* returns the resulting value in a form of query result.
+- estimates the required amount of Gas to execute or create a contract;
+- transfers Gas to the amount in a specified asset, based on the exchange rate of the asset and the cost of a Gas unit;
+- adds an additional fee to the received amount for the creation of an operation and the size of an operation;
+- returns the resulting value in a form of query result.
 
 The resulting value is indicated as `fee.amount` in the operation, just the same way as the other types of operations..
 
@@ -23,7 +23,7 @@ When performing an operation, the Gas amount is determined by the formula `Fee A
 
 ## New features in solidity
 
-To support various types of assets in contracts, both the solidity compiler \(solc\) and the Ethereum Virtual Machine have been refined. As a result, to use the new functionality added to Echo smart contracts, it is required to compile using the modified solidity compiler.
+To support various types of assets in contracts, both the solidity compiler (solc) and the Ethereum Virtual Machine have been refined. As a result, to use the new functionality added to Echo smart contracts, it is required to compile using the modified solidity compiler.
 
 ### Functions
 
@@ -35,25 +35,26 @@ By referring to the address, it returns the balance in the specified asset.
 uint assetbalance(string assetId)
 ```
 
-* `assetId` - string, id ассета\(in a triplet format, for instance "1.3.0"\).
+- `assetId` - string, id ассета(in a triplet format, for instance "1.3.0").
 
 Example:
 
 ```cpp
 contract assetbalance {
     uint public balance;
-    function saveBalance(address addr, string assetId) {
+    function saveBalance(address addr, uint64 assetId) public {
         balance = addr.assetbalance(assetId);
     }
 }
 
 contract assetbalance2 {
     uint public balance;
-    function saveBalance() {
+    function saveBalance() public {
         address addr = 0x0000000000000000000000000000000000000005;
-        balance = addr.assetbalance("1.3.1");
+        balance = addr.assetbalance(1);
     }
 }
+
 ```
 
 #### `transferasset`
@@ -64,21 +65,21 @@ By referring to the address, it transfers a certain amount in the specified asse
 void transferasset(uint value, uint assetId)
 ```
 
-* `value` - uint, transfer amount.
-* `assetId` - uint, transfer asset ID \(in a format of uint256\).
+- `value` - uint, transfer amount.
+- `assetId` - uint, transfer asset ID (in a format of uint256).
 
 Example:
 
 ```cpp
 contract transferasset {
-    function transfer(address addr, uint value, uint assetId) {
+    function transfer(address payable addr, uint value, uint assetId) public {
         addr.transferasset(value, assetId);
     }
 }
 
 contract transferasset2 {
-    function transfer() {
-        address addr = 0x0000000000000000000000000000000000000003;
+    function transfer() public {
+        address payable addr = 0x0000000000000000000000000000000000000003;
         addr.transferasset(100000, 1);
     }
 }
@@ -92,22 +93,22 @@ Returns the value of the field of a specified object in the blockchain.
 bytes property(string idAndProperty)
 ```
 
-* `idAndProperty` - string, object ID and the requested field\(for instance "1.2.5 lifetime\_referrer\_fee\_percentage"\).
+- `idAndProperty` - string, object ID and the requested field(for instance "1.2.5 lifetime_referrer_fee_percentage").
 
 Example:
 
 ```cpp
 contract property {
     bytes public data;
-    function getProperty(string idAndProperty) {
+    function getProperty(string memory idAndProperty) public {
         data = db.property(idAndProperty);
     }
 }
 
 contract property2 {
     bytes public data;
-    function getProperty() {
-        data = db.property("1.2.5 options.memo_key");
+    function getProperty() public {
+        data = db.property("1.2.5 options.delegate_share");
     }
 }
 ```
@@ -122,7 +123,7 @@ uint convert(bytes data)
 
 params:
 
-* `data` - bytes, convertible object.
+- `data` - bytes, convertible object.
 
 Example:
 
@@ -130,7 +131,7 @@ Example:
 contract convert {
     bytes public data;
     uint public value;
-    function getPropertyAndConvert(string idAndProperty) {
+    function getPropertyAndConvert(string memory idAndProperty) public {
         data = db.property(idAndProperty);
         value = db.convert(data);
     }
@@ -144,8 +145,8 @@ Returns the asset ID, with the help of which the transaction of creating or invo
 Example:
 
 ```cpp
-contract transfer {
-    function transfer(address addr, uint value) {
+contract transferContract {
+    function transfer(address payable addr, uint value) public {
         addr.transferasset(value, msg.idasset);  
     }
 }
@@ -159,7 +160,7 @@ Example:
 
 ```cpp
 contract A {
-    function f(address addr) returns (bool) {
+    function f(address addr) public returns (bool) {
         return addr.isCommittee;
     }
 }
@@ -174,8 +175,7 @@ A function used to verify multiple eddsa signatures required to authorize a sing
 - `bytes memory signatures` - packed byte array of signatures. Length must be a product of 64.
 
 Example:
-```bash
-pragma solidity ^0.5.0;
+```cpp
 contract C {
     function f(address a, bytes memory d, bytes memory s) public view returns (bool) {
         return edverify(a, d, s);
@@ -195,11 +195,10 @@ First, you need to associate the evm address generated from the existing private
 - `bytes32 s` - second 32 bytes of signature
 
 Example:
-```bash
-pragma solidity ^0.5.0;
+```cpp
 contract C {
     function recover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) public returns (address)  {
-            return ecrecover(hash, v, r, s);
+        return ecrecover(hash, v, r, s);
     }
 }
 ```
