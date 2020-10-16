@@ -1,14 +1,14 @@
-# Difference from Ethereum
+# Differences from Ethereum
 
 ## Working with Gas in Echo
 
-A rather common problem when working with contracts on the Ethereum network is a transaction error due to the lack of Gas. The period between estimating the required Gas to perform a transaction and the actual performing of a  transaction on the blockchain may last long, while, in the meantime, the state of the contract may have changed, which in its turn may result in an increase in the quantity of the required Gas.
+A rather common problem when working with contracts on the Ethereum network is a transaction error due to the lack of Gas. The period between estimating the required Gas to perform a transaction and the actual performing of a transaction on the blockchain may last long, while, in the meantime, the state of the contract may have changed, which in its turn may result in an increase in the quantity of the required Gas.
 
 In order to minimize the risk, the mechanism of transaction fee payment for the Echo contract has been changed. The Gas cost estimation mechanism has also been changed - the parameter cannot be transferred by a user, it's a network configuration parameter that can be changed by the committee.
 
 ### Transaction fee amount estimation
 
-For transaction fee amount estimation, Echo uses the following method [get_required_fees](https://wiki.echo-dev.io/developers/apis/database-api/#get_required_feesops-id). In responding to the request, when creating or executing a contract, Echo performs the following actions:
+For transaction fee amount estimation, Echo uses the following method [get\_required\_fees](/api-reference/echo-node-api/database-api/authority-api.md#get_required_fees-ops-id). In responding to the request, when creating or executing a contract, Echo performs the following actions:
 
 - estimates the required amount of Gas to execute or create a contract;
 - transfers Gas to the amount in a specified asset, based on the exchange rate of the asset and the cost of a Gas unit;
