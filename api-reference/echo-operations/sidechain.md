@@ -1029,6 +1029,7 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 
     account_id_type committee_member_id;
     fc::sha256 transaction_id;
+    uint64_t block_number = 0;
 
     extensions_type extensions;
 
@@ -1048,46 +1049,6 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
       },
       "committee_member_id": "1.2.0",
       "transaction_id": "0000000000000000000000000000000000000000000000000000000000000000",
-      "extensions": []
-   }
-]
-```
-
-
-## sidechain_btc_block_process_operation
-
-Store Bitcoin block in ECHO network. Used only by committee.
-
-```cpp
-struct sidechain_btc_block_process_operation : public base_operation
-{
-    struct fee_parameters_type
-    {
-        uint64_t fee = 0;
-    };
-
-    asset fee;
-
-    account_id_type committee_member_id;
-    uint64_t block_number;
-
-    extensions_type extensions;
-
-    account_id_type fee_payer() const { return committee_member_id; }
-};
-```
-
-### JSON Example
-
-```json
-[
-   65,
-   {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
-      "committee_member_id": "1.2.0",
       "block_number": 0,
       "extensions": []
    }
