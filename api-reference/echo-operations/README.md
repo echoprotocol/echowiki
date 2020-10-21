@@ -94,7 +94,6 @@
 * [sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation) - Used to withdraw the eBTC and receive BTC to provided address
 * [sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation) - An internal operation by which committee members collect an aggregate transaction
 * [sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation) - An internal operation by which committee members confirm the aggregate transaction
-* [sidechain\_btc\_block\_process\_operation](sidechain.md#sidechain_btc_block_process_operation) - An internal operation by which committee members confirm the aggregate transaction.
 
 ## Block Reward
 
