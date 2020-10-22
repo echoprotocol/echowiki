@@ -41,7 +41,7 @@ You can specify what accounts or contracts history should be tracked with `track
 
 `max-ops-per-account`, `max-ops-per-contract` parameters indicate how many history records are kept for each account or contract. The default value is 1000. For exchanges, if you have more deposit and withdrawal records, consider setting a larger value. Earlier data is deleted from memory and cannot be queried quickly (but still recorded on the chain).
 
-* NOTE: after changing this arguments you should restart node with `--replay-blockchain` argument
+> NOTE: after changing this arguments you should restart node with `--replay-blockchain` argument
 
 #### log_config.ini
 
@@ -86,10 +86,13 @@ info
 }
 ```
 
-* NOTE:
+{% hint style="info" %}
+
 * You can use `./echo_wallet --help` to see all arguments that could be specified
 * The data communicated between the `echo_wallet` and the `echo_node` does not contain private data. Generally, no encryption is needed and no deliberate protection is required for the RPC port of the node (it is not necessary to add a layer of protection).
 * When the `echo_wallet` is in the unlocked state, the funds in the wallet account can be transferred through the RPC port. Care must be taken to prevent unauthorized access.
+
+{% endhint %}
 
 [How to use cli wallet](/how-to/wallets/use-cli-wallet.md)
 
@@ -172,61 +175,64 @@ To verify address is created you need to call `get_account_address_by_label` met
 
 ## Track incoming transactions
 
-1. Querying Deposit Account History
+### 1. Querying Deposit Account History
 
-    1.1. Get history of specified address 
+#### 1.1. Get history of specified address 
 
-    Use the [get_account_address_history]() method to get transfers of specified address. 
+Use the `get_account_address_history` method to get transfers of specified address. 
 
-    ```
-    get_account_address_history account 1.6.0 1.6.0 10
+```
+get_account_address_history account 1.6.0 1.6.0 10
 
-    » curl -X POST --data '{"method": "get_account_address_history", "params": ["account ", "1.6.0", "1.6.0", 10], "id": 6}' http://localhost:8091
-    ```
+» curl -X POST --data '{"method": "get_account_address_history", "params": ["account ", "1.6.0", "1.6.0", 10], "id": 6}' http://localhost:8091
+```
     
-    The four parameters are: account name or id, start id, stop id, limit number.
+The four parameters are: account name or id, start id, stop id, limit number.
 
-    1.2. Get all transfers to address operation for account
+#### 1.2. Get all transfers to address operation for account
 
-    Use the [get_account_history_operations]() method to get account history of specified operation.
+Use the `get_account_history_operations` method to get account history of specified operation.
 
-    ```
-    get_account_history_operations account 1 1.6.0 1.6.0 10
+```
+get_account_history_operations account 1 1.6.0 1.6.0 10
 
-    » curl -X POST --data '{"method": "get_account_address_history", "params": ["account ", 1, "1.6.0", "1.6.0", 10], "id": 7}' http://localhost:8091
-    ```
+» curl -X POST --data '{"method": "get_account_address_history", "params": ["account ", 1, "1.6.0", "1.6.0", 10], "id": 7}' http://localhost:8091
+```
 
-    The four parameters are: account name or id, operation id(1 in our case), start id, stop id, limit number.
+The four parameters are: account name or id, operation id(1 in our case), start id, stop id, limit number.
 
-2. Obtaining the Current *Unable to Return Block* Number
+### 2. Obtaining the Current *Unable to Return Block* Number
 
-    Use the command get_dynamic_global_properties in `echo_wallet` to get the block number that cannot be rolled back:
+Use the command get_dynamic_global_properties in `echo_wallet` to get the block number that cannot be rolled back:
 
-    ```
-    get_dynamic_global_properties
-    {
-    "id": "2.1.0",
-    "head_block_number": 21955727,
-    ...
-    "last_irreversible_block_num": 21955709
-    }
+```
+get_dynamic_global_properties
+{
+  "id": "2.1.0",
+  "head_block_number": 21955727,
+  ...
+  "last_irreversible_block_num": 21955709
+}
 
 
-    » curl -X POST --data '{"method": "get_dynamic_global_properties", "params": [], "id": 8}' http://localhost:8091
-    ```
+» curl -X POST --data '{"method": "get_dynamic_global_properties", "params": [], "id": 8}' http://localhost:8091
+```
 
-    Among them, `head_block_number` is the latest block number, and `last_irreversible_block_num` is the block number that cannot be rollback.
+Among them, `head_block_number` is the latest block number, and `last_irreversible_block_num` is the block number that cannot be rollback.
 
 All transactions that included in block with number smaller or equal to current `last_irreversible_block_num` should be processed. You can store last processed block number and process transactions only from higher blocks. If result didn't reach previous stored block number then you need to chain one more request to get all needed data to process.
 
-* Note: 
+{% hint style="info" %}
+
 * If number of block with operation is higher then `last_irreversible_block_num` there is a little chance that it will be reverted in fork case.
 * Number of returned operations limited to 100.
 * The result is an array, sorted in reverse chronological order, with the most recent record at the top.
 
+{% endhint %}
+
 ## How to send funds from account
 
-1. Check balance
+### 1. Check balance
 
 Use the `list_account_balances` command to check whether the withdrawal account balance is sufficient (pay attention to the asset type and calculate the fee):
 
@@ -234,10 +240,9 @@ Use the `list_account_balances` command to check whether the withdrawal account 
 unlocked >>> list_account_balances withdrawal-account
 ```
 
-* Note:
-* Pay attention to asset type
+> Note: Pay attention to asset type
 
-2. Checking a validation of the Name of the Account
+### 2. Checking a validation of the Name of the Account
 
 Use the `get_account_id` command to check whether the customer’s withdrawal account is valid:
 
@@ -266,67 +271,77 @@ unlocked >>> get_account_by_address a35d99f48ea42385f7057bc48a2dd79ca6d728f8
 
 ```
 
-3. Sending withdrawal
+### 3. Sending withdrawal
 
-    3.1 Transfer to account
+#### 3.1 Transfer to account
 
-    Use the `transfer` command to send a withdrawal transaction. Such as:
+Use the `transfer` command to send a withdrawal transaction. Such as:
 
-    ```
-    unlocked >>> transfer withdrawal-account to-account 100 ECHO true
+```
+unlocked >>> transfer withdrawal-account to-account 100 ECHO true
 
-    » curl -X POST --data '{"method": "transfer", "params": ["withdrawal-account", "to-account", 100, "ECHO", true], "id": 11}' http://localhost:8091
+» curl -X POST --data '{"method": "transfer", "params": ["withdrawal-account", "to-account", 100, "ECHO", true], "id": 11}' http://localhost:8091
 
-    ```
-    The parameters are: source account name, destination account name, amount, currency, broadcast flag(only creates and not send transaction if it false)
+```
+The parameters are: source account name, destination account name, amount, currency, broadcast flag(only creates and not send transaction if it false)
 
-    The command will sign and broadcast the transaction and return detailed transaction content.
+The command will sign and broadcast the transaction and return detailed transaction content.
 
-    3.2 Transfer to address
+#### 3.2 Transfer to address
 
-    transfer_to_address command could be used to send a withdrawal transaction to address.
+`transfer_to_address` command could be used to send a withdrawal transaction to address.
 
-    ```
-    unlocked >>> transfer_to_address withdrawal-account to-account 100 ECHO true
+```
+unlocked >>> transfer_to_address withdrawal-account to-account 100 ECHO true
 
-    » curl -X POST --data '{"method": "transfer_to_address", "params": ["withdrawal-account", "a35d99f48ea42385f7057bc48a2dd79ca6d728f8", 100, "ECHO", true], "id": 12}' http://localhost:8091
-    ```
+» curl -X POST --data '{"method": "transfer_to_address", "params": ["withdrawal-account", "a35d99f48ea42385f7057bc48a2dd79ca6d728f8", 100, "ECHO", true], "id": 12}' http://localhost:8091
+```
 
-    The parameters are: source account name, destination address, amount, currency, broadcast flag(only creates and not send transaction if it false)
+The parameters are: source account name, destination address, amount, currency, broadcast flag(only creates and not send transaction if it false)
 
-    The command will sign and broadcast the transaction and return detailed transaction content.
+The command will sign and broadcast the transaction and return detailed transaction content. This content consists of JSON Array: first item is JSON Object `signed_transaction` and second is a string view of `transaction_id_type`(this is hash of the transaction).
 
-* Note:
-* If the currency is ECHO, the number of decimal places is up to 8 digits. If it is other assets, you can view the decimal places of the asset with the precision field with the get_asset command.
-
-* WIP: do something with transaction id 
-You can also use the transfer command, but this does not directly return the transaction ID. Instead, it needs to call another API to calculate it, so it is not recommended.
+> Note: If the currency is ECHO, the number of decimal places is up to 8 digits. If it is other assets, you can view the decimal places of the asset with the precision field with the `get_asset` command.
 
 It is recommended to record relevant data for future reference, such as transaction id, detailed transaction content in json format, etc.
 
-4. Withdrawal Results Check
-
-* WIP: do something with transaction id 
+### 4. Withdrawal Results Check
 
 Use the `get_relative_account_history` command to obtain withdrawal history of withdrawal-account.
 
 ```
-get_relative_account_history ...
+unlocked >>> get_relative_account_history withdrawal-account 1 100 100
+
+» curl -X POST --data '{"method": "get_relative_account_history", "params": ["withdrawal-account", 1, 100, 100], "id": 6}' http://localhost:8091
 ```
+
+The four parameters are: account name, minimum number, maximum return number, and maximum number. Numbering starts with 1.
+
+> Note: When the maximum number of cli_wallets returned in a certain version exceeds 100, resulting in inaccurate results. Please avoid using the limit to exceed 100.
+
+The result is an array, sorted in reverse chronological order, with the most recent record at the top.
 
 If new records are found and the transaction’s block number is earlier than `last_irreversible_block_num`, indicating that the transaction has entered the block and cannot be rolled back;
 
-* Note:
-* Use the `get_block` command to query details based on the `block_num` field of the record:
+> Note: Use the `get_block` command to query details based on the `block_num` field of the record:
 
 ```
 unlocked >>> get_block 12345
+
+» curl -X POST --data '{"method": "get_block", "params": [12345], "id": 6}' http://localhost:8091
 ```
 
 In the returned result, the transaction_ids field data should contain the previous transaction id.
 
 It is recommended to record the id (1.11.x), block_num, and trx_in_block in the above result of `get_relative_account_history` for future reference.
 
-5. About Resend Failure
+### 5. About Resend Failure
 
-* WIP
+In some cases, after the transaction may be sent, it is not packaged into the block in time.
+When using cli_wallet to sign a broadcast transaction, this field value defaults to the local system time plus 2 minutes.
+
+If, after the network time reaches the timeout, the transaction is still not packed into the block, the transaction is discarded by all network nodes and is no longer likely to be packed.
+
+If you got block from `get_block` method and field `invalid_trx_ids` contains id of your transaction that means that your transaction failed, so you need to resend it using [3. Sending withdrawal](#3.\ Sending\ withdrawal).
+
+Therefore, if a transaction broadcast appears but does not appear in the account history, first check if the local system time logs.
