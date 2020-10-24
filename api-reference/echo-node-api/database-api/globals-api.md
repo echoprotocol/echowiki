@@ -750,7 +750,7 @@ Retrieve info about git revision of running node
 }
 ```
 
-### get\_incentives\_info(\)
+### get_current_incentives_info
 
 Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
 
@@ -762,7 +762,7 @@ Returns information about incentives. The returned object contains incentives_po
     "method": "call",
     "params": [
         DATABASE_API_ID,
-        "get_incentives_info",
+        "get_current_incentives_info",
         []
     ]
 }
@@ -786,5 +786,109 @@ Returns information about incentives. The returned object contains incentives_po
             ]
         ]
     }
+}
+```
+
+### get\_incentives\_info(start\_block end\_block\)
+
+Returns the info about incentives in given block range [start_block, end_block]
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_incentives_info",
+        [
+            67,
+            71
+        ]
+    ]
+}
+```
+
+#### Returns
+
+```javascript
+{
+    "id": 4,
+    "jsonrpc": "2.0",
+    "result": [{
+        "incentives_pool": {
+          "id": "2.17.67",
+          "pool": [[
+              "1.3.0",
+              273122631
+            ]
+          ],
+          "block_number": 67
+        },
+        "incentives": [[
+            "1.3.0",
+            0
+          ]]
+      },{
+        "incentives_pool": {
+          "id": "2.17.68",
+          "pool": [[
+              "1.3.0",
+              273030306
+            ]
+          ],
+          "block_number": 68
+        },
+        "incentives": [[
+            "1.3.0",
+            0
+          ]]
+      },{
+        "incentives_pool": {
+          "id": "2.17.69",
+          "pool": [[
+              "1.3.0",
+              272937981
+            ]
+          ],
+          "block_number": 69
+        },
+        "incentives": [[
+            "1.3.0",
+            0
+          ]]
+      },{
+        "incentives_pool": {
+          "id": "2.17.70",
+          "pool": [[
+              "1.3.0",
+              272845656
+            ]
+          ],
+          "block_number": 70
+        },
+        "incentives": [[
+            "1.3.0",
+            92333
+          ]
+        ]
+      },{
+        "incentives_pool": {
+          "id": "2.17.71",
+          "pool": [[
+              "1.3.0",
+              526753331
+            ]
+          ],
+          "block_number": 71
+        },
+        "incentives": [[
+            "1.3.0",
+            92333
+          ]
+        ]
+      }
+    ]
 }
 ```

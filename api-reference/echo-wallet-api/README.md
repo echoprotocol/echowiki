@@ -92,7 +92,8 @@
     * [propose_parameter_change](#propose_parameter_change-proposing_account-expiration_time-changed_values)
     * [propose_fee_change](#propose_fee_change-proposing_account-expiration_time-changed_values)
     * [approve_proposal](#approve_proposal-fee_paying_account-proposal_id-delta-broadcast)
-    * [get_incentives_info](#get_incentives_info)
+    * [get_current_incentives_info](#get_current_incentives_info)
+    * [get_incentives_info](#get_incentives_info-start_block-end_block)
 * Contracts
     * [get_contract_object](#get_contract_object-id)
     * [get_contract](#get_contract-id)
@@ -1153,13 +1154,6 @@ Returns information about git revision of the running node. The returned object 
 get_git_revision
 ```
 
-### `get_incentives_info`
-Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
-
-```
-get_incentives_info
-```
-
 ### `propose_parameter_change proposing_account expiration_time changed_values` 
 Creates a transaction to propose a parameter change.  
 Multiple parameters can be specified if an atomic change is desired.
@@ -1207,11 +1201,23 @@ Approve or disapprove a proposal.
 approve_proposal 1.2.6 1.5.0 {"active_approvals_to_add": ["1.2.6", "1.2.7", "1.2.8", "1.2.9", "1.2.10"],"active_approvals_to_remove": [],"key_approvals_to_add": [],"key_approvals_to_remove": []} true
 ```
 
-### `get_incentives_info`
-Retrieve the current info about current incentives pool and incentives.
+### `get_current_incentives_info`
+Returns information about incentives. The returned object contains incentives_pool that indicates amounts that stored in pool now and incentives per block for current interval.
 
 ```
-get_incentives_info
+get_current_incentives_info
+```
+
+### `get_incentives_info start_block end_block`
+Retrieve the info about incentives in given block range [start_block, end_block]
+
+| Option | Description |
+| :--- | :--- |
+| `uint64_t proposing_account` | Number of start block |
+| `uint64_t expiration_time` | Number of end block |
+
+```
+get_incentives_info 5 100
 ```
 
 ## Contracts
