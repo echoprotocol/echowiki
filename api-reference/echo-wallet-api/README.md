@@ -329,12 +329,12 @@ Lookup the id of a named account.
 get_account_id 1.2.0
 ```
 
-### `get_account_addresses account_id from limit`
+### `get_account_addresses account from limit`
 Get addresses owned by account in specified ids interval
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account_id`|  ID of the account |
+| `string account_name_or_id`|  ID or name of the account |
 | `number from` | Number of block to start retrieve from |
 | `number limit` | Maximum number of addresses to return |
 
