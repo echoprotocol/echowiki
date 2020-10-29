@@ -135,6 +135,8 @@
     * [get_btc_address](#get_btc_address-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
+    * [create_btc_stake_address](#create_btc_stake_address-account-user_pubkey-broadcast)
+    * [get_btc_stake_address](#get_btc_stake_address-account)
 * Operations
     * [get_prototype_operation](#get_prototype_operation-operation_type)
 
@@ -1684,6 +1686,30 @@ Creates a transaction to withdraw btc.
 
 ```
 withdraw_btc nathan 0102fe7702b96808f7bbc0d4a888ed1468216cfd 10000000 true
+```
+
+### `create_btc_stake_address account user_pubkey broadcast` 
+Creates a transaction to generate bitcoin deposit address.
+
+| Option | Description |
+| :--- | :--- |
+| `string account` | The account for which the bitcoin address is generated. |
+| `std::string user_pubkey` | The Bitcoin address where stake. |
+| `bool broadcast` | true if you wish to broadcast the transaction |
+
+```
+create_btc_stake_address nathan 02c16e97132e72738c9c0163656348cd1be03521de17efeb07e496e742ac84512e true
+```
+
+### `get_btc_stake_address account` 
+Returns information about generated btc address, if exist and approved, for the given account id.
+
+| Option | Description |
+| :--- | :--- |
+| `string account` | The account name or id to provide information about |
+
+```
+get_btc_stake_address 1.2.0
 ```
 
 ## Operations

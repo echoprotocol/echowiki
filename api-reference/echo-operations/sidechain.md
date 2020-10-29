@@ -1054,3 +1054,46 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
    }
 ]
 ```
+
+## sidechain_btc_create_stake_script_operation
+
+Used to generate `btc_stake_script_object` with stake script and p2sh address.
+
+```cpp
+struct sidechain_btc_create_stake_script_operation : public base_operation
+{
+    struct fee_parameters_type
+    {
+        uint64_t fee = 0;
+    };
+
+    asset fee;
+
+    account_id_type account;
+    fc::ripemd160 pubkey_hash;
+
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return account; }
+
+    void validate() const {}
+    share_type calculate_fee(const fee_parameters_type& k) const { return k.fee; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  66,
+  {
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "account": "1.2.26",
+    "user_pubkey_hash": "6334edf1175678f7905763e6b24361ab998aa232",
+    "extensions": [ ]
+  }
+]
+```
