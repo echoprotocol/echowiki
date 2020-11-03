@@ -20,8 +20,6 @@ Call `./echo_node --help` to see the complete list of parameters.
 
 ## Run echo_wallet
 
-## Run echo_wallet
-
 Now, you need to start [echo_wallet](/how-to/use-cli-wallet.md#Use_CLI_Wallet), get connected to the node and create your own wallet.
 
 > You need to register an account in the blockchain network and deposit ECHO funds to it. You can find all the registration info [here](/how-to/register-account.md).
