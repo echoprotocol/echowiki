@@ -6,3 +6,4 @@
 * [How to deposit and withdraw sidechain Ethereum](/deposit-and-withdraw-sidechain-eth.md)
 * [How to deposit and withdraw sidechain Bitcoin](/deposit-and-withdraw-sidechain-btc.md)
 * [How to deposit and withdraw sidechain ERC20](/deposit-and-withdraw-sidechain-erc20.md)
+* [How to use echo testrpc](/use-echo-testrpc.md)
