@@ -17,6 +17,7 @@
     * [How to Echo committee publishes new rates for ETH and BTC](/how-to/committee-node-launch-&-committee-usage/publish-asset-feeds.md)
   * [Assets & Transfers](/how-to/assets-&-transfers/README.md)
     * [How to create your own token with Echo](/how-to/assets-&-transfers/create-your-own-token.md)
+    * [How to transfer between accounts](/how-to/assets-&-transfers/make-transfer-between-accounts.md)
   * [Wallets](/how-to/wallets/README.md)
     * [How to start using the Echo Wallet](/how-to/wallets/use-cli-wallet.md)
     * [How to download an Echo Wallet](/how-to/wallets/download-an-echo-wallet.md)
