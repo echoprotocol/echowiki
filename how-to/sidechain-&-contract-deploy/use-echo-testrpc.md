@@ -1,30 +1,30 @@
 # How to: Use Echo testrpc
 
-Echo TestRPC похож на Ethereum TestRPC и имплементирует его API. 
+Echo TestRPC is similar to Ethereum TestRPC and implements its API.  
 Echo TestRPC is a fast and customizable blockchain emulator. It allows making calls to the blockchain without the overheads of running an actual Echo node.
 
-* Аккаунты имеют стартовый баланс и нет нужны в faucet или mining
-* Позволяет использовать API testRPC через web3
+* Accounts have a starting balance and are not needed in faucet or mining
+* Allows to use API testRPC through web3
 
-> В отличии от Echo node, Echo testRPC используется только в тестовых целях, например, задеплоить и вызвать контракт.
+> Unlike the Echo node, Echo testRPC is used for testing purposes only, for example, to deploy and invoke a contract.
 
-Список поддреживаемых методов можно найти [здесь](../../api-reference/testrpc/README.md).
+The list of supported methods can be found [here](../../api-reference/testrpc/README.md).
 
-## Как запустить
+## How to launch
 
 ```
 ./echo_testrpc
 ```
 
-Этой команды достаточно для запуска эмулятора с 10 стартовыми аккаунтами.
-Можно указать несколько дополнительных опций(просмотреть все можно через `-h`), например:
+This command is enough to start the emulator with 10 start accounts.
+Several additional options can be specified(you can check everything through `-h`), for example:
 
 - `--init-balances arg` - Initial balances list. Account would be created for every specified balance.
 - `--accounts` - Count of initial accounts to create.
 
-## Пример работы с Echo testRPC
+## An example of working with Echo testRPC
 
-В качестве примера задеплоим и вызовем простой контракт.
+As an example, we will deploy and call a simple contract.
 
 ```solidity
 contract greeter {
@@ -34,28 +34,28 @@ contract greeter {
 }
 ```
 
-### Шаг 1. Компиляция
 
-В данном случае можно использовать любой удобный вариант, например, [Remix IDE](https://remix.ethereum.org/). Более подробно можно прочитать [здесь](deploy-a-solidity-contract.md).
+### Step 1. Compilation
 
-Получим байткод:
+In this case, any convenient option can be used, for example, [Remix IDE](https://remix.ethereum.org/). More details can be found [here](deploy-a-solidity-contract.md).
+
+We will get the bytecode:
 
 ```
 608060405234801561001057600080fd5b5061013f806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063cfae321714610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60606040805190810160405280600581526020017f48656c6c6f0000000000000000000000000000000000000000000000000000008152509050905600a165627a7a7230582077d0aade2769e29d91f721c553baa00c3cf8763e9ce6febf076339b8e072064b0029
 ```
 
-### Шаг 2. Подключение к testRPC.
+### Step 2. Connect to testRPC.
 
-Существует разные варианты подключения к testPRC, такие как `wscat` или `truffle console`. Остановимся на последнем.
+There are different options for connecting to testPRC, such as `wscat` or `truffle console`. Let's consider the last one.
 
-> Про установку и более подробное использование `truffle` расписано в их [документации](https://www.trufflesuite.com/docs/truffle/getting-started/installation).
+> Installation and more detailed usage of `truffle` are described in their [documentation](https://www.trufflesuite.com/docs/truffle/getting-started/installation).
 
-> `truffle console` так же позволяет компилировать контракты командой `compile`.
+> `truffle console` also allows to compile contracts through the command `compile`.
 
-#### Шаг 2.1 Поправим `truffle-config.js`.
+#### Step 2.1 Let's fix `truffle-config.js`.
 
-В директории из которой будем запускать `truffle console` сохраняем файл `truffle-config.js`:
-
+In the directory from which we will run `truffle console` save the file `truffle-config.js`:
 ```js
 module.exports = {
   networks: {
@@ -68,26 +68,24 @@ module.exports = {
     }
   },
 };
-
 ```
 
-#### Шаг 2.2 Запуск консоли.
+#### Step 2.2 Launching a console.
 
 ```bash
 truffle console --network development
 ```
 
+### Step 3. Contract deployment.
 
-### Шаг 3. Деплой контракта.
-
-В `truffle console` делаем:
+In `truffle console`, we do as follows:
 
 ```js
 truffle(development)> web3.eth.sendTransaction({from:"0x000000000000000000000000000000000000000b", data:"608060405234801561001057600080fd5b5061013f806100206000396000f300608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063cfae321714610046575b600080fd5b34801561005257600080fd5b5061005b6100d6565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561009b578082015181840152602081019050610080565b50505050905090810190601f1680156100c85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60606040805190810160405280600581526020017f48656c6c6f0000000000000000000000000000000000000000000000000000008152509050905600a165627a7a7230582077d0aade2769e29d91f721c553baa00c3cf8763e9ce6febf076339b8e072064b0029"})
 ```
 
-По сути это отправка обычной транзакции, но из-за того, что указан в `data` код, произойдет деплой контракта.
-Будет выведен результат выполнения транзакции, в котором присутствует поле `contractAddress` - это адрес контракта.
+In fact, this is sending an ordinary transaction, but since there is the code indicated in `data`, the deployment of the contract will occur.
+The result of the transaction will be displayed, in which the `contractAddress` field is present - this is the address of the contract.
 
 ```js
 {
@@ -106,15 +104,15 @@ truffle(development)> web3.eth.sendTransaction({from:"0x000000000000000000000000
 }
 ```
 
-> Так же можно убедиться, что контракт задеплоен с помощью `web3.eth.getCode("0x0100000000000000000000000000000000000000")`, должен вернуться код контракта. 
+> You can also make sure that the contract is deployed using `web3.eth.getCode("0x0100000000000000000000000000000000000000")`, the contract code should be back.
 
-### Шаг 4. Вызов контракта
+### Step 4. Contract call
 
-Для вызова контракта необходимо отпрвить транзакцию с сигнатурой метода в поле `data`. В нашем случае у функции `greet()` сигнатура `0xcfae3217`.
+To call the contract, you must send a transaction with the method signature in the `data` field. In our case, the function `greet()` has the signature `0xcfae3217`.
 
-> На просторах интернета можно найти множество статей, в которых расписано, как вызывать контракты Ethereum через сигнатуру методов и транзакции.
+> On the Internet, you can find many articles that describe how to call Ethereum contracts through method signatures and transactions.
 
-В `truffle console` делаем:
+In `truffle console` we do as follows:
 
 ```js
 truffle(development)> web3.eth.sendTransaction({to:"0x0100000000000000000000000000000000000000", from:"0x000000000000000000000000000000000000000b", data:"0xcfae3217"})
