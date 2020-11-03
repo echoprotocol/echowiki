@@ -1,8 +1,8 @@
 # How to become a registrar and start earn money with Echo
 
-Каждый участник сети, запустивший свою ноду, может принять участие в консенсусе, предоставляя API для регистрации новых аккаунтов в сети.
+Every network participant who has launched their own node can participate in the consensus by providing an API for the registration of new accounts on the network.
 
-## Шаг 1. Restrict API
+## Step 1. Restrict API
 
 You can restrict API's to particular users by specifying an `api-access` file in `config.ini` or by using the `--api-access /full/path/to/api-access.json` startup node command.
 Here's example which allows only `registration_api` for all without any password:
@@ -22,31 +22,30 @@ Here's example which allows only `registration_api` for all without any password
    ]
 }
 ```
+> Note: you can allow other API to be used by indicating a password to filter access. You can read more about this in the README.md of the project.
 
-> Note: вы можете разрешить использовать другое api, указывая пароль для фильтрации доступа. Более подробно про это можно прочитать в README.md проекта.
+## Step 2. Node launching
 
-## Шаг 2. Запуск ноды
+Launching a node is described in [this article](run_node_and_start_staking.md).
 
-Запуск ноды описан в [этой статье](run_node_and_start_staking.md).
-
-Необходимо при запуске указать конфигурацию для `registration plugin`, поэтому сама команда запуска ноды немного измениться (остальное останется как и в приведенной статье):
+It is necessary to specify the configuration for `registration plugin`, therefore, the node launch command itself will change slightly (the rest will remain as in the article above):
 
 - `--plugins="registration"` - enable registration plugin
 - `--registrar-account "1.2.26"` - ID of registrar account on this node (should be imported as account-info)
 - `--registration-difficulty 20` - complexity of POW task to register account. Default is 20
 
 ```bash
-./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info="[\"1.2.514\", \"5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA\"]" --plugins="registration" --registrar-account "1.2.26" --registration-difficulty 20 --api-access "api-access.json"
+./echo_node --rpc-endpoint="0.0.0.0:8090" --account-info="[\"1.2.514\", \"5KcP5uiAByA14Koo8o9eYgoPEyB6A53n57MmGMsKaMqi7wKQYiA\"]" --plugins="registration" --registrar-account=\"1.2.514\" --registration-difficulty=20 --api-access "api-access.json"
 ```
 
-## Шаг 3. Вызов API
+## Step 3. Calling API
 
-Теперь можно распространять ссылку на API:
+Now it is possible to distribute the API link:
 
 ```
-http://localhost:8090/rpc
+http://52.59.220.213:8090/rpc
 
-localhost - ip of your node
+52.59.220.213 - public ip of your node
 8090 - rpc port of your node
 ```
 
@@ -62,4 +61,4 @@ Using curl:
 curl --data '{"jsonrpc": "2.0", "params": ["registration", "request_registration_task", []], "method": "call", "id": 1}' http://localhost:8090/rpc
 ```
 
-В [этом файле](../../api-reference/echo-node-api/registration-api.md) расписаны методы, которые можно вызвать через данное API.
+In [this file](../../api-reference/echo-node-api/registration-api.md) described all Registration API methods. 
