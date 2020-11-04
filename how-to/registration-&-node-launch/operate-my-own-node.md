@@ -178,6 +178,13 @@ Comma-separated list of plugins which will be activated in addition to default.
 > ./echo_node --plugins="sidechain,registration,shapshot"
 ```
 
+#### Btc sidechain for Bitcoin testnet
+Generate address in operations for Bitcoin testnet
+
+```bash
+> ./echo_node --sidechain-btc-testnet
+```
+
 #### P2P compression
 Compress communication channels for this P2P node.
 
@@ -237,13 +244,6 @@ Sidechain: Pair of [account_id, eth_private_key] that should correspond to commi
 
 ```bash
 > ./echo_node --sidechain-eth-disable
-```
-
-#### Run btc sidechain for Bitcoin testnet
-Run btc sidechain for Bitcoin testnet.
-
-```bash
-> ./echo_node --sidechain-btc-testnet
 ```
 
 #### BTC sidechain committeeman
