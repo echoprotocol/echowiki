@@ -270,6 +270,46 @@ Pair of uints where the first element is min withdrawal value and the second is 
 }
 ```
 
+### get\_btc\_stake\_address\(account\)
+
+Returns information about generated bitcoin stake address, if exist, for the given account id.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `std::string account` | the account name or id to provide information about |
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_btc_stake_address",
+        [
+            "nathan"
+        ]
+    ]
+}
+```
+
+#### Returns
+
+The public bitcoin address data stored in the blockchain
+
+```javascript
+{
+  "id": "1.26.0",
+  "account": "1.2.26",
+  "stake_script": "76a9146334edf1175678f7905763e6b24361ab998aa23288ac52755675",
+  "p2sh_address": "2N92ShU1GRnkMwMtqN86WVUEw5NwjXrJYHC",
+  "extensions": []
+}
+```
+
 ## Sidechain Ethereum
 
 ### get\_eth\_address\(account\)
