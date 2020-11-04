@@ -1,6 +1,24 @@
-# TODO: what is stake address
-
 # How to generate stake address
+
+If you want to use stake feature with Bitcoin tokens, you need to stake some BTC on Echo network address.
+
+Step-by-step:
+1. Generate stake address.
+2. Transfer BTC to given address.
+4. Wait for approvals.
+3. Enjoy!
+
+{% hint style="info" %}
+Note: there is **no** fee on such transactions! (except Bitcoin miner fee)
+{% endhint %}
+
+You can withdraw founds at any time.
+There is no timestamp or else blocking with this type of script.
+For more info look into section above.
+
+{% hint style="info" %}
+Note: only you can unlock such transaction(you can use script below for that reason).
+{% endhint %}
 
 ## Generate stake address
 
@@ -30,11 +48,13 @@ For this you cat use Wallet API method [get_btc_stake_address](/api-reference/ec
 - scriptPubKey: `OP_DUP OP_HASH160 <pubkey hash> OP_EQUALVERIFY OP_CHECKSIG <digit from the instance> OP_DROP ... <digit from the instance> OP_DROP`
 - scriptSig: `<sig> <pubkey> <stake_script>`
 
+> `<digit from the instance>` - is digit from instance id of account (for 1.2.16 it will be 1 and 6)
+
 Example:
 - nathan have 1.2.26 ID
 - nathan used public key `03cce12c983779287b097cdba8699929f616f0fe6622b1f018e6ada1125549518b` (`hash160(pubkey) = 6334edf1175678f7905763e6b24361ab998aa232`)
 
-So he got `stake_script` = `OP_DUP OP_HASH160 6334edf1175678f7905763e6b24361ab998aa232 OP_EQUALVERIFY OP_CHECKSIG 2 OP_DROP 6 OP_DROP`
+So he got `stake_script` = `OP_DUP OP_HASH160 6334edf1175678f7905763e6b24361ab998aa232 OP_EQUALVERIFY OP_CHECKSIG OP_2 OP_DROP OP_6 OP_DROP`
 
 ## Unlock such script after sending funds
 
