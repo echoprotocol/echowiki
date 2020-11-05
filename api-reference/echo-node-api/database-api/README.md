@@ -80,6 +80,7 @@
   * [get\_btc\_address](sidechain-api.md#get_btc_address-account)
   * [get\_btc\_deposit\_script](sidechain-api.md#get_btc_deposit_script-address)
   * [get_btc_sidechain_fees](sidechain-api.md#get_btc_sidechain_fees)
+  * [get_btc_stake_address](sidechain-api.md#get_btc_stake_address-account)
 * [Sidechain Ethereum](sidechain-api.md#sidechain_Ethereum)
   * [get\_eth\_address](sidechain-api.md#get_eth_address-account)
   * [get_eth_sidechain_fees](sidechain-api.md#get_eth_sidechain_fees)
