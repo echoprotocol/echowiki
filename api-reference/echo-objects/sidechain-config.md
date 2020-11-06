@@ -32,7 +32,7 @@ struct config
 };
 ```
 
-## Configuration parameters for Echo ERC20
+## Configuration parameters for Echo ERC20 Sidechain
 
 ```cpp
 struct erc20_config
@@ -43,5 +43,15 @@ struct erc20_config
    eth_method check_balance_method;
    eth_method burn_method;
    eth_method issue_method;
+};
+```
+
+## Configuration parameters for Echo Stake Sidechain
+
+```cpp
+struct stake_config
+{
+    eth_address_type contract_address;
+    eth_topic_type balance_updated_topic;
 };
 ```
