@@ -69,7 +69,7 @@
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
     * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
-    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-vesting_cliff_seconds-vesting_duration-second-broadcast)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration-second-broadcast)
     * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
@@ -849,7 +849,7 @@ Transfer an amount from one account to address.
 transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
 ```
 
-### `create_vesting_linear_policy creator_name owner_name amount asset_symbol vesting_cliff_seconds vesting_duration-second broadcast`
+### `create_vesting_linear_policy creator_name owner_name amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration-second broadcast`
 Create a vesting balance with linear policy.
 
 | Option | Description |
@@ -858,12 +858,13 @@ Create a vesting balance with linear policy.
 | `string owner_name` | The account name or id of vesting creator |
 | `string amount` | The amount to create vesting |
 | `string asset_symbol` | The symbol of the asset to create vesting |
+| `time_point begin_timestamp` | Begin timestamp|
 | `number vesting_cliff_seconds` | The vesting cliff seconds |
 | `number vesting_duration_seconds` | The vesting duration seconds |
 | `bool broadcast` | true to broadcast the transaction on the network |
 
 ```
-create_vesting_linear_policy nathan nathan 10 ECHO 10 10 true
+create_vesting_linear_policy nathan nathan 10 ECHO "2093-12-11T10:26:00" 10 10 true
 ```
 
 ### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol start_claim vesting_second broadcast`
