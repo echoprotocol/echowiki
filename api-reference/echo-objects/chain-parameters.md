@@ -25,26 +25,29 @@ struct chain_parameters
    uint16_t                maximum_authority_membership        = ECHO_DEFAULT_MAX_AUTHORITY_MEMBERSHIP; ///< largest number of keys/accounts an authority can have
    uint8_t                 max_authority_depth                 = ECHO_MAX_SIG_CHECK_DEPTH;
 
-   uint64_t                committee_frozen_balance_to_activate       = ECHO_DEFAULT_COMMITTEE_FROZEN_BALANCE_TO_ACTIVATE;
-   uint64_t                committee_maintenance_intervals_to_deposit = ECHO_DEFAULT_COMMITTEE_MAINTENANCE_INTERVALS_TO_DEPOSIT;
-   uint32_t                committee_balance_unfreeze_duration_seconds          = ECHO_DEFAULT_COMMITTEE_BALANCE_UNFREEZE_DURATION_SECONDS;
+   uint64_t                committee_frozen_balance_to_activate        = ECHO_DEFAULT_COMMITTEE_FROZEN_BALANCE_TO_ACTIVATE;
+   uint64_t                committee_maintenance_intervals_to_deposit  = ECHO_DEFAULT_COMMITTEE_MAINTENANCE_INTERVALS_TO_DEPOSIT;
+   uint32_t                committee_balance_unfreeze_duration_seconds = ECHO_DEFAULT_COMMITTEE_BALANCE_UNFREEZE_DURATION_SECONDS;
 
    uint64_t                x86_64_maximum_contract_size        = ECHO_DEFAULT_MAX_X86_64_CONTRACT_SIZE;
 
    std::map<uint16_t, uint32_t> frozen_balances_multipliers    = {
-         {90,  110 * ECHO_1_PERCENT},
-         {180, 130 * ECHO_1_PERCENT},
-         {360, 150 * ECHO_1_PERCENT},
+      {90,  110 * ECHO_1_PERCENT},
+      {180, 130 * ECHO_1_PERCENT},
+      {360, 150 * ECHO_1_PERCENT},
    };
 
    rand::config      echorand_config;
    sidechain::config sidechain_config;
    sidechain::erc20_config erc20_config;
+   sidechain::stake_config stake_sidechain_config;
 
    gas_price_t gas_price;
 
+   std::set<asset_id_type> consensus_assets;
+
    std::set<asset_id_type> valid_fee_asset = {asset_id_type(1), asset_id_type(2)}; ///< assets other than ECHO that can be accepted as fee without fee pool 
-   
+
    economy::config economy_config;
 
    extensions_type         extensions;
@@ -60,7 +63,9 @@ struct chain_parameters
 
 [sidechain_config](sidechain-config.md#Configuration-parameters-for-Echo-Sidechain)
 
-[erc20_config](sidechain-config.md#Configuration-parameters-for-Echo-ERC20)
+[erc20_config](sidechain-config.md#Configuration-parameters-for-Echo-ERC20-Sidechain)
+
+[stake_sidechain-config](sidechain-config.md#Configuration-parameters-for-Echo-Stake-Sidechain)
 
 [economy_config](economy-config.md#Configuration-parameters-for-block-rewards-distribution)
 

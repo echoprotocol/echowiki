@@ -29,6 +29,16 @@ The transaction will be checked for validity in the local database prior to broa
 }
 ```
 
+### Returns
+
+```javascript
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "c7546a1c355b914c610b897ae58ca0afdd87baca"
+}
+```
+
 ## broadcast\_transaction\_with\_callback\(cb, trx\)
 
 This version of broadcast transaction registers a callback method that will be called when the transaction is included into a block. The callback method includes the transaction id, block number, and transaction number in the block.
@@ -40,15 +50,76 @@ This version of broadcast transaction registers a callback method that will be c
 | `confirmation_callback cb` | Transaction confirmation notifications with fields ID, block number, transaction number, processed transaction |
 | `signed_transaction trx` | The transaction to broadcast |
 
+### Returns
+
+```javascript
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "c7546a1c355b914c610b897ae58ca0afdd87baca"
+}
+```
+
 ## broadcast\_transaction\_synchronous\(trx\)
 
-Synchronious version of `broadcast_transaction_with_callback`.
+Synchronous version of `broadcast_transaction_with_callback`.
 
 ### Parameters
 
 | Option | Description |
 | :--- | :--- |
 | `signed_transaction trx` | The transaction to broadcast |
+
+
+### Returns
+
+```javascript
+{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "id": "c7546a1c355b914c610b897ae58ca0afdd87baca",
+        "block_num": 1,
+        "trx_num": 0,
+        "trx": {
+            "ref_block_num": 0,
+            "ref_block_prefix": 450105350,
+            "expiration": "2020-11-06T08:25:44",
+            "operations": [[
+                28,{
+                    "fee": {
+                        "amount": 0,
+                        "asset_id": "1.3.0"
+                    },
+                    "deposit_to_account": "1.2.15",
+                    "balance_to_claim": "1.8.0",
+                    "balance_owner_key": "ECHO5NaRTkq4uBAVGrZkD3jcTEdUxhxxJLU7hvt3p1zJyytc",
+                    "total_claimed": {
+                        "amount": "1000000000000000",
+                        "asset_id": "1.3.0"
+                    },
+                    "extensions": []
+                }
+                ]
+            ],
+            "extensions": [],
+            "signatures": [
+                "916b2e3d172c2f7c5c2a39356cedef695c32570ddebd8f1eb457bd8000288e4a7afb13d3ea0f9e6980e5689b10d9da398420ab45654d97b7da407602f1dfd40e"
+            ],
+            "signed_with_echorand_key": false,
+            "operation_results": [[
+                0,{}
+                ]
+            ],
+            "fees_collected": [{
+                "amount": 0,
+                "asset_id": "1.3.0"
+                }
+            ]
+        }
+    }
+}
+```
 
 ## broadcast\_block\(signed\_block\)
 

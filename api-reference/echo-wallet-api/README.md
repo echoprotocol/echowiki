@@ -10,6 +10,8 @@
 * Blocks and transactions
     * [get_block](#get_block-block_num)
     * [get_block_virtual_ops](#get_block_virtual_ops-block_num)
+    * [get_transaction](#get_transaction-block_num-tx_index)
+    * [get_transaction_by_id](#get_transaction_by_id-tx_id)
     * [get_transaction_id](#get_transaction_id-tx)
     * [serialize_transaction](#serialize_transaction-tx)
     * [sign_transaction](#sign_transaction-tx-broadcast)
@@ -220,7 +222,7 @@ get_block_virtual_ops 10
 ```
 
 ### `get_transaction_id tx`
-This method is used to convert a JSON transaction to its transactin ID.
+This method is used to convert a JSON transaction to its transaction ID.
 
 | Option | Description |
 | :--- | :--- |
@@ -229,6 +231,22 @@ This method is used to convert a JSON transaction to its transactin ID.
 ```
 get_transaction_id JSON_transaction
 ```
+
+### `get_transaction block_num tx_index`
+This method is to get transaction by index in block
+
+| Option | Description |
+| :--- | :--- |
+| `number block_num` | number of block with transaction |
+| `number tx_index` | transaction index in block |
+
+### `get_transaction_by_id tx_id`
+
+This method is to get transaction by index in block
+
+| Option | Description |
+| :--- | :--- |
+| `ripemd160 tx_id` | id of transaction to get |
 
 ### `serialize_transaction tx`
 Converts a signed_transaction in JSON form to its binary representation.

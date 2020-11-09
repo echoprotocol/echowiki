@@ -14,7 +14,7 @@
   * [get\_block\_tx\_number](block_transaction-api.md#get_block_tx_number-id)
   * [get\_block\_virtual\_ops](block_transaction-api.md#get_block_virtual_ops-block_num)
   * [get\_transaction](block_transaction-api.md#get_transaction-block_num-trx_in_block)
-  * [get\_recent\_transaction\_by\_id](block_transaction-api.md#get_recent_transaction_by_id-id)
+  * [get\_transaction\_by\_id](block_transaction-api.md#get_transaction_by_id-id)
 * [Globals](globals-api.md#globals)
   * [get\_chain\_properties](globals-api.md#get_chain_properties)
   * [get\_global\_properties](globals-api.md#get_global_properties)

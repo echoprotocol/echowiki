@@ -948,9 +948,9 @@ A processed transaction object.
 }
 ```
 
-### get\_recent\_transaction\_by\_id\(id\)
+### get\_transaction\_by\_id\(id\)
 
-If the transaction has not expired, this method will return the transaction for the given ID or it will return null if it is not known. Just because it is not known does not mean it wasn’t included in the blockchain.
+Returns the transaction for the given ID.
 
 #### Parameters
 
@@ -966,7 +966,7 @@ If the transaction has not expired, this method will return the transaction for 
     "method": "call",
     "params": [
         DATABASE_API_ID,
-        "get_recent_transaction_by_id",
+        "get_transaction_by_id",
         [
             "15ec7bf0b50732b49f8228e07d24365338f9e3ab"
         ]

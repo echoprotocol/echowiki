@@ -67,9 +67,11 @@
 |[sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation)|62|
 |[sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation)|63|
 |[sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation)|64|
-|[sidechain\_btc\_create\_stake\_script\_operation](sidechain.md#sidechain_btc_create_stake_script_operation)|65|
-|[block\_reward\_operation](block-reward.md#block_reward_operation) // VIRTUAL|66|
-|[evm\_address\_register\_operation](account-management.md#evm_address_register_operation)|67|
-|[did\_create\_operation](did.md#did_create_operation)|68|
-|[did\_update\_operation](did.md#did_update_operation)|69|
-|[did\_delete\_operation](did.md#did_delete_operation)|70|
+|[sidechain\_stake\_eth\_update\_operation](sidechain.md#sidechain_stake_eth_update_operation)|65|
+|[sidechain\_btc\_create\_stake\_script\_operation](sidechain.md#sidechain_btc_create_stake_script_operation)|66|
+|[sidechain\stake\btc\update\operation](sidechain.md#sidechain_stake_btc_update_operation)|67|
+|[block\_reward\_operation](block-reward.md#block_reward_operation) // VIRTUAL|68|
+|[evm\_address\_register\_operation](account-management.md#evm_address_register_operation)|69|
+|[did\_create\_operation](did.md#did_create_operation)|70|
+|[did\_update\_operation](did.md#did_update_operation)|71|
+|[did\_delete\_operation](did.md#did_delete_operation)|72|

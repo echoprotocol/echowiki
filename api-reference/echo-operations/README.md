@@ -95,6 +95,9 @@
 * [sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation) - An internal operation by which committee members collect an aggregate transaction
 * [sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation) - An internal operation by which committee members confirm the aggregate transaction
 * [sidechain\_btc\_create\_stake\_script\_operation](sidechain.md#sidechain_btc_create_stake_script_operation) - An operation to create object with btc stake script and p2sh address.
+* [sidechain_stake_eth_update_operation](sidechain.md#sidechain_stake_eth_update_operation) - An operation used by committee members to update Stake ETH balances 
+* [sidechain_stake_btc_create_script_operation](sidechain.md#sidechain_stake_btc_create_script_operation) - An operation used to generate stake address in BTC network 
+* [sidechain_stake_btc_update_operation](sidechain.md#sidechain_stake_btc_update_operation) - An operation used by committee members to update Stake BTC balances 
 
 ## Block Reward
 
