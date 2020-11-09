@@ -1055,6 +1055,56 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 ]
 ```
 
+
+## sidechain_stake_eth_update_operation
+
+Used by the committee member to approve/generate  `stake_eth_update_object` with Ethereum stake sidechain data.
+
+```cpp
+struct sidechain_stake_eth_update_operation : public base_operation
+{
+    struct fee_parameters_type
+    {
+        uint64_t fee = 0;
+    };
+
+    asset fee;
+    account_id_type committee_member_id;
+    asset_id_type asset_id;
+    uint64_t current_balance;
+    account_id_type account;
+
+    fc::sha256 transaction_hash;
+
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return committee_member_id; }
+    void validate() const {};
+    share_type calculate_fee(const fee_parameters_type& schedule) const { return schedule.fee; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  65,
+  {
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_member_id": "1.2.1",
+    "asset_id_type": "1.3.10",
+    "current_balance": "1000000",
+    "account": "1.2.26",
+    "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "extensions": [ ]
+  }
+]
+```
+
+
 ## sidechain_btc_create_stake_script_operation
 
 Used to generate `btc_stake_script_object` with stake script and p2sh address.
@@ -1093,6 +1143,61 @@ struct sidechain_btc_create_stake_script_operation : public base_operation
     },
     "account": "1.2.26",
     "user_pubkey_hash": "6334edf1175678f7905763e6b24361ab998aa232",
+    "extensions": [ ]
+  }
+]
+```
+
+
+## sidechain_stake_btc_update_operation
+
+Used by the committee member to approve/generate `stake_btc_vout_object` with data about deposits and withdrawals.
+
+```cpp
+struct sidechain_stake_btc_update_operation : public base_operation
+{
+    struct fee_parameters_type
+    {
+        uint64_t fee = 0;
+    };
+
+    asset fee;
+
+    // committee sender id
+    account_id_type committee_member_id;
+    account_id_type owner;
+    btc_transaction_details btc_tx_info;
+    bool is_vin = false;
+
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return committee_member_id; }
+    void validate() const { FC_ASSERT(btc_tx_info.out.amount != 0); };
+    share_type calculate_fee(const fee_parameters_type& schedule) const { return schedule.fee; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  67,
+  {
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_member_id": "1.2.17",
+    "owner": "1.2.26",
+    "btc_tx_info": {
+      "block_number": 0,
+      "out": {
+         "tx_id": "0000000000000000000000000000000000000000000000000000000000000000",
+         "index": 0,
+         "amount": 0
+      }
+    },
+    "is_vin": "false",
     "extensions": [ ]
   }
 ]
