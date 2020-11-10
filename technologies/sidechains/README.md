@@ -104,3 +104,15 @@ increased or decreased by committee members.
 
 ER20 tokens deposits and withdrawals are free of charge. Fees related to the ERC20 smart contract calls
 on the Echo side are covered by the fee pool of the contract.
+
+## Stake sidechains
+
+At the start of network work Echo have stake sidechains that allows you to participate in consensus: when selecting producers and verifiers stake assets converts by rate to core asset(the more asset you have the greater your chance to become producers/verifiers). Here is two sidechains, that works in some way same as sidechains above, Bitcoin and Ethereum sidechains. The main advantage of using stake sidechain is that you can withdraw your funds immediately(no need to wait for approves on Echo network).
+
+Bitcoin stake sidechain generate P2SH address that you can unlock at any time. That script is like P2PKH, you can read more [here](/how-to/sidechain-&-contract-deploy/how-to-use-btc-stake.md).
+
+Ethereum sidechain is more contract on Ethereum side, then something at the Echo node. You transfer funds to contract and get it from contract, you can read more [here](/how-to/sidechain-&-contract-deploy/how-to-use-eth-stake.md).
+
+{% hint style="info" %}
+Note: there is **no** fee on such transactions! (except network(BTC/ETH) fee)
+{% endhint %}

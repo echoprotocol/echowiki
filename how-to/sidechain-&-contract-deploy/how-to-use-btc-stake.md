@@ -1,12 +1,12 @@
-# How to generate stake address
+# How to use Bitcoin stake sidechain
 
 If you want to use stake feature with Bitcoin tokens, you need to stake some BTC on Echo network address.
 
 Step-by-step:
 1. Generate stake address.
 2. Transfer BTC to given address.
-4. Wait for approvals.
-3. Enjoy!
+3. Wait for approvals.
+4. Enjoy!
 
 {% hint style="info" %}
 Note: there is **no** fee on such transactions! (except Bitcoin miner fee)
