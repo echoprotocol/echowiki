@@ -2,7 +2,7 @@
 
 If you want to use stake feature with Ethereum tokens, you need to stake some ETH on Echo network contract.
 
-At `global_property_object` -> `chain_parameters` -> `stake_sidechain_config` you can find `contract_address` wich contains address of eth contract (or at some other places, e.g. standart genesis). It is contract that contains large part of stake sidechain logic. If you want to use stake sidechain, you call this contract.
+At `global_property_object` -> `chain_parameters` -> `stake_sidechain_config` you can find `contract_address` wich contains address of eth contract (or at some other places, e.g. standart genesis). If you want to use stake sidechain you need to call this contract.
 
 {% hint style="info" %}
 
@@ -42,9 +42,7 @@ Note: there is **no** fee on such transactions! (except Ethereum fee)
 
 First of all you need to get smart contract address and it's ABI from our resources.
 
-You can found at the Internet many resources about how to use smart contracts, so therefore, here we will look at the main aspects related to our contract.
-
-All you need to know about contract code:
+All you need to know about contract code now is:
 
 ```solidity
 contract Staking {
@@ -87,7 +85,7 @@ Methods signatures:
 }
 ```
 
-### 2. Call `stake` method of contract.
+### 2. Call the `stake` method of contract.
 
 You can use different tools to interact with smart contract. For this example we will use `truffle console`.
 
@@ -110,7 +108,7 @@ module.exports = {
 };
 ```
 
-> Here ip and port of your Ethereum node.
+> In this config you can set ip and port of your Ethereum node.
 
 #### Step 2.2 Launching a console.
 
@@ -136,6 +134,14 @@ So as argument for `stake` we have 26. And methods gets `uint256`, so we take he
 
     000000000000000000000000000000000000000000000000000000000000001A
 
+After that we create call data in such way:
+
+    `<method signature> + <argument data>`
+
+As output we have `0xa694fc3a000000000000000000000000000000000000000000000000000000000000001A`.
+
+Now finally call contract:
+
 ```js
 truffle(development)> web3.eth.sendTransaction({to:"0x3D0a386Dd3B9Bb99A7190f92c80F473C1d2749A5", from:"0x727935C5cd6C94b569AF373554E21c8a508b8471", data:"0xa694fc3a000000000000000000000000000000000000000000000000000000000000001A", value:1000000, nonce: 45})
 ```
@@ -143,7 +149,7 @@ truffle(development)> web3.eth.sendTransaction({to:"0x3D0a386Dd3B9Bb99A7190f92c8
 Explanation:
 - `to:"0x3D0a386Dd3B9Bb99A7190f92c80F473C1d2749A5"` - address of contract
 - `from:"0x727935C5cd6C94b569AF373554E21c8a508b8471"` - your ETH account address
-- `data:"0xa694fc3a000000000000000000000000000000000000000000000000000000000000001A"` - as said that equals `<method signature> + <argument data>`
+- `data:"0xa694fc3a000000000000000000000000000000000000000000000000000000000000001A"` - call data 
 - `value:1000000` - value to stake (at the example it equals to 0.000000000001 Ether)
 - `nonce: 45` - number of transaction sent by your Ethereum account
 
@@ -151,11 +157,16 @@ Explanation:
 
 Please wait for a short while...
 
+> 20 blocks on Ethereum network
+> after that about 2 blocks on Ethereum network to wait Echo committie members approves.
+
+> In sum 22 blocks on Ethereum network.
+
 ## Unstaking guide.
 
 First look to staking guide, here is example how to call smart contract methods.
 
-### 1. Call `unstake` method of contract.
+### 1. Call the `unstake` method of contract.
 
 Method `unstake` have signature:
 
@@ -187,9 +198,9 @@ Wait until system preparing you funds...
 
 > Explanation you can find at staking guide.
 
-### 3. Call `withdraw` method of contract.
+### 3. Call the `withdraw` method of contract.
 
-Method `stake` have signature:
+Method `withdraw` have signature:
 
 ```json
 "3ccfd60b": "withdraw()"
