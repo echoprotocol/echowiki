@@ -789,7 +789,7 @@ Returns information about incentives. The returned object contains incentives_po
 }
 ```
 
-### get\_incentives\_info(start\_block end\_block\)
+### get_incentives_info(start_block end_block)
 
 Returns the info about incentives in given block range [start_block, end_block]
 

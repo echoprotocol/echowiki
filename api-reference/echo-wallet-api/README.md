@@ -69,8 +69,8 @@
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
     * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
-    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration-second-broadcast)
-    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-vesting_second-broadcast)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration_seconds-broadcast)
+    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-start_claim-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
@@ -849,7 +849,7 @@ Transfer an amount from one account to address.
 transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
 ```
 
-### `create_vesting_linear_policy creator_name owner_name amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration-second broadcast`
+### `create_vesting_linear_policy creator_name owner_name amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration_seconds broadcast`
 Create a vesting balance with linear policy.
 
 | Option | Description |
