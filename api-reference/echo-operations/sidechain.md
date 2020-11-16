@@ -326,10 +326,6 @@ This operation is used to credit sidechain assets.
 ```cpp
 struct sidechain_issue_operation : public base_operation
 {
-   sidechain_issue_operation() = default;
-   sidechain_issue_operation(asset v, account_id_type a, deposit_eth_id_type d) :
-            value(v), account(a), deposit_id(d) {}
-   
    asset           value;
    account_id_type account;
    object_id_type  deposit_id;
@@ -366,17 +362,13 @@ This operation is used to burn sidechain assets.
 ```cpp
 struct sidechain_burn_operation : public base_operation
 {
-   sidechain_burn_operation() = default;
-   sidechain_burn_operation(asset v, account_id_type a, withdraw_eth_id_type w) :
-            value(v), account(a), withdraw_id(w) {}
-
    asset           value;
    account_id_type account;
    object_id_type  withdraw_id;
 
    extensions_type extensions;
 
-   account_id_type fee_payer()const { return account; }
+   account_id_type fee_payer()const { return ECHO_NULL_ACCOUNT; }
 };
 ```
 
@@ -1079,8 +1071,6 @@ struct sidechain_stake_eth_update_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return committee_member_id; }
-    void validate() const {};
-    share_type calculate_fee(const fee_parameters_type& schedule) const { return schedule.fee; }
 };
 ```
 
@@ -1095,7 +1085,7 @@ struct sidechain_stake_eth_update_operation : public base_operation
       "asset_id": "1.3.0"
     },
     "committee_member_id": "1.2.1",
-    "asset_id_type": "1.3.10",
+    "asset_id": "1.3.10",
     "current_balance": "1000000",
     "account": "1.2.26",
     "transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
@@ -1105,12 +1095,12 @@ struct sidechain_stake_eth_update_operation : public base_operation
 ```
 
 
-## sidechain_btc_create_stake_script_operation
+## sidechain_stake_btc_create_script_operation
 
-Used to generate `btc_stake_script_object` with stake script and p2sh address.
+Used to generate `stake_btc_script_object` with stake script and p2sh address.
 
 ```cpp
-struct sidechain_btc_create_stake_script_operation : public base_operation
+struct sidechain_stake_btc_create_script_operation : public base_operation
 {
     struct fee_parameters_type
     {
@@ -1125,9 +1115,6 @@ struct sidechain_btc_create_stake_script_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return account; }
-
-    void validate() const {}
-    share_type calculate_fee(const fee_parameters_type& k) const { return k.fee; }
 };
 ```
 
@@ -1142,7 +1129,7 @@ struct sidechain_btc_create_stake_script_operation : public base_operation
       "asset_id": "1.3.0"
     },
     "account": "1.2.26",
-    "user_pubkey_hash": "6334edf1175678f7905763e6b24361ab998aa232",
+    "pubkey_hash": "6334edf1175678f7905763e6b24361ab998aa232",
     "extensions": [ ]
   }
 ]
@@ -1172,8 +1159,6 @@ struct sidechain_stake_btc_update_operation : public base_operation
     extensions_type extensions;
 
     account_id_type fee_payer() const { return committee_member_id; }
-    void validate() const { FC_ASSERT(btc_tx_info.out.amount != 0); };
-    share_type calculate_fee(const fee_parameters_type& schedule) const { return schedule.fee; }
 };
 ```
 
