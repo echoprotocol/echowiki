@@ -11,7 +11,7 @@ class dynamic_global_property_object
     block_id_type head_block_id;
     time_point_sec time;
     time_point_sec next_maintenance_time;
-    time_point_sec last_budget_time;
+    time_point_sec last_maintenance_time;
     share_type committee_budget;
 
     /**
@@ -22,6 +22,9 @@ class dynamic_global_property_object
 
     uint32_t last_irreversible_block_num = 0;
     uint32_t last_block_of_previous_interval = 1;
+    uint32_t payed_blocks_in_interval = 0;
+
+    uint64_t last_processed_btc_block = 0;
 
     extensions_type extensions;
 };
