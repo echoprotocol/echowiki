@@ -76,6 +76,7 @@
 * [Sidechain](sidechain-api.md#sidechain)
   * [get\_account\_deposits](sidechain-api.md#get_account_deposits-account-type)
   * [get\_account\_withdrawals](sidechain-api.md#get_account_withdrawals-account-type)
+  * [get\_account\_stake\_objects](sidechain-api.md#get_account_stake_objects-account-type)
 * [Sidechain Bitcoin](sidechain-api.md#sidechain_Bitcoin)
   * [get\_btc\_address](sidechain-api.md#get_btc_address-account)
   * [get\_btc\_deposit\_script](sidechain-api.md#get_btc_deposit_script-address)

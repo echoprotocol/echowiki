@@ -69,7 +69,7 @@
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
     * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
-    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration-second-broadcast)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration_seconds-broadcast)
     * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
@@ -120,6 +120,7 @@
 * Sidechain
     * [get_account_deposits](#get_account_deposits-account-type)
     * [get_account_withdrawals](#get_account_withdrawals-account-type)
+    * [get_account_withdrawals](#get_account_stake_objects-account-type)
 * Sidechain-Ethereum
     * [get_eth_address](#get_eth_address-account)
     * [create_eth_address](#create_eth_address-account-broadcast)
@@ -849,7 +850,7 @@ Transfer an amount from one account to address.
 transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
 ```
 
-### `create_vesting_linear_policy creator_name owner_name amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration-second broadcast`
+### `create_vesting_linear_policy creator_name owner_name amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration_seconds broadcast`
 Create a vesting balance with linear policy.
 
 | Option | Description |
@@ -1518,6 +1519,18 @@ Returns all withdrawals, for the given account id.
 
 ```
 get_account_withdrawals 1.2.0 ""
+```
+
+### `get_account_stake_objects account type` 
+Returns all stake objects, for the given account id.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet account` | the id of the account to provide information about |
+| `string type` | the type of the withdrawals may be "", "eth" or "btc". By default "" = all withdrawals |
+
+```
+get_account_stake_objects 1.2.0 ""
 ```
 
 ## Sidechain Ethereum
