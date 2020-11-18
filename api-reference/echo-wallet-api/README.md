@@ -120,11 +120,7 @@
 * Sidechain
     * [get_account_deposits](#get_account_deposits-account-type)
     * [get_account_withdrawals](#get_account_withdrawals-account-type)
-<<<<<<< HEAD
-    * [get_account_withdrawals](#get_account_stake_objects-account-type)
-=======
     * [get_account_stake_objects](#get_account_stake_objects-account-type)
->>>>>>> [ECHO-2502] Changelog 0.23.1
 * Sidechain-Ethereum
     * [get_eth_address](#get_eth_address-account)
     * [create_eth_address](#create_eth_address-account-broadcast)
