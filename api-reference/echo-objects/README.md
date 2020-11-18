@@ -9,3 +9,4 @@
 * [Sidechain Config](sidechain-config.md)
 * [Sidechain](sidechain.md)
 * [Types](types.md)
+* [Verifiers](verifiers.md)
