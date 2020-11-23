@@ -120,6 +120,7 @@
 * Sidechain
     * [get_account_deposits](#get_account_deposits-account-type)
     * [get_account_withdrawals](#get_account_withdrawals-account-type)
+    * [get_account_stake_objects](#get_account_stake_objects-account-type)
 * Sidechain-Ethereum
     * [get_eth_address](#get_eth_address-account)
     * [create_eth_address](#create_eth_address-account-broadcast)
@@ -1518,6 +1519,18 @@ Returns all withdrawals, for the given account id.
 
 ```
 get_account_withdrawals 1.2.0 ""
+```
+
+### `get_account_stake_objects account type` 
+Returns all stake objects, for the given account id.
+
+| Option | Description |
+| :--- | :--- |
+| `triplet account` | the id of the account to provide information about |
+| `string type` | the type of the objects may be "", seth" or "sbtc". By default "" = all objects |
+
+```
+get_account_stake_objects 1.2.0 sbtc
 ```
 
 ## Sidechain Ethereum

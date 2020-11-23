@@ -97,6 +97,34 @@ Returns all withdrawals, for the given account id.
 }
 ```
 
+### get_account_stake_objects(account, type)
+
+Returns all stake objects, for the given account id.
+
+#### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `account_id_type account` | the id of the account to provide information about |
+| `string type` | the type of the withdrawals may be "", "eth" or "btc" |
+
+#### Example
+
+```javascript
+{
+    "id": 4,
+    "method": "call",
+    "params": [
+        DATABASE_API_ID,
+        "get_account_stake_objects",
+        [
+            "1.2.21",
+            ""
+        ]
+    ]
+}
+```
+
 #### Returns
 
 The all public withdrawals data stored in the blockchain.
