@@ -53,4 +53,5 @@
 |contract_pool_object_type|2.15.x|
 |malicious_committeemen_object_type|2.16.x|
 |incentives_object_type|2.17.x|
+|verifiers_object_type|2.18.x|
 
