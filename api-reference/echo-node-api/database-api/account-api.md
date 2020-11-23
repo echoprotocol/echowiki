@@ -594,7 +594,7 @@ EVM addresses owned by account.
 }
 ```
 
-### get\_account\_address\_by\_label\(account\_name\_or\_id, label\)
+### get_account_address_by_label(account_name_or_id, label)
 
 Get account address by owner account and label.
 

@@ -70,7 +70,7 @@
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
     * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
     * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration_seconds-broadcast)
-    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-vesting_second-broadcast)
+    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-start_claim-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
