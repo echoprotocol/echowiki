@@ -71,6 +71,7 @@
   * [Build](advanced/build.md)
   * [DID](advanced/did.md)
   * [Block reward](advanced/block-reward.md)
+  * [Block reward](advanced/exchanges-integration.md)
 * [API Reference](api-reference/README.md)
   * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
