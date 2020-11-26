@@ -79,6 +79,7 @@
 * [sidechain\_eth\_update\_contract\_address\_operation](sidechain.md#sidechain_eth_update_contract_address_operation) - An internal operation, sent by committee member to propose update of the eth contract address
 * [sidechain\_issue\_operation](sidechain.md#sidechain_issue_operation) - Virtual operation, which reports that the money entered with the help of sidechain
 * [sidechain\_burn\_operation](sidechain.md#sidechain_burn_operation) - Virtual operation, which reports that the conclusion was successful and funds burned\(withdrawn\)
+* [sidechain\_erc20\_register\_contract\_operation](sidechain.md#sidechain_erc20_register_contract_operation) - Used to register(create) contract in the sidechain. Used by committie members through proposal
 * [sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation) - Used to register a token in the sidechain
 * [sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation) - An internal operation by which committee members confirm the entry of tokens
 * [sidechain\_erc20\_send\_deposit\_operation](sidechain.md#sidechain_erc20_send_deposit_operation) - An internal operation by which committee members confirm the entry of tokens after 24h and credit token

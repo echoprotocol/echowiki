@@ -52,26 +52,27 @@
 |[sidechain\_eth\_update\_contract\_address\_operation](sidechain.md#sidechain_eth_update_contract_address_operation)|47|
 |[sidechain\_issue\_operation](sidechain.md#sidechain_issue_operation) // VIRTUAL|48|
 |[sidechain\_burn\_operation](sidechain.md#sidechain_burn_operation) // VIRTUAL|49|
-|[sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation)|50|
-|[sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation)|51|
-|[sidechain\_erc20\_send\_deposit\_operation](sidechain.md#sidechain_erc20_send_deposit_operation)|52|
-|[sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation)|53|
-|[sidechain\_erc20\_send\_withdraw\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation)|54|
-|[sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation)|55|
-|[sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) // VIRTUAL|56|
-|[sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) // VIRTUAL|57|
-|[sidechain\_btc\_create\_address\_operation](sidechain.md#sidechain_btc_create_address_operation)|58|
-|[sidechain\_btc\_create\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_create_intermediate_deposit_operation)|59|
-|[sidechain\_btc\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_intermediate_deposit_operation)|60|
-|[sidechain\_btc\_deposit\_operation](sidechain.md#sidechain_btc_deposit_operation)|61|
-|[sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation)|62|
-|[sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation)|63|
-|[sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation)|64|
-|[sidechain\_stake\_eth\_update\_operation](sidechain.md#sidechain_stake_eth_update_operation)|65|
-|[sidechain\_btc\_create\_stake\_script\_operation](sidechain.md#sidechain_btc_create_stake_script_operation)|66|
-|[sidechain\_stake\_btc\_update\_operation](sidechain.md#sidechain_stake_btc_update_operation)|67|
-|[block\_reward\_operation](block-reward.md#block_reward_operation) // VIRTUAL|68|
-|[evm\_address\_register\_operation](account-management.md#evm_address_register_operation)|69|
-|[did\_create\_operation](did.md#did_create_operation)|70|
-|[did\_update\_operation](did.md#did_update_operation)|71|
-|[did\_delete\_operation](did.md#did_delete_operation)|72|
+|[sidechain\_erc20\_register\_contract\_operation](sidechain.md#sidechain_erc20_register_contract_operation)|50|
+|[sidechain\_erc20\_register\_token\_operation](sidechain.md#sidechain_erc20_register_token_operation)|51|
+|[sidechain\_erc20\_deposit\_token\_operation](sidechain.md#sidechain_erc20_deposit_token_operation)|52|
+|[sidechain\_erc20\_send\_deposit\_operation](sidechain.md#sidechain_erc20_send_deposit_operation)|53|
+|[sidechain\_erc20\_withdraw\_token\_operation](sidechain.md#sidechain_erc20_withdraw_token_operation)|54|
+|[sidechain\_erc20\_send\_withdraw\_operation](sidechain.md#sidechain_erc20_send_withdraw_operation)|55|
+|[sidechain\_erc20\_approve\_token\_withdraw\_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation)|56|
+|[sidechain\_erc20\_issue\_operation](sidechain.md#sidechain_erc20_issue_operation) // VIRTUAL|57|
+|[sidechain\_erc20\_burn\_operation](sidechain.md#sidechain_erc20_burn_operation) // VIRTUAL|58|
+|[sidechain\_btc\_create\_address\_operation](sidechain.md#sidechain_btc_create_address_operation)|59|
+|[sidechain\_btc\_create\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_create_intermediate_deposit_operation)|60|
+|[sidechain\_btc\_intermediate\_deposit\_operation](sidechain.md#sidechain_btc_intermediate_deposit_operation)|61|
+|[sidechain\_btc\_deposit\_operation](sidechain.md#sidechain_btc_deposit_operation)|62|
+|[sidechain\_btc\_withdraw\_operation](sidechain.md#sidechain_btc_withdraw_operation)|63|
+|[sidechain\_btc\_aggregate\_operation](sidechain.md#sidechain_btc_aggregate_operation)|64|
+|[sidechain\_btc\_approve\_aggregate\_operation](sidechain.md#sidechain_btc_approve_aggregate_operation)|65|
+|[sidechain\_stake\_eth\_update\_operation](sidechain.md#sidechain_stake_eth_update_operation)|66|
+|[sidechain\_btc\_create\_stake\_script\_operation](sidechain.md#sidechain_btc_create_stake_script_operation)|67|
+|[sidechain\_stake\_btc\_update\_operation](sidechain.md#sidechain_stake_btc_update_operation)|68|
+|[block\_reward\_operation](block-reward.md#block_reward_operation) // VIRTUAL|69|
+|[evm\_address\_register\_operation](account-management.md#evm_address_register_operation)|70|
+|[did\_create\_operation](did.md#did_create_operation)|71|
+|[did\_update\_operation](did.md#did_update_operation)|72|
+|[did\_delete\_operation](did.md#did_delete_operation)|73|

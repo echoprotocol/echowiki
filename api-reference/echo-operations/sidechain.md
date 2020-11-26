@@ -389,6 +389,55 @@ struct sidechain_burn_operation : public base_operation
 ]
 ```
 
+## sidechain_erc20_register_contract_operation
+
+Used to register(create) contract in the sidechain. Used by committie members through proposal.
+
+```cpp
+struct sidechain_erc20_register_contract_operation : public base_operation
+{
+    struct fee_parameters_type
+    {
+        uint64_t fee = ECHO_BLOCKCHAIN_PRECISION;
+    };
+
+    asset fee;
+
+    std::string code;
+    std::string args;
+    eth_address_type address; // address of the contract in ethereum
+    std::string name;
+    std::string symbol;
+    uint8_t decimals;
+
+    extensions_type extensions;
+
+    share_type calculate_fee(const fee_parameters_type& fp) const { return fp.fee; }
+    account_id_type fee_payer() const { return ECHO_COMMITTEE_ACCOUNT; }
+};
+```
+
+### JSON Example
+
+```json
+[
+   50,
+   {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
+      "code": "",
+      "args": "",
+      "address": "0000000000000000000000000000000000000000",
+      "name": "",
+      "symbol": "",
+      "decimals": 0,
+      "extensions": []
+   }
+]
+```
+
 ## sidechain_erc20_register_token_operation
 
 Used to register a token in the sidechain.
@@ -421,7 +470,7 @@ struct sidechain_erc20_register_token_operation : public base_operation
 
 ```json
 [
-   50,
+   51,
    {
       "fee": {
          "amount": 0,
@@ -468,7 +517,7 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 
 ```json
 [
-   51,
+   52,
    {
       "fee": {
          "amount": 0,
@@ -510,7 +559,7 @@ struct sidechain_erc20_send_deposit_operation : public base_operation
 
 ```json
 [
-   52,
+   53,
    {
       "fee": {
          "amount": 0,
@@ -551,7 +600,7 @@ struct sidechain_erc20_withdraw_token_operation : public base_operation
 
 ```json
 [
-   53,
+   54,
    {
       "fee": {
          "amount": 0,
@@ -591,7 +640,7 @@ struct sidechain_erc20_send_withdraw_operation : public base_operation
 
 ```json
 [
-   54,
+   55,
    {
       "fee": {
          "amount": 0,
@@ -631,7 +680,7 @@ struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 
 ```json
 [
-   55,
+   56,
    {
       "fee": {
          "amount": 0,
@@ -668,7 +717,7 @@ struct sidechain_erc20_issue_operation : public base_operation
 
 ```json
 [
-   56,
+   57,
    {
       "deposit": "1.18.0",
       "account": "1.2.0",
@@ -704,7 +753,7 @@ struct sidechain_erc20_burn_operation : public base_operation
 
 ```json
 [
-   57,
+   58,
    {
       "withdraw": "1.19.0",
       "account": "1.2.0",
@@ -742,7 +791,7 @@ struct sidechain_btc_create_address_operation : public base_operation
 
 ```json
 [
-   58,
+   59,
    {
       "fee": {
          "amount": 0,
@@ -785,7 +834,7 @@ struct sidechain_btc_create_intermediate_deposit_operation : public base_operati
 
 ```json
 [
-   59,
+   60,
    {
       "fee": {
          "amount": 0,
@@ -835,7 +884,7 @@ struct sidechain_btc_intermediate_deposit_operation : public base_operation
 
 ```json
 [
-   60,
+   61,
    {
       "fee": {
          "amount": 0,
@@ -878,7 +927,7 @@ struct sidechain_btc_deposit_operation : public base_operation
 
 ```json
 [
-   61,
+   62,
    {
       "fee": {
          "amount": 0,
@@ -929,7 +978,7 @@ struct sidechain_btc_withdraw_operation : public base_operation
 
 ```json
 [
-   62,
+   63,
    {
       "fee": {
          "amount": 0,
@@ -983,7 +1032,7 @@ struct sidechain_btc_aggregate_operation : public base_operation
 
 ```json
 [
-   63,
+   64,
    {
       "fee": {
          "amount": 0,
@@ -1033,7 +1082,7 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 
 ```json
 [
-   64,
+   65,
    {
       "fee": {
          "amount": 0,
@@ -1078,7 +1127,7 @@ struct sidechain_stake_eth_update_operation : public base_operation
 
 ```json
 [
-  65,
+  66,
   {
     "fee": {
       "amount": 0,
@@ -1122,7 +1171,7 @@ struct sidechain_stake_btc_create_script_operation : public base_operation
 
 ```json
 [
-  66,
+  67,
   {
     "fee": {
       "amount": 0,
@@ -1166,7 +1215,7 @@ struct sidechain_stake_btc_update_operation : public base_operation
 
 ```json
 [
-  67,
+  68,
   {
     "fee": {
       "amount": 0,
