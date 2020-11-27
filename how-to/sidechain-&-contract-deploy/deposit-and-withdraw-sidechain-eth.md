@@ -27,7 +27,7 @@ The required field is `eth_addr`: `0xde0b295669a9fd93d5f28d9ec85e40f4cb697Bae`.
 
 Then, let’s see how to transfer our Ethereum funds to this address. For it, you may use any wallet.
 
-The funds will reach your account after the transaction gets the required number of validations. To check your balance, use these methods [list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-id).
+The funds will reach your account after the transaction gets the required number of validations. To check your balance, use these methods [list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-account).
 
 The balance will be expressed in `eETH`.
 

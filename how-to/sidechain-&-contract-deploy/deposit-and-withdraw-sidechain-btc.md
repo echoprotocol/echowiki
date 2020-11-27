@@ -50,7 +50,7 @@ Now, we can make in-network transfers using this address. To do it, you can use 
 
 Normally, the funds reach your account within 24 hours. You can check your balance using the methods
 
-[list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-id). 
+[list_id_balances](/api-reference/echo-wallet-api/README.md#list_id_balances-id) and [list_account_balances](/api-reference/echo-wallet-api/README.md#list_account_balances-account). 
 
 The balance will be expressed in eBTC.
 
