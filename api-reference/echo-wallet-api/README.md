@@ -19,21 +19,20 @@
     * [get_account_count](#get_account_count)
     * [list_my_accounts](#list_my_accounts)
     * [list_accounts](#list_accounts-lowerbound-limit)
-    * [get_account_history](#get_account_history-name-limit)
-    * [get_relative_account_history](#get_relative_account_history-name-stop-limit-start)
-    * [get_account](#get_account-account_name_or_id)
-    * [get_account_id](#account_name_or_id-account_name_or_id)
-    * [get_account_addresses](#get_account_addresses-account_id-from-limit)
+    * [get_account_history](#get_account_history-account-limit)
+    * [get_relative_account_history](#get_relative_account_history-account-stop-limit-start)
+    * [get_account](#get_account-account)
+    * [get_account_id](#get_account_id-account)
+    * [get_account_addresses](#get_account_addresses-account-from-limit)
     * [get_account_by_address](#get_account_by_address-address)
-    * [get_evm_addresses](#get_evm_addresses-account-id)
-    * [get_account_address_by_label](#get_account_address_by_label-account_name_or_id-label)
+    * [get_evm_addresses](#get_evm_addresses-account)
+    * [get_account_address_by_label](#get_account_address_by_label-account-label)
     * [register_account](#register_account-name-active-echorand-key-registrar-account-evm-address-broadcast)
     * [register_account_with_api](#register_account_with_api-name-active_key-echorand_key-evm_address)
     * [create_account_with_brain_key](#create_account_with_brain_key-brain_key-account_name-registrar_account-broadcast)
     * [generate_account_address](#generate_account_address-owner_account-label-broadcast)
     * [whitelist_account](#whitelist_account-authorizing_account-account_to_list-new_listing_status-broadcast)
-    * [update_account](#update_account-account_name_or_id-new_options-broadcast-new_active-new_echorand_key)
-    * [get_account_address_by_label](#get_account_address_by_label-account_name_or_id-label)
+    * [update_account](#update_account-account-new_options-broadcast-new_active-new_echorand_key)
     * [get_account_address_history](#get_account_address_history-address-start-stop-limit)
     * [get_account_history_operations](#get_account_history_operations-account-operation_id-start-stop-limit)
 * Keys
@@ -56,8 +55,8 @@
     * [load_wallet_file](#load_wallet_file-wallet_filename)
     * [save_wallet_file](#save_wallet_file-wallet_filename)
 * Balances
-    * [import_balance](#import_balance-account_name_or_id-broadcast-private_keys)
-    * [list_account_balances](#list_account_balances-id)
+    * [import_balance](#import_balance-account-broadcast-private_keys)
+    * [list_account_balances](#list_account_balances-account)
     * [list_id_balances](#list_id_balances-id)
     * [get_vesting_balances](#get_vesting_balances-account)
     * [withdraw_vesting](#withdraw_vesting-account-amount-asset_symbol-broadcast)
@@ -69,8 +68,8 @@
     * [committee_freeze_balance](#committee_freeze_balance-owner_account-amount-broadcast)
     * [committee_withdraw_balance](#committee_withdraw_balance-owner_account-amount-broadcast)
     * [transfer_to_address](#transfer_to_address-from-address-amount-asset_symbol-broadcast)
-    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator_name-owner_name-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration_seconds-broadcast)
-    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator_name-owner_name-amount-asset_symbol-start_claim-vesting_second-broadcast)
+    * [create_vesting_linear_policy](#create_vesting_linear_policy-creator-owner-amount-asset_symbol-begin_timestamp-vesting_cliff_seconds-vesting_duration_seconds-broadcast)
+    * [create_vesting_cdd_policy](#create_vesting_cdd_policy-creator-owner-amount-asset_symbol-start_claim-vesting_second-broadcast)
 * Assets
     * [list_assets](#list_assets-lowerbound-limit)
     * [create_asset](#create_asset-issuer-symbol-precision-asset_opts-bitasset_opts-broadcast)
@@ -303,24 +302,24 @@ Use the `lowerbound` and limit parameters to page through the list. To retrieve 
 list_accounts nathan 10
 ```
 
-### `get_account_history name limit`
+### `get_account_history account limit`
 Returns the most recent operations on the named account. This returns a list of operation history objects, which describe activity on the account.
 
 | Option | Description |
 | :--- | :--- |
-| `string name` | the name or id of the account |
+| `string account` | the name or id of the account |
 | `number limit` | the number of entries to return (starting from the most recent) |
 
 ```
 get_account_history nathan 10
 ```
 
-### `get_relative_account_history name stop limit start`
+### `get_relative_account_history account stop limit start`
 Returns the relative operations on the named account from start number.
 
 | Option | Description |
 | :--- | :--- |
-| `string name` | the name or id of the account |
+| `string account` | the name or id of the account |
 | `number stop` | Sequence number of earliest operation |
 | `number limit` | the number of entries to return |
 | `number start` | the sequence number where to start looping back throw the history |
@@ -329,23 +328,23 @@ Returns the relative operations on the named account from start number.
 get_relative_account_history nathan 0 10 20
 ```
 
-### `get_account account_name_or_id`
+### `get_account account`
 Returns information about the given account.
 
 | Option | Description |
 | :--- | :--- |
-| `string account_name_or_id` | the name or id of the account to provide information about |
+| `string account` | the name or id of the account to provide information about |
 
 ```
 get_account nathan or 1.2.0
 ```
 
-### `get_account_id account_name_or_id`
+### `get_account_id account`
 Lookup the id of a named account.
 
 | Option | Description |
 | :--- | :--- |
-| `string account_name_or_id` | the name of the account to look up |
+| `string account` | the name of the account to look up |
 
 ```
 get_account_id 1.2.0
@@ -356,7 +355,7 @@ Get addresses owned by account in specified ids interval
 
 | Option | Description |
 | :--- | :--- |
-| `string account_name_or_id`|  ID or name of the account |
+| `string account`|  ID or name of the account |
 | `number from` | Number of block to start retrieve from |
 | `number limit` | Maximum number of addresses to return |
 
@@ -375,23 +374,23 @@ Get owner of specified address.
 get_account_by_address 8815c69de5d32d3061e52ca9386446332225b43d
 ```
 
-### `get_evm_addresses account-id`
+### `get_evm_addresses account`
 Get EVM addresses, if exist, for the given account id
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account-id` | ID of the account |
+| `string account` | ID or name of the account |
 
 ```
 get_evm_addresses 1.2.0
 ```
 
-### `get_account_address_by_label account_name_or_id label`
+### `get_account_address_by_label account label`
 Get account address by owner account and label
 
 | Option | Description |
 | :--- | :--- |
-| `string account_name_or_id` | the name or id of the owner account |
+| `string account` | the name or id of the owner account |
 | `string label` | the label of account address object |
 
 ```
@@ -477,13 +476,13 @@ An asset which enforces a whitelist specifies a list of accounts to maintain its
 whitelist_account nathan acc 0 true
 ```
 
-### `update_account account_name_or_id new_options broadcast new_active new_echorand_key` 
+### `update_account account new_options broadcast new_active new_echorand_key` 
 Update an existing account. It can be used to update the authorities, or adjust the options.
 Returns the signed transaction updating the asset
 
 | Option | Description |
 | :--- | :--- |
-| `string account_name_or_id` | The name or id of the account to update |
+| `string account` | The name or id of the account to update |
 | `variant_object new_options` | Map of options field to update. The new [account_options](/api-reference/echo-operations/types/common.md#account_options) object, which will entirely replace the existing options. |
 | `bool broadcast` | true to broadcast the transaction on the network |
 | `authority new_active`| (Optional) The new active [authority](/api-reference/echo-operations/types/common.md#authority). This can be updated by the current active authority. null if you don't want to change the authority |
@@ -491,18 +490,6 @@ Returns the signed transaction updating the asset
 
 ```
 update_account nathan {"delegating_account": "1.2.10", "delegate_share": "3000"} true null null
-```
-
-### `get_account_address_by_label account_name_or_id label` 
-Get account address by owner account and label
-
-| Option | Description |
-| :--- | :--- |
-| `string account_name_or_id` | the name or id of the owner account |
-| `string label` | the label of account address object |
-
-```
-get_account_address_by_label 1.2.26 primary
 ```
 
 ### `get_account_address_history address start stop limit` 
@@ -530,7 +517,7 @@ Get operations relevant to the specificed account.
 
 | Option | Description |
 | :--- | :--- |
-| `account_id_type account` | The account whose history should be queried |
+| `string account` | The id or name of the account whose history should be queried |
 | `uint64 operation_id` | The ID of the operation we want to get operations in the account |
 | `operation_history_id_type start` | ID of the most recent operation to retrieve |
 | `operation_history_id_type stop` | ID of the earliest operation to retrieve |
@@ -723,13 +710,13 @@ save_wallet_file wallet.json
 
 ## Balances
 
-### `import_balance account_name_or_id broadcast private_keys` 
+### `import_balance account broadcast private_keys` 
 
 This call will construct transaction(s) that will claim all balances controled by wif_keys and deposit them into the given account. wif_key should be input interactively
 
 | Option | Description |
 | :--- | :--- |
-| `string account_name_or_id` | the account owning the key |
+| `string account` | the name or id of the account owning the key |
 | `bool broadcast` | true to broadcast the transaction on the network |
 | `listprivate_key private_keys` | array of eddsa private keys |
 
@@ -737,13 +724,13 @@ This call will construct transaction(s) that will claim all balances controled b
 import_balance nathan true [ private_keys ]
 ```
 
-### `list_account_balances id` 
+### `list_account_balances account` 
 List the balances of an account. Each account can have multiple balances, one for each type of asset owned by that account. The returned list will only contain assets for which the account has a nonzero balance.  
 Returns a list of the given account's balances
 
 | Option | Description |
 | :--- | :--- |
-| `string id` | the name or id of the account whose balances you want |
+| `string account` | the name or id of the account whose balances you want |
 
 ```
 list_account_balances nathan or 1.2.0
@@ -851,13 +838,13 @@ Transfer an amount from one account to address.
 transfer_to_address 1.2.0 f149bd2883b1179965bd6706092573be4d68fec8 10 ECHO true
 ```
 
-### `create_vesting_linear_policy creator_name owner_name amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration_seconds broadcast`
+### `create_vesting_linear_policy creator owner amount asset_symbol begin_timestamp vesting_cliff_seconds vesting_duration_seconds broadcast`
 Create a vesting balance with linear policy.
 
 | Option | Description |
 | :--- | :--- |
-| `string creator_name` | The account name or id of vesting creator |
-| `string owner_name` | The account name or id of vesting creator |
+| `string creator` | The account name or id of vesting creator |
+| `string owner` | The account name or id of vesting creator |
 | `string amount` | The amount to create vesting |
 | `string asset_symbol` | The symbol of the asset to create vesting |
 | `time_point begin_timestamp` | Begin timestamp|
@@ -869,13 +856,13 @@ Create a vesting balance with linear policy.
 create_vesting_linear_policy nathan nathan 10 ECHO "2093-12-11T10:26:00" 10 10 true
 ```
 
-### `create_vesting_cdd_policy creator_name owner_name amount asset_symbol start_claim vesting_second broadcast`
+### `create_vesting_cdd_policy creator owner amount asset_symbol start_claim vesting_second broadcast`
 Create a vesting balance with cdd policy.
 
 | Option | Description |
 | :--- | :--- |
-| `string creator_name` | The account name or id of vesting creator |
-| `string owner_name` | The account name or id of vesting creator |
+| `string creator` | The account name or id of vesting creator |
+| `string owner` | The account name or id of vesting creator |
 | `string amount` | The amount to create vesting |
 | `string asset_symbol` | The symbol of the asset to create vesting |
 | `time_point start_claim` | Start claim |
@@ -1503,7 +1490,7 @@ Returns all deposits, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | the id or name of the account to provide information about |
 | `string type` | the type of the deposits may be "", "eth" or "btc". By default "" = all deposits |
 
 ```
@@ -1515,7 +1502,7 @@ Returns all withdrawals, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | the id or name of the account to provide information about |
 | `string type` | the type of the withdrawals may be "", "eth" or "btc". By default "" = all withdrawals |
 
 ```
@@ -1527,7 +1514,7 @@ Returns all stake objects, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | the id or name of the account to provide information about |
 | `string type` | the type of the objects may be "", seth" or "sbtc". By default "" = all objects |
 
 ```
@@ -1541,7 +1528,7 @@ Returns information about generated eth address, if exist and approved, for the 
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | the id or name of the account to provide information about |
 
 ```
 get_eth_address 1.2.0
@@ -1616,7 +1603,7 @@ Returns all deposits, for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | the id or name of the account to provide information about |
 
 ```
 get_erc20_account_deposits 1.2.0
@@ -1627,7 +1614,7 @@ Returns all withdrawals for the given account id.
 
 | Option | Description |
 | :--- | :--- |
-| `triplet account` | the id of the account to provide information about |
+| `string account` | the id or name of the account to provide information about |
 
 ```
 get_erc20_account_withdrawals 1.2.0

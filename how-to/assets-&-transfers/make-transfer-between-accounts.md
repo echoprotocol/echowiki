@@ -28,7 +28,7 @@ generate_account_address nathan label true
 
 ### Step 2. Get an address using Wallet API.
 
-To do so, we use Wallet API [get_account_addresses](../../api-reference/echo-wallet-api/README.md#get_account_addresses-account_id-from-limit).
+To do so, we use Wallet API [get_account_addresses](../../api-reference/echo-wallet-api/README.md#get_account_addresses-account-from-limit).
 
 ```
 get_account_addresses 1.2.26 0 10
