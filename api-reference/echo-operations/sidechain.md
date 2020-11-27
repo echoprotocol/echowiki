@@ -459,6 +459,7 @@ struct sidechain_erc20_register_token_operation : public base_operation
    std::string name;
    std::string symbol;
    uint8_t decimals;
+   bool eth_accuracy;
    
    extensions_type extensions;
 
@@ -481,6 +482,7 @@ struct sidechain_erc20_register_token_operation : public base_operation
       "name": "",
       "symbol": "",
       "decimals": 0,
+      "eth_accuracy": false,
       "extensions": []
    }
 ]
