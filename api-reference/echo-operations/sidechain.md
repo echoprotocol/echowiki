@@ -773,6 +773,10 @@ Used for transfer asset to Ethereum ERC20 contract.
 ```cpp
 struct sidechain_erc20_transfer_asset_operation : public base_operation
 {
+    struct fee_parameters_type { uint64_t fee = 0; };
+
+    asset fee;
+
     account_id_type account;
     eth_address_type to;
     asset value;
@@ -790,6 +794,10 @@ struct sidechain_erc20_transfer_asset_operation : public base_operation
 [
    59,
    {
+      "fee": {
+         "amount": 0,
+         "asset_id": "1.3.0"
+      },
       "account": "1.2.26",
       "to": "0000000000000000000000000000000000000000",
       "value": {
