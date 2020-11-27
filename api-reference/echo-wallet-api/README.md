@@ -133,6 +133,7 @@
     * [get_erc20_account_withdrawals](#get_erc20_account_withdrawals-account)
     * [register_erc20_token](#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast)
     * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
+    * [transfer_to_eth_erc20](#transfer_to_eth_erc20-account-to-amount-asset_symbol-broadcast)
 * Sidechain-Bitcoin
     * [create_btc_address](#create_btc_address-account-backup_address-broadcast)
     * [get_btc_address](#get_btc_address-account)
@@ -1666,6 +1667,24 @@ Returns the signed version of the transaction.
 
 ```
 withdraw_erc20_token nathan 545a68602db30bf5db9692267f8f84b7f1e70ec3 1.16.0 10 true
+```
+
+### `transfer_to_eth_erc20 account to amount asset_symbol broadcast` 
+Creates a transaction to transfer assets to Ethereum erc20_token.
+
+Returns the signed version of the transaction.
+
+| Option | Description |
+| :--- | :--- |
+| `string account` | The account who withdraw erc20 token. |
+| `string to` | The Ethereum address where transfer erc20 token. |
+| `string amount` | The amount transfer. |
+| `string asset_symbol` | The asset symbol. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
+
+
+```
+transfer_to_eth_erc20 nathan 545a68602db30bf5db9692267f8f84b7f1e70ec3 100 ECHO true
 ```
 
 
