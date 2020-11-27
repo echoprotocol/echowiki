@@ -62,20 +62,20 @@ by the amount equal to **Fee Pool Balance / 30 / Count blocks per day**.
 The award increments are calculated during network maintenance and are not recalculated until
 the next network maintenance.
 
-![fin_plan1](fin_plan1.png)
+![](fin_plan1.png)
 
 The graph illustrates the increase of the verifier's award for each block with participation in the
 certificate of 9 out of 11 verifiers. The growth in 90 days is about 20%.
 Increasing the number of verifiers in the certificate to 10 will lead to a gradual reduction of the
 award to the state of the original award + 10%.
 
-![fin_plan2](fin_plan2.png)
+![](fin_plan2.png)
 
 If, however, after three months of operation of the network with the 9/11 certificate, the
 connection of new members will lead to a permanent completion of the certificate (11/11), the
 network will need about three months to return the award to its original state.
 
-![fin_plan3](fin_plan3.png)
+![](fin_plan3.png)
 
 ## Frozen funds:
 

@@ -60,6 +60,7 @@
     * [Run node as a participant](advanced/participation/run-participant-node.md)
     * [Delegation of participation](advanced/participation/delegating-participants.md)
     * [Aggregation of participants](advanced/participation/agregation-participants.md)
+    * [Participation of users with non-ECHO assets](advanced/participation/assets_in_consensus.md)
   * [Create Account](advanced/create-account.md)
   * [Generate Address](advanced/generate-address.md)
   * [Create and Processing Propose](advanced/propose.md)
