@@ -12,13 +12,6 @@ class dynamic_global_property_object
     time_point_sec time;
     time_point_sec next_maintenance_time;
     time_point_sec last_maintenance_time;
-    share_type committee_budget;
-
-    /**
-     * dynamic_flags specifies chain state properties that can be
-     * expressed in one bit.
-     */
-    uint32_t dynamic_flags = 0;
 
     uint32_t last_irreversible_block_num = 0;
     uint32_t last_block_of_previous_interval = 1;
