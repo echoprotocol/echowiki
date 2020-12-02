@@ -100,3 +100,20 @@ Under this incentive mechanism, the block producers which generate a block which
 
 When the network begins to generate empty blocks due to failure of consensus \(whether because of an attacker or through low participation in consensus by honest users\), the protocol increases the block reward \(which inflates the entire token supply\) in order to incentivize more rational users to participate in consensus. When the performance returns to the acceptable threshold, the block reward is decreased over time until it returns to the minimum inflation rate.
 
+## Handling forks by PoWR
+
+For example, Bitcoin with PoW consensus can be forked when some block producers using different "parent" blocks on their generated block, in such case other nodes received two valid blocks and blockchain forks.
+
+### Fork prioritization
+
+The number of steps of the algorithm and dependence on the state of the whole account database makes the possibility of forks unlikely. However, EchoRand still has a mechanism for choosing between diverging chains. The fork selection takes place according to one of the following scenarios:
+
+1. To switch to the longest chain (with the highest number of completed non zero rounds) in the presence of several chains.
+2. If there is more than one long chain at the end of a r-length chain, to follow the one in which the r block has the smallest hash value.
+
+This process is based on algorand-v9 (9. Handling Forks, page 70). According to it the probability of forks is about 10^−12 or 10^−18.
+
+Also we have constant (named `ECHO_REVERSIBLE_BLOCKS_COUNT`) that controls amount of reversible blocks and equals 15.
+So if you block have number `n`, it will be irreversible after `n + 15` blocks.
+
+> `Irreversible` means that this block cannot be canceled as a result of a fork.
