@@ -27,5 +27,6 @@
   * [How to deposit and withdraw sidechain ERC20](/how-to/sidechain-&-contract-deploy/deposit-and-withdraw-sidechain-erc20.md)
   * [How to use Ethereum stake sidechain](/how-to/sidechain-&-contract-deploy/how-to-use-eth-stake.md)
   * [How to use Bitcoin stake sidechain](/how-to/sidechain-&-contract-deploy/how-to-use-btc-stake.md)
+  * [How to transfer assets to Ethereum](/how-to/sidechain-&-contract-deploy/transfer_assets_to_eth.md)
   * [How to use echo testrpc](/how-to/sidechain-&-contract-deploy/use-echo-testrpc.md)
 
