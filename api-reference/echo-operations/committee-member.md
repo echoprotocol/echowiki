@@ -225,7 +225,6 @@ x86 is now in the development stage.
                "coefficient_waiting_blocks": 0
          },
          "erc20_config": {
-               "contract_code": "",
                "create_token_fee": 0,
                "transfer_topic": "0000000000000000000000000000000000000000000000000000000000000000",
                "check_balance_method": {

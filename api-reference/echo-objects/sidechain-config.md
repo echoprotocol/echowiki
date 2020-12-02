@@ -37,7 +37,6 @@ struct config
 ```cpp
 struct erc20_config
 {
-   std::string contract_code;
    uint64_t create_token_fee;
    eth_topic_type transfer_topic;
    eth_method check_balance_method;
