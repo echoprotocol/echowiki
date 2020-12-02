@@ -8,4 +8,5 @@
 * [How to deposit and withdraw sidechain ERC20](./deposit-and-withdraw-sidechain-erc20.md)
 * [How to use Ethereum stake sidechain](./how-to-use-eth-stake.md)
 * [How to use Bitcoin stake sidechain](./how-to-use-btc-stake.md)
+* [How to transfer assets to Ethereum](./transfer_assets_to_eth.md)
 * [How to use echo testrpc](./use-echo-testrpc.md)
