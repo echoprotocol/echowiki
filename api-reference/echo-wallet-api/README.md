@@ -132,6 +132,7 @@
     * [get_erc20_account_withdrawals](#get_erc20_account_withdrawals-account)
     * [register_erc20_token](#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast)
     * [withdraw_erc20_token](#withdraw_erc20_token-account-to-erc20_token-value-broadcast)
+    * [propose_register_asset_in_sidechain](#propose_register_asset_in_sidechain-proposing_account-expiration_time-erc20_data-broadcast)
     * [transfer_to_eth_erc20](#transfer_to_eth_erc20-account-to-amount-asset_symbol-broadcast)
 * Sidechain-Bitcoin
     * [create_btc_address](#create_btc_address-account-backup_address-broadcast)
@@ -1654,6 +1655,23 @@ Returns the signed version of the transaction.
 
 ```
 withdraw_erc20_token nathan 545a68602db30bf5db9692267f8f84b7f1e70ec3 1.16.0 10 true
+```
+
+### `propose_register_asset_in_sidechain proposing_account expiration_time erc20_data broadcast` 
+Creates a transaction to transfer assets to Ethereum erc20_token.
+
+Returns the signed version of the transaction.
+
+| Option | Description |
+| :--- | :--- |
+| `string proposing_account` | The account who make proposal. |
+| `fc::time_point_sec expiration_time` | Timestamp specifying when the proposal will either take effect or expire. |
+| `string erc20_data` | Object of data for erc20 contract. Should have fields `code`, `args`, `address`,`name`,`symbol`,`decimals`. Filed `eth_accuracy` is optional. |
+| `bool broadcast` | true if you wish to broadcast the transaction. |
+
+
+```
+propose_register_asset_in_sidechain 1.2.6 "2122-12-11T07:53:00" { "code" : "some code", "args" : "some args", "address" : "2A365517AB5f70b4079Cd2dC2C3Bc9d111AaE951", "name" : "NewToken", "symbol": "ENEW", "decimals" : 8, "eth_accuracy" : false } true
 ```
 
 ### `transfer_to_eth_erc20 account to amount asset_symbol broadcast` 
