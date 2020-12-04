@@ -59,8 +59,7 @@ The commission pool is replenished in the following cases:
 In case of non-zero balance on the commission pool, the total reward for each block is increased
 by the amount equal to **Fee Pool Balance / 30 / Count blocks per day**.
 
-The award increments are calculated during network maintenance and are not recalculated until
-the next network maintenance.
+The award increments and pool are recalculated every block.
 
 ![](fin_plan1.png)
 
