@@ -49,25 +49,25 @@ unlocked >>> create_contract myacc 60806040523<...>97293b4050029 0 ECHO "" false
   "signed_with_echorand_key": false,
   "operation_results": [[
       1,
-      "1.15.722"
+      "1.12.722"
     ]
   ]
 }
 ```
 
-`1.15.721` ID in `operation_results` array determines the operation execution result ID. An object with said ID stores the information about the deployed contract. `get_object` method can be used to get said object.
+`1.12.721` ID in `operation_results` array determines the operation execution result ID. An object with said ID stores the information about the deployed contract. `get_object` method can be used to get said object.
 
 ```bash
-get_object 1.15.722
+get_object 1.12.722
 ```
 
 ```bash
-unlocked >>> get_object 1.15.722
+unlocked >>> get_object 1.12.722
 [{
-    "id": "1.15.722",
+    "id": "1.12.722",
     "type": "evm",
     "contracts_id": [
-      "1.14.349"
+      "1.11.349"
     ],
     "extensions": []
   }
@@ -85,13 +85,13 @@ There are two types of contract calls - a call without changing the contract's s
 Fetching an account's balance in token doesn't require a transaction, hence the `call_contract_no_changing_state` method is used:
 
 ```bash
-call_contract_no_changing_state 1.14.349 myacc ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
+call_contract_no_changing_state 1.11.349 myacc 0 ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
 ```
 
 The last argument in the method is the hash of the contract's called method and the argument joined with the arguments that were passed along with the call. In this case `70a08231` is the hash of `balanceOf(address)` method, and `0000000000000000000000000000000000000000000000000000000000000536` is the "address" \(derived from account ID\), the balance of which we need are trying to get \(zeroes are added to increase the size of the address to 32 bytes\). This address belongs to Echo account `1.2.1334`. More information on converting the IDs to address formats can be found in [EVM. Introduction](../../docs/developers/smart-contracts/solidity/introduction.md) .
 
 ```bash
-unlocked >>> call_contract_no_changing_state 1.14.349 myacc ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
+unlocked >>> call_contract_no_changing_state 1.11.349 myacc 0 ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
 "0000000000000000000000000000000000000000000000000000000000002710"
 unlocked >>>
 ```
@@ -103,13 +103,13 @@ The result of executing the call is `"000000000000000000000000000000000000000000
 Token transfer is an operation that requires a transaction. `call_contract` method is used for it:
 
 ```bash
-call_contract myacc 1.14.349 a9059cbb00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010 0 ECHO
+call_contract myacc 1.11.349 a9059cbb00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010 0 ECHO
 ```
 
 As a result of executing this method, a transaction will be sent to Echo network:
 
 ```bash
-unlocked >>> call_contract myacc 1.14.349 a9059cbb00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010 0 ECHO
+unlocked >>> call_contract myacc 1.11.349 a9059cbb00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010 0 ECHO
 {
   "ref_block_num": 5685,
   "ref_block_prefix": 1691124375,
@@ -126,7 +126,7 @@ unlocked >>> call_contract myacc 1.14.349 a9059cbb000000000000000000000000000000
           "asset_id": "1.3.0"
         },
         "code": "a9059cbb00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010",
-        "callee": "1.14.349",
+        "callee": "1.11.349",
         "extensions": []
       }
     ]
@@ -138,7 +138,7 @@ unlocked >>> call_contract myacc 1.14.349 a9059cbb000000000000000000000000000000
   "signed_with_echorand_key": false,
   "operation_results": [[
       1,
-      "1.15.723"
+      "1.12.723"
     ]
   ]
 }
@@ -148,7 +148,7 @@ unlocked >>>
 As a result of the transfer, the contract calls an `event Transfer(address indexed from, address indexed to, uint256 value);` event. The logs can be viewed via `getContractResult` method, and adding operation execution result ID to argument:
 
 ```bash
-unlocked >>> get_contract_result 1.15.723
+unlocked >>> get_contract_result 1.12.723
 [
   0,{
     "exec_res": {
@@ -184,7 +184,7 @@ The result of the call will be the information about the call and a receipt, whi
 This contract call changes an account's token balance. The change in balance can be checked via `balanceOf` method:
 
 ```bash
-unlocked >>> call_contract_no_changing_state 1.14.349 myacc ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
+unlocked >>> call_contract_no_changing_state 1.11.349 myacc ECHO 70a082310000000000000000000000000000000000000000000000000000000000000536
 "0000000000000000000000000000000000000000000000000000000000002700"
 unlocked >>>
 ```
