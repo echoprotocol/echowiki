@@ -2,11 +2,15 @@
 
 ## Dependencies on Ubuntu
 
-We recommend building on Ubuntu 16.04 LTS, and the build dependencies may be installed with:
+We recommend building on Ubuntu 16.04 LTS or Ubuntu 18.04 LTS, and the build dependencies may be installed with:
+
+* `cmake` version should be greter than 3.11. 16.04 have cmake version 3.5.2 and 18.04 - 3.10.2, therefore better install cmake by pip3.
+* `g++` version should be greater than 5.4.
 
 ```bash
     sudo apt-get update
-    sudo apt-get install autoconf cmake git g++ libtool
+    sudo apt-get install autoconf git g++ libtool xxd doxygen perl python3-pip
+    pip3 install cmake --upgrade
 ```
 
 ## Dependencies on MacOS
@@ -20,7 +24,7 @@ To install dependencies for Mac OS, follow these steps:
 3. Install the necessary packages:
 
 ```bash
-brew install cmake git autoconf automake libtool doxygen
+brew install cmake git autoconf automake libtool doxygen perl
 ```
 
 ## Build (Ubuntu/MacOS)
