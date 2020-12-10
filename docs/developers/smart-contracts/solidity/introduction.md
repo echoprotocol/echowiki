@@ -13,8 +13,8 @@ Unlike Ethereum, where addresses are presented in the form of hashes, Echo uses 
 ### Some of the ID types in Echo network
 
 - `1.2.x` - account
-- `1.14.x` - contract
-- `1.15.x` - contract performance result
+- `1.11.x` - contract
+- `1.12.x` - contract performance result
 
 ### Echo IDs to Ethereum addresses conversion
 
@@ -32,11 +32,11 @@ Short Memo:
 ff0000000000000000000000ffffffffffffffff  | Conversion of decimal Echo type
 [][ 11 bytes of zeros  ][   8 bytes    ]  |       to hex short type:
 ^ 1 byte id short type    id instance     |   2 -> 00 - account
-                                          |  14 -> 01 - contract
+                                          |  11 -> 01 - contract
 1.2.26 = account 26 (0x1a) =              |  dd -> xx - everything else
 000000000000000000000000000000000000001a  |
                                           |
-1.14.5 = contract 5 =                     |
+1.11.5 = contract 5 =                     |
 0100000000000000000000000000000000000005  |
 
 ```

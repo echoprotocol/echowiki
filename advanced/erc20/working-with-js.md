@@ -100,7 +100,7 @@ console.log(result);
       "operation_results": [
         [
           1,
-          "1.15.726"
+          "1.12.726"
         ]
       ]
     }
@@ -108,10 +108,10 @@ console.log(result);
 ]
 ```
 
-ID `1.15.721` in `operation_results` array defines the operation execution result ID. An object with said ID stores the information about the deployed contract. `api.getObject(objectId)` method can be used to get said object.
+ID `1.12.721` in `operation_results` array defines the operation execution result ID. An object with said ID stores the information about the deployed contract. `api.getObject(objectId)` method can be used to get said object.
 
 ```javascript
-const object = await echo.api.getObject('1.15.726');
+const object = await echo.api.getObject('1.12.726');
 console.log(object);
 ```
 
@@ -120,7 +120,7 @@ console.log(object);
   "id": "1.15.726",
   "type": "evm",
   "contracts_id": [
-    "1.14.352"
+    "1.11.352"
   ],
   "extensions": []
 }
@@ -137,7 +137,7 @@ There are two types of contract calls - a call without changing the contract's s
 Fetching an account's balance in token doesn't require a transaction, hence the `callContractNoChangingState(contractId, accountId, assetId, bytecode)` method is used:
 
 ```javascript
-const balance = await echo.api.callContractNoChangingState('1.14.352', '1.2.1334', '1.3.0', '70a082310000000000000000000000000000000000000000000000000000000000000536');
+const balance = await echo.api.callContractNoChangingState('1.11.352', '1.2.1334', '1.3.0', '70a082310000000000000000000000000000000000000000000000000000000000000536');
 console.log(parseInt(balance, 16)); // 10000
 ```
 
@@ -148,7 +148,7 @@ The last argument in the method is the hash of the contract's called method and 
 Token transfer is an operation that requires a transaction.
 
 ```javascript
-const contractId = '1.14.352';
+const contractId = '1.11.352';
 const accountSender = '1.2.1334';
 const method = 'a9059cbb';
 const methodParameters = '00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010';
@@ -201,7 +201,7 @@ When this method is executed, a transaction will be sent to Echo network. `resul
               "asset_id": "1.3.0"
             },
             "code": "a9059cbb00000000000000000000000000000000000000000000000000000000000005370000000000000000000000000000000000000000000000000000000000000010",
-            "callee": "1.14.352",
+            "callee": "1.11.352",
             "extensions": []
           }
         ]
@@ -214,7 +214,7 @@ When this method is executed, a transaction will be sent to Echo network. `resul
       "operation_results": [
         [
           1,
-          "1.15.727"
+          "1.12.727"
         ]
       ]
     }
@@ -225,7 +225,7 @@ When this method is executed, a transaction will be sent to Echo network. `resul
 As a result of the transfer, the contract calls an `event Transfer(address indexed from, address indexed to, uint256 value);` event. The logs can be viewed via `getContractResult` method, and adding operation execution result ID to argument:
 
 ```javascript
-const result = await echo.api.getContractResult('1.15.727');
+const result = await echo.api.getContractResult('1.12.727');
 console.log(result);
 ```
 
@@ -264,7 +264,7 @@ console.log(result);
 This contract call changes an account's token balance. The change in balance can be checked via `balanceOf` method:
 
 ```javascript
-const balance = await echo.api.callContractNoChangingState('1.14.352', '1.2.1334', '1.3.0', '70a082310000000000000000000000000000000000000000000000000000000000000536');
+const balance = await echo.api.callContractNoChangingState('1.11.352', '1.2.1334', '1.3.0', '70a082310000000000000000000000000000000000000000000000000000000000000536');
 console.log(parseInt(balance, 16)); // 9984
 ```
 

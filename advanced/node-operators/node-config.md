@@ -21,6 +21,8 @@ Echo Node:
   -v [ --version ]                      Print version information
   --configure-keys                      Encrypt private keys in interactive
                                         mode and save it to keys.file
+  --config-seeds-only                   If true connect ONLY to specific in
+                                        config/command line seed nodes
 
   --create-genesis-json                 Create a genesis.json at corresponding
                                         datadir. Depending on which options
@@ -53,20 +55,19 @@ Echo Node:
                                         should be enforced as checkpoints.
   --rpc-endpoint [=arg(=127.0.0.1:8090)]
                                         Endpoint for websocket RPC to listen on
-  --rpc-tls-endpoint [=arg(=127.0.0.1:8089)]
-                                        Endpoint for TLS websocket RPC to
-                                        listen on
-  -p [ --server-pem ] [=arg(=server.pem)]
-                                        The TLS certificate file for this
-                                        server
-  -P [ --server-pem-password ] arg      Password for this certificate
+  --rpccorsdomain arg                   Domains from which to accept cross
+                                        origin requests
   --genesis-json arg                    File to read Genesis State from
   --api-access arg                      JSON file specifying API permissions
-  --plugins arg (=account_history,echorand)
-                                        Comma-separated list of plugins which
+  --plugins arg (=history,echorand)     Comma-separated list of plugins which
                                         will be activated in addition to
                                         default.Example: --plugins="sidechain,r
                                         egistration,shapshot"
+  --sidechain-btc-testnet               Using testnet for Bitcoin network
+  --p2p-compress                        Compress communication channels for
+                                        this P2P node
+  --p2p-encrypt                         Encrypt communication channels for this
+                                        P2P node
 
 
 Options for plugin echorand:
@@ -83,8 +84,6 @@ Options for plugin sidechain:
   --eth-rpc-ip [=arg(=127.0.0.1)]       Sidechain: RPC address of Ethereum node
   --eth-rpc-port [=arg(=18332)]         Sidechain: RPC port of Ethereum node
   --sidechain-eth-disable               Sidechain: Disable Ethereum service
-  --sidechain-btc-testnet               Sidechain: Run btc sidechain for
-                                        Bitcoin testnet
   --sidechain-btc-committeeman arg      Sidechain: Tuple of [account_id, WIF
                                         BTC private key] (may specify multiple
                                         times)
@@ -98,19 +97,31 @@ Options for plugin registration:
   --registrar-account arg               Registration: ID of registrar account
                                         on this node (should be imported as
                                         account-info)
-  --registration-difficulty arg (=)    Registration: complexity of POW task to
-                                        register account
+  --registration-difficulty arg         Registration: complexity of POW task to
+                                        register account. Default is 20
 
-Options for plugin account_history:
+Options for plugin history:
   --track-account arg                   Account history: Account ID to track
                                         history for (may specify multiple
                                         times)
-  --partial-operations arg              Account history: Keep only those
-                                        operations in memory that are related
-                                        to account history tracking
   --max-ops-per-account arg             Account history: Maximum number of
                                         operations per account will be kept in
                                         memory
+  --track-contract arg                  Contract history: Contract ID to track
+                                        history for (may specify multiple
+                                        times)
+  --max-ops-per-contract arg            Contract history: Maximum number of
+                                        operations per contract will be kept in
+                                        memory
+  --partial-operations arg              History: Keep only those operations in
+                                        memory that are related to history
+                                        tracking
+
+Options for plugin ethrpc:
+  --ethrpc-endpoint arg                 Endpoint for EthRPC to listen on
+  --ethrpc-registration-task-lifetime arg (=20)
+                                        Lifetime of registration tasks(in
+                                        blocks)
 
 Options for plugin snapshot:
   --snapshot-at-block arg               Snapshots: Block number after which to

@@ -18,6 +18,7 @@ Accounts can create the following proposes:
 #### [Fee change](/api-reference/echo-wallet-api/README.md#propose_fee_change-proposing_account-expiration_time-changed_values)
 #### [Parameter change](/api-reference/echo-wallet-api/README.md#propose_parameter_change-proposing_account-expiration_time-changed_values)
 #### [Update Ethereum contract address for sidechain](/api-reference/echo-wallet-api/README.md#propose_eth_update_contract_address-sender-expiration_time-new_addr_broadcast)
+#### [Register asset in Ethreum sidechain](/api-reference/echo-wallet-api/README.md#propose_register_asset_in_sidechain-proposing_account-expiration_time-erc20_data-broadcast)
 
 After creating "propose" in the wallet, id of the created "propose" will be displayed.
 

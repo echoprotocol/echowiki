@@ -20,4 +20,4 @@ Lists of supported plugins and APIs:
 
 
 Integrated test wallet can create accounts with specified balance during TestRPC startup.  
-To add inital account with balance should be specifieds `init-balances` option. For example `--init-balances=[1000, 2000, 3000]`. Also available `accounts` option that creates addintional accounts and splits all initial balance between them equally. For example `--acounts=5`
+To add inital account with balance should be specifieds `init-balances` option. For example `--init-balances=[1000, 2000, 3000]`. Also available `accounts` option that creates additional accounts and splits all initial balance between them equally. For example `--acounts=5`
