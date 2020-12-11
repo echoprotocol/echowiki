@@ -33,7 +33,7 @@ Registrar account have opportunity to register other accounts. For lauching shou
 ### Decrese memory usage
 To decrese memory usage specify some `history` plugin arguments.
 
-For example you may track only certain contracts or accounts and store not all their history, but only last certain number of operations or transactions.
+For example you may track only certain contracts or accounts and store not all their history, but only last certain number of operations. Also `history` plugin stores the least information about transactions(block number, inxed in block, id of transaction). `--max-transaction-ids-to-store` is used to regulate amount of stored transaction_info.
 
 ```bash
 > ./echo_node --track-contract "1.11.1" --track-contract "1.11.2" --track-account "1.2.18" --max-ops-per-contract 100 --max-ops-per-account 100 --max-transaction-ids-to-store 1000
