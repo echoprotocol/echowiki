@@ -2,7 +2,7 @@
 ## Install node
 
 First of all you need to install `echo_node`. This could be done by compiling whole project from source or download binaries matching your system. 
-[How to install node]()
+[How to install node](build.md)
 
 ## Launch the node
 
@@ -40,6 +40,8 @@ partial-operations = 1
 You can specify what accounts or contracts history should be tracked with `track-account` or `track-contract` arguments e.g. `track-account = "1.2.8"`. The following two parameters will greatly reduce the memory required for the operation, the principle is not to save the historical data index which is not related to the exchange account. To make this options work correctly you should also specify `partial-operations = 1` option.
 
 `max-ops-per-account`, `max-ops-per-contract` parameters indicate how many history records are kept for each account or contract. The default value is 1000. For exchanges, if you have more deposit and withdrawal records, consider setting a larger value. Earlier data is deleted from memory and cannot be queried quickly (but still recorded on the chain).
+
+`max-transaction-ids-to-store` parameter may to be specified to indicate how many transaction info records. No limit by default. Earlier data is deleted from memory and cannot be queried quickly (but still recorded on the chain).
 
 > NOTE: after changing this arguments you should restart node with `--replay-blockchain` argument
 
