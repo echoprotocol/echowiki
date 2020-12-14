@@ -23,6 +23,24 @@ key = value
 
 > `key` is the argument without a dash 
 
+### Launch echo_node with registrator account
+Registrar account have opportunity to register other accounts. For lauching should be specified `--account-info` argument with pair of account id and public key and specified `--registrar-account` argument with account id.
+
+```bash
+> ./echo_node --account-info ["1.2.6", "5JwnAdjJWufcv5c2xiEy1Ht8JUfND3o232JTbL2kze4TLhCJEcC"] --registrar-account "1.2.6"
+```
+
+### Decrese memory usage
+To decrese memory usage specify some `history` plugin arguments.
+
+For example you may track only certain contracts or accounts and store not all their history, but only last certain number of operations. Also `history` plugin stores the least information about transactions(block number, inxed in block, id of transaction). `--max-transaction-ids-to-store` is used to regulate amount of stored transaction_info.
+
+```bash
+> ./echo_node --track-contract "1.11.1" --track-contract "1.11.2" --track-account "1.2.18" --max-ops-per-contract 100 --max-ops-per-account 100 --max-transaction-ids-to-store 1000
+```
+
+By default `echo_node` track all accounts and contracts and store all history and all transactions.
+
 ### Arguments: description and examples
 
 #### Print help message
@@ -320,7 +338,7 @@ Maximum number of operations per account will be kept in memory.
 Contract ID to track history for (may specify multiple times).
 
 ```bash
-> ./echo_node --track-contract "1.2.6"
+> ./echo_node --track-contract "1.11.1"
 ```
 
 #### Maximum number of ops per contract in history
@@ -328,6 +346,13 @@ Maximum number of operations per contract will be kept in memory.
 
 ```bash
 > ./echo_node --max-ops-per-contract 1000
+```
+
+#### Maximum number of transaction info in history
+Maximum number of transaction info to store in memory.
+
+```bash
+> ./echo_node --max-transaction-ids-to-store 1000
 ```
 
 #### Partial operation storing
