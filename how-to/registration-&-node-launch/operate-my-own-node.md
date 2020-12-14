@@ -359,7 +359,7 @@ Maximum number of transaction info to store in memory.
 Keep only those operations in memory that are related to history tracking.
 
 ```bash
-> ./echo_node --partial-operations true
+> ./echo_node --partial-operations
 ```
 
 #### Endpoint for EthRPC

@@ -34,10 +34,10 @@ max-ops-per-account = 1000
 max-ops-per-contract = 1000
 
 # History: Keep only those operations in memory that are related to history tracking
-partial-operations = 1
+partial-operations = true
 ```
 
-You can specify what accounts or contracts history should be tracked with `track-account` or `track-contract` arguments e.g. `track-account = "1.2.8"`. The following two parameters will greatly reduce the memory required for the operation, the principle is not to save the historical data index which is not related to the exchange account. To make this options work correctly you should also specify `partial-operations = 1` option.
+You can specify what accounts or contracts history should be tracked with `track-account` or `track-contract` arguments e.g. `track-account = "1.2.8"`. The following two parameters will greatly reduce the memory required for the operation, the principle is not to save the historical data index which is not related to the exchange account. To make this options work correctly you should also specify `partial-operations = true` option.
 
 `max-ops-per-account`, `max-ops-per-contract` parameters indicate how many history records are kept for each account or contract. The default value is 1000. For exchanges, if you have more deposit and withdrawal records, consider setting a larger value. Earlier data is deleted from memory and cannot be queried quickly (but still recorded on the chain).
 
