@@ -13,7 +13,7 @@ Example:
 - eth_account1 stake 10 ETH for echo_account;
 - eth_account2 stake 5 ETH for echo_account;
 
-So echo_account will have 15 `SBTC`, but if you want to withdraw:
+So echo_account will have 15 `SETH`, but if you want to withdraw:
 
 - eth_account1 can withdraw up to 10 ETH;
 - eth_account2 can withdraw up to 5 ETH;

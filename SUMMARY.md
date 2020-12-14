@@ -72,6 +72,7 @@
   * [DID](advanced/did.md)
   * [Block reward](advanced/block-reward.md)
   * [Exchanges integration](advanced/exchanges-integration.md)
+  * [ECHO distribution](advanced/distribution.md)
 * [API Reference](api-reference/README.md)
   * [Echo Wallet API](api-reference/echo-wallet-api/README.md)
   * [Echo Node API](api-reference/echo-node-api/README.md)
