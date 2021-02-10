@@ -16,7 +16,7 @@
   * [What is Echo delegate and how to become one?](#what-is-echo-delegate-and-how-to-become-one)
   * [How to lock your Echo funds to participate in staking?](#how-to-lock-your-echo-funds-to-participate-in-staking)
   * [How to register a token in the Echo network?](#how-to-register-a-token-in-the-echo-network)
-  * [How to Echo's block rewards work?](#how-to-echo's-block-rewards-work)
+  * [How Echo's block rewards work?](#how-echo's-block-rewards-work)
 * [Bitcoin and Ethereum Sidechains](#bitcoin-and-ethereum-sidechains)
   * [What is a sidechain?](#what-is-a-sidechain)
   * [How does Echo’s sidechains work?](#how-does-echos-sidechains-work)
@@ -149,7 +149,7 @@ To increase your chances to get a reward, you have to lock (freeze) your funds i
 
 First, you have to create an ERC20 token on the Ethereum blockchain. Then, you can register this token in the Echo network. For it, call the method [register_erc20_token](/api-reference/echo-wallet-api/README.md#register_erc20_token-account-eth_addr-name-symbol-decimals-broadcast). For this purpose you should specify the account that will be the owner of the token, the address of the contract in Ethereum, the name of the token in Echo, which token will have an abbreviated name in Echo and precision. That to check the registered token, please, use the following methods [get_erc20_token](/api-reference/echo-wallet-api/README.md#get_erc20_token-eth_addr_or_id) and [check_erc20_token](/api-reference/echo-wallet-api/README.md#check_erc20_token-id).
 
-### How to Echo's block rewards work?
+### How Echo's block rewards work?
 
 When valid block occurs in Echo chain, producer and verifiers of previous block will obtain a block reward.
 

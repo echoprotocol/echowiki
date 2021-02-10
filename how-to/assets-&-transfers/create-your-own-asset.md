@@ -1,4 +1,4 @@
-# How to: How to create your own token with Echo
+# How to: How to create your own asset with Echo
 
 ## General guidelines
 

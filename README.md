@@ -48,7 +48,7 @@ The project is currently under heavy development and testing as early-stage expe
 * Create and issue new assets.
 * Transfer assets.
 * Deploy and access smart contracts written in Solidity with the EVM.
-* Deploy and access smart contracts written in С++ via x86-64 VM.
+<!--- * Deploy and access smart contracts written in С++ via x86-64 VM. --->
 * Create and use account addresses.
 * Launch your node and access its API to communicate with the blockchain.
 

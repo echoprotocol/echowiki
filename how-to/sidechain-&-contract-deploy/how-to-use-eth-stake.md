@@ -124,11 +124,10 @@ Method `stake` have signature:
 "a694fc3a": "stake(uint256)"
 ```
 
-So you need just to send transaction to contract address with signature of method and id of Echo account.
+So you need just to send transaction to contract address with signature of method and id of Echo account. Echo account id conversion to address is described [there](/technologies/evm-support/README.md#converting-echo-ids-to-ethereum-addresses). We will use `1.2.26` Echo account for this short example.
 
 > ID of Echo account is instance ID in triplet, e.g. 1.2.26 account have ID=26.
 
-We will use 1.2.26 Echo account for this example.
 
 So as argument for `stake` we have 26. And methods gets `uint256`, so we take hex number `1A` (that 26 in hex), and paste some 0 to get 32 bytes number:
 
