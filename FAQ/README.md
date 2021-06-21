@@ -16,7 +16,7 @@
   * [What is Echo delegate and how to become one?](#what-is-echo-delegate-and-how-to-become-one)
   * [How to lock your Echo funds to participate in staking?](#how-to-lock-your-echo-funds-to-participate-in-staking)
   * [How to register a token in the Echo network?](#how-to-register-a-token-in-the-echo-network)
-  * [How Echo's block rewards work?](#how-echo's-block-rewards-work)
+  * [How Echo's block rewards work?](#how-echos-block-rewards-work)
 * [Bitcoin and Ethereum Sidechains](#bitcoin-and-ethereum-sidechains)
   * [What is a sidechain?](#what-is-a-sidechain)
   * [How does Echo’s sidechains work?](#how-does-echos-sidechains-work)
@@ -182,7 +182,7 @@ A sidechain is a method of representing an asset (such as Bitcoin) from it's nat
 
 Echo's sidechains work through a 2-way peg to the native blockchain. For Bitcoin, this means that BTC is deposited into a multisignature address and a corresponding amount of Echo BTC, or eBTC, is minted on the Echo blockchain to the user who initiated the deposit. The new eBTC can be used to interact with a smart contract, traded on an exchange, or transferred to another user. When the eBTC needs to be converted back to BTC, it will be broadcasted to the network and the corresponding amount of BTC will be released on the bitcoin core blockchain. The protocol ensures that the same BTC cannot be valid on both blockchains at the same time.
 
-Read further into the sidechain mechanism here: https://docs.echo.org/v/version-0.22/technologies/sidechains
+Read further into the sidechain mechanism here: [technologies/sidechains](/technologies/sidechains/README.md)
 
 ### Is Echo compatible with Bitcoin?
 

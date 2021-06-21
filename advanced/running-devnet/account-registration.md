@@ -2,7 +2,7 @@
 
 This section will describe how to enable Registration API on your node.
 
-Usage example can be found in the ["Get Started" section](../../how-to/register-account.md).
+Usage example can be found in the ["Get Started" section](/how-to/registration-&-node-launch/register-account.md).
 
 ## Setup for registrar's node
 Enable `registration` plugin and specify `registrar-account`.
