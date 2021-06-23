@@ -13,7 +13,7 @@
   * [How to freeze and unfreeze Echo funds for committee member](/how-to/committee-node-launch-&-committee-usage/freeze-unfreeze-committee-frozen-balance.md)
   * [How to Echo committee publishes new rates for ETH and BTC](/how-to/committee-node-launch-&-committee-usage/publish-asset-feeds.md)
 * [Assets & Transfers](/how-to/assets-&-transfers/README.md)
-  * [How to create your own token with Echo](/how-to/assets-&-transfers/create-your-own-token.md)
+  * [How to create your own asset with Echo](/how-to/assets-&-transfers/create-your-own-asset.md)
   * [How to transfer between accounts](/how-to/assets-&-transfers/make-transfer-between-accounts.md)
 * [Wallets](/how-to/wallets/README.md)
   * [How to start using the Echo Wallet](/how-to/wallets/use-cli-wallet.md)
