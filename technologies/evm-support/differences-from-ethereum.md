@@ -23,7 +23,7 @@ When performing an operation, the Gas amount is determined by the formula `Fee A
 
 ## New features in solidity
 
-To support various types of assets in contracts, both the solidity compiler (solc) and the Ethereum Virtual Machine have been refined. As a result, to use the new functionality added to Echo smart contracts, it is required to compile using the modified solidity compiler.
+To support various types of assets in contracts, both the solidity compiler (solc) and the Ethereum Virtual Machine have been refined. As a result, to use the new functionality(all functions described below but `ecrecover`) added to Echo smart contracts, it is required to compile using the modified solidity compiler [solc-bin](https://github.com/echoprotocol/solc-bin).
 
 ### Functions
 
@@ -184,6 +184,7 @@ contract C {
 ```
 
 #### `ecrecover`
+
 A function used to recover the echo account address associated with the its public key from elliptic curve signature. Returns echo account address or zero on error.
 
 First, you need to associate the evm address generated from the existing private key with the existing account in the echo using the operation [evm_address_register_operation](/api-reference/echo-operations/account-management.md#evm_address_register_operation). Next, you need to sign the message with this private key. The account address in the echo will be received from this signature.
@@ -199,6 +200,25 @@ Example:
 contract C {
     function recover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) public returns (address)  {
         return ecrecover(hash, v, r, s);
+    }
+}
+```
+
+#### `ecrecovernative`
+
+A function that is working just as in Ethereum and only restores address from a signature.
+
+`ecrecovernative(bytes32 hash, uint8 v, bytes32 r, bytes32 s)`
+- `bytes32 hash` - hash of the message
+- `uint8 v` - final 1 byte of signature
+- `bytes32 r` - first 32 bytes of signature
+- `bytes32 s` - second 32 bytes of signature
+
+Example:
+```cpp
+contract C {
+    function recover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) public returns (address)  {
+        return ecrecovernative(hash, v, r, s);
     }
 }
 ```
@@ -304,10 +324,6 @@ contract Call {
 ```
 
 ### Ways to use
-
-#### Use Echo Solc
-
-To compile contracts with additional methods, an advanced Solc compiler can be used - [solc-bin](https://github.com/echoprotocol/solc-bin).
 
 #### Use predefined contracts
 
