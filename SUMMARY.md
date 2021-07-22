@@ -120,6 +120,7 @@
   * [TestRPC](api-reference/testrpc/README.md)
     * [Methods](api-reference/testrpc/methods.md)
 * [Changelogs](changelogs/README.md)
+  * [0.25](changelogs/0.25.md)
   * [0.24](changelogs/0.24.md)
   * [0.23](changelogs/0.23.md)
   * [0.22](changelogs/0.22.md)

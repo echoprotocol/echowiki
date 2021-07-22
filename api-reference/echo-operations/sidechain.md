@@ -824,7 +824,6 @@ struct sidechain_btc_create_address_operation : public base_operation
    asset fee;
 
    account_id_type account;
-   std::string backup_address;
 
    extensions_type extensions;
 
@@ -843,126 +842,25 @@ struct sidechain_btc_create_address_operation : public base_operation
          "asset_id": "1.3.0"
       },
       "account": "1.2.0",
-      "backup_address": "n4cLNDfyVPGoNFUpUEyBP8TzDPRNaVBm6E",
       "extensions": []
    }
 ]
 ```
-
-
-## sidechain_btc_create_intermediate_deposit_operation
-
-An internal operation by which committee members processed deposit to account.
-
-This operation is sent by the committee member to indicate that btc transaction with deposit was processed in the echo.
-
-```cpp
-struct sidechain_btc_create_intermediate_deposit_operation : public base_operation
-{
-   struct fee_parameters_type { uint64_t fee = 0; };
-
-   asset fee;
-
-   account_id_type committee_member_id;
-
-   account_id_type account;
-   btc_address_id_type btc_address_id;
-   btc_transaction_details tx_info;
-
-   extensions_type extensions;
-
-   account_id_type fee_payer()const { return committee_member_id; }
-};
-```
-
-### JSON Example
-
-```json
-[
-   61,
-   {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
-      "committee_member_id": "1.2.0",
-      "account": "1.2.0",
-      "btc_address_id": "1.19.0",
-      "tx_info": {
-         "block_number": 0,
-         "out": {
-            "tx_id": "0000000000000000000000000000000000000000000000000000000000000000",
-            "index": 0,
-            "amount": 0
-         }
-      },
-      "extensions": []
-   }
-]
-```
-
-
-## sidechain_btc_intermediate_deposit_operation
-
-An internal operation by which committee members send from intermediate address to deposit address.
-
-This operations is used by the committee member to send btc from intermediate address to deposit address.
-
-```cpp
-struct sidechain_btc_intermediate_deposit_operation : public base_operation
-{
-   struct fee_parameters_type { uint64_t fee = 0; };
-
-   asset fee;
-
-   account_id_type committee_member_id;
-   btc_intermediate_deposit_id_type intermediate_address_id;
-   btc_signature_type signature;
-
-   extensions_type extensions;
-
-   account_id_type fee_payer()const { return committee_member_id; }
-};
-```
-
-### JSON Example
-
-```json
-[
-   62,
-   {
-      "fee": {
-         "amount": 0,
-         "asset_id": "1.3.0"
-      },
-      "committee_member_id": "1.2.0",
-      "intermediate_address_id": "1.20.0",
-      "signature": [],
-      "extensions": []
-   }
-]
-```
-
 
 ## sidechain_btc_deposit_operation
 
-An internal operation by which committee members processed deposit to deposit address from intermediate address.
-
-This operation is used by the committee member to indicate that transfer from intermediate address to deposit address was processed.
+This operation is used by the committee member to indicate that deposit address was processed.
 
 ```cpp
 struct sidechain_btc_deposit_operation : public base_operation
 {
    struct fee_parameters_type { uint64_t fee = 0; };
 
-   asset fee;
+    asset fee;
 
-   account_id_type committee_member_id;
-   account_id_type account;
-   btc_intermediate_deposit_id_type intermediate_deposit_id;
-   btc_transaction_details tx_info;
-
-   extensions_type extensions;
+    account_id_type account;
+    btc_address_id_type btc_address_id;
+    btc_transaction_details tx_info;
 
    account_id_type fee_payer() const { return committee_member_id; }
 };
@@ -1278,6 +1176,223 @@ struct sidechain_stake_btc_update_operation : public base_operation
     },
     "is_vin": "false",
     "extensions": [ ]
+  }
+]
+```
+
+## sidechain_eth_spv_create_operation
+
+Used by the committee member to add Ethereum block header and sidechain related transaction receipts(with proof) from it
+
+```cpp
+struct sidechain_eth_spv_create_operation : public base_operation
+{
+    struct fee_parameters_type 
+    {
+        uint64_t fee = 0; 
+    };
+    
+    asset fee;
+
+    account_id_type committee_member_id;
+    spv::eth::block_header header;
+    std::vector<spv::eth::merkle_proof> proofs;
+    
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  42,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_member_id": "1.2.0",
+    "header": {
+      "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "sha3Uncles": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "miner": "0x",
+      "stateRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "transactionsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "receiptsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "logsBloom": "0x",
+      "difficulty": "0",
+      "number": "0",
+      "gasLimit": "0",
+      "gasUsed": "0",
+      "timestamp": "0",
+      "extraData": "0x",
+      "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "nonce": "0x"
+    },
+    "proofs": [],
+    "extensions": []
+  }
+]
+```
+
+## sidechain_eth_spv_add_missed_tx_receipt_operation
+
+Can be used by any user to add proof for a missed transaction by a committee member. Also will active penalties mechanism
+
+```cpp
+struct sidechain_eth_spv_add_missed_tx_receipt_operation : public base_operation
+{
+    struct fee_parameters_type { uint64_t fee = 0; };
+    
+    asset fee;
+
+    account_id_type reporter;
+    fc::sha256 block_hash;
+    std::vector<spv::eth::merkle_proof> proofs;
+    
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return reporter; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  43,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "reporter": "1.2.0",
+    "block_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "proofs": [],
+    "extensions": []
+  }
+]
+```
+
+## sidechain_btc_spv_create_operation
+
+Used by the committee member to add Bitcoin block header and sidechain related transactions(and its proofs) from it
+
+```cpp
+struct sidechain_btc_spv_create_operation : public base_operation
+{
+    struct fee_parameters_type { uint64_t fee = 0; };
+    
+    asset fee;
+
+    account_id_type committee_member_id;
+    spv::btc::block_header header;
+    std::vector<spv::btc::merkle_proof> proofs;
+    
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return committee_member_id; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  67,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "committee_member_id": "1.2.0",
+    "header": {
+      "version": 0,
+      "prev_block_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "merkle_root": "0000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": 0,
+      "bits": 0,
+      "nonce": 0,
+      "height": 0
+    },
+    "proofs": [],
+    "extensions": []
+  }
+]
+```
+
+## sidechain_btc_spv_add_missed_tx_operation
+
+Can be used by any user to add proof for a missed transaction by a committee member. Also will active penalties mechanism
+
+```cpp
+struct sidechain_btc_spv_add_missed_tx_operation : public base_operation
+{
+    struct fee_parameters_type { uint64_t fee = 0; };
+    
+    asset fee;
+
+    account_id_type reporter;
+    fc::sha256 block_hash;
+    std::vector<spv::btc::merkle_proof> proofs;
+    
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return reporter; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  68,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "reporter": "1.2.0",
+    "block_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "proofs": [],
+    "extensions": []
+  }
+]
+```
+
+## sidechain_spv_exchange_excess_funds_operation
+
+Can be used by any user to exchange surplus of sidechain asset caused by unexpected committee behavior
+
+```cpp
+struct sidechain_spv_exchange_excess_funds_operation : public base_operation
+{
+    struct fee_parameters_type { uint64_t fee = 0; };
+
+    asset fee;
+    account_id_type account;
+
+    asset amount;
+    extensions_type extensions;
+
+    account_id_type fee_payer() const { return account; }
+};
+```
+
+### JSON Example
+
+```json
+[
+  69,{
+    "fee": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "account": "1.2.0",
+    "amount": {
+      "amount": 0,
+      "asset_id": "1.3.0"
+    },
+    "extensions": []
   }
 ]
 ```

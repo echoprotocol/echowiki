@@ -35,6 +35,8 @@
     * [update_account](#update_account-account-new_options-broadcast-new_active-new_echorand_key)
     * [get_account_address_history](#get_account_address_history-address-start-stop-limit)
     * [get_account_history_operations](#get_account_history_operations-account-operation_id-start-stop-limit)
+    * [register_evm_address](#register_evm_address-owner-evm_address-broadcast)
+)
 * Keys
     * [import_key](#import_key-account_name_or_id-priv_key)
     * [create_eddsa_keypair](#create_eddsa_keypair)
@@ -137,7 +139,7 @@
     * [propose_register_asset_in_sidechain](#propose_register_asset_in_sidechain-proposing_account-expiration_time-erc20_data-broadcast)
     * [transfer_to_eth_erc20](#transfer_to_eth_erc20-account-to-amount-asset_symbol-broadcast)
 * Sidechain-Bitcoin
-    * [create_btc_address](#create_btc_address-account-backup_address-broadcast)
+    * [create_btc_address](#create_btc_address-account-broadcast)
     * [get_btc_address](#get_btc_address-account)
     * [get_btc_deposit_script](#get_btc_deposit_script-address)
     * [withdraw_btc](#withdraw_btc-account-btc_addr-value-broadcast)
@@ -527,6 +529,22 @@ Get all transfers about this address.
 
 ```
 get_account_address_history f149bd2883b1179965bd6706092573be4d68fec8 1.6.67 1.6.0 100
+```
+
+### `register_evm_address owner evm_address broadcast`
+
+Get operations relevant to the specified account.
+
+### Parameters
+
+| Option | Description |
+| :--- | :--- |
+| `string owner` | the id or name of the account to register address for |
+| `eth_address_type evm_address` | address that will be associated with owner account id |
+| `bool broadcast` | true to broadcast the transaction on the network |
+
+```
+get_account_history_operations 1.2.12 1 1.6.10 1.6.0 100
 ```
 
 ### `get_account_history_operations account operation_id start stop limit`
@@ -1752,17 +1770,16 @@ transfer_to_eth_erc20 nathan 545a68602db30bf5db9692267f8f84b7f1e70ec3 100 ECHO t
 
 ## Sidechain Bitcoin
 
-### `create_btc_address account backup_address broadcast`
+### `create_btc_address account broadcast`
 Creates a transaction to generate bitcoin deposit address.
 
 | Option | Description |
 | :--- | :--- |
 | `string account` | the account or id for which the bitcoin address is generated. |
-| `string backup_address` | the P2PKH address to transfer satoshis back. |
 | `bool broadcast` | true if you want to broadcast the transaction |
 
 ```
-create_btc_address nathan 17VZNX1SN5NtKa8UQFxwQbFeFc3iqRYhem true
+create_btc_address nathan true
 ```
 
 ### `get_btc_address account`

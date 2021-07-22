@@ -6,7 +6,7 @@ x86 is now in the development stage.
 
 Default configuration values for chain parameters can be obtained using the method [get_config](../echo-node-api/database-api/globals-api.md#get_config).
 
-```cpp
+```cpp   
 struct chain_parameters
 {
    /** using a shared_ptr breaks the circular dependency created between operations and the fee schedule */
@@ -37,19 +37,25 @@ struct chain_parameters
       {360, 150 * ECHO_1_PERCENT},
    };
 
-   rand::config      echorand_config;
-   sidechain::config sidechain_config;
+   rand::config            echorand_config;
+   sidechain::config       sidechain_config;
    sidechain::erc20_config erc20_config;
    sidechain::stake_config stake_sidechain_config;
 
-   gas_price_t gas_price;
+   struct gas_price_t
+   {
+         uint64_t price = 1;
+         uint64_t gas_amount = 1000;
+   } gas_price;
 
    std::set<asset_id_type> consensus_assets;
 
    std::set<asset_id_type> valid_fee_asset = {asset_id_type(1), asset_id_type(2)}; ///< assets other than ECHO that can be accepted as fee without fee pool 
+   
+   economy::config         economy_config;
 
-   economy::config economy_config;
-
+   spv::penalties::config  spv_penalties_config;
+   
    extensions_type         extensions;
 };
 
@@ -70,3 +76,5 @@ struct chain_parameters
 [economy_config](economy-config.md#Configuration-parameters-for-block-rewards-distribution)
 
 [gas_price_t](types.md#Gas-price-type)
+
+[spv::penalties::config](sidechain-config.md#SPV-Penalties-config)
