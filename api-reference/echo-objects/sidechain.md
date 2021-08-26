@@ -35,24 +35,6 @@ struct stake_btc_vout_object
 };
 ```
 
-## stake_eth_update_object
-
-```cpp
-struct stake_eth_update_object
-{    
-    account_id_type account;
-    asset_id_type asset_id;
-    uint64_t current_balance;
-
-    fc::sha256 transaction_hash;
-
-    bool is_approved = false;
-    set<account_id_type> approves;
-
-    extensions_type extensions;
-};
-```
-
 ## btc_block_object
 
 ```cpp

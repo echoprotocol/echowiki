@@ -30,11 +30,10 @@
 |did_object_type|1.25.x|
 |stake_btc_script_object_type|1.26.x|
 |stake_btc_vout_object_type|1.27.x|
-|stake_eth_update_object_type|1.28.x|
-|btc_block_object_type|1.29.x|
-|btc_tx_object_type|1.30.x|
-|eth_block_object_type|1.31.x|
-|eth_tx_receipt_object_type|1.32.x|
+|btc_block_object_type|1.28.x|
+|btc_tx_object_type|1.29.x|
+|eth_block_object_type|1.30.x|
+|eth_tx_receipt_object_type|1.31.x|
 
 ## Implementation types
 

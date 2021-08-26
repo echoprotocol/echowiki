@@ -20,6 +20,8 @@ class dynamic_global_property_object
     uint64_t last_processed_btc_block = 0;
     uint32_t last_retarget_time = 0;
 
+    uint64_t last_processed_eth_block = 0;
+
     extensions_type extensions;
 };
 

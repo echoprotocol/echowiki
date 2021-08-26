@@ -97,69 +97,6 @@ Returns all withdrawals, for the given account id.
 }
 ```
 
-### get_account_stake_objects(account, type)
-
-Returns all stake objects, for the given account id.
-
-#### Parameters
-
-| Option | Description |
-| :--- | :--- |
-| `account_id_type account` | the id of the account to provide information about |
-| `string type` | the type of the withdrawals may be "", "eth" or "btc" |
-
-#### Example
-
-```javascript
-{
-    "id": 4,
-    "method": "call",
-    "params": [
-        DATABASE_API_ID,
-        "get_account_stake_objects",
-        [
-            "1.2.21",
-            ""
-        ]
-    ]
-}
-```
-
-#### Returns
-
-The all public withdrawals data stored in the blockchain.
-
-```javascript
-{
-    "id": 4,
-    "jsonrpc": "2.0",
-    "result": [
-        {
-            "id": "1.16.0",
-            "withdraw_id": 0,
-            "account": "1.2.21",
-            "eth_addr": "1AFeEcE88325110488570146f2635C8615Ad0613",
-            "value": 1000,
-            "is_approved": true,
-            "is_sent": false,
-            "echo_block_number": 1654,
-            "approves": [],
-            "extensions": []
-        },
-        {
-            "id": "1.23.0",
-            "account": "1.2.21",
-            "btc_addr": "mxhWhgx46cqvpHYzTMuGL9eir59V7vqM9c",
-            "value": 12,
-            "block_number": 561,
-            "is_approved": true,
-            "approves": [],
-            "extensions": []
-        }
-    ]
-}
-```
-
 ## Sidechain Bitcoin
 
 ### get\_btc\_address\(account\)

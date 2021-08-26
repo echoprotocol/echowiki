@@ -45,11 +45,9 @@ Committee member sends this operation to approve created address. After the requ
 ```cpp
 struct sidechain_eth_approve_address_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type {};
 
    asset fee;
-   account_id_type committee_member_id;
-   std::vector<account_id_type> malicious_committeemen;
 
    account_id_type account;
    eth_address_type eth_addr;
@@ -57,7 +55,8 @@ struct sidechain_eth_approve_address_operation : public base_operation
 
    extensions_type extensions;
 
-   account_id_type fee_payer() const { return committee_member_id; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
@@ -90,10 +89,9 @@ This operation is sent by the committee member to indicate that eth transaction 
 ```cpp
 struct sidechain_eth_deposit_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type {};
 
    asset fee;
-   account_id_type committee_member_id;
    uint64_t deposit_id;
    account_id_type account;
    uint64_t value;
@@ -101,7 +99,8 @@ struct sidechain_eth_deposit_operation : public base_operation
 
    extensions_type extensions;
 
-   account_id_type fee_payer() const { return committee_member_id; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
@@ -250,16 +249,16 @@ This operation is used by the commitee member to approve withdrawal. After the r
 ```cpp
 struct sidechain_eth_approve_withdraw_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type {};
 
    asset fee;
-   account_id_type committee_member_id;
    uint64_t withdraw_id;
    sha256 transaction_hash;
 
    extensions_type extensions;
 
-   account_id_type fee_payer() const { return committee_member_id; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
@@ -497,11 +496,10 @@ This operation is sent by the committee member to indicate that eth transaction 
 ```cpp
 struct sidechain_erc20_deposit_token_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type {};
 
    asset fee;
-   
-   account_id_type committee_member_id;
+
    std::vector<account_id_type> malicious_committeemen;
 
    account_id_type account;
@@ -511,7 +509,8 @@ struct sidechain_erc20_deposit_token_operation : public base_operation
 
    extensions_type extensions;
 
-   account_id_type fee_payer() const { return committee_member_id; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
@@ -664,17 +663,17 @@ This operation is used by the commitee member to approve withdrawal. After the r
 ```cpp
 struct sidechain_erc20_approve_token_withdraw_operation : public base_operation
 {
-   struct fee_parameters_type { uint64_t fee = 0; };
+   struct fee_parameters_type {};
 
    asset fee;
 
-   account_id_type committee_member_id;
    uint64_t withdraw_id;
    sha256 transaction_hash;
 
    extensions_type extensions;
 
-   account_id_type fee_payer() const { return committee_member_id; }
+   account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+   share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
@@ -1044,18 +1043,14 @@ struct sidechain_btc_approve_aggregate_operation : public base_operation
 
 ## sidechain_stake_eth_update_operation
 
-Used by the committee member to approve/generate  `stake_eth_update_object` with Ethereum stake sidechain data.
+Used by the committee member to adjust balance with Ethereum stake sidechain data.
 
 ```cpp
 struct sidechain_stake_eth_update_operation : public base_operation
 {
-    struct fee_parameters_type
-    {
-        uint64_t fee = 0;
-    };
+    struct fee_parameters_type {};
 
     asset fee;
-    account_id_type committee_member_id;
     asset_id_type asset_id;
     uint64_t current_balance;
     account_id_type account;
@@ -1064,7 +1059,9 @@ struct sidechain_stake_eth_update_operation : public base_operation
 
     extensions_type extensions;
 
-    account_id_type fee_payer() const { return committee_member_id; }
+    account_id_type fee_payer() const { return ECHO_NULL_ACCOUNT; }
+    void validate() const {};
+    share_type calculate_fee(const fee_parameters_type& schedule) const { return 0; }
 };
 ```
 
