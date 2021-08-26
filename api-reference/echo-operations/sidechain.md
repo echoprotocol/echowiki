@@ -856,12 +856,14 @@ struct sidechain_btc_deposit_operation : public base_operation
 {
    struct fee_parameters_type { uint64_t fee = 0; };
 
-    asset fee;
+   asset fee;
 
-    account_id_type account;
-    btc_address_id_type btc_address_id;
-    btc_transaction_details tx_info;
+   account_id_type account;
+   btc_address_id_type btc_address_id;
+   btc_transaction_details tx_info;
 
+   extensions_type extensions;
+   
    account_id_type fee_payer() const { return committee_member_id; }
 };
 ```

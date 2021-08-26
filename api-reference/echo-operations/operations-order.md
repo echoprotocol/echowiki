@@ -60,7 +60,7 @@
 |[sidechain_erc20_send_deposit_operation](sidechain.md#sidechain_erc20_send_deposit_operation)|55|
 |[sidechain_erc20_withdraw_token_operation](sidechain.md#sidechain_erc20_withdraw_token_operation)|56|
 |[sidechain_erc20_send_withdraw_operation](sidechain.md#sidechain_erc20_send_withdraw_operation)|57|
-|[sidechain_erc20_approve_token_withdraw_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation)|58|
+|[sidechain_erc20_approve_token_withdraw_operation](sidechain.md#sidechain_erc20_approve_token_withdraw_operation) // VIRTUAL|58|
 |[sidechain_erc20_issue_operation](sidechain.md#sidechain_erc20_issue_operation) // VIRTUAL|59|
 |[sidechain_erc20_burn_operation](sidechain.md#sidechain_erc20_burn_operation) // VIRTUAL|60|
 |[sidechain_erc20_transfer_asset_operation](sidechain.md#sidechain_erc20_transfer_asset_operation)|61|
