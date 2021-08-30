@@ -133,7 +133,7 @@ A user can receive her personal deposit addresses and history of the deposits an
 
 The committee is a group of Echo network participants, where every member is explicitly elected to participate in the committee. In addition to participating in the Echo consensus protocol, each elected member has voting rights on accepting/rejecting network events (incoming transactions from the Bitcoin/Ethereum network, transfer events, membership changes, etc.). The account, however, does not allow participants to make decisions on these events independently.
 
-Each of the committee members must send its vote in favor of the transfer of funds to or from the main chain. Committee members are voting via special Echo operations and these votes are collected in the special objects in the Echo database.
+Each of the committee members must send its vote in favor of the transfer of funds to or from the main chain. Committee members are voting via special Echo operations which are collected in the special objects in the Echo database.
 
 More than 2/3 of the votes collected is treated as a proof that some event happened on the main chain and can trigger a transaction to be sent back to the main chain. Hereinafter collecting of more than the threshold amount of votes will be referred as operation approved by committee.
 
@@ -154,19 +154,19 @@ The committee members are not only responsible for ensuring the stable operation
 Any sidechain mechanism implies stability against the following three critical situations:
 
 1. double waste of funds (on the main chain side or the sidechain side)
-1. loss of access to funds (on the main chain side or the sidechain side)
-1. ability of any committee members to make a sole decision and corrupt the state of the chain
+2. loss of access to funds (on the main chain side or the sidechain side)
+3. ability of any committee members to make a sole decision and corrupt the state of the chain
 
 The security of the Echo Sidechain with respect to the first point is based on two aspects:
 
 1. To avoid possible main chain forks all blocks should be processed with reasonable lag, 12 blocks for the Bitcoin chain and 20 blocks for the Ethereum chain. Hereinafter we will refer to the transaction as confirmed in the main chain if it has received the above mentioned number of confirmations in the chain.
-1. From the Echo side, this security is guaranteed by EchoRand, which reduces the probability of network forks to an extremely low level.
+2. From the Echo side, this security is guaranteed by EchoRand, which reduces the probability of network forks to an extremely low level.
 
 The second situation is covered with the ability to manually create transactions and transfer funds out of the address/account controlled by the committee and 24 hours delay in processing the deposits/withdrawals.
 
 In addition to that sidechain it includes decreasing after some predefined time the number of signatures required to withdraw funds and ability to cancel the deposit transaction during 24 hours for the Bitcoin sidechain. For details please refer to corresponding sections.
 
-Voting process covers the third possible vulnerability by not allowing any of the committee members to simulate non existent transactions on the main chain or to transfer funds out of the committee controlled account/address.
+Sidechain operations use SPV mechanism. It allows to store merkle proof beside sidechain transaction. This scheme covers the third possible vulnerability by not allowing any of the committee members to simulate to prevent simulating non existent transactions on the main chain or to transfer funds out of the committee controlled account/address.
 
 ## Bitcoin Sidechain
 
@@ -192,21 +192,22 @@ After a user deposit address is created, it is added to the list of observed add
 
 Upon receiving the withdrawal operation, each of committee members generate corresponding transactions to withdraw the Bitcoins to the specified withdrawal address.
 
+Every sidechain transaction is tracked and proccessed by one of the committee members with `sidechain_btc_spv_create_operation` contains the transaction details and its merkle proof. After that committee member extract info from transaction and send an appropriate operation.
+
 Deposit and withdrawal flow are described in detail below.
 
-BTC to eBTC conversion takes place in 3 stages:
+BTC to eBTC conversion:
 
-1. After the transfer to the deposit address is confirmed on the Bitcoin chain and detected by the sidechain, each of the committee members creates and sends `sidechain_btc_create_intermediate_deposit_operation` with the transaction details to the Echo network.
-1. 24 hours after the deposit operation is approved by committee, each of committee members creates the unique intermediate address script, creates a transaction from the deposit to the intermediate address, sign it and send `sidechain_btc_intermediate_deposit_operation` which contains the signature. After the operation is approved by the committee, a transaction is sent to the Bitcoin network. This transaction should have RBF flag enabled so if it gets stuck in the mempool the deposit owner will be able to send a replacement transaction with a higher fee and return his BTC to the backup address. Intermediate script provides ability similar to SMA script to reduce the number of required signatures during the time.
-1. After the transaction is confirmed on the Bitcoin chain and received back by sidechain, each of committee members creates `sidechain_btc_deposit_operation` with transaction details, and after the operation is approved by committee, corresponding amount of eBTC-s are issued to the user account, `sidechain_issue_operation` is applied and the deposit is stored in the Echo database.
+1. After the transfer to the deposit address is confirmed on the Bitcoin chain and detected by the sidechain, one of the committee members creates and sends `sidechain_btc_spv_create_operation` with the transaction details and its merkle proof to the Echo network.
+2. After the transaction is confirmed on the Bitcoin chain and received back by sidechain, `sidechain_btc_deposit_operation` is created with transaction details, and corresponding amount of eBTC-s are issued to the user account, `sidechain_issue_operation` is applied and the deposit is stored in the Echo database.
 
 This flow allows the locking of funds in the intermediate address and guarantees that the SMA transaction will not fail because of the users’ refund transaction sent earlier.
 
-BTC to eBTC conversion takes place in 3 stages:
+BTC to eBTC conversion:
 
 1. After the withdrawal operation is sent by the user it is stored in Echo database and specified amount of eBTC-s are withdrawn from the user’s account.
-1. In 24 hours this withdrawal becomes active and will be aggregated by the next aggregating transaction.
-1. After the committee approves the fact that the aggregating transaction has received necessary confirmations on the Bitcoin blockchain, withdrawal is treated as confirmed and `sidechain_burn_operation` is applied.
+2. In 24 hours this withdrawal becomes active and will be aggregated by the next aggregating transaction.
+3. After the committee approves the fact that the aggregating transaction has received necessary confirmations on the Bitcoin blockchain, withdrawal is treated as confirmed and `sidechain_burn_operation` is applied.
 
 ### Aggregating transaction
 
@@ -216,7 +217,7 @@ The amount transferred to the SMA is the sum of the previous SMA balance and all
 
 Please note that the input and output SMA can be different in case of changes in the committee as SMA script includes the committee Bitcoin public keys.
 
-After the aggregating transaction is confirmed on the Bitcoin chain, each of committee members creates `sidechain_btc_approve_aggregate_operation` with transaction details.
+After the aggregating transaction is confirmed on the Bitcoin chain, `sidechain_btc_approve_aggregate_operation` is created with transaction details.
 
 The SMA address script includes a mechanism for reducing the threshold after a certain period of time. In the case when three months go by and the output has not been used up, only the signatures of more than half the committee will be needed to allow spending. After 6 months, more than a third of the votes will suffice. This is necessary to allow the recovery of funds even in the case when part of the committee loses its keys.
 
@@ -229,8 +230,8 @@ CPFP mechanism will be used in the case that the SMA transaction gets stuck in t
 Changes to the list of committee addresses may occur in the following cases:
 
 1. A new committee member is added to the list (`committee_member_activate_operation`);
-1. A committee member is removed from the list (`committee_member_deactivate_operation`);
-1. A committee member has changed his Bictoin address (`committee_member_update_operation`).
+2. A committee member is removed from the list (`committee_member_deactivate_operation`);
+3. A committee member has changed his Bictoin address (`committee_member_update_operation`).
 
 Since the committee addresses are part of the multi-signature addresses, all 3 of these cases must initiate the change of the SMA. The process of changing the SMA is implicit. This means that when you change the SMA, the transaction is not sent only because of the need to change the address. The address changes with the next aggregate transaction.
 
@@ -328,6 +329,8 @@ Echo Ethereum sidechain allows Echo accounts owners to exchange their Ether and 
 
 In order to transfer ERC20 tokens from and to the Echo chain, ERC20 tokens should be registered in Echo network. Registration of the Ethereum ERC20 token deploys an ERC20 smart contract in Echo network and informs the sidechain to listen to the events of the connected ERC20 token on the Ethereum side. When a token is transferred to a deposit address on the Ethereum chain, a corresponding amount of  related tokens on the Echo side will be transferred to the user's account.
 
+Every sidechain transaction is tracked and proccessed by one of the committee members with `sidechain_eth_spv_create_operation` contains the transaction details and its merkle proof. After that committee member extract info from transaction and send an appropriate operation.
+
 ### User operations for Ethereum
 
 Initially, to enter funds, the user needs to receive their “personal” address, transfer of funds to which will always mean freezing of funds on the Ethereum side and issuing the corresponding amount of eETH to the account on Echo side.
@@ -352,20 +355,20 @@ Upon receiving the withdrawal operation, each of the committee members generate 
 
 Deposit and withdrawal flow are described in detail below.
 
-ETH to eETH conversion takes place in 3 stages:
+ETH to eETH conversion:
 
-1. When the event of new address creation is emitted by the main smart contract, each of the committee members receives this event and sends `sidechain_eth_approve_address_operation` into the Echo network. After the address is approved by the committee it is added to the list of observed addresses.
-1. When the deposit is transferred to the created address and the transfer event is emitted by the main smart contract, each of the committee members creates and sends `sidechain_eth_deposit_operation` into the Echo network with the transaction details.
-1. In 24 hours each of the committee members creates and sends `sidechain_eth_send_deposit_operation` which approves the deposit.
-1. After the operation is approved by committee, eETH-s are issued to the user account and `sidechain_issue_operation` is applied.
+1. When the event of new address creation is emitted by the main smart contract, one of the committee members receives this event and sends `sidechain_eth_approve_address_operation` into the Echo network. The address is added to the list of observed addresses.
+2. When the deposit is transferred to the created address and the transfer event is emitted by the main smart contract, committee member that tracked `sidechain_eth_spv_create_operation` creates and sends `sidechain_eth_deposit_operation` into the Echo network with the transaction details.
+3. In 24 hours each of the committee members creates and sends `sidechain_eth_send_deposit_operation` which approves the deposit.
+4. eETH-s are issued to the user account and `sidechain_issue_operation` is applied.
 
-eETH to ETH conversion takes place in 4 stages:
+eETH to ETH conversion:
 
 1. Withdrawal operation is withdrawing the eETH-s from the users account and is creating pending withdrawal object in the Echo chain.
-1. 24 hours after the withdrawal operation is sent by the user, each committee member is sending `sidechain_eth_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the withdraw method of the main smart contract.
-1. After the withdrawal is approved on the smart contract side, the Ethers are transferred to the specified account and the appropriate event is emitted.
-1. Each committee member sends `sidechain_eth_approve_withdraw_operation` into the Echo network after receiving this event.
-1. After the operation is approved by committee, the withdrawal is marked as processed and `sidechain_burn_operation` is applied.
+2. 24 hours after the withdrawal operation is sent by the user, each committee member is sending `sidechain_eth_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the withdraw method of the main smart contract.
+3. After the withdrawal is approved on the smart contract side, the Ethers are transferred to the specified account and the appropriate event is emitted.
+4. One of the committee member tracks `sidechain_eth_spv_create_operation` and sends `sidechain_eth_approve_withdraw_operation` into the Echo network after receiving this event.
+5. The withdrawal is marked as processed and `sidechain_burn_operation` is applied.
 
 ### Committee member operations for ERC20
 
@@ -375,27 +378,27 @@ Upon receiving the ERC20 withdrawal operation, each of the committee members gen
 
 Deposit and withdrawal flow are described in detail below.
 
-ERC20 token transfer to Echo takes place in 2 stages:
+ERC20 token transfer to Echo chain:
 
-1. After the transfer event is emitted by the ERC20 contract, each of the committee members creates and sends `sidechain_erc20_deposit_token_operation` into the Echo network with the transaction details, token info and amount.
-1. In 24 hours each of the committee members creates and sends `sidechain_erc20_send_deposit_operation` which approves the deposit.
-1. After the operation is approved by the committee, ERC20 tokens are issued to the user account on the Echo network using `sidechain_erc20_issue_operation`.
+1. After the transfer event is emitted by the ERC20 contract, one of the committee members creates and sends `sidechain_erc20_deposit_token_operation` into the Echo network with the transaction details, token info and amount.
+2. In 24 hours each of the committee members creates and sends `sidechain_erc20_send_deposit_operation` which approves the deposit.
+3. ERC20 tokens are issued to the user account on the Echo network using `sidechain_erc20_issue_operation`.
 
-ERC20 token transfer to Ethereum chain takes place in 4 stages:
+ERC20 token transfer to Ethereum chain:
 
-1. When the ERC20 token withdrawal operation is received, the specified amount of tokens are withdrawn from the user’s account and pending ERC20 withdrawal object is created in the Echo chain
-1. 24 hours after the ERC20 withdrawal operation is sent by the user, each committee member is sending `sidechain_erc20_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the ERC20 withdraw method of the main smart contract.
-1. After the withdrawal operation is approved on the smart contract side, the tokens are transferred to the specified account and appropriate event is emitted.
-1. Each of committee members sends `sidechain_erc20_approve_token_withdraw_operation` into the Echo network after receiving this event.
-1. After the operation is approved by the committee, the token withdrawal is marked as processed and tokens are burned by `sidechain_erc20_burn_operation`.
+1. When the ERC20 token withdrawal operation is received, the specified amount of tokens are withdrawn from the user’s account and pending ERC20 withdrawal object is created in the Echo chain.
+2. 24 hours after the ERC20 withdrawal operation is sent by the user, each committee member is sending `sidechain_erc20_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the ERC20 withdraw method of the main smart contract.
+3. After the withdrawal operation is approved on the smart contract side, the tokens are transferred to the specified account and appropriate event is emitted.
+4. One of the committee members sends `sidechain_erc20_approve_token_withdraw_operation` into the Echo network after receiving this event.
+5. The token withdrawal is marked as processed and tokens are burned by `sidechain_erc20_burn_operation`.
 
 ### Changes in the Committee
 
 Changes to the list of committee addresses may occur in the following cases:
 
 1. A new committee member is added to the list (`committee_member_activate_operation`);
-1. A committee member is removed from the list (`committee_member_deactivate_operation`);
-1. A committee member has changed his Bictoin address (`committee_member_update_operation`).
+2. A committee member is removed from the list (`committee_member_deactivate_operation`);
+3. A committee member has changed his Bictoin address (`committee_member_update_operation`).
 
 Since the committee addresses are stored in the main smart contract deployed on the Ethereum network, all 3 of these cases must initiate the update of these addresses on the contract side. The smart contract provides the interface for updating the list of addresses of the committee members. During such change each of the committee members send a transaction to the Ethereum network which invokes the update function of the smart contract. After the operation is approved on the main smart contract side, the list of committee members is updated in the contract.
 
@@ -418,6 +421,9 @@ All parameters (fees, minumums and gas price) are defined in the Echo config and
 
 ER20 tokens deposits and withdrawals are free of charge. Fees related to the ERC20 smart contract calls on the Echo side are covered by the fee pool of the contract.
 
+## Sidechain Penalties
+
+If committee members don't send an appropriate sidechain SPV transaction, any user can use `sidechain_btc_spv_add_missed_tx_operation` or `sidechain_eth_spv_add_missed_tx_receipt_operation` to add a proof for a missed transaction by a committee member. Is will also activate penalty mechanism which slahses all committee and reward the reporter.
 
 ## Further Development
 
