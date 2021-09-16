@@ -362,6 +362,14 @@ Also, Echo's Token Economy implies itself that if blocks are skipped due to the 
 Sidechain addresses are addresses on the network from which the sidechain operates.
 Echo uses an account model with the additional possibility to generate an alias for receiving funds to the address.
 
+### Replay Attack Protection
+
+A replay attack (also known as playback attack) is a form of network attack in which valid data transmission is maliciously or fraudulently repeated or delayed. This is carried out either by the originator or by an adversary who intercepts the data and re-transmits it, possibly as part of a spoofing attack by IP packet substitution. This is one of the lower-tier versions of a man-in-the-middle attack. Replay attacks are usually passive in nature.
+
+The replay attack allows any transaction signed in a way that is valid on both chains to be executed. So, for example, if you have an account with 10 eth in the Classic chain and 1 eth in the Ethereum chain, a transaction would allow an attacker to replay any basic balance transfer from the Ethereum chain on the Classic. A balance transfer of more than 1 eth signed on the Classic chain using wallet could not be replayed on the Ethereum chain until the account balance was large enough. But as soon as the balance on the Ethereum account is large enough, the transaction becomes valid and an attacker can replay it onto the Ethereum chain. Perhaps this attacker received payment for you in ETC and is hoping to get the same amount in ETH as well.
+
+When you sign a transaction, you're saying "I authorize X to happen". As long as the authorization makes sense on a chain, it can be used (once) on that chain. EIP155 allows the transaction signature to also include the chain for which the transaction is being signed -- essentially, the signed transaction now says "I authorize X to happen (only) on the Y chain." and the mining nodes will reject the transaction if they are not mining chain Y. Thus, even if the transaction were replayed onto another chain, the authorization is invalid on that chain.
+
 ## Agenda for Adoption
 
 ### What type of innovations will Echo projects add to the industry?
