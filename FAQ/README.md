@@ -47,6 +47,7 @@
   * [How many confirmations are required for consensus? Why are the lower requirements enough?](#how-many-confirmations-are-required-for-consensus-why-are-the-lower-requirements-enough)
   * [What are Echo’s plans to diversify nodes to avoid network centralization?](#what-are-echos-plans-to-diversify-nodes-to-avoid-network-centralization)
   * [What are the identifiable differences between on-chain and sidechain wallet addresses?](#what-are-the-identifiable-differences-between-on-chain-and-sidechain-wallet-addresses)
+  * [Replay Attack Protection](#replay-attack-protection)
 * [Agenda for Adoption](#agenda-for-adoption)
   * [What type of innovations will Echo projects add to the industry?](#what-type-of-innovations-will-echo-projects-add-to-the-industry)
   * [What type of relationship will Echo have with other blockchains?](#what-type-of-relationship-will-echo-have-with-other-blockchains)
@@ -364,11 +365,9 @@ Echo uses an account model with the additional possibility to generate an alias 
 
 ### Replay Attack Protection
 
-A replay attack (also known as playback attack) is a form of network attack in which valid data transmission is maliciously or fraudulently repeated or delayed. This is carried out either by the originator or by an adversary who intercepts the data and re-transmits it, possibly as part of a spoofing attack by IP packet substitution. This is one of the lower-tier versions of a man-in-the-middle attack. Replay attacks are usually passive in nature.
+The replay attack allows any transaction signed in a way that is valid on both chains to be executed. So, for example, if you have an account with 10 eth in the first chain (A-chain) and 1 eth in the second chain (B-chain) in the same network, a transaction would allow an attacker to replay any basic balance transfer from the B-chain on the A-chain. A balance transfer of more than 1 eth signed on the A-chain using wallet could not be replayed on the B-chain until the account balance was large enough. But as soon as the balance on the B-chain account is large enough, the transaction becomes valid and an attacker can replay it onto the B-chain.
 
-The replay attack allows any transaction signed in a way that is valid on both chains to be executed. So, for example, if you have an account with 10 eth in the Classic chain and 1 eth in the Ethereum chain, a transaction would allow an attacker to replay any basic balance transfer from the Ethereum chain on the Classic. A balance transfer of more than 1 eth signed on the Classic chain using wallet could not be replayed on the Ethereum chain until the account balance was large enough. But as soon as the balance on the Ethereum account is large enough, the transaction becomes valid and an attacker can replay it onto the Ethereum chain. Perhaps this attacker received payment for you in ETC and is hoping to get the same amount in ETH as well.
-
-When you sign a transaction, you're saying "I authorize X to happen". As long as the authorization makes sense on a chain, it can be used (once) on that chain. EIP155 allows the transaction signature to also include the chain for which the transaction is being signed -- essentially, the signed transaction now says "I authorize X to happen (only) on the Y chain." and the mining nodes will reject the transaction if they are not mining chain Y. Thus, even if the transaction were replayed onto another chain, the authorization is invalid on that chain.
+When you sign a transaction, you're saying "I authorize X to happen". As long as the authorization makes sense on a chain, it can be used (once) on that chain. [EIP155](https://eips.ethereum.org/EIPS/eip-155#list-of-chain-ids)allows the transaction signature to also include the chain for which the transaction is being signed -- essentially, the signed transaction now says "I authorize X to happen (only) on the Y chain." and the mining nodes will reject the transaction if they are not mining chain Y. Thus, even if the transaction were replayed onto another chain, the authorization is invalid on that chain.
 
 ## Agenda for Adoption
 
