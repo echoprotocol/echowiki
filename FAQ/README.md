@@ -365,9 +365,7 @@ Echo uses an account model with the additional possibility to generate an alias 
 
 ### Replay Attack Protection
 
-The replay attack allows any transaction signed in a way that is valid on both chains to be executed. So, for example, if you have an account with 10 eth in the first chain (A-chain) and 1 eth in the second chain (B-chain) in the same network, a transaction would allow an attacker to replay any basic balance transfer from the B-chain on the A-chain. A balance transfer of more than 1 eth signed on the A-chain using wallet could not be replayed on the B-chain until the account balance was large enough. But as soon as the balance on the B-chain account is large enough, the transaction becomes valid and an attacker can replay it onto the B-chain.
-
-When you sign a transaction, you're saying "I authorize X to happen". As long as the authorization makes sense on a chain, it can be used (once) on that chain. [EIP155](https://eips.ethereum.org/EIPS/eip-155#list-of-chain-ids)allows the transaction signature to also include the chain for which the transaction is being signed -- essentially, the signed transaction now says "I authorize X to happen (only) on the Y chain." and the mining nodes will reject the transaction if they are not mining chain Y. Thus, even if the transaction were replayed onto another chain, the authorization is invalid on that chain.
+The replay attack protection  prevents the replay of the same transaction on different chains on network of Ethereum by adding id chain addiction. Implementation features of this protection you can see [here](https://eips.ethereum.org/EIPS/eip-155#list-of-chain-ids).
 
 ## Agenda for Adoption
 
