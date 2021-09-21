@@ -365,7 +365,7 @@ Echo uses an account model with the additional possibility to generate an alias 
 
 ### Replay Attack Protection
 
-The replay attack protection  prevents the replay of the same transaction on different chains on network of Ethereum by adding id chain addiction. Implementation features of this protection you can see [here](https://eips.ethereum.org/EIPS/eip-155#list-of-chain-ids).
+The replay attack protection prevents a replay of the same transaction on different chains on Ethereum network by adding chain id to sign a transaction. You can see implementation features [here](https://eips.ethereum.org/EIPS/eip-155#list-of-chain-ids).
 
 ## Agenda for Adoption
 
