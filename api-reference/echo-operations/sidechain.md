@@ -877,9 +877,8 @@ struct sidechain_btc_deposit_operation : public base_operation
          "amount": 0,
          "asset_id": "1.3.0"
       },
-      "committee_member_id": "1.2.0",
       "account": "1.2.0",
-      "intermediate_deposit_id": "1.20.0",
+      "btc_address_id": "1.20.0",
       "tx_info": {
          "block_number": 0,
          "out": {
