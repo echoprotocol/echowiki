@@ -862,8 +862,6 @@ struct sidechain_btc_deposit_operation : public base_operation
    btc_transaction_details tx_info;
 
    extensions_type extensions;
-   
-   account_id_type fee_payer() const { return committee_member_id; }
 };
 ```
 
@@ -1147,6 +1145,8 @@ struct sidechain_stake_btc_update_operation : public base_operation
     bool is_vin = false;
 
     extensions_type extensions;
+
+    account_id_type fee_payer() const { return committee_member_id; }
 };
 ```
 
