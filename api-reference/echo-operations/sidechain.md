@@ -1147,8 +1147,6 @@ struct sidechain_stake_btc_update_operation : public base_operation
     bool is_vin = false;
 
     extensions_type extensions;
-
-    account_id_type fee_payer() const { return committee_member_id; }
 };
 ```
 
