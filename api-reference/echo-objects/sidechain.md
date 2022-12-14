@@ -35,19 +35,54 @@ struct stake_btc_vout_object
 };
 ```
 
-## stake_eth_update_object
+## btc_block_object
 
 ```cpp
-struct stake_eth_update_object
-{    
-    account_id_type account;
-    asset_id_type asset_id;
-    uint64_t current_balance;
+class btc_block_object
+{
+public:
+    spv::btc::block_header header;
+    fc::sha256 block_hash;
+    uint32_t height;
 
-    fc::sha256 transaction_hash;
+    extensions_type extensions;
+};
+```
 
-    bool is_approved = false;
-    set<account_id_type> approves;
+## btc_tx_object
+
+```cpp
+class btc_tx_object
+{
+public:
+    fc::sha256 block_hash;
+    spv::btc::merkle_proof proof;
+
+    extensions_type extensions;
+};
+```
+
+## eth_block_object
+
+```cpp
+class eth_block_object
+{
+public:
+    spv::eth::block_header header;
+    fc::sha256 block_hash;
+
+    extensions_type extensions;
+};
+```
+
+## eth_tx_receipt_object
+
+```cpp
+class eth_tx_receipt_object
+{
+public:
+    fc::sha256 block_hash;
+    spv::eth::merkle_proof proof;
 
     extensions_type extensions;
 };

@@ -30,7 +30,11 @@
 |did_object_type|1.25.x|
 |stake_btc_script_object_type|1.26.x|
 |stake_btc_vout_object_type|1.27.x|
-|stake_eth_update_object_type|1.28.x|
+|btc_block_object_type|1.28.x|
+|btc_tx_object_type|1.29.x|
+|eth_block_object_type|1.30.x|
+|eth_tx_receipt_object_type|1.31.x|
+
 ## Implementation types
 
 | Objects | id |
@@ -54,4 +58,5 @@
 |malicious_committeemen_object_type|2.16.x|
 |incentives_object_type|2.17.x|
 |verifiers_object_type|2.18.x|
+|impl_spv_penalties_object_type|2.19.x|
 
