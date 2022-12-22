@@ -14,12 +14,42 @@ As starting point you can create an example genesis or network genesis.
     - `erc20_config` - erc20 sidechain parameters;
     - `stake_sidechain_config` - stake sidechain parameters;
     - `economy_config` - rewards calculation parameters;
+    - `spv_penalties_config` - penalties for missed spv transactions;
 - `initial_accounts` - list of initial accounts. Can be imported to the wallet with `import_key` command;
 - `initial_assets` - list of additional assets;
 - `initial_balances` - list of balances that can be redeemed by account with `import_balance` command;
 - `initial_vesting_balances` - list of vesting balances;
 - `initial_committee_candidates` - list of initial committee accounts.
 - `initial_sidechain_asset_config` - list of initial contracts for asset transferring to Ethereum;
+- `btc_initial_stable_block` - stable BTC block (the height is a multiple of 2016) for sidechain;
+- `eth_initial_stable_block` - stable ETH block for sidechain;
+
+## Add initial spv penalties example
+
+* `missed_gen_address_penalty` - penalty for missed generate ETH address SPV transaction.
+* `missed_deposit_penalty` - penalty for missed deposit BTC/ETH SPV transaction.
+* `missed_withdraw_penalty` - penalty for missed withdraw BTC/ETH SPV transaction.
+* `missed_balance_update_penalty` - penalty for update ERC20 balance SPV transaction.
+* `missed_erc20_deposit_penalty` - penalty for missed ERC20 deposit SPV transaction.
+* `missed_erc20_withdraw_penalty` - penalty for missed ERC20 withdraw SPV transaction.
+* `missed_erc20_transfer_penalty` - penalty for missed ERC20 transfer SPV transaction.
+* `excess_withdraw_penalty` - penalty for excess withdraw BTC/ETH SPV transaction.
+* `penalty_multiplier` - penalty multiplier coefficient.
+
+
+```json
+"spv_penalties_config": {
+  "missed_gen_address_penalty": 10000000,
+  "missed_deposit_penalty": 10000000,
+  "missed_withdraw_penalty": 200000000,
+  "missed_balance_update_penalty": 10000000,
+  "missed_erc20_deposit_penalty": 10000000,
+  "missed_erc20_withdraw_penalty": 10000000,
+  "missed_erc20_transfer_penalty": 10000000,
+  "excess_withdraw_penalty": 500000000,
+  "penalty_multiplier": 10000
+}
+```
 
 ## Add initial account example
 
@@ -177,6 +207,44 @@ Using this information, you can add new entries to the list as follows:
       "supported_asset" : "1.3.2"
     }
   ],
+```
+## Add stable BTC block example
+
+You need to add BTC stable block for sidechain. Its height should be divisible by 2016 for proper retarget verification for SPV accepted blocks.
+
+```json
+"btc_initial_stable_block": {
+  "hash":"00000000000000353138cee31622c4e9cb6f04f33a672ab3ab8d3d880d055514",
+  "height":2064384,
+  "version":536870912,
+  "merkleroot":"72886b1a426b6bf3b594179fe1a2d4edf1d8854f4abf135960bcdf841d900141",
+  "time":1628707368,
+  "nonce":3819972105,
+  "bits":"19382bdc",
+  "previousblockhash":"000000000000000c555ee275a7c75daeea5fc8c9cc3589ce8ffc485b0e2f9c84"
+}
+```
+
+## Add stable ETH block example
+```json
+"eth_initial_stable_block": {
+  "baseFeePerGas":"0x8",
+  "difficulty":"0x5178f75b",
+  "extraData":"0xd883010a07846765746888676f312e31362e35856c696e7578",
+  "gasLimit":"0x7a1200",
+  "gasUsed":"0x5e877b",
+  "hash":"0x99f20186425b682d2da7fc680f317a4a541747fd13ff26be03dec955264caca4",
+  "logsBloom":"0x00120000000000020020000000000000000000020000800000800101000004000000000000420000000001205...",
+  "mixHash":"0xcf40b200310bf2c69632063000e1fdaab6e52d519743af93296e14994c967679",
+  "nonce":"0xfc67dd6c202e4933",
+  "number":"0xa628f2",
+  "parentHash":"0xc1cbbb5f0e679877f2d1f7ee95dcd930599bd7cc90abe89c0cd6ecc86bf369b8", 
+  "receiptsRoot":"0x878b31b399d6635b6610f165b1a451dc84e005f14f0856eed5869fa1bbd14d02",
+  "sha3Uncles":"0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+  "stateRoot":"0xe6c7df361b36d2a3470d135390fd62e0dd874b9162f8a41bcf0c3f18927036fb",
+  "timestamp":"0x6122b67e",
+  "transactionsRoot":"0xb47c45ebe6b82ab3ff167721c36ef84cfce7f951b5164d99682e6378e33b0b00"
+}
 ```
 
 After editing genesis file restart your network.

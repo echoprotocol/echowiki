@@ -116,3 +116,13 @@ Ethereum sidechain is more contract on Ethereum side, then something at the Echo
 {% hint style="info" %}
 Note: there is **no** fee on such transactions! (except network(BTC/ETH) fee)
 {% endhint %}
+
+## SPV mechanism
+
+ECHO sidechain uses SPV mechanism for storing sidechain transactions. An SPV operations store transaction (transaction receipt for Ethereum) and appropriate proof. This scheme verifies correctness of sidechain transaction and save integrity of chain. 
+
+## Penalties
+
+If committee members don't send an appropriate sidechain SPV transaction, any user can use [sidechain_btc_spv_add_missed_tx_operation](/api-reference/echo-operations/sidechain.md#sidechain_btc_spv_add_missed_tx_operation) or [sidechain_eth_spv_add_missed_tx_receipt_operation](/api-reference/echo-operations/sidechain.md#sidechain_eth_spv_add_missed_tx_receipt_operation) to add a proof for a missed transaction by a committee member. Is will also activate penalty mechanism which slahses all committee and reward the reporter. 
+
+All penalties are listed in [spv::penalties::config](/api-reference/echo-objects/sidechain-config.md#SPV-Penalties-config). They could be modified with [spv_penalties_config](/advanced/running-devnet/modify-genesis.md#Add-initial-spv-penalties-example) in genesis file.

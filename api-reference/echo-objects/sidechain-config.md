@@ -38,7 +38,7 @@ struct config
     dev::u256 constantinople_fork_block = 7280000;
     dev::u256 byzantium_fork_block = 4370000;
     dev::u256 homestead_fork_block = 1150000;
-    dev::u256 duration_limit = 13;
+    dev::u256 difficulty_duration_limit = 13;
     dev::u256 difficulty_bound_divisor = 2048;
     dev::u256 minimum_difficulty = 131072;
 };
@@ -72,9 +72,21 @@ struct stake_config
 ```cpp
 struct config 
 {
+<<<<<<< HEAD
    echo::chain::share_type missed_deposit_penalty;
    echo::chain::share_type excess_withdraw_penalty;
    echo::chain::share_type missed_withdraw_penalty;
    uint16_t penalty_multiplier = 100 * ECHO_1_PERCENT;
+=======
+    echo::chain::share_type missed_gen_address_penalty;
+    echo::chain::share_type missed_deposit_penalty;
+    echo::chain::share_type missed_withdraw_penalty;
+    echo::chain::share_type missed_balance_update_penalty;
+    echo::chain::share_type missed_erc20_deposit_penalty;
+    echo::chain::share_type missed_erc20_withdraw_penalty;
+    echo::chain::share_type missed_erc20_transfer_penalty;
+    echo::chain::share_type excess_withdraw_penalty;
+    uint16_t penalty_multiplier = 100 * ECHO_1_PERCENT;
+>>>>>>> master
 };
 ```
