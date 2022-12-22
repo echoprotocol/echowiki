@@ -862,6 +862,8 @@ struct sidechain_btc_deposit_operation : public base_operation
    btc_transaction_details tx_info;
 
    extensions_type extensions;
+   
+   account_id_type fee_payer() const { return committee_member_id; }
 };
 ```
 
@@ -1217,9 +1219,9 @@ struct sidechain_eth_spv_create_operation : public base_operation
       "stateRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
       "transactionsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
       "receiptsRoot": "0x0000000000000000000000000000000000000000000000000000000000000000",
-      "logsRloom": "0x",
+      "logsBloom": "0x",
       "difficulty": "0",
-      "height": "0",
+      "number": "0",
       "gasLimit": "0",
       "gasUsed": "0",
       "timestamp": "0",
