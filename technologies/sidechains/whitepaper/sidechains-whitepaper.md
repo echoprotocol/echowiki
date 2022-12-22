@@ -170,7 +170,7 @@ SPV machanism covers the third possible vulnerability by not allowing any of the
 
 ### SPV mechanism
 
-ECHO sidechain uses SPV mechanism for storing sidechain transactions. An SPV operations store transaction (transaction receipt for Ethereum) and appropriate proof: `sidechain_btc_spv_create_operation` and `sidechain_eth_spv_create_operation`. This scheme verifies correctness of sidechain transaction and save integrity of chain. 
+ECHO sidechain uses SPV mechanism for storing sidechain transactions. An SPV operations store transaction (transaction receipt for Ethereum) and appropriate proof: `sidechain_btc_spv_create_operation` and `sidechain_eth_spv_create_operation`. This scheme verifies correctness of sidechain transaction and save integrity of chain.
 
 BTC sidechain logic uses Merkle Tree to create merkle proof for transaction.
 ETH sidechain logic uses Patricia Merkle Tree to create proof for transaction receipt.
