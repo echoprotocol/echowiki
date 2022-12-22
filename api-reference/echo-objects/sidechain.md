@@ -87,3 +87,56 @@ public:
     extensions_type extensions;
 };
 ```
+
+## btc_block_object
+
+```cpp
+class btc_block_object
+{
+public:
+    spv::btc::block_header header;
+    fc::sha256 block_hash;
+    uint32_t height;
+
+    extensions_type extensions;
+};
+```
+
+## btc_tx_object
+
+```cpp
+class btc_tx_object
+{
+public:
+    fc::sha256 block_hash;
+    spv::btc::merkle_proof proof;
+
+    extensions_type extensions;
+};
+```
+
+## eth_block_object
+
+```cpp
+class eth_block_object
+{
+public:
+    spv::eth::block_header header;
+    fc::sha256 block_hash;
+
+    extensions_type extensions;
+};
+```
+
+## eth_tx_receipt_object
+
+```cpp
+class eth_tx_receipt_object
+{
+public:
+    fc::sha256 block_hash;
+    spv::eth::merkle_proof proof;
+
+    extensions_type extensions;
+};
+```

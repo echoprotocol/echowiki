@@ -72,6 +72,12 @@ struct stake_config
 ```cpp
 struct config 
 {
+<<<<<<< HEAD
+   echo::chain::share_type missed_deposit_penalty;
+   echo::chain::share_type excess_withdraw_penalty;
+   echo::chain::share_type missed_withdraw_penalty;
+   uint16_t penalty_multiplier = 100 * ECHO_1_PERCENT;
+=======
     echo::chain::share_type missed_gen_address_penalty;
     echo::chain::share_type missed_deposit_penalty;
     echo::chain::share_type missed_withdraw_penalty;
@@ -81,5 +87,6 @@ struct config
     echo::chain::share_type missed_erc20_transfer_penalty;
     echo::chain::share_type excess_withdraw_penalty;
     uint16_t penalty_multiplier = 100 * ECHO_1_PERCENT;
+>>>>>>> master
 };
 ```

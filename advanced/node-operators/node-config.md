@@ -81,8 +81,9 @@ Options for plugin sidechain:
                                         eth_private_key] that should correspond
                                         to committee account (may be specified
                                         multiple times)
-  --eth-rpc-ip [=arg(=127.0.0.1)]       Sidechain: RPC address of Ethereum node
-  --eth-rpc-port [=arg(=18332)]         Sidechain: RPC port of Ethereum node
+  --eth-rpc-ip                          Sidechain: RPC address of Ethereum node
+  --eth-rpc-port                        Sidechain: RPC port of Ethereum node
+  --eth-rpc-url                         Sidechain: RPC URL of Ethereum node (instead of ip and port)
   --sidechain-eth-disable               Sidechain: Disable Ethereum service
   --sidechain-btc-committeeman arg      Sidechain: Tuple of [account_id, WIF
                                         BTC private key] (may specify multiple
