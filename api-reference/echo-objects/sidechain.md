@@ -1,4 +1,4 @@
-## stake_btc_script_object 
+## stake_btc_script_object
 
 ```cpp
 struct stake_btc_script_object
@@ -11,7 +11,7 @@ struct stake_btc_script_object
 };
 ```
 
-## stake_btc_vout_object 
+## stake_btc_vout_object
 
 ```cpp
 struct stake_btc_vout_object
@@ -30,59 +30,6 @@ struct stake_btc_vout_object
     bool is_vout_approved = false;
     std::set<account_id_type> approves_for_vin;
     bool is_vin_approved = false;
-
-    extensions_type extensions;
-};
-```
-
-## btc_block_object
-
-```cpp
-class btc_block_object
-{
-public:
-    spv::btc::block_header header;
-    fc::sha256 block_hash;
-    uint32_t height;
-
-    extensions_type extensions;
-};
-```
-
-## btc_tx_object
-
-```cpp
-class btc_tx_object
-{
-public:
-    fc::sha256 block_hash;
-    spv::btc::merkle_proof proof;
-
-    extensions_type extensions;
-};
-```
-
-## eth_block_object
-
-```cpp
-class eth_block_object
-{
-public:
-    spv::eth::block_header header;
-    fc::sha256 block_hash;
-
-    extensions_type extensions;
-};
-```
-
-## eth_tx_receipt_object
-
-```cpp
-class eth_tx_receipt_object
-{
-public:
-    fc::sha256 block_hash;
-    spv::eth::merkle_proof proof;
 
     extensions_type extensions;
 };
