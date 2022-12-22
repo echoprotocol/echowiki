@@ -1,4 +1,4 @@
-## stake_btc_script_object 
+## stake_btc_script_object
 
 ```cpp
 struct stake_btc_script_object
@@ -11,7 +11,7 @@ struct stake_btc_script_object
 };
 ```
 
-## stake_btc_vout_object 
+## stake_btc_vout_object
 
 ```cpp
 struct stake_btc_vout_object

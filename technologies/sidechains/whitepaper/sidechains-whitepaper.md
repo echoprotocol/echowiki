@@ -166,7 +166,14 @@ The second situation is covered with the ability to manually create transactions
 
 In addition to that sidechain it includes decreasing after some predefined time the number of signatures required to withdraw funds and ability to cancel the deposit transaction during 24 hours for the Bitcoin sidechain. For details please refer to corresponding sections.
 
-Sidechain operations use SPV mechanism. It allows to store merkle proof beside sidechain transaction. This scheme covers the third possible vulnerability by not allowing any of the committee members to simulate to prevent simulating non existent transactions on the main chain or to transfer funds out of the committee controlled account/address.
+SPV machanism covers the third possible vulnerability by not allowing any of the committee members to simulate to prevent simulating non existent transactions on the main chain or to transfer funds out of the committee controlled account/address.
+
+### SPV mechanism
+
+ECHO sidechain uses SPV mechanism for storing sidechain transactions. An SPV operations store transaction (transaction receipt for Ethereum) and appropriate proof: `sidechain_btc_spv_create_operation` and `sidechain_eth_spv_create_operation`. This scheme verifies correctness of sidechain transaction and save integrity of chain.
+
+BTC sidechain logic uses Merkle Tree to create merkle proof for transaction.
+ETH sidechain logic uses Patricia Merkle Tree to create proof for transaction receipt.
 
 ## Bitcoin Sidechain
 
