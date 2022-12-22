@@ -117,13 +117,13 @@ Echo's Bitcoin and Ethereum sidechains approach is based on the federated sidech
 The mechanism for transferring main coins to the Echo network is as follows:
 
 1. Users receive a personal deposit address for the main chain from the Echo network.
-1. Users transfer the desired amount of main coins to the deposit address.
-1. Transferring funds to this address results in freezing them on the main chain and the same amount of eBTC or eETH coins will be issued on Echo network and credited to the originator.
+2. Users transfer the desired amount of main coins to the deposit address.
+3. Transferring funds to this address results in freezing them on the main chain and the same amount of eBTC or eETH coins will be issued on Echo network and credited to the originator.
 
 Echo sidechains are symmetrical, such that withdrawing main coins back to the main chain is a very similar process:
 
 1. Users inform the Echo network of the intention to “unfreeze” a certain amount of main coins. To do this, they send withdraw operation on the Echo network, which contains information about the output amount and the recipient's address in the main chain.
-1. The operation triggers the withdrawal process, as a result of which the committee members collectively unfreeze the required number of main coins. The eBTC or eETH tokens are automatically burned on the Echo side.
+2. The operation triggers the withdrawal process, as a result of which the committee members collectively unfreeze the required number of main coins. The eBTC or eETH tokens are automatically burned on the Echo side.
 
 Echo sidechain supports similar flow to transfer Ethereum chain ERC20 tokens from/to Echo which is described in detail in the corresponding section.
 
@@ -168,9 +168,9 @@ In addition to that sidechain it includes decreasing after some predefined time 
 
 SPV machanism covers the third possible vulnerability by not allowing any of the committee members to simulate to prevent simulating non existent transactions on the main chain or to transfer funds out of the committee controlled account/address.
 
-### SPV mechanism
+### SPV Sidechain mechanism
 
-ECHO sidechain uses SPV mechanism for storing sidechain transactions. An SPV operations store transaction (transaction receipt for Ethereum) and appropriate proof: `sidechain_btc_spv_create_operation` and `sidechain_eth_spv_create_operation`. This scheme verifies correctness of sidechain transaction and save integrity of chain. 
+ECHO sidechain uses SPV mechanism for storing sidechain transactions. An SPV operations store transaction (transaction receipt for Ethereum) and appropriate proof using `sidechain_btc_spv_create_operation` and `sidechain_eth_spv_create_operation` sent by committee members. This scheme verifies correctness of sidechain transaction and save integrity of chain.
 
 BTC sidechain logic uses Merkle Tree to create merkle proof for transaction.
 ETH sidechain logic uses Patricia Merkle Tree to create proof for transaction receipt.
@@ -336,13 +336,13 @@ Echo Ethereum sidechain allows Echo accounts owners to exchange their Ether and 
 
 In order to transfer ERC20 tokens from and to the Echo chain, ERC20 tokens should be registered in Echo network. Registration of the Ethereum ERC20 token deploys an ERC20 smart contract in Echo network and informs the sidechain to listen to the events of the connected ERC20 token on the Ethereum side. When a token is transferred to a deposit address on the Ethereum chain, a corresponding amount of  related tokens on the Echo side will be transferred to the user's account.
 
-Every sidechain transaction is tracked and proccessed by one of the committee members with `sidechain_eth_spv_create_operation` contains the transaction details and its merkle proof. After that committee member extract info from transaction and send an appropriate operation.
+Every sidechain transaction passed through smartcontact, tracked and proccessed by one of the committee members with `sidechain_eth_spv_create_operation` contains the transaction details and its proof. After that committee member extract info from transaction and send an appropriate operation.
 
 ### User operations for Ethereum
 
 Initially, to enter funds, the user needs to receive their “personal” address, transfer of funds to which will always mean freezing of funds on the Ethereum side and issuing the corresponding amount of eETH to the account on Echo side.
 
-To create an address, the user can send `sidechain_eth_create_address_operation` within the Echo network. This operation will trigger sending of the transaction which invokes the corresponding method of the smart contract on the Ethereum side. This method will create a deposit sub-contract and will emit an event with address of the newly created contract. After the address is approved by committee, it can be used for deposit.
+To create an address, the user can send `sidechain_eth_create_address_operation` within the Echo network. This operation will trigger sending of the transaction which invokes the corresponding method of the smart contract on the Ethereum side. This method will create a deposit sub-contract and will emit an event with address of the newly created contract. After the address is approved by committee, it can be used for deposit using `sidechain_eth_send_withdraw_operation`.
 
 To transfer eETH back to Ethereum, the user can send `sidechain_eth_withdraw_operation` within the Echo network by providing the address in the Ethereum network and desired amount of Ether to withdraw.
 
@@ -354,7 +354,7 @@ To create the ERC20 deposit address users should use the same `sidechain_eth_cre
 
 To release tokens on Ethereum chain, the user needs to send the `sidechain_erc20_withdraw_token_operation` operation within the Echo network providing the address in the Ethereum network, address of the token, and desired amount of tokens to release.
 
-### Committee member operations for Etherum
+### Committee member operations for Ethereum
 
 The Ethereum sidechain listens to the events of the smart contract deployed in the Ethereum network. When the Ethers are transferred to the created address they are automatically transferred by the deposit sub-contract further to the main contract and the event is emitted by the main contract.
 
@@ -364,17 +364,17 @@ Deposit and withdrawal flow are described in detail below.
 
 ETH to eETH conversion:
 
-1. When the event of new address creation is emitted by the main smart contract, one of the committee members receives this event and sends `sidechain_eth_approve_address_operation` into the Echo network. The address is added to the list of observed addresses.
-2. When the deposit is transferred to the created address and the transfer event is emitted by the main smart contract, committee member that tracked `sidechain_eth_spv_create_operation` creates and sends `sidechain_eth_deposit_operation` into the Echo network with the transaction details.
-3. In 24 hours each of the committee members creates and sends `sidechain_eth_send_deposit_operation` which approves the deposit.
+1. When the event of new address creation is emitted by the main smart contract, one of the committee members receives this event and evaluates `sidechain_eth_approve_address_operation` into the Echo network. The address is added to the list of observed addresses.
+2. When the deposit is transferred to the created address and the transfer event is emitted by the main smart contract, committee member evaluates `sidechain_eth_deposit_operation` with the transaction details.
+3. Each of the committee members create and send `sidechain_eth_send_deposit_operation` which deposit approve.
 4. eETH-s are issued to the user account and `sidechain_issue_operation` is applied.
 
 eETH to ETH conversion:
 
 1. Withdrawal operation is withdrawing the eETH-s from the users account and is creating pending withdrawal object in the Echo chain.
-2. 24 hours after the withdrawal operation is sent by the user, each committee member is sending `sidechain_eth_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the withdraw method of the main smart contract.
+2. After the withdrawal operation is sent by the user, each committee member is sending `sidechain_eth_send_withdraw_operation`. After the operation is approved, each committee member is sending transaction into Ethereum network by invoking the withdraw method of the main smart contract.
 3. After the withdrawal is approved on the smart contract side, the Ethers are transferred to the specified account and the appropriate event is emitted.
-4. One of the committee member tracks `sidechain_eth_spv_create_operation` and sends `sidechain_eth_approve_withdraw_operation` into the Echo network after receiving this event.
+4. One of the committee members receives this event and evaluates `sidechain_eth_approve_withdraw_operation`.
 5. The withdrawal is marked as processed and `sidechain_burn_operation` is applied.
 
 ### Committee member operations for ERC20
@@ -412,7 +412,7 @@ Since the committee addresses are stored in the main smart contract deployed on 
 ### Fee payment
 
 All fees below are calculated based on ethereum gas unit. Fees in GWei and approximate fees in USD are provided in the table below as well. Please note that additional gas will be charged from the user's Ethereum account for transfers to sidechain addresses in Ethereum network.
-Deposit fee is intended to cover gas spended for deposit contract deployement in Ethereum network so it will be charged only for the first transfer to the address of that contract, subsequent deposits will be free of charge. 
+Deposit fee is intended to cover gas spended for deposit contract deployement in Ethereum network so it will be charged only for the first transfer to the address of that contract, subsequent deposits will be free of charge.
 Withdrawal fees will be divided and setteled on committee members' accounts in eETH asset.
 
 | Operation                               | Gas                   | Gwei (gas price 4 Gwei) | USD (approx) |
@@ -430,14 +430,14 @@ ER20 tokens deposits and withdrawals are free of charge. Fees related to the ERC
 
 ## Sidechain Penalties
 
-If committee members don't send an appropriate sidechain SPV transaction, any user can use `sidechain_btc_spv_add_missed_tx_operation` or `sidechain_eth_spv_add_missed_tx_receipt_operation` to add a proof for a missed transaction by a committee member. Is will also activate penalty mechanism which slahses all committee and reward the reporter.
+If committee members don't send an appropriate sidechain SPV transaction, any user can use `sidechain_btc_spv_add_missed_tx_operation` or `sidechain_eth_spv_add_missed_tx_receipt_operation` to add a proof for a missed transaction by a committee member. Is will also activate penalty mechanism which slahses all committee with `spv_penalties_config` and reward the reporter.
 
 ## Further Development
 
 Further development of the Sidechain has two main vectors:
 
 1. Quality and stability - further development of the current protocol to ensure a higher quality of implementation;
-1. Security and Privacy - Expanding and Improving the Protocol to enhance Security and for the full guarantee of withdrawal of funds.
+2. Security and Privacy - Expanding and Improving the Protocol to enhance Security and for the full guarantee of withdrawal of funds.
 
 ### Taproot and Schnorr Signatures Integration
 
